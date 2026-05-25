@@ -12,7 +12,7 @@ $_nlAmount = intval($_nlCfg['newsletter_voucher_amount'] ?: 100000);
 $_footArticles = dbAll("SELECT title, slug FROM articles ORDER BY created_at DESC LIMIT 3");
 $_hl = $sysHotline ?? '0947796471';
 ?>
-<?php if(function_exists(csrfField)) echo csrfField(); ?>
+<?php if(function_exists("csrfField")) echo csrfField(); ?>
 <footer>
   <div class="newsletter-band">
     <div class="wrap">
