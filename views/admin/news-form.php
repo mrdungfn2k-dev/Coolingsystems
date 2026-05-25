@@ -107,38 +107,87 @@ Quill.register(FontStyle, true);
 var quill = new Quill('#quillEditor',{theme:'snow',placeholder:'Nhập nội dung bài viết...',modules:{toolbar:{container:toolbarFull}}});
 
 
-// === Custom Table Insert Handler ===
+// === Word-like Table Grid Picker ===
 function addTableHandler(quillInstance) {
-  var toolbar = quillInstance.getModule('toolbar');
-  if (!toolbar) return;
-  // Find the clean button and add table button before it
   var toolbarEl = quillInstance.container.previousSibling;
   if (!toolbarEl || !toolbarEl.classList.contains('ql-toolbar')) return;
-  
-  // Create table button
+
+  var wrap = document.createElement('span');
+  wrap.className = 'ql-formats';
+  wrap.style.position = 'relative';
+
   var tableBtn = document.createElement('button');
   tableBtn.type = 'button';
   tableBtn.className = 'ql-table-insert';
   tableBtn.title = 'Chèn bảng';
   tableBtn.innerHTML = '<svg viewBox="0 0 18 18" width="18" height="18"><rect x="1" y="1" width="16" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="1" y1="7" x2="17" y2="7" stroke="currentColor" stroke-width="1"/><line x1="1" y1="12" x2="17" y2="12" stroke="currentColor" stroke-width="1"/><line x1="7" y1="1" x2="7" y2="17" stroke="currentColor" stroke-width="1"/><line x1="12" y1="1" x2="12" y2="17" stroke="currentColor" stroke-width="1"/></svg>';
   tableBtn.style.cssText = 'cursor:pointer;padding:3px 5px;';
+
+  // Grid picker popup
+  var popup = document.createElement('div');
+  popup.className = 'table-grid-popup';
+  popup.style.cssText = 'display:none;position:absolute;top:100%;left:0;z-index:9999;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,0.15);min-width:200px;';
   
-  tableBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    var rows = prompt('Số hàng (rows):', '3');
-    var cols = prompt('Số cột (columns):', '3');
-    if (!rows || !cols) return;
-    rows = parseInt(rows); cols = parseInt(cols);
-    if (isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1 || rows > 20 || cols > 10) {
-      alert('Số hàng: 1-20, số cột: 1-10');
-      return;
+  var label = document.createElement('div');
+  label.style.cssText = 'text-align:center;font-size:12px;font-weight:700;color:#0b1d3a;margin-bottom:8px;';
+  label.textContent = 'Chọn kích thước bảng';
+  popup.appendChild(label);
+
+  var ROWS = 8, COLS = 8;
+  var grid = document.createElement('div');
+  grid.style.cssText = 'display:grid;grid-template-columns:repeat(' + COLS + ',24px);gap:2px;justify-content:center;';
+  
+  var cells = [];
+  var selR = 0, selC = 0;
+
+  for (var r = 0; r < ROWS; r++) {
+    for (var c = 0; c < COLS; c++) {
+      var cell = document.createElement('div');
+      cell.style.cssText = 'width:24px;height:24px;border:1px solid #ddd;border-radius:3px;cursor:pointer;transition:all 0.1s;';
+      cell.dataset.r = r + 1;
+      cell.dataset.c = c + 1;
+      cells.push(cell);
+      grid.appendChild(cell);
     }
-    var html = '<table style="width:100%;border-collapse:collapse;margin:12px 0"><thead><tr>';
+  }
+  popup.appendChild(grid);
+
+  var info = document.createElement('div');
+  info.style.cssText = 'text-align:center;font-size:11px;color:#888;margin-top:6px;';
+  info.textContent = '0 × 0';
+  popup.appendChild(info);
+
+  // Hover highlight
+  grid.addEventListener('mouseover', function(e) {
+    var t = e.target;
+    if (!t.dataset.r) return;
+    selR = parseInt(t.dataset.r);
+    selC = parseInt(t.dataset.c);
+    info.textContent = selR + ' × ' + selC;
+    cells.forEach(function(cl) {
+      var cr = parseInt(cl.dataset.r), cc = parseInt(cl.dataset.c);
+      if (cr <= selR && cc <= selC) {
+        cl.style.background = '#0b1d3a';
+        cl.style.borderColor = '#0b1d3a';
+      } else {
+        cl.style.background = '#f8f9fc';
+        cl.style.borderColor = '#ddd';
+      }
+    });
+  });
+
+  // Click to insert
+  grid.addEventListener('click', function(e) {
+    var t = e.target;
+    if (!t.dataset.r) return;
+    var rows = parseInt(t.dataset.r), cols = parseInt(t.dataset.c);
+    
+    var html = '<table style="width:100%;border-collapse:collapse;margin:16px 0"><thead><tr>';
     for (var c = 0; c < cols; c++) {
-      html += '<th style="border:1px solid #ddd;padding:10px 14px;background:#0b1d3a;color:#fff;font-weight:700;text-align:left">Tiêu đề ' + (c+1) + '</th>';
+      html += '<th style="border:1px solid #ddd;padding:10px 14px;background:#0b1d3a;color:#fff;font-weight:700;text-align:left">Cột ' + (c+1) + '</th>';
     }
     html += '</tr></thead><tbody>';
-    for (var r = 0; r < rows - 1; r++) {
+    for (var r = 1; r < rows; r++) {
       html += '<tr>';
       for (var c = 0; c < cols; c++) {
         html += '<td style="border:1px solid #ddd;padding:10px 14px;text-align:left">&nbsp;</td>';
@@ -149,16 +198,33 @@ function addTableHandler(quillInstance) {
     
     var range = quillInstance.getSelection(true);
     quillInstance.clipboard.dangerouslyPasteHTML(range ? range.index : quillInstance.getLength(), html);
+    popup.style.display = 'none';
   });
-  
-  // Add separator and button
-  var span = document.createElement('span');
-  span.className = 'ql-formats';
-  span.appendChild(tableBtn);
-  toolbarEl.appendChild(span);
+
+  // Toggle popup
+  tableBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
+    // Reset grid
+    cells.forEach(function(cl) { cl.style.background = '#f8f9fc'; cl.style.borderColor = '#ddd'; });
+    info.textContent = '0 × 0';
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!wrap.contains(e.target)) popup.style.display = 'none';
+  });
+
+  wrap.appendChild(tableBtn);
+  wrap.appendChild(popup);
+  toolbarEl.appendChild(wrap);
 }
 
 addTableHandler(quill);
+
+
+
 
 document.getElementById('newsForm').addEventListener('submit',function(){
   document.getElementById('contentHidden').value = quill.root.innerHTML;
