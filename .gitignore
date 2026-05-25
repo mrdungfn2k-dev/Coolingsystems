@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Database
+*.db
+*.sqlite
+database.sqlite
+
+# Uploads (user-generated content)
+public/uploads/
+
+# Backup files
+backups/
+*.bak*
+*.bak_*
+
+# System files
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment
+.env.local
+
+# Symlinks (Linux)
+uploads
+
+# Test files
+test_*.php
+
+# IDE
+.idea/
+.vscode/

@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /partner/dashboard
+Disallow: /partner/products/
+Disallow: /customer/
+Disallow: /chat/
+Disallow: /auth/
+Disallow: /api/
+
+Crawl-delay: 1
+
+Sitemap: https://coolingsystem.vn/sitemap.xml

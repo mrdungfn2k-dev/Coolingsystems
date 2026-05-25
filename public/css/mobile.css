@@ -1,0 +1,1437 @@
+
+/* ============================================================
+   COOLINGSYSTEM.VN — MOBILE RESPONSIVE PATCH v2.0
+   Upload: 05/18/2026 08:43:15
+   ============================================================ */
+
+/* === 1. HAMBURGER MENU (Mobile Nav) === */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin-left: auto;
+  z-index: 200;
+}
+.mobile-menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.mobile-menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
+.mobile-menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile drawer overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 150;
+  backdrop-filter: blur(2px);
+}
+.mobile-nav-overlay.open { display: block; }
+
+/* Mobile drawer */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 85%;
+  max-width: 320px;
+  height: 100dvh;
+  background: var(--navy-dark);
+  z-index: 160;
+  overflow-y: auto;
+  transition: left 0.35s cubic-bezier(0.4,0,0.2,1);
+  padding: 0 0 40px;
+}
+.mobile-nav-drawer.open { left: 0; }
+.mobile-nav-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mobile-nav-header .close-btn {
+  color: rgba(255,255,255,0.6);
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+.mobile-nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.mobile-nav-links a:hover, .mobile-nav-links a.active {
+  background: rgba(201,161,74,0.12);
+  color: var(--gold-light);
+  padding-left: 28px;
+}
+.mobile-nav-links a::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold-warm);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.mobile-nav-links a:hover::before { width: 8px; height: 8px; }
+.mobile-nav-links .nav-section-label {
+  padding: 14px 20px 6px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+.mobile-nav-actions {
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 8px;
+}
+.mobile-nav-actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+}
+.mobile-nav-actions .action-gold {
+  background: linear-gradient(135deg, var(--gold-warm), var(--gold-deep));
+  color: var(--navy-dark);
+}
+.mobile-nav-actions .action-outline {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Mobile search bar */
+.mobile-search-bar {
+  display: none;
+  padding: 10px 14px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-search-bar form {
+  display: flex;
+  border: 2px solid var(--navy);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+.mobile-search-bar input {
+  flex: 1;
+  border: none;
+  padding: 11px 14px;
+  font-size: 14px;
+  outline: none;
+  color: var(--ink);
+  font-family: inherit;
+}
+.mobile-search-bar button {
+  padding: 0 18px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+
+/* === 2. STICKY BOTTOM BAR (Mobile) === */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -4px 16px rgba(15,35,66,0.12);
+  padding: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mobile-bottom-bar .bar-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+.mobile-bottom-bar a, .mobile-bottom-bar button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  min-height: 54px;
+}
+.mobile-bottom-bar a.active, .mobile-bottom-bar a:hover,
+.mobile-bottom-bar button.active, .mobile-bottom-bar button:hover {
+  color: var(--navy);
+}
+.mobile-bottom-bar .bar-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+.mobile-bottom-bar .bar-icon.cart-icon { position: relative; }
+.mobile-bottom-bar .bar-icon.cart-icon .cart-count {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: var(--gold-warm);
+  color: var(--navy-dark);
+  font-size: 9px;
+  font-weight: 800;
+  min-width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  border-radius: 999px;
+  padding: 0 3px;
+}
+.mobile-bottom-bar .bar-search-active { color: var(--navy); }
+
+/* === 3. MOBILE-SPECIFIC SPACING === */
+@media (max-width: 640px) {
+  /* Extra bottom padding so content not hidden by bottom bar */
+  body { padding-bottom: 0 !important; }
+  footer { padding-bottom: 60px !important; }
+  body.no-bottom-bar { padding-bottom: 0; }
+
+  /* Float buttons move up to avoid bottom bar */
+  .float-stack { bottom: 72px; right: 12px; }
+
+  /* Header: show hamburger, simplify */
+  .mobile-menu-toggle { display: flex; }
+  .mobile-search-bar { display: flex; align-items: center; }
+  .mobile-bottom-bar { display: block; }
+
+  /* Header search only shown in mobile bar, hide from header */
+  header.main .wrap { grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; }
+  header.main .search { display: none; }
+  /* header.main .header-actions: hidden on mobile - see below */
+  header.main { padding: 12px 0; }
+  header.main .hotline { display: none; }
+
+  /* Nav primary: simplify to just logo + hamburger */
+  nav.primary .wrap { display: none; }
+
+  /* Top bar: only show essential items on mobile */
+  .top-bar .wrap { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .top-bar .left .item,
+  .top-bar .left .sep { display: none; }
+  .top-bar .badge-live { display: inline-flex; }
+
+  /* Banner improvements */
+  .banner { border-radius: 4px; }
+  .banner h1 { word-break: break-word; }
+
+  /* Trust grid: 2 cols with compact layout */
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .trust-item { padding: 14px 12px; gap: 8px; flex-wrap: wrap; }
+  .trust-item .num { min-width: auto; font-size: 24px; }
+
+  /* Product card: improved 2-col layout */
+  .prod-grid, .prod-grid.cols-4, .prod-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+  .prod-card { padding: 10px; }
+  .prod-img { border-radius: 3px; }
+  .prod-price .now { font-size: 16px; }
+  .add-cart-btn { display: none; } /* Hide text, keep icon */
+
+  /* Category tiles: 2 cols */
+  .cat-tiles { grid-template-columns: repeat(2, 1fr); }
+
+  /* Brands grid: 2 cols */
+  .brands-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Hero section: stack vertically */
+  .hero-section .wrap { 
+    grid-template-columns: 1fr; 
+    gap: 12px; 
+  }
+  .cat-sidebar { display: none; }
+  .vs-card { display: none; }
+
+  /* Specialty card */
+  .specialty-card { padding: 20px 16px; gap: 20px; }
+  .specialty-cats { grid-template-columns: 1fr; }
+
+  /* Footer */
+  footer .main-foot .wrap { grid-template-columns: 1fr; gap: 24px; }
+  footer .newsletter-band .wrap { flex-direction: column; }
+  .nl-form { flex-direction: column; }
+  .nl-form input, .nl-form button { width: 100%; }
+
+  /* Promo band */
+  .promo-band .wrap { grid-template-columns: 1fr; }
+
+  /* Dashboard */
+  .dash { grid-template-columns: 1fr; }
+  .dash-main { padding: 14px 12px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Tables */
+  .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Search results page */
+  section.block .wrap { padding: 0 12px; }
+  .container { padding: 0 12px; }
+}
+
+/* === 4. SMALL MOBILE (< 400px) === */
+@media (max-width: 400px) {
+  .prod-grid, .prod-grid.cols-4, .prod-grid.cols-3 { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .cat-tiles { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .brands-grid { grid-template-columns: repeat(2, 1fr); }
+  .specialty-text h2 { font-size: 20px; }
+  .banner h1 { font-size: 20px; }
+  .logo svg { width: 110px; }
+}
+
+/* === 5. GENERAL TOUCH IMPROVEMENTS === */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase tap targets */
+  .btn, .nav-link, .cat-tile, .brand-card, .prod-card, .h-btn,
+  .mobile-nav-links a, .car-chip { min-height: 44px; }
+  .prod-fav { width: 36px; height: 36px; }
+
+  /* iOS input zoom fix */
+  input[type=text], input[type=email], input[type=tel],
+  input[type=password], input[type=number], select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Smooth scroll */
+  .tbl-wrap, .dash-nav, .sec-tabs, .nav.primary .wrap {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* === 6. SAFE AREA INSET (iPhone X+) === */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-bottom-bar {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  @media (max-width: 640px) {
+    body { padding-bottom: 0 !important; }
+  }
+}
+
+/* === 7. PRODUCT DETAIL MOBILE === */
+@media (max-width: 640px) {
+  .pd-grid { grid-template-columns: 1fr; padding: 12px 0; gap: 14px; }
+  .pd-info h1 { font-size: 20px; }
+  .pd-price { font-size: 24px; }
+  .pd-meta { font-size: 11px; gap: 8px; flex-wrap: wrap; }
+  .pd-buy { position: relative; }
+  .pd-thumbs { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* === 8. CART/CHECKOUT MOBILE === */
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* === 9. ANIMATION PERFORMANCE === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* === FIX: Bottom bar fix - show on mobile only === */
+/* Note: mobile bottom bar handled by media query above */
+
+
+/* === FIX: Chống tràn layout Dashboard (đối tác/admin) trên mobile === */
+@media (max-width: 820px) {
+  /* Ép khung chứa về 100% màn hình, không bị nở ngang */
+  .dash {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+  
+  .dash-sidebar {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Đảm bảo thanh công cụ cuộn ngang mượt mà */
+  .dash-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
+    scrollbar-width: none; /* Firefox */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .dash-nav::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+  
+  .dash-nav a {
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    border-left: none !important;
+    border-bottom: 3px solid transparent !important;
+  }
+  .dash-nav a.active {
+    border-left-color: transparent !important;
+    border-bottom-color: var(--gold-warm) !important;
+  }
+  
+  /* Phần nội dung chính (bảng biểu) không được tràn */
+  .dash-main {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 14px 12px !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Bảng cần cuộn được */
+  .panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* Xoá cột dọc cố định của inline style */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* === REMOVED: Horizontal slider - now using 2-col grid with pagination === */
+@media (max-width: 640px) {
+  #products .prod-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    gap: 10px !important;
+    padding-bottom: 0 !important;
+  }
+  #products .prod-grid > * {
+    flex: none !important;
+    scroll-snap-align: none !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  /* Căn chỉnh nút "Xem tất cả" */
+  .sec-head {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+  .sec-tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+  .sec-tabs::-webkit-scrollbar { display: none; }
+  .all-link {
+    margin-left: auto !important;
+    white-space: nowrap !important;
+    font-size: 11px !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* COMPREHENSIVE MOBILE FIX v2 - May 2026                */
+/* ═══════════════════════════════════════════════════════ */
+
+/* === HEADER MOBILE ≤ 640px === */
+@media (max-width: 640px) {
+  /* Top bar - simplify */
+  .top-bar { font-size: 11px; }
+  .top-bar .wrap { padding: 6px 12px; gap: 8px; }
+  .top-bar .left { display: none; }
+  .top-bar .right { width: 100%; justify-content: center; gap: 8px; flex-wrap: nowrap; overflow: hidden; }
+  .top-bar .right a { font-size: 10px; white-space: nowrap; }
+
+  /* Header - clean mobile layout */
+  header.main { padding: 10px 0; position: sticky; top: 0; z-index: 100; background: #fff; }
+  header.main .wrap {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    padding: 0 12px !important;
+    gap: 8px !important;
+    grid-template-columns: unset !important;
+  }
+  
+  /* Logo smaller on mobile */
+  header.main .logo { flex-shrink: 0; }
+  header.main .logo img { max-width: 120px !important; max-height: 50px !important; }
+  header.main .logo svg { width: 110px; }
+  
+  /* Hide desktop search, header-actions, hotline on mobile */
+  header.main .search { display: none !important; }
+  header.main .header-actions { display: none !important; }
+  header.main .hotline { display: none !important; }
+
+  /* Mobile cart + hamburger on right */
+  .mobile-cart-btn { display: flex !important; }
+  .mobile-menu-toggle { display: flex !important; }
+  
+  /* Mobile search bar */
+  .mobile-search-bar {
+    display: flex !important;
+    padding: 6px 12px 10px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+  }
+  .mobile-search-bar form {
+    display: flex;
+    width: 100%;
+    gap: 0;
+  }
+  .mobile-search-bar input {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .mobile-search-bar button {
+    background: var(--navy, #1a3258);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  /* Nav primary - horizontal scroll */
+  nav.primary { overflow: hidden; }
+  nav.primary .wrap {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start !important;
+    padding: 0 8px !important;
+    scrollbar-width: none;
+  }
+  nav.primary .wrap::-webkit-scrollbar { display: none; }
+  nav.primary .nav-link {
+    flex-shrink: 0 !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+    height: 40px !important;
+  }
+  /* Show all nav links on mobile (remove the nth-child hide) */
+  nav.primary .nav-link:nth-child(n+5) { display: flex !important; }
+
+  /* Chat page mobile */
+  .chat-container {
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: calc(100vh - 180px);
+  }
+  .chat-sidebar {
+    width: 100% !important;
+    max-height: 300px;
+    border-right: none !important;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .chat-main { width: 100% !important; }
+  .chat-messages { max-height: 50vh !important; }
+
+  /* Product detail grid */
+  .pd-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Checkout form */
+  .checkout-grid,
+  .form-row { grid-template-columns: 1fr !important; }
+
+  /* General containers */
+  .container, section.block .wrap { padding: 0 12px !important; }
+  
+  /* Customer dashboard */
+  .dash { grid-template-columns: 1fr !important; }
+  .dash-sidebar { width: 100% !important; }
+  .dash-main { padding: 12px !important; }
+  
+  /* Order detail page */
+  .order-detail-grid { grid-template-columns: 1fr !important; }
+  
+  /* Tables responsive */
+  table { font-size: 12px; }
+  table th, table td { padding: 8px 6px; }
+  
+  /* Float buttons above bottom bar */
+  .float-stack { bottom: 72px !important; right: 12px !important; }
+  
+  /* Ensure images don't overflow */
+  img { max-width: 100%; height: auto; }
+  
+  /* Fix any inline grid layouts */
+  [style*="grid-template-columns"] { 
+    grid-template-columns: 1fr !important; 
+  }
+}
+
+/* === TABLET ≤ 820px === */
+@media (max-width: 820px) {
+  /* Header actions scrollable */
+  .header-actions {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .header-actions::-webkit-scrollbar { display: none; }
+  
+  /* Ensure wrap doesn't overflow */
+  header.main .wrap { overflow: hidden; }
+  
+  /* Product grid 2 cols */
+  .prod-grid, .prod-grid.cols-4, .prod-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+  }
+}
+
+/* === CUSTOMER ACCOUNT PAGES MOBILE === */
+@media (max-width: 640px) {
+  /* Profile/account forms */
+  .profile-form .form-group,
+  .invoice-form .form-group { margin-bottom: 12px; }
+  
+  .profile-form input,
+  .profile-form select,
+  .profile-form textarea,
+  .invoice-form input,
+  .invoice-form select,
+  .invoice-form textarea {
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+  
+  /* Auth pages (login/register) */
+  .auth-card,
+  .auth-form { 
+    width: 100% !important; 
+    max-width: 100% !important; 
+    padding: 20px 16px !important; 
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+  
+  /* Cart page */
+  .cart-item { 
+    flex-direction: column; 
+    gap: 10px; 
+    padding: 12px;
+  }
+  .cart-item img { max-width: 80px; }
+  
+  /* Pagination */
+  .pagination { flex-wrap: wrap; gap: 4px; }
+  .pagination a, .pagination span { 
+    min-width: 32px; 
+    height: 32px; 
+    font-size: 12px; 
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* ENHANCED MOBILE v3 - Layout consistency + Responsive   */
+/* ═══════════════════════════════════════════════════════ */
+
+/* === Fix layout consistency (thụt ra thụt vào) === */
+@media (max-width: 640px) {
+  section.block .wrap,
+  .trust .wrap,
+  footer .main-foot .wrap,
+  .newsletter-band .wrap,
+  .promo-band .wrap {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* Consistent card padding */
+  .sec-card { padding: 12px !important; border-radius: 8px !important; }
+  .prod-card { padding: 10px !important; }
+  
+  /* Hero section on mobile */
+  .hero-section { padding: 0 !important; }
+  .hero-section .wrap { padding: 0 16px !important; }
+  
+  /* vs-card (vehicle search) shown on mobile */
+  .vs-card {
+    display: block !important;
+    margin: 12px 16px !important;
+    border-radius: 10px !important;
+    padding: 16px !important;
+  }
+  
+  /* Mobile bottom bar adjustments */
+  .mobile-bottom-bar { 
+    padding: 8px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Newsletter band mobile */
+  .newsletter-band .wrap {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center;
+  }
+  .nl-form {
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .nl-form input { width: 100% !important; }
+  .nl-form button { width: 100% !important; }
+  
+  /* Trust grid responsive */
+  .trust-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .trust-item {
+    padding: 12px !important;
+    gap: 8px !important;
+  }
+  .trust-item .num { font-size: 20px !important; }
+  .trust-item .ttl { font-size: 12px !important; }
+  .trust-item .desc { font-size: 10px !important; }
+  
+  /* Profile page mobile */
+  .customer-profile-grid,
+  .profile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* Invoice form mobile */
+  .invoice-section .form-row,
+  .invoice-section [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Order cards mobile */
+  .order-card { padding: 12px !important; }
+  
+  /* Fix overflow everywhere */
+  body { overflow-x: hidden !important; }
+  main { overflow-x: hidden !important; }
+  .wrap { overflow-x: hidden !important; }
+  
+  /* Fix floating social on mobile */
+  .floating-social { bottom: 140px !important; right: 12px !important; left: auto !important; }
+  .floating-social a { width: 40px !important; height: 40px !important; }
+  
+  /* Fix categories sidebar in products page */
+  .cat-sidebar, .filter-sidebar {
+    position: static !important;
+    width: 100% !important;
+    margin-bottom: 16px;
+  }
+  
+  /* Product listing grid */
+  .prod-list-wrap {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === Small phone fixes === */
+@media (max-width: 400px) {
+  .trust-grid { grid-template-columns: 1fr !important; }
+  section.block .wrap { padding: 0 12px !important; }
+  .prod-card { padding: 8px !important; }
+  .prod-name { font-size: 11px !important; }
+  .prod-price .now { font-size: 15px !important; }
+}
+
+/* === Tablet fixes === */
+@media (min-width: 641px) and (max-width: 820px) {
+  .hero-section .wrap {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .cat-sidebar { display: none; }
+  .prod-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* MOBILE v4 - Cart+hamburger, bottom gap, spacing        */
+/* ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Cart icon next to hamburger menu */
+
+
+
+
+  
+  /* Giỏ hàng + hamburger cạnh nhau */
+  .mobile-header-right {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Fix white space at bottom */
+  footer { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  body { margin-bottom: 0 !important; }
+  .main-foot { padding-bottom: 60px !important; }
+  footer::after { display: none !important; }
+  
+  /* Fix "Giới thiệu về Cooling" spacing */
+  .about-section .wrap,
+  .sec-card .about-grid,
+  [class*="about"] .wrap {
+    gap: 20px !important;
+    padding: 16px !important;
+  }
+  .about-section img,
+  .sec-card img[style*="width:100%"] {
+    margin-top: 16px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Ensure no horizontal overflow causing white gap */
+  html { overflow-x: hidden !important; }
+  body { overflow-x: hidden !important; width: 100% !important; }
+  .wrap { max-width: 100% !important; }
+  
+  /* Fix floating social overlap with bottom bar */
+  .floating-social { bottom: 75px !important; }
+  
+  /* Fix call button overlap */
+  .float-call { bottom: 75px !important; }
+}
+
+@media (max-width: 640px) {
+  .mobile-cart-btn { display: flex !important; align-items: center; }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* MOBILE v5 - Comprehensive mobile fixes                 */
+/* ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* === Invoice radio buttons: stack vertically === */
+  #custInvoiceForm .form-group > div[style*="display:flex"][style*="gap:16px"],
+  .inv-type-wrap {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  #custInvoiceForm label[style*="display:flex"][style*="align-items:center"] {
+    font-size: 14px !important;
+  }
+  /* Invoice 2-col grids -> 1 col */
+  #custInvoiceForm div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* === Vehicle search card: center and full width === */
+  .vs-card {
+    margin: 12px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  .vs-card form { width: 100% !important; }
+  .vs-card select, .vs-card input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* === Product grid: 2 columns, no horizontal scroll === */
+  .prod-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    overflow-x: visible !important;
+    overflow: visible !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .prod-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+  .prod-card img {
+    max-height: 140px !important;
+    object-fit: contain !important;
+  }
+  
+
+  
+  /* === Nav bar: horizontal scroll, no jump === */
+  nav.primary { position: sticky; top: 0; z-index: 100; }
+  #navScrollWrap {
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-link {
+    padding: 10px 14px !important;
+    font-size: 12px !important;
+  }
+  
+  /* === Floating social: don't cover content === */
+  .floating-social {
+    bottom: 75px !important;
+    right: 8px !important;
+    left: auto !important;
+    gap: 8px !important;
+    bottom: 120px !important;
+    bottom: 140px !important;
+  }
+  .floating-social a {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .floating-social a svg { width: 18px !important; height: 18px !important; }
+  .float-stack { bottom: 75px !important; }
+  
+  /* === Fix all 2-col grids on mobile === */
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* === FORCE prod-grid 2-col mobile === */
+@media (max-width: 640px) {
+  .prod-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    white-space: normal !important;
+  }
+  .prod-grid > * {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+    scroll-snap-align: unset !important;
+    white-space: normal !important;
+  }
+  .prod-card {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  header.main > .wrap {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  /* Hide everything except logo and cart+hamburger wrapper */
+  header.main .search,
+  header.main .hotline,
+  header.main .header-actions {
+    display: none !important;
+  }
+  /* Logo takes only needed space */
+  header.main .logo {
+    flex: 0 0 auto !important;
+  }
+  /* Cart+hamburger wrapper pushed to right */
+  header.main > .wrap > div:last-of-type {
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .mobile-cart-btn {
+    display: flex !important;
+    align-items: center !important;
+    color: var(--navy) !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .mobile-right-actions {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    z-index: 50 !important;
+  }
+  header.main > .wrap {
+    position: relative !important;
+  }
+  .mobile-cart-btn {
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* FINAL OVERRIDES - MUST BE AT END OF FILE               */
+/* ═══════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* === HIDE desktop header-actions completely === */
+  header.main .header-actions {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  header.main .header-actions * {
+    display: none !important;
+  }
+  /* Ensure desktop search and hotline are hidden */
+  header.main .search { display: none !important; }
+  header.main .hotline { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  /* === PRODUCT GRID: 2 columns === */
+  .prod-grid,
+  .prod-grid.cols-4,
+  .prod-grid.cols-3,
+  .prod-grid.cols-5,
+  div.prod-grid,
+  section .prod-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    overflow: visible !important;
+  }
+  .prod-grid > .prod-card,
+  .prod-grid > div,
+  .prod-grid > article,
+  .prod-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: unset !important;
+  }
+  .prod-card .img-wrap,
+  .prod-card .img-wrap img {
+    width: 100% !important;
+    max-height: 160px !important;
+  }
+  
+  /* === FOOTER: fix bottom color bar === */
+  .foot-bottom {
+    background: var(--navy-dark, #0b1f40) !important;
+    margin: 0 !important;
+    padding: 14px 0 !important;
+  }
+  footer {
+    background: var(--navy-dark, #0b1f40) !important;
+    padding-bottom: 0 !important;
+  }
+  footer .main-foot {
+    background: var(--navy-dark, #0b1f40) !important;
+  }
+  /* No white gap after footer */
+  body::after { display: none !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* PROD-GRID: Force 2 columns on mobile with pagination   */
+/* ═══════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .prod-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    padding: 0 4px !important;
+  }
+  .prod-grid > .prod-card,
+  .prod-card {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: auto !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .prod-card .prod-img-wrap,
+  .prod-card a[style*="aspect-ratio"] {
+    aspect-ratio: 1 !important;
+    width: 100% !important;
+  }
+  .prod-card .prod-img-wrap img,
+  .prod-card a[style*="aspect-ratio"] img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  /* Smaller text on mobile cards */
+  .prod-card a[style*="font-weight:600"] {
+    font-size: 11px !important;
+    min-height: 28px !important;
+    -webkit-line-clamp: 2 !important;
+  }
+  /* Pagination styles */
+  .prod-pager {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 0;
+    flex-wrap: wrap;
+  }
+  .prod-pager button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    color: #333;
+    transition: all 0.15s;
+  }
+  .prod-pager button.active {
+    background: #1a3258;
+    color: #fff;
+    border-color: #1a3258;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* FOOTER: Remove bottom white gap / color mismatch       */
+/* ═══════════════════════════════════════════════════════ */
+html {
+  background: var(--navy-dark, #0b1f40);
+}
+footer .foot-bottom {
+  background: transparent !important;
+}
+
+
+/* === FINAL: Remove body padding, keep footer padding === */
+body { padding-bottom: 0 !important; }
+
+
+/* === FIX: Mobile Header Icons (Notification, Messages, Favorites) === */
+@media (max-width: 640px) {
+  .mobile-icon-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 6px !important;
+    color: var(--navy) !important;
+    min-height: 44px;
+    min-width: 36px;
+    position: relative;
+  }
+  .mobile-icon-btn:hover { color: var(--gold-warm) !important; }
+  .mobile-right-actions { gap: 2px !important; }
+  
+  /* === FIX: Ẩn phân trang trùng trong section Sản phẩm nổi bật === */
+  #products .prod-pager { display: none !important; }
+  #products .prod-grid[style*="display:none"] { display: none !important; }
+  
+  /* Đảm bảo tab ẩn vẫn ẩn khi mobile */
+  .prod-grid[data-tab][style*="display: none"] { display: none !important; }
+  .prod-grid[data-tab][style*="display:none"] { display: none !important; }
+}
+
+/* ===== FIX 2026-05-23: Ensure mobile buttons hidden on desktop ===== */
+@media (min-width: 641px) {
+  .mobile-icon-btn { display: none !important; }
+  .mobile-right-actions { display: none !important; }
+}
+
+
+
+
+/* ── Full responsive for all phone sizes ── */
+@media (max-width: 480px) {
+  .hero-section, .hero-banner, section.hero {
+    margin-top: 10px !important;
+    border-radius: 0 !important;
+    min-height: 280px !important;
+  }
+  .hero-section h1, .hero-banner h1 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+  }
+  .hero-section p, .hero-banner p {
+    font-size: 13px !important;
+  }
+  .hero-section .actions, .hero-banner .actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .hero-section .actions .btn, .hero-banner .actions .btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  /* Product grid responsive */
+  .p-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .p-card img {
+    height: 140px !important;
+  }
+  /* Form fields responsive */
+  .co-card input, .co-card select, .co-card textarea {
+    font-size: 14px !important;
+  }
+  /* Footer responsive */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-section h1, .hero-banner h1 {
+    font-size: 20px !important;
+  }
+  .hero-section, .hero-banner {
+    min-height: 240px !important;
+    padding: 20px 12px !important;
+  }
+  .p-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+  .p-card .p-name {
+    font-size: 12px !important;
+  }
+  .p-card .p-price {
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero-section h1, .hero-banner h1 {
+    font-size: 18px !important;
+  }
+  .wrap {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}
+
+/* ── Banner spacing: gap between nav and hero ── */
+@media (max-width: 900px) {
+  .hero-section {
+    margin-top: 16px !important;
+    padding-top: 0 !important;
+  }
+  .hero-section .banner {
+    border-radius: 10px !important;
+    margin: 0 8px !important;
+    min-height: 300px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 30px 20px !important;
+  }
+  .hero-section .banner h1 {
+    font-size: 26px !important;
+    line-height: 1.3 !important;
+  }
+  .hero-section .banner p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  .hero-section .banner .actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin-top: 16px !important;
+  }
+  .hero-section .banner .actions .btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 12px 20px !important;
+  }
+}
+
+/* ── Full responsive: all phone sizes ── */
+@media (max-width: 480px) {
+  .hero-section {
+    margin-top: 14px !important;
+  }
+  .hero-section .banner {
+    min-height: 260px !important;
+    padding: 24px 16px !important;
+    margin: 0 6px !important;
+  }
+  .hero-section .banner h1 {
+    font-size: 22px !important;
+  }
+  /* Product cards */
+  .p-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .p-card img {
+    height: 140px !important;
+  }
+  .p-card .p-name {
+    font-size: 12px !important;
+    -webkit-line-clamp: 2 !important;
+  }
+  /* Checkout form */
+  .co-card input, .co-card select, .co-card textarea {
+    font-size: 14px !important;
+  }
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Contact form */
+  section.block > .wrap > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-section .banner {
+    min-height: 240px !important;
+    padding: 20px 14px !important;
+  }
+  .hero-section .banner h1 {
+    font-size: 20px !important;
+  }
+  .hero-section .banner .badge {
+    font-size: 10px !important;
+    padding: 4px 12px !important;
+  }
+  .wrap {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero-section .banner h1 {
+    font-size: 18px !important;
+  }
+  .hero-section .banner {
+    min-height: 220px !important;
+    padding: 16px 12px !important;
+  }
+}
+
+/* === OVERRIDE: Social buttons above Goi ngay === */
+.floating-social {
+  bottom: 150px !important;
+  right: 12px !important;
+  left: auto !important;
+}
+.float-stack {
+  right: 12px !important;
+  bottom: 72px !important;
+}
+
+/* === Mobile Bottom Navigation Bar === */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+  justify-content: space-around;
+  border-top: 1px solid #eee;
+}
+.mb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #555;
+  font-size: 9px;
+  font-weight: 600;
+  gap: 2px;
+  position: relative;
+  padding: 4px 6px;
+}
+.mb-item svg { width: 20px; height: 20px; }
+.mb-item span { margin-top: 1px; }
+.pos-rel { position: relative; }
