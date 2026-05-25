@@ -564,6 +564,63 @@ var quillSpec = new Quill('#quillSpec', {
   modules: { toolbar: { container: toolbarFull } }
 });
 
+
+// === Custom Table Insert Handler ===
+function addTableHandler(quillInstance) {
+  var toolbar = quillInstance.getModule('toolbar');
+  if (!toolbar) return;
+  // Find the clean button and add table button before it
+  var toolbarEl = quillInstance.container.previousSibling;
+  if (!toolbarEl || !toolbarEl.classList.contains('ql-toolbar')) return;
+  
+  // Create table button
+  var tableBtn = document.createElement('button');
+  tableBtn.type = 'button';
+  tableBtn.className = 'ql-table-insert';
+  tableBtn.title = 'Chèn bảng';
+  tableBtn.innerHTML = '<svg viewBox="0 0 18 18" width="18" height="18"><rect x="1" y="1" width="16" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="1" y1="7" x2="17" y2="7" stroke="currentColor" stroke-width="1"/><line x1="1" y1="12" x2="17" y2="12" stroke="currentColor" stroke-width="1"/><line x1="7" y1="1" x2="7" y2="17" stroke="currentColor" stroke-width="1"/><line x1="12" y1="1" x2="12" y2="17" stroke="currentColor" stroke-width="1"/></svg>';
+  tableBtn.style.cssText = 'cursor:pointer;padding:3px 5px;';
+  
+  tableBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var rows = prompt('Số hàng (rows):', '3');
+    var cols = prompt('Số cột (columns):', '3');
+    if (!rows || !cols) return;
+    rows = parseInt(rows); cols = parseInt(cols);
+    if (isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1 || rows > 20 || cols > 10) {
+      alert('Số hàng: 1-20, số cột: 1-10');
+      return;
+    }
+    var html = '<table style="width:100%;border-collapse:collapse;margin:12px 0"><thead><tr>';
+    for (var c = 0; c < cols; c++) {
+      html += '<th style="border:1px solid #ddd;padding:10px 14px;background:#0b1d3a;color:#fff;font-weight:700;text-align:left">Tiêu đề ' + (c+1) + '</th>';
+    }
+    html += '</tr></thead><tbody>';
+    for (var r = 0; r < rows - 1; r++) {
+      html += '<tr>';
+      for (var c = 0; c < cols; c++) {
+        html += '<td style="border:1px solid #ddd;padding:10px 14px;text-align:left">&nbsp;</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table><p><br></p>';
+    
+    var range = quillInstance.getSelection(true);
+    quillInstance.clipboard.dangerouslyPasteHTML(range ? range.index : quillInstance.getLength(), html);
+  });
+  
+  // Add separator and button
+  var span = document.createElement('span');
+  span.className = 'ql-formats';
+  span.appendChild(tableBtn);
+  toolbarEl.appendChild(span);
+}
+
+addTableHandler(quillDesc);
+addTableHandler(quillFeat);
+addTableHandler(quillSpec);
+
+
 document.getElementById('productForm').addEventListener('submit', function(e) {
   // SEO validation - block if score < 50%
   var scoreEl = document.getElementById('seoScore');
