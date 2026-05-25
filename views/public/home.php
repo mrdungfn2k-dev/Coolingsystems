@@ -81,7 +81,7 @@ foreach ($trustSteps as $step):
   <div class="sec-head">
     <div class="title"><span class="bar"></span><h2>Sản phẩm nổi bật</h2></div>
     <div class="sec-tabs"><button class="active" data-target="featured">Sản phẩm mới</button><button data-target="bestseller">Bán chạy</button></div>
-    <a href="/products" class="btn-link all-link">Xem tất cả</a>
+    <a href="/products?sort=newest" class="btn-link all-link" id="featuredViewAll">Xem tất cả  →</a>
   </div>
   <div class="prod-grid" data-tab="featured">
     <?php foreach ($featured as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
@@ -167,6 +167,19 @@ foreach ($cats as $cat):
 .prod-pager button.active { background: #1a3258; color: #fff; border-color: #1a3258; }
 .prod-pager button:hover:not(.active) { background: #f0f2f7; border-color: #1a3258; }
 .featured-paging { text-align: center; margin-top: 12px; }
+
+/* Mobile price fix */
+@media (max-width: 640px) {
+  .prod-card .prod-price-row {
+    flex-wrap: nowrap;
+  }
+  .prod-card .prod-price-row span[style*="font-size:15px"] {
+    font-size: 13px !important;
+  }
+  .prod-card .prod-price-row span[style*="font-size:11px"] {
+    font-size: 10px !important;
+  }
+}
 </style>
 
 <script>
@@ -188,12 +201,23 @@ document.addEventListener('DOMContentLoaded', function() {
       card.querySelectorAll('.featured-paging').forEach(function(fp) {
         fp.style.display = (fp.getAttribute('data-for-tab') === target) ? '' : 'none';
       });
+      // Update "Xem tất cả" link based on active tab
+      var viewAllLink = card.querySelector('#featuredViewAll');
+      if (viewAllLink) {
+        if (target === 'bestseller') {
+          viewAllLink.href = '/products?sort=bestseller';
+          viewAllLink.textContent = 'Xem tất cả  \u2192';
+        } else {
+          viewAllLink.href = '/products?sort=newest';
+          viewAllLink.textContent = 'Xem tất cả  \u2192';
+        }
+      }
     });
   });
 
   /* === B. Featured pagination === */
   function initFeaturedPagination() {
-    var perPage = isMobile() ? 6 : 10;
+    var perPage = isMobile() ? 4 : 10;
     document.querySelectorAll('.prod-grid[data-tab]').forEach(function(grid) {
       var tab = grid.getAttribute('data-tab');
       var cards = Array.from(grid.querySelectorAll('.prod-card'));
@@ -220,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* === C. Category AJAX pagination === */
   function initCatPagination() {
-    var perPage = isMobile() ? 6 : 10;
+    var perPage = isMobile() ? 4 : 10;
     document.querySelectorAll('.cat-paging').forEach(function(pagingEl) {
       var gridId = pagingEl.getAttribute('data-grid');
       var grid = document.getElementById(gridId);

@@ -34,10 +34,10 @@
   <?php endif; ?>
 
   <!-- Giá + nút giỏ hàng cùng hàng -->
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:6px">
+  <div class="prod-price-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:4px">
     
 <div>
-      <span style="font-size:15px;font-weight:800;color:var(--navy)"><?= vnd($p['price']) ?></span>
+      <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($p['price']) ?></span>
       <?php if (!empty($p['original_price']) && $p['original_price'] > $p['price']): ?>
         <span style="text-decoration:line-through;color:var(--ink-4);font-size:11px;margin-left:4px"><?= vnd($p['original_price']) ?></span>
       <?php endif; ?>

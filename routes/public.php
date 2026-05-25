@@ -17,7 +17,8 @@ get('/', function() {
         AND p.created_at >= datetime('now', '-" . $newDays . " days', 'localtime')
         ORDER BY p.created_at DESC LIMIT 20");
 
-    $bestSellers = dbAll("SELECT p.*, 'Cooling' AS shop_name,
+    $bestSellers = dbAll("SELECT * FROM (
+        SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
         COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count,
@@ -27,7 +28,8 @@ get('/', function() {
             WHERE oi.product_id=p.id AND o.payment_status != 'cancelled'), 0) AS total_purchased
         FROM products p
         WHERE p.status='published' AND p.stock>0
-        ORDER BY total_purchased DESC, avg_rating DESC, p.sold_count DESC LIMIT 10");
+        ) WHERE total_purchased > 0
+        ORDER BY total_purchased DESC, avg_rating DESC LIMIT 10");
 
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
     $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c ORDER BY sort_order LIMIT 12");

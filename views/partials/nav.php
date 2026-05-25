@@ -81,6 +81,14 @@
   el.addEventListener('touchmove',function(e){
     var x=e.touches[0].pageX-el.offsetLeft; el.scrollLeft=scrollLeft-(x-startX);
   },{passive:true});
+  // Auto-scroll to active nav link so it stays visible on page load
+  var activeLink = el.querySelector('.nav-link.active');
+  if (activeLink) {
+    var elRect = el.getBoundingClientRect();
+    var linkRect = activeLink.getBoundingClientRect();
+    var scrollTarget = activeLink.offsetLeft - (elRect.width / 2) + (linkRect.width / 2);
+    el.scrollLeft = Math.max(0, scrollTarget);
+  }
 })();
 </script>
 </nav>
