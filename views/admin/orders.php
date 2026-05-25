@@ -113,7 +113,7 @@
     <tr>
       <td style="font-weight:700;color:var(--navy)"><?= e($o['code'] ?? $o['order_code'] ?? 'N/A') ?></td>
       <td>
-        <div style="font-weight:600"><?= e($o['full_name']) ?></div>
+        <div style="font-weight:600"><?= e($o['full_name'] ?? $o['shipping_full_name'] ?? 'N/A') ?></div>
         <div style="font-size:11px;color:#666"><?= e($o['phone']??'') ?></div>
       </td>
       <td>
