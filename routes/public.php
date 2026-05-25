@@ -313,14 +313,60 @@ get('/sitemap.xml', function() {
 
     // Products
     foreach ($products as $p) {
-        $slug = $p['slug'] ?: $p['id'];
+        $slug = !empty($p['slug']) ? $p['slug'] : $p['id'];
         $mod = substr($p['updated_at']??$now, 0, 10);
         echo '<url>';
-        echo '<loc>https://coolingsystem.vn/products/'.e($p['id']).'</loc>';
+        echo '<loc>https://coolingsystem.vn/products/'.e($slug).'</loc>';
         echo '<changefreq>weekly</changefreq><priority>0.9</priority>';
         echo '<lastmod>'.$mod.'</lastmod>';
         echo '</url>';
     }
+
+    // News articles
+    $news = dbAll("SELECT slug, updated_at FROM news WHERE status='published' ORDER BY published_at DESC LIMIT 200");
+    foreach ($news as $n) {
+        $mod = substr($n['updated_at']??$now, 0, 10);
+        echo '<url>';
+        echo '<loc>https://coolingsystem.vn/news/'.e($n['slug']).'</loc>';
+        echo '<changefreq>weekly</changefreq><priority>0.7</priority>';
+        echo '<lastmod>'.$mod.'</lastmod>';
+        echo '</url>';
+    }
+
+    // Product brands
+    $brands = dbAll("SELECT slug, updated_at FROM product_brands WHERE status='active' ORDER BY name ASC LIMIT 100");
+    foreach ($brands as $b) {
+        echo '<url>';
+        echo '<loc>https://coolingsystem.vn/product-brands/'.e($b['slug']).'</loc>';
+        echo '<changefreq>monthly</changefreq><priority>0.6</priority>';
+        echo '<lastmod>'.$now.'</lastmod>';
+        echo '</url>';
+    }
+
+    // Vehicle brands
+    $vbrands = dbAll("SELECT slug FROM brands WHERE status='active' ORDER BY name ASC LIMIT 100");
+    foreach ($vbrands as $vb) {
+        echo '<url>';
+        echo '<loc>https://coolingsystem.vn/brands/'.e($vb['slug']).'</loc>';
+        echo '<changefreq>monthly</changefreq><priority>0.6</priority>';
+        echo '<lastmod>'.$now.'</lastmod>';
+        echo '</url>';
+    }
+
+    // Static pages / Policies
+    $staticPages = dbAll("SELECT slug, updated_at FROM static_pages LIMIT 50");
+    foreach ($staticPages as $sp) {
+        $mod = substr($sp['updated_at']??$now, 0, 10);
+        echo '<url>';
+        echo '<loc>https://coolingsystem.vn/policies/'.e($sp['slug']).'</loc>';
+        echo '<changefreq>monthly</changefreq><priority>0.5</priority>';
+        echo '<lastmod>'.$mod.'</lastmod>';
+        echo '</url>';
+    }
+
+    // Promotions
+    echo '<url><loc>https://coolingsystem.vn/promotions</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>'.$now.'</lastmod></url>';
+    echo '<url><loc>https://coolingsystem.vn/product-brands</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>'.$now.'</lastmod></url>';
 
     echo '</urlset>';
     exit;

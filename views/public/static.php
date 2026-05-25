@@ -40,4 +40,36 @@
     <?php endif; ?>
   </div>
 </div></section>
+
+<script>
+// Auto Table of Contents
+(function() {
+  var body = document.querySelector('.article-body');
+  if (!body) return;
+  var headings = body.querySelectorAll('h2, h3, h4');
+  if (headings.length < 3) return; // Only show TOC for 3+ headings
+  
+  // Build TOC
+  var tocHtml = '<div class="auto-toc" style="background:#f8f9fc;border:1px solid #e2e5ea;border-radius:8px;padding:18px 24px;margin-bottom:24px">';
+  tocHtml += '<div style="font-weight:800;font-size:15px;color:#0b1d3a;margin-bottom:10px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="this.parentElement.classList.toggle('toc-collapsed')">';
+  tocHtml += '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
+  tocHtml += 'Mục lục bài viết <span style="font-size:11px;color:#999;font-weight:400">(' + headings.length + ' mục)</span></div>';
+  tocHtml += '<ol class="toc-list" style="margin:0;padding-left:20px;font-size:14px;line-height:2">';
+  
+  headings.forEach(function(h, i) {
+    var id = 'toc-' + i;
+    h.id = id;
+    var indent = h.tagName === 'H3' ? 'padding-left:16px' : (h.tagName === 'H4' ? 'padding-left:32px' : '');
+    var weight = h.tagName === 'H2' ? 'font-weight:600' : 'font-weight:400';
+    tocHtml += '<li style="' + indent + ';' + weight + '"><a href="#' + id + '" style="color:#0b1d3a;text-decoration:none" onmouseover="this.style.color='#c9a14a'" onmouseout="this.style.color='#0b1d3a'">' + h.textContent + '</a></li>';
+  });
+  
+  tocHtml += '</ol></div>';
+  tocHtml += '<style>.toc-collapsed .toc-list{display:none}</style>';
+  
+  // Insert TOC before first heading
+  headings[0].insertAdjacentHTML('beforebegin', tocHtml);
+})();
+</script>
+
 <?php require __DIR__ . '/../partials/foot.php'; ?>
