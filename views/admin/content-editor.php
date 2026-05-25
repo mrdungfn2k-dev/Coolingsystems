@@ -1,35 +1,16 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
-<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<style>
+.tox-tinymce { border: 1px solid var(--line) !important; border-radius: 6px !important; }
+.tox .tox-toolbar { background: #fafafa !important; }
+.tox .tox-statusbar { border-top: 1px solid var(--line) !important; }
+.tox-notifications-container { display: none !important; }
+.tox-promotion { display: none !important; }
+</style>
 <style>
 .editor-layout{display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:start}
 @media(max-width:900px){.editor-layout{grid-template-columns:1fr}}
-
-/* Quill font size dropdown labels */
-.ql-snow .ql-picker.ql-size .ql-picker-label::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item::before { content: attr(data-value) !important; }
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=""]::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=""]::before { content: 'Mặc định' !important; }
-/* Quill font family dropdown labels */
-.ql-snow .ql-picker.ql-font .ql-picker-label::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item::before { content: attr(data-value) !important; text-transform: capitalize; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=""]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=""]::before { content: 'Mặc định' !important; }
-
-.ql-toolbar{border-radius:6px 6px 0 0 !important;border:1px solid var(--line) !important;background:#fafafa}
-.ql-container{border:1px solid var(--line) !important;border-top:none !important;border-radius:0 0 6px 6px !important;min-height:500px;font-size:15px}
-.ql-editor{min-height:500px;font-family:'Inter',sans-serif;line-height:1.9}
-.ql-editor h1{font-size:32px;font-weight:800;color:#1a3258}
-.ql-editor h2{font-size:24px;font-weight:700;color:#1a3258}
-.ql-editor h3{font-size:20px;font-weight:700;color:#2c4a7c}
-.ql-editor img{max-width:100%;height:auto;border-radius:8px;cursor:pointer}
-.ql-editor img.selected{outline:3px solid var(--navy);outline-offset:2px}
-.ql-size-small{font-size:0.75em}.ql-size-large{font-size:1.5em}.ql-size-huge{font-size:2.5em}
 .sidebar-box{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
-.img-resize-bar{display:none;position:fixed;background:var(--navy);color:#fff;padding:6px 12px;border-radius:8px;z-index:999;gap:6px;align-items:center;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
-.img-resize-bar.show{display:flex}
-.img-resize-bar button{background:rgba(255,255,255,0.2);border:none;color:#fff;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:700}
-.img-resize-bar button:hover{background:rgba(255,255,255,0.35)}
 </style>
 
 <div class="dash-head">
@@ -39,7 +20,6 @@
 
 <form method="post" action="/admin/content/<?= e($page['slug']) ?>" id="editorForm" enctype="multipart/form-data">
   <?= csrfField() ?>
-  <input type="hidden" name="content" id="contentHidden">
   <div class="editor-layout">
     <div>
       <div class="panel">
@@ -47,249 +27,72 @@
           <h3>Nội dung trang <code style="font-size:12px;background:#f0f0f0;padding:2px 8px;border-radius:4px"><?= e($page['slug']) ?></code></h3>
         </div>
         <div class="panel-body" style="padding:0">
-          <div id="quillEditor"><?= $page['content'] ?></div>
+          <textarea id="tinymceContent" name="content"><?= htmlspecialchars($page['content'] ?? '') ?></textarea>
         </div>
       </div>
     </div>
     <div class="sidebar-box">
       <div class="panel">
-        <div class="panel-head"><h3>Tùy chọn</h3></div>
+        <div class="panel-head"><h3>🖼 Chèn ảnh</h3></div>
         <div class="panel-body">
-          <div class="form-group">
-            <label>Tiêu đề trang</label>
-            <input type="text" name="title" value="<?= e($page['title']) ?>" required>
-          </div>
-          <div class="form-group">
-            <label>Upload ảnh vào nội dung</label>
-            <input type="file" id="imgUpload" accept="image/*" style="font-size:12px">
-            <small style="color:#888;display:block;margin-top:4px">Chọn ảnh rồi nó sẽ được chèn tại vị trí con trỏ</small>
-          </div>
-          <button type="submit" class="btn btn-gold btn-block btn-lg">Lưu nội dung</button>
-          <div class="mt-2 fs-12 text-muted text-center">
-            Cập nhật: <?= $page['updated_at'] ? relTime($page['updated_at']) : 'Chưa lưu' ?>
-          </div>
+          <input type="file" id="imgUpload" accept="image/*" class="form-control" style="font-size:12px">
+          <small style="color:#888;font-size:11px">Upload ảnh rồi chèn vào nội dung</small>
         </div>
       </div>
-      <div class="panel">
-        <div class="panel-head"><h3>Hướng dẫn</h3></div>
-        <div class="panel-body fs-12" style="color:var(--ink-2);line-height:1.7">
-          <div style="margin-bottom:4px"><strong>H1-H6</strong> — Tiêu đề</div>
-          <div style="margin-bottom:4px"><strong>Cỡ chữ</strong> — Nhỏ / Bình thường / Lớn / Rất lớn</div>
-          <div style="margin-bottom:4px"><strong>B I U</strong> — Đậm, Nghiêng, Gạch chân</div>
-          <div style="margin-bottom:4px">Click vào ảnh để thay đổi kích thước</div>
-        </div>
-      </div>
+      <button type="submit" class="btn btn-navy" style="width:100%;padding:14px;font-size:15px;font-weight:700">💾 Lưu nội dung</button>
     </div>
   </div>
 </form>
 
-<div class="img-resize-bar" id="imgResizeBar">
-  <span>Kích thước ảnh:</span>
-  <button onclick="resizeImg(25)">25%</button>
-  <button onclick="resizeImg(50)">50%</button>
-  <button onclick="resizeImg(75)">75%</button>
-  <button onclick="resizeImg(100)">100%</button>
-</div>
-
 <script>
-// Full toolbar matching product form
-var toolbarFull = [
-  [{ 'font': ['', 'serif', 'monospace', 'sans-serif', 'arial', 'times', 'verdana', 'tahoma', 'georgia', 'impact', 'courier'] }],
-  [{ 'size': ['8px','9px','10px','11px','12px','13px','14px','16px','18px','20px','22px','24px','26px','28px','32px','36px','48px','60px','72px'] }],
-  [{ 'header': [1,2,3,4,5,6,false] }],
-  ['bold','italic','underline','strike'],
-  [{ 'color': [] }, { 'background': [] }],
-  ['blockquote','code-block'],
-  [{ 'script': 'sub' }, { 'script': 'super' }],
-  [{ 'list':'ordered' }, { 'list':'bullet' }, { 'list':'check' }],
-  [{ 'indent':'-1' }, { 'indent':'+1' }],
-  [{ 'align': ['','center','right','justify'] }],
-  ['link','image','video'],
-  ['clean']
-];
-
-var SizeStyle = Quill.import('attributors/style/size');
-SizeStyle.whitelist = ['8px','9px','10px','11px','12px','13px','14px','16px','18px','20px','22px','24px','26px','28px','32px','36px','48px','60px','72px'];
-Quill.register(SizeStyle, true);
-var FontStyle = Quill.import('attributors/style/font');
-FontStyle.whitelist = ['', 'serif', 'monospace', 'sans-serif', 'arial', 'times', 'verdana', 'tahoma', 'georgia', 'impact', 'courier'];
-Quill.register(FontStyle, true);
-
-var quill = new Quill('#quillEditor', {
-  theme: 'snow',
-  placeholder: 'Nhập nội dung...',
-  modules: {
-    toolbar: {
-      container: toolbarFull
-    }
+tinymce.init({
+  selector: '#tinymceContent',
+  height: 550,
+  language: 'vi',
+  plugins: 'table lists link image code wordcount fullscreen preview searchreplace autolink visualblocks',
+  toolbar: [
+    'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
+    'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | link image | code fullscreen'
+  ],
+  font_family_formats: 'Mặc định=; Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
+  font_size_formats: '8px 9px 10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 60px 72px',
+  table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+  table_default_styles: { 'border-collapse': 'collapse', 'width': '100%' },
+  table_default_attributes: { 'border': '1' },
+  table_class_list: [
+    { title: 'Mặc định', value: '' },
+    { title: 'Bảng sọc', value: 'table-striped' }
+  ],
+  content_style: `
+    body { font-family: Inter, Arial, sans-serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    th { background: #0b1d3a; color: #fff; font-weight: 700; padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
+    td { padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
+    tr:nth-child(even) td { background: #f8f9fc; }
+    h1 { font-size: 28px; color: #0b1d3a; font-weight: 900; }
+    h2 { font-size: 22px; color: #0b1d3a; font-weight: 800; }
+    h3 { font-size: 18px; color: #0b1d3a; font-weight: 700; }
+    img { max-width: 100%; height: auto; border-radius: 8px; }
+    blockquote { border-left: 3px solid #c9a14a; padding: 12px 16px; background: #faf8f3; border-radius: 0 8px 8px 0; }
+  `,
+  menubar: 'file edit view insert format table',
+  promotion: false,
+  branding: false,
+  license_key: 'gpl',
+  setup: function(editor) {
+    editor.on('change', function() { editor.save(); });
   }
 });
 
-
-// === Word-like Table Grid Picker ===
-function addTableHandler(quillInstance) {
-  var toolbarEl = quillInstance.container.previousSibling;
-  if (!toolbarEl || !toolbarEl.classList.contains('ql-toolbar')) return;
-
-  var wrap = document.createElement('span');
-  wrap.className = 'ql-formats';
-  wrap.style.position = 'relative';
-
-  var tableBtn = document.createElement('button');
-  tableBtn.type = 'button';
-  tableBtn.className = 'ql-table-insert';
-  tableBtn.title = 'Chèn bảng';
-  tableBtn.innerHTML = '<svg viewBox="0 0 18 18" width="18" height="18"><rect x="1" y="1" width="16" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="1" y1="7" x2="17" y2="7" stroke="currentColor" stroke-width="1"/><line x1="1" y1="12" x2="17" y2="12" stroke="currentColor" stroke-width="1"/><line x1="7" y1="1" x2="7" y2="17" stroke="currentColor" stroke-width="1"/><line x1="12" y1="1" x2="12" y2="17" stroke="currentColor" stroke-width="1"/></svg>';
-  tableBtn.style.cssText = 'cursor:pointer;padding:3px 5px;';
-
-  // Grid picker popup
-  var popup = document.createElement('div');
-  popup.className = 'table-grid-popup';
-  popup.style.cssText = 'display:none;position:absolute;top:100%;left:0;z-index:9999;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,0.15);min-width:200px;';
-  
-  var label = document.createElement('div');
-  label.style.cssText = 'text-align:center;font-size:12px;font-weight:700;color:#0b1d3a;margin-bottom:8px;';
-  label.textContent = 'Chọn kích thước bảng';
-  popup.appendChild(label);
-
-  var ROWS = 8, COLS = 8;
-  var grid = document.createElement('div');
-  grid.style.cssText = 'display:grid;grid-template-columns:repeat(' + COLS + ',24px);gap:2px;justify-content:center;';
-  
-  var cells = [];
-  var selR = 0, selC = 0;
-
-  for (var r = 0; r < ROWS; r++) {
-    for (var c = 0; c < COLS; c++) {
-      var cell = document.createElement('div');
-      cell.style.cssText = 'width:24px;height:24px;border:1px solid #ddd;border-radius:3px;cursor:pointer;transition:all 0.1s;';
-      cell.dataset.r = r + 1;
-      cell.dataset.c = c + 1;
-      cells.push(cell);
-      grid.appendChild(cell);
-    }
-  }
-  popup.appendChild(grid);
-
-  var info = document.createElement('div');
-  info.style.cssText = 'text-align:center;font-size:11px;color:#888;margin-top:6px;';
-  info.textContent = '0 × 0';
-  popup.appendChild(info);
-
-  // Hover highlight
-  grid.addEventListener('mouseover', function(e) {
-    var t = e.target;
-    if (!t.dataset.r) return;
-    selR = parseInt(t.dataset.r);
-    selC = parseInt(t.dataset.c);
-    info.textContent = selR + ' × ' + selC;
-    cells.forEach(function(cl) {
-      var cr = parseInt(cl.dataset.r), cc = parseInt(cl.dataset.c);
-      if (cr <= selR && cc <= selC) {
-        cl.style.background = '#0b1d3a';
-        cl.style.borderColor = '#0b1d3a';
-      } else {
-        cl.style.background = '#f8f9fc';
-        cl.style.borderColor = '#ddd';
-      }
-    });
-  });
-
-  // Click to insert
-  grid.addEventListener('click', function(e) {
-    var t = e.target;
-    if (!t.dataset.r) return;
-    var rows = parseInt(t.dataset.r), cols = parseInt(t.dataset.c);
-    
-    var html = '<table style="width:100%;border-collapse:collapse;margin:16px 0"><thead><tr>';
-    for (var c = 0; c < cols; c++) {
-      html += '<th style="border:1px solid #ddd;padding:10px 14px;background:#0b1d3a;color:#fff;font-weight:700;text-align:left">Cột ' + (c+1) + '</th>';
-    }
-    html += '</tr></thead><tbody>';
-    for (var r = 1; r < rows; r++) {
-      html += '<tr>';
-      for (var c = 0; c < cols; c++) {
-        html += '<td style="border:1px solid #ddd;padding:10px 14px;text-align:left">&nbsp;</td>';
-      }
-      html += '</tr>';
-    }
-    html += '</tbody></table><p><br></p>';
-    
-    var range = quillInstance.getSelection(true);
-    quillInstance.clipboard.dangerouslyPasteHTML(range ? range.index : quillInstance.getLength(), html);
-    popup.style.display = 'none';
-  });
-
-  // Toggle popup
-  tableBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
-    // Reset grid
-    cells.forEach(function(cl) { cl.style.background = '#f8f9fc'; cl.style.borderColor = '#ddd'; });
-    info.textContent = '0 × 0';
-  });
-
-  // Close on outside click
-  document.addEventListener('click', function(e) {
-    if (!wrap.contains(e.target)) popup.style.display = 'none';
-  });
-
-  wrap.appendChild(tableBtn);
-  wrap.appendChild(popup);
-  toolbarEl.appendChild(wrap);
-}
-
-addTableHandler(quill);
-
-
-
-
-
-// Image upload from sidebar
+// Image upload
 document.getElementById('imgUpload').addEventListener('change', function(e) {
   var file = e.target.files[0];
   if (!file) return;
   var reader = new FileReader();
   reader.onload = function(ev) {
-    var range = quill.getSelection(true);
-    quill.insertEmbed(range.index, 'image', ev.target.result);
-    quill.setSelection(range.index + 1);
+    tinymce.activeEditor.insertContent('<img src="' + ev.target.result + '" alt="' + file.name + '" style="max-width:100%">');
   };
   reader.readAsDataURL(file);
-  e.target.value = '';
-});
-
-// Image click to resize
-var selectedImg = null;
-var resizeBar = document.getElementById('imgResizeBar');
-document.querySelector('.ql-editor').addEventListener('click', function(e) {
-  if (e.target.tagName === 'IMG') {
-    if (selectedImg) selectedImg.classList.remove('selected');
-    selectedImg = e.target;
-    selectedImg.classList.add('selected');
-    var rect = selectedImg.getBoundingClientRect();
-    resizeBar.style.top = (rect.top - 40) + 'px';
-    resizeBar.style.left = rect.left + 'px';
-    resizeBar.classList.add('show');
-  } else {
-    if (selectedImg) selectedImg.classList.remove('selected');
-    selectedImg = null;
-    resizeBar.classList.remove('show');
-  }
-});
-
-function resizeImg(pct) {
-  if (!selectedImg) return;
-  selectedImg.style.width = pct + '%';
-  selectedImg.style.height = 'auto';
-  resizeBar.classList.remove('show');
-  selectedImg.classList.remove('selected');
-  selectedImg = null;
-}
-
-document.getElementById('editorForm').addEventListener('submit', function(e) {
-  document.getElementById('contentHidden').value = quill.root.innerHTML;
 });
 </script>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
