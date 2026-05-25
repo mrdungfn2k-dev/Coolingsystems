@@ -37,6 +37,57 @@
   </aside>
   <div class="dash-main">
 <?php
+// Admin Breadcrumb
+$_ap = parse_url($_SERVER['REQUEST_URI'] ?? '/admin', PHP_URL_PATH);
+$_abcMap = [
+    '/admin' => 'Tổng quan',
+    '/admin/products' => 'Quản lý sản phẩm',
+    '/admin/products/new' => 'Đăng SP mới',
+    '/admin/categories' => 'Danh mục',
+    '/admin/orders' => 'Đơn hàng',
+    '/admin/orders/create' => 'Tạo đơn hàng',
+    '/admin/returns' => 'Trả hàng',
+    '/admin/staff' => 'Phân quyền NV',
+    '/admin/users' => 'Người dùng',
+    '/admin/brands' => 'Hãng xe',
+    '/admin/promotions' => 'Khuyến mãi',
+    '/admin/vouchers' => 'Voucher toàn sàn',
+    '/admin/news' => 'Tin tức',
+    '/admin/news/new' => 'Viết bài',
+    '/admin/content' => 'Trang tĩnh',
+    '/admin/chat' => 'Tin nhắn',
+    '/admin/reviews' => 'Kiểm duyệt đánh giá',
+    '/admin/contacts' => 'Liên hệ khách',
+    '/admin/stores' => 'Hệ thống cửa hàng',
+    '/admin/settings/finance' => 'Cấu hình Thuế',
+    '/admin/settings' => 'Cài đặt hệ thống',
+];
+$_abcLabel = $_abcMap[$_ap] ?? '';
+$_abcParent = '';
+if (empty($_abcLabel) && $_ap !== '/admin') {
+    foreach ($_abcMap as $bk => $bv) {
+        if (strpos($_ap, $bk.'/') === 0 && $bk !== '/admin') {
+            $_abcLabel = $title ?? 'Chi tiết';
+            $_abcParent = $bk;
+            break;
+        }
+    }
+    if (empty($_abcLabel)) $_abcLabel = $title ?? '';
+}
+if ($_ap !== '/admin' && !empty($_abcLabel)):
+?>
+<nav style="font-size:12px;color:var(--ink-3);margin-bottom:16px">
+  <a href="/admin" style="color:var(--navy);text-decoration:none;font-weight:600">Tổng quan</a>
+  <?php if (!empty($_abcParent) && isset($_abcMap[$_abcParent])): ?>
+    <span style="margin:0 5px;color:#ccc">›</span>
+    <a href="<?= $_abcParent ?>" style="color:var(--navy);text-decoration:none"><?= $_abcMap[$_abcParent] ?></a>
+  <?php endif; ?>
+  <span style="margin:0 5px;color:#ccc">›</span>
+  <span style="color:var(--ink-2)"><?= htmlspecialchars($_abcLabel) ?></span>
+</nav>
+<?php endif; ?>
+
+<?php
 // Generate low stock alerts
 $lowStockProducts = dbAll("SELECT id, name, stock, min_stock FROM products WHERE stock <= min_stock AND min_stock > 0");
 foreach($lowStockProducts as $p) {

@@ -20,6 +20,14 @@ $sysFacebook = $_sysConf['social_facebook'] ?? '';
 <meta name="description" content="Sàn TMĐT phụ tùng ô tô chính hãng. Tra cứu phụ tùng theo dòng xe, mua hàng nhiều shop, bảo hành chính hãng.">
 <link rel="stylesheet" href="/css/cooling.css?v=1779633952">
 <link rel="stylesheet" href="/css/mobile.css?v=1779633952">
+
+<?php
+// === CANONICAL URL ===
+$_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystem.vn';
+?>
+<link rel="canonical" href="<?= e($_canonicalUrl) ?>">
 </head>
 <body>
 
@@ -97,3 +105,83 @@ $sysFacebook = $_sysConf['social_facebook'] ?? '';
   <?php require __DIR__ . '/nav.php'; ?>
 </div>
 <main>
+<?php
+// === BREADCRUMB ===
+$_curPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$_breadcrumbMap = [
+    '/' => [],
+    '/products' => [['Sản phẩm', '']],
+    '/brands' => [['Hãng xe', '']],
+    '/about' => [['Giới thiệu', '']],
+    '/contact' => [['Liên hệ', '']],
+    '/news' => [['Tin tức', '']],
+    '/stores' => [['Hệ thống cửa hàng', '']],
+    '/promotions' => [['Khuyến mãi', '']],
+    '/cam-ket' => [['4 Bước cam kết', '']],
+    '/careers' => [['Tuyển dụng', '']],
+    '/product-brands' => [['Thương hiệu', '']],
+    '/chat' => [['Tin nhắn', '']],
+];
+// Auto-detect breadcrumb from path
+$_bcItems = [];
+if (isset($_breadcrumbMap[$_curPath])) {
+    $_bcItems = $_breadcrumbMap[$_curPath];
+} elseif (preg_match('#^/products/(.+)#', $_curPath)) {
+    $_bcItems = [['Sản phẩm', '/products'], [e($title ?? 'Chi tiết'), '']];
+} elseif (preg_match('#^/news/(.+)#', $_curPath)) {
+    $_bcItems = [['Tin tức', '/news'], [e($title ?? 'Bài viết'), '']];
+} elseif (preg_match('#^/policies/(.+)#', $_curPath)) {
+    $_bcItems = [['Chính sách', '/policies/huong-dan-mua-hang'], [e($title ?? 'Chi tiết'), '']];
+} elseif (preg_match('#^/product-brands/(.+)#', $_curPath)) {
+    $_bcItems = [['Thương hiệu', '/product-brands'], [e($title ?? 'Chi tiết'), '']];
+} elseif (preg_match('#^/about/(.+)#', $_curPath)) {
+    $_bcItems = [['Giới thiệu', '/about'], [e($title ?? ''), '']];
+} elseif (preg_match('#^/page/(.+)#', $_curPath)) {
+    $_bcItems = [[e($title ?? 'Trang'), '']];
+} elseif (preg_match('#^/customer/(.+)#', $_curPath)) {
+    $_bcItems = [['Tài khoản', '/customer'], [e($title ?? ''), '']];
+} elseif (preg_match('#^/shops/(.+)#', $_curPath)) {
+    $_bcItems = [['Cửa hàng', ''], [e($title ?? ''), '']];
+} else {
+    // Fallback: use title
+    if (!empty($title) && $_curPath !== '/') {
+        $_bcItems = [[e($title), '']];
+    }
+}
+if (!empty($_bcItems) && $_curPath !== '/'):
+?>
+<nav class="site-breadcrumb" aria-label="Breadcrumb" style="max-width:100%;padding:10px 40px;font-size:13px;color:var(--ink-3);background:#f8f9fc;border-bottom:1px solid var(--line)">
+  <a href="/" style="color:var(--navy);text-decoration:none;font-weight:600">Trang chủ</a>
+  <?php foreach ($_bcItems as $bc): ?>
+    <span style="margin:0 6px;color:#ccc">›</span>
+    <?php if (!empty($bc[1])): ?>
+      <a href="<?= $bc[1] ?>" style="color:var(--navy);text-decoration:none"><?= $bc[0] ?></a>
+    <?php else: ?>
+      <span style="color:var(--ink-2)"><?= $bc[0] ?></span>
+    <?php endif; ?>
+  <?php endforeach; ?>
+</nav>
+<?php
+// Breadcrumb Schema.org JSON-LD
+$_schemaItems = [['name' => 'Trang chủ', 'url' => 'https://coolingsystem.vn']];
+foreach ($_bcItems as $i => $bc) {
+    $_schemaItems[] = ['name' => strip_tags($bc[0]), 'url' => !empty($bc[1]) ? 'https://coolingsystem.vn'.$bc[1] : $_canonicalUrl];
+}
+?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    <?php foreach ($_schemaItems as $si => $item): ?>
+    {
+      "@type": "ListItem",
+      "position": <?= $si + 1 ?>,
+      "name": "<?= addslashes($item['name']) ?>",
+      "item": "<?= $item['url'] ?>"
+    }<?= $si < count($_schemaItems) - 1 ? ',' : '' ?>
+    <?php endforeach; ?>
+  ]
+}
+</script>
+<?php endif; ?>
