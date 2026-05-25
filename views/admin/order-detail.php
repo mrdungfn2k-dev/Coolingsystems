@@ -90,7 +90,7 @@ $psCfg  = $psLabel[$payStatus] ?? $psLabel['unpaid'];
     </div>
     <div class="ohi-col">
         <span class="ohi-label">Khách hàng</span>
-        <span class="ohi-val"><?= e($order['full_name']) ?></span>
+        <span class="ohi-val"><?= e($order['full_name'] ?? '') ?></span>
     </div>
     <div class="ohi-col">
         <span class="ohi-label">Hình thức TT</span>
@@ -190,7 +190,7 @@ $psCfg  = $psLabel[$payStatus] ?? $psLabel['unpaid'];
                 </td>
                 <td style="padding:12px">
                     <div style="font-weight:600; font-size:13px"><?= e($item['snapshot_name'] ?? $item['product_name'] ?? 'N/A') ?></div>
-                    <?php if(!empty($item['snapshot_oem'])): ?><div style="font-size:11px;color:#888">OEM: <?= e($item['snapshot_oem']) ?></div><?php endif; ?>
+                    <?php if(!empty($item['snapshot_oem'])): ?><div style="font-size:11px;color:#888">OEM: <?= e($item['snapshot_oem'] ?? '') ?></div><?php endif; ?>
                 </td>
                 <td style="text-align:center; font-weight:600"><?= (int)$item['quantity'] ?></td>
                 <td style="text-align:right"><?= vnd($item['unit_price']) ?></td>
@@ -330,14 +330,14 @@ $psCfg  = $psLabel[$payStatus] ?? $psLabel['unpaid'];
     <div style="background:#f8f9fa; border-radius:8px; padding:16px; font-size:13px; line-height:1.6; margin-bottom:24px">
         <strong><?= e($order['shipping_full_name'] ?? $order['ship_name'] ?? $order['full_name']) ?></strong><br>
         SĐT: <?= e($order['shipping_phone'] ?? $order['ship_phone'] ?? $order['phone']) ?><br>
-        Địa chỉ: <?= e($order['shipping_detail'] ?? $order['ship_address'] ?? '') ?><?php if(!empty($order['shipping_district'])): ?>, <?= e($order['shipping_district']) ?><?php endif; ?><?php if(!empty($order['shipping_province'])): ?>, <?= e($order['shipping_province']) ?><?php endif; ?>
+        Địa chỉ: <?= e($order['shipping_detail'] ?? $order['ship_address'] ?? '') ?><?php if(!empty($order['shipping_district'])): ?>, <?= e($order['shipping_district'] ?? '') ?><?php endif; ?><?php if(!empty($order['shipping_province'])): ?>, <?= e($order['shipping_province'] ?? '') ?><?php endif; ?>
     </div>
     
     <!-- Ghi chú khách hàng -->
     <?php if(!empty($order['customer_note'])): ?>
     <div style="font-size:14px; font-weight:700; margin-bottom:12px"> Ghi chú của khách hàng</div>
     <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:14px; font-size:13px; line-height:1.6; margin-bottom:24px; color:#92400e">
-        <?= nl2br(e($order['customer_note'])) ?>
+        <?= nl2br(e($order['customer_note'] ?? '')) ?>
     </div>
     <?php endif; ?>
 
@@ -345,7 +345,7 @@ $psCfg  = $psLabel[$payStatus] ?? $psLabel['unpaid'];
     <?php if(!empty($order['staff_note'])): ?>
     <div style="font-size:14px; font-weight:700; margin-bottom:12px"> Ghi chú nhân viên</div>
     <div style="background:#f0f4ff; border:1px solid #d0d8f0; border-radius:8px; padding:14px; font-size:13px; line-height:1.6; margin-bottom:24px; color:#1e40af">
-        <?= nl2br(e($order['staff_note'])) ?>
+        <?= nl2br(e($order['staff_note'] ?? '')) ?>
     </div>
     <?php endif; ?>
 
