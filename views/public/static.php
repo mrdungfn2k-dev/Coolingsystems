@@ -1,17 +1,16 @@
 <?php require __DIR__ . '/../partials/head.php'; ?>
-<section class="block"><div class="wrap">
-  <div class="sec-card"><div class="sec-head"><div class="title"><span class="bar"></span><h2><?= e($title) ?></h2></div></div>
-    <div class="panel-body static-content" style="font-size:14px;line-height:1.8;color:var(--ink-2)">
-      <?php
-        $slug = $page ?? '';
-        $staticRow = dbGet("SELECT content FROM static_pages WHERE slug=?", [$slug]);
-        if ($staticRow && !empty(trim($staticRow['content']))): ?>
-          <?= $staticRow['content'] ?>
-      <?php else: ?>
-        <p>Nội dung trang <strong><?= e($title) ?></strong> đang được cập nhật. Vui lòng quay lại sau.</p>
-        <p>Mọi thắc mắc xin liên hệ hotline: <strong><?= $sysHotline ?? '0947796471' ?></strong></p>
-      <?php endif; ?>
-    </div>
+<section class="block" style="padding:24px 0 40px"><div class="wrap">
+  <div class="sec-head" style="margin-bottom:20px"><div class="title"><span class="bar"></span><h2><?= e($title) ?></h2></div></div>
+  <div class="static-content" style="font-size:15px;line-height:1.8;color:var(--ink-1)">
+    <?php
+      $slug = $page ?? '';
+      $staticRow = dbGet("SELECT content FROM static_pages WHERE slug=?", [$slug]);
+      if ($staticRow && !empty(trim($staticRow['content']))): ?>
+        <?= $staticRow['content'] ?>
+    <?php else: ?>
+      <p>Nội dung trang <strong><?= e($title) ?></strong> đang được cập nhật. Vui lòng quay lại sau.</p>
+      <p>Mọi thắc mắc xin liên hệ hotline: <strong><?= $sysHotline ?? '0947796471' ?></strong></p>
+    <?php endif; ?>
   </div>
 </div></section>
 <style>

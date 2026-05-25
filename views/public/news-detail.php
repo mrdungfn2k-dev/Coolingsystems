@@ -1,10 +1,10 @@
 <?php require __DIR__ . '/../partials/head.php'; ?>
 <section class="block"><div class="wrap">
-  <div class="sec-card">
+  <div>
     <?php if ($article['thumbnail']): ?>
       <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;height:320px;object-fit:cover;border-radius:8px 8px 0 0">
     <?php endif; ?>
-    <div class="panel-body" style="padding:28px 36px">
+    <div style="padding:0">
       <div style="font-size:12px;color:var(--ink-4);margin-bottom:10px">
          <?= $article['published_at'] ? date('d/m/Y H:i', strtotime($article['published_at'])) : '' ?>
         &nbsp;·&nbsp; <a href="/news" style="color:var(--navy)">← Tin tức</a>
