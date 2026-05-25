@@ -2815,8 +2815,8 @@ post('/admin/contacts/:id/reply', function($p) {
     } csrfCheck();
     $id = (int)$p['id'];
     $reply = trim($_POST['reply'] ?? '');
-    if (empty($reply) || mb_strlen($reply) < 5) {
-        flash('error', 'Nội dung trả lời phải có ít nhất 5 ký tự.');
+    if (empty($reply) || mb_strlen($reply) < 5 || mb_strlen($reply) > 100) {
+        flash('error', 'Nội dung trả lời phải từ 5 đến 100 ký tự.');
         redirect('/admin/contacts');
     }
 

@@ -171,8 +171,10 @@ $_contactHours = $_contactCfg['contact_hours'] ?: "<?= nl2br(htmlspecialchars($_
 
   // === 1. HỌ TÊN: Chặn ký tự đặc biệt ===
   nameF.addEventListener('input', function() {
-    this.value = this.value.replace(/[^a-zA-Z\u00C0-\u024F\u1E00-\u1EFF ]/g, '');
     if (this.value.length >= 2) hideErr(this);
+  });
+  nameF.addEventListener('change', function() {
+    this.value = this.value.replace(/[^a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỂưăạảấầẩẫậắằẳẵặẹẻẽềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ ]/g, '');
   });
   nameF.addEventListener('blur', function() {
     if (this.value.trim().length < 2 && this.value.trim().length > 0) {

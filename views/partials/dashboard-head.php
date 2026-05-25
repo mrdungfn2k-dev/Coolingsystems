@@ -11,15 +11,16 @@
      <div class="sb-section">SẢN PHẨM</div>
      <a href="/admin/products" class="<?= startsWith(currentPath(),'/admin/products')?'active':'' ?>">Quản lý sản phẩm</a>
      <a href="/admin/products/new">+ Đăng SP mới</a>
+     <a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>">Danh mục</a>
      <div class="sb-section">VẬN HÀNH</div>
      <a href="/admin/orders" class="<?= startsWith(currentPath(),'/admin/orders')?'active':'' ?>">Đơn hàng</a>
      <a href="/admin/returns" class="<?= startsWith(currentPath(),'/admin/returns')?'active':'' ?>">Trả hàng</a>
-     <div class="sb-section">DANH MỤC</div>
-     <a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>">Danh mục</a>
+     <div class="sb-section">NHÂN SỰ</div>
+     <a href="/admin/staff" class="<?= startsWith(currentPath(),'/admin/staff')?'active':'' ?>">Phân quyền NV</a>
+     <a href="/admin/users" class="<?= isActive('/admin/users') ?>">Người dùng</a>
      <a href="/admin/brands" class="<?= startsWith(currentPath(),'/admin/brands')?'active':'' ?>">Hãng xe</a>
      <a href="/admin/promotions" class="<?= isActive('/admin/promotions') ?>">Khuyến mãi</a>
      <a href="/admin/vouchers" class="<?= startsWith(currentPath(),'/admin/vouchers')?'active':'' ?>">Voucher toàn sàn</a>
-     <div class="sb-section">NỘI DUNG</div>
      <a href="/admin/news">Tin tức</a>
      <a href="/admin/news/new" style="padding-left:28px">+ Viết bài</a>
      <a href="/admin/content" class="<?= startsWith(currentPath(),'/admin/content')?'active':'' ?>">Quản lý trang tĩnh</a>
@@ -27,9 +28,6 @@
      <a href="/admin/chat" class="sb-link"><span>Tin nhắn</span></a>
      <a href="/admin/reviews" class="<?= isActive('/admin/reviews') ?>">Kiểm duyệt đánh giá</a>
      <a href="/admin/contacts" class="<?= startsWith(currentPath(),'/admin/contacts')!==false?'active':'' ?>">Liên hệ khách</a>
-     <div class="sb-section">NHÂN SỰ</div>
-     <a href="/admin/staff" class="<?= startsWith(currentPath(),'/admin/staff')?'active':'' ?>">Phân quyền NV</a>
-     <a href="/admin/users" class="<?= isActive('/admin/users') ?>">Người dùng</a>
      <div class="sb-section">CẤU HÌNH</div>
      <a href="/admin/stores" class="sb-link"><span>Hệ thống cửa hàng</span></a>
      <a href="/admin/settings/finance" class="<?= isActive('/admin/settings/finance') ?>">Cấu hình Thuế &amp; Giảm giá</a>

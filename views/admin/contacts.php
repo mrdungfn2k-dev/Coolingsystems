@@ -91,9 +91,9 @@
             <form method="POST" action="/admin/contacts/<?= $msg['id'] ?>/reply" class="cm-form">
               <?= csrfField() ?>
               <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px">Trả lời (sẽ gửi về email <?= e($msg['email']) ?>):</label>
-              <textarea name="reply" required minlength="5" maxlength="500" placeholder="Nhập nội dung trả lời..."></textarea>
+              <textarea name="reply" required minlength="5" maxlength="100" placeholder="Nhập nội dung trả lời (tối đa 100 ký tự)..."></textarea>
               <div class="cm-actions">
-                <button type="submit" class="btn-reply">📧 Gửi trả lời qua Email</button>
+                <button type="submit" class="btn-reply" onclick="this.disabled=true;this.textContent='Đang gửi...';this.form.submit();">📧 Gửi trả lời qua Email</button>
                 <button type="button" class="btn-delete" onclick="if(confirm('Xóa tin nhắn này?'))location.href='/admin/contacts/<?= $msg['id'] ?>/delete'">🗑 Xóa</button>
               </div>
             </form>
