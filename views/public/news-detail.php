@@ -1,5 +1,5 @@
 <?php require __DIR__ . '/../partials/head.php'; ?>
-<section class="block"><div class="wrap" style="max-width:820px">
+<section class="block"><div class="wrap">
   <div class="sec-card">
     <?php if ($article['thumbnail']): ?>
       <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;height:320px;object-fit:cover;border-radius:8px 8px 0 0">

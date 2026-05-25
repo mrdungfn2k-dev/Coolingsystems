@@ -1,5 +1,5 @@
 <?php require __DIR__ . '/../partials/head.php'; ?>
-<section class="block"><div class="wrap" style="max-width:880px">
+<section class="block"><div class="wrap">
   <div class="sec-card"><div class="sec-head"><div class="title"><span class="bar"></span><h2><?= e($title) ?></h2></div></div>
     <div class="panel-body static-content" style="font-size:14px;line-height:1.8;color:var(--ink-2)">
       <?php
