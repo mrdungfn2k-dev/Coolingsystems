@@ -374,19 +374,19 @@ function swTab(t){
         <div class="panel-body">
           <div class="form-group">
             <label>Giá nhập <span style="color:#888;font-weight:normal;font-size:11px">(tùy chọn)</span></label>
-            <input type="number" name="cost_price" id="costPrice" min="0"
+            <input type="number" name="cost_price" id="costPrice" min="0" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
                    value="<?= $product['cost_price']??'' ?>" placeholder="VD: 400000"
                    >
           </div>
 
           <div class="form-group">
             <label>Giá bán sau VAT <span class="req">*</span></label>
-            <input type="number" name="price" id="priceAfterVat" required min="1000"
+            <input type="number" name="price" id="priceAfterVat" required min="1000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
                    value="<?= $product['price']??'' ?>" placeholder="VD: 440000">
           </div>
           <div class="form-group">
             <label>Giá gốc (để gạch ngang)</label>
-            <input type="number" name="original_price" value="<?= $product['original_price']??'' ?>">
+            <input type="number" name="original_price" min="0" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= $product['original_price']??'' ?>">
           </div>
           
           <div class="form-group">
@@ -648,36 +648,65 @@ tinymce.init({
 
 
 document.getElementById('productForm').addEventListener('submit', function(e) {
-  // SEO validation - block if score < 50%
+  // === VALIDATE CÁC TRƯỜNG BẮT BUỘC ===
+  var name  = (document.querySelector('input[name="name"]')?.value  || '').trim();
+  var sku   = (document.querySelector('input[name="sku"]')?.value   || '').trim();
+  var price = (document.querySelector('input[name="price"]')?.value || '').trim();
+  var stockEl = document.querySelector('input[name="stock"]');
+  var stock = stockEl !== null ? stockEl.value : null;
+  var catSel = document.querySelector('select[name="category_id"]');
+  var catVal = catSel ? catSel.value : '';
+  var costPrice = (document.querySelector('input[name="cost_price"]')?.value || '').trim();
+  var origPrice = (document.querySelector('input[name="original_price"]')?.value || '').trim();
+
+  var errors = [];
+  if (!name)  errors.push('• Tên sản phẩm không được để trống');
+  if (!sku)   errors.push('• Mã sản phẩm (SKU) không được để trống');
+  if (!price || parseInt(price) <= 0) errors.push('• Giá bán sau VAT phải lớn hơn 0');
+  if (stock === '' || stock === null) errors.push('• Tồn kho hiện tại không được để trống');
+  if (!catVal || catVal === '') errors.push('• Vui lòng chọn danh mục sản phẩm');
+
+  // Validate giá nhập (tùy chọn - nhưng nếu có thì phải là số nguyên >= 0)
+  if (costPrice !== '') {
+    if (!/^\d+$/.test(costPrice)) {
+      errors.push('• Giá nhập phải là số nguyên không âm (hoặc để trống)');
+    }
+  }
+  if (origPrice !== '') {
+    if (!/^\d+$/.test(origPrice)) {
+      errors.push('• Giá gốc phải là số nguyên không âm (hoặc để trống)');
+    }
+  }
+
+  if (errors.length > 0) {
+    e.preventDefault();
+    alert('⚠️ Vui lòng điền đầy đủ thông tin bắt buộc:\n\n' + errors.join('\n'));
+    return false;
+  }
+
+  // === VALIDATE SEO SCORE >= 80 ===
   var scoreEl = document.getElementById('seoScore');
-  if(scoreEl) {
+  if (scoreEl) {
     var scoreText = scoreEl.textContent || '';
-    var match = scoreText.match(/\((\d+)\/100\)/);
+    var match = scoreText.match(/(\d+)\/100/);
     var pct = match ? parseInt(match[1]) : 0;
-    if(pct < 0) {
+    if (pct < 80) {
       e.preventDefault();
-      alert(' Chưa đạt đầy đủ tiêu chuẩn SEO!\n\nĐiểm SEO hiện tại: ' + pct + '/100 (cần đạt 100/100)\n\nVui lòng hoàn thiện TẤT CẢ các tiêu chí:\n• Tên sản phẩm (20-100 ký tự)\n• Mã SKU và OEM\n• Danh mục sản phẩm\n• Mô tả sản phẩm (≥150 ký tự, có H2/H3, danh sách)\n• Đặc điểm sản phẩm (≥50 ký tự, có danh sách, in đậm)\n• Thông số kỹ thuật (≥30 ký tự)\n• Hình ảnh sản phẩm');
-      // Scroll to SEO panel
+      alert('❌ Điểm SEO chưa đủ!\n\nĐiểm hiện tại: ' + pct + '/100 (cần đạt tối thiểu 80/100)\n\nVui lòng cải thiện các tiêu chí SEO được đánh dấu ❌ bên dưới.');
       var panel = document.getElementById('seoPanel');
-      if(panel) panel.scrollIntoView({behavior:'smooth', block:'center'});
+      if (panel) panel.scrollIntoView({behavior:'smooth', block:'center'});
       return false;
     }
   }
-  // Proceed with normal submission
-  // TinyMCE auto-saves to textarea
-  
-  
+  // TinyMCE tự lưu vào textarea
 });
-
 function calcPrice() {
   var vatEl=document.getElementById('vatRate');
   var vatRate=vatEl?parseInt(vatEl.value):10;
-  var before = parseInt(document.getElementById('priceBefore').value)||0;
+  var before = parseInt(document.getElementById('priceBefore')?.value)||0;
   var tax = Math.round(before * vatRate / 100);
   var taxField=document.getElementById('taxAmount'); if(taxField)taxField.value=tax;
-  if (before > 0) {
-    document.getElementById('priceAfterVat').value = before + tax;
-  }
+  if (before > 0) { document.getElementById('priceAfterVat').value = before + tax; }
 }
 
 function previewImgs(input) {
@@ -696,109 +725,140 @@ function previewImgs(input) {
 }
 
 
-// ── SEO CONTENT ANALYSIS (Rank Math / Yoast style) ──
+
+
+// ── SEO CONTENT ANALYSIS ──
 function runSeoAnalysis() {
   var name = (document.querySelector('input[name="name"]')?.value || '').trim();
-  var sku = (document.querySelector('input[name="sku"]')?.value || '').trim();
-  var oem = (document.querySelector('input[name="oem_code"]')?.value || '').trim();
+  var sku  = (document.querySelector('input[name="sku"]')?.value  || '').trim();
+  var oem  = (document.querySelector('input[name="oem_code"]')?.value || '').trim();
   var keyword = (document.getElementById('seoKeyword')?.value || '').toLowerCase().trim();
 
-  // Get content from Quill editors
-  var descText='', featText='', specText='', descHtml='', featHtml='', specHtml='';
-  try { descText = quillDesc.getText().trim(); descHtml = quillDesc.root.innerHTML; } catch(e){}
-  try { featText = quillFeat.getText().trim(); featHtml = quillFeat.root.innerHTML; } catch(e){}
-  try { specText = quillSpec.getText().trim(); specHtml = quillSpec.root.innerHTML; } catch(e){}
-  var allText = (name + ' ' + descText + ' ' + featText + ' ' + specText).toLowerCase();
-  var allHtml = descHtml + featHtml + specHtml;
+  // Đọc nội dung TinyMCE — fallback sang textarea nếu chưa sync
+  function readEditor(edId, taName) {
+    if (typeof tinymce !== 'undefined') {
+      var ed = tinymce.get(edId);
+      if (!ed && tinymce.editors) {
+        for (var i = 0; i < tinymce.editors.length; i++) {
+          if (tinymce.editors[i].id === edId) { ed = tinymce.editors[i]; break; }
+        }
+      }
+      if (ed) {
+        try {
+          var h = ed.getContent() || '';
+          var t = (ed.getContent({format:'text'}) || '').trim();
+          return {html: h, text: t};
+        } catch(ex) {}
+      }
+    }
+    var ta = document.querySelector('textarea[name="' + taName + '"]');
+    if (ta && ta.value) {
+      var h2 = ta.value;
+      var t2 = h2.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      return {html: h2, text: t2};
+    }
+    return {html: '', text: ''};
+  }
 
-  // Preview
+  var _d = readEditor('tinymceDesc', 'description');
+  var descHtml = _d.html, descText = _d.text;
+  var _f = readEditor('tinymceFeat', 'features');
+  var featHtml = _f.html, featText = _f.text;
+  var _s = readEditor('tinymceSpec', 'specifications');
+  var specHtml = _s.html, specText = _s.text;
+  var allText = (name + ' ' + descText + ' ' + featText + ' ' + specText).toLowerCase();
+
+  // Preview Google SERP
   document.getElementById('seoPreviewTitle').textContent = name ? name + ' — Cooling' : 'Tiêu đề sản phẩm...';
   document.getElementById('seoPreviewDesc').textContent = descText ? descText.substring(0,155) : 'Mô tả sản phẩm...';
 
   var checks = [], score = 0, total = 0;
-  function add(pass, msg, cat) {
-    total++;
-    if(pass) score++;
-    checks.push({pass:pass, msg:msg, cat:cat});
-  }
+  function add(pass, msg, cat) { total++; if(pass) score++; checks.push({pass:pass,msg:msg,cat:cat}); }
 
-  // ── THÔNG TIN CƠ BẢN ──
+  // ─ THÔNG TIN CƠ BẢN
   add(name.length >= 20 && name.length <= 100, 'Tên SP dài ' + name.length + ' ký tự (tốt: 20-100)', 'basic');
-  add(!!sku, 'Đã có mã SKU' + (sku ? ': ' + sku : ''), 'basic');
-  add(!!oem, 'Đã có mã OEM' + (oem ? ': ' + oem : ''), 'basic');
+  add(!!sku, 'Đã có mã SKU' + (sku?': '+sku:''), 'basic');
+  add(!!oem, 'Đã có mã OEM' + (oem?': '+oem:''), 'basic');
   var catSel = document.querySelector('select[name="category_id"]');
   add(catSel && catSel.value && catSel.value !== '' && catSel.value !== 'HIDDEN', 'Đã chọn danh mục sản phẩm', 'basic');
 
-  // ── MÔ TẢ SẢN PHẨM ──
+  // ─ MÔ TẢ
   add(descText.length >= 150, 'Mô tả dài ' + descText.length + ' ký tự (tối thiểu 150)', 'desc');
   add(descText.length >= 300, 'Mô tả đủ chi tiết ≥300 ký tự (' + descText.length + ')', 'desc');
-  var h2Count = (descHtml.match(/<h2/gi)||[]).length;
-  var h3Count = (descHtml.match(/<h3/gi)||[]).length;
-  add(h2Count > 0, 'Mô tả có ' + h2Count + ' tiêu đề H2 (nên có ít nhất 1)', 'desc');
-  add(h2Count + h3Count >= 2, 'Mô tả có tổng ' + (h2Count+h3Count) + ' heading H2/H3 (nên ≥2)', 'desc');
-  var hasDescList = /<(ul|ol)/i.test(descHtml);
-  add(hasDescList, 'Mô tả có danh sách (bullet/numbered) giúp dễ đọc', 'desc');
-  var hasDescImg = /<img/i.test(descHtml);
-  add(hasDescImg, 'Mô tả có chèn hình ảnh minh họa', 'desc');
+  var h2c = (descHtml.match(/<h2/gi)||[]).length;
+  var h3c = (descHtml.match(/<h3/gi)||[]).length;
+  add(h2c > 0, 'Mô tả có ' + h2c + ' tiêu đề H2 (nên có ít nhất 1)', 'desc');
+  add(h2c + h3c >= 2, 'Mô tả có tổng ' + (h2c+h3c) + ' heading H2/H3 (nên ≥2)', 'desc');
+  add(/<(ul|ol)/i.test(descHtml), 'Mô tả có danh sách (bullet/numbered) giúp dễ đọc', 'desc');
+  add(/<img/i.test(descHtml), 'Mô tả có chèn hình ảnh minh họa', 'desc');
 
-  // ── ĐẶC ĐIỂM SẢN PHẨM ──
+  // ─ ĐẶC ĐIỂM
   add(featText.length >= 50, 'Đặc điểm dài ' + featText.length + ' ký tự (tối thiểu 50)', 'feat');
-  var hasFeatList = /<(ul|ol)/i.test(featHtml);
-  add(hasFeatList, 'Đặc điểm dùng danh sách để liệt kê', 'feat');
-  var featBold = (featHtml.match(/<(strong|b)>/gi)||[]).length;
-  add(featBold >= 2, 'Đặc điểm có ' + featBold + ' từ/cụm in đậm (nên ≥2)', 'feat');
+  add(/<(ul|ol)/i.test(featHtml), 'Đặc điểm dùng danh sách để liệt kê', 'feat');
+  var fb = (featHtml.match(/<(strong|b)>/gi)||[]).length;
+  add(fb >= 2, 'Đặc điểm có ' + fb + ' từ/cụm in đậm (nên ≥2)', 'feat');
 
-  // ── THÔNG SỐ KỸ THUẬT ──
+  // ─ THÔNG SỐ KỸ THUẬT
   add(specText.length >= 30, 'Thông số KT dài ' + specText.length + ' ký tự (tối thiểu 30)', 'spec');
-  var hasTable = /<table/i.test(specHtml);
-  add(hasTable || specText.length >= 80, 'Thông số có bảng hoặc nội dung chi tiết', 'spec');
+  add(/<table/i.test(specHtml) || specText.length >= 80, 'Thông số có bảng hoặc nội dung chi tiết', 'spec');
 
-  // ── TỪ KHÓA ──
-  if(keyword) {
-    add(name.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa "'+keyword+'" có trong tên sản phẩm', 'kw');
-    add(descText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong mô tả sản phẩm', 'kw');
-    add(featText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong đặc điểm sản phẩm', 'kw');
-    // Density
-    var kwCount = (allText.match(new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'))||[]).length;
-    var wordCount = allText.split(/\s+/).length;
-    var density = wordCount > 0 ? (kwCount/wordCount*100).toFixed(1) : 0;
-    add(kwCount >= 3 && density < 5, 'Mật độ từ khóa: '+density+'% ('+kwCount+' lần, tốt: 1-3%)', 'kw');
+  // ─ TỪ KHÓA
+  if (keyword) {
+    add(name.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa "'+keyword+'" có trong tên SP', 'kw');
+    add(descText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong mô tả', 'kw');
+    add(featText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong đặc điểm', 'kw');
+    var kwr = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+    var kwn = (allText.match(kwr)||[]).length;
+    var wc  = allText.split(/\s+/).length;
+    var den = wc > 0 ? (kwn/wc*100).toFixed(1) : 0;
+    add(kwn >= 3 && den < 5, 'Mật độ từ khóa: '+den+'% ('+kwn+' lần, tốt: 1-3%)', 'kw');
   }
 
-  // ── HÌNH ẢNH ──
-  var imgCount = document.querySelectorAll('#imgPreviewRow img').length + document.querySelectorAll('.panel-body img[src*="uploads"]').length;
-  add(imgCount > 0, 'Sản phẩm có ' + imgCount + ' hình ảnh', 'img');
+  // ─ HÌNH ẢNH
+  var imgCnt = document.querySelectorAll('#img-preview-area .existing-img-wrap').length
+    + document.querySelectorAll('#existingImagesRow .existing-img-wrap').length;
+  add(imgCnt > 0, 'Sản phẩm có ' + imgCnt + ' hình ảnh', 'img');
 
-  // Build output grouped by category
-  var catLabels = {basic:' Thông tin cơ bản', desc:' Mô tả sản phẩm', feat:'⭐ Đặc điểm sản phẩm', spec:' Thông số kỹ thuật', kw:' Từ khóa mục tiêu', img:' Hình ảnh'};
-  var cats = ['basic','desc','feat','spec','kw','img'];
+  // Render checklist
+  var catLabels = {
+    basic: ' Thông tin cơ bản', desc: ' Mô tả sản phẩm',
+    feat: '⭐ Đặc điểm sản phẩm', spec: ' Thông số kỹ thuật',
+    kw: ' Từ khóa mục tiêu', img: ' Hình ảnh'
+  };
   var html = '';
-  cats.forEach(function(cat) {
+  ['basic','desc','feat','spec','kw','img'].forEach(function(cat) {
     var items = checks.filter(function(c){return c.cat===cat;});
-    if(!items.length) return;
+    if (!items.length) return;
     html += '<div style="font-weight:700;color:var(--navy);margin:10px 0 4px;font-size:13px">'+catLabels[cat]+'</div>';
-    items.forEach(function(c) {
-      html += '<div style="color:'+(c.pass?'#059669':'#dc2626')+'">'+(c.pass?'':'')+' '+c.msg+'</div>';
+    items.forEach(function(c){
+      html += '<div style="color:'+(c.pass?'#059669':'#dc2626')+'">'+(c.pass?'✅':'❌')+' '+c.msg+'</div>';
     });
   });
   document.getElementById('seoChecklist').innerHTML = html;
 
-  // Score
   var pct = total > 0 ? Math.round(score/total*100) : 0;
   var badge = document.getElementById('seoScore');
-  if(pct >= 80) { badge.textContent = ' Đạt chuẩn SEO ('+pct+'/100)'; badge.style.background='#ecfdf5'; badge.style.color='#059669'; }
-  else if(pct >= 50) { badge.textContent = ' Trung bình ('+pct+'/100)'; badge.style.background='#fef3c7'; badge.style.color='#d97706'; }
-  else { badge.textContent = ' Cần cải thiện ('+pct+'/100)'; badge.style.background='#fef2f2'; badge.style.color='#dc2626'; }
+  if (pct >= 80)      { badge.textContent='✅ Đạt chuẩn SEO ('+pct+'/100)'; badge.style.background='#ecfdf5'; badge.style.color='#059669'; }
+  else if (pct >= 50) { badge.textContent='⚠️ Trung bình ('+pct+'/100)'; badge.style.background='#fef3c7'; badge.style.color='#d97706'; }
+  else                { badge.textContent='❌ Cần cải thiện ('+pct+'/100)'; badge.style.background='#fef2f2'; badge.style.color='#dc2626'; }
 }
 
-// Auto-analyze when content changes
+// Auto-trigger SEO analysis khi TinyMCE thay đổi
 setTimeout(function() {
   runSeoAnalysis();
-  try{quillDesc.on('text-change',function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,800);});}catch(e){}
-  try{quillFeat.on('text-change',function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,800);});}catch(e){}
-  try{quillSpec.on('text-change',function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,800);});}catch(e){}
-  document.querySelector('input[name="name"]')?.addEventListener('input',function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
-}, 800);
+  // Kết nối TinyMCE events
+  ['tinymceDesc','tinymceFeat','tinymceSpec'].forEach(function(id){
+    var ed = tinymce.get(id);
+    if(ed) ed.on('Change KeyUp', function(){
+      clearTimeout(window._seoT);
+      window._seoT = setTimeout(runSeoAnalysis, 800);
+    });
+  });
+  document.querySelector('input[name="name"]')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
+  document.querySelector('input[name="sku"]')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
+  document.getElementById('seoKeyword')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
+  document.querySelector('select[name="category_id"]')?.addEventListener('change', function(){runSeoAnalysis();});
+}, 1500);
 
 </script>
 
@@ -880,6 +940,7 @@ function saveImageOrder(container) {
   var hiddenInput = document.getElementById('img-hidden-input');
   if (!picker || !preview || !hiddenInput) return;
   var selectedFiles = [];
+  var sortableNew = null;
 
   picker.addEventListener('change', function(e) {
     var newFiles = Array.from(e.target.files);
@@ -903,10 +964,12 @@ function saveImageOrder(container) {
     preview.innerHTML = '';
     selectedFiles.forEach(function(file, idx) {
       var wrapper = document.createElement('div');
-      wrapper.style.cssText = 'position:relative;width:100px;height:100px;border:1px solid #d0d5dd;border-radius:6px;overflow:hidden;background:#f9fafb;';
+      wrapper.className = 'existing-img-wrap';
+      wrapper.setAttribute('data-file-idx', idx);
+      wrapper.style.cssText = 'position:relative;width:100px;height:100px;border:1px solid #d0d5dd;border-radius:6px;overflow:hidden;background:#f9fafb;cursor:grab;flex-shrink:0;';
 
       var img = document.createElement('img');
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none;';
       var reader = new FileReader();
       reader.onload = function(e) { img.src = e.target.result; };
       reader.readAsDataURL(file);
@@ -925,14 +988,41 @@ function saveImageOrder(container) {
       });
 
       var label = document.createElement('div');
-      label.textContent = idx === 0 ? 'Ảnh chính' : (idx + 1);
-      label.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(26,50,88,0.85);color:#fff;font-size:10px;text-align:center;padding:2px 0;font-weight:600;';
+      label.className = 'drag-handle-hint';
+      if (idx === 0) {
+        label.textContent = '⭐ Ảnh chính';
+        label.style.background = 'rgba(201,151,44,0.9)';
+      } else {
+        label.textContent = 'Ảnh ' + (idx + 1);
+      }
 
       wrapper.appendChild(img);
       wrapper.appendChild(removeBtn);
       wrapper.appendChild(label);
       preview.appendChild(wrapper);
     });
+
+    // Init/reinit Sortable for new images
+    if (sortableNew) sortableNew.destroy();
+    if (selectedFiles.length > 1) {
+      sortableNew = new Sortable(preview, {
+        animation: 200,
+        ghostClass: 'sortable-ghost',
+        chosenClass: 'sortable-chosen',
+        onEnd: function() {
+          // Rebuild selectedFiles array in new order
+          var newOrder = [];
+          var items = preview.querySelectorAll('[data-file-idx]');
+          items.forEach(function(el) {
+            var oldIdx = parseInt(el.getAttribute('data-file-idx'));
+            newOrder.push(selectedFiles[oldIdx]);
+          });
+          selectedFiles = newOrder;
+          renderPreviews();
+          syncHiddenInput();
+        }
+      });
+    }
   }
 
   function syncHiddenInput() {

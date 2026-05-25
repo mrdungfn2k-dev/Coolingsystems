@@ -1897,12 +1897,33 @@ post('/admin/products/new', function() {
     $priceBefore = intval($d['price_before_tax'] ?? 0);
     $taxAmt = intval($d['tax_amount'] ?? 0);
     $stock = intval($d['stock'] ?? 0);
-    if ($stock > 1000) { $stock = 1000; } // Max 1000
+    if ($stock > 1000) { $stock = 1000; }
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $slug = trim($d['slug'] ?? '') ?: preg_replace('/\s+/','-',strtolower(trim($name)));
     $slug = preg_replace('/[^a-z0-9\-]/','',$slug);
 
-    if (!$name) { flash('error','Vui lòng nhập tên sản phẩm.'); redirect('/admin/products/new'); }
+    // === SERVER-SIDE VALIDATION ===
+    $valErrors = [];
+    if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
+    if (!$sku)  $valErrors[] = 'Mã SKU không được để trống';
+    if ($price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
+    if (!isset($d['stock']) || $d['stock'] === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
+    if (empty($d['category_id'])) $valErrors[] = 'Vui lòng chọn danh mục sản phẩm';
+    // Validate giá nhập (tùy chọn nhưng phải >= 0 nếu có)
+    $costRaw = trim($d['cost_price'] ?? '');
+    if ($costRaw !== '' && (!ctype_digit($costRaw) || intval($costRaw) < 0)) {
+        $valErrors[] = 'Giá nhập phải là số nguyên không âm';
+    }
+    // Validate giá gốc (tùy chọn nhưng phải >= 0 nếu có)
+    $origRaw = trim($d['original_price'] ?? '');
+    if ($origRaw !== '' && (!ctype_digit($origRaw) || intval($origRaw) < 0)) {
+        $valErrors[] = 'Giá gốc phải là số nguyên không âm';
+    }
+    if (!empty($valErrors)) {
+        flash('error', 'Không thể đăng sản phẩm: ' . implode('. ', $valErrors));
+        redirect('/admin/products/new');
+        return;
+    }
 
     $id = dbInsert("INSERT INTO products (name,sku,slug,oem_code,part_brand,car_brand_id,category_id,price,price_before_tax,tax_amount,vat_rate,original_price,stock,min_stock,max_stock,features,specifications,warranty_months,description,status,is_featured,show_on_home,show_on_promo,is_new,is_indexed,partner_id,published_at,created_at,weight_g,width_cm,height_cm,depth_cm,seo_title,seo_description,seo_keyword,video_url,cost_price,total_import_value) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime('now','localtime'),datetime('now','localtime'),?,?,?,?,?,?,?,?,?,?)", [
         $name,
@@ -1951,8 +1972,8 @@ post('/admin/products/new', function() {
             if (!in_array($ext, ['jpg','jpeg','png','webp'])) continue;
             $fname = uniqid('p_') . '.' . $ext;
             if (move_uploaded_file($tmp, $uploadDir . $fname)) {
-                dbRun("INSERT INTO product_images (product_id,file_path,is_main) VALUES (?,?,?)",
-                    [$id, $fname, $k===0 ? 1 : 0]);
+                dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
+                    [$id, $fname, $k===0 ? 1 : 0, $k]);
             }
         }
     }
@@ -1975,7 +1996,7 @@ get('/admin/products/:id/edit', function($p) {
     if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); }
     $categories = dbAll('SELECT * FROM categories ORDER BY sort_order');
     $brands = dbAll('SELECT * FROM brands ORDER BY name ASC');
-    $images = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY is_main DESC', [$p['id']]);
+    $images = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC', [$p['id']]);
     view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images]);
 });
 
@@ -1984,6 +2005,27 @@ post('/admin/products/:id/edit', function($p) {
     $d = $_POST;
     $price = intval($d['price'] ?? 0);
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
+
+    // === SERVER-SIDE VALIDATION ===
+    $editErrors = [];
+    if (!trim($d['name'] ?? '')) $editErrors[] = 'Tên sản phẩm không được để trống';
+    if (!trim($d['sku']  ?? '')) $editErrors[] = 'Mã SKU không được để trống';
+    if ($price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
+    if (!isset($d['stock']) || $d['stock'] === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
+    if (empty($d['category_id'])) $editErrors[] = 'Vui lòng chọn danh mục sản phẩm';
+    $costRaw = trim($d['cost_price'] ?? '');
+    if ($costRaw !== '' && (!ctype_digit($costRaw) || intval($costRaw) < 0)) {
+        $editErrors[] = 'Giá nhập phải là số nguyên không âm';
+    }
+    $origRaw = trim($d['original_price'] ?? '');
+    if ($origRaw !== '' && (!ctype_digit($origRaw) || intval($origRaw) < 0)) {
+        $editErrors[] = 'Giá gốc phải là số nguyên không âm';
+    }
+    if (!empty($editErrors)) {
+        flash('error', 'Không thể cập nhật sản phẩm: ' . implode('. ', $editErrors));
+        redirect('/admin/products/'.$p['id'].'/edit');
+        return;
+    }
 
     dbRun("UPDATE products SET name=?,sku=?,oem_code=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=? WHERE id=?", [
         trim($d['name']??''),
@@ -2026,8 +2068,10 @@ post('/admin/products/:id/edit', function($p) {
             $fname = uniqid('p_') . '.' . $ext;
             if (move_uploaded_file($tmp, $uploadDir . $fname)) {
                 $hasMain = dbGet('SELECT id FROM product_images WHERE product_id=? AND is_main=1', [$p['id']]);
-                dbRun("INSERT INTO product_images (product_id,file_path,is_main) VALUES (?,?,?)",
-                    [$p['id'], $fname, $hasMain ? 0 : 1]);
+                $maxOrder = dbGet('SELECT COALESCE(MAX(sort_order),0) AS max_so FROM product_images WHERE product_id=?', [$p['id']]);
+                $nextOrder = ($maxOrder['max_so'] ?? 0) + 1 + $k;
+                dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
+                    [$p['id'], $fname, $hasMain ? 0 : 1, $nextOrder]);
             }
         }
     }
