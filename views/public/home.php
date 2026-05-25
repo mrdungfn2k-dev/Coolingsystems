@@ -130,10 +130,10 @@ foreach ($cats as $cat):
   </div>
   <style>
     .brands-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:16px; padding:8px 0; }
-    .brand-card { display:flex; flex-direction:column; align-items:center; text-decoration:none; background:#fff; border:1px solid #e8ecf1; border-radius:12px; overflow:hidden; transition:all 0.3s; }
+    .brand-card { display:flex; flex-direction:column; align-items:center; text-decoration:none; background:#fff; border:1px solid #e8ecf1; border-radius:12px; overflow:hidden; transition:all 0.3s; padding:0; }
     .brand-card:hover { border-color:var(--navy); box-shadow:0 6px 20px rgba(26,50,88,0.12); transform:translateY(-3px); }
-    .brand-card .brand-img-wrap { width:100%; height:120px; overflow:hidden; background:linear-gradient(135deg,#f0f4f8,#e2e8f0); display:flex; align-items:center; justify-content:center; }
-    .brand-card .brand-img-wrap img { width:100%; height:100%; object-fit:cover; }
+    .brand-card .brand-img-wrap { width:100%; height:120px; overflow:hidden; background:linear-gradient(135deg,#f0f4f8,#e2e8f0); display:flex; align-items:center; justify-content:center; padding:0; }
+    .brand-card .brand-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; border-radius:0; }
     .brand-card .brand-initial { font-size:28px; font-weight:900; color:#1a3258; opacity:0.6; letter-spacing:2px; }
     .brand-card .brand-name { padding:10px 8px 4px; font-size:14px; font-weight:700; color:#1a3258; text-align:center; }
     .brand-card .brand-count { padding:0 8px 10px; font-size:11px; color:#888; text-align:center; }

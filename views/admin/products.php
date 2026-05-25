@@ -114,6 +114,24 @@
       <option value="draft" <?= ($_GET['tab']??'')==='draft'?'selected':'' ?>>Bản nháp</option>
     </select>
   </div>
+  <div style="min-width:140px">
+    <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px">HÃNG XE</label>
+    <select name="brand_id" style="width:100%;height:38px;padding:0 10px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px">
+      <option value="">Tất cả hãng xe</option>
+      <?php if(!empty($carBrands)): foreach($carBrands as $cb): ?>
+        <option value="<?= $cb['id'] ?>" <?= ($filterBrandId??0)==$cb['id']?'selected':'' ?>><?= e($cb['name']) ?></option>
+      <?php endforeach; endif; ?>
+    </select>
+  </div>
+  <div style="min-width:140px">
+    <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px">THƯƠNG HIỆU SP</label>
+    <select name="part_brand" style="width:100%;height:38px;padding:0 10px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px">
+      <option value="">Tất cả thương hiệu</option>
+      <?php if(!empty($partBrands)): foreach($partBrands as $pb): ?>
+        <option value="<?= e($pb['part_brand']) ?>" <?= ($filterPartBrand??'')==$pb['part_brand']?'selected':'' ?>><?= e($pb['part_brand']) ?></option>
+      <?php endforeach; endif; ?>
+    </select>
+  </div>
   <div style="display:flex;gap:8px">
     <button type="submit" class="btn btn-navy" style="height:38px;border-radius:6px;padding:0 20px;display:flex;align-items:center;gap:6px">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>

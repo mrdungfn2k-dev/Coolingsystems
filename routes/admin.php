@@ -117,17 +117,22 @@ get('/admin/partners', function() {
 get('/admin/products', function() {    requireStaffPermission('products', '/admin/login');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
     $q=trim($_GET['q']??''); $tab=$_GET['tab']??'all'; $catId=intval($_GET['cat']??0);
+    $brandId=intval($_GET['brand_id']??0); $partBrand=trim($_GET['part_brand']??'');
     $where='WHERE 1=1'; $params=[];
     if($tab==='draft'){$where.=" AND p.status='draft'";}
     elseif($tab==='published'){$where.=" AND p.status='published'";}
     if($q){$where.=" AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l]);}
     if($catId){$where.=" AND p.category_id=?"; $params[]=$catId;}
+    if($brandId){$where.=" AND p.car_brand_id=?"; $params[]=$brandId;}
+    if($partBrand){$where.=" AND p.part_brand=?"; $params[]=$partBrand;}
     $total=dbGet("SELECT COUNT(*) AS n FROM products p $where",$params)['n']??0;
     $totalPages=max(1,ceil($total/$perPage));
     $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
-    $products=dbAll("SELECT p.*,COALESCE(pt.shop_name,'Admin') AS shop_name,c.name AS cat_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN categories c ON c.id=p.category_id $where ORDER BY p.created_at DESC LIMIT ? OFFSET ?",$p2);
+    $products=dbAll("SELECT p.*,COALESCE(pt.shop_name,'Admin') AS shop_name,c.name AS cat_name,b.name AS brand_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id $where ORDER BY p.created_at DESC LIMIT ? OFFSET ?",$p2);
     $categories=dbAll("SELECT * FROM categories ORDER BY sort_order");
-    view('admin/products',['title'=>'San pham','role'=>'admin','products'=>$products,'categories'=>$categories,'tab'=>$tab,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages]);
+    $carBrands=dbAll("SELECT * FROM brands ORDER BY name");
+    $partBrands=dbAll("SELECT DISTINCT part_brand FROM products WHERE part_brand IS NOT NULL AND part_brand != '' ORDER BY part_brand");
+    view('admin/products',['title'=>'San pham','role'=>'admin','products'=>$products,'categories'=>$categories,'carBrands'=>$carBrands,'partBrands'=>$partBrands,'tab'=>$tab,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'filterBrandId'=>$brandId,'filterPartBrand'=>$partBrand]);
 });
 
 
