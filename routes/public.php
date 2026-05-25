@@ -28,7 +28,7 @@ get('/', function() {
             WHERE oi.product_id=p.id AND o.payment_status != 'cancelled'), 0) AS total_purchased
         FROM products p
         WHERE p.status='published' AND p.stock>0
-        ) WHERE total_purchased > 0
+        ) WHERE total_purchased >= 10
         ORDER BY total_purchased DESC, avg_rating DESC LIMIT 10");
 
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");

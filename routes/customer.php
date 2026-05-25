@@ -3,8 +3,13 @@
 // Customer notifications page
 get('/customer/notifications', function() {
     $user = requireRole(['customer','staff'], '/auth/login');
-    $notifications = dbAll("SELECT * FROM user_notifications WHERE user_id=? ORDER BY created_at DESC LIMIT 50", [$user['id']]);
-    view('customer/notifications', ['title'=>'Thông báo','notifications'=>$notifications]);
+    $perPage = 4;
+    $page = max(1, intval($_GET['page'] ?? 1));
+    $offset = ($page - 1) * $perPage;
+    $total = dbGet("SELECT COUNT(*) AS cnt FROM user_notifications WHERE user_id=?", [$user['id']])['cnt'] ?? 0;
+    $totalPages = max(1, ceil($total / $perPage));
+    $notifications = dbAll("SELECT * FROM user_notifications WHERE user_id=? ORDER BY created_at DESC LIMIT ? OFFSET ?", [$user['id'], $perPage, $offset]);
+    view('customer/notifications', ['title'=>'Thông báo','notifications'=>$notifications,'page'=>$page,'totalPages'=>$totalPages,'total'=>$total]);
 });
 
 get('/customer/orders', function() {

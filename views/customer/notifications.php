@@ -1,13 +1,14 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
 <div class="wrap" style="max-width:800px;margin:30px auto;padding:0 16px">
-  <h1 style="font-size:22px;color:var(--navy);margin-bottom:20px">🔔 Thông báo</h1>
+  <h1 style="font-size:22px;color:var(--navy);margin-bottom:20px">Thông báo</h1>
   <?php if(empty($notifications)): ?>
     <div style="text-align:center;padding:60px 20px;color:var(--ink-3)">
-      <div style="font-size:48px;margin-bottom:12px">🔔</div>
+      <div style="font-size:48px;margin-bottom:12px">📭</div>
       <div style="font-size:15px">Chưa có thông báo nào</div>
     </div>
   <?php else: ?>
-    <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span style="font-size:12px;color:var(--ink-4)">Trang <?= $page ?? 1 ?>/<?= $totalPages ?? 1 ?> (<?= $total ?? 0 ?> thông báo)</span>
       <form method="post" action="/customer/notifications/read-all" style="display:inline"><?= csrfField() ?>
         <button type="submit" style="background:none;border:1px solid var(--line);padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--ink-2)">✓ Đánh dấu tất cả đã đọc</button>
       </form>
@@ -36,6 +37,20 @@
         </div>
       </div>
     <?php endforeach; ?>
+
+    <?php if(($totalPages ?? 1) > 1): ?>
+    <div style="display:flex;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap">
+      <?php if(($page ?? 1) > 1): ?>
+        <a href="/customer/notifications?page=<?= ($page ?? 1) - 1 ?>" style="min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #d0d5e0;border-radius:6px;text-decoration:none;color:var(--navy);font-size:13px;font-weight:600">‹</a>
+      <?php endif; ?>
+      <?php for($i = 1; $i <= ($totalPages ?? 1); $i++): ?>
+        <a href="/customer/notifications?page=<?= $i ?>" style="min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid <?= $i === ($page ?? 1) ? 'var(--navy)' : '#d0d5e0' ?>;border-radius:6px;text-decoration:none;color:<?= $i === ($page ?? 1) ? '#fff' : 'var(--navy)' ?>;background:<?= $i === ($page ?? 1) ? 'var(--navy)' : '#fff' ?>;font-size:13px;font-weight:600"><?= $i ?></a>
+      <?php endfor; ?>
+      <?php if(($page ?? 1) < ($totalPages ?? 1)): ?>
+        <a href="/customer/notifications?page=<?= ($page ?? 1) + 1 ?>" style="min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #d0d5e0;border-radius:6px;text-decoration:none;color:var(--navy);font-size:13px;font-weight:600">›</a>
+      <?php endif; ?>
+    </div>
+    <?php endif; ?>
   <?php endif; ?>
 </div>
 <?php require __DIR__.'/../partials/foot.php'; ?>

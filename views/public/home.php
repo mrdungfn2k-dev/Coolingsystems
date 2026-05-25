@@ -87,7 +87,15 @@ foreach ($trustSteps as $step):
     <?php foreach ($featured as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
   </div>
   <div class="prod-grid" data-tab="bestseller" style="display:none">
-    <?php foreach ($bestSellers as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
+    <?php if (empty($bestSellers)): ?>
+      <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--ink-3)">
+        <div style="font-size:36px;margin-bottom:8px">📊</div>
+        <p style="font-size:14px;margin:0">Chưa có sản phẩm bán chạy (cần từ 10 đơn trở lên).</p>
+        <p style="font-size:12px;color:var(--ink-4);margin-top:4px">Dữ liệu sẽ cập nhật khi có đủ đơn hàng.</p>
+      </div>
+    <?php else: ?>
+      <?php foreach ($bestSellers as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
+    <?php endif; ?>
   </div>
 </div></div></section>
 
