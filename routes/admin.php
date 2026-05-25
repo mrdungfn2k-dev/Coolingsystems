@@ -2215,9 +2215,27 @@ post('/admin/products/:id/toggle-status', function($p) {
 
 post('/admin/products/:id/delete', function($p) {
     requireStaffPermission('products', '/admin/login'); csrfCheck();
-    dbRun("DELETE FROM product_images WHERE product_id=?", [$p['id']]);
-    dbRun("DELETE FROM products WHERE id=?", [$p['id']]);
-    flash('success','Da xoa san pham.');
+    $pid = intval($p['id']);
+    // Check if product has order_items (cannot delete if ordered)
+    $hasOrders = dbGet("SELECT COUNT(*) AS cnt FROM order_items WHERE product_id=?", [$pid])['cnt'] ?? 0;
+    if ($hasOrders > 0) {
+        flash('error','Không thể xóa sản phẩm đã có đơn hàng ('.$hasOrders.' đơn). Hãy ẩn sản phẩm thay vì xóa.');
+        redirect('/admin/products');
+        return;
+    }
+    // Delete all related records first
+    dbRun("DELETE FROM product_images WHERE product_id=?", [$pid]);
+    dbRun("DELETE FROM product_fitments WHERE product_id=?", [$pid]);
+    dbRun("DELETE FROM product_brand_map WHERE product_id=?", [$pid]);
+    dbRun("DELETE FROM cart_items WHERE product_id=?", [$pid]);
+    dbRun("DELETE FROM favorites WHERE product_id=?", [$pid]);
+    dbRun("DELETE FROM review_images WHERE review_id IN (SELECT id FROM reviews WHERE product_id=?)", [$pid]);
+    dbRun("DELETE FROM review_reactions WHERE review_id IN (SELECT id FROM reviews WHERE product_id=?)", [$pid]);
+    dbRun("DELETE FROM review_reports WHERE review_id IN (SELECT id FROM reviews WHERE product_id=?)", [$pid]);
+    dbRun("DELETE FROM review_responses WHERE review_id IN (SELECT id FROM reviews WHERE product_id=?)", [$pid]);
+    dbRun("DELETE FROM reviews WHERE product_id=?", [$pid]);
+    dbRun("DELETE FROM products WHERE id=?", [$pid]);
+    flash('success','Đã xóa sản phẩm thành công.');
     redirect('/admin/products');
 });
 
