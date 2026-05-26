@@ -1,7 +1,9 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
 <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<script src="https://cdn.quilljs.com/1.3.7/quill.min.js">
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
 function swTab(t){
   ['desc','feat','spec'].forEach(function(x){
     var panel=document.getElementById('panel'+x.charAt(0).toUpperCase()+x.slice(1));
@@ -10,7 +12,6 @@ function swTab(t){
     if(tab){tab.classList.toggle('_tab-active',x===t);}
   });
 }
-
 </script>
 <style>
 .form-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
@@ -308,9 +309,16 @@ function swTab(t){
           </div>
           <div class="form-group">
             <label>Từ khóa mục tiêu <span style="font-weight:400;color:#888;font-size:11px">(Focus Keyword — để kiểm tra)</span></label>
-            <input type="text" name="seo_keyword" id="seoKeyword"
-                   value="<?= e($product['seo_keyword']??'') ?>" placeholder="VD: két nước hyundai i10"
-                   oninput="runSeoAnalysis()">
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="text" name="seo_keyword" id="seoKeyword" style="flex:1"
+                     value="<?= e($product['seo_keyword']??'') ?>" placeholder="VD: két nước hyundai i10"
+                     oninput="runSeoAnalysis()">
+              <button type="button" id="btnSuggestKw" onclick="suggestKeywords()" class="btn btn-outline-navy btn-sm" style="white-space:nowrap;height:38px;display:inline-flex;align-items:center;gap:4px;flex-shrink:0">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                Gợi ý từ khóa
+              </button>
+            </div>
+            <div id="kwSuggestions" style="display:none;margin-top:8px;padding:10px 12px;background:#f0f4ff;border-radius:8px;border:1px solid #c7d2fe"></div>
           </div>
 
           <!-- Google SERP Preview -->
@@ -528,6 +536,28 @@ function deleteProductImage(imageId, btn) {
 
 
 
+// Helper upload handler dùng chung cho cả 3 editor
+function tinymceImageUploadHandler(blobInfo, progress) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/admin/upload-tinymce-image');
+    xhr.upload.onprogress = function(e) { if (e.lengthComputable) progress(e.loaded / e.total * 100); };
+    xhr.onload = function() {
+      if (xhr.status !== 200) { reject('Upload thất bại: HTTP ' + xhr.status); return; }
+      try {
+        var json = JSON.parse(xhr.responseText);
+        if (json.location) { resolve(json.location); } else { reject(json.msg || 'Upload thất bại'); }
+      } catch(e) { reject('Phản hồi không hợp lệ'); }
+    };
+    xhr.onerror = function() { reject('Lỗi kết nối máy chủ'); };
+    var fd = new FormData();
+    fd.append('file', blobInfo.blob(), blobInfo.filename());
+    var csrf = document.querySelector('input[name="_csrf"]');
+    if (csrf) fd.append('_csrf', csrf.value);
+    xhr.send(fd);
+  });
+}
+
 tinymce.init({
   selector: '#tinymceDesc',
   height: 300,
@@ -562,6 +592,29 @@ tinymce.init({
   promotion: false,
   branding: false,
   license_key: 'gpl',
+  automatic_uploads: true,
+  images_upload_handler: tinymceImageUploadHandler,
+  file_picker_types: 'image',
+  file_picker_callback: function(cb, value, meta) {
+    if (meta.filetype === 'image') {
+      var input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*';
+      input.onchange = function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+          var id = 'blobid' + Date.now();
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+          var base64 = reader.result.split(',')[1];
+          var blobInfo = blobCache.create(id, file, base64);
+          blobCache.add(blobInfo);
+          cb(blobInfo.blobUri(), { title: file.name });
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
+  },
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
@@ -600,6 +653,29 @@ tinymce.init({
   promotion: false,
   branding: false,
   license_key: 'gpl',
+  automatic_uploads: true,
+  images_upload_handler: tinymceImageUploadHandler,
+  file_picker_types: 'image',
+  file_picker_callback: function(cb, value, meta) {
+    if (meta.filetype === 'image') {
+      var input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*';
+      input.onchange = function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+          var id = 'blobid' + Date.now();
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+          var base64 = reader.result.split(',')[1];
+          var blobInfo = blobCache.create(id, file, base64);
+          blobCache.add(blobInfo);
+          cb(blobInfo.blobUri(), { title: file.name });
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
+  },
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
@@ -638,6 +714,29 @@ tinymce.init({
   promotion: false,
   branding: false,
   license_key: 'gpl',
+  automatic_uploads: true,
+  images_upload_handler: tinymceImageUploadHandler,
+  file_picker_types: 'image',
+  file_picker_callback: function(cb, value, meta) {
+    if (meta.filetype === 'image') {
+      var input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*';
+      input.onchange = function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+          var id = 'blobid' + Date.now();
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+          var base64 = reader.result.split(',')[1];
+          var blobInfo = blobCache.create(id, file, base64);
+          blobCache.add(blobInfo);
+          cb(blobInfo.blobUri(), { title: file.name });
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
+  },
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
@@ -726,6 +825,134 @@ function previewImgs(input) {
 
 
 
+
+// ── GỢI Ý TỪ KHÓA SEO ──
+function suggestKeywords() {
+  var btn = document.getElementById('btnSuggestKw');
+  var box = document.getElementById('kwSuggestions');
+  btn.disabled = true; btn.innerHTML = '⏳ Đang phân tích...';
+
+  // Thu thập nội dung từ tất cả các nguồn
+  var name = (document.querySelector('input[name="name"]')?.value || '').trim();
+  var sku  = (document.querySelector('input[name="sku"]')?.value  || '').trim();
+  var oem  = (document.querySelector('input[name="oem_code"]')?.value || '').trim();
+  var catSel = document.querySelector('select[name="category_id"]');
+  var catText = catSel ? catSel.options[catSel.selectedIndex]?.text || '' : '';
+
+  function getEditorText(edId, taName) {
+    if (typeof tinymce !== 'undefined') {
+      var ed = tinymce.get(edId);
+      if (!ed && tinymce.editors) {
+        for (var i = 0; i < tinymce.editors.length; i++) {
+          if (tinymce.editors[i].id === edId) { ed = tinymce.editors[i]; break; }
+        }
+      }
+      if (ed) try { return (ed.getContent({format:'text'}) || '').trim(); } catch(e) {}
+    }
+    var ta = document.querySelector('textarea[name="' + taName + '"]');
+    return ta ? (ta.value || '').replace(/<[^>]+>/g,' ').trim() : '';
+  }
+
+  var descText = getEditorText('tinymceDesc', 'description');
+  var featText = getEditorText('tinymceFeat', 'features');
+  var specText = getEditorText('tinymceSpec', 'specifications');
+
+  var allText = (name + ' ' + catText + ' ' + descText + ' ' + featText + ' ' + specText).toLowerCase();
+
+  // Từ dừng tiếng Việt + tiếng Anh phổ biến
+  var stopWords = 'và của cho với các được có không trong này là một những được theo từ đến khi của bạn để như về sản phẩm tính năng thông số hàng chính hãng cao cấp chất lượng tốt nhất giá rẻ mua bán the and for with from this that are was were has have had been being will would could should may might shall can does did not but or if then else when how what which who whom whose where why all any both each few more most other some such than too very also just only own same her his its our their your a an in on at to by is it of as do no so up we he she me my we us i am be'.split(' ');
+
+  // Trích xuất từ/cụm từ quan trọng
+  var words = allText.replace(/[.,;:!?()[\]{}""''\"]/g, ' ').split(/\s+/).filter(function(w) {
+    return w.length >= 2 && stopWords.indexOf(w) === -1 && !/^\d+$/.test(w);
+  });
+
+  // Đếm tần suất từ đơn
+  var freq = {};
+  words.forEach(function(w) { freq[w] = (freq[w] || 0) + 1; });
+
+  // Tạo bigrams (cụm 2 từ)
+  var bigrams = {};
+  for (var i = 0; i < words.length - 1; i++) {
+    var bg = words[i] + ' ' + words[i+1];
+    bigrams[bg] = (bigrams[bg] || 0) + 1;
+  }
+
+  // Tạo trigrams (cụm 3 từ)
+  var trigrams = {};
+  for (var i = 0; i < words.length - 2; i++) {
+    var tg = words[i] + ' ' + words[i+1] + ' ' + words[i+2];
+    trigrams[tg] = (trigrams[tg] || 0) + 1;
+  }
+
+  // Ưu tiên: từ trong tiêu đề được boost x3
+  var nameWords = name.toLowerCase().replace(/[.,;:!?()[\]{}""''\"]/g, ' ').split(/\s+/).filter(function(w) {
+    return w.length >= 2 && stopWords.indexOf(w) === -1;
+  });
+  nameWords.forEach(function(w) { freq[w] = (freq[w] || 0) + 5; });
+
+  // Gộp tất cả ngrams + sắp xếp theo tần suất
+  var candidates = [];
+  Object.keys(trigrams).forEach(function(k) { if (trigrams[k] >= 2) candidates.push({text: k, score: trigrams[k] * 4}); });
+  Object.keys(bigrams).forEach(function(k) { if (bigrams[k] >= 2) candidates.push({text: k, score: bigrams[k] * 2.5}); });
+  Object.keys(freq).forEach(function(k) { if (freq[k] >= 2 && k.length >= 3) candidates.push({text: k, score: freq[k]}); });
+
+  // Thêm cụm từ đặc biệt từ tiêu đề (ưu tiên cao)
+  if (name.length > 5) {
+    // Lấy 2-4 từ đầu tiên từ tên SP làm keyword chính
+    var nameTokens = name.toLowerCase().split(/\s+/).filter(function(w) { return w.length >= 2; });
+    for (var len = Math.min(4, nameTokens.length); len >= 2; len--) {
+      var kw = nameTokens.slice(0, len).join(' ');
+      candidates.push({text: kw, score: 20});
+    }
+    // Nếu có tên hãng/model trong tên SP
+    if (sku) candidates.push({text: sku.toLowerCase(), score: 15});
+    if (oem) candidates.push({text: oem.toLowerCase(), score: 15});
+  }
+
+  // Thêm danh mục
+  if (catText && catText !== 'Chọn danh mục' && catText.length > 2) {
+    candidates.push({text: catText.toLowerCase(), score: 10});
+  }
+
+  // Loại trùng, sắp xếp
+  var seen = {};
+  candidates = candidates.filter(function(c) {
+    if (seen[c.text]) return false;
+    seen[c.text] = true;
+    return true;
+  }).sort(function(a, b) { return b.score - a.score; }).slice(0, 12);
+
+  // Render
+  if (candidates.length === 0) {
+    box.style.display = 'block';
+    box.innerHTML = '<div style="color:#666;font-size:12px">⚠️ Chưa đủ nội dung để gợi ý. Hãy viết mô tả, đặc điểm, thông số kỹ thuật trước.</div>';
+  } else {
+    var html = '<div style="font-size:11px;font-weight:700;color:#4338ca;margin-bottom:6px">💡 Từ khóa gợi ý (click để chọn):</div><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    candidates.forEach(function(c) {
+      html += '<span onclick="pickKeyword(this)" style="cursor:pointer;padding:4px 12px;background:#fff;border:1px solid #c7d2fe;border-radius:20px;font-size:12px;color:#4338ca;font-weight:600;transition:all .2s" onmouseover="this.style.background=\'#4338ca\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'#fff\';this.style.color=\'#4338ca\'">' + c.text + '</span>';
+    });
+    html += '</div>';
+    box.style.display = 'block';
+    box.innerHTML = html;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg> Gợi ý từ khóa';
+}
+
+function pickKeyword(el) {
+  var kw = el.textContent.trim();
+  var input = document.getElementById('seoKeyword');
+  input.value = kw;
+  input.dispatchEvent(new Event('input'));
+  runSeoAnalysis();
+  // Highlight chọn
+  document.querySelectorAll('#kwSuggestions span').forEach(function(s) {
+    s.style.background = '#fff'; s.style.color = '#4338ca'; s.style.borderColor = '#c7d2fe';
+  });
+  el.style.background = '#4338ca'; el.style.color = '#fff'; el.style.borderColor = '#4338ca';
+}
 
 // ── SEO CONTENT ANALYSIS ──
 function runSeoAnalysis() {

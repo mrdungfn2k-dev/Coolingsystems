@@ -117,7 +117,7 @@ get('/admin/partners', function() {
 get('/admin/products', function() {    requireStaffPermission('products', '/admin/login');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
     $q=trim($_GET['q']??''); $tab=$_GET['tab']??'all'; $catId=intval($_GET['cat']??0);
-    $brandId=intval($_GET['brand_id']??0); $partBrand=trim($_GET['part_brand']??'');
+    $brandId=intval($_GET['brand_id']??$_GET['brand']??0); $partBrand=trim($_GET['part_brand']??$_GET['pbrand']??'');
     $where='WHERE 1=1'; $params=[];
     if($tab==='draft'){$where.=" AND p.status='draft'";}
     elseif($tab==='published'){$where.=" AND p.status='published'";}
@@ -132,6 +132,7 @@ get('/admin/products', function() {    requireStaffPermission('products', '/admi
     $categories=dbAll("SELECT * FROM categories ORDER BY sort_order");
     $carBrands=dbAll("SELECT * FROM brands ORDER BY name");
     $partBrands=dbAll("SELECT DISTINCT part_brand FROM products WHERE part_brand IS NOT NULL AND part_brand != '' ORDER BY part_brand");
+
     view('admin/products',['title'=>'San pham','role'=>'admin','products'=>$products,'categories'=>$categories,'carBrands'=>$carBrands,'partBrands'=>$partBrands,'tab'=>$tab,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'filterBrandId'=>$brandId,'filterPartBrand'=>$partBrand]);
 });
 
@@ -2282,6 +2283,95 @@ post('/admin/products/:id/delete', function($p) {
     flash('success','Đã xóa sản phẩm thành công.');
     redirect('/admin/products');
 });
+post('/admin/upload-tinymce-image', function() {
+    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    header('Content-Type: application/json');
+
+    if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        echo json_encode(['ok' => false, 'msg' => 'Không có file hoặc lỗi upload']);
+        exit;
+    }
+
+    $file = $_FILES['file'];
+    $maxSize = 5 * 1024 * 1024; // 5MB
+    if ($file['size'] > $maxSize) {
+        echo json_encode(['ok' => false, 'msg' => 'File quá lớn (tối đa 5MB)']);
+        exit;
+    }
+
+    $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    if (!in_array($mime, $allowed)) {
+        echo json_encode(['ok' => false, 'msg' => 'Chỉ chấp nhận ảnh JPG, PNG, GIF, WEBP']);
+        exit;
+    }
+
+    $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/gif' => 'gif', 'image/webp' => 'webp'];
+    $extension = $ext[$mime] ?? 'jpg';
+    $filename = 'tinymce_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
+
+    $uploadDir = __DIR__ . '/../uploads/content/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0775, true);
+    }
+
+    $dest = $uploadDir . $filename;
+    if (!move_uploaded_file($file['tmp_name'], $dest)) {
+        echo json_encode(['ok' => false, 'msg' => 'Không thể lưu file']);
+        exit;
+    }
+
+    echo json_encode(['location' => '/uploads/content/' . $filename]);
+    exit;
+});
+
+
+post('/admin/products/bulk-delete', function() {
+    $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
+    header('Content-Type: application/json');
+
+    $idsRaw = trim($_POST['ids'] ?? '');
+    if (empty($idsRaw)) {
+        echo json_encode(['ok' => false, 'msg' => 'Chưa chọn sản phẩm nào.']);
+        exit;
+    }
+
+    $ids = array_filter(array_map('intval', explode(',', $idsRaw)), function($id) { return $id > 0; });
+    if (empty($ids)) {
+        echo json_encode(['ok' => false, 'msg' => 'ID không hợp lệ.']);
+        exit;
+    }
+
+    $deleted = 0;
+    $errors  = [];
+    foreach ($ids as $pid) {
+        // Không xóa nếu đã có trong đơn hàng
+        $hasOrders = dbGet("SELECT COUNT(*) AS cnt FROM order_items WHERE product_id=?", [$pid]);
+        if ($hasOrders && $hasOrders['cnt'] > 0) {
+            $errors[] = "SP #$pid đã có trong đơn hàng, không thể xóa";
+            continue;
+        }
+        // Xóa ảnh liên quan
+        dbRun("DELETE FROM product_images WHERE product_id=?", [$pid]);
+        // Xóa brand mapping
+        dbRun("DELETE FROM product_brand_map WHERE product_id=?", [$pid]);
+        // Xóa sản phẩm
+        dbRun("DELETE FROM products WHERE id=?", [$pid]);
+        $deleted++;
+    }
+
+    $msg = "Đã xóa $deleted sản phẩm.";
+    if (!empty($errors)) {
+        $msg .= ' Bỏ qua: ' . implode('; ', $errors);
+    }
+    echo json_encode(['ok' => true, 'deleted' => $deleted, 'msg' => $msg]);
+    exit;
+});
+
+
 
 post('/admin/notifications/read-all', function() {
     requireStaffPermission('orders', '/admin/login'); csrfCheck();
