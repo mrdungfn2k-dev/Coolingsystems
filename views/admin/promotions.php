@@ -8,15 +8,22 @@ $page = max(1, intval($_GET['page'] ?? 1));
 $perPage = 20;
 $offset = ($page - 1) * $perPage;
 $filter = $_GET['filter'] ?? 'all'; // all, on_sale, no_sale
+$q = trim($_GET['q'] ?? '');
 
 $where = "WHERE p.status='published'";
 if ($filter === 'on_sale') $where .= " AND p.is_on_sale=1";
 if ($filter === 'no_sale') $where .= " AND (p.is_on_sale=0 OR p.is_on_sale IS NULL)";
 
-$total = dbGet("SELECT COUNT(*) as n FROM products p $where")['n'];
+$params = [];
+if ($q !== '') {
+    $where .= " AND p.name LIKE ?";
+    $params[] = "%" . $q . "%";
+}
+
+$total = dbGet("SELECT COUNT(*) as n FROM products p $where", $params)['n'] ?? 0;
 $products = dbAll("SELECT p.id, p.name, p.price, p.original_price, p.sale_price, p.is_on_sale,
     (SELECT file_path FROM product_images WHERE product_id=p.id AND is_main=1 LIMIT 1) AS main_image
-    FROM products p $where ORDER BY p.is_on_sale DESC, p.name LIMIT $perPage OFFSET $offset");
+    FROM products p $where ORDER BY p.is_on_sale DESC, p.name LIMIT $perPage OFFSET $offset", $params);
 $totalPages = max(1, ceil($total / $perPage));
 ?>
 <style>
@@ -49,6 +56,18 @@ $totalPages = max(1, ceil($total / $perPage));
         </div>
     </div>
 </div>
+
+<form method="get" action="/admin/promotions" class="admin-filter" style="background:#fff;padding:14px 16px;border-radius:8px;border:1px solid var(--line);margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+    <div style="flex:1;min-width:220px">
+        <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">TÌM KIẾM SẢN PHẨM</label>
+        <input type="text" name="q" class="form-control" value="<?= e($q) ?>" placeholder="Tên sản phẩm..." style="width:100%">
+        <?php if($filter !== 'all'): ?>
+        <input type="hidden" name="filter" value="<?= e($filter) ?>">
+        <?php endif; ?>
+    </div>
+    <button type="submit" class="btn btn-navy" style="height:42px;padding:0 24px">Tìm kiếm</button>
+    <a href="/admin/promotions" class="btn btn-outline-navy" style="height:42px;padding:0 20px;display:flex;align-items:center;">Đặt lại</a>
+</form>
 
 <div class="filter-tabs">
     <a href="/admin/promotions" class="filter-tab <?= $filter==='all' ? 'active' : '' ?>">Tất cả (<?= $total ?>)</a>
@@ -115,10 +134,11 @@ $totalPages = max(1, ceil($total / $perPage));
 </div>
 
 <?php if ($totalPages > 1): ?>
-<div style="display:flex;justify-content:center;gap:8px;margin-top:20px">
-    <?php for($i=1;$i<=$totalPages;$i++): ?>
-    <a href="?filter=<?= $filter ?>&page=<?= $i ?>" style="padding:6px 12px;border:1px solid var(--line);border-radius:5px;font-size:13px;text-decoration:none;<?= $i==$page?'background:var(--navy);color:#fff':'color:#333' ?>"><?= $i ?></a>
-    <?php endfor; ?>
+<div style="padding:12px 16px;display:flex;gap:6px;justify-content:center">
+<?php
+require_once __DIR__.'/../partials/pagination.php';
+renderPagination($page, $totalPages, '', $_GET);
+?>
 </div>
 <?php endif; ?>
 

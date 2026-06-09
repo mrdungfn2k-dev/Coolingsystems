@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e($title ?? '') ?> — Cooling</title>
 <meta name="description" content="<?= e($title ?? 'Tài khoản') ?> — Cooling Phụ tùng & Dịch vụ ô tô.">
-<link rel="stylesheet" href="/css/cooling.css?v=1780910000">
+<link rel="stylesheet" href="/css/cooling.css?v=1780930000">
 <link rel="stylesheet" href="/css/mobile.css?v=1780900000">
 <?php
 $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
