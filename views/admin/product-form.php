@@ -3,6 +3,17 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script src="/tinymce/tinymce.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.default.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+<style id="ts-chip-fix">
+/* Chip Tom Select (Thương hiệu / Hãng xe) — đồng bộ màu navy hệ thống */
+.ts-control .item { background:var(--navy) !important; color:#fff !important; border:1px solid var(--navy) !important; border-radius:6px !important; font-weight:600 !important; }
+.ts-control .item.active { background:var(--navy-dark) !important; border-color:var(--navy-dark) !important; box-shadow:none !important; }
+.ts-control .item .remove { color:#fff !important; border-left:1px solid rgba(255,255,255,.4) !important; }
+.ts-control .item .remove:hover { background:rgba(255,255,255,.2) !important; color:#fff !important; }
+.ts-dropdown .active { background:var(--navy) !important; color:#fff !important; }
+.ts-wrapper.focus .ts-control { border-color:var(--navy) !important; box-shadow:0 0 0 3px rgba(26,50,88,.12) !important; }
+</style>
 <script>
 function swTab(t){
   ['desc','feat','spec'].forEach(function(x){
@@ -14,8 +25,10 @@ function swTab(t){
 }
 </script>
 <style>
-.form-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
-@media(max-width:900px){.form-layout{grid-template-columns:1fr}}
+input[type="checkbox"]{outline:none!important;box-shadow:none!important;border:none!important;accent-color:#1a3258;}
+input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
+.form-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+@media(max-width:900px){.form-layout{grid-template-columns:minmax(0,1fr)}}
 .sidebar-panel{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
 .ql-toolbar{border-radius:6px 6px 0 0 !important;border:1px solid var(--line) !important;background:#fafafa}
 .ql-container{border:1px solid var(--line) !important;border-top:none !important;border-radius:0 0 6px 6px !important;font-size:14px;min-height:300px}
@@ -77,20 +90,12 @@ function swTab(t){
                 $allBrands = dbAll("SELECT name FROM product_brands ORDER BY sort_order, name");
                 $selectedBrands = ($product['part_brand']??'')==='HIDDEN' ? [] : array_map('trim', explode(',', $product['part_brand']??''));
               ?>
-              <div id="brandBoxWrapper" style="border:1px solid #d0d5dd;border-radius:8px;background:#fff;overflow:hidden;<?= ($product['part_brand']??'')==='HIDDEN' ? 'opacity:0.45;pointer-events:none' : '' ?>">
-                <div style="padding:6px 10px;display:grid;grid-template-columns:1fr 1fr;gap:0;">
+              <div id="brandBoxWrapper" style="<?= ($product['part_brand']??'')==='HIDDEN' ? 'opacity:0.45;pointer-events:none' : '' ?>">
+                <select id="partBrandSelect" multiple placeholder="Chọn thương hiệu..." onchange="updateBrandHidden()" style="width:100%">
                   <?php foreach($allBrands as $pb): ?>
-                  <label style="display:flex;align-items:center;gap:8px;padding:7px 8px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:1px solid #f0f0f0;color:#1a1a2e">
-                    <input type="checkbox" class="brandCheck" value="<?= e($pb['name']) ?>"
-                      <?= in_array(trim($pb['name']), $selectedBrands) ? 'checked' : '' ?>
-                      onchange="updateBrandHidden()"
-                      style="width:15px;height:15px;cursor:pointer;flex-shrink:0;accent-color:#1a1a2e">
-                    <span><?= e($pb['name']) ?></span>
-                  </label>
+                    <option value="<?= e($pb['name']) ?>" <?= in_array(trim($pb['name']), $selectedBrands) ? 'selected' : '' ?>><?= e($pb['name']) ?></option>
                   <?php endforeach; ?>
-                </div>
-                <div style="border-top:2px solid #f0f0f0;padding:8px 14px;background:#f8f9fc;">
-                </div>
+                </select>
               </div>
               <label style="display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;cursor:pointer">
                 <input type="checkbox" onchange="toggleBrandHide(this.checked)" <?= ($product['part_brand']??'')==="HIDDEN"?"checked":"" ?> style="width:14px;height:14px;cursor:pointer;accent-color:#dc2626">
@@ -135,11 +140,11 @@ function swTab(t){
 .ql-font-courier { font-family: 'Courier New', monospace; }
 </style>
 
-<script>
+              <script>
               function updateBrandHidden(){
-                var checks = document.querySelectorAll('.brandCheck:checked');
-                var vals = [];
-                checks.forEach(function(c){ vals.push(c.value); });
+                var sel = document.getElementById('partBrandSelect');
+                if(!sel) return;
+                var vals = Array.from(sel.selectedOptions).map(o => o.value);
                 document.getElementById('partBrandHidden').value = vals.join(', ');
               }
               function toggleBrandHide(hidden){
@@ -169,25 +174,19 @@ function swTab(t){
                     $selectedCarBrands[] = intval($product['car_brand_id']);
                 }
               ?>
-              <div style="border:1px solid #d0d5dd;border-radius:8px;background:#fff;overflow:hidden;max-height:250px;overflow-y:auto">
-                <div style="padding:6px 10px;display:grid;grid-template-columns:1fr 1fr;gap:0;">
-                  <label style="display:flex;align-items:center;gap:8px;padding:7px 8px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:1px solid #f0f0f0;color:#1a1a2e;grid-column:span 2">
-                    <input type="checkbox" name="car_brand_ids[]" value="0" <?= empty($selectedCarBrands) ? 'checked' : '' ?> style="width:14px;height:14px;cursor:pointer"> — Tất cả / Chung —
-                  </label>
-                  <label style="display:flex;align-items:center;gap:8px;padding:7px 8px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:1px solid #f0f0f0;color:#1a1a2e;grid-column:span 2">
-                    <input type="checkbox" name="car_brand_ids[]" value="HIDDEN" <?= in_array('HIDDEN', array_map('strval', $selectedCarBrands)) ? 'checked' : '' ?> style="width:14px;height:14px;cursor:pointer"> Không hiển thị mục này
-                  </label>
+              <div style="background:#fff;">
+                <select id="carBrandSelect" name="car_brand_ids[]" multiple placeholder="Tìm và chọn hãng xe..." style="width:100%">
+                  <option value="0" <?= empty($selectedCarBrands) ? 'selected' : '' ?>>— Tất cả / Chung —</option>
+                  <option value="HIDDEN" <?= in_array('HIDDEN', array_map('strval', $selectedCarBrands)) ? 'selected' : '' ?>>Không hiển thị mục này</option>
                   <?php foreach($brands as $b): ?>
-                  <label style="display:flex;align-items:center;gap:8px;padding:7px 8px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:1px solid #f0f0f0;color:#1a1a2e">
-                    <input type="checkbox" name="car_brand_ids[]" value="<?=$b['id']?>" <?= in_array($b['id'], $selectedCarBrands) ? 'checked' : '' ?> style="width:14px;height:14px;cursor:pointer"> <?= htmlspecialchars($b['name']) ?>
-                  </label>
+                    <option value="<?=$b['id']?>" <?= in_array($b['id'], $selectedCarBrands) ? 'selected' : '' ?>><?= htmlspecialchars($b['name']) ?></option>
                   <?php endforeach; ?>
-                </div>
+                </select>
               </div>
             </div>
             <div class="form-group">
               <label>Danh mục <span class="req">*</span></label>
-              <select name="category_id" required>
+              <select name="category_id" id="categorySelect" required placeholder="— Chọn danh mục —" style="width:100%">
                 <option value="">— Chọn danh mục —</option>
                 <option value="HIDDEN" <?= ($product['category_id']??'') === 'HIDDEN' ? 'selected' : '' ?>> Không hiển thị mục danh mục</option>
                 <?php foreach($categories as $c):?>
@@ -284,16 +283,59 @@ function swTab(t){
             </div>
           <?php endif;?>
           <div class="form-group">
-            <label>Thêm ảnh mới (tối đa 8 ảnh)</label>
-            <div id="img-preview-area" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"></div>
-            <label class="btn btn-outline-navy btn-sm" style="cursor:pointer;display:inline-block">
-               Chọn ảnh
-              <input type="file" id="img-picker" multiple accept="image/jpeg,image/png,image/webp" style="display:none">
-            </label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;">
+              <label style="cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:140px;height:140px;border:1px dashed #ccc;border-radius:8px;background:#f8f9fa;text-align:center;transition:all 0.2s" onmouseover="this.style.background='#f0f4f8';this.style.borderColor='var(--navy)'" onmouseout="this.style.background='#f8f9fa';this.style.borderColor='#ccc'">
+                <div style="padding:6px 14px;background:#fff;border:1px solid #ddd;border-radius:6px;color:#333;font-weight:600;font-size:13px;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:8px">Thêm ảnh</div>
+                <span style="font-size:12px;color:#888;padding:0 8px;line-height:1.4">Mỗi ảnh không quá 100 MB<br>(Tối đa 8 ảnh)</span>
+                <input type="file" id="img-picker" multiple accept="image/jpeg,image/png,image/webp" style="display:none">
+              </label>
+              <div id="img-preview-area" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+            </div>
             <input type="file" name="images[]" id="img-hidden-input" multiple accept="image/*" style="display:none">
-            <div class="form-help" style="margin-top:6px">JPG/PNG/WEBP, mỗi ảnh ≤ 5MB, tối đa 8 ảnh. Click  để bỏ ảnh không muốn đăng.</div>
           </div>
           <div id="imgPreviewRow" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>
+
+<!-- IMG-LIGHTBOX: click a thumbnail to view the full image -->
+<style>
+#existingImagesRow .existing-img-wrap img, #img-preview-area img, #imgPreviewRow img { cursor: zoom-in; }
+#imgLightbox { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:100000; display:none; align-items:center; justify-content:center; padding:24px; }
+#imgLightbox img { max-width:92vw; max-height:90vh; object-fit:contain; border-radius:6px; box-shadow:0 8px 40px rgba(0,0,0,0.5); }
+#imgLightbox .ilb-close { position:absolute; top:18px; right:24px; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.16); color:#fff; border:none; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+#imgLightbox .ilb-close:hover { background:rgba(255,255,255,0.32); }
+</style>
+<div id="imgLightbox" onclick="closeImgLightbox(event)">
+  <button type="button" class="ilb-close" onclick="closeImgLightbox(event)" title="Đóng (Esc)">&times;</button>
+  <img id="imgLightboxImg" src="" alt="Xem ảnh">
+</div>
+<script>
+(function(){
+  var downX=0, downY=0;
+  function openImgLightbox(src){
+    if(!src) return;
+    document.getElementById('imgLightboxImg').src=src;
+    document.getElementById('imgLightbox').style.display='flex';
+  }
+  window.closeImgLightbox=function(e){
+    if(e && e.target && e.target.id==='imgLightboxImg') return; // clicking the image itself keeps it open
+    var lb=document.getElementById('imgLightbox');
+    if(lb){ lb.style.display='none'; document.getElementById('imgLightboxImg').src=''; }
+  };
+  document.addEventListener('mousedown', function(e){ downX=e.clientX; downY=e.clientY; }, true);
+  document.addEventListener('click', function(ev){
+    if(ev.target.closest('button')) return;                 // X = delete, don't open viewer
+    var wrap=ev.target.closest('.existing-img-wrap');       // wrapper of BOTH saved & new thumbs
+    if(!wrap || !wrap.closest('#existingImagesRow, #img-preview-area, #imgPreviewRow')) return;
+    if(Math.abs(ev.clientX-downX)+Math.abs(ev.clientY-downY) > 6) return; // was a drag (reorder)
+    var im=wrap.querySelector('img');
+    if(!im || !im.src) return;
+    ev.preventDefault(); ev.stopPropagation();
+    openImgLightbox(im.currentSrc || im.src);
+  }, true);
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){ var lb=document.getElementById('imgLightbox'); if(lb && lb.style.display==='flex') window.closeImgLightbox(); }
+  });
+})();
+</script>
         </div>
       </div>
 
@@ -382,52 +424,42 @@ function swTab(t){
         <div class="panel-body">
           <div class="form-group">
             <label>Giá nhập <span style="color:#888;font-weight:normal;font-size:11px">(tùy chọn)</span></label>
-            <input type="number" name="cost_price" id="costPrice" min="0" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                   value="<?= $product['cost_price']??'' ?>" placeholder="VD: 400000"
-                   >
+            <input type="number" name="cost_price" id="costPrice" min="0" max="100000000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>100000000)this.value=100000000" value="<?= $product['cost_price']??'' ?>" placeholder="VD: 400000">
           </div>
 
           <div class="form-group">
             <label>Giá bán sau VAT <span class="req">*</span></label>
-            <input type="number" name="price" id="priceAfterVat" required min="1000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-                   value="<?= $product['price']??'' ?>" placeholder="VD: 440000">
+            <input type="number" name="price" id="priceAfterVat" required min="1000" max="100000000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>100000000)this.value=100000000" value="<?= $product['price']??'' ?>" placeholder="VD: 440000">
           </div>
           <div class="form-group">
             <label>Giá gốc (để gạch ngang)</label>
-            <input type="number" name="original_price" min="0" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= $product['original_price']??'' ?>">
+            <input type="number" name="original_price" min="0" max="100000000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>100000000)this.value=100000000" value="<?= $product['original_price']??'' ?>">
           </div>
           
           <div class="form-group">
             <label>Tồn kho hiện tại <span class="req">*</span></label>
-            <input type="number" name="stock" required min="0" max="1000" value="<?= $product['stock']??0 ?>">
+            <input type="number" name="stock" required min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999" value="<?= $product['stock']??0 ?>">
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div class="form-group">
               <label>Tồn kho tối thiểu</label>
-              <input type="number" name="min_stock" min="0" value="<?= $product['min_stock']??5 ?>">
+              <input type="number" name="min_stock" min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999" value="<?= $product['min_stock']??5 ?>">
             </div>
             <div class="form-group">
               <label>Tồn kho tối đa</label>
-              <input type="number" name="max_stock" min="0" value="<?= $product['max_stock']??1000 ?>">
+              <input type="number" name="max_stock" min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999" value="<?= $product['max_stock']??999 ?>">
             </div>
           </div>
           <div class="form-group">
             <label>Bảo hành (tháng)</label>
-            <input type="number" name="warranty_months" value="<?= $product['warranty_months']??12 ?>" min="0">
+            <input type="number" name="warranty_months" value="<?= $product['warranty_months']??12 ?>" min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999">
           </div>
         </div>
       </div>
     </div><!-- /sidebar -->
   </div><!-- /form-layout -->
 
-<script>
-document.querySelector('input[name="stock"]')?.addEventListener('input', function() {
-  if (parseInt(this.value) > 1000) {
-    this.value = 1000;
-    alert('Số lượng tồn kho tối đa là 1.000 sản phẩm!');
-  }
-});
-</script>
+<!-- Script previously restricted stock to 999, now handled inline -->
 
 <!-- VIDEO SAN PHAM -->
 <div class="panel" style="margin-top:20px">
@@ -496,8 +528,8 @@ function previewVideo(url) {
 </form>
 
 <script>
-function deleteProductImage(imageId, btn) {
-  if (!confirm('Bạn có chắc muốn xóa ảnh này?')) return;
+async function deleteProductImage(imageId, btn) {
+  if (!(await csConfirmAsync('Bạn có chắc muốn xóa ảnh này?'))) return;
   var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
   var wrap = btn.closest('.existing-img-wrap');
   
@@ -954,14 +986,11 @@ function pickKeyword(el) {
   el.style.background = '#4338ca'; el.style.color = '#fff'; el.style.borderColor = '#4338ca';
 }
 
-// ── SEO CONTENT ANALYSIS ──
+// ── SEO CONTENT ANALYSIS (Weighted Scoring) ──
 function runSeoAnalysis() {
   var name = (document.querySelector('input[name="name"]')?.value || '').trim();
-  var sku  = (document.querySelector('input[name="sku"]')?.value  || '').trim();
-  var oem  = (document.querySelector('input[name="oem_code"]')?.value || '').trim();
   var keyword = (document.getElementById('seoKeyword')?.value || '').toLowerCase().trim();
 
-  // Đọc nội dung TinyMCE — fallback sang textarea nếu chưa sync
   function readEditor(edId, taName) {
     if (typeof tinymce !== 'undefined') {
       var ed = tinymce.get(edId);
@@ -972,17 +1001,13 @@ function runSeoAnalysis() {
       }
       if (ed) {
         try {
-          var h = ed.getContent() || '';
-          var t = (ed.getContent({format:'text'}) || '').trim();
-          return {html: h, text: t};
+          return {html: ed.getContent() || '', text: (ed.getContent({format:'text'}) || '').trim()};
         } catch(ex) {}
       }
     }
     var ta = document.querySelector('textarea[name="' + taName + '"]');
     if (ta && ta.value) {
-      var h2 = ta.value;
-      var t2 = h2.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      return {html: h2, text: t2};
+      return {html: ta.value, text: ta.value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()};
     }
     return {html: '', text: ''};
   }
@@ -996,74 +1021,76 @@ function runSeoAnalysis() {
   var allText = (name + ' ' + descText + ' ' + featText + ' ' + specText).toLowerCase();
 
   // Preview Google SERP
-  document.getElementById('seoPreviewTitle').textContent = name ? name + ' — Cooling' : 'Tiêu đề sản phẩm...';
+  document.getElementById('seoPreviewTitle').textContent = name ? name + ' — CoolingSystem' : 'Tiêu đề sản phẩm...';
   document.getElementById('seoPreviewDesc').textContent = descText ? descText.substring(0,155) : 'Mô tả sản phẩm...';
 
-  var checks = [], score = 0, total = 0;
-  function add(pass, msg, cat) { total++; if(pass) score++; checks.push({pass:pass,msg:msg,cat:cat}); }
+  // ── WEIGHTED SCORING (100 điểm) ──
+  // Meta/Tiêu đề: 10đ | Mô tả: 35đ | Cấu trúc: 20đ | Từ khóa: 25đ | Hình ảnh: 10đ
+  var score = 0;
+  var checks = [];
+  function add(pass, msg, cat, pts) { if(pass) score += pts; checks.push({pass:pass,msg:msg,cat:cat,pts:pts}); }
 
-  // ─ THÔNG TIN CƠ BẢN
-  add(name.length >= 20 && name.length <= 100, 'Tên SP dài ' + name.length + ' ký tự (tốt: 20-100)', 'basic');
-  add(!!sku, 'Đã có mã SKU' + (sku?': '+sku:''), 'basic');
-  add(!!oem, 'Đã có mã OEM' + (oem?': '+oem:''), 'basic');
+  // ─ META / TIÊU ĐỀ (10đ)
+  add(name.length >= 20 && name.length <= 100, 'Tiêu đề dài ' + name.length + ' ký tự (tốt: 20-100)', 'meta', 5);
   var catSel = document.querySelector('select[name="category_id"]');
-  add(catSel && catSel.value && catSel.value !== '' && catSel.value !== 'HIDDEN', 'Đã chọn danh mục sản phẩm', 'basic');
+  add(catSel && catSel.value && catSel.value !== '', 'Đã chọn danh mục sản phẩm', 'meta', 5);
 
-  // ─ MÔ TẢ
-  add(descText.length >= 150, 'Mô tả dài ' + descText.length + ' ký tự (tối thiểu 150)', 'desc');
-  add(descText.length >= 300, 'Mô tả đủ chi tiết ≥300 ký tự (' + descText.length + ')', 'desc');
+  // ─ MÔ TẢ SẢN PHẨM (35đ)
+  add(descText.length >= 150, 'Mô tả dài ' + descText.length + ' ký tự (tối thiểu 150)', 'desc', 8);
+  add(descText.length >= 300, 'Mô tả chi tiết ≥300 ký tự (' + descText.length + ')', 'desc', 5);
   var h2c = (descHtml.match(/<h2/gi)||[]).length;
   var h3c = (descHtml.match(/<h3/gi)||[]).length;
-  add(h2c > 0, 'Mô tả có ' + h2c + ' tiêu đề H2 (nên có ít nhất 1)', 'desc');
-  add(h2c + h3c >= 2, 'Mô tả có tổng ' + (h2c+h3c) + ' heading H2/H3 (nên ≥2)', 'desc');
-  add(/<(ul|ol)/i.test(descHtml), 'Mô tả có danh sách (bullet/numbered) giúp dễ đọc', 'desc');
-  add(/<img/i.test(descHtml), 'Mô tả có chèn hình ảnh minh họa', 'desc');
+  add(h2c + h3c >= 1, 'Mô tả có ' + (h2c+h3c) + ' heading H2/H3 (nên ≥1)', 'desc', 7);
+  add(h2c + h3c >= 2, 'Mô tả có tổng ' + (h2c+h3c) + ' heading (nên ≥2)', 'desc', 5);
+  add(/<(ul|ol)/i.test(descHtml), 'Mô tả có danh sách bullet/numbered', 'desc', 5);
+  add(/<img/i.test(descHtml), 'Mô tả có chèn hình ảnh minh họa', 'desc', 5);
 
-  // ─ ĐẶC ĐIỂM
-  add(featText.length >= 50, 'Đặc điểm dài ' + featText.length + ' ký tự (tối thiểu 50)', 'feat');
-  add(/<(ul|ol)/i.test(featHtml), 'Đặc điểm dùng danh sách để liệt kê', 'feat');
+  // ─ CẤU TRÚC: ĐẶC ĐIỂM + THÔNG SỐ (20đ)
+  add(featText.length >= 50, 'Đặc điểm dài ' + featText.length + ' ký tự (≥50)', 'struct', 5);
+  add(/<(ul|ol)/i.test(featHtml), 'Đặc điểm dùng danh sách', 'struct', 3);
   var fb = (featHtml.match(/<(strong|b)>/gi)||[]).length;
-  add(fb >= 2, 'Đặc điểm có ' + fb + ' từ/cụm in đậm (nên ≥2)', 'feat');
+  add(fb >= 2, 'Đặc điểm có ' + fb + ' từ in đậm (≥2)', 'struct', 2);
+  add(specText.length >= 30, 'Thông số KT dài ' + specText.length + ' ký tự (≥30)', 'struct', 5);
+  add(/<table/i.test(specHtml) || specText.length >= 80, 'Thông số có bảng hoặc nội dung chi tiết', 'struct', 5);
 
-  // ─ THÔNG SỐ KỸ THUẬT
-  add(specText.length >= 30, 'Thông số KT dài ' + specText.length + ' ký tự (tối thiểu 30)', 'spec');
-  add(/<table/i.test(specHtml) || specText.length >= 80, 'Thông số có bảng hoặc nội dung chi tiết', 'spec');
-
-  // ─ TỪ KHÓA
+  // ─ TỪ KHÓA (25đ)
   if (keyword) {
-    add(name.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa "'+keyword+'" có trong tên SP', 'kw');
-    add(descText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong mô tả', 'kw');
-    add(featText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong đặc điểm', 'kw');
+    add(name.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa "'+keyword+'" có trong tiêu đề', 'kw', 8);
+    add(descText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong mô tả', 'kw', 7);
+    add(featText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong đặc điểm', 'kw', 3);
     var kwr = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
     var kwn = (allText.match(kwr)||[]).length;
     var wc  = allText.split(/\s+/).length;
     var den = wc > 0 ? (kwn/wc*100).toFixed(1) : 0;
-    add(kwn >= 3 && den < 5, 'Mật độ từ khóa: '+den+'% ('+kwn+' lần, tốt: 1-3%)', 'kw');
+    add(kwn >= 3 && den < 5, 'Mật độ: '+den+'% ('+kwn+' lần, tốt: 1-3%)', 'kw', 7);
+  } else {
+    // Không nhập từ khóa → cho điểm tự nhiên nếu tên SP đủ tốt
+    add(name.length >= 15, 'Tiêu đề chứa từ khóa tự nhiên (nhập từ khóa để chấm chi tiết hơn)', 'kw', 25);
   }
 
-  // ─ HÌNH ẢNH
+  // ─ HÌNH ẢNH (10đ)
   var imgCnt = document.querySelectorAll('#img-preview-area .existing-img-wrap').length
     + document.querySelectorAll('#existingImagesRow .existing-img-wrap').length;
-  add(imgCnt > 0, 'Sản phẩm có ' + imgCnt + ' hình ảnh', 'img');
+  add(imgCnt > 0, 'Sản phẩm có ' + imgCnt + ' hình ảnh', 'img', 7);
+  add(imgCnt >= 2, 'Có ≥2 hình ảnh (' + imgCnt + ' ảnh)', 'img', 3);
 
-  // Render checklist
+  // Render
   var catLabels = {
-    basic: ' Thông tin cơ bản', desc: ' Mô tả sản phẩm',
-    feat: '⭐ Đặc điểm sản phẩm', spec: ' Thông số kỹ thuật',
-    kw: ' Từ khóa mục tiêu', img: ' Hình ảnh'
+    meta: '📋 Tiêu đề & Meta', desc: '📝 Mô tả sản phẩm',
+    struct: '⭐ Đặc điểm & Thông số', kw: '🔑 Từ khóa SEO', img: '🖼 Hình ảnh'
   };
   var html = '';
-  ['basic','desc','feat','spec','kw','img'].forEach(function(cat) {
+  ['meta','desc','struct','kw','img'].forEach(function(cat) {
     var items = checks.filter(function(c){return c.cat===cat;});
     if (!items.length) return;
     html += '<div style="font-weight:700;color:var(--navy);margin:10px 0 4px;font-size:13px">'+catLabels[cat]+'</div>';
     items.forEach(function(c){
-      html += '<div style="color:'+(c.pass?'#059669':'#dc2626')+'">'+(c.pass?'✅':'❌')+' '+c.msg+'</div>';
+      html += '<div style="color:'+(c.pass?'#059669':'#dc2626')+'">'+(c.pass?'✅':'❌')+' '+c.msg+' <span style="font-size:10px;color:#999">('+c.pts+'đ)</span></div>';
     });
   });
   document.getElementById('seoChecklist').innerHTML = html;
 
-  var pct = total > 0 ? Math.round(score/total*100) : 0;
+  var pct = Math.min(score, 100);
   var badge = document.getElementById('seoScore');
   if (pct >= 80)      { badge.textContent='✅ Đạt chuẩn SEO ('+pct+'/100)'; badge.style.background='#ecfdf5'; badge.style.color='#059669'; }
   else if (pct >= 50) { badge.textContent='⚠️ Trung bình ('+pct+'/100)'; badge.style.background='#fef3c7'; badge.style.color='#d97706'; }
@@ -1263,4 +1290,47 @@ function saveImageOrder(container) {
     form.addEventListener('submit', function() { syncHiddenInput(); });
   }
 })();
+
+// Initialize Tom Select for dropdowns
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('partBrandSelect')) {
+    new TomSelect('#partBrandSelect', {
+      plugins: ['remove_button'],
+      create: false,
+      maxOptions: null,
+      placeholder: 'Tìm và chọn thương hiệu...'
+    });
+  }
+  if (document.getElementById('carBrandSelect')) {
+    new TomSelect('#carBrandSelect', {
+      plugins: ['remove_button'],
+      create: false,
+      maxOptions: null,
+      placeholder: 'Tìm và chọn hãng xe...'
+    });
+  }
+  if (document.getElementById('categorySelect')) {
+    new TomSelect('#categorySelect', {
+      create: false,
+      maxOptions: null,
+      placeholder: 'Tìm và chọn danh mục...'
+    });
+  }
+  var prodForm = document.getElementById('productForm');
+  if (prodForm) {
+    prodForm.addEventListener('submit', function(e) {
+      var priceInput = document.getElementById('priceAfterVat');
+      var originalInput = document.querySelector('input[name="original_price"]');
+      if (priceInput && originalInput && originalInput.value.trim() !== '') {
+        var price = parseInt(priceInput.value) || 0;
+        var original = parseInt(originalInput.value) || 0;
+        if (original <= price) {
+          e.preventDefault();
+          alert('Lỗi: Giá gốc phải cao hơn Giá bán sau VAT!');
+          originalInput.focus();
+        }
+      }
+    });
+  }
+});
 </script>

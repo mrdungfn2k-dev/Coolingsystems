@@ -1,15 +1,15 @@
 <?php require __DIR__ . '/../partials/head.php'; ?>
 <style>
-.full-article .wrap { max-width: 100% !important; padding: 0 40px !important; }
+
 .full-article .rich-content { font-size: 16px !important; }
 @media(max-width:768px) {
-  .full-article .wrap { padding: 0 16px !important; }
+  
 }
 </style>
 <section class="block full-article"><div class="wrap">
   <div>
     <?php if ($article['thumbnail']): ?>
-      <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;height:320px;object-fit:cover;border-radius:8px 8px 0 0">
+      <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;height:auto;border-radius:8px 8px 0 0;display:block">
     <?php endif; ?>
     <div style="padding:0">
       <div style="font-size:12px;color:var(--ink-4);margin-bottom:10px">

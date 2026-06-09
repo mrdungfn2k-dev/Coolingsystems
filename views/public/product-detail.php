@@ -2,7 +2,7 @@
 $title = $product['name'];
 $mainImg = !empty($images) ? 'https://coolingsystem.vn/uploads/products/'.$images[0]['file_path'] : null;
 $seo = [
-    'meta_title'       => !empty($product['seo_title']) ? $product['seo_title'].' — Cooling' : mb_substr($product['name'],0,55).' | Cooling',
+    'meta_title'       => (!empty($product['seo_title']) ? $product['seo_title'] : $product['name']) . ' — CoolingSystem',
     'meta_description' => !empty($product['seo_description']) ? $product['seo_description'] : mb_substr(strip_tags($product['description']??''),0,155),
     'meta_keywords'    => !empty($product['seo_keyword']) ? $product['seo_keyword'] : $product['name'].', '.($product['oem_code']??'').', '.($product['part_brand']??'').', phụ tùng ô tô',
     'og_type'          => 'product',
@@ -62,7 +62,7 @@ if(empty($faqItems)) {
   "offers": {
     "@type": "Offer",
     "priceCurrency": "VND",
-    "price": "<?= $product['price'] ?>",
+    "price": "<?= $displayPrice ?>",
     "availability": "<?= ($product['stock']??0)>0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' ?>",
     "url": "https://coolingsystem.vn/products/<?= !empty($product['slug']) ? e($product['slug']) : (int)$product['id'] ?>",
     "seller": {
@@ -89,20 +89,16 @@ if(empty($faqItems)) {
 }
 </script>
 
-<!-- 2. BreadcrumbList Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Trang chủ", "item": "https://coolingsystem.vn/"},
-    {"@type": "ListItem", "position": 2, "name": "Sản phẩm", "item": "https://coolingsystem.vn/products"},
-    {"@type": "ListItem", "position": 3, "name": "<?= e($catName) ?>", "item": "https://coolingsystem.vn/products?category=<?= (int)($product['category_id']??0) ?>"},
-    {"@type": "ListItem", "position": 4, "name": "<?= e($product['name']) ?>"}
-  ]
-}
-</script>
 
+
+<?php
+$displayPrice = $product['price'] ?? 0;
+$displayOriginalPrice = $product['original_price'] ?? null;
+if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product['sale_price'] < $product['price']) {
+    $displayPrice = $product['sale_price'];
+    $displayOriginalPrice = $product['price'];
+}
+?>
 <?php if(!empty($faqItems)): ?>
 <!-- 3. FAQ Schema (auto-detected from content) -->
 <script type="application/ld+json">
@@ -133,7 +129,7 @@ if(empty($faqItems)) {
 }
 .pd-gallery{position:sticky;top:100px}
 .pd-main-img{background:#f5f7fb;border-radius:0;padding:0;text-align:center;min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pd-main-img img{max-width:100%;max-height:460px;object-fit:contain;border-radius:0;width:100%}
+.pd-main-img img{max-width:100%;object-fit:cover;object-position:center;border-radius:0;width:100%;height:100%}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pd-thumb{width:62px;height:62px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
 .pd-thumb img{width:100%;height:100%;object-fit:cover}
@@ -191,12 +187,6 @@ if(empty($faqItems)) {
     
     <!-- Product Title (moved above grid for image-below-title layout) -->
     <div style="padding:20px 24px 0 24px">
-      <div class="fs-12 text-muted mb-1">
-          Cooling
-          <?php if(!empty($product['car_brand_name'])): ?> &nbsp;·&nbsp; Hãng: <span class="fw-600 text-navy"><?= e($product['car_brand_name']) ?></span><?php endif; ?>
-          <?php if($product['oem_code']): ?> &nbsp;·&nbsp; <span class="mono"><?= e($product['oem_code']) ?></span><?php endif; ?>
-          <?php if($product['part_brand'] && $product['part_brand'] !== 'HIDDEN'): ?> &nbsp;·&nbsp; <?= e($product['part_brand']) ?><?php endif; ?>
-        </div>
 
         <h1 class="serif text-navy" style="font-size:22px;margin-bottom:12px;line-height:1.4" itemprop="name"><?= e($product['name']) ?></h1>
     </div>
@@ -213,7 +203,7 @@ if(empty($faqItems)) {
           <?php if(!empty($images)): ?>
             <img src="/uploads/products/<?= e($images[0]['file_path']) ?>"
                  alt="<?= e($product['name']) ?>" id="pdMainImg" loading="lazy"
-                 style="max-width:100%;max-height:460px;object-fit:contain;border-radius:0;width:100%">
+                 style="max-width:100%;object-fit:cover;object-position:center;border-radius:0;width:100%;height:100%">
           <?php else: ?>
             <div style="text-align:center;color:#ccc">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -253,11 +243,11 @@ if(empty($faqItems)) {
 
         <!-- Price -->
         <div style="margin:12px 0 10px">
-          <span class="pd-price-big"><?= vnd($product['price']) ?></span>
+          <span class="pd-price-big"><?= vnd($displayPrice) ?></span>
           <span class="fs-12 text-muted" style="margin-left:6px;font-weight:500">(Đã bao gồm <?= (int)($product['vat_rate']??0) ?>% VAT)</span>
-          <?php if(!empty($product['original_price']) && $product['original_price'] > $product['price']): ?>
-            <span class="pd-price-was"><?= vnd($product['original_price']) ?></span>
-            <span class="pd-discount-badge">-<?= round(($product['original_price']-$product['price'])/$product['original_price']*100) ?>%</span>
+          <?php if(!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+            <span class="pd-price-was"><?= vnd($displayOriginalPrice) ?></span>
+            <span class="pd-discount-badge">-<?= round(($displayOriginalPrice-$displayPrice)/$displayOriginalPrice*100) ?>%</span>
           <?php endif; ?>
         </div>
 
@@ -382,7 +372,7 @@ if(empty($faqItems)) {
     <?php if(!empty($product['description'])): ?>
     <div style="margin-top:32px;border-top:1px solid var(--line);padding-top:24px">
       <h2 class="serif text-navy mb-2" style="font-size:18px">Mô tả sản phẩm</h2>
-      <div style="line-height:1.9;color:var(--ink-2);font-size:14px" class="pd-content-html" itemprop="description"><?= preg_replace('/\s*border[^;"]*;?/i', '', preg_replace('/style="[^"]*border[^"]*"/i', '', $product['description'])) ?></div>
+      <div style="line-height:1.9;color:var(--ink-2);font-size:14px" class="pd-content-html" itemprop="description"><?= $product['description'] ?></div>
     </div>
     <?php endif; ?>
 
@@ -403,7 +393,31 @@ if(empty($faqItems)) {
     <?php endif; ?>
 
     <!-- Reviews -->
-    <div style="margin-top:30px;border-top:1px solid var(--line);padding-top:24px;padding-left:16px;padding-right:16px">
+    <script>
+/* Gửi đánh giá bằng AJAX, chỉ làm mới phần Đánh giá (không reload cả trang, không vẽ lại gallery) */
+function submitReview(e, form){
+  e.preventDefault();
+  var btn=form.querySelector('button[type="submit"]'); var oldHtml=btn?btn.innerHTML:'';
+  if(btn){ btn.disabled=true; btn.style.opacity='0.6'; btn.innerHTML='Đang gửi...'; }
+  fetch(form.getAttribute('action'), {method:'POST', body:new FormData(form), headers:{'X-Requested-With':'XMLHttpRequest'}, credentials:'same-origin', redirect:'follow'})
+    .then(function(r){ return r.text(); })
+    .then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var nsec=doc.getElementById('reviewSection'), csec=document.getElementById('reviewSection');
+      if(nsec && csec){
+        csec.innerHTML=nsec.innerHTML;
+        if(window.coolToastShow) coolToastShow('Đã gửi đánh giá của bạn!','✅');
+        try{ csec.scrollIntoView({behavior:'smooth',block:'start'}); }catch(_){}
+      } else { location.reload(); }
+    })
+    .catch(function(){
+      if(btn){ btn.disabled=false; btn.style.opacity=''; btn.innerHTML=oldHtml; }
+      if(window.coolToastShow) coolToastShow('Lỗi gửi đánh giá, vui lòng thử lại.','⚠️');
+    });
+  return false;
+}
+</script>
+    <div id="reviewSection" style="margin-top:30px;border-top:1px solid var(--line);padding-top:24px;padding-left:16px;padding-right:16px">
       <h2 class="serif text-navy mb-3" style="font-size:18px">Đánh giá <?= !empty($reviews) ? '('.count($reviews).')' : '' ?></h2>
       
       <?php
@@ -419,7 +433,7 @@ if(empty($faqItems)) {
       <!-- User already reviewed - edit form hidden, accessible via Chinh sua button in review list -->
       <div id="editReviewBox" style="display:none;background:#f8f9fa;padding:16px;border-radius:6px;border:1px solid var(--line);margin-bottom:20px">
         <h3 class="fs-14 mb-2">Chỉnh sửa đánh giá</h3>
-        <form method="post" action="/products/<?= (int)$product['id'] ?>/reviews" enctype="multipart/form-data">
+        <form method="post" action="/products/<?= (int)$product['id'] ?>/reviews" enctype="multipart/form-data" onsubmit="return submitReview(event, this)">
           <?= csrfField() ?>
           <div style="margin-bottom:12px">
             <label style="display:block;margin-bottom:6px;font-size:13px;font-weight:600">Đánh giá sao:</label>
@@ -444,7 +458,7 @@ if(empty($faqItems)) {
       <?php else: ?>
       <div style="background:#f8f9fa;padding:16px;border-radius:6px;border:1px solid var(--line);margin-bottom:20px">
         <h3 class="fs-14 mb-2">Viết đánh giá của bạn</h3>
-        <form method="post" action="/products/<?= (int)$product['id'] ?>/reviews" enctype="multipart/form-data">
+        <form method="post" action="/products/<?= (int)$product['id'] ?>/reviews" enctype="multipart/form-data" onsubmit="return submitReview(event, this)">
           <?= csrfField() ?>
           <div style="margin-bottom:12px">
             <label style="display:block;margin-bottom:6px;font-size:13px;font-weight:600">Đánh giá sao:</label>
@@ -626,9 +640,7 @@ window.toggleFav = function toggleFav(btn, productId) {
       btn.style.borderColor = isFav?'#e74c3c':'#f0f0f0';
       btn.title = isFav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích';
       if (data.redirect) {
-        if(confirm('Bạn cần đăng nhập để thêm yêu thích.\nBấm OK để đến trang đăng nhập.')) {
-          window.location.href = data.redirect;
-        }
+        showFavLoginPopup(data.redirect);
       }
     } else {
       svg.setAttribute('fill', data.fav?'#e74c3c':'none');
@@ -724,7 +736,7 @@ function showToast(msg, isErr) {
   window._tt = setTimeout(function(){ t.classList.remove('show'); }, 3000);
 }
 
-function updateCartBadge(n) {
+function updateCartBadge(n, totalText) {
   var cc=parseInt(n)||0;
   document.querySelectorAll('.count,[data-cart-count]').forEach(function(b){
     b.textContent = cc>0?cc:'';
@@ -733,7 +745,12 @@ function updateCartBadge(n) {
   var mb=document.querySelector('.cart-badge-mobile');
   if(!mb&&cc>0){var mc=document.querySelector('.mobile-cart-btn');if(mc){mb=document.createElement('span');mb.className='cart-badge-mobile';mb.style.cssText='';mc.appendChild(mb);}}
   if(mb){mb.textContent=cc;mb.style.display=cc>0?'flex':'none';}
-  document.querySelectorAll('a[href="/customer/cart"]').forEach(function(link){var badge=link.querySelector('.count');if(!badge&&cc>0){badge=document.createElement('span');badge.className='count';link.style.position='relative';link.appendChild(badge);}if(badge){badge.textContent=cc;badge.style.display=cc>0?'inline-block':'none';}});
+  document.querySelectorAll('a[href="/customer/cart"]').forEach(function(link){
+    var badge=link.querySelector('.count');
+    if(!badge&&cc>0){badge=document.createElement('span');badge.className='count';link.style.position='relative';link.appendChild(badge);}
+    if(badge){badge.textContent=cc;badge.style.display=cc>0?'inline-block':'none';}
+    if(totalText){var val=link.querySelector('.value');if(val)val.textContent=totalText;}
+  });
 }
 
 function cartPost(pid, qty, cb) {
@@ -762,7 +779,7 @@ function doAddCart(pid) {
     if(data.redirect){ window.location.href=data.redirect; return; }
     if(data.ok){
       showToast(' ' + data.msg, false);
-      updateCartBadge(data.cartCount);
+      updateCartBadge(data.cartCount, data.cart_total);
     } else {
       showToast(' ' + (data.msg||'Lỗi'), true);
     }
@@ -1001,6 +1018,23 @@ function reactReview(reviewId, reaction, btn) {
 }
 </script>
 
+<div id="favLoginModal" style="display:none;position:fixed;inset:0;background:rgba(15,35,66,.55);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:14px;max-width:380px;width:100%;padding:26px 24px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center">
+    <div style="width:54px;height:54px;margin:0 auto 14px;border-radius:50%;background:#eef2f9;display:flex;align-items:center;justify-content:center">
+      <svg width="26" height="26" fill="none" stroke="#1a3258" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h3 style="margin:0 0 8px;font-size:18px;color:#1a3258;font-weight:800">Cần đăng nhập</h3>
+    <p style="margin:0 0 20px;font-size:14px;color:#666;line-height:1.55">Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button type="button" onclick="document.getElementById('favLoginModal').style.display='none'" style="flex:1;height:42px;border-radius:10px;border:1.5px solid #d6deea;background:#fff;color:#1a3258;font-weight:700;font-size:14px;cursor:pointer;transition:all .15s">Để sau</button>
+      <a id="favLoginGo" href="/auth/login" style="flex:1;height:42px;border-radius:10px;background:#1a3258;color:#fff;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;transition:all .15s">Đăng nhập</a>
+    </div>
+  </div>
+</div>
+<script>
+function showFavLoginPopup(url){ var m=document.getElementById("favLoginModal"); if(!m) return; var go=document.getElementById("favLoginGo"); if(go && url) go.href=url; m.style.display="flex"; }
+(function(){ var m=document.getElementById("favLoginModal"); if(m){ m.addEventListener("click", function(e){ if(e.target===m) m.style.display="none"; }); } document.addEventListener("keydown", function(e){ if(e.key==="Escape" && m) m.style.display="none"; }); })();
+</script>
 <?php require __DIR__ . '/../partials/foot.php'; ?>
 
 <script>

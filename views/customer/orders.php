@@ -8,11 +8,13 @@
     <thead><tr><th>Mã đơn</th><th>Ngày</th><th>Tổng tiền</th><th>Thanh toán</th><th>Giao hàng</th><th>Thao tác</th></tr></thead>
     <tbody>
     <?php foreach($orders as $o):
-      $ds = $o['delivery_status'] ?? 'pending';
+      $ds = ($o['delivery_status'] ?? '') ?: 'pending';
       $ps = $o['payment_status'] ?? 'unpaid';
       $statusMap = [
         'pending'=>['Chờ xác nhận','#f59e0b'],
         'confirmed'=>['Đã xác nhận','#3b82f6'],
+        'received'=>['Tiếp nhận','#0ea5e9'],
+        'delivering'=>['Đang giao','#8b5cf6'],
         'shipping'=>['Đang giao','#8b5cf6'],
         'delivered'=>['Đã giao','#10b981'],
         'completed'=>['Hoàn thành','#059669'],
@@ -26,18 +28,15 @@
       <td data-label="Mã đơn"><a href="/customer/orders/<?= $o['id'] ?>" style="color:#1a3258;font-weight:700;text-decoration:none"><?= e($o['code']) ?></a></td>
       <td data-label="Ngày" class="fs-12"><?= relTime($o['created_at']) ?></td>
       <td data-label="Tổng tiền" style="font-weight:700;color:#c8962b"><?= vnd($o['grand_total']) ?></td>
-      <td data-label="Thanh toán"><span style="font-size:11px;padding:3px 8px;border-radius:4px;background:<?= $ps==='paid'?'#d1fae5':'#fef3c7' ?>;color:<?= $ps==='paid'?'#059669':'#92400e' ?>;font-weight:600"><?= $ps==='paid'?'Đã TT':'Chưa TT' ?></span></td>
-      <td data-label="Giao hàng"><span style="font-size:11px;padding:3px 8px;border-radius:4px;background:<?= $sInfo[1] ?>20;color:<?= $sInfo[1] ?>;font-weight:600"><?= $sInfo[0] ?></span></td>
+      <td data-label="Thanh toán"><span style="font-size:11px;padding:3px 8px;border-radius:4px;background:#1a3258;color:#fff;font-weight:600"><?= $ps==='paid'?'Đã TT':'Chưa TT' ?></span></td>
+      <td data-label="Giao hàng"><span style="font-size:11px;padding:3px 8px;border-radius:4px;background:#1a3258;color:#fff;font-weight:600"><?= $sInfo[0] ?></span></td>
       <td data-label="Thao tác" style="white-space:nowrap">
         <a href="/customer/orders/<?= $o['id'] ?>" style="font-size:12px;color:#1a3258;font-weight:600;text-decoration:none;margin-right:8px">Xem</a>
         <?php if ($ds === 'pending'): ?>
-          <form method="post" action="/customer/orders/<?= $o['id'] ?>/cancel" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?')">
-            <?= csrfField() ?>
-            <button type="submit" style="font-size:11px;padding:4px 10px;background:#ef4444;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600">Hủy đơn</button>
-          </form>
+          <button type="button" onclick="openCancelModal(<?= $o['id'] ?>)" style="font-size:11px;padding:4px 10px;background:#ef4444;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600">Hủy đơn</button>
         <?php endif; ?>
         <?php if (in_array($ds, ['delivered','completed']) && !$hasReturn): ?>
-          <a href="/customer/orders/<?= $o['id'] ?>?return=1" style="font-size:11px;padding:4px 10px;background:#f59e0b;color:#fff;border-radius:4px;text-decoration:none;font-weight:600">Trả hàng</a>
+          <a href="/customer/orders/<?= $o['id'] ?>?return=1" style="font-size:11px;padding:4px 10px;background:#1a3258;color:#fff;border-radius:4px;text-decoration:none;font-weight:600">Trả hàng</a>
         <?php elseif ($hasReturn): ?>
           <span style="font-size:11px;color:#6b7280;font-weight:600">Đã yêu cầu trả</span>
         <?php endif; ?>
@@ -63,4 +62,5 @@
   .tbl td::before { content:attr(data-label); font-weight:700; color:#1a3258; font-size:11px; text-transform:uppercase; min-width:100px; }
 }
 </style>
+<?php require __DIR__.'/../partials/cancel-order-modal.php'; ?>
 <?php require __DIR__.'/../partials/foot.php'; ?>

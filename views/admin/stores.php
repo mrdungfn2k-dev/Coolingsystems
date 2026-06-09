@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody>
-  <?php $typeMap=['chi_nhanh'=>'Chi nhánh','dai_ly'=>'Đại lý','bao_hanh'=>'Trạm BH']; ?>
+  <?php $typeMap=[]; foreach(($branchTypes??[]) as $bt){ $typeMap[$bt['code']]=$bt['name']; } if(empty($typeMap)) $typeMap=['chi_nhanh'=>'Chi nhánh','dai_ly'=>'Đại lý','bao_hanh'=>'Trạm BH']; ?>
   <?php foreach($stores as $s): ?>
     <tr>
       <td><?= $s['id'] ?></td>
@@ -34,10 +34,10 @@
       <td style="font-size:12px"><?= e($s['hours']??'') ?></td>
       <td><?= $s['is_active']?'<span style="color:#059669;font-weight:700">ON</span>':'<span style="color:#999">OFF</span>' ?></td>
       <td>
-        <button class="btn btn-sm btn-gold" onclick="editStore(<?= htmlspecialchars(json_encode($s),ENT_QUOTES) ?>)">Sửa</button>
-        <form method="post" action="/admin/stores/<?= $s['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Xóa cửa hàng này?')">
+        <button class="adm-edit" onclick="editStore(<?= htmlspecialchars(json_encode($s),ENT_QUOTES) ?>)">Sửa</button>
+        <form method="post" action="/admin/stores/<?= $s['id'] ?>/delete" style="display:inline" onsubmit="return csConfirmForm(this,'Xóa cửa hàng này?')">
           <?= csrfField() ?>
-          <button type="submit" class="btn btn-sm" style="background:#fee2e2;color:#dc2626;border:1px solid #fca5a5">Xóa</button>
+          <button type="submit" class="adm-del">Xóa</button>
         </form>
       </td>
     </tr>
@@ -57,30 +57,28 @@
       <?= csrfField() ?>
       <div class="form-group mb-3">
         <label>Tên cửa hàng *</label>
-        <input type="text" name="name" required class="form-control" placeholder="VD: CoolingSystem - Chi nhánh Đà Nẵng">
+        <input type="text" name="name" required maxlength="50" class="form-control" placeholder="VD: CoolingSystem - Chi nhánh Đà Nẵng">
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="mb-3">
         <div class="form-group">
           <label>Loại</label>
           <select name="type" class="form-control">
-            <option value="chi_nhanh">Chi nhánh chính</option>
-            <option value="dai_ly">Đại lý ủy quyền</option>
-            <option value="bao_hanh">Trạm bảo hành</option>
+            <?php foreach(($branchTypes??[]) as $bt): ?><option value="<?= e($bt['code']) ?>"><?= e($bt['name']) ?></option><?php endforeach; ?>
           </select>
         </div>
         <div class="form-group">
           <label>SĐT</label>
-          <input type="tel" name="phone" class="form-control" placeholder="0868..." pattern="0[0-9]{9}" maxlength="10" title="SĐT bắt đầu từ 0, 10 số" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <input type="tel" name="phone" class="form-control" placeholder="VD: 0987654321" pattern="0[1-9][0-9]{8}" maxlength="10" title="SĐT phải gồm 10 chữ số, bắt đầu từ 01 đến 09" oninput="let v=this.value.replace(/[^0-9]/g,''); if(v.length>0 && v[0]!=='0') v=''; if(v.length>1 && v[1]==='0') v='0'; this.value=v;">
         </div>
       </div>
       <div class="form-group mb-3">
         <label>Địa chỉ</label>
-        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Số nhà, đường, quận, TP">
+        <input type="text" name="address" id="addAddress" maxlength="50" class="form-control" placeholder="Số nhà, đường, quận, TP">
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="mb-3">
         <div class="form-group">
           <label>Giờ mở cửa</label>
-          <input type="text" name="hours" class="form-control" value="8:00 - 18:00">
+          <input type="text" name="hours" maxlength="50" class="form-control" value="8:00 - 18:00">
         </div>
         <div class="form-group">
           <label>Thứ tự</label>
@@ -90,12 +88,13 @@
       <div class="form-group mb-3">
         <label>Tìm vị trí trên bản đồ</label>
         <div style="display:flex;gap:8px">
-          <input type="text" id="addGeoAddress" class="form-control" placeholder="Nhập địa chỉ rồi bấm Tìm..." style="flex:1">
+          <input type="text" id="addGeoAddress" maxlength="50" class="form-control" placeholder="Nhập địa chỉ rồi bấm Tìm..." style="flex:1">
           <button type="button" onclick="geocodeAddress('add')" class="btn btn-navy" style="white-space:nowrap">Tìm</button>
         </div>
         <input type="hidden" name="lat" id="addLat">
         <input type="hidden" name="lng" id="addLng">
         <div id="addMapResult" style="font-size:12px;color:#059669;margin-top:6px"></div>
+        <iframe id="addMap" src="https://maps.google.com/maps?q=Vietnam&z=5&output=embed" style="width:100%;height:240px;border:1px solid #d6deea;border-radius:8px;margin-top:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin:12px 0">
         <input type="checkbox" name="is_active" id="addActive" checked style="width:18px;height:18px;cursor:pointer">
@@ -117,30 +116,28 @@
       <?= csrfField() ?>
       <div class="form-group mb-3">
         <label>Tên cửa hàng *</label>
-        <input type="text" name="name" id="eName" required class="form-control">
+        <input type="text" name="name" id="eName" required maxlength="50" class="form-control">
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="mb-3">
         <div class="form-group">
           <label>Loại</label>
           <select name="type" id="eType" class="form-control">
-            <option value="chi_nhanh">Chi nhánh chính</option>
-            <option value="dai_ly">Đại lý ủy quyền</option>
-            <option value="bao_hanh">Trạm bảo hành</option>
+            <?php foreach(($branchTypes??[]) as $bt): ?><option value="<?= e($bt['code']) ?>"><?= e($bt['name']) ?></option><?php endforeach; ?>
           </select>
         </div>
         <div class="form-group">
           <label>SĐT</label>
-          <input type="tel" name="phone" id="ePhone" class="form-control" pattern="0[0-9]{9}" maxlength="10" title="SĐT bắt đầu từ 0, 10 số" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <input type="tel" name="phone" id="ePhone" class="form-control" placeholder="VD: 0987654321" pattern="0[1-9][0-9]{8}" maxlength="10" title="SĐT phải gồm 10 chữ số, bắt đầu từ 01 đến 09" oninput="let v=this.value.replace(/[^0-9]/g,''); if(v.length>0 && v[0]!=='0') v=''; if(v.length>1 && v[1]==='0') v='0'; this.value=v;">
         </div>
       </div>
       <div class="form-group mb-3">
         <label>Địa chỉ</label>
-        <input type="text" name="address" id="eAddress" class="form-control">
+        <input type="text" name="address" id="eAddress" maxlength="50" class="form-control">
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" class="mb-3">
         <div class="form-group">
           <label>Giờ mở cửa</label>
-          <input type="text" name="hours" id="eHours" class="form-control">
+          <input type="text" name="hours" id="eHours" maxlength="50" class="form-control">
         </div>
         <div class="form-group">
           <label>Thứ tự</label>
@@ -150,12 +147,13 @@
       <div class="form-group mb-3">
         <label>Tìm vị trí trên bản đồ</label>
         <div style="display:flex;gap:8px">
-          <input type="text" id="editGeoAddress" class="form-control" placeholder="Nhập địa chỉ rồi bấm Tìm..." style="flex:1">
+          <input type="text" id="editGeoAddress" maxlength="50" class="form-control" placeholder="Nhập địa chỉ rồi bấm Tìm..." style="flex:1">
           <button type="button" onclick="geocodeAddress('edit')" class="btn btn-navy" style="white-space:nowrap">Tìm</button>
         </div>
         <input type="hidden" name="lat" id="eLat">
         <input type="hidden" name="lng" id="eLng">
         <div id="editMapResult" style="font-size:12px;color:#059669;margin-top:6px"></div>
+        <iframe id="editMap" src="https://maps.google.com/maps?q=Vietnam&z=5&output=embed" style="width:100%;height:240px;border:1px solid #d6deea;border-radius:8px;margin-top:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin:12px 0">
         <input type="checkbox" name="is_active" id="eActive" style="width:18px;height:18px;cursor:pointer">
@@ -181,6 +179,7 @@ function editStore(s) {
   document.getElementById('eLat').value = s.lat || '';
   document.getElementById('editGeoAddress').value = s.address || '';
   if(s.lat && s.lng) document.getElementById('editMapResult').textContent = 'Vị trí hiện tại: ' + (s.lat ? parseFloat(s.lat).toFixed(4) : '') + ', ' + (s.lng ? parseFloat(s.lng).toFixed(4) : '');
+  var _em=document.getElementById('editMap'); if(_em) _em.src=(s.lat&&s.lng)?('https://maps.google.com/maps?q='+s.lat+','+s.lng+'&z=16&output=embed'):'https://maps.google.com/maps?q=Vietnam&z=5&output=embed';
   document.getElementById('eLng').value = s.lng || '';
   document.getElementById('eActive').checked = !!s.is_active;
   document.getElementById('editModal').style.display = 'flex';
@@ -204,6 +203,7 @@ function geocodeAddress(mode) {
         var addrField = document.getElementById(mode === 'add' ? 'addAddress' : 'eAddress');
         if (addrField) { addrField.value = addr; }
         resultEl.textContent = 'Tìm thấy: ' + data[0].display_name.substring(0,80) + '... (' + parseFloat(data[0].lat).toFixed(4) + ', ' + parseFloat(data[0].lon).toFixed(4) + ')';
+        var _mp=document.getElementById(mode === 'add' ? 'addMap' : 'editMap'); if(_mp) _mp.src='https://maps.google.com/maps?q='+data[0].lat+','+data[0].lon+'&z=16&output=embed';
         resultEl.style.color = '#059669';
       } else {
         resultEl.textContent = 'Không tìm thấy vị trí. Hãy thử nhập chi tiết hơn.';

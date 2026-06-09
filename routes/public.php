@@ -6,19 +6,18 @@
 // ── Quên mật khẩu ──
 get('/', function() {
     $newDaysRow = dbGet("SELECT value FROM site_config WHERE key='new_product_days'");
-    $newDays = intval($newDaysRow['value'] ?? 7);
+    $newDays = intval($newDaysRow['value'] ?? 30);
 
     $featured = dbAll("SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
         COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
         FROM products p
-        WHERE p.status='published' AND p.stock>0
+        WHERE p.status='published'
         AND p.created_at >= datetime('now', '-" . $newDays . " days', 'localtime')
-        ORDER BY p.created_at DESC LIMIT 20");
+        ORDER BY p.created_at DESC LIMIT 40");
 
-    $bestSellers = dbAll("SELECT * FROM (
-        SELECT p.*, 'Cooling' AS shop_name,
+    $bestSellers = dbAll("SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
         COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count,
@@ -28,7 +27,8 @@ get('/', function() {
             WHERE oi.product_id=p.id AND o.payment_status != 'cancelled'), 0) AS total_purchased
         FROM products p
         WHERE p.status='published' AND p.stock>0
-        ) WHERE total_purchased >= 10
+        GROUP BY p.id
+        HAVING total_purchased >= 20
         ORDER BY total_purchased DESC, avg_rating DESC LIMIT 10");
 
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
@@ -37,6 +37,19 @@ get('/', function() {
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     $trustSteps = dbAll("SELECT * FROM trust_steps WHERE is_active=1 ORDER BY sort_order");
     view('public/home', compact('featured','bestSellers','brands','categories','sidebarCategories','productBrands','trustSteps'));
+});
+
+
+// ── Vouchers Page ────────────────────────────────────────────────────────────
+get('/vouchers', function() {
+    $vWhere = "(status='active' OR status='1' OR status='published') AND (valid_to IS NULL OR date(valid_to) >= date('now','localtime'))";
+    $vPerPage = 4;
+    $vTotal = (int)(dbGet("SELECT COUNT(*) AS n FROM vouchers WHERE $vWhere")['n'] ?? 0);
+    $vTotalPages = max(1, (int)ceil($vTotal / $vPerPage));
+    $vPage = max(1, min((int)($_GET['vpage'] ?? 1), $vTotalPages));
+    $vouchers = dbAll("SELECT * FROM vouchers WHERE $vWhere ORDER BY created_at DESC LIMIT $vPerPage OFFSET " . (($vPage-1)*$vPerPage));
+    $saleProducts = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.status='published' AND p.original_price IS NOT NULL AND p.original_price > p.price ORDER BY p.updated_at DESC LIMIT 8");
+    view('public/vouchers', ['title'=>'Khuyến mãi & Mã giảm giá', 'vouchers'=>$vouchers, 'saleProducts'=>$saleProducts, 'vPage'=>$vPage, 'vTotalPages'=>$vTotalPages]);
 });
 
 get('/products', function() {
@@ -144,11 +157,7 @@ get('/products', function() {
 
     if (!empty($_GET['promo'])) {
         // Show only products with active promotions
-        $now = date('Y-m-d H:i:s');
-        $joins .= " INNER JOIN promotions pr ON pr.id=p.promotion_id";
-        $where[] = "pr.is_active=1 AND pr.start_date <= ? AND pr.end_date >= ?";
-        $params[] = $now;
-        $params[] = $now;
+        $where[] = "p.is_on_sale=1 AND p.sale_price > 0";
     }
     if (!empty($_GET['pb'])) { $where[] = "(p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?)"; $params[] = $_GET['pb']; $params[] = $_GET['pb'].',%'; $params[] = '%, '.$_GET['pb'].',%'; $params[] = '%, '.$_GET['pb']; }
     $sort = match($_GET['sort'] ?? 'newest') { 'bestseller'=>'p.sold_count DESC','price_asc'=>'p.price ASC','price_desc'=>'p.price DESC','rating'=>'p.rating_avg DESC', default=>'p.published_at DESC' };
@@ -191,6 +200,13 @@ get('/products/:slug', function($p) {
     $related = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.id!=? AND p.status='published' ORDER BY p.rating_avg DESC LIMIT 5", [$product['category_id'], (int)$product['id']]);
     $fitments = dbAll("SELECT b.name AS brand_name, m.name AS model_name, pf.year_from, pf.year_to FROM product_fitments pf INNER JOIN brands b ON b.id=pf.brand_id LEFT JOIN car_models m ON m.id=pf.model_id WHERE pf.product_id=?", [(int)$product['id']]);
     dbRun("UPDATE products SET view_count=view_count+1 WHERE id=?", [(int)$product['id']]);
+    // log_product_view: ghi lai luot truy cap (khach + thanh vien) vao audit_logs, bo qua bot
+    $__pvUa = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    if (!preg_match('/bot|crawl|spider|slurp|bingpreview|facebookexternal|headless/i', $__pvUa)) {
+        $__pvU = currentUser();
+        dbRun("INSERT INTO audit_logs (user_id, role, action, entity_type, entity_id, meta, ip, user_agent) VALUES (?,?,?,?,?,?,?,?)",
+            [$__pvU['id'] ?? null, $__pvU['role'] ?? 'guest', 'view', 'product', (int)$product['id'], mb_substr((string)($product['name'] ?? ''), 0, 120), $_SERVER['REMOTE_ADDR'] ?? '', mb_substr($__pvUa, 0, 250)]);
+    }
     view('public/product-detail', compact('product','images','reviews','related','fitments'));
 });
 
@@ -264,6 +280,10 @@ post('/contact', function() {
     dbRun("INSERT INTO contact_messages (name, email, phone, subject, message, status, created_at) VALUES (?,?,?,?,?,?,datetime('now','localtime'))",
         [$name, $email, $phone, $subjectLabel, $message, 'new']);
 
+    // Notify admin (chuông thông báo) về tin nhắn liên hệ mới
+    dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('contact', ?, ?, '/admin/contacts')",
+        ['Tin nhắn liên hệ mới', 'Khách "' . $name . '" vừa gửi tin nhắn (' . $subjectLabel . '): ' . mb_substr($message, 0, 60)]);
+
     view('public/contact', ['title' => 'Liên hệ — Cooling Parts & Service', 'success' => true, 'errors' => []]);
 });
 
@@ -285,9 +305,9 @@ get('/promotions', function() {
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image
         FROM products p
         LEFT JOIN partners pt ON pt.id=p.partner_id
-        WHERE p.status='published' AND p.is_on_sale=1 AND p.sale_price > 0
+        WHERE p.status='published' AND p.original_price IS NOT NULL AND p.original_price > p.price
         ORDER BY p.updated_at DESC LIMIT $limit OFFSET $offset");
-    $total = dbGet("SELECT COUNT(*) as n FROM products p WHERE p.status='published' AND p.is_on_sale=1 AND p.sale_price>0")['n'];
+    $total = dbGet("SELECT COUNT(*) as n FROM products p WHERE p.status='published' AND p.original_price IS NOT NULL AND p.original_price > p.price")['n'];
     $totalPages = max(1, ceil($total/$limit));
     $categories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY sort_order");
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
@@ -313,60 +333,14 @@ get('/sitemap.xml', function() {
 
     // Products
     foreach ($products as $p) {
-        $slug = !empty($p['slug']) ? $p['slug'] : $p['id'];
+        $slug = $p['slug'] ?: $p['id'];
         $mod = substr($p['updated_at']??$now, 0, 10);
         echo '<url>';
-        echo '<loc>https://coolingsystem.vn/products/'.e($slug).'</loc>';
+        echo '<loc>https://coolingsystem.vn/products/'.e($p['id']).'</loc>';
         echo '<changefreq>weekly</changefreq><priority>0.9</priority>';
         echo '<lastmod>'.$mod.'</lastmod>';
         echo '</url>';
     }
-
-    // News articles
-    $news = dbAll("SELECT slug, updated_at FROM news WHERE status='published' ORDER BY published_at DESC LIMIT 200");
-    foreach ($news as $n) {
-        $mod = substr($n['updated_at']??$now, 0, 10);
-        echo '<url>';
-        echo '<loc>https://coolingsystem.vn/news/'.e($n['slug']).'</loc>';
-        echo '<changefreq>weekly</changefreq><priority>0.7</priority>';
-        echo '<lastmod>'.$mod.'</lastmod>';
-        echo '</url>';
-    }
-
-    // Product brands
-    $brands = dbAll("SELECT slug, updated_at FROM product_brands WHERE status='active' ORDER BY name ASC LIMIT 100");
-    foreach ($brands as $b) {
-        echo '<url>';
-        echo '<loc>https://coolingsystem.vn/product-brands/'.e($b['slug']).'</loc>';
-        echo '<changefreq>monthly</changefreq><priority>0.6</priority>';
-        echo '<lastmod>'.$now.'</lastmod>';
-        echo '</url>';
-    }
-
-    // Vehicle brands
-    $vbrands = dbAll("SELECT slug FROM brands WHERE status='active' ORDER BY name ASC LIMIT 100");
-    foreach ($vbrands as $vb) {
-        echo '<url>';
-        echo '<loc>https://coolingsystem.vn/brands/'.e($vb['slug']).'</loc>';
-        echo '<changefreq>monthly</changefreq><priority>0.6</priority>';
-        echo '<lastmod>'.$now.'</lastmod>';
-        echo '</url>';
-    }
-
-    // Static pages / Policies
-    $staticPages = dbAll("SELECT slug, updated_at FROM static_pages LIMIT 50");
-    foreach ($staticPages as $sp) {
-        $mod = substr($sp['updated_at']??$now, 0, 10);
-        echo '<url>';
-        echo '<loc>https://coolingsystem.vn/policies/'.e($sp['slug']).'</loc>';
-        echo '<changefreq>monthly</changefreq><priority>0.5</priority>';
-        echo '<lastmod>'.$mod.'</lastmod>';
-        echo '</url>';
-    }
-
-    // Promotions
-    echo '<url><loc>https://coolingsystem.vn/promotions</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>'.$now.'</lastmod></url>';
-    echo '<url><loc>https://coolingsystem.vn/product-brands</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>'.$now.'</lastmod></url>';
 
     echo '</urlset>';
     exit;
@@ -427,7 +401,7 @@ post('/newsletter/subscribe', function() {
     // Create voucher UUDAI100K if not exists
     $v = dbGet("SELECT id FROM vouchers WHERE code='UUDAI100K'");
     if (!$v) {
-        try { dbRun("INSERT OR IGNORE INTO vouchers (code, name, scope, discount_type, discount_value, min_order_amount, funded_by, total_quantity, used_quantity, max_per_user, valid_from, valid_to, status, created_at) VALUES ('UUDAI100K', 'Uu dai don dau', 'platform', 'amount', 100000, 0, 'platform', 99999, 0, 1, datetime('now','localtime'), datetime('now','+1 year','localtime'), 'active', datetime('now','localtime'))"); } catch (Exception $e) {}
+        dbInsert("INSERT OR IGNORE INTO vouchers (code, discount_amount, discount_type, max_uses, min_order_amount, is_active, created_at) VALUES ('UUDAI100K', 100000, 'fixed', 0, 0, 1, datetime('now','localtime'))");
     }
     // Save to user_saved_vouchers
     dbRun("INSERT OR IGNORE INTO user_saved_vouchers (user_id, code, discount_amount, description, created_at) VALUES (?,?,100000,'Uu dai don dau tien - Chi dung 1 lan',datetime('now','localtime'))", [$user['id'], 'UUDAI100K']);
@@ -459,8 +433,13 @@ get('/product-brands', function() {
 get('/product-brands/:slug', function($p) {
     $brand = dbGet("SELECT * FROM product_brands WHERE slug=? OR id=?", [$p['slug'], (int)$p['slug']]);
     if (!$brand) { http_response_code(404); echo '404'; exit; }
-    $products = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image, NULL AS shop_name, NULL AS partner_id FROM products p WHERE (p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?) AND p.status='published' ORDER BY p.created_at DESC", [$brand['name'], $brand['name'].',%', '%, '.$brand['name'].',%', '%, '.$brand['name']]);
-    view('public/product-brands/detail', ['title' => $brand['name'] . ' - Thuong hieu', 'brand' => $brand, 'products' => $products]);
+    $limit = 12; $page = max(1, intval($_GET['page'] ?? 1)); $offset = ($page-1)*$limit;
+    $bWhere = "(p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?) AND p.status='published'";
+    $bParams = [$brand['name'], $brand['name'].',%', '%, '.$brand['name'].',%', '%, '.$brand['name']];
+    $total = dbGet("SELECT COUNT(*) AS n FROM products p WHERE $bWhere", $bParams)['n'];
+    $totalPages = max(1, ceil($total/$limit));
+    $products = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image, NULL AS shop_name, NULL AS partner_id FROM products p WHERE $bWhere ORDER BY p.created_at DESC LIMIT $limit OFFSET $offset", $bParams);
+    view('public/product-brands/detail', ['title' => $brand['name'] . ' - Thuong hieu', 'brand' => $brand, 'products' => $products, 'page' => $page, 'totalPages' => $totalPages, 'total' => $total]);
 });
 
 

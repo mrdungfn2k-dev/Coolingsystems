@@ -17,7 +17,7 @@ if (!empty($_GET['brand_id'])) {
 <div class="dash-head" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
     <h1 style="margin:0">Quản lý Hãng xe</h1>
     <div style="display:flex;gap:8px;align-items:center">
-        <a href="/admin/brands/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
+        <a href="#" onclick="csColPick({section:'brands',url:'/admin/brands/export-csv',title:'Hãng xe & dòng xe'});return false" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
         <button type="button" onclick="document.getElementById('csvImportBrands').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↑ Nhập CSV</button>
         <button class="btn btn-navy btn-sm" onclick="openBrandModal()">+ Thêm hãng</button>
     </div>
@@ -75,7 +75,7 @@ if (!empty($_GET['brand_id'])) {
             <?php foreach ($brands as $b): ?>
             <div class="panel-item <?= ($activeBrand && $activeBrand['id'] == $b['id']) ? 'active' : '' ?>">
                 <input type="checkbox" class="row-check" value="<?=$b['id']?>" style="margin-right:8px;flex-shrink:0" onclick="event.stopPropagation()">
-                <a href="/admin/brands?brand_id=<?= $b['id'] ?>" style="text-decoration:none;flex:1">
+                <a href="/admin/brands?brand_id=<?= $b['id'] ?>" onclick="return loadBrandModels(<?= $b['id'] ?>, this, event)" style="text-decoration:none;flex:1">
                     <div class="panel-item-name">
                         <?php if($b['image']): ?>
                             <img src="/uploads/brands/<?= e($b['image']) ?>" style="height:20px; width:40px; vertical-align:middle; margin-right:8px; object-fit:contain;">
@@ -85,10 +85,10 @@ if (!empty($_GET['brand_id'])) {
                     <div class="panel-item-sub"><?= $b['model_count'] ?> dòng xe · <?= $b['product_count'] ?> sản phẩm</div>
                 </a>
                 <div class="panel-item-actions">
-                    <button class="btn-icon" onclick="openBrandEditModal(<?= $b['id'] ?>, '<?= e($b['name']) ?>', '<?= e($b['slug']) ?>', <?= $b['sort_order'] ?>, '<?= e($b['image']??'') ?>')" title="Sửa">Sửa</button>
-                    <form method="post" action="/admin/brands/<?= $b['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa hãng xe này?')">
+                    <button class="adm-edit" onclick="openBrandEditModal(<?= $b['id'] ?>, '<?= e($b['name']) ?>', '<?= e($b['slug']) ?>', <?= $b['sort_order'] ?>, '<?= e($b['image']??'') ?>')" title="Sửa">Sửa</button>
+                    <form method="post" action="/admin/brands/<?= $b['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa hãng xe này?')">
                         <?= csrfField() ?>
-                        <button type="submit" class="btn-icon red" title="Xóa">Xóa</button>
+                        <button type="submit" class="adm-del" title="Xóa">Xóa</button>
                     </form>
                 </div>
             </div>
@@ -98,7 +98,7 @@ if (!empty($_GET['brand_id'])) {
     </div>
 
     <!-- Right: Car models of selected brand -->
-    <div class="catalog-panel" style="flex:1">
+    <div class="catalog-panel" style="flex:1" id="brandModelsPanel">
         <?php if ($activeBrand): ?>
         <div class="panel-header">
             <h3>Dòng xe – <?= e($activeBrand['name']) ?></h3>
@@ -127,11 +127,11 @@ if (!empty($_GET['brand_id'])) {
                     <td style="padding:12px;text-align:center"><?= $m['year_to'] ?: '—' ?></td>
                     <td style="padding:12px;text-align:center">
                         <div style="display:flex;gap:6px;justify-content:center">
-                            <button class="btn-icon" onclick="openModelEditModal(<?= $m['id'] ?>, <?= $activeBrand['id'] ?>, '<?= e($m['name']) ?>', '<?= e($m['slug']) ?>', <?= $m['year_from'] ?>, <?= $m['year_to'] ?: 'null' ?>)">Sửa</button>
-                            <form method="post" action="/admin/car-models/<?= $m['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa dòng xe này?')">
+                            <button class="adm-edit" onclick="openModelEditModal(<?= $m['id'] ?>, <?= $activeBrand['id'] ?>, '<?= e($m['name']) ?>', '<?= e($m['slug']) ?>', <?= $m['year_from'] ?>, <?= $m['year_to'] ?: 'null' ?>)">Sửa</button>
+                            <form method="post" action="/admin/car-models/<?= $m['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa dòng xe này?')">
                                 <?= csrfField() ?>
                                 <input type="hidden" name="brand_id" value="<?= $activeBrand['id'] ?>">
-                                <button type="submit" class="btn-icon red">Xóa</button>
+                                <button type="submit" class="adm-del">Xóa</button>
                             </form>
                         </div>
                     </td>
@@ -285,6 +285,23 @@ function openModelEditModal(id, brandId, name, slug, yearFrom, yearTo) {
 function closeModelModal() { document.getElementById('modelModal').classList.remove('show'); }
 </script>
 
+<script>
+function loadBrandModels(id, aEl, e){
+  if(e) e.preventDefault();
+  document.querySelectorAll('.panel-item.active').forEach(function(x){x.classList.remove('active');});
+  var item=aEl.closest('.panel-item'); if(item) item.classList.add('active');
+  var panel=document.getElementById('brandModelsPanel'); if(panel) panel.style.opacity='0.5';
+  fetch('/admin/brands?brand_id='+id, {headers:{'X-Requested-With':'XMLHttpRequest'}})
+    .then(function(r){return r.text();})
+    .then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var np=doc.getElementById('brandModelsPanel');
+      if(np && panel){ panel.innerHTML=np.innerHTML; panel.style.opacity='1'; }
+      try{ history.replaceState(null,'','/admin/brands?brand_id='+id); }catch(_){}
+    }).catch(function(){ if(panel) panel.style.opacity='1'; });
+  return false;
+}
+</script>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
 
 <div id="csvImportBrands" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">

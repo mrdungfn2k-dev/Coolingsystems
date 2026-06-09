@@ -30,7 +30,8 @@ if (!empty($_GET['thread'])) {
 .chat-search input { width:100%; border:1px solid #ddd; border-radius:6px; padding:8px 12px; font-size:13px; }
 .chat-list { flex:1; overflow-y:auto; }
 .chat-item { display:flex; align-items:center; gap:10px; padding:12px 16px; cursor:pointer; border-bottom:1px solid #f5f5f5; transition:background 0.15s; }
-.chat-item:hover, .chat-item.active { background:#f0f4ff; }
+.chat-item:hover { background:#f5f8ff; }
+.chat-item.active { background:#eef3fb; box-shadow:inset 3px 0 0 var(--navy); }
 .chat-item .avatar { width:40px; height:40px; border-radius:50%; background:#ddd; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:#fff; flex-shrink:0; overflow:hidden; }
 .chat-item .avatar img { width:100%; height:100%; object-fit:cover; }
 .chat-item .info { flex:1; min-width:0; }
@@ -44,21 +45,22 @@ if (!empty($_GET['thread'])) {
 .chat-main-header { padding:14px 20px; border-bottom:1px solid #eaeaea; display:flex; align-items:center; gap:12px; background:#fafbfc; }
 .chat-main-header .name { font-weight:700; font-size:14px; color:#222; }
 .chat-main-header .email { font-size:12px; color:#888; }
-.chat-messages { flex:1; overflow-y:auto; max-height:calc(100vh - 220px); padding:20px; display:flex; flex-direction:column; gap:12px; background:#f8f9fc; }
-.msg-row { display:flex; gap:8px; max-width:70%; flex-direction:column; }
-.msg-row.mine { margin-left:auto; flex-direction:column; align-items:flex-end; }
-.msg-bubble { padding:10px 14px; border-radius:12px; font-size:13px; line-height:1.5; word-break:break-word; overflow:hidden; max-width:100%; }
-.msg-row:not(.mine) .msg-bubble { background:#fff; border:1px solid #eee; color:#333; border-bottom-left-radius:4px; align-self:flex-start; }
+.chat-messages { flex:1; overflow-y:auto; max-height:calc(100vh - 220px); padding:20px; display:flex; flex-direction:column; gap:12px; background:#f4f7fb; }
+.msg-row { display:flex; gap:8px; max-width:70%; flex-direction:column; align-items:flex-start; align-self:flex-start; }
+.msg-row.mine { margin-left:auto; flex-direction:column; align-items:flex-end; align-self:flex-end; }
+.msg-bubble { padding:10px 14px; border-radius:16px; font-size:13px; line-height:1.5; word-break:break-word; overflow:hidden; max-width:100%; box-shadow:0 1px 4px rgba(15,35,66,0.08); }
+.msg-row:not(.mine) .msg-bubble { background:#fff; color:#1f2937; border-bottom-left-radius:4px; align-self:flex-start; }
 .msg-row.mine .msg-bubble { background:var(--navy); color:#fff; border-bottom-right-radius:4px; align-self:flex-end; }
 .msg-time { font-size:10px; color:#aaa; margin-top:4px; }
 .msg-row.mine .msg-time { text-align:right; align-self:flex-end; }
 .msg-img { max-width:200px; max-height:200px; width:100%; object-fit:cover; border-radius:8px; cursor:pointer; display:block; }
 
 .chat-input-bar { padding:12px 16px; border-top:1px solid #eaeaea; display:flex; gap:8px; align-items:flex-end; background:#fff; }
-.chat-input-bar textarea { flex:1; border:1px solid #ddd; border-radius:8px; padding:10px 12px; font-size:13px; resize:none; min-height:40px; max-height:100px; font-family:inherit; }
-.chat-input-bar .btn-send { background:var(--navy); color:#fff; border:none; border-radius:8px; padding:10px 16px; cursor:pointer; font-weight:700; font-size:13px; }
+.chat-input-bar textarea { flex:1; border:1px solid #d6deea; border-radius:20px; padding:11px 16px; font-size:13px; resize:none; min-height:42px; max-height:100px; font-family:inherit; }
+.chat-input-bar textarea:focus { border-color:var(--navy); outline:none; box-shadow:0 0 0 3px rgba(26,50,88,0.1); }
+.chat-input-bar .btn-send { background:var(--navy); color:#fff; border:none; border-radius:20px; padding:0 20px; height:42px; cursor:pointer; font-weight:700; font-size:13px; flex-shrink:0; }
 .chat-input-bar .btn-send:hover { opacity:0.9; }
-.chat-input-bar .btn-img { background:none; border:1px solid #ddd; border-radius:8px; padding:8px 10px; cursor:pointer; color:#666; }
+.chat-input-bar .btn-img { background:#f4f7fb; border:1px solid #d6deea; border-radius:50%; width:42px; height:42px; cursor:pointer; color:var(--navy); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .chat-empty { flex:1; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:14px; flex-direction:column; gap:8px; }
 
 /* Hidden conversations */
@@ -181,8 +183,9 @@ if (!empty($_GET['thread'])) {
     </div>
     <?php else: ?>
     <div class="chat-empty">
-      <div style="font-size:48px;opacity:0.3"></div>
-      <div>Chọn một cuộc hội thoại để xem tin nhắn</div>
+      <div style="width:84px;height:84px;border-radius:50%;background:#eef3fb;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="40" height="40" fill="none" stroke="#1a3258" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <div style="font-size:15px;font-weight:700;color:#1a3258">Chọn một cuộc hội thoại</div>
+      <div style="font-size:13px;color:#8b97a8">Chọn khách hàng bên trái để xem tin nhắn</div>
     </div>
     <?php endif; ?>
   </div>
@@ -426,8 +429,8 @@ function hideThread(threadId) {
   });
 }
 
-function deleteThread(threadId) {
-  if (!confirm('Bạn có chắc muốn xóa cuộc hội thoại này? Toàn bộ tin nhắn sẽ bị xóa vĩnh viễn.')) return;
+async function deleteThread(threadId) {
+  if (!(await csConfirmAsync('Bạn có chắc muốn xóa cuộc hội thoại này? Toàn bộ tin nhắn sẽ bị xóa vĩnh viễn.'))) return;
   var csrf = document.querySelector('#globalCsrf') ? document.querySelector('#globalCsrf').value : '<?= $_SESSION["csrf_token"] ?? "" ?>';
   fetch('/admin/chat/' + threadId + '/delete', {
     method: 'POST',

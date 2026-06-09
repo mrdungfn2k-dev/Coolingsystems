@@ -1,38 +1,76 @@
 <?php require __DIR__ . '/head-admin.php'; ?>
+<?php
+/* sidebar permission gating: admin sees all; staff sees only granted perms */
+$__sbU = $user ?? (function_exists('currentUser') ? currentUser() : null);
+$__isAdmin = $__sbU && (($__sbU['role'] ?? '') === 'admin');
+$__isSuperadmin = $__sbU && !empty($__sbU['is_superadmin']);
+$__perms = []; $__roleName = '';
+if ($__sbU && (($__sbU['role'] ?? '') === 'staff')) {
+    $__prs = dbAll("SELECT sr.name AS role_name, sr.permissions FROM staff_role_assignments sra INNER JOIN staff_roles sr ON sr.id=sra.role_id WHERE sra.user_id=?", [$__sbU['id']]);
+    $__names = [];
+    foreach ($__prs as $__r) { $__a = json_decode($__r['permissions'] ?? '[]', true); if (is_array($__a)) $__perms = array_merge($__perms, $__a); if (!empty($__r['role_name'])) $__names[] = $__r['role_name']; }
+    $__perms = array_values(array_unique($__perms));
+    $__roleName = $__names ? implode(', ', $__names) : 'Nhân viên';
+}
+$sb = function($perm) use ($__isAdmin, $__perms) { if ($__isAdmin) return true; return in_array($perm, $__perms, true); };
+?>
 
 <div class="dash">
   <aside class="dash-sidebar">
     <div class="who">
-      <div class="name"><?= e($user['full_name']) ?></div>
-      <div class="role">Quản trị viên</div>
+      <?php $__siteLogo = ((dbGet("SELECT value FROM system_config WHERE key='site_logo'") ?: [])['value'] ?? ''); ?>
+      <?php if($__siteLogo): ?>
+        <a href="/admin" style="display:block"><img src="/uploads/<?= e($__siteLogo) ?>" alt="CoolingSystem" style="max-width:170px;max-height:46px;object-fit:contain;display:block;margin-bottom:8px;border-radius:12px;background:#fff"></a>
+      <?php else: ?>
+        <div class="name"><?= e($user['full_name']) ?></div>
+      <?php endif; ?>
+      <div class="role"><?= $__isSuperadmin ? 'Super Admin' : ($__isAdmin ? 'Quản trị viên' : e($__roleName ?: 'Nhân viên')) ?></div>
     </div>
+    <style>.dash-nav a{display:flex;align-items:center;gap:10px}.dash-nav a .sb-ic{width:18px;height:18px;flex-shrink:0;opacity:.62}.dash-nav a.active .sb-ic{opacity:.95}</style>
     <nav class="dash-nav">
-      <a href="/admin" class="<?= isActive('/admin') ?>">Tổng quan</a>
-     <div class="sb-section">SẢN PHẨM</div>
-     <a href="/admin/products" class="<?= startsWith(currentPath(),'/admin/products')?'active':'' ?>">Quản lý sản phẩm</a>
-     <a href="/admin/products/new">+ Đăng SP mới</a>
-     <a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>">Danh mục</a>
-     <div class="sb-section">VẬN HÀNH</div>
-     <a href="/admin/orders" class="<?= startsWith(currentPath(),'/admin/orders')?'active':'' ?>">Đơn hàng</a>
-     <a href="/admin/returns" class="<?= startsWith(currentPath(),'/admin/returns')?'active':'' ?>">Trả hàng</a>
-     <div class="sb-section">NHÂN SỰ</div>
-     <a href="/admin/staff" class="<?= startsWith(currentPath(),'/admin/staff')?'active':'' ?>">Phân quyền NV</a>
-     <a href="/admin/users" class="<?= isActive('/admin/users') ?>">Người dùng</a>
-     <a href="/admin/brands" class="<?= startsWith(currentPath(),'/admin/brands')?'active':'' ?>">Hãng xe</a>
-     <a href="/admin/promotions" class="<?= isActive('/admin/promotions') ?>">Khuyến mãi</a>
-     <a href="/admin/vouchers" class="<?= startsWith(currentPath(),'/admin/vouchers')?'active':'' ?>">Voucher toàn sàn</a>
-     <a href="/admin/news">Tin tức</a>
-     <a href="/admin/news/new" style="padding-left:28px">+ Viết bài</a>
-     <a href="/admin/content" class="<?= startsWith(currentPath(),'/admin/content')?'active':'' ?>">Quản lý trang tĩnh</a>
-     <div class="sb-section">HỖ TRỢ</div>
-     <a href="/admin/chat" class="sb-link"><span>Tin nhắn</span></a>
-     <a href="/admin/reviews" class="<?= isActive('/admin/reviews') ?>">Kiểm duyệt đánh giá</a>
-     <a href="/admin/contacts" class="<?= startsWith(currentPath(),'/admin/contacts')!==false?'active':'' ?>">Liên hệ khách</a>
-     <div class="sb-section">CẤU HÌNH</div>
-     <a href="/admin/stores" class="sb-link"><span>Hệ thống cửa hàng</span></a>
-     <a href="/admin/settings/finance" class="<?= isActive('/admin/settings/finance') ?>">Cấu hình Thuế &amp; Giảm giá</a>
-     <a href="/admin/settings" class="<?= isActive('/admin/settings') ?>">Cài đặt hệ thống</a>
-     <a href="/admin/logout">Đăng xuất</a>
+      <?php if($sb('reports')): ?><a href="/admin" class="<?= isActive('/admin') ?>"><?= sbIcon('home') ?>Tổng quan</a><?php endif; ?>
+      <?php if($sb('products')||$sb('categories')||$sb('brand_models')||$sb('brands')): ?>
+      <div class="sb-section">SẢN PHẨM<span class="sb-sec-desc">Sản phẩm · Danh mục · Thương hiệu · Hãng xe</span></div>
+      <?php if($sb('products')): ?><a href="/admin/products" class="<?= (startsWith(currentPath(),'/admin/products') && currentPath()!=='/admin/products/new')?'active':'' ?>"><?= sbIcon('box') ?>Quản lý sản phẩm</a>
+      <a href="/admin/products/new" class="<?= currentPath()==='/admin/products/new'?'active':'' ?>"><?= sbIcon('plus') ?>+ Đăng SP mới</a><?php endif; ?>
+      <?php if($sb('categories')): ?><a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>"><?= sbIcon('folder') ?>Danh mục</a><?php endif; ?>
+      <?php if($sb('brand_models')): ?><a href="/admin/product-brands" class="<?= startsWith(currentPath(),'/admin/product-brands')?'active':'' ?>"><?= sbIcon('tag') ?>Thương hiệu</a><?php endif; ?>
+      <?php if($sb('brands')): ?><a href="/admin/brands" class="<?= startsWith(currentPath(),'/admin/brands')?'active':'' ?>"><?= sbIcon('truck') ?>Hãng xe</a><?php endif; ?>
+      <?php endif; ?>
+      <?php if($sb('orders')||$sb('returns')): ?>
+      <div class="sb-section">VẬN HÀNH<span class="sb-sec-desc">Đơn hàng · Trả hàng</span></div>
+      <?php if($sb('orders')): ?><a href="/admin/orders" class="<?= startsWith(currentPath(),'/admin/orders')?'active':'' ?>"><?= sbIcon('cart') ?>Đơn hàng</a><?php endif; ?>
+      <?php if($sb('returns')): ?><a href="/admin/returns" class="<?= startsWith(currentPath(),'/admin/returns')?'active':'' ?>"><?= sbIcon('undo') ?>Trả hàng</a><?php endif; ?>
+      <?php endif; ?>
+      <?php if($__isAdmin||$sb('users')||$sb('staff')||$sb('content')): ?>
+      <div class="sb-section">NHÂN SỰ<span class="sb-sec-desc">Phân quyền · Khách hàng · Nhân viên · Tin tức</span></div>
+      <?php if($__isAdmin): ?><a href="/admin/staff" class="<?= (currentPath()==='/admin/staff' || startsWith(currentPath(),'/admin/staff/'))?'active':'' ?>"><?= sbIcon('shield') ?>Phân quyền NV</a><?php endif; ?>
+      <?php if($sb('users')): ?><a href="/admin/users" class="<?= currentPath()==='/admin/users'?'active':'' ?>"><?= sbIcon('users') ?>Khách hàng</a>
+      <?php if($sb('staff')): ?><a href="/admin/staff-accounts" class="<?= startsWith(currentPath(),'/admin/staff-accounts')?'active':'' ?>"><?= sbIcon('user') ?>Nhân viên</a><?php endif; ?>
+      <?php if($__isSuperadmin): ?><a href="/admin/admin-accounts" class="<?= startsWith(currentPath(),'/admin/admin-accounts')?'active':'' ?>"><?= sbIcon('shield') ?>Quản trị viên</a><?php endif; ?><?php endif; ?>
+      <?php if($sb('content')): ?><a href="/admin/news" class="<?= (startsWith(currentPath(),'/admin/news') && currentPath()!=='/admin/news/new')?'active':'' ?>"><?= sbIcon('filetext') ?>Tin tức</a>
+      <a href="/admin/news/new" class="<?= currentPath()==='/admin/news/new'?'active':'' ?>"><?= sbIcon('plus') ?>+ Viết bài</a>
+      <a href="/admin/content" class="<?= startsWith(currentPath(),'/admin/content')?'active':'' ?>"><?= sbIcon('file') ?>Quản lý trang tĩnh</a><?php endif; ?>
+      <?php endif; ?>
+      <?php if($sb('chat')||$sb('reviews')||$sb('contacts')): ?>
+      <div class="sb-section">HỖ TRỢ<span class="sb-sec-desc">Tin nhắn · Đánh giá · Liên hệ</span></div>
+      <?php if($sb('chat')): ?><a href="/admin/chat" class="sb-link"><?= sbIcon('message') ?><span>Tin nhắn</span></a><?php endif; ?>
+      <?php if($sb('reviews')): ?><a href="/admin/reviews" class="<?= isActive('/admin/reviews') ?>"><?= sbIcon('star') ?>Kiểm duyệt đánh giá</a><?php endif; ?>
+      <?php if($sb('contacts')): ?><a href="/admin/contacts" class="<?= startsWith(currentPath(),'/admin/contacts')!==false?'active':'' ?>"><?= sbIcon('mail') ?>Liên hệ khách</a><?php endif; ?>
+      <?php endif; ?>
+      <?php if($__isAdmin||$sb('stores')): ?>
+      <div class="sb-section">CỬA HÀNG<span class="sb-sec-desc">Hệ thống · Loại chi nhánh</span></div>
+      <?php if($sb('stores')): ?><a href="/admin/stores" class="<?= isActive('/admin/stores') ?>"><?= sbIcon('pin') ?>Hệ thống cửa hàng</a><?php endif; ?>
+      <?php if($sb('stores')): ?><a href="/admin/branch-types" class="<?= isActive('/admin/branch-types') ?>"><?= sbIcon('list') ?>Loại chi nhánh cửa hàng</a><?php endif; ?>
+      <?php endif; ?>
+      <?php if($__isAdmin||$sb('tax_config')||$sb('promotions')||$sb('vouchers')): ?>
+      <div class="sb-section">CẤU HÌNH<span class="sb-sec-desc">Khuyến mãi · Voucher · Vận chuyển · Cài đặt</span></div>
+      <?php if($sb('promotions')): ?><a href="/admin/promotions" class="<?= isActive('/admin/promotions') ?>"><?= sbIcon('gift') ?>Khuyến mãi</a><?php endif; ?>
+      <?php if($sb('vouchers')): ?><a href="/admin/vouchers" class="<?= startsWith(currentPath(),'/admin/vouchers')?'active':'' ?>"><?= sbIcon('ticket') ?>Voucher toàn sàn</a><?php endif; ?>
+      <?php if($sb('tax_config')): ?><a href="/admin/settings/finance" class="<?= isActive('/admin/settings/finance') ?>"><?= sbIcon('truck') ?>Cấu hình Vận chuyển</a><?php endif; ?>
+      <?php if($__isAdmin): ?><a href="/admin/settings" class="<?= isActive('/admin/settings') ?>"><?= sbIcon('gear') ?>Cài đặt hệ thống</a><?php endif; ?>
+      <?php endif; ?>
+      <a href="<?= $__isAdmin ? '/admin/logout' : '/staff/logout' ?>"><?= sbIcon('logout') ?>Đăng xuất</a>
     </nav>
   </aside>
   <div class="dash-main">
@@ -44,6 +82,7 @@ $_abcMap = [
     '/admin/products' => 'Quản lý sản phẩm',
     '/admin/products/new' => 'Đăng SP mới',
     '/admin/categories' => 'Danh mục',
+    '/admin/product-brands' => 'Thương hiệu',
     '/admin/orders' => 'Đơn hàng',
     '/admin/orders/create' => 'Tạo đơn hàng',
     '/admin/returns' => 'Trả hàng',
@@ -59,7 +98,8 @@ $_abcMap = [
     '/admin/reviews' => 'Kiểm duyệt đánh giá',
     '/admin/contacts' => 'Liên hệ khách',
     '/admin/stores' => 'Hệ thống cửa hàng',
-    '/admin/settings/finance' => 'Cấu hình Thuế',
+    '/admin/branch-types' => 'Loại chi nhánh cửa hàng',
+    '/admin/settings/finance' => 'Cấu hình Vận chuyển',
     '/admin/settings' => 'Cài đặt hệ thống',
 ];
 $_abcLabel = $_abcMap[$_ap] ?? '';
@@ -86,6 +126,32 @@ if ($_ap !== '/admin' && !empty($_abcLabel)):
   <span style="color:var(--ink-2)"><?= htmlspecialchars($_abcLabel) ?></span>
 </nav>
 <?php endif; ?>
+<?php
+// === Admin BreadcrumbList JSON-LD Schema (for SEOQuake detection) ===
+$_adminSchemaItems = [['name' => 'Tổng quan', 'url' => 'https://coolingsystem.vn/admin']];
+if ($_ap !== '/admin' && !empty($_abcLabel)) {
+    if (!empty($_abcParent) && isset($_abcMap[$_abcParent])) {
+        $_adminSchemaItems[] = ['name' => $_abcMap[$_abcParent], 'url' => 'https://coolingsystem.vn' . $_abcParent];
+    }
+    $_adminSchemaItems[] = ['name' => strip_tags($_abcLabel), 'url' => $_canonicalUrl];
+}
+?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    <?php foreach ($_adminSchemaItems as $si => $item): ?>
+    {
+      "@type": "ListItem",
+      "position": <?= $si + 1 ?>,
+      "name": "<?= addslashes($item['name']) ?>",
+      "item": "<?= $item['url'] ?>"
+    }<?= $si < count($_adminSchemaItems) - 1 ? ',' : '' ?>
+    <?php endforeach; ?>
+  ]
+}
+</script>
 
 <?php
 // Generate low stock alerts
@@ -115,7 +181,7 @@ $unreadNotisCount = dbGet("SELECT COUNT(*) as n FROM admin_notifications WHERE i
 .noti-msg { font-size:12px; color:#555; line-height:1.4; }
 .noti-time { font-size:10px; color:#999; margin-top:6px; display:block; }
 </style>
-<div style="display:flex; justify-content:flex-end; padding:10px 20px; background:#fff; border-bottom:1px solid var(--line); margin:-20px -20px 20px -20px; align-items:center">
+<div style="display:flex; justify-content:flex-end; padding:10px 20px; background:#fff; border-bottom:1px solid var(--line); margin:0 0 20px 0; align-items:center">
   <input type="hidden" id="globalCsrf" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
   <div style="position:relative">
     <button class="noti-btn" onclick="toggleNoti(event)">
@@ -130,10 +196,10 @@ $unreadNotisCount = dbGet("SELECT COUNT(*) as n FROM admin_notifications WHERE i
       <div id="notiList">
         <?php foreach($notis as $n): ?>
         <div style="position:relative" class="noti-item-wrap">
-          <a href="<?= e($n['link']) ?>" class="noti-item <?= $n['is_read'] ? '' : 'unread' ?>" onclick="markRead(<?= $n['id'] ?>)" style="padding-right: 36px;">
+          <a href="<?= e($n['link']) ?>" class="noti-item <?= $n['is_read'] ? '' : 'unread' ?>" onclick="return goAdminNoti(<?= $n['id'] ?>, this)" style="padding-right: 36px;">
             <div class="noti-title"><?= e($n['title']) ?></div>
             <div class="noti-msg"><?= e($n['message']) ?></div>
-            <span class="noti-time"><?= date('d/m H:i', strtotime($n['created_at'])) ?></span>
+            <span class="noti-time"><?= agoVN($n['created_at']) ?></span>
           </a>
           <button onclick="deleteNoti(<?= $n['id'] ?>, event)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#999; padding:4px;" title="Xóa thông báo">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
@@ -161,18 +227,19 @@ document.addEventListener('click', function(e) {
 function markAllRead() {
   let csrf = document.getElementById('globalCsrf').value;
   fetch('/admin/notifications/read-all', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: '_csrf=' + csrf })
-  .then(()=>location.reload());
+  .then(function(){ var b=document.getElementById('notiBadge'); if(b)b.remove(); document.querySelectorAll('#notiList .noti-item.unread').forEach(function(it){ it.classList.remove('unread'); }); });
 }
+function goAdminNoti(id, link){ try{markRead(id);}catch(e){} var d=document.getElementById('notiDropdown'); if(d)d.classList.remove('show'); var href=(link&&link.getAttribute('href'))||'/admin'; if(window.csNav){csNav(href);}else{location.href=href;} return false; }
 function markRead(id) {
   let csrf = document.getElementById('globalCsrf').value;
   fetch('/admin/notifications/' + id + '/read', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: '_csrf=' + csrf });
 }
-function deleteNoti(id, e) {
-  e.stopPropagation();
+async function deleteNoti(id, e) {
+  e.stopPropagation(); var __b=e.currentTarget;
   let csrf = document.getElementById('globalCsrf').value;
-  if(confirm('Bạn có chắc muốn xóa thông báo này?')) {
+  if(await csConfirmAsync('Bạn có chắc muốn xóa thông báo này?')) {
     fetch('/admin/notifications/' + id + '/delete', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: '_csrf=' + csrf })
-    .then(()=>location.reload());
+    .then(function(){ var w=(__b&&__b.closest)?__b.closest('.noti-item-wrap'):null; if(w)w.remove(); var L=document.getElementById('notiList'); if(L&&!L.querySelector('.noti-item')){L.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';} });
   }
 }
 </script>

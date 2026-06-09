@@ -1,5 +1,22 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
 <style>
+#coForm .form-group{min-width:0}
+#coForm .form-group input:not([type=file]):not([type=radio]):not([type=checkbox]):not([type=hidden]),#coForm .form-group select,#coForm .form-group textarea{border-radius:10px !important;border:1px solid #d6deea !important;padding:12px 14px !important;font-size:14px !important;background-color:#fff !important;color:#0a192f;max-width:100%;width:100%;-webkit-appearance:none;-moz-appearance:none;appearance:none;transition:border-color .2s,box-shadow .2s}
+#coForm .form-group input:not([type=file]):not([type=radio]):not([type=checkbox]):not([type=hidden]):focus,#coForm .form-group select:focus,#coForm .form-group textarea:focus{border-color:#1a3258 !important;box-shadow:0 0 0 3px rgba(26,50,88,.12) !important;outline:none !important}
+#coForm .form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%231a3258' stroke-width='1.8' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px !important}
+.prov-dd{position:relative}
+.prov-dd-trg{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #d6deea;border-radius:10px;padding:12px 14px;background:#fff;font-size:14px;color:#0a192f;cursor:pointer;text-align:left;font-family:inherit;line-height:1.3}
+.prov-dd-trg:focus,.prov-dd.open .prov-dd-trg{border-color:#1a3258;box-shadow:0 0 0 3px rgba(26,50,88,.12);outline:none}
+.prov-dd-trg #provLabel.ph{color:#9aa7bd}
+.prov-dd-caret{transition:transform .2s;flex-shrink:0}
+.prov-dd.open .prov-dd-caret{transform:rotate(180deg)}
+.prov-dd-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:10000;background:#fff;border:1px solid #d6deea;border-radius:12px;box-shadow:0 12px 32px rgba(10,25,47,.18);overflow:hidden}
+.prov-dd.open .prov-dd-panel{display:block}
+.prov-dd-search{padding:8px;border-bottom:1px solid #eef2f7}
+.prov-dd-list{max-height:240px;overflow-y:auto}
+.prov-dd-opt{padding:11px 14px;font-size:14px;color:#0a192f;cursor:pointer}
+.prov-dd-opt:hover{background:#f0f4fb}
+.prov-dd-opt.sel{background:#1a3258;color:#fff;font-weight:600}
 .co-grid{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
 @media(max-width:900px){.co-grid{grid-template-columns:1fr}}
 .co-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
@@ -37,16 +54,83 @@
 .btn-confirm-qr:hover { background:#219653; }
 .btn-close-modal { position:absolute; top:12px; right:12px; background:none; border:none; font-size:24px; cursor:pointer; color:#888; }
 </style>
+<style>
+#qrPanel {
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6) !important;
+    z-index: 99999;
+    display: none;
+    align-items: center; justify-content: center;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 20px;
+}
+.qr-modal-inner {
+    background: #fff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+@media(max-width:500px) {
+    .qr-modal-inner { padding: 16px; }
+    .transfer-info .key, .transfer-info .val { font-size: 12px !important; }
+    .qr-layout { flex-direction: column !important; align-items: center !important; }
+    .qr-layout-left { margin-bottom: 16px !important; }
+    .qr-layout-right { width: 100% !important; }
+    .copy-layout { flex-direction: column !important; align-items: stretch !important; }
+    .copy-layout button { width: 100%; margin-top: 8px !important; }
+    .content-box { font-size: 14px !important; text-align: center; }
+    .btn-gold.btn-lg, .btn-navy.btn-lg { white-space: normal !important; font-size: 13px !important; line-height: 1.4 !important; height: auto !important; padding: 10px !important; }
+}
+.qr-modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none; font-size: 28px;
+    cursor: pointer; color: #888; line-height: 1;
+}
+</style>
+
 
 <section class="block"><div class="wrap" style="max-width:960px">
   <nav class="breadcrumb"><a href="/">Trang chủ</a><span class="sep">›</span><a href="/customer/cart">Giỏ hàng</a><span class="sep">›</span><span>Thanh toán</span></nav>
   <div class="sec-head"><div class="title"><span class="bar"></span><h1 style="font-size:22px">Thanh toán đơn hàng</h1></div></div>
 
-  <form method="post" action="/customer/checkout" id="coForm" onsubmit="return handleCheckoutSubmit(event)">
+  <form method="post" action="/customer/checkout" id="coForm" onsubmit="return handleCheckoutSubmit(event)" enctype="multipart/form-data">
+    <?php
+$qrImg = dbGet("SELECT value FROM system_config WHERE key='payment_qr_image'")['value'] ?? '';
+$bankName = dbGet("SELECT value FROM system_config WHERE key='payment_bank_name'")['value'] ?? '';
+$accName = dbGet("SELECT value FROM system_config WHERE key='payment_account_name'")['value'] ?? '';
+$accNum = dbGet("SELECT value FROM system_config WHERE key='payment_account_number'")['value'] ?? '';
+$qrPrefix = dbGet("SELECT value FROM system_config WHERE key='payment_transfer_prefix'")['value'] ?? '';
+$tmpCode = strtoupper(substr(base_convert(time(), 10, 36), -4) . substr(md5(uniqid()), 0, 6));
+$customerName = removeAccents($user['full_name'] ?? 'KHACH');
+$customerName = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $customerName));
+$transferContent = trim($customerName . ' ' . $tmpCode);
+?>
     <?= csrfField() ?>
     <div class="co-grid">
       <div>
         <!-- Shipping address -->
+        <?php
+$uAddr = $user['address'] ?? '';
+$addrParts = array_map('trim', explode(',', $uAddr));
+$pProv = ''; $pDist = ''; $pWard = ''; $pDetail = '';
+if (!empty($uAddr)) {
+    if (count($addrParts) >= 4) {
+        $pProv = array_pop($addrParts);
+        $pDist = array_pop($addrParts);
+        $pWard = array_pop($addrParts);
+        $pDetail = implode(', ', $addrParts);
+    } else {
+        $pDetail = $uAddr;
+    }
+}
+?>
         <div class="co-card">
           <h3>Địa chỉ nhận hàng</h3>
           <div class="form-row">
@@ -57,14 +141,21 @@
           </div>
           <div class="form-row">
             <div class="form-group"><label>Tỉnh/Thành phố <span class="req">*</span></label>
-              <input type="text" name="shipping_province" required placeholder="VD: Hà Nội" oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:,.<>?/~`]/g,'')"></div>
+              <div class="prov-dd" id="provDD">
+                <input type="hidden" name="shipping_province" id="provValue" value="<?= e($pProv) ?>">
+                <button type="button" class="prov-dd-trg" id="provTrg" onclick="provToggle()"><span id="provLabel"<?= $pProv?'':' class="ph"' ?>><?= $pProv ? e($pProv) : '-- Chọn tỉnh/thành --' ?></span><svg class="prov-dd-caret" width="12" height="8" viewBox="0 0 12 8"><path fill="none" stroke="#1a3258" stroke-width="1.8" d="M1 1.5l5 5 5-5"/></svg></button>
+                <div class="prov-dd-panel" id="provPanel">
+                  <div class="prov-dd-search"><input type="text" id="provSearch" placeholder="Tìm tỉnh/thành..." oninput="provFilter(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();return false;}" autocomplete="off"></div>
+                  <div class="prov-dd-list" id="provList"><?php foreach(vnProvinceList() as $pp): ?><div class="prov-dd-opt<?= $pp===$pProv?' sel':'' ?>" data-v="<?= e($pp) ?>" onclick="provPick(this)"><?= e($pp) ?></div><?php endforeach; ?></div>
+                </div>
+              </div></div>
             <div class="form-group"><label>Quận/Huyện <span class="req">*</span></label>
-              <input type="text" name="shipping_district" required placeholder="VD: Đống Đa" oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:,.<>?/~`]/g,'')"></div>
+              <input type="text" name="shipping_district" value="<?= e($pDist) ?>" required placeholder="VD: Đống Đa" oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:,.<>?/~`]/g,'')"></div>
           </div>
           <div class="form-group"><label>Phường/Xã <span class="req">*</span></label>
-            <input type="text" name="shipping_ward" required placeholder="VD: Phương Liên" oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:,.<>?/~`]/g,'')"></div>
+            <input type="text" name="shipping_ward" value="<?= e($pWard) ?>" required placeholder="VD: Phương Liên" oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:,.<>?/~`]/g,'')"></div>
           <div class="form-group"><label>Địa chỉ cụ thể <span class="req">*</span></label>
-            <input type="text" name="shipping_detail" required placeholder="Số nhà, tên đường..." oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:.<>?~`]/g,'')" maxlength="100"></div>
+            <input type="text" name="shipping_detail" value="<?= e($pDetail) ?>" required placeholder="Số nhà, tên đường..." oninput="this.value=this.value.replace(/[!@#$%^&*()_+=\[\]{}|;:.<>?~`]/g,'')" maxlength="100"></div>
           <div class="form-group"><label>Ghi chú đơn hàng</label>
             <textarea name="customer_note" id="coNoteField" rows="2" maxlength="100" placeholder="Hướng dẫn giao hàng, yêu cầu đặc biệt..." oninput="if(this.value.length>100){this.value=this.value.substring(0,100);}document.getElementById('noteCounter').textContent=this.value.length+'/100 ký tự';document.getElementById('noteCounter').style.color=this.value.length>=100?'#e74c3c':'#999'"></textarea>
               <div id="noteCounter" style="font-size:11px;color:#999;text-align:right;margin-top:4px">0/100 ký tự</div></div>
@@ -93,14 +184,60 @@
             <div style="font-weight:700;color:#1b5e20;font-size:14px;margin-bottom:6px">Thanh toán khi nhận hàng</div>
             <div style="font-size:13px;color:#388e3c">Bạn sẽ thanh toán tiền mặt sau khi nhận được hàng. Đơn hàng sẽ được xử lý và giao đến địa chỉ của bạn.</div>
           </div>
+          
+          <!-- Transfer Modal -->
+          <div id="qrPanel" style="display:none;">
+            <div class="qr-modal-inner">
+              <button type="button" class="qr-modal-close" onclick="closeQrModal()">×</button>
+              <h3 style="margin-top:0;font-size:18px;color:var(--navy);margin-bottom:20px;text-align:center">Quét mã QR Thanh toán</h3>
+              <!-- QR & Account Info -->
+              <div style="display:flex; gap:16px; align-items:flex-start;" class="qr-layout">
+                <div style="flex:0 0 160px; margin:0;" class="qr-layout-left">
+                  <?php if($qrImg): ?>
+                    <div class="qr-img-box" style="margin:0; margin-bottom: 8px;"><img src="/uploads/qr/<?=htmlspecialchars($qrImg)?>" alt="QR" style="width:100%; height:auto; display:block;"></div>
+                    <a href="/uploads/qr/<?=htmlspecialchars($qrImg)?>" download="ma-qr-thanh-toan.png" style="display:inline-block; font-size:13px; color:var(--navy); font-weight:700; text-decoration:underline;">📥 Tải mã QR</a>
+                  <?php else: ?>
+                    <div class="qr-img-box" style="margin:0;background:#f5f5f5;flex-direction:column;gap:8px;color:#aaa;font-size:13px;padding:20px"><div style="font-size:32px;opacity:0.4">QR</div><div>Chưa có mã QR</div></div>
+                  <?php endif; ?>
+                </div>
+                
+                <div style="flex:1; min-width:0;" class="qr-layout-right">
+                  <div class="transfer-info" style="margin:0;">
+                    <div class="row"><span class="key">Ngân hàng</span><span class="val"><?=htmlspecialchars($bankName)?></span></div>
+                    <div class="row"><span class="key">Số tài khoản</span><span class="val"><?=htmlspecialchars($accNum)?></span></div>
+                    <div class="row"><span class="key">Chủ tài khoản</span><span class="val"><?=htmlspecialchars($accName)?></span></div>
+                    <div class="row"><span class="key">Số tiền</span><div style="text-align:right"><span class="val" id="amtDisplay" style="color:#e74c3c">—</span></div></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Transfer Note & Upload (Full width below) -->
+              <div style="margin-top: 20px;">
 
-          <?php
-          $qrImg = dbGet("SELECT value FROM system_config WHERE key='payment_qr_image'")['value'] ?? '';
-          $bankName = dbGet("SELECT value FROM system_config WHERE key='payment_bank_name'")['value'] ?? '';
-          $accName = dbGet("SELECT value FROM system_config WHERE key='payment_account_name'")['value'] ?? '';
-          $accNum = dbGet("SELECT value FROM system_config WHERE key='payment_account_number'")['value'] ?? '';
-          $tmpCode = strtoupper(substr(base_convert(time(), 10, 36), -4) . substr(md5(uniqid()), 0, 6));
-          ?>
+                  <div class="transfer-note" style="margin:0; background:#fffcf2; border:1px solid #f2e3b6;">
+                    <div class="note-title" style="color:#b8860b; margin-bottom:8px;">Nội dung chuyển khoản bắt buộc</div>
+                    <div style="display:flex; align-items:center; gap:12px;" class="copy-layout">
+                      <div class="content-box" id="transferContent" style="flex:1; border-color:#1a3258; color:#1a3258; font-size: 16px; margin:0; padding:10px;"><?=e($transferContent)?></div>
+                      <button type="button" onclick="copyContent(this)" style="background:var(--navy);color:#fff;border:none;border-radius:6px;padding:12px 18px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;margin:0;">Sao chép nội dung</button>
+                    </div>
+                  </div>
+                  
+                  <div style="margin-top:20px;">
+                    <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Tải lên biên lai chuyển khoản <span class="req" style="color:red">*</span></label>
+                    <label style="cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:140px;height:140px;border:1px dashed #ccc;border-radius:8px;background:#f8f9fa;text-align:center;transition:all 0.2s" onmouseover="this.style.background='#f0f4f8';this.style.borderColor='var(--navy)'" onmouseout="this.style.background='#f8f9fa';this.style.borderColor='#ccc'">
+                      <div style="padding:6px 14px;background:#fff;border:1px solid #ddd;border-radius:6px;color:#333;font-weight:600;font-size:13px;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:8px">Thêm ảnh</div>
+                      <span style="font-size:12px;color:#888;padding:0 8px;line-height:1.4" id="receiptFileName">Mỗi ảnh không quá 5 MB</span>
+                      <input type="file" name="payment_receipt" id="payment_receipt_input" accept="image/*" style="display:none" onchange="document.getElementById('receiptFileName').textContent = this.files[0] ? this.files[0].name : 'Mỗi ảnh không quá 5 MB'">
+                    </label>
+                  </div>
+              </div>
+              <div style="margin-top: 24px; text-align: center;">
+                 <button type="submit" class="btn btn-navy btn-lg" style="width:100%">Xác nhận đặt hàng</button>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
 
@@ -154,7 +291,12 @@
           }
           
           $afterDiscount = $sub - $discountTotal;
-          $ship = $afterDiscount >= 2000000 ? 0 : 30000; 
+          $shipCfg = dbAll("SELECT key,value FROM system_config WHERE key IN ('default_shipping_fee','free_shipping_threshold','shipping_origin_province','shipping_rates')");
+          $shipCfgM=[]; foreach($shipCfg as $sc)$shipCfgM[$sc['key']]=$sc['value'];
+          $freeThreshold = intval($shipCfgM['free_shipping_threshold'] ?? 2000000);
+          $cartWeight = 0; foreach($items as $wi){ $cartWeight += intval($wi['weight_g']??0) * $wi['quantity']; }
+          $shipFeeRaw = calcShippingFee($pProv, (int)$cartWeight, $shipCfgM);
+          $ship = ($freeThreshold > 0 && $afterDiscount >= $freeThreshold) ? 0 : $shipFeeRaw; 
           $grand = $afterDiscount + $ship; 
           ?>
           <div style="border-top:2px solid var(--line);padding-top:14px;margin-top:8px">
@@ -173,11 +315,11 @@
               <span>Voucher (<?= e($_SESSION['cart_voucher']['code']) ?>)</span><span>- <?=vnd($discountTotal - $newsletterDiscount - $qtyDiscount)?></span></div>
             <?php endif; ?>
             <div style="display:flex;justify-content:space-between;font-size:13px;color:#666;margin-bottom:10px">
-              <span>Vận chuyển</span><span><?=$ship?vnd($ship):'Miễn phí'?></span></div>
+              <span>Vận chuyển</span><span id="shipDisplay"><?=$ship?vnd($ship):'Miễn phí'?></span></div>
             <div style="display:flex;justify-content:space-between;font-size:20px;font-weight:800;color:var(--navy);padding-top:10px;border-top:1px solid #f0f0f0">
               <span>Tổng cộng</span><span id="grandDisplay"><?=vnd($grand)?></span></div>
           </div>
-          <button type="submit" class="btn btn-gold btn-block btn-lg" style="margin-top:18px;font-size:16px;height:52px" id="submitBtn">
+          <button type="submit" class="btn btn-navy btn-block btn-lg" style="margin-top:18px;font-size:16px;height:52px" id="submitBtn">
             Đặt hàng ngay
           </button>
           <div style="font-size:11px;color:var(--ink-3);text-align:center;margin-top:10px">
@@ -188,41 +330,6 @@
     </div>
   </form>
 </div></section>
-
-<!-- QR Modal -->
-<div class="modal-overlay" id="qrModal">
-  <div class="modal-box">
-    <button class="btn-close-modal" onclick="closeQRModal()" type="button">&times;</button>
-    <div style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:4px">Quét mã QR để chuyển khoản</div>
-    <div style="font-size:12px;color:#888;margin-bottom:12px">Sử dụng app ngân hàng để quét mã bên dưới</div>
-
-    <?php if($qrImg): ?>
-      <div class="qr-img-box"><img src="/uploads/qr/<?=htmlspecialchars($qrImg)?>" alt="QR Code thanh toán"></div>
-    <?php else: ?>
-      <div class="qr-img-box" style="background:#f5f5f5;flex-direction:column;gap:8px;color:#aaa;font-size:13px;padding:20px">
-        <div style="font-size:32px;opacity:0.4">QR</div>
-        <div>Chưa có mã QR</div>
-      </div>
-    <?php endif; ?>
-
-    <div class="transfer-info">
-      <div class="row"><span class="key">Ngân hàng</span><span class="val"><?=htmlspecialchars($bankName)?></span></div>
-      <div class="row"><span class="key">Số tài khoản</span><span class="val"><?=htmlspecialchars($accNum)?></span></div>
-      <div class="row"><span class="key">Chủ tài khoản</span><span class="val"><?=htmlspecialchars($accName)?></span></div>
-      <div class="row"><span class="key">Số tiền</span><span class="val" id="amtDisplay" style="color:#e74c3c">—</span></div>
-    </div>
-
-    <div class="transfer-note">
-      <div class="note-title">Nội dung chuyển khoản bắt buộc</div>
-      <div style="color:#666;margin-bottom:8px;font-size:12px">Ghi chính xác nội dung sau khi chuyển tiền để xác nhận đơn hàng:</div>
-      <div class="content-box" id="transferContent"><?=e($user['full_name']??'Khách')?> - <?=$tmpCode?></div>
-      <div style="font-size:11px;color:#999;margin-top:4px">Định dạng: Họ tên - Mã đơn hàng</div>
-      <button type="button" onclick="copyContent(this)" style="background:var(--navy);color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;margin-top:10px;transition:all 0.2s">Sao chép nội dung</button>
-    </div>
-    
-    <button type="button" class="btn-confirm-qr" onclick="confirmQR()">Tôi đã chuyển khoản & Đặt hàng</button>
-  </div>
-</div>
 
 <script>
 // ── Checkout Phone Validation ──
@@ -276,21 +383,47 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
 // Voucher discount
 var voucherAmt = <?= isset($vDiscount) ? $vDiscount : 0 ?>;
 var grandTotal = <?= $grand ?>;
+var SHIP_ORIGIN = <?= json_encode($shipCfgM['shipping_origin_province'] ?? '') ?>;
+var SHIP_RATES = (function(){ var o={}; (<?= json_encode(json_decode($shipCfgM['shipping_rates'] ?? '[]', true) ?: []) ?>).forEach(function(r){o[r.zone]={bw:+r.base_weight,bp:+r.base_price,sw:+r.step_weight,sp:+r.step_price};}); return o; })();
+var SHIP_REGION = <?= json_encode((function(){ $m=[]; foreach(vnProvinceList() as $pp){ $m[$pp]=vnProvinceRegion($pp); } return $m; })(), JSON_UNESCAPED_UNICODE) ?>;
+var SHIP_CART_WEIGHT = <?= (int)($cartWeight ?? 0) ?>;
+var SHIP_FREE = <?= (int)($freeThreshold ?? 2000000) ?>;
+var SHIP_AFTER_DISCOUNT = <?= (int)$afterDiscount ?>;
+var SHIP_DEFAULT = <?= (int)($shipCfgM['default_shipping_fee'] ?? 30000) ?>;
+function shipVnd(n){ return Math.round(n).toLocaleString('vi-VN') + ' ₫'; }
+function shipZone(dest){ if(dest && dest===SHIP_ORIGIN) return 'noi_tinh'; var o=SHIP_REGION[SHIP_ORIGIN]||'', d=SHIP_REGION[dest]||''; if(!o||!d) return ''; if(o===d) return 'noi_mien'; if(o==='trung'||d==='trung') return 'can_mien'; return 'lien_mien'; }
+function shipFeeFor(dest){ var z=shipZone(dest); if(!z||!SHIP_RATES[z]) return SHIP_DEFAULT; var r=SHIP_RATES[z]; var w=SHIP_CART_WEIGHT>0?SHIP_CART_WEIGHT:r.bw; if(w<=r.bw) return r.bp; return r.bp + Math.ceil((w-r.bw)/r.sw)*r.sp; }
+function recalcShip(){ var el=document.querySelector('[name="shipping_province"]'); if(!el) return; var fee=shipFeeFor(el.value); var ship=(SHIP_FREE>0 && SHIP_AFTER_DISCOUNT>=SHIP_FREE)?0:fee; var sd=document.getElementById('shipDisplay'); if(sd) sd.textContent=ship?shipVnd(ship):'Miễn phí'; grandTotal=SHIP_AFTER_DISCOUNT+ship; depositAmount=grandTotal; var gd=document.getElementById('grandDisplay'); if(gd) gd.textContent=shipVnd(grandTotal); }
+document.addEventListener('DOMContentLoaded', function(){ var el=document.querySelector('[name="shipping_province"]'); if(el){ el.addEventListener('change', recalcShip); recalcShip(); } });
+function provToggle(){ var dd=document.getElementById('provDD'); var willOpen=!dd.classList.contains('open'); dd.classList.toggle('open'); if(willOpen){ var s=document.getElementById('provSearch'); if(s){ s.value=''; provFilter(''); setTimeout(function(){s.focus();},50); } } }
+function provPick(el){ var v=el.getAttribute('data-v'); document.getElementById('provValue').value=v; var lb=document.getElementById('provLabel'); lb.textContent=v; lb.classList.remove('ph'); document.querySelectorAll('#provList .prov-dd-opt.sel').forEach(function(x){x.classList.remove('sel');}); el.classList.add('sel'); document.getElementById('provDD').classList.remove('open'); if(typeof recalcShip==='function') recalcShip(); }
+function provFilter(q){ q=(q||'').toLowerCase(); document.querySelectorAll('#provList .prov-dd-opt').forEach(function(o){ o.style.display=o.textContent.toLowerCase().indexOf(q)>=0?'':'none'; }); }
+document.addEventListener('click', function(e){ var dd=document.getElementById('provDD'); if(dd && !dd.contains(e.target)) dd.classList.remove('open'); });
 var depositAmount = grandTotal;  // Full amount, no deposit split
 var remainingAmount = 0;
 var userName = <?= json_encode($user['full_name'] ?? '') ?>;
 var tmpOrderCode = '<?= $tmpCode ?>';
 
+function closeQrModal() {
+    document.getElementById('qrPanel').style.display = 'none';
+    window.qrConfirmed = false;
+    document.getElementById('submitBtn').textContent = 'Đặt hàng ngay';
+}
 function selectPay(el, val) {
   document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   
   // Hide QR panel when switching
   document.getElementById('qrPanel').style.display = 'none';
+  window.qrConfirmed = false;
   
+  var receiptInput = document.querySelector('input[name="payment_receipt"]');
+  if (receiptInput) receiptInput.required = false;
+
   if (val === 'prepay') {
     document.getElementById('payPre').checked = true;
     document.getElementById('codBlock').style.display = 'none';
@@ -303,6 +436,7 @@ function selectPay(el, val) {
 }
 
 function handleCheckoutSubmit(e) {
+    var _pv=document.getElementById('provValue'); if(_pv && !_pv.value){ e.preventDefault(); alert('Vui lòng chọn Tỉnh/Thành phố.'); var _pt=document.getElementById('provTrg'); if(_pt)_pt.focus(); return false; }
     // Validate phone: must start with 0 and have 10 digits
     var phoneEl = document.getElementById('coPhoneField') || document.querySelector('[name="shipping_phone"]');
     if (phoneEl) {
@@ -346,24 +480,43 @@ function handleCheckoutSubmit(e) {
 
   if (document.getElementById('payPre').checked && !window.qrConfirmed) {
     e.preventDefault();
-    // Validate required fields natively
     if (!document.getElementById('coForm').reportValidity()) return false;
     updateTransferInfo();
-    document.getElementById('qrModal').classList.add('show');
+    
+    // SHOW QR PANEL INSTEAD OF SUBMITTING
+    var qrPanel = document.getElementById('qrPanel');
+    qrPanel.style.display = 'flex';
+    
+    // Change required for receipt
+    var receiptInput = document.querySelector('input[name="payment_receipt"]');
+    if (receiptInput) {
+        receiptInput.required = true;
+        // Make sure label shows it's required
+        var lbl = receiptInput.previousElementSibling;
+        if (lbl && !lbl.innerHTML.includes('*')) {
+            lbl.innerHTML = 'Tải lên biên lai chuyển khoản <span class="req" style="color:red">*</span>';
+        }
+    }
+    
+    document.getElementById('submitBtn').textContent = 'Tôi đã chuyển khoản & Hoàn tất Đặt hàng';
+    window.qrConfirmed = true;
+    
+    setTimeout(function() {
+        qrPanel.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }, 100);
+    
     return false;
   }
   return true;
 }
 
-function confirmQR() {
-  window.qrConfirmed = true;
-  document.getElementById('coForm').submit();
-}
 
-function closeQRModal() {
-  document.getElementById('qrModal').classList.remove('show');
-}
 
+
+
+function removeAccents(str) {
+  return str.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").replace(/\s+/g, "");
+}
 function updateTransferInfo() {
   var isPrepay = document.getElementById('payPre').checked;
   var displayAmt = isPrepay ? depositAmount : grandTotal;
@@ -381,7 +534,9 @@ function updateTransferInfo() {
   var nameEl = document.querySelector('input[name="shipping_full_name"]');
   var name = nameEl ? nameEl.value.trim() : userName;
   if (!name) name = userName;
-  var content = name + ' - ' + tmpOrderCode;
+  var qrPrefix = "<?= e($qrPrefix) ?>";
+  var formattedName = removeAccents(name).replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+  var content = formattedName + ' ' + tmpOrderCode;
   var box = document.getElementById('transferContent');
   if (box) box.textContent = content;
 }

@@ -1,7 +1,8 @@
 <?php require __DIR__.'/../partials/head.php'; ?>
 <?php $profileComplete = !empty($user['full_name']) && !empty($user['phone']) && !empty($user['address']); ?>
 <?php $cinv = dbGet("SELECT * FROM user_invoice_info WHERE user_id=?", [$user['id']]); ?>
-<section class="block"><div class="wrap">
+<section class="block profile-page"><div class="wrap">
+<style id="profile-redesign">.profile-page .form-group input,.profile-page .form-group select,.profile-page .form-group textarea{border-radius:10px;border:1px solid #d6deea;padding:11px 14px}.profile-page .form-group input:focus,.profile-page .form-group select:focus,.profile-page .form-group textarea:focus{border-color:#1a3258;box-shadow:0 0 0 3px rgba(26,50,88,0.12)}.profile-page .form-group select{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:36px;cursor:pointer;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:11px}.profile-page input[type=radio]{accent-color:#1a3258;width:16px;height:16px;cursor:pointer}.profile-page input[type=radio]:focus{outline:none;box-shadow:none}</style>
   <?php if (!$profileComplete): ?>
   <div style="background:#fff8e1;border-left:4px solid #f0c040;padding:12px 16px;font-size:13px;color:#7a5c00;margin-bottom:16px">
     Vui lòng cập nhật đầy đủ thông tin để có thể đặt hàng.
@@ -23,14 +24,64 @@
             </div>
             <div>
               <label style="font-size:13px;font-weight:700;display:block;margin-bottom:4px">Ảnh đại diện</label>
-              <input type="file" name="avatar" accept="image/png,image/jpeg,image/webp" style="font-size:13px;max-width:250px" onchange="document.getElementById('avatarPreview').src=window.URL.createObjectURL(this.files[0])">
+              <input type="file" name="avatar" accept="image/png,image/jpeg,image/webp" class="js-filepick" data-file-label="Chọn ảnh" style="max-width:250px" onchange="document.getElementById('avatarPreview').src=window.URL.createObjectURL(this.files[0])">
+<style>
+.cs-file{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cs-file-btn{display:inline-flex;align-items:center;gap:8px;padding:0 16px;height:38px;border:1px solid #1a3258;border-radius:8px;background:#1a3258;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s}
+.cs-file-btn:hover{background:#0f2342}
+.cs-file-name{font-size:13px;color:#566;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px}
+.cs-file-name.empty{color:#9aa7bd;font-style:italic}
+</style>
+<script>
+(function(){
+  function enh(inp){
+    if(inp.dataset.cfEnh)return; inp.dataset.cfEnh="1";
+    var label=inp.getAttribute("data-file-label")||"Chọn ảnh";
+    var wrap=document.createElement("div"); wrap.className="cs-file";
+    var btn=document.createElement("button"); btn.type="button"; btn.className="cs-file-btn";
+    btn.innerHTML='<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg><span>'+label+'</span>';
+    var nm=document.createElement("span"); nm.className="cs-file-name empty"; nm.textContent="Chưa chọn ảnh";
+    inp.parentNode.insertBefore(wrap,inp); inp.style.display="none";
+    wrap.appendChild(btn); wrap.appendChild(nm); wrap.appendChild(inp);
+    btn.addEventListener("click",function(){inp.click();});
+    inp.addEventListener("change",function(){ if(inp.files&&inp.files.length){nm.textContent=inp.files[0].name;nm.classList.remove("empty");}else{nm.textContent="Chưa chọn ảnh";nm.classList.add("empty");} });
+  }
+  function r(){ document.querySelectorAll("input.js-filepick").forEach(enh); }
+  if(document.readyState!=="loading") r(); else document.addEventListener("DOMContentLoaded",r);
+})();
+</script>
             </div>
           </div>
           <div class="form-group"><label>Email</label><input type="email" value="<?= e($user['email']) ?>" readonly style="background:#f8f9fa;color:#888;cursor:not-allowed"></div>
           <div class="form-group"><label>Họ và tên <span class="req">*</span></label><input type="text" name="full_name" id="pf_name" value="<?= e($user['full_name']) ?>" required maxlength="20" placeholder="Nguyễn Văn A"></div>
           <div class="form-group"><label>Số điện thoại <span class="req">*</span></label><input type="tel" name="phone" id="pf_phone" value="<?= e($user['phone']??'') ?>" maxlength="10" required pattern="0[1-9][0-9]{8}"></div>
-          <div class="form-group"><label>Địa chỉ nhận hàng <span class="req">*</span></label><input type="text" name="address" id="pf_address" value="<?= e($user['address']??'') ?>" required maxlength="100"><small style="color:#888;font-size:11px">Địa chỉ mặc định khi đặt hàng</small></div>
-          <button type="submit" class="btn btn-gold btn-lg">Cập nhật thông tin</button>
+                    <?php
+            $uAddr = $user['address'] ?? '';
+            $addrParts = array_map('trim', explode(',', $uAddr));
+            $pProv = ''; $pDist = ''; $pWard = ''; $pDetail = '';
+            if (!empty($uAddr)) {
+                if (count($addrParts) >= 4) {
+                    $pProv = array_pop($addrParts);
+                    $pDist = array_pop($addrParts);
+                    $pWard = array_pop($addrParts);
+                    $pDetail = implode(', ', $addrParts);
+                } else {
+                    $pDetail = $uAddr;
+                }
+            }
+          ?>
+          <div style="font-weight:700;font-size:14px;color:var(--navy);margin-bottom:12px;padding-top:12px;border-top:1px dashed #e0e6f0">Địa chỉ nhận hàng (Mặc định khi thanh toán)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="form-group"><label>Tỉnh/Thành phố <span class="req">*</span></label>
+              <input type="text" name="shipping_province" id="pf_prov" value="<?= e($pProv) ?>" required placeholder="VD: Hà Nội"></div>
+            <div class="form-group"><label>Quận/Huyện <span class="req">*</span></label>
+              <input type="text" name="shipping_district" id="pf_dist" value="<?= e($pDist) ?>" required placeholder="VD: Đống Đa"></div>
+          </div>
+          <div class="form-group"><label>Phường/Xã <span class="req">*</span></label>
+            <input type="text" name="shipping_ward" id="pf_ward" value="<?= e($pWard) ?>" required placeholder="VD: Phương Liên"></div>
+          <div class="form-group"><label>Địa chỉ cụ thể <span class="req">*</span></label>
+            <input type="text" name="shipping_detail" id="pf_detail" value="<?= e($pDetail) ?>" required maxlength="100" placeholder="Số nhà, đường..."></div>
+          <button type="submit" class="btn btn-navy btn-lg">Cập nhật thông tin</button>
         </form>
       </div>
     </div>
@@ -66,16 +117,16 @@
             <div class="form-group"><label>Số điện thoại <span class="req">*</span></label><input type="tel" name="inv_phone" id="inv_phone" value="<?= e($cinv['phone']??'') ?>" maxlength="10" required pattern="0[1-9][0-9]{8}" title="Nhập số điện thoại 10 số, bắt đầu bằng 0" placeholder="0912345678"></div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div class="form-group"><label>Ngân hàng <span class="req">*</span></label>
-              <select name="bank_name" id="inv_bank" required style="width:100%"><option value="">Chọn ngân hàng</option>
+            <div class="form-group"><label>Ngân hàng</label>
+              <select name="bank_name" id="inv_bank" style="width:100%"><option value="">Chọn ngân hàng</option>
                 <?php foreach(['Vietcombank','Techcombank','BIDV','VietinBank','MB Bank','ACB','Sacombank','VPBank','TPBank','HDBank','SHB','SeABank','OCB','LienVietPostBank','MSB','Eximbank','VIB','ABBank','BacABank','NCB','PVcomBank','SCB','CIMB','UOB','BanVietBank','Agribank'] as $bk): ?>
                 <option value="<?= $bk ?>" <?= ($cinv['bank_name']??'')===$bk?'selected':'' ?>><?= $bk ?></option>
                 <?php endforeach; ?>
               </select></div>
-            <div class="form-group"><label>Số tài khoản <span class="req">*</span></label><input type="text" name="bank_account" id="inv_bankno" value="<?= e($cinv['bank_account']??'') ?>" required></div>
+            <div class="form-group"><label>Số tài khoản</label><input type="text" name="bank_account" id="inv_bankno" value="<?= e($cinv['bank_account']??'') ?>"></div>
           </div>
           <div id="invErrors" style="color:#e74c3c;font-size:12px;margin-bottom:10px"></div>
-          <button type="submit" class="btn btn-gold btn-lg" id="custInvBtn">Lưu thông tin hóa đơn</button>
+          <button type="submit" class="btn btn-navy btn-lg" id="custInvBtn">Lưu thông tin hóa đơn</button>
           <div id="custInvStatus" style="margin-top:8px;font-size:12px"></div>
         </form>
       </div>
@@ -129,7 +180,7 @@ var BANK_RULES={"Vietcombank":[9,13],"Techcombank":[14,14],"BIDV":[14,14],"Vieti
     });
   })();
   phoneValidate($('pf_phone'));
-  blockChars($('pf_address'),/[!@#$%^&*()+={}\[\];:'"<>?\/\\|]/g);
+  ['pf_prov','pf_dist','pf_ward','pf_detail'].forEach(function(id){blockChars($(id),/[!@#$%^&*()+={}\[\];:'"<>?\/\\|]/g);});
 
   // Invoice fields
   // Buyer name: only validate on blur, not during typing
@@ -151,15 +202,11 @@ var BANK_RULES={"Vietcombank":[9,13],"Techcombank":[14,14],"BIDV":[14,14],"Vieti
     this.value=v.slice(0,8);
   });
   phoneValidate($('inv_phone'));
-  onlyDigits($('inv_bankno'),20);
+  onlyDigits($('inv_bankno'),13);
 
   // Bank account length based on bank
-  var bankSel=$('inv_bank'),bankNo=$('inv_bankno');
-  if(bankSel&&bankNo){bankSel.addEventListener('change',function(){
-    var r=BANK_RULES[this.value];
-    if(r){bankNo.maxLength=r[1];bankNo.placeholder=r[0]===r[1]?r[0]+' số':r[0]+'-'+r[1]+' số';bankNo.value=bankNo.value.slice(0,r[1]);}
-    else{bankNo.maxLength=20;bankNo.placeholder='Nhập số tài khoản';}
-  });bankSel.dispatchEvent(new Event('change'));}
+  var bankNo=$('inv_bankno');
+  if(bankNo){bankNo.maxLength=13;bankNo.placeholder='10-13 số';}
 
   
   // Email validation
@@ -194,6 +241,7 @@ var BANK_RULES={"Vietcombank":[9,13],"Techcombank":[14,14],"BIDV":[14,14],"Vieti
 
 function saveCustInvoice(e){
   e.preventDefault();
+  var $=function(id){return document.getElementById(id);};
   var errs=[];
   var buyer=$('inv_buyer').value.trim();
   if(!buyer)errs.push('Tên người mua bắt buộc');
@@ -218,22 +266,20 @@ function saveCustInvoice(e){
   var phone=$('inv_phone').value.trim();
   if(!phone)errs.push('SĐT bắt buộc');
   if(!/^0[1-9]\d{8}$/.test(phone))errs.push('SĐT 10 số, đầu số 01-09');
-  if(!$('inv_bank').value)errs.push('Chọn ngân hàng');
   var bkno=$('inv_bankno').value.trim();
-  if(!bkno)errs.push('Số tài khoản bắt buộc');
   var bk=$('inv_bank').value;
-  if(bk&&BANK_RULES[bk]){var r=BANK_RULES[bk];if(bkno.length<r[0]||bkno.length>r[1])errs.push('STK '+bk+' phải '+r[0]+'-'+r[1]+' số');}
-  if(errs.length){$('invErrors').innerHTML=errs.map(function(x){return '⚠ '+x;}).join('<br>');return false;}
+  if(bkno && !/^\d{10,13}$/.test(bkno))errs.push('Số tài khoản phải 10-13 số');
+  if(errs.length){$('invErrors').innerHTML=errs.map(function(x){return '⚠ '+x;}).join('<br>'); if(window.coolToastShow)coolToastShow(errs[0],'⚠️'); return false;}
   $('invErrors').innerHTML='';
   var form=$('custInvoiceForm');var fd=new FormData(form);var data=new URLSearchParams();
   fd.forEach(function(v,k){if(k==='inv_address')data.append('address',v);else if(k==='inv_email')data.append('email',v);else if(k==='inv_phone')data.append('phone',v);else data.append(k,v);});
   $('custInvBtn').disabled=true;$('custInvStatus').innerHTML="<span style='color:#888'>Đang lưu...</span>";
   fetch('/customer/invoice-info',{method:'POST',body:data}).then(function(r){return r.json();}).then(function(d){
     $('custInvBtn').disabled=false;
-    if(d.ok)$('custInvStatus').innerHTML="<span style='color:#27ae60'>✅ Đã lưu!</span>";
-    else $('custInvStatus').innerHTML="<span style='color:#e74c3c'>Lỗi: "+(d.error||'')+"</span>";
+    if(d.ok){$('custInvStatus').innerHTML="<span style='color:#27ae60'>✅ Đã lưu!</span>"; if(window.coolToastShow)coolToastShow('Đã lưu thông tin hóa đơn!','✅');}
+    else {$('custInvStatus').innerHTML="<span style='color:#e74c3c'>Lỗi: "+(d.error||'')+"</span>"; if(window.coolToastShow)coolToastShow(d.error||'Không thể lưu thông tin hóa đơn','⚠️');}
     setTimeout(function(){$('custInvStatus').innerHTML='';},3000);
-  }).catch(function(){$('custInvBtn').disabled=false;$('custInvStatus').innerHTML="<span style='color:#e74c3c'>Lỗi kết nối</span>";});
+  }).catch(function(){$('custInvBtn').disabled=false;$('custInvStatus').innerHTML="<span style='color:#e74c3c'>Lỗi kết nối</span>"; if(window.coolToastShow)coolToastShow('Lỗi kết nối, vui lòng thử lại','⚠️');});
   return false;
 }
 </script>

@@ -1,20 +1,28 @@
 <?php require __DIR__ . '/../partials/dashboard-head.php'; ?>
+<?php $listRole = $listRole ?? 'customer'; $listRoute = $listRoute ?? '/admin/users'; ?>
 <div class="dash-head">
-  <h1>Quản lý người dùng</h1>
+  <h1><?= ($listRole??'')==='staff' ? 'Nhân viên' : (($listRole??'')==='admin' ? 'Quản trị viên' : 'Khách hàng') ?></h1>
   <div style="display:flex;gap:8px;align-items:center">
-    <a href="/admin/users/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
+    <?php if(in_array(($listRole??'customer'), ['customer','staff'])): ?>
+    <a href="#" onclick="csColPick({section:'users',url:'/admin/users/export-csv',title:'<?= ($listRole??'')==='staff'?'Nhân viên':(($listRole??'')==='admin'?'Quản trị viên':'Khách hàng') ?>',extra:{role:'<?= e($listRole??'customer') ?>'}});return false" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
     <button type="button" onclick="document.getElementById('csvImportUsers').style.display='flex'" class="btn btn-outline-navy btn-sm">↑ Nhập CSV</button>
-    <a href="/admin/users/new" class="btn btn-navy btn-sm">+ Thêm tài khoản</a>
+    <?php endif; ?>
+    <a href="/admin/users/new?role=<?= e($listRole??'customer') ?>" class="btn btn-navy btn-sm">+ <?= ($listRole??'')==='staff' ? 'Thêm nhân viên' : (($listRole??'')==='admin' ? 'Thêm quản trị viên' : 'Thêm tài khoản') ?></a>
   </div>
 </div>
-<form method="get" action="/admin/users" style="background:#fff;padding:14px 16px;border-radius:8px;border:1px solid var(--line);margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+<style>
+.uf-filter { align-items:flex-end !important; }
+.uf-filter .frm-input, .uf-filter .cs-sel-trg, .uf-filter .btn { height:42px !important; min-height:42px !important; box-sizing:border-box !important; }
+.uf-filter .btn { display:inline-flex !important; align-items:center !important; }
+</style>
+<form method="get" action="<?= e($listRoute) ?>" class="uf-filter" style="background:#fff;padding:14px 16px;border-radius:8px;border:1px solid var(--line);margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
   <div style="flex:2;min-width:200px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">TÌM KIẾM</label>
     <input type="text" name="q" class="frm-input" style="border-radius:6px;width:100%" value="<?= e($_GET['q']??'') ?>" placeholder="Email, họ tên, SĐT...">
   </div>
   <div style="flex:1;min-width:140px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">TRẠNG THÁI</label>
-    <select name="status" class="frm-input" style="border-radius:6px;width:100%">
+    <select name="status" class="frm-input js-cdd" style="border-radius:6px;width:100%">
       <option value="">Tất cả</option>
       <option value="active" <?= ($_GET['status']??'')==='active'?'selected':'' ?>>Hoạt động</option>
       <option value="suspended" <?= ($_GET['status']??'')==='suspended'?'selected':'' ?>>Đang ngưng</option>
@@ -22,20 +30,20 @@
   </div>
   <div style="flex:1;min-width:140px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">TỪ NGÀY</label>
-    <input type="date" name="from" class="frm-input" style="border-radius:6px;width:100%" value="<?= e($_GET['from']??'') ?>">
+    <input type="date" name="from" class="frm-input js-date" style="border-radius:6px;width:100%" value="<?= e($_GET['from']??'') ?>">
   </div>
   <div style="flex:1;min-width:140px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">ĐẾN NGÀY</label>
-    <input type="date" name="to" class="frm-input" style="border-radius:6px;width:100%" value="<?= e($_GET['to']??'') ?>">
+    <input type="date" name="to" class="frm-input js-date" style="border-radius:6px;width:100%" value="<?= e($_GET['to']??'') ?>">
   </div>
   <button type="submit" class="btn btn-navy btn-sm" style="border-radius:6px">Lọc</button>
-  <a href="/admin/users" class="btn btn-outline-navy btn-sm" style="border-radius:6px">Đặt lại</a>
+  <a href="<?= e($listRoute) ?>" class="btn btn-outline-navy btn-sm" style="border-radius:6px">Đặt lại</a>
 </form>
 <div class="panel">
   <div style="padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:#888;display:flex;justify-content:space-between;align-items:center">
     <span>Hiển thị <?= count($users) ?>/<?= $total ?> tài khoản (trang <?= $page ?>/<?= $totalPages ?>)</span>
     <div>
-      <button id="bulkDeleteBtn" onclick="bulkDeleteUsers()" class="btn btn-sm" style="background:#dc2626;color:#fff;border:none;border-radius:4px;font-weight:600;padding:6px 14px;display:none;cursor:pointer">Xóa đã chọn</button>
+      <button id="bulkDeleteBtn" onclick="bulkDeleteUsers()" class="btn btn-sm" style="background:#dc2626;color:#fff;border:none;border-radius:4px;font-weight:600;padding:6px 14px;display:none;cursor:pointer;text-transform:none;letter-spacing:.01em">Xóa đã chọn</button>
     </div>
   </div>
   <table class="tbl">
@@ -52,7 +60,7 @@
       $isSuspended = $u['status'] !== 'active' || (!empty($u['suspended_until']) && strtotime($u['suspended_until']) > time());
       $suspendedUntil = !empty($u['suspended_until']) && strtotime($u['suspended_until']) > time() ? date('d/m/Y', strtotime($u['suspended_until'])) : null;
     ?>
-    <tr style="<?= $isSuspended ? 'background:#fff5f5' : '' ?>">
+    <tr id="u<?= $u['id'] ?>" style="<?= $isSuspended ? 'background:#fff5f5' : '' ?>">
       <td><input type="checkbox" class="row-check" value="<?=$u['id']?>"></td>
       <td class="fs-12 text-muted"><?= $stt ?></td>
       <td>
@@ -78,17 +86,26 @@
         <?php endif; ?>
       </td>
       <td class="fs-12"><?= date('d/m/Y H:i', strtotime($u['created_at'])) ?></td>
-      <td>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
-          <a href="/admin/users/<?= $u['id'] ?>/edit" class="btn btn-sm" style="background:#1a3258;color:#fff;text-align:center;padding:5px 0;border-radius:4px;font-weight:600">Sửa</a>
+      <td style="padding:10px 12px;white-space:nowrap">
+        <div style="display:flex;flex-wrap:nowrap;gap:5px;align-items:center">
+          <a href="/admin/users/<?= $u['id'] ?>/edit" class="btn btn-sm" style="background:#1a3258;color:#fff;text-align:center;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em">Sửa</a>
 
-          <button class="btn btn-sm" style="background:#3b82f6;color:#fff;width:100%;padding:5px 0;border-radius:4px;font-weight:600" onclick="showUserDetail(<?= $u['id'] ?>)">Chi tiết</button>
+          <button class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em" onclick="showUserDetail(<?= $u['id'] ?>)">Chi tiết</button>
           <?php if ($isSuspended): ?>
-            <form method="post" action="/admin/users/<?= $u['id'] ?>/unlock" style="display:block"><?= csrfField() ?>
-              <button class="btn btn-sm" style="background:#27ae60;color:#fff;width:100%;padding:5px 0;border-radius:4px;font-weight:600">Mở</button></form>
+            <form method="post" action="/admin/users/<?= $u['id'] ?>/unlock" style="display:block"><?= csrfField() ?><input type="hidden" name="back" value="<?= e($_SERVER['REQUEST_URI'] ?? $listRoute) ?>">
+              <button class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em">Mở</button></form>
           <?php else: ?>
-            <button class="btn btn-sm" style="background:#e74c3c;color:#fff;width:100%;padding:5px 0;border-radius:4px;font-weight:600" onclick="showSuspendModal(<?= $u['id'] ?>,'<?= e($u['full_name']) ?>')">Ngưng</button>
+            <button class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em" onclick="showSuspendModal(<?= $u['id'] ?>,'<?= e($u['full_name']) ?>')">Ngưng</button>
           <?php endif; ?>
+        <?php if(in_array(($listRole??''), ['staff','admin'])): ?>
+        <button type="button" class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em" onclick="showResetPwModal(<?= $u['id'] ?>,'<?= e($u['full_name']) ?>')">Cấp lại MK</button>
+        <?php endif; ?>
+        <form method="post" action="/admin/users/bulk-delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa vĩnh viễn tài khoản này? Hành động này không thể hoàn tác.')">
+          <?= csrfField() ?>
+          <input type="hidden" name="ids[]" value="<?= $u['id'] ?>">
+          <input type="hidden" name="back" value="<?= e($listRoute ?? '/admin/users') ?>">
+          <button type="submit" title="Xóa tài khoản" class="btn btn-sm" style="background:#fff;color:#6b7280;border:1.5px solid #d1d5db;padding:6px 9px;border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+        </form>
         </div>
       </td>
     </tr>
@@ -100,7 +117,7 @@
   <div style="padding:12px 16px;display:flex;gap:6px;justify-content:center">
     <?php
 require_once __DIR__.'/../partials/pagination.php';
-renderPagination($page, $totalPages, '/admin/users', ['q' => $_GET['q'] ?? '', 'role' => $_GET['role'] ?? '']);
+renderPagination($page, $totalPages, $listRoute, ['q' => $_GET['q'] ?? '', 'role' => $_GET['role'] ?? '']);
 ?>
   </div>
   <?php endif; ?>
@@ -111,7 +128,7 @@ renderPagination($page, $totalPages, '/admin/users', ['q' => $_GET['q'] ?? '', '
   <div style="background:#fff;border-radius:10px;padding:28px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.2)">
     <h3 style="margin:0 0 16px;color:#1a3258">Ngưng tài khoản</h3>
     <p style="margin:0 0 16px;color:#555">Tài khoản: <strong id="suspendName"></strong></p>
-    <form method="post" id="suspendForm"><?= csrfField() ?>
+    <form method="post" id="suspendForm"><?= csrfField() ?><input type="hidden" name="back" value="<?= e($_SERVER['REQUEST_URI'] ?? $listRoute) ?>">
       <div class="form-group">
         <label>Số ngày ngưng (để trống = ngưng vĩnh viễn)</label>
         <input type="number" name="days" min="1" max="3650" placeholder="VD: 7" style="width:100%">
@@ -132,6 +149,40 @@ function showSuspendModal(id,name){
   document.getElementById('suspendName').textContent=name;
   document.getElementById('suspendForm').action='/admin/users/'+id+'/suspend';
   document.getElementById('suspendModal').style.display='flex';
+}
+</script>
+
+<!-- Modal Cấp lại mật khẩu nhân viên -->
+<div id="resetPwModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:10px;padding:28px;max-width:420px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.2)">
+    <h3 style="margin:0 0 8px;color:#1a3258">Cấp lại mật khẩu</h3>
+    <p style="margin:0 0 14px;color:#555;font-size:13px">Nhân viên: <strong id="resetPwName"></strong><br><span style="color:#888;font-size:12px">Mật khẩu cũ đã được mã hóa nên không xem lại được. Đặt mật khẩu mới rồi gửi cho nhân viên.</span></p>
+    <form method="post" id="resetPwForm"><?= csrfField() ?><input type="hidden" name="back" value="<?= e($_SERVER['REQUEST_URI'] ?? $listRoute) ?>">
+      <div class="form-group">
+        <label>Mật khẩu mới <span style="color:#e74c3c">*</span></label>
+        <div style="display:flex;gap:8px">
+          <input type="text" name="new_password" id="resetPwInput" required minlength="6" placeholder="Tối thiểu 6 ký tự" style="flex:1">
+          <button type="button" class="btn btn-outline-navy btn-sm" onclick="genPw()">Ngẫu nhiên</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+        <button type="button" onclick="document.getElementById('resetPwModal').style.display='none'" class="btn btn-outline-navy">Hủy</button>
+        <button type="submit" class="btn btn-navy">Cấp lại mật khẩu</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+function showResetPwModal(id,name){
+  document.getElementById('resetPwName').textContent=name;
+  document.getElementById('resetPwForm').action='/admin/users/'+id+'/reset-password';
+  document.getElementById('resetPwInput').value='';
+  document.getElementById('resetPwModal').style.display='flex';
+}
+function genPw(){
+  var ch='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'; var p='';
+  for(var i=0;i<10;i++) p+=ch.charAt(Math.floor(Math.random()*ch.length));
+  document.getElementById('resetPwInput').value=p;
 }
 </script>
 
@@ -242,14 +293,15 @@ function updateBulkBtn() {
   if (btn) btn.style.display = checked > 0 ? 'inline-block' : 'none';
   if (btn && checked > 0) btn.textContent = 'Xóa đã chọn (' + checked + ')';
 }
-function bulkDeleteUsers() {
+async function bulkDeleteUsers() {
   var ids = [];
   document.querySelectorAll('.row-check:checked').forEach(function(cb){ ids.push(cb.value); });
   if (!ids.length) return;
-  if (!confirm('Bạn có chắc muốn xóa ' + ids.length + ' tài khoản đã chọn?')) return;
+  if (!(await csConfirmAsync('Bạn có chắc muốn xóa ' + ids.length + ' tài khoản đã chọn?'))) return;
   var form = document.createElement('form');
   form.method = 'POST';
   form.action = '/admin/users/bulk-delete';
+  var __bk=document.createElement('input'); __bk.type='hidden'; __bk.name='back'; __bk.value='<?= e($listRoute ?? '/admin/users') ?>'; form.appendChild(__bk);
   var csrf = document.createElement('input');
   csrf.type = 'hidden'; csrf.name = '_csrf';
   csrf.value = document.querySelector('meta[name=csrf-token]')?.content || document.querySelector('input[name=_csrf]')?.value || '';
@@ -263,6 +315,29 @@ function bulkDeleteUsers() {
   form.submit();
 }
 </script>
+<?php if(($listRole??'')==='admin'): ?>
+<div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-top:18px">
+  <h3 style="margin:0 0 4px;color:var(--navy)">Nhật ký đổi mật khẩu</h3>
+  <p style="margin:0 0 14px;font-size:12px;color:#888;line-height:1.5">Theo dõi việc đổi mật khẩu của các tài khoản quản trị viên: ai đổi, khi nào, bằng cách nào. Vì mật khẩu được mã hóa 1 chiều nên hệ thống <strong>không lưu và không hiển thị mật khẩu thật</strong>. Cần đặt lại mật khẩu cho admin, hãy dùng nút <strong>Cấp lại MK</strong> ở bảng trên.</p>
+  <?php $__pwLog = $pwLog ?? []; if(empty($__pwLog)): ?>
+    <div style="background:#f8f9fa;padding:16px;border-radius:8px;text-align:center;color:#888;font-size:13px">Chưa có thay đổi mật khẩu nào được ghi nhận.</div>
+  <?php else: $__pml=['self_change'=>'Admin tự đổi (Cài đặt)','forgot_otp'=>'Quên mật khẩu (OTP)','superadmin_reset'=>'Super admin cấp lại','admin_reset'=>'Admin cấp lại']; ?>
+    <div style="overflow-x:auto"><table class="tbl" style="width:100%;min-width:560px">
+      <thead><tr><th>Email admin</th><th>Thời gian</th><th>Cách đổi</th><th>Người thực hiện</th></tr></thead>
+      <tbody>
+      <?php foreach($__pwLog as $__lg): $__m=json_decode($__lg['meta']??'[]',true)?:[]; $__mk=$__m['method']??''; ?>
+        <tr>
+          <td><?= e(($__m['target_email']??'') ?: '—') ?></td>
+          <td style="white-space:nowrap"><?= e(fmtVnDateTime($__lg['created_at']??'')) ?></td>
+          <td><?= e($__pml[$__mk] ?? ($__mk ?: '—')) ?></td>
+          <td><?= e(($__m['actor_email']??'') ?: '— (chính chủ)') ?></td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table></div>
+  <?php endif; ?>
+</div>
+<?php endif; ?>
 <?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>
 
 <div id="csvImportUsers" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">
@@ -270,7 +345,8 @@ function bulkDeleteUsers() {
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="margin:0;color:var(--navy)"> Nhập người dùng từ CSV</h3><button onclick="document.getElementById('csvImportUsers').style.display='none'" style="background:none;border:none;font-size:22px;cursor:pointer">&times;</button></div>
 <form method="post" action="/admin/users/import-csv" enctype="multipart/form-data">
 <input type="hidden" name="_csrf" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
-<div style="margin-bottom:12px;font-size:12px;color:#666;background:#f0f4ff;padding:10px;border-radius:6px">Cột: full_name, email, phone, role, address<br><a href="/admin/users/export-csv?template=1" style="color:var(--navy);font-weight:600">⬇ Tải file mẫu</a></div>
+<input type="hidden" name="import_role" value="<?= e($listRole??'customer') ?>">
+<div style="margin-bottom:12px;font-size:12px;color:#666;background:#f0f4ff;padding:10px;border-radius:6px">Cột: Họ và tên, Email, SĐT, Vai trò, Trạng thái, Địa chỉ<br><a href="/admin/users/export-csv?role=<?= e($listRole??'customer') ?>" style="color:var(--navy);font-weight:600">⬇ Tải file mẫu</a></div>
 <div class="csv-dropzone" id="dz-users">
   <input type="file" name="csv_file" accept=".csv" required>
   <span class="dz-icon">📂</span>

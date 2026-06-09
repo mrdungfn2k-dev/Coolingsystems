@@ -1,16 +1,24 @@
+<?php
+$displayPrice = $p['price'] ?? 0;
+$displayOriginalPrice = $p['original_price'] ?? null;
+if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $p['price']) {
+    $displayPrice = $p['sale_price'];
+    $displayOriginalPrice = $p['price'];
+}
+?>
 <div class="prod-card">
   <!-- Ảnh sản phẩm — bấm vào xem chi tiết -->
-  <a href="/products/<?= $p['id'] ?>" class="prod-img-wrap" style="display:block;background:linear-gradient(135deg,#f7f8fb,#e8edf5);aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;margin-bottom:10px">
+  <a href="/products/<?= $p['id'] ?>" class="prod-img-wrap" style="display:block;background:#fff;aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;margin-bottom:10px<?= !empty($p['main_image']) ? ';--pcbg:url(\'/uploads/products/'.e($p['main_image']).'\')' : '' ?>">
     <?php if ($p['main_image']): ?>
-      <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" loading="lazy" style="width:100%;height:100%;object-fit:contain;padding:12px">
+      <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" loading="lazy" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover;padding:0">
     <?php else: ?>
       <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ccc">
         <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         <div style="font-size:10px;margin-top:4px"><?= e($p['oem_code']??$p['sku']??'') ?></div>
       </div>
     <?php endif; ?>
-    <?php if (!empty($p['original_price']) && $p['original_price'] > $p['price']): ?>
-      <span style="position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700">-<?= round(100-$p['price']/$p['original_price']*100) ?>%</span>
+    <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+      <span style="position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700">-<?= round(100-$displayPrice/$displayOriginalPrice*100) ?>%</span>
     <?php endif; ?>
     <?php 
       $is_new_badge = !empty($p['is_new']);
@@ -21,7 +29,7 @@
       }
     ?>
     <?php if ($is_new_badge): ?>
-      <span style="position:absolute;top:<?= !empty($p['original_price'])&&$p['original_price']>$p['price'] ? 30 : 8 ?>px;left:8px;background:var(--gold-warm);color:var(--navy-dark);padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">MỚI</span>
+      <span style="position:absolute;top:<?= !empty($displayOriginalPrice)&&$displayOriginalPrice>$displayPrice ? 30 : 8 ?>px;left:8px;background:var(--gold-warm);color:var(--navy-dark);padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">MỚI</span>
     <?php endif; ?>
   </a>
 
@@ -35,23 +43,17 @@
 
   <!-- Giá + nút giỏ hàng cùng hàng -->
   <div class="prod-price-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:4px">
-    
-<div>
-      <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($p['price']) ?></span>
-      <?php if (!empty($p['original_price']) && $p['original_price'] > $p['price']): ?>
-        <span style="text-decoration:line-through;color:var(--ink-4);font-size:11px;margin-left:4px"><?= vnd($p['original_price']) ?></span>
+    <div>
+      <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($displayPrice) ?></span>
+      <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+        <span style="text-decoration:line-through;color:var(--ink-4);font-size:11px;margin-left:4px"><?= vnd($displayOriginalPrice) ?></span>
       <?php endif; ?>
     </div>
     <!-- Nút giỏ hàng icon màu xám -->
     <?php if (($p['stock']??0) > 0): ?>
-    <form method="post" action="/customer/cart/quick-add">
-      <?= csrfField() ?>
-      <input type="hidden" name="product_id" value="<?= $p['id'] ?>">
-      <input type="hidden" name="quantity" value="1">
-      <button type="submit" title="Thêm vào giỏ hàng" style="width:34px;height:34px;border-radius:50%;background:#f0f2f7;border:1.5px solid #d0d5e0;color:#6b7a99;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background 0.2s,color 0.2s" onmouseover="this.style.background='#1a3258';this.style.color='#fff'" onmouseout="this.style.background='#f0f2f7';this.style.color='#6b7a99'">
+    <button type="button" onclick="ajaxAddCart(<?= $p['id'] ?>, this)" title="Thêm vào giỏ hàng" style="width:34px;height:34px;border-radius:50%;background:#f0f2f7;border:1.5px solid #d0d5e0;color:#6b7a99;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background 0.2s,color 0.2s" onmouseover="this.style.background='#1a3258';this.style.color='#fff'" onmouseout="this.style.background='#f0f2f7';this.style.color='#6b7a99'">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       </button>
-    </form>
     <?php endif; ?>
   </div>
 

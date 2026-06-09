@@ -6,9 +6,10 @@
 </div>
 
 <?php $inv = isset($editUser['id']) ? dbGet("SELECT * FROM user_invoice_info WHERE user_id=?", [$editUser['id']]) : []; ?>
+<?php $ctxRole = isset($editUser['id']) ? ($editUser['role'] ?? 'customer') : (in_array($_GET['role'] ?? '', ['customer','staff','admin']) ? $_GET['role'] : 'customer'); $isCustomerForm = ($ctxRole === 'customer'); ?>
 
 <!-- 2 panels 50/50 -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+<div style="display:grid;grid-template-columns:<?= $isCustomerForm ? '1fr 1fr' : '1fr' ?>;gap:20px;align-items:start;">
 
   <!-- LEFT: Thông tin tài khoản -->
   <div class="panel">
@@ -16,6 +17,7 @@
     <div class="panel-body">
       <form method="post" action="<?= isset($editUser['id']) ? '/admin/users/'.$editUser['id'].'/edit' : '/admin/users/new' ?>" id="userAccountForm">
         <?= csrfField() ?>
+        <?php if(!$isCustomerForm): ?><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 18px"><?php endif; ?>
         <div class="form-group">
           <label>Họ và tên <span class="req">*</span></label>
           <input type="text" name="full_name" id="ueNameF" value="<?= e($editUser['full_name']??'') ?>" required>
@@ -32,14 +34,7 @@
           <label>Địa chỉ</label>
           <input type="text" name="address" id="ueAddrF" value="<?= e($editUser['address']??'') ?>">
         </div>
-        <div class="form-group">
-          <label>Vai trò</label>
-          <select name="role" <?= ($editUser['id']??0)==1 ? 'disabled' : '' ?>>
-            <option value="customer" <?= ($editUser['role']??'')==='customer'?'selected':'' ?>>Khách hàng</option>
-            <option value="staff" <?= ($editUser['role']??'')==='staff'?'selected':'' ?>>Nhân viên</option>
-            <option value="admin" <?= ($editUser['role']??'')==='admin'?'selected':'' ?>>Quản trị viên</option>
-          </select>
-        </div>
+        <input type="hidden" name="role" value="<?= e($ctxRole) ?>">
         <?php if (!isset($editUser['id'])): ?>
         <div class="form-group">
           <label>Mật khẩu <span class="req">*</span></label>
@@ -57,17 +52,19 @@
           <label>Ghi chú nội bộ</label>
           <input type="text" name="notes" value="<?= e($editUser['notes']??'') ?>" placeholder="Ghi chú về tài khoản này">
         </div>
+        <?php if(!$isCustomerForm): ?></div><?php endif; ?>
         <button type="submit" class="btn btn-gold" id="ueSubmitBtn">Lưu tài khoản</button>
       </form>
 
       <?php if (isset($editUser['id']) && $editUser['role'] === 'staff'): ?>
       <hr style="margin:24px 0">
       <h3 style="font-size:16px;color:#1a3258">Phân quyền nhân viên</h3>
-      <?php $perms = dbGet('SELECT * FROM staff_permissions WHERE user_id=?', [$editUser['id']]) ?: []; ?>
+      <p style="font-size:12px;color:#888;margin:4px 0 0">Tích một nhóm = trao toàn bộ quyền của nhóm đó (vd: <b>Quản lý sản phẩm</b> = Sản phẩm + Hãng xe + Thương hiệu + Danh mục). Nhân viên sẽ hiển thị ở trang <b>Phân quyền NV</b> theo các nhóm đã tích.</p>
+      <?php $asgN = array_column(dbAll("SELECT sr.name FROM staff_role_assignments sra INNER JOIN staff_roles sr ON sr.id=sra.role_id WHERE sra.user_id=?", [$editUser['id']]), 'name'); $deptMap=['can_products'=>'Quản lý sản phẩm','can_orders'=>'Quản lý đơn hàng','can_content'=>'Quản lý nội dung','can_users'=>'Quản lý người dùng','can_staff'=>'Quản lý nhân viên','can_vouchers'=>'Quản lý voucher','can_reviews'=>'Kiểm duyệt đánh giá']; $perms=[]; foreach($deptMap as $dk=>$dn){ $perms[$dk]=in_array($dn,$asgN)?1:0; } ?>
       <form method="post" action="/admin/users/<?= $editUser['id'] ?>/permissions">
         <?= csrfField() ?>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-          <?php $plist=['can_products'=>'Quản lý sản phẩm','can_orders'=>'Quản lý đơn hàng','can_content'=>'Quản lý nội dung','can_users'=>'Quản lý người dùng','can_vouchers'=>'Quản lý voucher','can_reviews'=>'Kiểm duyệt đánh giá']; ?>
+          <?php $plist=['can_products'=>'Quản lý sản phẩm','can_orders'=>'Quản lý đơn hàng','can_content'=>'Quản lý nội dung','can_users'=>'Quản lý người dùng','can_staff'=>'Quản lý nhân viên','can_vouchers'=>'Quản lý voucher','can_reviews'=>'Kiểm duyệt đánh giá']; ?>
           <?php foreach ($plist as $key=>$label): ?>
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px;border:1px solid #e0e6f0;border-radius:6px;font-size:13px;background:<?= !empty($perms[$key])?'#f0f4ff':'#fff' ?>">
             <input type="checkbox" name="<?= $key ?>" value="1" <?= !empty($perms[$key])?'checked':'' ?>>
@@ -81,6 +78,7 @@
     </div>
   </div>
 
+<?php if ($isCustomerForm): ?>
   <!-- RIGHT: Thông tin xuất hóa đơn -->
   <div class="panel" id="invoice-section">
     <div style="padding:14px 20px;border-bottom:1px solid var(--line);font-weight:700;font-size:15px;color:#1a3258">Thông tin xuất hóa đơn</div>
@@ -94,6 +92,7 @@
       <?php endif; ?>
     </div>
   </div>
+<?php endif; ?>
 
 <script>
 // Block special chars in name and address
@@ -131,6 +130,7 @@ if(pwdEl){
   });
 }
 
+<?php if ($isCustomerForm): ?>
 function saveInvoice(e) {
   e.preventDefault();
   var form = document.getElementById("invoiceForm");
@@ -190,8 +190,10 @@ document.getElementById("userAccountForm").addEventListener("submit", function(e
   sessionStorage.setItem("pendingInvoice", JSON.stringify(invData));
 });
 <?php endif; ?>
+<?php endif; ?>
 </script>
 
+<?php if ($isCustomerForm): ?>
 <script src="/js/invoice-validation.js"></script>
 <script>
 setupInvoiceForm('invoiceForm');
@@ -227,4 +229,5 @@ function saveInvoiceAdmin() {
     });
 }
 </script>
+<?php endif; ?>
 <?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

@@ -1,12 +1,17 @@
 <?php require __DIR__ . '/../partials/head.php'; ?>
 <section class="block"><div class="wrap">
   <div class="sec-head"><div class="title"><span class="bar"></span><h1 style="font-size:22px">Tin tức Cooling</h1></div></div>
+<style>
+  .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 16px; }
+  @media(max-width: 900px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width: 600px) { .news-grid { grid-template-columns: 1fr; } }
+</style>
   <?php if ($articles): ?>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:16px">
+  <div class="news-grid">
     <?php foreach ($articles as $a): ?>
     <a href="/news/<?= e($a['slug']) ?>" style="text-decoration:none;color:inherit;display:block;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.07);transition:transform 0.2s,box-shadow 0.2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,0.07)'">
       <?php if ($a['thumbnail']): ?>
-        <img src="/uploads/news/<?= e($a['thumbnail']) ?>" alt="<?= e($a['title']) ?>" style="width:100%;height:180px;object-fit:cover">
+        <img src="/uploads/news/<?= e($a['thumbnail']) ?>" alt="<?= e($a['title']) ?>" style="width:100%;height:180px;object-fit:cover;background:#fff">
       <?php else: ?>
         <div style="width:100%;height:180px;background:linear-gradient(135deg,#1a3258,#2c4a7c);display:flex;align-items:center;justify-content:center">
           <span style="font-size:36px"></span>

@@ -45,15 +45,27 @@ function requireStaffPermission(string $permission, string $redirect = '/auth/lo
     if ($user['role'] === 'admin') return $user;
     // Staff: check role-based permissions
     if ($user['role'] === 'staff') {
-        $roleAssignment = dbGet(
+        $roleAssignment = dbAll(
             "SELECT sr.permissions FROM staff_role_assignments sra 
              INNER JOIN staff_roles sr ON sr.id = sra.role_id 
-             WHERE sra.user_id = ? ORDER BY sra.assigned_at DESC LIMIT 1",
+             WHERE sra.user_id = ?",
             [$user['id']]
         );
-        $perms = json_decode($roleAssignment['permissions'] ?? '[]', true) ?: [];
-        if (in_array($permission, $perms)) return $user;
+        $perms = []; foreach (($roleAssignment ?: []) as $rr) { $a = json_decode($rr['permissions'] ?? '[]', true); if (is_array($a)) $perms = array_merge($perms, $a); }
+        foreach (explode('|', $permission) as $__pp) { if (in_array($__pp, $perms)) return $user; }
     }
     header('Location: ' . $redirect);
     exit;
+}
+
+// True if this user has at least one staff role assignment (i.e. is an ACTIVE assigned staff).
+function staffHasAssignment(int $uid): bool {
+    return (bool) dbGet('SELECT 1 FROM staff_role_assignments WHERE user_id=? LIMIT 1', [$uid]);
+}
+
+// Super admin = role 'admin' + is_superadmin flag. Highest level; can manage admins.
+function requireSuperAdmin(string $redirect = '/admin'): array {
+    $user = requireLogin($redirect);
+    if (empty($user['is_superadmin'])) { header('Location: ' . $redirect); exit; }
+    return $user;
 }

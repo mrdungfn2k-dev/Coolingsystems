@@ -20,21 +20,21 @@
 }
 .pay-select:disabled { cursor:not-allowed; opacity:0.8; background-image:none; padding-right:8px; }
 .pay-badge { display:inline-block; font-size:11px; font-weight:700; white-space:nowrap; padding:3px 8px; border-radius:12px; }
-.pay-unpaid { color:#d97706; background:#fffbeb; border:1px solid #fde68a; }
-.pay-partial { color:#9d174d; background:#fdf2f8; border:1px solid #fbcfe8; }
-.pay-paid { color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; }
-.pay-refunded { color:#7e22ce; background:#f3e8ff; border:1px solid #d8b4fe; }
+.pay-unpaid { color:#1a3258; background:#eef3fb; border:1px solid #1a3258; }
+.pay-partial { color:#1a3258; background:#eef3fb; border:1px solid #1a3258; }
+.pay-paid { color:#1a3258; background:#eef3fb; border:1px solid #1a3258; }
+.pay-refunded { color:#1a3258; background:#eef3fb; border:1px solid #1a3258; }
 </style>
 
 <!-- Filter bar -->
-<form method="get" action="/admin/orders" style="background:#fff;padding:14px 16px;border-radius:8px;border:1px solid var(--line);margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+<form method="get" action="/admin/orders" class="admin-filter" style="background:#fff;padding:14px 16px;border-radius:8px;border:1px solid var(--line);margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
   <div style="flex:1;min-width:180px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">TÌM KIẾM</label>
-    <input type="text" name="q" value="<?= e($_GET['q']??'') ?>" placeholder="Mã đơn, tên KH, SĐT...">
+    <input type="text" name="q" class="form-control" value="<?= e($_GET['q']??'') ?>" placeholder="Mã đơn, tên KH, SĐT..." style="width:100%">
   </div>
   <div style="min-width:140px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">GIAO HÀNG</label>
-    <select name="delivery">
+    <select name="delivery" class="form-control js-cdd" style="width:100%">
       <option value="">Tất cả</option>
       <option value="pending" <?= ($_GET['delivery']??'')==='pending'?'selected':'' ?>>Đang chờ</option>
       <option value="received" <?= ($_GET['delivery']??'')==='received'?'selected':'' ?>>Tiếp nhận</option>
@@ -46,15 +46,15 @@
   </div>
   <div style="min-width:140px">
     <label style="font-size:11px;font-weight:700;color:#888;display:block;margin-bottom:4px">THANH TOÁN</label>
-    <select name="payment">
+    <select name="payment" class="form-control js-cdd" style="width:100%">
       <option value="">Tất cả</option>
       <option value="unpaid" <?= ($_GET['payment']??'')==='unpaid'?'selected':'' ?>>Chưa thanh toán</option>
       <option value="partial_paid" <?= ($_GET['payment']??'')==='partial_paid'?'selected':'' ?>>TT một phần</option>
       <option value="paid" <?= ($_GET['payment']??'')==='paid'?'selected':'' ?>>Đã thanh toán</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-navy btn-sm" style="padding:0 20px">Lọc</button>
-  <a href="/admin/orders" class="btn btn-outline-navy btn-sm" style="padding:0 15px">Đặt lại</a>
+  <button type="submit" class="btn btn-navy" style="height:42px;padding:0 24px">Lọc</button>
+  <a href="/admin/orders" class="btn btn-outline-navy" style="height:42px;padding:0 20px;display:flex;align-items:center;">Đặt lại</a>
 </form>
 
 <div class="panel">
@@ -66,7 +66,7 @@
       <tr>
         <th>Mã đơn</th>
         <th>Khách hàng</th>
-        <th>NV tạo hộ</th>
+        <th>Người tạo</th>
         <th>Tổng tiền</th>
         <th style="width:90px">Hình thức TT</th>
         <th style="width:140px">Giao hàng</th>
@@ -82,17 +82,17 @@
       $payStatus = $o['payment_status'] ?? 'unpaid';
       $payMethod = $o['payment_method'] ?? 'cod';
       $payType   = $o['payment_type'] ?? 'cod';
-      $ptMap = ['cod'=>'COD','bank_transfer'=>'CK trước','deposit_70'=>'Cọc 70%','full_prepay'=>'TT 100%'];
+      $ptMap = ['cod'=>'COD','bank_transfer'=>'CK trước', 'bank'=>'CK trước','deposit_70'=>'Cọc 70%','full_prepay'=>'TT 100%'];
 
       // Delivery status config
       $dMap = [
-        'pending'    => ['#f3f4f6','#4b5563','Đang chờ'],
-        'received'   => ['#eff6ff','#1d4ed8','Tiếp nhận'],
-        'delivering' => ['#fef3c7','#d97706','Đang giao'],
-        'delivered'  => ['#ecfdf5','#059669','Đã giao'],
-        'completed'  => ['#ecfdf5','#047857','Đã hoàn thành'],
-        'cancelled'  => ['#fef2f2','#dc2626','Hủy đơn'],
-        'returned'   => ['#f3e8ff','#7e22ce','Đã trả hàng']
+        'pending'    => ['#eef3fb','#1a3258','Đang chờ'],
+        'received'   => ['#eef3fb','#1a3258','Tiếp nhận'],
+        'delivering' => ['#eef3fb','#1a3258','Đang giao'],
+        'delivered'  => ['#eef3fb','#1a3258','Đã giao'],
+        'completed'  => ['#eef3fb','#1a3258','Đã hoàn thành'],
+        'cancelled'  => ['#eef3fb','#1a3258','Hủy đơn'],
+        'returned'   => ['#eef3fb','#1a3258','Đã trả hàng']
       ];
       $dCfg = $dMap[$delStatus] ?? $dMap['pending'];
 
@@ -107,7 +107,7 @@
       $isLocked    = $isCompleted || $isCancelled || $isReturned;
 
       // Payment locked if: completed, cancelled, returned, OR payment method is QR/bank_transfer (already paid)
-      $isQrPayment = in_array($payMethod, ['bank_transfer']) && $payType !== 'cod';
+      $isQrPayment = in_array($payMethod, ['bank_transfer', 'bank']) && $payType !== 'cod';
       $paymentLocked = $isLocked || $isQrPayment || $payStatus === 'paid' || $payStatus === 'refunded';
     ?>
     <tr>
@@ -117,10 +117,16 @@
         <div style="font-size:11px;color:#666"><?= e($o['phone']??'') ?></div>
       </td>
       <td>
-        <?php if(!empty($o['staff_name'])): ?>
-          <span style="font-size:11px;background:#fffbeb;border:1px solid #fde68a;padding:2px 6px;border-radius:4px;color:#92400e"><?= e($o['staff_name']) ?></span>
+        <?php if(!empty($o['created_by_staff'])): ?>
+          <?php if(($o['staff_role']??'') === 'admin'): ?>
+            <span style="font-size:11px;background:#fef2f2;border:1px solid #fecaca;padding:2px 6px;border-radius:4px;color:#b91c1c;font-weight:600">Admin</span>
+          <?php else: ?>
+            <span style="font-size:11px;background:#e0f2fe;border:1px solid #bae6fd;padding:2px 6px;border-radius:4px;color:#0369a1;font-weight:600"><?= e($o['staff_name']) ?></span>
+          <?php endif; ?>
+        <?php elseif(!empty($o['user_id'])): ?>
+          <span style="font-size:11px;color:#059669;font-weight:600;background:#ecfdf5;padding:2px 6px;border-radius:4px;border:1px solid #a7f3d0;">Khách hàng</span>
         <?php else: ?>
-          <span style="font-size:11px;color:#aaa">Khách tự đặt</span>
+          <span style="font-size:11px;color:#4b5563;font-weight:600;background:#f3f4f6;padding:2px 6px;border-radius:4px;border:1px solid #d1d5db;">Khách vãng lai</span>
         <?php endif; ?>
       </td>
       <td style="font-weight:700;color:#c0392b"><?= vnd($o['grand_total'] ?? 0) ?></td>
@@ -188,12 +194,13 @@
   </table>
 
   <?php if (($totalPages??0) > 1): ?>
-  <div style="padding:12px 16px;display:flex;gap:6px;justify-content:center">
-    <?php for ($i=1;$i<=$totalPages;$i++): $q2=http_build_query(array_merge($_GET,['page'=>$i])); ?>
-      <a href="/admin/orders?<?= $q2 ?>" style="padding:6px 12px;border-radius:6px;border:1.5px solid <?= $i===$page?'var(--navy)':'#d0d5e0' ?>;background:<?= $i===$page?'var(--navy)':'#fff' ?>;color:<?= $i===$page?'#fff':'var(--navy)' ?>;text-decoration:none;font-size:13px;font-weight:700"><?= $i ?></a>
-    <?php endfor; ?>
-  </div>
-  <?php endif; ?>
+<div style="padding:12px 16px;display:flex;gap:6px;justify-content:center">
+<?php
+require_once __DIR__.'/../partials/pagination.php';
+renderPagination($page, $totalPages, '', $_GET);
+?>
+</div>
+<?php endif; ?>
 </div>
 
 

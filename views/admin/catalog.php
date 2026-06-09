@@ -84,10 +84,10 @@ if (!empty($_GET['parent_id'])) {
                     <div class="panel-item-sub"><?= $cat['child_count'] ?> danh mục con · <?= $cat['product_count'] ?> sản phẩm</div>
                 </a>
                 <div class="panel-item-actions">
-                    <button class="btn-icon" onclick="openCatEditModal(<?= $cat['id'] ?>, null, '<?= e($cat['name']) ?>', '<?= e($cat['slug']) ?>', <?= $cat['sort_order'] ?>, <?= $cat['is_featured'] ?>)">Sửa</button>
-                    <form method="post" action="/admin/categories/<?= $cat['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa danh mục này và toàn bộ danh mục con?')">
+                    <button class="adm-edit" onclick="openCatEditModal(<?= $cat['id'] ?>, null, '<?= e($cat['name']) ?>', '<?= e($cat['slug']) ?>', <?= $cat['sort_order'] ?>, <?= $cat['is_featured'] ?>)">Sửa</button>
+                    <form method="post" action="/admin/categories/<?= $cat['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa danh mục này và toàn bộ danh mục con?')">
                         <?= csrfField() ?>
-                        <button type="submit" class="btn-icon red">Xóa</button>
+                        <button type="submit" class="adm-del">Xóa</button>
                     </form>
                 </div>
             </div>
@@ -127,10 +127,10 @@ if (!empty($_GET['parent_id'])) {
                     <td style="padding:12px;text-align:center"><?= $child['product_count'] ?></td>
                     <td style="padding:12px;text-align:center">
                         <div style="display:flex;gap:6px;justify-content:center">
-                            <button class="btn-icon" onclick="openCatEditModal(<?= $child['id'] ?>, <?= $activeParent['id'] ?>, '<?= e($child['name']) ?>', '<?= e($child['slug']) ?>', <?= $child['sort_order'] ?>, 0)">Sửa</button>
-                            <form method="post" action="/admin/categories/<?= $child['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa danh mục con này?')">
+                            <button class="adm-edit" onclick="openCatEditModal(<?= $child['id'] ?>, <?= $activeParent['id'] ?>, '<?= e($child['name']) ?>', '<?= e($child['slug']) ?>', <?= $child['sort_order'] ?>, 0)">Sửa</button>
+                            <form method="post" action="/admin/categories/<?= $child['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa danh mục con này?')">
                                 <?= csrfField() ?>
-                                <button type="submit" class="btn-icon red">Xóa</button>
+                                <button type="submit" class="adm-del">Xóa</button>
                             </form>
                         </div>
                     </td>

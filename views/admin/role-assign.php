@@ -35,7 +35,7 @@
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:#888">
       <strong>Quyền của vai trò này:</strong>
       <?php 
-      $pLabels = ['orders'=>'Đơn hàng','create_order'=>'Tạo đơn hộ','products'=>'Sản phẩm','reviews'=>'Đánh giá','contacts'=>'Quản lý liên hệ','users'=>'Người dùng','vouchers'=>'Voucher','content'=>'Nội dung','reports'=>'Báo cáo'];
+      $pLabels = ['orders'=>'Đơn hàng','create_order'=>'Tạo đơn hộ','products'=>'Sản phẩm','reviews'=>'Đánh giá','contacts'=>'Quản lý liên hệ','users'=>'Người dùng','staff'=>'Nhân viên','vouchers'=>'Voucher','content'=>'Nội dung','reports'=>'Báo cáo'];
       ?>
       <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px">
         <?php foreach($perms as $p): ?>
@@ -61,7 +61,7 @@
       <td><?= e($u['full_name']) ?></td>
       <td class="fs-12"><?= e($u['email']) ?></td>
       <td>
-        <form method="post" action="/admin/staff/unassign/<?= $u['assignment_id'] ?>" onsubmit="return confirm('Hủy phân quyền?')">
+        <form method="post" action="/admin/staff/unassign/<?= $u['assignment_id'] ?>" onsubmit="return csConfirmForm(this,'Hủy phân quyền?')">
           <?= csrfField() ?><button type="submit" class="btn btn-sm" style="background:#fee;color:#c62828;border:1px solid #fcc">Hủy</button>
         </form>
       </td>

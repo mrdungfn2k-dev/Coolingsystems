@@ -6,14 +6,25 @@
 </style>
 
 <style>
-/* Fix search button text clipping */
-header.main .search .submit{flex-shrink:0;min-width:100px;padding:0 16px!important;white-space:nowrap;overflow:visible}
-header.main .search .submit span{position:relative;z-index:1}
-header.main .search{display:flex}
-header.main .search input{flex:1;min-width:0}
+/* Modern search bar styling */
+header.main .search { border: 1px solid var(--line) !important; border-radius: 8px !important; }
+header.main .search:focus-within { border-color: var(--navy) !important; box-shadow: 0 0 0 3px var(--navy-soft) !important; }
+header.main .search .submit { flex-shrink:0; padding:0!important; min-width:48px!important; width:48px!important; background:transparent!important; color:#888!important; border-left:1px solid var(--line)!important; border-radius:0!important; display:flex; align-items:center; justify-content:center; }
+header.main .search .submit::before { display:none!important; }
+header.main .search .submit:hover { background:var(--bg-soft)!important; color:var(--navy)!important; }
+@media(min-width: 901px) {
+  header.main .wrap { max-width: 1280px !important; padding: 0 20px !important; gap: 20px !important; }
+  header.main .search { display:flex; flex: 1 1 auto; max-width: 600px; min-width: 250px !important; margin: 0 auto !important; }
+  header.main .search input { flex:1; min-width: 180px !important; width: 100%; padding-right: 12px; }
+  header.main .hotline { margin-left: 0 !important; }
+}
+@media(max-width: 900px) {
+  header.main .search { display:flex; flex: 1; min-width: 150px !important; margin: 0 8px !important; }
+  header.main .search input { flex:1; min-width: 80px !important; width: 100%; }
+}
 </style>
 <?php 
-$cart = cartInfo(); $fav = favCount(); $notiCount = 0; if ($user && $user['role'] === 'customer') { $notiRow = dbGet("SELECT COUNT(*) AS n FROM notifications WHERE user_id=? AND is_read=0", [$user['id']]); $notiCount = $notiRow['n'] ?? 0; } 
+$cart = cartInfo(); $fav = favCount();
 $sysConfig = dbAll("SELECT key, value FROM system_config");
 $configMap = [];
 foreach($sysConfig as $cfg) {
@@ -34,7 +45,12 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
     </a>
     <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (mã OEM, tên phụ tùng, hãng xe...)','🔍');return false;}">
       <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm theo mã OEM, tên phụ tùng, hãng xe...">
-      <button class="submit" type="submit"><span>Tìm kiếm</span></button>
+      <button class="submit" type="submit" aria-label="Tìm kiếm">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
     </form>
     <div class="hotline">
       <div class="pulse">T</div>
@@ -53,14 +69,12 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         <div style="position:relative;display:inline-block">
           <button onclick="toggleUserNoti(event)" style="background:none;border:none;cursor:pointer;position:relative;padding:8px 10px;display:flex;align-items:center;justify-content:center;color:#1a3258">
             <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-            <?php if($unreadNotiCount > 0): ?><span style="position:absolute;top:2px;right:2px;background:#c8962b;color:#fff;font-size:10px;font-weight:bold;border-radius:10px;padding:1px 5px;min-width:16px;text-align:center"><?= $unreadNotiCount ?></span><?php endif; ?>
+            <?php /* badge so thong bao da an theo yeu cau */ ?>
           </button>
           <div id="userNotiDropdown" style="display:none;position:absolute;right:0;top:42px;width:320px;background:#fff;border:1px solid #e0e4eb;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.12);z-index:200;max-height:380px;overflow-y:auto">
             <div style="padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center">
               <h4 style="margin:0;font-size:14px;color:#1a3258;font-weight:700"> Thông báo</h4>
-              <?php if($unreadNotiCount > 0): ?>
-                <button onclick="markAllUserNotiRead()" style="background:none;border:none;color:#d4a84b;font-size:12px;font-weight:600;cursor:pointer">Đọc tất cả</button>
-              <?php endif; ?>
+              <button onclick="markAllUserNotiRead()" style="background:none;border:none;color:#d4a84b;font-size:12px;font-weight:600;cursor:pointer">Đọc tất cả</button>
             </div>
             <div id="userNotiList">
               <?php if(empty($userNotis)): ?>
@@ -68,12 +82,12 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
               <?php else: ?>
               <?php foreach($userNotis as $n): ?>
               <div style="position:relative">
-                <a href="<?= e($n['link'] ?? '/customer/orders') ?>" onclick="markUserNotiRead(<?= $n['id'] ?>)" style="display:block;padding:12px 40px 12px 14px;border-bottom:1px solid #f5f5f5;text-decoration:none;background:<?= $n['is_read'] ? '#fff' : '#f0f4ff' ?>;transition:background .2s" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='<?= $n['is_read'] ? '#fff' : '#f0f4ff' ?>'">
+                <a href="<?= e($n['link'] ?? '/customer/orders') ?>" onclick="return goUserNoti(<?= $n['id'] ?>, this)" style="display:block;padding:12px 40px 12px 14px;border-bottom:1px solid #f5f5f5;text-decoration:none;background:<?= $n['is_read'] ? '#fff' : '#f0f4ff' ?>;transition:background .2s" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='<?= $n['is_read'] ? '#fff' : '#f0f4ff' ?>'">
                   <div style="font-size:13px;font-weight:<?= $n['is_read'] ? '400' : '700' ?>;color:#1a3258;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:20px"><?= e($n['title']) ?></div>
                   <div style="font-size:12px;color:#555;margin-top:3px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;padding-right:20px"><?= e($n['message']) ?></div>
                   <div style="font-size:10px;color:#999;margin-top:5px"><?= date('d/m H:i', strtotime($n['created_at'])) ?></div>
                 </a>
-                <button onclick="deleteUserNoti(<?= $n['id'] ?>, event)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#bbb;padding:4px" title="Xóa">
+                <button onclick="deleteUserNoti(<?= $n['id'] ?>, event, this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#bbb;padding:4px" title="Xóa">
                   <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
                 </button>
               </div>
@@ -97,12 +111,24 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         }
         function markAllUserNotiRead() {
           fetch('/customer/notifications/read-all', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'_csrf='+(document.querySelector('input[name="_csrf"]')?.value||'')})
-          .then(()=>location.reload());
+          .then(function(){
+            // Update UI without reload: remove badge, mark all as read visually
+            var badge = document.querySelector('button[onclick*="toggleUserNoti"] span');
+            if(badge) badge.remove();
+            document.querySelectorAll('#userNotiList a').forEach(function(a){
+              a.style.background='#fff';
+              a.onmouseover=function(){this.style.background='#f8f9fa'};
+              a.onmouseout=function(){this.style.background='#fff'};
+              var title=a.querySelector('div');
+              if(title) title.style.fontWeight='400';
+            });
+          });
         }
-        function deleteUserNoti(id, e) {
+        function goUserNoti(id, link){ try{markUserNotiRead(id);}catch(e){} var d=document.getElementById('userNotiDropdown'); if(d)d.style.display='none'; var href=(link&&link.getAttribute('href'))||'/customer/orders'; if(window.csNav){csNav(href);}else{location.href=href;} return false; }
+        function deleteUserNoti(id, e, btn) {
           e.preventDefault(); e.stopPropagation();
           fetch('/customer/notifications/'+id+'/delete', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'_csrf='+(document.querySelector('input[name="_csrf"]')?.value||'')})
-          .then(()=>location.reload());
+          .then(function(){ if(btn&&btn.parentNode){btn.parentNode.remove();} var L=document.getElementById('userNotiList'); if(L&&!L.querySelector('a')){L.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';} });
         }
         </script>
 
@@ -130,9 +156,9 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         <a href="/admin/logout" class="h-btn"><span class="label">Đăng xuất</span><span class="value"><?= truncate($user['full_name'], 12) ?></span></a>
       <?php else: ?>
         <?php if($isGuestUser ?? false): ?>
-          <a href="/customer/cart" class="h-btn"><span class="label">Giỏ hàng</span><span class="value"><?= vnd($cart['total']) ?></span><?php if ($cart['cnt'] > 0): ?><span class="count"><?= $cart['cnt'] ?></span><?php endif; ?></a>
+          <a href="/customer/cart" class="h-btn"><span class="label">Giỏ hàng</span><span class="value"><?= vnd($cart['total'] ?? 0) ?></span><?php if (($cart['cnt'] ?? 0) > 0): ?><span class="count"><?= $cart['cnt'] ?></span><?php endif; ?></a>
         <?php else: ?>
-          <a href="/customer/cart" class="h-btn"><span class="label">Giỏ hàng</span><span class="value">0 ₫</span></a>
+          <a href="/customer/cart" class="h-btn"><span class="label">Giỏ hàng</span><span class="value"><?= vnd($cart['total'] ?? 0) ?></span><?php if (($cart['cnt'] ?? 0) > 0): ?><span class="count"><?= $cart['cnt'] ?></span><?php endif; ?></a>
         <?php endif; ?>
         <a href="/auth/login" class="h-btn"><span class="label">Tài khoản</span><span class="value">Đăng nhập</span></a>
         <a href="/auth/register" class="h-btn"><span class="label">Mới?</span><span class="value">Đăng ký</span></a>
@@ -145,7 +171,7 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         <a href="/customer/notifications" class="mobile-icon-btn" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Thông báo">
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
           <?php if (!empty($notiCount) && $notiCount > 0): ?>
-            <span style="position:absolute;top:0px;right:0px;background:#c8962b;color:#fff;font-size:9px;font-weight:bold;border-radius:10px;min-width:15px;height:15px;line-height:15px;text-align:center;padding:0 3px;"><?= min($notiCount, 99) ?></span>
+            
           <?php endif; ?>
         </a>
         <!-- Tin nhắn -->
@@ -171,7 +197,7 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
   <div class="mobile-search-bar">
     <form method="get" action="/products" style="width:100%" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm','🔍');return false;}">
       <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm kiếm phụ tùng, mã OEM...">
-      <button type="submit">Tìm</button>
+      <button type="submit" aria-label="Tìm kiếm" style="display:inline-flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
     </form>
   </div>
 </header>

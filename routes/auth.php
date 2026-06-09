@@ -4,22 +4,26 @@ get('/auth/login', function() { view('auth/login', ['title'=>'Đăng nhập']); 
 
 post('/auth/login', function() {
     csrfCheck();
-    $email = strtolower(trim($_POST['email'] ?? ''));
+    $input = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    if (!$email || !$password) { flash('error','Vui lòng nhập email và mật khẩu.'); redirect('/auth/login'); }
-    $user = dbGet('SELECT * FROM users WHERE email=?', [$email]);
-    if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email hoặc mật khẩu không đúng.'); redirect('/auth/login'); }
+    if (!$input || !$password) { flash('error','Vui lòng nhập email/SĐT và mật khẩu.'); redirect('/auth/login'); }
+    // Support login by phone or email
+    if (preg_match('/^0[0-9]{9}$/', $input)) {
+        $user = dbGet('SELECT * FROM users WHERE phone=?', [$input]);
+    } else {
+        $user = dbGet('SELECT * FROM users WHERE email=?', [strtolower($input)]);
+    }
+    if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email/SĐT hoặc mật khẩu không đúng.'); redirect('/auth/login'); }
     if ($user['status'] !== 'active') { flash('error','Tài khoản bị khóa.'); redirect('/auth/login'); }
     // Admin goes to admin dashboard
     if ($user['role'] === 'admin') {
         loginUser($user['id']);
         redirect('/admin');
     }
-    // Staff goes to staff dashboard
-    if ($user['role'] === 'staff') {
-        loginUser($user['id']);
-        flash('success', 'Xin chào, '.$user['full_name'].'!');
-        redirect('/admin');
+    // Staff must use the dedicated staff login page (not the customer login)
+    if ($user['role'] === 'staff' && staffHasAssignment($user['id'])) {
+        flash('error', 'Tài khoản nhân viên vui lòng đăng nhập tại trang dành cho nhân viên.');
+        redirect('/staff/login');
     }
     // Customer login
     loginUser($user['id']);
@@ -44,6 +48,7 @@ post('/auth/register', function() {
     if (!$name || mb_strlen($name) < 2) $errs[] = 'Họ tên không hợp lệ (tối thiểu 2 ký tự, không chứa số/ký tự đặc biệt).';
     // Email: strict format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errs[] = 'Email không hợp lệ.';
+    if ($email && !str_ends_with($email, '@gmail.com')) $errs[] = 'Chỉ chấp nhận email @gmail.com.';
     if ($email && !preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) $errs[] = 'Email sai định dạng (VD: ten@gmail.com).';
     // Phone: exactly 10 digits, starts with 01-09
     $phone = preg_replace('/[^0-9]/', '', $phone);
@@ -146,7 +151,7 @@ post('/auth/reset', function() {
     unset($_SESSION['reset_email']);
     
     flash('success','Đặt lại mật khẩu thành công! Vui lòng đăng nhập.');
-    redirect('/auth/login');
+    redirect(($user['role'] ?? '')==='admin' ? '/admin/login' : ((($user['role'] ?? '')==='staff') ? '/staff/login' : '/auth/login'));
 });
 
 // ── Resend OTP ──

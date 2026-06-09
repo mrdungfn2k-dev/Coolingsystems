@@ -43,4 +43,9 @@
 <?php endforeach;?>
 <?php endif; ?>
 </tbody></table></div>
+<?php if (($totalPages ?? 1) > 1): ?>
+<div style="margin-top:18px">
+  <?php require_once __DIR__.'/../partials/pagination.php'; renderPagination($page, $totalPages, '/admin/reviews', ['rating'=>$_GET['rating']??'','category_id'=>$_GET['category_id']??'']); ?>
+</div>
+<?php endif; ?>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

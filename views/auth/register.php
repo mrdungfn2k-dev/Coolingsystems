@@ -4,9 +4,16 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Đăng ký tài khoản — Cooling</title>
+<meta name="description" content="Đăng ký tài khoản Cooling — Phụ tùng & Dịch vụ ô tô chính hãng.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/cooling.css?v=<?= time() ?>">
+<?php
+$_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+?>
+<link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
+<meta name="robots" content="noindex, nofollow">
 <style>
 body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;margin:0;font-family:'Inter',sans-serif;padding:20px 0}
 .auth-wrap{width:100%;max-width:500px;padding:20px}
@@ -40,6 +47,9 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
 .terms a{color:#1a3258;text-decoration:underline}
 @media(max-width:520px){.form-row{flex-direction:column;gap:0}.auth-card{padding:28px 20px}}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystem.vn"},{"@type":"ListItem","position":2,"name":"Đăng ký","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
+</script>
 </head>
 <body>
 <div class="auth-wrap"><div class="auth-card">
@@ -47,9 +57,9 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
   <div class="auth-sub">PHỤ TÙNG & DỊCH VỤ</div>
   <h2>Đăng ký tài khoản</h2>
 
-  <?php if (!empty($_SESSION['flash'])): foreach ((array)$_SESSION['flash'] as $f): ?>
-    <div class="flash-<?= $f['type']??'error' ?>"><?= e($f['msg']??'') ?></div>
-  <?php endforeach; unset($_SESSION['flash']); endif; ?>
+  <?php if (!empty($flash)): foreach ((array)$flash as $f): ?>
+    <div class="flash-<?= $f['type']??'error' ?>"><?= e($f['message'] ?? $f['msg']??'') ?></div>
+  <?php endforeach;  endif; ?>
 
   <form method="post" action="/auth/register" id="regForm" onsubmit="return validateAll()">
     <?= csrfField() ?>
@@ -59,7 +69,7 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
       <label>Họ và tên <span class="req">*</span></label>
       <input type="text" name="full_name" id="fname" required maxlength="50"
              placeholder="Nguyễn Văn A" value="<?= e($_POST['full_name'] ?? '') ?>"
-             oninput="filterSpecial(this);validateName()">
+             oninput="validateName()">
       <div class="field-msg" id="fname-msg"></div>
     </div>
 
@@ -126,7 +136,9 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
 // === Filter: block special chars (except password) ===
 function filterSpecial(el) {
   // Allow Vietnamese characters, letters, digits, spaces, comma, dot, slash
-  el.value = el.value.replace(/[^a-zA-ZÀ-ỹ0-9\s,\.\/\-]/g, '');
+  // Use composing check to avoid breaking IME
+  if (el.dataset.composing === '1') return;
+  el.value = el.value.replace(/[^\p{L}\p{M}0-9\s,\.\/\-]/gu, '');
 }
 
 // === Filter: phone only digits ===
@@ -142,12 +154,13 @@ function onlyDigit(e) {
 
 // === Validate: Name ===
 function validateName() {
-  var v = document.getElementById('fname').value.trim();
-  var msg = document.getElementById('fname-msg');
   var el = document.getElementById('fname');
+  var v = el.value.trim();
+  var msg = document.getElementById('fname-msg');
   if (!v) { setMsg(msg,'err','Vui lòng nhập họ tên'); el.className='invalid'; return false; }
   if (v.length < 2) { setMsg(msg,'err','Họ tên quá ngắn'); el.className='invalid'; return false; }
   if (/[0-9]/.test(v)) { setMsg(msg,'err','Họ tên không được chứa số'); el.className='invalid'; return false; }
+  if (/[!@#$%^&*()+=\[\]{};:'"<>?|~`]/.test(v)) { setMsg(msg,'err','Họ tên không được chứa ký tự đặc biệt'); el.className='invalid'; return false; }
   setMsg(msg,'ok','✓ Hợp lệ'); el.className='valid'; return true;
 }
 
@@ -160,8 +173,14 @@ function validateEmail() {
   el.value = el.value.replace(/[^a-zA-Z0-9@.\-_]/g, '');
   v = el.value.trim().toLowerCase();
   if (!v) { setMsg(msg,'err','Vui lòng nhập email'); el.className='invalid'; return false; }
+  // Basic format check
   var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!re.test(v)) { setMsg(msg,'err','Email không hợp lệ (VD: ten@gmail.com)'); el.className='invalid'; return false; }
+  // STRICT: Only allow @gmail.com
+  var domain = v.split('@')[1];
+  if (domain !== 'gmail.com') {
+    setMsg(msg,'err','Chỉ chấp nhận email @gmail.com'); el.className='invalid'; return false;
+  }
   setMsg(msg,'ok','✓ Email hợp lệ'); el.className='valid'; return true;
 }
 
@@ -233,5 +252,48 @@ function validateAll() {
   }
   return ok;
 }
+
+// Prevent filterSpecial from running during IME composition
+document.addEventListener('compositionstart', function(e) {
+  if (e.target && e.target.tagName === 'INPUT') e.target.dataset.composing = '1';
+});
+document.addEventListener('compositionend', function(e) {
+  if (e.target && e.target.tagName === 'INPUT') {
+    e.target.dataset.composing = '0';
+    // Re-validate after composition ends
+    if (e.target.id === 'fname') validateName();
+  }
+});
+</script>
+
+<script>
+(function(){
+  <?php if (!empty($flash)): ?>
+  <?php foreach ((array)$flash as $f): ?>
+    var msg = <?= json_encode($f['message'] ?? $f['msg']??'') ?>;
+    var type = <?= json_encode($f['type']??'info') ?>;
+    if(msg){
+      var d = document.createElement('div');
+      var color = type === 'success' ? '#16a34a' : (type === 'error' ? '#dc2626' : '#2563eb');
+      d.style.cssText = 'position:fixed;top:20px;right:20px;z-index:99999;padding:16px 24px;border-radius:4px;font-size:16px;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,0.15);background:#fff;border-left:4px solid '+color+';color:'+color+';opacity:0;transform:translateX(100%);transition:all 0.3s ease;';
+      d.innerHTML = msg;
+      document.body.appendChild(d);
+      
+      // Animate in
+      setTimeout(function(){
+        d.style.opacity = '1';
+        d.style.transform = 'translateX(0)';
+      }, 10);
+      
+      // Auto dismiss
+      setTimeout(function(){
+        d.style.opacity = '0';
+        d.style.transform = 'translateX(100%)';
+        setTimeout(function(){ d.remove(); }, 300);
+      }, 4000);
+    }
+  <?php endforeach; ?>
+  <?php endif; ?>
+})();
 </script>
 </body></html>

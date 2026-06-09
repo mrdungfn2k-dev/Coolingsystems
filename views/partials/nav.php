@@ -54,7 +54,7 @@
     <a href="/products" class="nav-link <?= isActive('/products') ?>">Sản phẩm</a>
     <a href="/brands" class="nav-link <?= isActive('/brands') ?>">Phụ tùng theo hãng</a>
     <a href="/product-brands" class="nav-link <?= isActive('/product-brands') ?>">Thương hiệu</a>
-    <a href="/promotions" class="nav-link <?= isActive('/promotions') ?>">Khuyến mại</a>
+    <a href="/vouchers" class="nav-link <?= isActive('/vouchers') ?>">Khuyến mại</a>
     <a href="/news" class="nav-link <?= isActive('/news') ?>">Tin tức</a>
     <!-- Chính sách moved to footer -->
     <a href="/stores" class="nav-link <?= isActive('/stores') ?>">Hệ thống cửa hàng</a>

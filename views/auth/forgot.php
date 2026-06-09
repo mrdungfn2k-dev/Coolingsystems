@@ -12,7 +12,7 @@
       <label>Email đăng ký <span class="req">*</span></label>
       <input type="email" name="email" required autofocus placeholder="VD: ten@gmail.com">
     </div>
-    <button type="submit" class="btn btn-gold btn-block btn-lg">Gửi mã OTP</button>
+    <button type="submit" class="btn btn-navy btn-block btn-lg">Gửi mã OTP</button>
   </form>
   <div class="text-center mt-3 fs-13 text-muted">
     <a href="/auth/login" class="text-navy">← Quay lại đăng nhập</a>

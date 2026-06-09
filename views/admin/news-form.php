@@ -1,5 +1,5 @@
 <?php require __DIR__ . '/../partials/dashboard-head.php'; ?>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="/tinymce/tinymce.min.js"></script>
 <style>
 .tox-tinymce{border:1px solid var(--line)!important;border-radius:6px!important}
 .tox .tox-toolbar{background:#fafafa!important}
@@ -54,7 +54,7 @@
             <?php if (!empty($article['thumbnail'])): ?>
               <img src="/uploads/news/<?= e($article['thumbnail']) ?>" style="width:100%;border-radius:4px;margin-bottom:6px">
             <?php endif; ?>
-            <input type="file" name="thumbnail" accept="image/*">
+            <input type="file" name="thumbnail" accept="image/*" class="js-filepick" data-file-label="Chọn ảnh đại diện">
           </div>
           <button type="submit" class="btn btn-gold btn-block">Lưu bài viết</button>
         </div>

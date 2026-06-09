@@ -11,6 +11,9 @@ $_nlCode = $_nlCfg['newsletter_voucher_code'] ?: 'UUDAI100K';
 $_nlAmount = intval($_nlCfg['newsletter_voucher_amount'] ?: 100000);
 $_footArticles = dbAll("SELECT title, slug FROM articles ORDER BY created_at DESC LIMIT 3");
 $_hl = $sysHotline ?? '0947796471';
+
+$_tLogo = dbGet("SELECT value FROM settings WHERE key='footer_logo_text'")['value'] ?? ''; $_footerLogo = !empty($_tLogo) ? $_tLogo : 'COOLING';
+$_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?? ''; $_footerDesc = !empty($_tDesc) ? $_tDesc : 'Sàn TMĐT phụ tùng ô tô chính hãng — chuyên sâu hệ thống làm mát. Cung cấp phụ tùng uy tín cho hàng triệu khách hàng trên toàn quốc.';
 ?>
 <?php if(function_exists("csrfField")) echo csrfField(); ?>
 <footer>
@@ -26,10 +29,15 @@ $_hl = $sysHotline ?? '0947796471';
   <div class="main-foot">
     <div class="wrap">
       <div class="foot-brand">
-        <div class="logo" style="font-size:24px;font-weight:900;color:#fff;letter-spacing:1px">COOLING</div>
-        <p class="desc" style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px">Sàn TMĐT phụ tùng ô tô chính hãng — chuyên sâu hệ thống làm mát. Cung cấp phụ tùng uy tín cho hàng triệu khách hàng trên toàn quốc.</p>
+        <?php $_fLogoImg = dbGet("SELECT value FROM settings WHERE key='footer_logo_image'")['value'] ?? ''; ?>
+        <?php if($_fLogoImg && file_exists('/var/lib/cooling/uploads/'.$_fLogoImg)): ?>
+          <div class="logo footer-logo-img-wrap"><img src="/uploads/<?= e($_fLogoImg) ?>" alt="<?= e($_footerLogo) ?>" class="footer-logo-img"></div>
+        <?php else: ?>
+          <div class="logo" style="font-size:24px;font-weight:900;color:#fff;letter-spacing:1px"><?= e($_footerLogo) ?></div>
+        <?php endif; ?>
+        <p class="desc" style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px"><?= e($_footerDesc) ?></p>
       </div>
-      <div class="foot-col"><h4>Sản phẩm</h4><ul><li><a href="/products">Tất cả phụ tùng</a></li><li><a href="/brands">Theo hãng xe</a></li><li><a href="/products?promo=1">Khuyến mại</a></li></ul></div>
+      <div class="foot-col"><h4>Sản phẩm</h4><ul><li><a href="/products">Tất cả phụ tùng</a></li><li><a href="/brands">Theo hãng xe</a></li><li><a href="/promotions">Khuyến mại</a></li></ul></div>
       <div class="foot-col"><h4>Về chúng tôi</h4><ul><li><a href="/about">Câu chuyện Cooling</a></li><li><a href="/stores">Hệ thống cửa hàng</a></li><li><a href="/news">Tin tức</a></li><li><a href="/contact">Liên hệ</a></li></ul></div>
       <div class="foot-col"><h4>Hỗ trợ</h4><ul><li><a href="/policies/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li><li><a href="/policies/chinh-sach-doi-tra">Chính sách đổi trả</a></li><li><a href="/policies/chinh-sach-bao-hanh">Chính sách bảo hành</a></li><li><a href="/policies/dieu-khoan-bao-mat">Điều khoản bảo mật</a></li></ul></div>
       <div class="foot-col"><h4>Bài viết mới</h4><ul>
@@ -41,7 +49,11 @@ $_hl = $sysHotline ?? '0947796471';
       </ul></div>
     </div>
   </div>
-  <div class="foot-bottom"><div class="wrap"><span>&copy; <?= date('Y') ?> Cooling. Bảo lưu mọi quyền.</span></div></div>
+  <?php
+  $_footCopy = dbGet("SELECT value FROM settings WHERE key='footer_copyright'");
+  $_copyText = !empty($_footCopy['value']) ? $_footCopy['value'] : ('&copy; ' . date('Y') . ' Cooling. Bảo lưu mọi quyền.');
+  ?>
+  <div class="foot-bottom"><div class="wrap"><span><?= $_copyText ?></span></div></div>
 </footer>
 <div class="float-stack"><a href="tel:<?= $_hl ?>" class="float-btn gold">Gọi ngay</a></div>
 

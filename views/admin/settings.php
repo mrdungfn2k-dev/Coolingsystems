@@ -1,46 +1,56 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
 <div class="dash-head">
-  <h1>⚙️ Cài đặt hệ thống</h1>
+  <h1>Cài đặt hệ thống</h1><div id="settingsCardTools" style="display:flex;align-items:center"></div>
 </div>
 
 <?php /* flash is handled in head */ ?>
 
 <style>
-.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-@media(max-width: 768px) { .settings-grid { grid-template-columns: 1fr; } }
-.settings-card { background: #fff; border: 1px solid #eaeaea; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.settings-card h3 { font-size: 16px; font-weight: 800; color: var(--navy); margin: 0 0 20px; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
-.settings-card .form-group { margin-bottom: 16px; }
-.settings-card label { display: block; font-size: 13px; font-weight: 700; color: #444; margin-bottom: 6px; }
-.settings-card label small { font-weight: 400; color: #888; }
-.settings-card input[type=text], .settings-card input[type=url] { width: 100%; height: 40px; border: 1px solid #ddd; border-radius: 8px; padding: 0 12px; font-size: 14px; transition: border-color 0.2s; box-sizing: border-box; }
-.settings-card input:focus { border-color: var(--navy); outline: none; box-shadow: 0 0 0 3px rgba(26,50,88,0.1); }
-.qr-preview { width: 180px; height: 180px; border: 2px dashed #ddd; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 12px 0; overflow: hidden; background: #f9f9f9; cursor: pointer; transition: border-color 0.2s; }
-.qr-preview:hover { border-color: var(--navy); }
-.qr-preview img { width: 100%; height: 100%; object-fit: contain; }
-.qr-preview .placeholder { text-align: center; color: #aaa; font-size: 13px; }
-.btn-save { background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-.btn-save:hover { background: #0b1f40; transform: translateY(-1px); }
+.settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start; }
+@media(max-width:768px){ .settings-grid { grid-template-columns:1fr; } }
+.settings-card { background:#fff; border:1px solid #e8edf3; border-radius:14px; padding:24px 26px; box-shadow:0 2px 12px rgba(15,35,66,0.05); }
+.settings-card h3 { font-size:15px; font-weight:800; color:var(--navy); margin:0 0 20px; padding:0 0 14px 0; border-bottom:1px solid #eef1f6; display:flex; align-items:center; gap:9px; }
+.settings-card .form-group { margin-bottom:16px; }
+.settings-card label { display:block; font-size:13px; font-weight:700; color:#3a4658; margin-bottom:6px; }
+.settings-card label small { font-weight:400; color:#8a93a3; }
+.settings-card input[type=text], .settings-card input[type=url], .settings-card input[type=email], .settings-card input[type=tel], .settings-card textarea, .settings-card select { width:100%; min-height:42px; border:1px solid #dde3ec; border-radius:9px; padding:0 13px; font-size:14px; transition:border-color .15s, box-shadow .15s; box-sizing:border-box; background:#fff; }
+.settings-card textarea { padding:10px 13px; line-height:1.5; }
+.settings-card input:focus, .settings-card textarea:focus, .settings-card select:focus { border-color:var(--navy); outline:none; box-shadow:0 0 0 3px rgba(26,50,88,0.10); }
+.settings-card .field-hint { font-size:12px; color:#8a93a3; margin-top:6px; }
+.settings-logo-prev { display:inline-flex; align-items:center; justify-content:center; border-radius:10px; padding:12px 16px; margin-top:10px; min-height:60px; }
+.qr-preview { width:180px; height:180px; border:2px dashed #dde3ec; border-radius:12px; display:flex; align-items:center; justify-content:center; margin:12px 0; overflow:hidden; background:#f8fafc; cursor:pointer; transition:border-color .2s; }
+.qr-preview:hover { border-color:var(--navy); }
+.qr-preview img { width:100%; height:100%; object-fit:contain; }
+.qr-preview .placeholder { text-align:center; color:#aab4c4; font-size:13px; }
+.btn-save { background:var(--navy); color:#fff; border:none; border-radius:9px; padding:11px 26px; font-size:14px; font-weight:700; cursor:pointer; transition:all .15s; }
+.btn-save:hover { background:#0b1f40; transform:translateY(-1px); box-shadow:0 6px 16px rgba(15,35,66,.2); }
+.general-form { display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px; align-items:stretch; }
+.general-form > div { display:flex; flex-direction:column; }
+.general-form .btn-save, .general-form .cs-file { margin-top:auto; }
+@media(max-width:900px){ .general-form { grid-template-columns:1fr; } }
 </style>
 
 <div class="settings-grid">
   <!-- General Site Settings -->
   <div class="settings-card" style="grid-column: 1 / -1;">
     <h3>🛠 Cài đặt thông tin chung</h3>
-    <form method="post" action="/admin/settings/general" enctype="multipart/form-data" style="display:flex; gap:24px; flex-wrap:wrap;">
+    <form method="post" action="/admin/settings/general" enctype="multipart/form-data" class="general-form">
       <?= csrfField() ?>
-      <div style="flex:1; min-width:300px;">
+      <div>
+        <div class="form-group">
+          <label>Tên công ty <small>(hiện trên hóa đơn bán hàng)</small></label>
+          <input type="text" name="company_name" value="<?= htmlspecialchars(((dbGet("SELECT value FROM system_config WHERE key='company_name'") ?: [])['value'] ?? '') ?: 'CÔNG TY CỔ PHẦN HVAC CORPORATION VIỆT NAM') ?>" placeholder="Tên công ty xuất hóa đơn">
+        </div>
         <div class="form-group">
           <label>Hotline tư vấn</label>
-          <input type="text" name="site_phone" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='site_phone'")['value'] ?? '08 6585 6585') ?>" placeholder="08 6585 6585">
+          <input type="text" name="site_phone" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='site_phone'")['value'] ?? '') ?>" placeholder="0987654321" pattern="0[1-9][0-9]{8}" title="Hotline phải là 10 chữ số, bắt đầu bằng số 0, tiếp theo là số từ 1-9" required oninput="let v = this.value.replace(/[^0-9]/g, ''); if(v.length > 0 && v[0] !== '0') v = ''; if(v.length > 1 && v[1] === '0') v = '0'; this.value = v;" maxlength="10">
         </div>
-        <button type="submit" class="btn-save" style="margin-top:10px;">💾 Lưu cài đặt chung</button>
+        <button type="submit" class="btn-save">Lưu cài đặt chung</button>
       </div>
-      <div style="flex:1; min-width:300px;">
+      <div>
         <div class="form-group">
           <label>Logo Website <small>(Định dạng PNG/SVG/JPG)</small></label>
           <?php $siteLogo = dbGet("SELECT value FROM system_config WHERE key='site_logo'")['value'] ?? ''; ?>
-          <input type="file" name="site_logo" accept="image/*" style="margin-bottom:12px; display:block;">
           <?php if($siteLogo): ?>
           <div style="background:#1a3258; padding:12px; border-radius:8px; display:inline-block; margin-top:8px;">
              <img src="/uploads/<?= htmlspecialchars($siteLogo) ?>" style="max-height:50px; display:block; object-fit:contain;">
@@ -49,7 +59,39 @@
           <div style="font-size:12px; color:#888;">Chưa có logo tùy chỉnh. Đang dùng logo mặc định.</div>
           <?php endif; ?>
         </div>
+        <input type="file" name="site_logo" accept="image/*" class="js-filepick" data-file-label="Chọn ảnh logo" style="display:block;">
       </div>
+      <div>
+        <div class="form-group">
+          <label>Logo Footer <small>(Định dạng PNG)</small></label>
+          <?php $footerLogoImg = dbGet("SELECT value FROM settings WHERE key='footer_logo_image'")['value'] ?? ''; ?>
+          <?php if($footerLogoImg): ?>
+          <div style="background:#fff; padding:12px; border-radius:8px; display:inline-block; margin-top:8px; border:1px solid #e2e8f0;">
+             <img src="/uploads/<?= htmlspecialchars($footerLogoImg) ?>" style="max-height:60px; max-width:100%; display:block; object-fit:contain;">
+          </div>
+          <label style="display:flex; align-items:center; gap:6px; margin-top:10px; font-size:12px; color:#888; cursor:pointer;">
+            <input type="checkbox" name="remove_footer_logo" value="1"> Xóa ảnh, hiển thị lại chữ ở chân trang
+          </label>
+          <?php else: ?>
+          <div style="font-size:12px; color:#888;">Chưa có logo footer. Đang hiển thị chữ ở chân trang.</div>
+          <?php endif; ?>
+        </div>
+        <input type="file" name="footer_logo" accept="image/*" class="js-filepick" data-file-label="Chọn ảnh logo" style="display:block;">
+      </div>
+    </form>
+  </div>
+  <!-- Admin Account -->
+  <div class="settings-card" style="grid-column:1 / -1">
+    <h3>🔑 Tài khoản quản trị</h3>
+    <p style="font-size:13px;color:#666;margin-bottom:16px">Đổi tên hiển thị, email đăng nhập và mật khẩu của tài khoản quản trị. Phải nhập đúng mật khẩu hiện tại để xác nhận thay đổi.</p>
+    <?php $__me = (function_exists('currentUser') ? currentUser() : null) ?: []; ?>
+    <form method="post" action="/admin/settings/account" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end">
+      <?= csrfField() ?>
+      <div class="form-group" style="margin:0;flex:1;min-width:220px"><label>Tên hiển thị</label><input type="text" name="full_name" value="<?= htmlspecialchars($__me['full_name'] ?? '') ?>" required></div>
+      <div class="form-group" style="margin:0;flex:1;min-width:220px"><label>Email đăng nhập</label><input type="email" name="login_email" value="<?= htmlspecialchars($__me['email'] ?? '') ?>" required></div>
+      <div class="form-group" style="margin:0;flex:1;min-width:220px"><label>Mật khẩu mới <small>(để trống nếu không đổi)</small></label><input type="text" name="new_password" placeholder="Tối thiểu 6 ký tự"></div>
+      <div class="form-group" style="margin:0;flex:1;min-width:220px"><label>Mật khẩu hiện tại <span style="color:#e74c3c">*</span></label><input type="password" name="current_password" required placeholder="Xác nhận để lưu"></div>
+      <div style="width:100%"><button type="submit" class="btn-save">Lưu tài khoản quản trị</button></div>
     </form>
   </div>
   <!-- Social Media Links -->
@@ -63,23 +105,23 @@
           <svg style="vertical-align:middle;margin-right:4px" width="16" height="16" fill="#25D366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp Link
         </label>
-        <input type="text" name="social_whatsapp" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_whatsapp'")['value'] ?? '') ?>" placeholder="https://wa.me/84xxxxxxxxx">
+        <input type="text" name="social_whatsapp" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_whatsapp'")['value'] ?? '') ?>" placeholder="https://wa.me/84xxxxxxxxx" pattern="https?://(wa\.me|(www\.)?whatsapp\.com)/.*" title="Phải là link WhatsApp (wa.me / whatsapp.com)">
       </div>
       <div class="form-group">
         <label>
           <svg style="vertical-align:middle;margin-right:4px" width="16" height="16" fill="#000" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z"/></svg>
           TikTok Link
         </label>
-        <input type="text" name="social_tiktok" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_tiktok'")['value'] ?? '') ?>" placeholder="https://www.tiktok.com/@...">
+        <input type="text" name="social_tiktok" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_tiktok'")['value'] ?? '') ?>" placeholder="https://www.tiktok.com/@..." pattern="https?://((www|vt|vm|m)\.)?tiktok\.com/.*" title="Phải là link TikTok (tiktok.com)">
       </div>
       <div class="form-group">
         <label>
           <svg style="vertical-align:middle;margin-right:4px" width="16" height="16" fill="#1877F2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           Facebook Link
         </label>
-        <input type="text" name="social_facebook" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_facebook'")['value'] ?? '') ?>" placeholder="https://www.facebook.com/...">
+        <input type="text" name="social_facebook" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_facebook'")['value'] ?? '') ?>" placeholder="https://www.facebook.com/..." pattern="https?://((www|m|web|business)\.)?(facebook\.com|fb\.com|fb\.me)/.*" title="Phải là link Facebook (facebook.com)">
       </div>
-      <button type="submit" class="btn-save">💾 Lưu liên kết mạng xã hội</button>
+      <button type="submit" class="btn-save">Lưu liên kết mạng xã hội</button>
     </form>
   </div>
 
@@ -91,11 +133,35 @@
       <?= csrfField() ?>
       <div class="form-group">
         <label>Tên ngân hàng</label>
-        <input type="text" name="payment_bank_name" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='payment_bank_name'")['value'] ?? '') ?>" placeholder="Vietcombank, MB Bank...">
+        <select name="payment_bank_name" class="js-cdd" style="width: 100%; height: 40px; border: 1px solid #ddd; border-radius: 8px; padding: 0 12px; font-size: 14px; background: #fff;">
+          <?php $currentBank = dbGet("SELECT value FROM system_config WHERE key='payment_bank_name'")['value'] ?? ''; ?>
+          <option value="">-- Chọn ngân hàng --</option>
+          <option value="Vietcombank" <?= $currentBank == 'Vietcombank' ? 'selected' : '' ?>>Vietcombank (Ngân hàng TMCP Ngoại thương VN)</option>
+          <option value="VietinBank" <?= $currentBank == 'VietinBank' ? 'selected' : '' ?>>VietinBank (Ngân hàng TMCP Công Thương VN)</option>
+          <option value="BIDV" <?= $currentBank == 'BIDV' ? 'selected' : '' ?>>BIDV (Ngân hàng TMCP Đầu tư và Phát triển VN)</option>
+          <option value="Agribank" <?= $currentBank == 'Agribank' ? 'selected' : '' ?>>Agribank (Ngân hàng NN&PTNT VN)</option>
+          <option value="Techcombank" <?= $currentBank == 'Techcombank' ? 'selected' : '' ?>>Techcombank (Ngân hàng TMCP Kỹ Thương VN)</option>
+          <option value="MB Bank" <?= $currentBank == 'MB Bank' ? 'selected' : '' ?>>MB Bank (Ngân hàng TMCP Quân Đội)</option>
+          <option value="ACB" <?= $currentBank == 'ACB' ? 'selected' : '' ?>>ACB (Ngân hàng TMCP Á Châu)</option>
+          <option value="VPBank" <?= $currentBank == 'VPBank' ? 'selected' : '' ?>>VPBank (Ngân hàng TMCP Việt Nam Thịnh Vượng)</option>
+          <option value="Sacombank" <?= $currentBank == 'Sacombank' ? 'selected' : '' ?>>Sacombank (Ngân hàng TMCP Sài Gòn Thương Tín)</option>
+          <option value="VIB" <?= $currentBank == 'VIB' ? 'selected' : '' ?>>VIB (Ngân hàng TMCP Quốc Tế VN)</option>
+          <option value="TPBank" <?= $currentBank == 'TPBank' ? 'selected' : '' ?>>TPBank (Ngân hàng TMCP Tiên Phong)</option>
+          <option value="SHB" <?= $currentBank == 'SHB' ? 'selected' : '' ?>>SHB (Ngân hàng TMCP Sài Gòn - Hà Nội)</option>
+          <option value="SeABank" <?= $currentBank == 'SeABank' ? 'selected' : '' ?>>SeABank (Ngân hàng TMCP Đông Nam Á)</option>
+          <option value="MSB" <?= $currentBank == 'MSB' ? 'selected' : '' ?>>MSB (Ngân hàng TMCP Hàng Hải VN)</option>
+          <option value="LienVietPostBank" <?= $currentBank == 'LienVietPostBank' ? 'selected' : '' ?>>LienVietPostBank (Ngân hàng TMCP Bưu Điện Liên Việt)</option>
+          <option value="HDBank" <?= $currentBank == 'HDBank' ? 'selected' : '' ?>>HDBank (Ngân hàng TMCP Phát triển TPHCM)</option>
+          <option value="Nam A Bank" <?= $currentBank == 'Nam A Bank' ? 'selected' : '' ?>>Nam A Bank (Ngân hàng TMCP Nam Á)</option>
+        </select>
       </div>
       <div class="form-group">
         <label>Tên chủ tài khoản</label>
         <input type="text" name="payment_account_name" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='payment_account_name'")['value'] ?? '') ?>" placeholder="NGUYEN VAN A">
+      </div>
+            <div class="form-group">
+        <label>Mã tiền tố Nội dung chuyển khoản <small>(Ví dụ: CK)</small></label>
+        <input type="text" name="payment_transfer_prefix" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='payment_transfer_prefix'")['value'] ?? '') ?>" placeholder="Để trống nếu không cần">
       </div>
       <div class="form-group">
         <label>Số tài khoản</label>
@@ -104,19 +170,23 @@
       <div class="form-group">
         <label>Ảnh mã QR thanh toán <small>(Click để thay đổi)</small></label>
         <?php $qrImg = dbGet("SELECT value FROM system_config WHERE key='payment_qr_image'")['value'] ?? ''; ?>
-        <label class="qr-preview" for="qrUpload">
-          <?php if($qrImg): ?>
-            <img src="/uploads/qr/<?= htmlspecialchars($qrImg) ?>" alt="QR Code" id="qrPreviewImg">
-          <?php else: ?>
-            <div class="placeholder" id="qrPlaceholder">
-              <div style="font-size:40px;margin-bottom:8px">📷</div>
-              <div>Click để upload mã QR</div>
-            </div>
-          <?php endif; ?>
-        </label>
+        <div style="position:relative; width: 180px;">
+          <label class="qr-preview" for="qrUpload" style="margin: 12px 0 0 0;">
+            <?php if($qrImg): ?>
+              <img src="/uploads/qr/<?= htmlspecialchars($qrImg) ?>" alt="QR Code" id="qrPreviewImg">
+            <?php else: ?>
+              <div class="placeholder" id="qrPlaceholder">
+                <div style="font-size:40px;margin-bottom:8px">📷</div>
+                <div>Click để upload mã QR</div>
+              </div>
+            <?php endif; ?>
+          </label>
+          <button type="button" id="removeQrBtn" style="position:absolute; top:4px; right:4px; background:rgba(255,0,0,0.7); color:white; border:none; border-radius:50%; width:24px; height:24px; font-size:12px; cursor:pointer; display:<?= $qrImg ? 'block' : 'none' ?>;" onclick="removeQr()" title="Xóa ảnh mã QR">✕</button>
+        </div>
         <input type="file" id="qrUpload" name="qr_image" accept="image/*" style="display:none" onchange="previewQr(this)">
+        <input type="hidden" id="removeQrInput" name="remove_qr" value="0">
       </div>
-      <button type="submit" class="btn-save">💾 Lưu cài đặt thanh toán</button>
+      <button type="submit" class="btn-save" style="margin-top: 12px;">Lưu cài đặt thanh toán</button>
     </form>
   </div>
 </div>
@@ -135,9 +205,18 @@ function previewQr(input) {
         img.src = e.target.result;
         if(ph) ph.style.display = 'none';
       }
+      document.getElementById('removeQrBtn').style.display = 'block';
+      document.getElementById('removeQrInput').value = '0';
     };
     reader.readAsDataURL(input.files[0]);
   }
+}
+function removeQr() {
+  var label = document.querySelector('.qr-preview');
+  label.innerHTML = '<div class="placeholder" id="qrPlaceholder"><div style="font-size:40px;margin-bottom:8px">📷</div><div>Click để upload mã QR</div></div>';
+  document.getElementById('qrUpload').value = '';
+  document.getElementById('removeQrInput').value = '1';
+  document.getElementById('removeQrBtn').style.display = 'none';
 }
 </script>
 
@@ -163,24 +242,57 @@ function previewQr(input) {
       <div style="flex:1;min-width:250px;">
         <div class="form-group">
           <label>Địa chỉ</label>
-          <input type="text" name="contact_address" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='contact_address'")['value'] ?? '') ?>" placeholder="123 Trường Chinh...">
+          <input type="text" name="contact_address" maxlength="100" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='contact_address'")['value'] ?? '') ?>" placeholder="123 Trường Chinh...">
         </div>
         <div class="form-group">
           <label>Giờ làm việc</label>
-          <textarea name="contact_hours" rows="2" style="width:100%;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:14px;box-sizing:border-box"><?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='contact_hours'")['value'] ?? '') ?></textarea>
+          <textarea name="contact_hours" rows="2" maxlength="100" style="width:100%;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:14px;box-sizing:border-box;resize:vertical;min-height:40px;max-height:80px;"><?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='contact_hours'")['value'] ?? '') ?></textarea>
         </div>
       </div>
       <div style="width:100%">
-        <button type="submit" class="btn-save">💾 Lưu thông tin liên hệ</button>
+        <button type="submit" class="btn-save">Lưu thông tin liên hệ</button>
       </div>
     </form>
   </div>
 
   <!-- Newsletter / Promotion Settings -->
-  <div class="settings-card">
+  <div class="settings-card" style="grid-column: 1 / -1;">
     <h3>📧 Cài đặt ưu đãi đăng ký</h3>
     <p style="color:#666;font-size:13px;margin-bottom:16px">Chỉnh sửa tiêu đề, nội dung, mã voucher và giá trị ưu đãi hiển thị ở phần đăng ký nhận ưu đãi (footer).</p>
-    <a href="/admin/settings/newsletter" class="btn-save" style="display:inline-block;text-decoration:none;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;">⚙️ Quản lý ưu đãi đăng ký</a>
+    <a href="/admin/settings/newsletter" class="btn-save" style="display:inline-block;text-decoration:none;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;">Quản lý ưu đãi đăng ký</a>
   </div>
 
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".settings-card"));
+  var tools = document.getElementById("settingsCardTools");
+  if(!cards.length || !tools) return;
+  var key="settings-cards-hidden";
+  var hidden=[]; try{ hidden=JSON.parse(localStorage.getItem(key)||"[]"); }catch(e){}
+  var bar=document.createElement("div"); bar.className="tbl-coltools"; bar.style.margin="0";
+  var btn=document.createElement("button"); btn.type="button"; btn.className="tbl-colbtn";
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h18M3 15h18M10 3v18"/></svg> Hiển thị mục';
+  var menu=document.createElement("div"); menu.className="tbl-colmenu";
+  menu.addEventListener("click", function(ev){ ev.stopPropagation(); });
+  var hd=document.createElement("div"); hd.className="tbl-colmenu-hd"; hd.innerHTML="<span>Hiển thị mục</span>";
+  var x=document.createElement("button"); x.type="button"; x.className="tbl-colmenu-x"; x.innerHTML="&times;"; x.addEventListener("click", function(){ menu.classList.remove("open"); });
+  hd.appendChild(x); menu.appendChild(hd);
+  cards.forEach(function(card, i){
+    var h=card.querySelector("h3"); var name=h?(h.textContent||"").trim():("Mục "+(i+1));
+    var lbl=document.createElement("label");
+    var cb=document.createElement("input"); cb.type="checkbox"; cb.checked=hidden.indexOf(i)===-1;
+    cb.addEventListener("change", function(){
+      card.style.display = cb.checked ? "" : "none";
+      var h2=[]; try{ h2=JSON.parse(localStorage.getItem(key)||"[]"); }catch(e){}
+      if(cb.checked){ h2=h2.filter(function(z){return z!==i}); } else if(h2.indexOf(i)===-1){ h2.push(i); }
+      localStorage.setItem(key, JSON.stringify(h2));
+    });
+    lbl.appendChild(cb); lbl.appendChild(document.createTextNode(" "+name));
+    menu.appendChild(lbl);
+    if(hidden.indexOf(i)!==-1) card.style.display="none";
+  });
+  btn.addEventListener("click", function(e){ e.stopPropagation(); var o=menu.classList.contains("open"); document.querySelectorAll(".tbl-colmenu.open").forEach(function(m){m.classList.remove("open");}); if(!o) menu.classList.add("open"); });
+  bar.appendChild(btn); bar.appendChild(menu); tools.appendChild(bar);
+})();
+</script>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

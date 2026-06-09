@@ -4,13 +4,13 @@
    ADMIN: Quản lý Danh mục (Categories)
    ───────────────────────────────────────────────── */
 
-$parentCats = dbAll("SELECT c.*, COUNT(ch.id) AS child_count FROM categories c LEFT JOIN categories ch ON ch.parent_id=c.id WHERE c.parent_id IS NULL GROUP BY c.id ORDER BY c.sort_order, c.name");
+$parentCats = dbAll("SELECT c.*, (SELECT COUNT(*) FROM categories ch WHERE ch.parent_id=c.id) AS child_count, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id) AS product_count FROM categories c WHERE c.parent_id IS NULL ORDER BY c.sort_order, c.name");
 $activeParent = null;
 $childCats = [];
 if (!empty($_GET['parent_id'])) {
     $activeParent = dbGet("SELECT * FROM categories WHERE id=?", [intval($_GET['parent_id'])]);
     if ($activeParent) {
-        $childCats = dbAll("SELECT * FROM categories WHERE parent_id=? ORDER BY sort_order, name", [$activeParent['id']]);
+        $childCats = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id) AS product_count FROM categories c WHERE parent_id=? ORDER BY sort_order, name", [$activeParent['id']]);
     }
 }
 ?>
@@ -63,7 +63,7 @@ if (!empty($_GET['parent_id'])) {
                 ↓ XUẤT CSV ▾
             </button>
             <div class="csv-export-menu">
-                <a href="/admin/categories/export-csv"> Xuất tất cả</a>
+                <a href="#" onclick="csColPick({section:'categories',url:'/admin/categories/export-csv',title:'Tất cả danh mục'});return false"> Xuất tất cả</a>
                 <a href="#" onclick="exportSelectedCats();return false"> Xuất đã chọn</a>
             </div>
         </div>
@@ -73,7 +73,7 @@ if (!empty($_GET['parent_id'])) {
 
 <div class="catalog-wrap">
     <!-- Left: Parent categories -->
-    <div class="catalog-panel" style="flex:0 0 340px">
+    <div class="catalog-panel" style="flex:1">
         <div class="panel-header">
             <h3>Danh mục cha (<?= count($parentCats) ?>)</h3>
             <button class="add-btn" onclick="openCatModal(null, null)">+ Thêm danh mục</button>
@@ -86,19 +86,19 @@ if (!empty($_GET['parent_id'])) {
             <div class="panel-item <?= ($activeParent && $activeParent['id'] == $cat['id']) ? 'active' : '' ?>">
                 <div style="display:flex;align-items:center;gap:8px;flex:1">
                     <input type="checkbox" class="cat-parent-tick" value="<?= $cat['id'] ?>" onchange="updateCatCount()">
-                    <a href="/admin/categories?parent_id=<?= $cat['id'] ?>" style="text-decoration:none;flex:1">
-                        <div class="panel-item-name">
-                            <?= e($cat['name']) ?>
-                            <?php if ($cat['is_featured']): ?><span class="featured-badge">Nổi bật</span><?php endif; ?>
+                    <a href="/admin/categories?parent_id=<?= $cat['id'] ?>" style="text-decoration:none;flex:1;display:flex;align-items:center;gap:10px">
+                        <?php if(!empty($cat['icon'])): ?><img src="/uploads/categories/<?= e($cat['icon']) ?>" style="width:46px;height:46px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;flex-shrink:0"><?php else: ?><span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:8px;border:1px dashed #cbd5e1;background:#f1f5f9;color:#9aa7bd;font-size:9px;flex-shrink:0">Ảnh</span><?php endif; ?>
+                        <div style="flex:1;min-width:0">
+                            <div class="panel-item-name"><?= e($cat['name']) ?><?php if ($cat['is_featured']): ?><span class="featured-badge">Nổi bật</span><?php endif; ?></div>
+                            <div class="panel-item-sub"><?= $cat['product_count'] ?> sản phẩm</div>
                         </div>
-                        <div class="panel-item-sub"><?= $cat['child_count'] ?> danh mục con · <?= $cat['product_count'] ?> sản phẩm</div>
                     </a>
                 </div>
                 <div class="panel-item-actions">
-                    <button class="btn-icon" onclick="openCatEditModal(<?= $cat['id'] ?>, null, '<?= e($cat['name']) ?>', '<?= e($cat['slug']) ?>', <?= $cat['sort_order'] ?>, <?= $cat['is_featured'] ?>)">Sửa</button>
-                    <form method="post" action="/admin/categories/<?= $cat['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa danh mục này và toàn bộ danh mục con?')">
+                    <button class="adm-edit" onclick="openCatEditModal(<?= $cat['id'] ?>, null, '<?= e($cat['name']) ?>', '<?= e($cat['slug']) ?>', <?= $cat['sort_order'] ?>, <?= $cat['is_featured'] ?>, '<?= e($cat['icon']??'') ?>')">Sửa</button>
+                    <form method="post" action="/admin/categories/<?= $cat['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa danh mục này và toàn bộ danh mục con?')">
                         <?= csrfField() ?>
-                        <button type="submit" class="btn-icon red">Xóa</button>
+                        <button type="submit" class="adm-del">Xóa</button>
                     </form>
                 </div>
             </div>
@@ -107,57 +107,6 @@ if (!empty($_GET['parent_id'])) {
         </div>
     </div>
 
-    <!-- Right: Child categories -->
-    <div class="catalog-panel" style="flex:1">
-        <?php if ($activeParent): ?>
-        <div class="panel-header">
-            <h3>Danh mục con – <?= e($activeParent['name']) ?></h3>
-            <button class="add-btn" onclick="openCatModal(<?= $activeParent['id'] ?>, '<?= e($activeParent['name']) ?>')">+ Thêm danh mục con</button>
-        </div>
-        <div class="panel-list">
-            <?php if (empty($childCats)): ?>
-                <div class="empty-state">Chưa có danh mục con nào</div>
-            <?php else: ?>
-            <table class="tbl" style="width:100%">
-                <thead>
-                    <tr>
-                        <th style="width:36px;padding:12px"><input type="checkbox" id="checkAllChild" onchange="document.querySelectorAll('.cat-child-tick').forEach(c=>c.checked=this.checked);updateCatCount()"></th>
-                        <th style="padding:12px 20px;text-align:left">Tên danh mục</th>
-                        <th style="padding:12px;text-align:left">Slug</th>
-                        <th style="padding:12px;text-align:center">Thứ tự</th>
-                        <th style="padding:12px;text-align:center">Sản phẩm</th>
-                        <th style="padding:12px;text-align:center">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($childCats as $child): ?>
-                <tr style="border-bottom:1px solid #f5f5f5">
-                    <td style="padding:12px;text-align:center"><input type="checkbox" class="cat-child-tick" value="<?= $child['id'] ?>" onchange="updateCatCount()"></td>
-                    <td style="padding:12px 20px;font-weight:600"><?= e($child['name']) ?></td>
-                    <td style="padding:12px;font-size:12px;color:#888"><?= e($child['slug']) ?></td>
-                    <td style="padding:12px;text-align:center"><?= $child['sort_order'] ?></td>
-                    <td style="padding:12px;text-align:center"><?= $child['product_count'] ?></td>
-                    <td style="padding:12px;text-align:center">
-                        <div style="display:flex;gap:6px;justify-content:center">
-                            <button class="btn-icon" onclick="openCatEditModal(<?= $child['id'] ?>, <?= $activeParent['id'] ?>, '<?= e($child['name']) ?>', '<?= e($child['slug']) ?>', <?= $child['sort_order'] ?>, 0)">Sửa</button>
-                            <form method="post" action="/admin/categories/<?= $child['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa danh mục con này?')">
-                                <?= csrfField() ?>
-                                <button type="submit" class="btn-icon red">Xóa</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-            <?php endif; ?>
-        </div>
-        <?php else: ?>
-        <div class="empty-state" style="padding:80px">
-            Chọn danh mục cha bên trái để xem và quản lý danh mục con
-        </div>
-        <?php endif; ?>
-    </div>
 </div>
 <div style="font-size:12px;color:#888;margin-top:8px" id="catSelectedCount"></div>
 
@@ -165,7 +114,7 @@ if (!empty($_GET['parent_id'])) {
 <div class="modal-overlay" id="catModal">
     <div class="modal-box">
         <h3 id="catModalTitle">Thêm danh mục</h3>
-        <form method="post" id="catForm" action="/admin/categories/add">
+        <form method="post" id="catForm" action="/admin/categories/add" enctype="multipart/form-data">
             <?= csrfField() ?>
             <input type="hidden" name="cat_id" id="catId" value="">
             <input type="hidden" name="parent_id" id="catParentId" value="">
@@ -176,6 +125,21 @@ if (!empty($_GET['parent_id'])) {
             <div class="form-group">
                 <label>Slug (URL) *</label>
                 <input type="text" name="slug" id="catSlug" required placeholder="phu-tung-dong-co">
+            </div>
+            <div class="form-group">
+                <label>Ảnh đại diện</label>
+                <input type="hidden" name="current_image" id="catCurrentImage" value="">
+                <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+                    <div style="width:92px;height:92px;border-radius:10px;border:1px solid #d6deea;background:#f8fafc;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0">
+                        <img id="catImgPreview" src="" style="width:100%;height:100%;object-fit:cover;display:none">
+                        <span id="catImgPlaceholder" style="font-size:11px;color:#9aa7bd;text-align:center;padding:4px">Chưa có ảnh</span>
+                    </div>
+                    <div>
+                        <label for="catImageInput" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px dashed #c3cfe2;border-radius:8px;background:#f8fafc;font-size:13px;cursor:pointer;color:#0a192f;font-weight:600">Chọn ảnh</label>
+                        <input type="file" id="catImageInput" name="image" accept="image/*" style="display:none" onchange="catImgPick(this)">
+                        <div id="catImgName" style="font-size:12px;color:#888;margin-top:8px">Chưa chọn ảnh</div>
+                    </div>
+                </div>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
                 <div class="form-group">
@@ -315,6 +279,7 @@ document.getElementById('catName').addEventListener('input', function() {
 });
 document.getElementById('catSlug').addEventListener('input', function() { this.dataset.manual = '1'; });
 
+function catImgPick(inp){ var p=document.getElementById('catImgPreview'),n=document.getElementById('catImgName'),ph=document.getElementById('catImgPlaceholder'); if(inp.files&&inp.files[0]){ p.src=URL.createObjectURL(inp.files[0]); p.style.display='block'; if(ph)ph.style.display='none'; n.textContent=inp.files[0].name; } }
 function openCatModal(parentId, parentName) {
     document.getElementById('catModalTitle').textContent = parentName ? 'Thêm danh mục con – ' + parentName : 'Thêm danh mục cha';
     document.getElementById('catForm').action = '/admin/categories/add';
@@ -325,9 +290,10 @@ function openCatModal(parentId, parentName) {
     document.getElementById('catSlug').removeAttribute('data-manual');
     document.getElementById('catSort').value = '100';
     document.getElementById('catFeatured').value = '0';
+    document.getElementById('catImageInput').value=''; document.getElementById('catCurrentImage').value=''; document.getElementById('catImgPreview').style.display='none'; document.getElementById('catImgPlaceholder').style.display='block'; document.getElementById('catImgName').textContent='Chưa chọn ảnh';
     document.getElementById('catModal').classList.add('show');
 }
-function openCatEditModal(id, parentId, name, slug, sort, featured) {
+function openCatEditModal(id, parentId, name, slug, sort, featured, image) {
     document.getElementById('catModalTitle').textContent = 'Sửa danh mục';
     document.getElementById('catForm').action = '/admin/categories/'+id+'/edit';
     document.getElementById('catId').value = id;
@@ -337,6 +303,7 @@ function openCatEditModal(id, parentId, name, slug, sort, featured) {
     document.getElementById('catSlug').dataset.manual = '1';
     document.getElementById('catSort').value = sort;
     document.getElementById('catFeatured').value = featured;
+    document.getElementById('catImageInput').value=''; document.getElementById('catCurrentImage').value=image||''; var _cp=document.getElementById('catImgPreview'),_cn=document.getElementById('catImgName'),_ph=document.getElementById('catImgPlaceholder'); if(image){_cp.src='/uploads/categories/'+image;_cp.style.display='block';if(_ph)_ph.style.display='none';_cn.textContent='Ảnh hiện tại';}else{_cp.style.display='none';if(_ph)_ph.style.display='block';_cn.textContent='Chưa chọn ảnh';}
     document.getElementById('catModal').classList.add('show');
 }
 function closeCatModal() { document.getElementById('catModal').classList.remove('show'); }
@@ -357,7 +324,7 @@ function exportSelectedCats() {
     parentChecked.forEach(function(c) { ids.push(c.value); });
     childChecked.forEach(function(c) { ids.push(c.value); });
     if (ids.length === 0) { alert('Vui lòng chọn ít nhất 1 danh mục để xuất'); return; }
-    window.location.href = '/admin/categories/export-csv?ids=' + ids.join(',');
+    csColPick({section:'categories',url:'/admin/categories/export-csv',title:'Danh mục đã chọn',extra:{ids:ids.join(',')}});
 }
 
 function updateCatCount() {

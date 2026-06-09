@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng nhập Quản trị viên - CoolingSystem</title>
+    <meta name="description" content="Đăng nhập trang quản trị hệ thống CoolingSystem.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <?php
+    $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+    $_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+    ?>
+    <link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
+    <meta name="robots" content="noindex, nofollow">
     <style>
         :root { --navy:#0a192f; --gold:#d4af37; --bg:#f4f7f6; }
         body { font-family:'Inter',sans-serif; background:var(--bg); margin:0; display:flex; align-items:center; justify-content:center; min-height:100vh; }
@@ -21,6 +28,9 @@
         .alert-error { background:#fee2e2; color:#dc2626; border:1px solid #fecaca; }
         .alert-success { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; }
     </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystem.vn"},{"@type":"ListItem","position":2,"name":"Đăng nhập Admin","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
+    </script>
 </head>
 <body>
 
@@ -47,10 +57,9 @@
         </div>
         <button type="submit" class="btn-submit">Đăng nhập Admin</button>
     </form>
+    <div style="margin-top:18px;font-size:13px"><a href="/admin/forgot" style="color:var(--navy);text-decoration:none;font-weight:600">Quên mật khẩu?</a></div>
     
-    <div style="margin-top:24px;font-size:12px;color:#888;">
-        <a href="/" style="color:var(--navy);text-decoration:none;">&larr; Quay lại trang chủ</a>
-    </div>
+
 </div>
 
 </body>

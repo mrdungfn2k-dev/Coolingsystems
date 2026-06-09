@@ -4,9 +4,16 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Quên mật khẩu — Cooling</title>
+<meta name="description" content="Khôi phục mật khẩu tài khoản Cooling.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/cooling.css?v=<?= time() ?>">
+<?php
+$_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+?>
+<link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
+<meta name="robots" content="noindex, nofollow">
 <style>
 body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;margin:0;font-family:'Inter',sans-serif}
 .auth-wrap{width:100%;max-width:440px;padding:20px}
@@ -27,6 +34,9 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
 .flash-error{background:#fef2f2;color:#dc2626;padding:10px 14px;border-radius:8px;margin-bottom:16px;font-size:13px;border:1px solid #fecaca}
 .flash-success{background:#f0fdf4;color:#16a34a;padding:10px 14px;border-radius:8px;margin-bottom:16px;font-size:13px;border:1px solid #bbf7d0}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystem.vn"},{"@type":"ListItem","position":2,"name":"Quên mật khẩu","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
+</script>
 </head>
 <body>
 <div class="auth-wrap"><div class="auth-card">

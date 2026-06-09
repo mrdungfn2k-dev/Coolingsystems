@@ -25,9 +25,9 @@
           <input type="hidden" name="is_active" value="<?= $s['is_active'] ?>">
           <button type="submit" class="btn btn-navy" style="padding:6px 14px;font-size:12px">Lưu</button>
         </form>
-        <form method="post" action="/admin/trust-steps/<?= $s['id'] ?>/delete" onsubmit="return confirm('Xóa bước này?')">
+        <form method="post" action="/admin/trust-steps/<?= $s['id'] ?>/delete" onsubmit="return csConfirmForm(this,'Xóa bước này?')">
           <?= csrfField() ?>
-          <button type="submit" style="background:#e74c3c;color:#fff;border:none;padding:6px 12px;border-radius:4px;font-size:12px;cursor:pointer">Xóa</button>
+          <button type="submit" class="adm-del">Xóa</button>
         </form>
       </div>
     <?php endforeach; ?>

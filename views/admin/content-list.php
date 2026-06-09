@@ -7,13 +7,20 @@
 </div>
 
 <div class="panel">
-  <div class="sec-head"><div class="title"><span class="bar"></span><h2>Danh sách trang</h2></div></div>
   <table class="tbl">
     <thead><tr><th>Tên trang</th><th>Slug</th><th>Cập nhật lần cuối</th><th>Xem</th><th>Sửa</th></tr></thead>
     <tbody>
+    <!-- Footer row -->
+    <tr>
+      <td><strong>Footer (Chân trang)</strong></td>
+      <td class="fs-12"><code>footer-info</code></td>
+      <td class="fs-12">—</td>
+      <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
+      <td><button onclick="document.getElementById('footerModal').style.display='flex'" class="btn btn-gold btn-sm">Sửa</button></td>
+    </tr>
     <!-- Banner row -->
     <tr>
-      <td><strong>🖼️ Banner trang chủ</strong></td>
+      <td><strong>Banner trang chủ</strong></td>
       <td class="fs-12"><code>hero-banner</code></td>
       <td class="fs-12">—</td>
       <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
@@ -21,7 +28,7 @@
     </tr>
     <!-- 4 Bước cam kết -->
     <tr>
-      <td><strong>🔧 4 bước cam kết</strong></td>
+      <td><strong>4 bước cam kết</strong></td>
       <td class="fs-12"><code>trust-steps</code></td>
       <td class="fs-12">—</td>
       <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
@@ -61,7 +68,7 @@
 <div id="bannerModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;justify-content:center;align-items:center">
   <div style="background:#fff;border-radius:12px;padding:28px;max-width:700px;width:95%;max-height:85vh;overflow-y:auto;position:relative">
     <button onclick="document.getElementById('bannerModal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#666">&times;</button>
-    <h3 style="margin:0 0 20px;font-size:18px;font-weight:700;color:var(--navy)">🖼️ Chỉnh sửa Banner trang chủ</h3>
+    <h3 style="margin:0 0 20px;font-size:18px;font-weight:700;color:var(--navy)">Chỉnh sửa Banner trang chủ</h3>
     <form method="post" action="/admin/banner/update" enctype="multipart/form-data">
       <?= csrfField() ?>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
@@ -109,6 +116,34 @@
         <div class="form-group" style="display:flex;align-items:flex-end">
           <button type="submit" class="btn btn-navy btn-sm" style="padding:10px 24px">Lưu Banner</button>
         </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal Footer Edit -->
+<div id="footerModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;justify-content:center;align-items:center">
+  <div style="background:#fff;border-radius:12px;padding:28px;max-width:600px;width:95%;max-height:85vh;overflow-y:auto;position:relative">
+    <button onclick="document.getElementById('footerModal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#666">&times;</button>
+    <h3 style="margin:0 0 20px;font-size:18px;font-weight:700;color:var(--navy)">Chỉnh sửa Chân trang (Footer)</h3>
+    <form method="post" action="/admin/footer/update">
+      <?= csrfField() ?>
+      <div class="form-group">
+        <label style="font-weight:600;font-size:12px;text-transform:uppercase;color:#555;margin-bottom:4px;display:block">Tên Logo Text</label>
+        <input type="text" name="footer_logo_text" value="<?= e(!empty($footerSettings['footer_logo_text']) ? $footerSettings['footer_logo_text'] : 'COOLING') ?>" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px">
+      </div>
+      <div class="form-group" style="margin-top:12px">
+        <label style="font-weight:600;font-size:12px;text-transform:uppercase;color:#555;margin-bottom:4px;display:block">Đoạn mô tả ngắn (Dưới logo)</label>
+        <textarea name="footer_desc" rows="3" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px"><?= e(!empty($footerSettings['footer_desc']) ? $footerSettings['footer_desc'] : 'Sàn TMĐT phụ tùng ô tô chính hãng — chuyên sâu hệ thống làm mát. Cung cấp phụ tùng uy tín cho hàng triệu khách hàng trên toàn quốc.') ?></textarea>
+      </div>
+      <div class="form-group" style="margin-top:12px">
+        <label style="font-weight:600;font-size:12px;text-transform:uppercase;color:#555;margin-bottom:4px;display:block">Đoạn text Cuối trang (Copyright)</label>
+        <input type="text" name="footer_copyright" value="<?= e(!empty($footerSettings['footer_copyright']) ? $footerSettings['footer_copyright'] : '&copy; ' . date('Y') . ' Cooling. Bảo lưu mọi quyền.') ?>" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px" placeholder="VD: &copy; 2026 Cooling System. Bảo lưu mọi quyền.">
+        <div style="font-size:11px;color:#888;margin-top:4px">Ghi chú: Dùng &amp;copy; cho ký hiệu ©</div>
+      </div>
+      <div class="form-group" style="margin-top:16px;text-align:right">
+        <button type="submit" class="btn btn-navy btn-sm" style="padding:10px 24px">Lưu Chân trang</button>
       </div>
     </form>
   </div>

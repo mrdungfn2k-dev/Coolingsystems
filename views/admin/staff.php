@@ -41,10 +41,10 @@
       </td>
       <td><span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700"><?= $staffCount ?> nhân viên</span></td>
       <td style="display:flex;gap:6px;flex-wrap:wrap">
-        <a href="/admin/staff/roles/<?= $r['id'] ?>/edit" class="btn btn-outline-navy btn-sm">Sửa</a>
+        <a href="/admin/staff/roles/<?= $r['id'] ?>/edit" class="adm-edit">Sửa</a>
         <a href="/admin/staff/roles/<?= $r['id'] ?>/assign" class="btn btn-navy btn-sm">Phân công</a>
-        <form method="post" action="/admin/staff/roles/<?= $r['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Xóa vai trò này?')">
-          <?= csrfField() ?><button type="submit" class="btn btn-sm" style="background:#fee;color:#c62828;border:1px solid #f5c6cb">Xóa</button>
+        <form method="post" action="/admin/staff/roles/<?= $r['id'] ?>/delete" style="display:inline" onsubmit="return csConfirmForm(this,'Xóa vai trò này?')">
+          <?= csrfField() ?><button type="submit" class="adm-del">Xóa</button>
         </form>
       </td>
     </tr>
@@ -56,22 +56,28 @@
 
 <!-- Danh sách nhân viên được phân quyền -->
 <div class="panel">
-  <div style="padding:14px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px;color:var(--navy)">Nhân viên đang được phân quyền (<?= count($assignments ?? []) ?>)</div>
+  <div style="padding:14px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px;color:var(--navy)">Nhân viên đang được phân quyền (<?= (int)($sTotal ?? 0) ?>)</div>
   <table class="tbl">
     <thead><tr><th>Nhân viên</th><th>Email</th><th>Vai trò</th><th>Phân công lúc</th><th>Thao tác</th></tr></thead>
     <tbody>
     <?php if(empty($assignments)): ?>
       <tr><td colspan="5" style="text-align:center;padding:30px;color:#888">Chưa có nhân viên nào được phân quyền.</td></tr>
     <?php else: ?>
-    <?php foreach($assignments as $a): ?>
+    <?php foreach($assignments as $a): $roleList = array_filter(explode('|', $a['roles'] ?? '')); ?>
     <tr>
       <td><strong><?= e($a['full_name']) ?></strong><div class="fs-11 text-muted"><?= e($a['phone'] ?? '') ?></div></td>
       <td class="fs-12"><?= e($a['email']) ?></td>
-      <td><span style="background:var(--gold-warm);color:var(--navy-dark);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700"><?= e($a['role_name']) ?></span></td>
+      <td>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <?php foreach($roleList as $rstr): $rp=explode('~',$rstr,2); $aid=(int)($rp[0]??0); $rn=$rp[1]??''; ?>
+          <span style="display:inline-flex;align-items:center;gap:6px;background:var(--gold-warm);color:var(--navy-dark);padding:3px 5px 3px 10px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap"><?= e($rn) ?><form method="post" action="/admin/staff/unassign/<?= $aid ?>" style="display:inline;margin:0;line-height:0" onsubmit="return csConfirmForm(this,'Hủy vai trò này của nhân viên?')"><?= csrfField() ?><button type="submit" title="Hủy vai trò này" style="border:none;background:rgba(15,35,66,.18);color:var(--navy-dark);width:16px;height:16px;border-radius:50%;cursor:pointer;font-size:12px;line-height:14px;padding:0;font-weight:700">&times;</button></form></span>
+        <?php endforeach; ?>
+        </div>
+      </td>
       <td class="fs-12"><?= date('d/m/Y', strtotime($a['assigned_at'])) ?></td>
       <td>
-        <form method="post" action="/admin/staff/unassign/<?= $a['assignment_id'] ?>" style="display:inline" onsubmit="return confirm('Hủy phân quyền nhân viên này?')">
-          <?= csrfField() ?><button type="submit" class="btn btn-sm" style="background:#fee;color:#c62828;border:1px solid #f5c6cb">Hủy quyền</button>
+        <form method="post" action="/admin/staff/unassign-all/<?= (int)$a['user_id'] ?>" style="display:inline" onsubmit="return csConfirmForm(this,'Hủy TẤT CẢ quyền của nhân viên này?')">
+          <?= csrfField() ?><button type="submit" class="btn btn-sm" style="background:#fee;color:#c62828;border:1px solid #f5c6cb">Hủy tất cả</button>
         </form>
       </td>
     </tr>
@@ -79,6 +85,13 @@
     <?php endif; ?>
     </tbody>
   </table>
+  <?php if(($sTotalPages ?? 1) > 1): ?>
+  <div style="padding:12px 16px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
+    <?php for($i=1;$i<=$sTotalPages;$i++): ?>
+      <a href="/admin/staff?spage=<?= $i ?>" style="padding:6px 12px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;<?= $i==($spage??1)?'background:var(--navy);color:#fff':'background:#eef2f7;color:var(--navy)' ?>"><?= $i ?></a>
+    <?php endfor; ?>
+  </div>
+  <?php endif; ?>
 </div>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

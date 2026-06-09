@@ -31,6 +31,60 @@
 .form-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
 @media(max-width:900px){.form-layout{grid-template-columns:1fr}}
 .sidebar-panel{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
+
+/* ── Word-like Table Grid Picker ── */
+.ql-table-btn { position:relative; display:inline-block; }
+.ql-table-btn button.ql-table-trigger {
+  background:none; border:none; cursor:pointer; padding:6px 8px;
+  font-size:13px; color:#444; font-weight:600; display:flex; align-items:center; gap:4px;
+  border-radius:4px; transition:background .15s;
+}
+.ql-table-btn button.ql-table-trigger:hover { background:#e8e8e8; }
+.ql-table-btn button.ql-table-trigger svg { width:18px; height:18px; fill:#444; }
+.table-grid-popup {
+  display:none; position:absolute; top:100%; left:0; z-index:9999;
+  background:#fff; border:1px solid #ccc; border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.18); padding:10px 12px 8px;
+  min-width:200px;
+}
+.table-grid-popup.active { display:block; }
+.table-grid-popup .grid-label {
+  font-size:12px; font-weight:700; color:#1a3258; text-align:center;
+  margin-bottom:6px; min-height:18px;
+}
+.table-grid-cells {
+  display:grid; grid-template-columns:repeat(8,22px); gap:2px;
+  justify-content:center;
+}
+.table-grid-cells .cell {
+  width:22px; height:22px; border:1px solid #d0d0d0; border-radius:2px;
+  cursor:pointer; transition:background .1s, border-color .1s;
+  background:#fff;
+}
+.table-grid-cells .cell.active {
+  background:#dbeafe; border-color:#3b82f6;
+}
+.table-grid-cells .cell:hover {
+  background:#bfdbfe; border-color:#2563eb;
+}
+.table-grid-popup .grid-actions {
+  margin-top:8px; padding-top:8px; border-top:1px solid #eee;
+  display:flex; gap:6px; justify-content:center;
+}
+.table-grid-popup .grid-actions button {
+  font-size:11px; padding:4px 12px; border:1px solid #d0d5dd;
+  border-radius:4px; background:#f8f9fa; cursor:pointer; color:#333;
+  font-weight:500; transition:all .15s;
+}
+.table-grid-popup .grid-actions button:hover {
+  background:#1a3258; color:#fff; border-color:#1a3258;
+}
+/* Tables inside Quill editor */
+.ql-editor table { border-collapse:collapse; width:100%; margin:12px 0; }
+.ql-editor table th { background:#0b1d3a; color:#fff; font-weight:700; padding:10px 14px; border:1px solid #ddd; text-align:left; }
+.ql-editor table td { padding:10px 14px; border:1px solid #ddd; text-align:left; }
+.ql-editor table tr:nth-child(even) td { background:#f8f9fc; }
+
 </style>
 
 <div class="dash-head">
@@ -424,5 +478,157 @@ function previewImgs(input) {
 updateCounts();
 updateSEO();
 quillDesc.on('text-change', function(){ updateSEO(); });
+
+
+// ── Word-like Table Grid Picker for Quill ──
+(function() {
+  function createTableGridPicker(quillInstance) {
+    var toolbar = quillInstance.container.previousSibling;
+    if (!toolbar || !toolbar.classList.contains('ql-toolbar')) return;
+    
+    // Remove the default empty table-insert button if exists
+    var defaultBtn = toolbar.querySelector('.ql-table-insert');
+    if (defaultBtn) defaultBtn.style.display = 'none';
+    
+    // Create table button with grid popup
+    var wrapper = document.createElement('span');
+    wrapper.className = 'ql-table-btn ql-formats';
+    
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ql-table-trigger';
+    btn.title = 'Chèn bảng';
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v4h5V5H5zm7 0v4h5V5h-5zm5 6h-5v4h5v-4zm0 6h-5v4h5v-4zM10 17H5v4h5v-4zm0-6H5v4h5v-4z"/></svg> Bảng';
+    
+    var popup = document.createElement('div');
+    popup.className = 'table-grid-popup';
+    
+    var label = document.createElement('div');
+    label.className = 'grid-label';
+    label.textContent = 'Chọn kích thước bảng';
+    
+    var grid = document.createElement('div');
+    grid.className = 'table-grid-cells';
+    
+    var ROWS = 8, COLS = 8;
+    var cells = [];
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c < COLS; c++) {
+        var cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.setAttribute('data-row', r + 1);
+        cell.setAttribute('data-col', c + 1);
+        cells.push(cell);
+        grid.appendChild(cell);
+      }
+    }
+    
+    // Hover highlight
+    grid.addEventListener('mouseover', function(e) {
+      if (!e.target.classList.contains('cell')) return;
+      var hRow = parseInt(e.target.getAttribute('data-row'));
+      var hCol = parseInt(e.target.getAttribute('data-col'));
+      label.textContent = hRow + ' x ' + hCol + ' Bảng';
+      cells.forEach(function(c) {
+        var cr = parseInt(c.getAttribute('data-row'));
+        var cc = parseInt(c.getAttribute('data-col'));
+        if (cr <= hRow && cc <= hCol) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+    });
+    
+    grid.addEventListener('mouseleave', function() {
+      label.textContent = 'Chọn kích thước bảng';
+      cells.forEach(function(c) { c.classList.remove('active'); });
+    });
+    
+    // Click to insert table
+    grid.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('cell')) return;
+      var rows = parseInt(e.target.getAttribute('data-row'));
+      var cols = parseInt(e.target.getAttribute('data-col'));
+      insertTable(quillInstance, rows, cols);
+      popup.classList.remove('active');
+    });
+    
+    // Quick actions
+    var actions = document.createElement('div');
+    actions.className = 'grid-actions';
+    var presets = [
+      {label: '3x3', r:3, c:3},
+      {label: '4x2', r:4, c:2},
+      {label: '5x3', r:5, c:3}
+    ];
+    presets.forEach(function(p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = p.label;
+      b.addEventListener('click', function() {
+        insertTable(quillInstance, p.r, p.c);
+        popup.classList.remove('active');
+      });
+      actions.appendChild(b);
+    });
+    
+    popup.appendChild(label);
+    popup.appendChild(grid);
+    popup.appendChild(actions);
+    wrapper.appendChild(btn);
+    wrapper.appendChild(popup);
+    toolbar.appendChild(wrapper);
+    
+    // Toggle popup
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelectorAll('.table-grid-popup.active').forEach(function(p) {
+        if (p !== popup) p.classList.remove('active');
+      });
+      popup.classList.toggle('active');
+    });
+  }
+  
+  function insertTable(quill, rows, cols) {
+    var range = quill.getSelection(true);
+    if (!range) quill.focus();
+    range = quill.getSelection(true);
+    
+    var html = '<table><thead><tr>';
+    for (var c = 0; c < cols; c++) {
+      html += '<th>Cột ' + (c + 1) + '</th>';
+    }
+    html += '</tr></thead><tbody>';
+    for (var r = 0; r < rows - 1; r++) {
+      html += '<tr>';
+      for (var c2 = 0; c2 < cols; c2++) {
+        html += '<td>&nbsp;</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table><p><br></p>';
+    
+    var index = range ? range.index : quill.getLength();
+    quill.clipboard.dangerouslyPasteHTML(index, html);
+  }
+  
+  // Close popups on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.ql-table-btn')) {
+      document.querySelectorAll('.table-grid-popup.active').forEach(function(p) {
+        p.classList.remove('active');
+      });
+    }
+  });
+  
+  // Init for editors
+  setTimeout(function() {
+    if (typeof quillDesc !== 'undefined') createTableGridPicker(quillDesc);
+    if (typeof quillFeat !== 'undefined') createTableGridPicker(quillFeat);
+    if (typeof quillSpec !== 'undefined') createTableGridPicker(quillSpec);
+  }, 500);
+})();
+
 </script>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

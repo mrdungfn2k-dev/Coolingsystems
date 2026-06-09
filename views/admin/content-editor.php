@@ -1,5 +1,5 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="/tinymce/tinymce.min.js"></script>
 <style>
 .tox-tinymce { border: 1px solid var(--line) !important; border-radius: 6px !important; }
 .tox .tox-toolbar { background: #fafafa !important; }

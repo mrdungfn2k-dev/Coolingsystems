@@ -4,8 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e($title ?? '') ?> — Cooling</title>
-<link rel="stylesheet" href="/css/cooling.css?v=1779294935">
-<link rel="stylesheet" href="/css/mobile.css?v=1779264225v2">
+<meta name="description" content="<?= e($title ?? 'Tài khoản') ?> — Cooling Phụ tùng & Dịch vụ ô tô.">
+<link rel="stylesheet" href="/css/cooling.css?v=1780910000">
+<link rel="stylesheet" href="/css/mobile.css?v=1780900000">
+<?php
+$_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+?>
+<link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
+<meta name="robots" content="noindex, nofollow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystem.vn"},{"@type":"ListItem","position":2,"name":"<?= addslashes(e($title ?? 'Tài khoản')) ?>","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
+</script>
 </head>
 <body>
 <?php require __DIR__ . '/svg-logo.php'; ?>

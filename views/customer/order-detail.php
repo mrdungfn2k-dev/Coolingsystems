@@ -18,8 +18,8 @@
 .status-badge.blue{background:#e3f2fd;color:#1565c0}
 .status-badge.red{background:#fce4ec;color:#c62828}
 .status-badge.gray{background:#f5f5f5;color:#666}
-.invoice-print{background:linear-gradient(135deg,#c8a55a,#b8923e);color:#fff;padding:10px 28px;border-radius:6px;font-size:13px;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
-.invoice-print:hover{background:linear-gradient(135deg,#b8923e,#a07e2e);box-shadow:0 2px 8px rgba(200,165,90,.3)}
+.invoice-print{background:#1a3258;color:#fff;padding:10px 28px;border-radius:6px;font-size:13px;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:0.5px;transition:all .2s}
+.invoice-print:hover{background:#0f2342;box-shadow:0 2px 8px rgba(15,35,66,.3)}
 @media print{.no-print{display:none!important} .od-card{border:none;box-shadow:none}}
 </style>
 
@@ -38,12 +38,12 @@
       <div>
         <?php
         $statusMap = [
-          'pending'=>['Chờ xử lý','orange'],'confirmed'=>['Đã xác nhận','blue'],
+          'pending'=>['Chờ xử lý','orange'],'confirmed'=>['Đã xác nhận','blue'],'received'=>['Tiếp nhận','blue'],'delivering'=>['Đang giao','blue'],
           'shipping'=>['Đang giao','blue'],'delivered'=>['Đã giao','green'],
           'completed'=>['Hoàn thành','green'],'cancelled'=>['Đã hủy','red'],
           'returned'=>['Trả hàng','gray']
         ];
-        $s = $statusMap[$order['status']] ?? ['N/A','gray'];
+        $s = $statusMap[($order['delivery_status'] ?? '') ?: 'pending'] ?? ['Chờ xử lý','orange'];
         ?>
         <span class="status-badge <?= $s[1] ?>"><?= $s[0] ?></span>
       </div>
@@ -51,7 +51,7 @@
     <div class="od-body">
       <div class="od-grid" style="margin-bottom:16px">
         <div><div class="label">Khách hàng</div><div class="value"><?= e($order['shipping_full_name']??'') ?></div></div>
-        <div><div class="label">Hình thức TT</div><div class="value"><?= $order['payment_method']==='bank_transfer'?'Chuyển khoản':'COD (Thanh toán khi nhận)' ?></div></div>
+        <div><div class="label">Hình thức TT</div><div class="value"><?= in_array($order['payment_method'], ['bank_transfer', 'bank'])?'Chuyển khoản':'COD (Thanh toán khi nhận)' ?></div></div>
         <div><div class="label">Địa chỉ giao hàng</div><div class="value"><?= e($order['shipping_detail']??'—') ?></div></div>
         <div><div class="label">Ghi chú</div><div class="value"><?= e($order['notes']??'—') ?></div></div>
       </div>
@@ -65,8 +65,55 @@
         <div style="width:60px;height:60px;background:#f0f0f0;border-radius:6px"></div>
         <?php endif; ?>
         <div class="name">
-          <?= e($item['product_name']??'Sản phẩm') ?>
-          <div style="font-size:12px;color:#888;font-weight:400">x<?= $item['quantity']??1 ?></div>
+          <div style="margin-bottom:4px;line-height:1.4"><?= e($item['product_name']??'Sản phẩm') ?></div>
+          <div style="font-size:12px;color:#888;font-weight:400;margin-bottom:4px">SL: <?= $item['quantity']??1 ?></div>
+          <?php
+          $prod = dbGet("SELECT warranty_months FROM products WHERE id=?", [$item['product_id']]);
+          $warrantyMonths = $prod['warranty_months'] ?? 0;
+          $returnDays = 7;
+          
+          if (in_array($order['delivery_status']??'', ['completed', 'delivered'])) {
+              $completedTime = !empty($order['completed_at']) ? strtotime($order['completed_at']) : strtotime($order['updated_at']??'now');
+              $now = time();
+              
+              // Đổi trả
+              $returnEndTime = strtotime("+$returnDays days", $completedTime);
+              if ($now <= $returnEndTime) {
+                  $daysLeft = ceil(($returnEndTime - $now) / 86400);
+                  $returnStatus = "<span style='color:#1a3258;font-weight:600'><i class='bx bx-check-shield'></i> Đổi trả còn $daysLeft ngày</span>";
+              } else {
+                  $returnStatus = "<span style='color:#888'><i class='bx bx-x-circle'></i> Hết hạn đổi trả</span>";
+              }
+              
+              // Bảo hành
+              if ($warrantyMonths > 0) {
+                  $warrantyEndTime = strtotime("+$warrantyMonths months", $completedTime);
+                  if ($now <= $warrantyEndTime) {
+                      $daysLeft = ceil(($warrantyEndTime - $now) / 86400);
+                      $monthsLeft = floor($daysLeft / 30);
+                      $remDays = $daysLeft % 30;
+                      $wText = "Còn ";
+                      if ($monthsLeft > 0) $wText .= "$monthsLeft tháng ";
+                      if ($remDays > 0 || $monthsLeft == 0) $wText .= "$remDays ngày";
+                      $warrantyStatus = "<span style='color:#1a3258;font-weight:600'><i class='bx bx-wrench'></i> Bảo hành: $wText</span>";
+                  } else {
+                      $warrantyStatus = "<span style='color:#888'><i class='bx bx-x-circle'></i> Hết hạn bảo hành</span>";
+                  }
+              } else {
+                  $warrantyStatus = "<span style='color:#888'><i class='bx bx-info-circle'></i> Không bảo hành</span>";
+              }
+          ?>
+            <div style="font-size:10px;display:flex;gap:8px;margin-top:4px;background:#f4f7fb;padding:3px 8px;border-radius:6px;border:1px solid #e2e8f0;width:fit-content">
+               <div><?= $returnStatus ?></div>
+               <div style="width:1px;background:#ddd"></div>
+               <div><?= $warrantyStatus ?></div>
+            </div>
+          <?php } else { ?>
+            <div style="font-size:11px;display:flex;gap:12px;margin-top:4px;color:#888">
+               <div>Đổi trả: <?= $returnDays ?> ngày</div>
+               <div>Bảo hành: <?= $warrantyMonths > 0 ? "$warrantyMonths tháng" : "Không" ?></div>
+            </div>
+          <?php } ?>
         </div>
         <div class="price"><?= number_format($lineTotal) ?> ₫</div>
       </div>
@@ -90,10 +137,7 @@
   <div class="od-card no-print">
     <div class="od-body" style="display:flex;gap:12px;flex-wrap:wrap;padding:20px">
       <?php if (($order['delivery_status']??'pending') === 'pending'): ?>
-        <form method="post" action="/customer/orders/<?= $order['id'] ?>/cancel" onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?')" style="margin:0">
-          <?= csrfField() ?>
-          <button type="submit" style="padding:10px 24px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">✕ Hủy đơn hàng</button>
-        </form>
+        <button type="button" onclick="openCancelModal(<?= $order['id'] ?>)" style="padding:10px 24px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">✕ Hủy đơn hàng</button>
         <p style="font-size:12px;color:#888;margin:0;align-self:center">Bạn có thể hủy đơn khi admin chưa xác nhận</p>
       <?php endif; ?>
 
@@ -102,7 +146,7 @@
           $existingReturn = dbGet("SELECT * FROM order_returns WHERE order_id=? AND user_id=?", [$order['id'], $user['id']]);
         ?>
         <?php if (!$existingReturn): ?>
-          <button onclick="document.getElementById('returnForm').style.display='block';this.style.display='none'" style="padding:10px 24px;background:#f59e0b;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">↩ Yêu cầu trả hàng</button>
+          <!-- nút Yêu cầu trả hàng đã gỡ: form hiển thị sẵn bên dưới -->
         <?php else: ?>
           <div style="padding:10px 20px;background:#f3f4f6;border-radius:8px;font-size:13px;color:#6b7280;font-weight:600">
             ✓ Đã gửi yêu cầu trả hàng (<?= ucfirst($existingReturn['status']??'pending') ?>)
@@ -114,10 +158,18 @@
 
   <!-- Return Form (hidden by default) -->
   <?php if (in_array($order['delivery_status']??'', ['delivered','completed']) && empty($existingReturn)): ?>
-  <div id="returnForm" class="od-card no-print" style="display:<?= !empty($_GET['return']) ? 'block' : 'none' ?>">
+  <div id="returnForm" class="od-card no-print" style="display:block">
+    <?php $rinv = is_array($invoice ?? null) ? $invoice : []; ?>
+    <script>
+    function validateReturnForm(){var bk=document.getElementById('rt_bank'); if(bk&&!bk.value){alert('Vui lòng chọn ngân hàng.'); var dd=document.getElementById('rtBankDD'); if(dd){dd.classList.add('open'); dd.scrollIntoView({block:'center'});} return false;} return true;}
+    function rtddToggle(){var dd=document.getElementById('rtBankDD'); if(dd) dd.classList.toggle('open');}
+    function rtddPick(el){var v=el.getAttribute('data-v'); document.getElementById('rt_bank').value=v; var lbl=document.getElementById('rtBankLbl'); lbl.textContent=v; lbl.classList.remove('ph'); document.querySelectorAll('#rtBankMenu .rtdd-item').forEach(function(x){x.classList.remove('sel');}); el.classList.add('sel'); document.getElementById('rtBankDD').classList.remove('open');}
+    document.addEventListener('click',function(e){var dd=document.getElementById('rtBankDD'); if(dd && !dd.contains(e.target)) dd.classList.remove('open');});
+    </script>
     <div class="od-head"><h3 style="margin:0;font-size:16px;color:#1a3258">Yêu cầu trả hàng</h3></div>
     <div class="od-body">
       <form method="post" action="/customer/orders/<?= $order['id'] ?>/return" enctype="multipart/form-data" id="returnReqForm" onsubmit="return validateReturnForm()">
+        <style>#returnReqForm input,#returnReqForm select,#returnReqForm textarea{font-family:inherit !important;width:100% !important;border:1px solid #d6deea !important;border-radius:10px !important;font-size:14px !important;box-sizing:border-box !important;background-color:#fff;color:#1f2937;transition:border .15s,box-shadow .15s}#returnReqForm input,#returnReqForm textarea{padding:11px 14px !important}#returnReqForm textarea{resize:vertical !important;min-height:84px !important}#returnReqForm select{padding:11px 40px 11px 14px !important;-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px}#returnReqForm input:focus,#returnReqForm select:focus,#returnReqForm textarea:focus{border-color:#1a3258 !important;box-shadow:0 0 0 3px rgba(26,50,88,.12) !important;outline:none}#returnReqForm label{font-size:13px;font-weight:600;color:#374151}@media(max-width:640px){#returnReqForm div[style*="1fr 1fr"]{grid-template-columns:1fr !important}}</style>
         <?= csrfField() ?>
         <div style="margin-bottom:14px">
           <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Lý do trả hàng <span style="color:red">*</span></label>
@@ -126,49 +178,64 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
           <div>
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">SĐT liên hệ <span style="color:red">*</span></label>
-            <input type="tel" name="contact_phone" id="rt_phone" required maxlength="10" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="09xxxxxxxx">
+            <input type="tel" name="contact_phone" id="rt_phone" value="<?= e(($rinv['phone'] ?? '') ?: ($user['phone'] ?? '')) ?>" required maxlength="10" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="09xxxxxxxx">
           </div>
           <div>
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Email liên hệ <span style="color:red">*</span></label>
-            <input type="email" name="contact_email" id="rt_email" required style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="email@gmail.com">
+            <input type="email" name="contact_email" id="rt_email" value="<?= e(($rinv['email'] ?? '') ?: ($user['email'] ?? '')) ?>" required style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="email@gmail.com">
           </div>
         </div>
         <div style="margin-bottom:14px">
           <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Địa chỉ nhận lại hàng <span style="color:red">*</span></label>
-          <input type="text" name="contact_address" id="rt_addr" required maxlength="50" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="Số nhà, đường, phường, quận, TP">
+          <input type="text" name="contact_address" id="rt_addr" value="<?= e(($rinv['address'] ?? '') ?: ($user['address'] ?? '')) ?>" required maxlength="50" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="Số nhà, đường, phường, quận, TP">
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
           <div>
+            
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Ngân hàng <span style="color:red">*</span></label>
-            <select name="bank_name" id="rt_bank" required style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px">
-              <option value="">-- Chọn ngân hàng --</option>
-              <option value="Vietcombank">Vietcombank</option><option value="Techcombank">Techcombank</option><option value="BIDV">BIDV</option><option value="VietinBank">VietinBank</option><option value="MB Bank">MB Bank</option><option value="ACB">ACB</option><option value="Sacombank">Sacombank</option><option value="VPBank">VPBank</option><option value="TPBank">TPBank</option><option value="HDBank">HDBank</option><option value="SHB">SHB</option><option value="SeABank">SeABank</option><option value="OCB">OCB</option><option value="LienVietPostBank">LienVietPostBank</option><option value="MSB">MSB</option><option value="Eximbank">Eximbank</option><option value="VIB">VIB</option><option value="ABBank">ABBank</option><option value="BacABank">BacABank</option><option value="NCB">NCB</option><option value="PVcomBank">PVcomBank</option><option value="SCB">SCB</option><option value="CIMB">CIMB</option><option value="UOB">UOB</option><option value="BanVietBank">BanVietBank</option><option value="Agribank">Agribank</option>
-            </select>
+            <style>#returnForm{overflow:visible}#returnForm .od-head{border-top-left-radius:8px;border-top-right-radius:8px}.rtdd{position:relative}.rtdd-trg{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:11px 14px;border:1px solid #d6deea;border-radius:10px;background:#fff;font-size:14px;font-family:inherit;color:#1f2937;cursor:pointer;text-align:left}.rtdd-trg .ph{color:#9aa7bd}.rtdd.open .rtdd-trg,.rtdd-trg:focus{border-color:#1a3258;box-shadow:0 0 0 3px rgba(26,50,88,.12);outline:none}.rtdd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:60;background:#fff;border:1px solid #d6deea;border-radius:10px;box-shadow:0 12px 28px rgba(15,35,66,.18);max-height:240px;overflow-y:auto;padding:4px}.rtdd.open .rtdd-menu{display:block}.rtdd-item{padding:10px 12px;font-size:14px;border-radius:7px;cursor:pointer;color:#1f2937}.rtdd-item:hover{background:#eef2f7}.rtdd-item.sel{background:#1a3258;color:#fff;font-weight:600}</style>
+            <?php $rtBanks=['Vietcombank','Techcombank','BIDV','VietinBank','MB Bank','ACB','Sacombank','VPBank','TPBank','HDBank','SHB','SeABank','OCB','LienVietPostBank','MSB','Eximbank','VIB','ABBank','BacABank','NCB','PVcomBank','SCB','CIMB','UOB','BanVietBank','Agribank']; $rtSelBank=$rinv['bank_name'] ?? ''; ?>
+            <div class="rtdd" id="rtBankDD">
+              <button type="button" class="rtdd-trg" id="rtBankTrg" onclick="rtddToggle()"><span id="rtBankLbl"<?= $rtSelBank?'':' class="ph"' ?>><?= $rtSelBank ? e($rtSelBank) : '-- Chọn ngân hàng --' ?></span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="rtdd-menu" id="rtBankMenu">
+                <?php foreach($rtBanks as $bk): ?><div class="rtdd-item<?= $rtSelBank===$bk?' sel':'' ?>" data-v="<?= e($bk) ?>" onclick="rtddPick(this)"><?= e($bk) ?></div><?php endforeach; ?>
+              </div>
+              <input type="hidden" name="bank_name" id="rt_bank" value="<?= e($rtSelBank) ?>">
+            </div>
           </div>
           <div>
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">STK hoàn tiền <span style="color:red">*</span></label>
-            <input type="text" name="bank_account" id="rt_bankno" required style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="Số tài khoản">
+            <input type="text" name="bank_account" id="rt_bankno" value="<?= e($rinv['bank_account'] ?? '') ?>" required style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="Số tài khoản">
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
           <div>
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Tên chủ TK <span style="color:red">*</span></label>
-            <input type="text" name="bank_holder" id="rt_holder" required maxlength="30" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="NGUYEN VAN A">
+            <input type="text" name="bank_holder" id="rt_holder" value="<?= e(($rinv['buyer_name'] ?? '') ?: ($user['full_name'] ?? '')) ?>" required maxlength="30" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px" placeholder="NGUYEN VAN A">
           </div>
           <div></div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
           <div>
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Ảnh minh chứng</label>
-            <input type="file" name="return_image" accept="image/*" style="font-size:13px">
+            <input type="file" id="rt_img" name="return_image" accept="image/*" onchange="rtFileName(this,'rt_img_name','Chưa chọn ảnh')" style="display:none">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <label for="rt_img" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px dashed #c3cfe2;border-radius:8px;background:#f8fafc;font-size:13px;cursor:pointer;color:#0a192f;font-weight:600">Chọn ảnh</label>
+              <span id="rt_img_name" style="font-size:12px;color:#888">Chưa chọn ảnh</span>
+            </div>
           </div>
           <div>
             <label style="display:block;font-weight:600;margin-bottom:4px;font-size:13px">Video minh chứng</label>
-            <input type="file" name="return_video" accept="video/*" style="font-size:13px">
+            <input type="file" id="rt_vid" name="return_video" accept="video/*" onchange="rtFileName(this,'rt_vid_name','Chưa chọn video')" style="display:none">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <label for="rt_vid" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px dashed #c3cfe2;border-radius:8px;background:#f8fafc;font-size:13px;cursor:pointer;color:#0a192f;font-weight:600">Chọn video</label>
+              <span id="rt_vid_name" style="font-size:12px;color:#888">Chưa chọn video</span>
+            </div>
           </div>
         </div>
+        <script>function rtFileName(inp,spanId,emptyTxt){var s=document.getElementById(spanId);if(s)s.textContent=(inp.files&&inp.files.length)?inp.files[0].name:emptyTxt;}</script>
         <div id="rtErrors" style="color:#e74c3c;font-size:12px;margin-bottom:10px"></div>
-        <button type="submit" style="padding:12px 28px;background:linear-gradient(135deg,#c8a84e,#b8942e);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">Gửi yêu cầu trả hàng</button>
+        <button type="submit" style="padding:12px 28px;background:#1a3258;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">Gửi yêu cầu trả hàng</button>
       </form>
     </div>
   </div>
@@ -224,7 +291,7 @@
           <h3 style="font-size:14px;color:#1a3258;margin:0 0 8px;border-bottom:1px solid #ddd;padding-bottom:4px">Thông tin đơn hàng</h3>
           <p style="margin:2px 0;font-size:13px"><b>Mã đơn:</b> <?= e($order['code']) ?></p>
           <p style="margin:2px 0;font-size:13px"><b>Ngày đặt:</b> <?= date('d/m/Y H:i', strtotime($order['created_at'])) ?></p>
-          <p style="margin:2px 0;font-size:13px"><b>Thanh toán:</b> <?= $order['payment_method']==='bank_transfer'?'Chuyển khoản':'COD' ?></p>
+          <p style="margin:2px 0;font-size:13px"><b>Thanh toán:</b> <?= in_array($order['payment_method'], ['bank_transfer', 'bank'])?'Chuyển khoản':'COD' ?></p>
           <p style="margin:2px 0;font-size:13px"><b>Giao tới:</b> <?= e($order['shipping_detail']??'') ?></p>
         </div>
       </div>
@@ -314,4 +381,5 @@ function printInvoice() {
   }
 })();
 </script>
+<?php require __DIR__.'/../partials/cancel-order-modal.php'; ?>
 <?php require __DIR__.'/../partials/foot.php'; ?>

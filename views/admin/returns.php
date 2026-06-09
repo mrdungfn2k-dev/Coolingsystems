@@ -5,7 +5,7 @@
   <a href="/admin/returns" class="btn <?= empty($currentStatus) ? 'btn-navy' : 'btn-outline-navy' ?> btn-sm">
     Tất cả (<?= $counts['all'] ?>)
   </a>
-  <a href="/admin/returns?status=pending" class="btn <?= $currentStatus==='pending' ? 'btn-gold' : 'btn-outline-navy' ?> btn-sm">
+  <a href="/admin/returns?status=pending" class="btn <?= $currentStatus==='pending' ? 'btn-navy' : 'btn-outline-navy' ?> btn-sm">
     Chờ duyệt (<?= $counts['pending'] ?>)
   </a>
   <a href="/admin/returns?status=approved" class="btn <?= $currentStatus==='approved' ? 'btn-navy' : 'btn-outline-navy' ?> btn-sm">
@@ -108,13 +108,13 @@
   <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
     <form method="post" action="/admin/returns/<?= $r['id'] ?>/approve" style="margin:0">
       <?= csrfField() ?>
-      <button type="submit" class="btn btn-sm" style="background:#059669;color:#fff;border:none;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px" onclick="return confirm('Duyệt yêu cầu trả hàng và trừ doanh thu?')">Duyệt trả hàng</button>
+      <button type="submit" class="btn btn-sm" style="background:#059669;color:#fff;border:none;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px" onclick="return csConfirmBtn(this,'Duyệt yêu cầu trả hàng và trừ doanh thu?')">Duyệt trả hàng</button>
     </form>
     <form method="post" action="/admin/returns/<?= $r['id'] ?>/reject" style="margin:0">
       <?= csrfField() ?>
-      <button type="submit" class="btn btn-sm" style="background:#dc2626;color:#fff;border:none;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px" onclick="return confirm('Từ chối yêu cầu trả hàng này?')">Từ chối</button>
+      <button type="submit" class="btn btn-sm" style="background:#dc2626;color:#fff;border:none;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px" onclick="return csConfirmBtn(this,'Từ chối yêu cầu trả hàng này?')">Từ chối</button>
     </form>
-    <form method="post" action="/admin/returns/<?= $r['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Bạn có chắc muốn xóa yêu cầu trả hàng #<?= $r['id'] ?> ?')">
+    <form method="post" action="/admin/returns/<?= $r['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Bạn có chắc muốn xóa yêu cầu trả hàng #<?= $r['id'] ?> ?')">
       <?= csrfField() ?>
       <button type="submit" class="btn btn-sm" style="background:#fff;color:#666;border:1px solid #ddd;padding:8px 16px;border-radius:6px;font-weight:600;font-size:13px;cursor:pointer" title="Xóa yêu cầu">🗑 Xóa</button>
     </form>
@@ -122,7 +122,7 @@
   <?php elseif ($r['status'] === 'approved'): ?>
   <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:#059669;font-weight:600;display:flex;justify-content:space-between;align-items:center">
     <span>Đã duyệt</span>
-    <form method="post" action="/admin/returns/<?= $r['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa yêu cầu trả hàng đã duyệt này?')">
+    <form method="post" action="/admin/returns/<?= $r['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa yêu cầu trả hàng đã duyệt này?')">
       <?= csrfField() ?>
       <button type="submit" style="background:none;border:1px solid #ddd;color:#999;padding:4px 12px;border-radius:5px;font-size:11px;cursor:pointer">🗑 Xóa</button>
     </form>
@@ -130,7 +130,7 @@
   <?php elseif ($r['status'] === 'rejected'): ?>
   <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:#dc2626;font-weight:600;display:flex;justify-content:space-between;align-items:center">
     <span>Đã từ chối</span>
-    <form method="post" action="/admin/returns/<?= $r['id'] ?>/delete" style="margin:0" onsubmit="return confirm('Xóa yêu cầu trả hàng đã từ chối này?')">
+    <form method="post" action="/admin/returns/<?= $r['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa yêu cầu trả hàng đã từ chối này?')">
       <?= csrfField() ?>
       <button type="submit" style="background:none;border:1px solid #ddd;color:#999;padding:4px 12px;border-radius:5px;font-size:11px;cursor:pointer">🗑 Xóa</button>
     </form>
@@ -144,10 +144,10 @@
 
 <?php if (($totalPages ?? 0) > 1): ?>
 <div style="display:flex;justify-content:center;gap:8px;margin-top:24px;padding:16px 0">
-    <?php for($i=1; $i<=$totalPages; $i++): ?>
-    <a href="?status=<?= $currentStatus ?? '' ?>&page=<?= $i ?>" 
-       style="padding:8px 14px;border:1px solid <?= $i==($page??1) ? 'var(--navy)' : 'var(--line)' ?>;border-radius:6px;font-size:13px;text-decoration:none;font-weight:600;<?= $i==($page??1) ? 'background:var(--navy);color:#fff' : 'color:#333;background:#fff' ?>"><?= $i ?></a>
-    <?php endfor; ?>
+    <?php
+    require_once __DIR__.'/../partials/pagination.php';
+    renderPagination($page, $totalPages, '/admin/returns', $_GET);
+    ?>
 </div>
 <?php endif; ?>
 

@@ -32,25 +32,30 @@
             </form>
           <?php endif; ?>
           <form method="post" action="/customer/notifications/<?= $n['id'] ?>/delete" style="display:inline"><?= csrfField() ?>
-            <button type="submit" style="background:none;border:none;font-size:11px;color:#e74c3c;cursor:pointer" onclick="return confirm('Xóa thông báo này?')">Xóa</button>
+            <button type="submit" style="background:none;border:none;font-size:11px;color:#e74c3c;cursor:pointer" onclick="return confirmDeleteNotif(event, this.form)">Xóa</button>
           </form>
         </div>
       </div>
     <?php endforeach; ?>
 
-    <?php if(($totalPages ?? 1) > 1): ?>
-    <div style="display:flex;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap">
-      <?php if(($page ?? 1) > 1): ?>
-        <a href="/customer/notifications?page=<?= ($page ?? 1) - 1 ?>" style="min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #d0d5e0;border-radius:6px;text-decoration:none;color:var(--navy);font-size:13px;font-weight:600">‹</a>
-      <?php endif; ?>
-      <?php for($i = 1; $i <= ($totalPages ?? 1); $i++): ?>
-        <a href="/customer/notifications?page=<?= $i ?>" style="min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid <?= $i === ($page ?? 1) ? 'var(--navy)' : '#d0d5e0' ?>;border-radius:6px;text-decoration:none;color:<?= $i === ($page ?? 1) ? '#fff' : 'var(--navy)' ?>;background:<?= $i === ($page ?? 1) ? 'var(--navy)' : '#fff' ?>;font-size:13px;font-weight:600"><?= $i ?></a>
-      <?php endfor; ?>
-      <?php if(($page ?? 1) < ($totalPages ?? 1)): ?>
-        <a href="/customer/notifications?page=<?= ($page ?? 1) + 1 ?>" style="min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #d0d5e0;border-radius:6px;text-decoration:none;color:var(--navy);font-size:13px;font-weight:600">›</a>
-      <?php endif; ?>
-    </div>
-    <?php endif; ?>
+    <?php require_once __DIR__ . '/../partials/pagination.php'; renderPagination($page ?? 1, $totalPages ?? 1, '/customer/notifications'); ?>
   <?php endif; ?>
 </div>
+<div id="notifConfirmModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,25,47,0.5);align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:14px;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.3);padding:24px 22px;text-align:center">
+    <div style="font-size:16px;font-weight:700;color:#0a192f;margin-bottom:8px">Xóa thông báo</div>
+    <p style="font-size:13px;color:#666;margin:0 0 20px;line-height:1.5">Bạn có chắc muốn xóa thông báo này không?</p>
+    <div style="display:flex;gap:10px">
+      <button type="button" onclick="notifDelClose()" style="flex:1;padding:11px;background:#eef2f7;color:#0a192f;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px">Hủy</button>
+      <button type="button" onclick="notifDelConfirm()" style="flex:1;padding:11px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">Xóa</button>
+    </div>
+  </div>
+</div>
+<script>
+var _notifDelForm=null;
+function confirmDeleteNotif(e, form){ e.preventDefault(); _notifDelForm=form; document.getElementById("notifConfirmModal").style.display="flex"; return false; }
+function notifDelClose(){ document.getElementById("notifConfirmModal").style.display="none"; _notifDelForm=null; }
+function notifDelConfirm(){ if(_notifDelForm) _notifDelForm.submit(); }
+document.addEventListener("click",function(e){ if(e.target&&e.target.id==="notifConfirmModal") notifDelClose(); });
+</script>
 <?php require __DIR__.'/../partials/foot.php'; ?>

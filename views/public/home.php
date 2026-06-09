@@ -1,4 +1,4 @@
-<?php $title = 'Trang chủ'; require __DIR__ . '/../partials/head.php'; ?>
+<?php $title = 'Trang chủ'; $seo = ['meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng']; require __DIR__ . '/../partials/head.php'; ?>
 <section class="hero-section">
   <div class="wrap">
     <aside class="cat-sidebar">
@@ -26,31 +26,46 @@
       <div class="actions"><a href="<?= e($heroBtn1Url) ?>" class="btn btn-gold btn-lg"><?= e($heroBtn1) ?></a><a href="<?= e($heroBtn2Url) ?>" class="btn btn-outline-light btn-lg"><?= e($heroBtn2) ?></a></div>
     </div>
     <aside class="vs-card">
-      <div class="head"><h3>Tìm phụ tùng cho xe của bạn</h3><div class="sub">Chọn theo Hãng — Dòng — Năm</div></div>
+      <div class="head"><h3>Tìm phụ tùng cho xe của bạn</h3><div class="sub">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
-        <div class="vs-field" style="margin-bottom:12px"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px">Từ khóa / Tên sản phẩm</label>
-          <input type="text" name="q" placeholder="Nhập tên phụ tùng, mã OEM..." style="width:100%;height:38px;padding:8px 12px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px">
+        <div class="vs-field">
+          <label>Từ khóa / Tên sản phẩm</label>
+          <input type="text" name="q" placeholder="Nhập tên phụ tùng, mã OEM..." class="vs-input">
         </div>
-        <div class="vs-field" style="margin-bottom:12px"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px">Danh mục</label>
-          <select name="cat" style="width:100%;height:38px;padding:8px 12px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px">
-            <option value="">— Tất cả danh mục —</option>
-            <?php foreach ($sidebarCategories as $c): ?><option value="<?= e($c['slug']) ?>"><?= e($c['name']) ?></option><?php endforeach; ?>
-          </select>
+        <div class="vs-field">
+          <label>Danh mục</label>
+          <input type="hidden" name="cat" id="vsi-cat" value="">
+          <div class="cdd" data-target="vsi-cat">
+            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)"><span class="cdd-label">— Tất cả danh mục —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="cdd-panel">
+              <div class="cdd-opt sel" data-val="" onclick="vsCddPick(this)">— Tất cả danh mục —</div>
+              <?php foreach ($sidebarCategories as $c): ?><div class="cdd-opt" data-val="<?= e($c['slug']) ?>" onclick="vsCddPick(this)"><?= e($c['name']) ?></div><?php endforeach; ?>
+            </div>
+          </div>
         </div>
-        <div class="vs-field" style="margin-bottom:12px"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px">Thương hiệu SP</label>
-          <select name="pb" style="width:100%;height:38px;padding:8px 12px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px">
-            <option value="">— Tất cả thương hiệu —</option>
-            <?php if(!empty($productBrands)): foreach ($productBrands as $pb): ?><option value="<?= e($pb['name']) ?>"><?= e($pb['name']) ?></option><?php endforeach; endif; ?>
-          </select>
+        <div class="vs-field">
+          <label>Thương hiệu SP</label>
+          <input type="hidden" name="pb" id="vsi-pb" value="">
+          <div class="cdd" data-target="vsi-pb">
+            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)"><span class="cdd-label">— Tất cả thương hiệu —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="cdd-panel">
+              <div class="cdd-opt sel" data-val="" onclick="vsCddPick(this)">— Tất cả thương hiệu —</div>
+              <?php if(!empty($productBrands)): foreach ($productBrands as $pbr): ?><div class="cdd-opt" data-val="<?= e($pbr['name']) ?>" onclick="vsCddPick(this)"><?= e($pbr['name']) ?></div><?php endforeach; endif; ?>
+            </div>
+          </div>
         </div>
-        <div class="vs-field" style="margin-bottom:12px"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px">Hãng xe</label>
-          <select name="brand_id" id="vs-brand" style="width:100%;height:38px;padding:8px 12px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px"><option value="">— Tất cả hãng xe —</option>
-            <?php foreach ($brands as $b): ?><option value="<?= $b['id'] ?>"><?= e($b['name']) ?></option><?php endforeach; ?>
-          </select>
+        <div class="vs-field">
+          <label>Hãng xe</label>
+          <input type="hidden" name="brand_id" id="vsi-brand" value="">
+          <div class="cdd" data-target="vsi-brand">
+            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)"><span class="cdd-label">— Tất cả hãng xe —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="cdd-panel">
+              <div class="cdd-opt sel" data-val="" onclick="vsCddPick(this)">— Tất cả hãng xe —</div>
+              <?php foreach ($brands as $b): ?><div class="cdd-opt" data-val="<?= $b['id'] ?>" onclick="vsCddPick(this)"><?= e($b['name']) ?></div><?php endforeach; ?>
+            </div>
+          </div>
         </div>
-        <div class="vs-field" style="margin-bottom:12px"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px">Dòng xe</label><select name="model_id" id="vs-model" disabled style="width:100%;height:38px;padding:8px 12px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px;background:#f8f9fa"><option value="">— Chọn hãng trước —</option></select></div>
-        <div class="vs-field" style="margin-bottom:12px"><label style="font-size:12px;font-weight:700;display:block;margin-bottom:4px">Năm SX</label><select name="year" id="vs-year" disabled style="width:100%;height:38px;padding:8px 12px;border:1px solid #d0d5e0;border-radius:6px;font-size:13px;background:#f8f9fa"><option value="">— Chọn dòng trước —</option></select></div>
-        <button type="submit" class="btn btn-navy btn-block" style="margin-top:12px;height:42px;font-size:14px">Tìm kiếm phụ tùng</button>
+        <button type="submit" class="btn btn-navy btn-block" style="margin-top:14px;height:44px;font-size:14px">Tìm kiếm phụ tùng</button>
       </form>
     </aside>
   </div>
@@ -81,20 +96,20 @@ foreach ($trustSteps as $step):
   <div class="sec-head">
     <div class="title"><span class="bar"></span><h2>Sản phẩm nổi bật</h2></div>
     <div class="sec-tabs"><button class="active" data-target="featured">Sản phẩm mới</button><button data-target="bestseller">Bán chạy</button></div>
-    <a href="/products?sort=newest" class="btn-link all-link" id="featuredViewAll">Xem tất cả  →</a>
+    <a href="/products" class="btn-link all-link">Xem tất cả</a>
   </div>
   <div class="prod-grid" data-tab="featured">
     <?php foreach ($featured as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
   </div>
   <div class="prod-grid" data-tab="bestseller" style="display:none">
-    <?php if (empty($bestSellers)): ?>
-      <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--ink-3)">
-        <div style="font-size:36px;margin-bottom:8px">📊</div>
-        <p style="font-size:14px;margin:0">Chưa có sản phẩm bán chạy (cần từ 10 đơn trở lên).</p>
-        <p style="font-size:12px;color:var(--ink-4);margin-top:4px">Dữ liệu sẽ cập nhật khi có đủ đơn hàng.</p>
-      </div>
-    <?php else: ?>
+    <?php if (!empty($bestSellers)): ?>
       <?php foreach ($bestSellers as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
+    <?php else: ?>
+      <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:#888">
+        <svg width="48" height="48" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom:12px"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <p style="font-size:15px;font-weight:600;color:#666;margin:0 0 6px">Chưa có sản phẩm bán chạy</p>
+        <p style="font-size:13px;margin:0">Sản phẩm cần bán trên 20 đơn vị mới hiển thị tại đây</p>
+      </div>
     <?php endif; ?>
   </div>
 </div></div></section>
@@ -128,30 +143,23 @@ foreach ($cats as $cat):
     <div class="title"><span class="bar"></span><h2>Phụ tùng theo hãng xe</h2></div>
     <a href="/brands" class="btn-link all-link">Xem tất cả</a>
   </div>
-  <style>
-    .brands-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:16px; padding:8px 0; }
-    .brand-card { display:flex; flex-direction:column; align-items:center; text-decoration:none; background:#fff; border:1px solid #e8ecf1; border-radius:12px; overflow:hidden; transition:all 0.3s; padding:0; }
-    .brand-card:hover { border-color:var(--navy); box-shadow:0 6px 20px rgba(26,50,88,0.12); transform:translateY(-3px); }
-    .brand-card .brand-img-wrap { width:100%; height:120px; overflow:hidden; background:linear-gradient(135deg,#f0f4f8,#e2e8f0); display:flex; align-items:center; justify-content:center; padding:0; }
-    .brand-card .brand-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; border-radius:0; }
-    .brand-card .brand-initial { font-size:28px; font-weight:900; color:#1a3258; opacity:0.6; letter-spacing:2px; }
-    .brand-card .brand-name { padding:10px 8px 4px; font-size:14px; font-weight:700; color:#1a3258; text-align:center; }
-    .brand-card .brand-count { padding:0 8px 10px; font-size:11px; color:#888; text-align:center; }
-    @media(max-width:900px) { .brands-grid { grid-template-columns:repeat(3,1fr); gap:10px; } .brand-card .brand-img-wrap { height:90px; } }
-    @media(max-width:480px) { .brands-grid { grid-template-columns:repeat(2,1fr); gap:8px; } }
-  </style>
+  
   <div class="brands-grid">
     <?php foreach ($brands as $b):
       $bCount = dbGet("SELECT COUNT(*) as n FROM products WHERE car_brand_id=? AND status='published'", [$b['id']])['n'] ?? 0;
     ?>
-    <a href="/products?brand_id=<?= $b['id'] ?>" class="brand-card">
-      <?php if (!empty($b['image'])): ?>
-        <div class="brand-img-wrap"><img src="/uploads/brands/<?= e($b['image']) ?>" alt="<?= e($b['name']) ?>" loading="lazy"></div>
-      <?php else: ?>
-        <div class="brand-img-wrap"><span class="brand-initial"><?= strtoupper(mb_substr($b['name'], 0, 3)) ?></span></div>
-      <?php endif; ?>
-      <div class="brand-name"><?= e($b['name']) ?></div>
-      <div class="brand-count"><?= $bCount ?> sản phẩm</div>
+    <a href="/products?brand_id=<?= $b['id'] ?>" class="brand-card <?= !empty($b['image']) ? 'has-image' : '' ?>">
+      <div class="brand-img-wrap">
+        <?php if (!empty($b['image'])): ?>
+          <img src="/uploads/brands/<?= e($b['image']) ?>" alt="<?= e($b['name']) ?>" loading="lazy">
+        <?php else: ?>
+          <span class="brand-initial"><?= strtoupper(mb_substr($b['name'], 0, 3)) ?></span>
+        <?php endif; ?>
+      </div>
+      <div class="brand-info">
+        <div class="name"><?= e($b['name']) ?></div>
+        <div class="count"><?= $bCount ?> sản phẩm</div>
+      </div>
     </a>
     <?php endforeach; ?>
   </div>
@@ -175,20 +183,47 @@ foreach ($cats as $cat):
 .prod-pager button.active { background: #1a3258; color: #fff; border-color: #1a3258; }
 .prod-pager button:hover:not(.active) { background: #f0f2f7; border-color: #1a3258; }
 .featured-paging { text-align: center; margin-top: 12px; }
-
-/* Mobile price fix */
-@media (max-width: 640px) {
-  .prod-card .prod-price-row {
-    flex-wrap: nowrap;
-  }
-  .prod-card .prod-price-row span[style*="font-size:15px"] {
-    font-size: 13px !important;
-  }
-  .prod-card .prod-price-row span[style*="font-size:11px"] {
-    font-size: 10px !important;
-  }
-}
+/* === Bộ lọc tìm phụ tùng (.cdd) — giống trang Sản phẩm, mở xuống dưới === */
+.vs-card .vs-field label { font-size:11px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
+.vs-card .vs-input, .vs-card .cdd-trigger { width:100%; height:42px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--navy-dark); font-size:13.5px; font-weight:500; font-family:inherit; }
+.vs-card .vs-input { padding:0 14px; transition:border-color .15s, box-shadow .15s; }
+.vs-card .vs-input:hover { border-color:#b9c4d6; }
+.vs-card .vs-input:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
+.vs-card .cdd { position:relative; }
+.vs-card .cdd-trigger { padding:0 12px 0 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:pointer; transition:border-color .15s, box-shadow .15s; }
+.vs-card .cdd-trigger:hover { border-color:#b9c4d6; }
+.vs-card .cdd.open .cdd-trigger { border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
+.vs-card .cdd-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:left; }
+.vs-card .cdd-arrow { flex-shrink:0; color:#1a3258; transition:transform .2s; }
+.vs-card .cdd.open .cdd-arrow { transform:rotate(180deg); }
+.vs-card .cdd-panel { display:none; position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); overflow-y:auto; max-height:280px; z-index:60; padding:6px; }
+.vs-card .cdd.open .cdd-panel { display:block; }
+.vs-card .cdd-opt { padding:10px 12px; border-radius:7px; font-size:13.5px; color:var(--navy-dark); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background .12s; }
+.vs-card .cdd-opt:hover { background:#f1f5fb; }
+.vs-card .cdd-opt.sel { background:var(--navy); color:#fff; font-weight:600; }
+/* phân trang rút gọn (ellipsis) */
+.prod-pager .pp-dots { min-width:24px; height:36px; display:inline-flex; align-items:center; justify-content:center; color:#9aa3b2; font-weight:700; }
+.prod-pager button:disabled { opacity:.4; cursor:default; }
 </style>
+<script>
+/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở xuống dưới */
+function vsCddToggle(btn){
+  var cdd=btn.closest('.cdd'); var open=cdd.classList.contains('open');
+  document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+  if(!open) cdd.classList.add('open');
+}
+function vsCddPick(opt){
+  var cdd=opt.closest('.cdd');
+  var t=document.getElementById(cdd.getAttribute('data-target'));
+  if(t) t.value=opt.getAttribute('data-val')||'';
+  var lbl=cdd.querySelector('.cdd-label'); if(lbl) lbl.textContent=opt.textContent;
+  cdd.querySelectorAll('.cdd-opt').forEach(function(o){ o.classList.remove('sel'); });
+  opt.classList.add('sel'); cdd.classList.remove('open');
+}
+document.addEventListener('click', function(ev){
+  if(!ev.target.closest('.vs-card .cdd')) document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+});
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -209,23 +244,12 @@ document.addEventListener('DOMContentLoaded', function() {
       card.querySelectorAll('.featured-paging').forEach(function(fp) {
         fp.style.display = (fp.getAttribute('data-for-tab') === target) ? '' : 'none';
       });
-      // Update "Xem tất cả" link based on active tab
-      var viewAllLink = card.querySelector('#featuredViewAll');
-      if (viewAllLink) {
-        if (target === 'bestseller') {
-          viewAllLink.href = '/products?sort=bestseller';
-          viewAllLink.textContent = 'Xem tất cả  \u2192';
-        } else {
-          viewAllLink.href = '/products?sort=newest';
-          viewAllLink.textContent = 'Xem tất cả  \u2192';
-        }
-      }
     });
   });
 
   /* === B. Featured pagination === */
   function initFeaturedPagination() {
-    var perPage = isMobile() ? 4 : 10;
+    var perPage = isMobile() ? 6 : 10;
     document.querySelectorAll('.prod-grid[data-tab]').forEach(function(grid) {
       var tab = grid.getAttribute('data-tab');
       var cards = Array.from(grid.querySelectorAll('.prod-card'));
@@ -252,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* === C. Category AJAX pagination === */
   function initCatPagination() {
-    var perPage = isMobile() ? 4 : 10;
+    var perPage = isMobile() ? 6 : 10;
     document.querySelectorAll('.cat-paging').forEach(function(pagingEl) {
       var gridId = pagingEl.getAttribute('data-grid');
       var grid = document.getElementById(gridId);
@@ -309,13 +333,23 @@ document.addEventListener('DOMContentLoaded', function() {
   function renderPager(el, active, total, onClick) {
     el.innerHTML = '';
     var div = document.createElement('div'); div.className = 'prod-pager';
-    for (var i = 1; i <= total; i++) {
-      var btn = document.createElement('button');
-      btn.textContent = i; btn.className = (i === active) ? 'active' : '';
-      btn.setAttribute('data-page', i);
-      btn.addEventListener('click', function() { onClick(parseInt(this.getAttribute('data-page'))); });
-      div.appendChild(btn);
+    function mkBtn(label, page, isActive, isDisabled){
+      var b = document.createElement('button');
+      b.innerHTML = label;
+      if (isActive) b.className = 'active';
+      if (isDisabled) { b.disabled = true; }
+      else { b.setAttribute('data-page', page); b.addEventListener('click', function(){ onClick(parseInt(this.getAttribute('data-page'), 10)); }); }
+      div.appendChild(b);
     }
+    function dots(){ var s = document.createElement('span'); s.className = 'pp-dots'; s.textContent = '\u2026'; div.appendChild(s); }
+    mkBtn('\u2039', active - 1, false, active <= 1);
+    var win = 2, pages = [1];
+    if (active - win > 2) pages.push('...');
+    for (var i = Math.max(2, active - win); i <= Math.min(total - 1, active + win); i++) pages.push(i);
+    if (active + win < total - 1) pages.push('...');
+    if (total > 1) pages.push(total);
+    pages.forEach(function(p){ if (p === '...') dots(); else mkBtn(p, p, p === active, false); });
+    mkBtn('\u203a', active + 1, false, active >= total);
     el.appendChild(div);
   }
 

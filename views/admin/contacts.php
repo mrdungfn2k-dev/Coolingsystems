@@ -107,7 +107,7 @@
               <p><?= nl2br(e($msg['reply'])) ?></p>
             </div>
             <div class="cm-actions">
-              <button type="button" class="btn-delete" onclick="if(confirm('Xóa tin nhắn này?'))location.href='/admin/contacts/<?= $msg['id'] ?>/delete'">🗑 Xóa tin nhắn</button>
+              <button type="button" class="btn-delete" onclick="csConfirm('Xóa tin nhắn này?', function(){ csNav('/admin/contacts/<?= $msg['id'] ?>/delete'); })">🗑 Xóa tin nhắn</button>
             </div>
           <?php else: ?>
             <form method="POST" action="/admin/contacts/<?= $msg['id'] ?>/reply" class="cm-form">
@@ -116,7 +116,7 @@
               <textarea name="reply" required minlength="5" maxlength="100" placeholder="Nhập nội dung trả lời (tối đa 100 ký tự)..."></textarea>
               <div class="cm-actions">
                 <button type="submit" class="btn-reply" onclick="this.disabled=true;this.textContent='Đang gửi...';this.form.submit();">📧 Gửi trả lời qua Email</button>
-                <button type="button" class="btn-delete" onclick="if(confirm('Xóa tin nhắn này?'))location.href='/admin/contacts/<?= $msg['id'] ?>/delete'">🗑 Xóa</button>
+                <button type="button" class="btn-delete" onclick="csConfirm('Xóa tin nhắn này?', function(){ csNav('/admin/contacts/<?= $msg['id'] ?>/delete'); })">🗑 Xóa</button>
               </div>
             </form>
           <?php endif; ?>
@@ -127,19 +127,10 @@
     <!-- Pagination -->
     <?php if ($totalPages > 1): ?>
     <div class="cm-pager">
-      <?php if ($page > 1): ?>
-        <a href="/admin/contacts?page=<?= $page - 1 ?>">← Trước</a>
-      <?php endif; ?>
-      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <?php if ($i == $page): ?>
-          <span class="current"><?= $i ?></span>
-        <?php else: ?>
-          <a href="/admin/contacts?page=<?= $i ?>"><?= $i ?></a>
-        <?php endif; ?>
-      <?php endfor; ?>
-      <?php if ($page < $totalPages): ?>
-        <a href="/admin/contacts?page=<?= $page + 1 ?>">Sau →</a>
-      <?php endif; ?>
+        <?php
+        require_once __DIR__.'/../partials/pagination.php';
+        renderPagination($page, $totalPages, '/admin/contacts', $_GET);
+        ?>
     </div>
     <?php endif; ?>
   <?php endif; ?>

@@ -12,7 +12,8 @@
 .nl-fg label small { font-weight: 400; color: #888; }
 .nl-fg input[type=text], .nl-fg input[type=number], .nl-fg textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; font-size: 14px; box-sizing: border-box; transition: border-color 0.2s; }
 .nl-fg input:focus, .nl-fg textarea:focus { border-color: var(--navy); outline: none; box-shadow: 0 0 0 3px rgba(26,50,88,0.1); }
-.nl-fg textarea { min-height: 60px; resize: vertical; }
+.nl-fg textarea { min-height: 60px; max-height: 160px; resize: vertical; overflow-wrap: break-word; word-break: break-word; }
+.nl-fg input[type=text], .nl-fg textarea { overflow-wrap: break-word; word-break: break-word; }
 .nl-preview { background: linear-gradient(135deg, #1a3258, #0b1f40); color: #fff; border-radius: 12px; padding: 24px; margin-top: 24px; text-align: center; }
 .nl-preview h3 { color: #fff; border: none; margin-bottom: 8px; }
 .nl-preview em { color: #c8962b; font-style: italic; }
@@ -37,11 +38,11 @@
     <div class="nl-fg" style="display:flex; gap:16px; flex-wrap:wrap;">
       <div style="flex:1; min-width:200px;">
         <label>Mã voucher</label>
-        <input type="text" name="newsletter_voucher_code" value="<?= htmlspecialchars($nl['newsletter_voucher_code'] ?? 'UUDAI100K') ?>" placeholder="UUDAI100K" style="text-transform:uppercase; font-weight:700; letter-spacing:2px;">
+        <input type="text" name="newsletter_voucher_code" value="<?= htmlspecialchars($nl['newsletter_voucher_code'] ?? 'UUDAI100K') ?>" placeholder="UUDAI100K" style="font-weight:700; letter-spacing:1px;">
       </div>
       <div style="flex:1; min-width:200px;">
         <label>Giá trị ưu đãi (VNĐ)</label>
-        <input type="number" name="newsletter_voucher_amount" value="<?= htmlspecialchars($nl['newsletter_voucher_amount'] ?? '100000') ?>" placeholder="100000" min="0" step="1000">
+        <input type="text" inputmode="numeric" name="newsletter_voucher_amount" value="<?= number_format(intval($nl['newsletter_voucher_amount'] ?: 100000), 0, ',', '.') ?>" placeholder="100.000" autocomplete="off">
       </div>
     </div>
     <div class="nl-fg">
@@ -66,10 +67,24 @@
 // Live preview
 document.querySelector('[name=newsletter_title]').addEventListener('input', function(){ document.getElementById('prevTitle').textContent = this.value; });
 document.querySelector('[name=newsletter_subtitle]').addEventListener('input', function(){ document.getElementById('prevSubtitle').textContent = this.value; });
-document.querySelector('[name=newsletter_voucher_code]').addEventListener('input', function(){ document.getElementById('prevCode').textContent = this.value.toUpperCase(); });
-document.querySelector('[name=newsletter_voucher_amount]').addEventListener('input', function(){
-  var v = parseInt(this.value)||0;
-  document.getElementById('prevAmount').textContent = v.toLocaleString('vi-VN') + '₫';
-});
+document.querySelector('[name=newsletter_voucher_code]').addEventListener('input', function(){ document.getElementById('prevCode').textContent = this.value; });
+// Giá trị ưu đãi: tự động thêm dấu "." phân cách hàng nghìn (vd: 10.000)
+(function(){
+  var amtEl = document.querySelector('[name=newsletter_voucher_amount]');
+  if(!amtEl) return;
+  function fmt(s){ s=(s+'').replace(/\D/g,''); return s ? s.replace(/\B(?=(\d{3})+(?!\d))/g,'.') : ''; }
+  function preview(){ var d=parseInt(amtEl.value.replace(/\D/g,''))||0; document.getElementById('prevAmount').textContent = d.toLocaleString('vi-VN')+'₫'; }
+  amtEl.addEventListener('input', function(){
+    var digitsBefore = this.value.slice(0, this.selectionStart).replace(/\D/g,'').length;
+    this.value = fmt(this.value);
+    var pos=0, seen=0;
+    while(pos<this.value.length && seen<digitsBefore){ var c=this.value.charCodeAt(pos); if(c>=48&&c<=57) seen++; pos++; }
+    this.setSelectionRange(pos,pos);
+    preview();
+  });
+  amtEl.value = fmt(amtEl.value); preview();
+  // bỏ dấu "." trước khi gửi để lưu số nguyên thuần
+  if(amtEl.form) amtEl.form.addEventListener('submit', function(){ amtEl.value = amtEl.value.replace(/\D/g,''); });
+})();
 </script>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

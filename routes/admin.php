@@ -7,7 +7,9 @@ post('/admin/login', function() {
     if (!$email || !$password) { flash('error','Vui lòng nhập email và mật khẩu.'); redirect('/admin/login'); }
     $user = dbGet('SELECT * FROM users WHERE email=?', [$email]);
     if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email hoặc mật khẩu không đúng.'); redirect('/admin/login'); }
-    if ($user['role'] !== 'admin') { flash('error','Tài khoản không có quyền quản trị.'); redirect('/admin/login'); }
+    if (!empty($user['is_superadmin'])) { flash('error','Tài khoản không hợp lệ ở khu vực này.'); redirect('/admin/login'); }
+    if ($user['role'] === 'staff' && staffHasAssignment($user['id'])) { if ($user['status'] !== 'active') { flash('error','Tài khoản bị khóa.'); redirect('/admin/login'); } loginUser($user['id']); flash('success','Xin chào, '.$user['full_name'].'!'); redirect('/staff'); }
+    if ($user['role'] !== 'admin') { flash('error','Tài khoản không có quyền truy cập khu vực quản trị.'); redirect('/admin/login'); }
     if ($user['status'] !== 'active') { flash('error','Tài khoản bị khóa.'); redirect('/admin/login'); }
     loginUser($user['id']);
     flash('success','Xin chào, '.$user['full_name'].'!');
@@ -15,15 +17,72 @@ post('/admin/login', function() {
 });
 
 get('/admin/logout', function() { logout('/admin/login'); });
+get('/superadmin-k9x27c', function() { $u = currentUser(); if ($u && !empty($u['is_superadmin'])) redirect('/admin'); view('admin/superadmin-login', ['title' => 'Super Admin']); });
+get('/superadmin-k9x27c/logout', function() { logout('/superadmin-k9x27c'); });
+post('/superadmin-k9x27c', function() {
+    csrfCheck();
+    $email = strtolower(trim($_POST['email'] ?? '')); $password = $_POST['password'] ?? '';
+    if (!$email || !$password) { flash('error','Vui lòng nhập email và mật khẩu.'); redirect('/superadmin-k9x27c'); }
+    $user = dbGet('SELECT * FROM users WHERE email=?', [$email]);
+    if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email hoặc mật khẩu không đúng.'); redirect('/superadmin-k9x27c'); }
+    if (empty($user['is_superadmin'])) { flash('error','Tài khoản không có quyền Super Admin.'); redirect('/superadmin-k9x27c'); }
+    if ($user['status'] !== 'active') { flash('error','Tài khoản đang bị khóa.'); redirect('/superadmin-k9x27c'); }
+    loginUser($user['id']);
+    flash('success','Xin chào Super Admin!');
+    redirect('/admin');
+});
+get('/staff/logout', function() { logout('/staff/login'); });
+
+get('/admin/forgot', function() { view('admin/forgot', ['title' => 'Quên mật khẩu Quản trị']); });
+post('/admin/forgot', function() {
+    csrfCheck();
+    $email = strtolower(trim($_POST['email'] ?? ''));
+    if (!$email) { flash('error','Vui lòng nhập email.'); redirect('/admin/forgot'); }
+    $user = dbGet("SELECT * FROM users WHERE email=?", [$email]);
+    if (!$user || $user['role'] !== 'admin') { flash('error','Email không phải tài khoản quản trị.'); redirect('/admin/forgot'); }
+    $otp = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+    $expires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
+    dbRun("UPDATE users SET otp_code=?, otp_expires=? WHERE id=?", [$otp, $expires, $user['id']]);
+    require_once __DIR__ . '/../includes/mailer.php';
+    sendOTPEmail($email, $user['full_name'], $otp);
+    $_SESSION['admin_reset_email'] = $email;
+    flash('success','Mã OTP đã được gửi đến email quản trị.');
+    redirect('/admin/reset');
+});
+get('/admin/reset', function() {
+    if (empty($_SESSION['admin_reset_email'])) { redirect('/admin/forgot'); }
+    view('admin/reset', ['title' => 'Đặt lại mật khẩu Quản trị', 'reset_email' => $_SESSION['admin_reset_email']]);
+});
+post('/admin/reset', function() {
+    csrfCheck();
+    $email = $_SESSION['admin_reset_email'] ?? '';
+    if (!$email) { flash('error','Phiên hết hạn. Vui lòng thử lại.'); redirect('/admin/forgot'); }
+    $otp = trim($_POST['otp'] ?? '');
+    $newPass = $_POST['password'] ?? ''; $newPass2 = $_POST['password2'] ?? '';
+    if (strlen($otp) !== 6) { flash('error','Mã OTP phải có 6 chữ số.'); redirect('/admin/reset'); }
+    $user = dbGet("SELECT * FROM users WHERE email=? AND otp_code=? AND role='admin'", [$email, $otp]);
+    if (!$user) { flash('error','Mã OTP không đúng.'); redirect('/admin/reset'); }
+    if ($user['otp_expires'] < date('Y-m-d H:i:s')) { flash('error','Mã OTP đã hết hạn. Vui lòng gửi lại.'); redirect('/admin/forgot'); }
+    if (strlen($newPass) < 6) { flash('error','Mật khẩu mới tối thiểu 6 ký tự.'); redirect('/admin/reset'); }
+    if ($newPass !== $newPass2) { flash('error','Mật khẩu nhập lại không khớp.'); redirect('/admin/reset'); }
+    dbRun("UPDATE users SET password_hash=?, otp_code=NULL, otp_expires=NULL WHERE id=?", [password_hash($newPass, PASSWORD_BCRYPT), $user['id']]);
+    logPasswordChange($user['id'], 'forgot_otp');
+    unset($_SESSION['admin_reset_email']);
+    flash('success','Đặt lại mật khẩu thành công! Vui lòng đăng nhập.');
+    redirect('/admin/login');
+});
 
 get('/admin', function() {
     $user = requireStaffPermission('reports', '/admin/login');
     
     // Xử lý bộ lọc biểu đồ
-    $period = $_GET['period'] ?? 'month'; // week, month, year
+    $period = $_GET['period'] ?? 'month'; // week, month, year, custom
+    $dateFrom = preg_replace('/[^0-9-]/', '', $_GET['date_from'] ?? '');
+    $dateTo   = preg_replace('/[^0-9-]/', '', $_GET['date_to'] ?? '');
     $dateFilter = "date(created_at) >= date('now', '-30 days')";
     if ($period === 'week') $dateFilter = "date(created_at) >= date('now', '-7 days')";
-    if ($period === 'year') $dateFilter = "date(created_at) >= date('now', '-365 days')";
+    elseif ($period === 'year') $dateFilter = "date(created_at) >= date('now', '-365 days')";
+    elseif ($period === 'custom' && $dateFrom && $dateTo) $dateFilter = "date(created_at) BETWEEN '$dateFrom' AND '$dateTo'";
     $dateFilterO = str_replace('created_at', 'o.created_at', $dateFilter);
 
     $kpis = dbGet("SELECT 
@@ -82,21 +141,70 @@ get('/admin', function() {
     $offset = ($page - 1) * $perPage;
     
     $totalOrders = dbGet("SELECT COUNT(*) as c FROM orders")['c'];
-    $recentOrders = dbAll("SELECT o.id, o.code, o.grand_total, o.payment_method, o.payment_status, o.created_at, u.full_name FROM orders o LEFT JOIN users u ON u.id=o.user_id ORDER BY o.created_at DESC LIMIT $perPage OFFSET $offset");
+    $recentOrders = dbAll("SELECT o.id, o.code, o.grand_total, o.payment_method, o.payment_status, o.delivery_status, o.shipping_phone, o.shipping_full_name, o.created_at, u.full_name FROM orders o LEFT JOIN users u ON u.id=o.user_id ORDER BY o.created_at DESC LIMIT $perPage OFFSET $offset");
     
-    // Stock alerts: products below min_stock or above max_stock
+    // Stock alerts: products below min_stock or above max_stock (or > 1000)
     $lowStockProducts = dbAll("SELECT id, name, sku, stock, min_stock, max_stock FROM products WHERE status='published' AND stock <= min_stock AND min_stock > 0 ORDER BY stock ASC LIMIT 20");
-    $overStockProducts = dbAll("SELECT id, name, sku, stock, min_stock, max_stock FROM products WHERE status='published' AND stock >= max_stock AND max_stock > 0 ORDER BY stock DESC LIMIT 20");
+    $overStockProducts = dbAll("SELECT id, name, sku, stock, min_stock, max_stock FROM products WHERE status='published' AND stock > 1000 ORDER BY stock DESC LIMIT 20");
+
+    // ===== Dashboard cards / status / customers =====
+    $c2 = dbGet("SELECT
+        (SELECT COUNT(*) FROM orders WHERE date(created_at)=date('now')) AS orders_today,
+        (SELECT COUNT(*) FROM orders WHERE date(created_at)=date('now','-1 day')) AS orders_yesterday,
+        (SELECT COUNT(*) FROM orders WHERE strftime('%Y-%m',created_at)=strftime('%Y-%m','now')) AS orders_month,
+        (SELECT COUNT(*) FROM orders WHERE strftime('%Y-%m',created_at)=strftime('%Y-%m',date('now','-1 month'))) AS orders_lastmonth,
+        (SELECT COUNT(*) FROM orders WHERE COALESCE(delivery_status,'') IN ('','pending','received')) AS orders_pending,
+        (SELECT COUNT(*) FROM orders WHERE delivery_status IN ('delivering','delivered','shipping','shipped')) AS orders_shipping,
+        (SELECT COUNT(*) FROM orders WHERE delivery_status IN ('cancelled','canceled','returned','refunded')) AS orders_cancelled,
+        (SELECT COUNT(*) FROM orders WHERE delivery_status IN ('completed','delivered')) AS orders_completed,
+        (SELECT COUNT(*) FROM orders WHERE payment_status='paid') AS orders_paid,
+        (SELECT COUNT(*) FROM users WHERE role='customer' AND strftime('%Y-%m',created_at)=strftime('%Y-%m','now')) AS newcust_month,
+        (SELECT COUNT(*) FROM users WHERE role='customer' AND strftime('%Y-%m',created_at)=strftime('%Y-%m',date('now','-1 month'))) AS newcust_lastmonth,
+        (SELECT COALESCE(SUM(grand_total),0)-COALESCE(SUM(refund_amount),0) FROM orders WHERE payment_status='paid' AND delivery_status IN ('completed','delivered') AND date(created_at)=date('now','-1 day')) AS rev_yesterday,
+        (SELECT COALESCE(SUM(grand_total),0)-COALESCE(SUM(refund_amount),0) FROM orders WHERE payment_status='paid' AND delivery_status IN ('completed','delivered') AND strftime('%Y-%m',created_at)=strftime('%Y-%m',date('now','-1 month'))) AS rev_lastmonth
+    ") ?: [];
+    $kpis = array_merge($kpis ?: [], $c2);
+    $kpis['aov'] = (($kpis['orders_paid'] ?? 0) > 0) ? round(($kpis['revenue'] ?? 0) / $kpis['orders_paid']) : 0;
+    $kpis['completion_rate'] = (($kpis['orders_total'] ?? 0) > 0) ? round(($kpis['orders_completed'] ?? 0) / $kpis['orders_total'] * 100, 1) : 0;
+    $pf = function($cur,$prev){ $cur=(float)$cur; $prev=(float)$prev; if($prev>0) return round(($cur-$prev)/$prev*100,1); return $cur>0?100.0:0.0; };
+    $pcts = [
+        'rev_today' => $pf($kpis['today_revenue']??0, $kpis['rev_yesterday']??0),
+        'orders_today' => $pf($kpis['orders_today']??0, $kpis['orders_yesterday']??0),
+        'newcust' => $pf($kpis['newcust_month']??0, $kpis['newcust_lastmonth']??0),
+        'month_rev' => $pf($kpis['month_revenue']??0, $kpis['rev_lastmonth']??0),
+        'orders_month' => $pf($kpis['orders_month']??0, $kpis['orders_lastmonth']??0),
+    ];
+    $statusRaw = dbAll("SELECT COALESCE(delivery_status,'') AS s, COUNT(*) c FROM orders GROUP BY COALESCE(delivery_status,'')");
+    $statusBuckets = [
+        'Đang chờ' => ['c'=>0,'color'=>'#f59e0b'],
+        'Tiếp nhận' => ['c'=>0,'color'=>'#3b82f6'],
+        'Đang giao' => ['c'=>0,'color'=>'#8b5cf6'],
+        'Đã giao' => ['c'=>0,'color'=>'#06b6d4'],
+        'Đã hoàn thành' => ['c'=>0,'color'=>'#22c55e'],
+        'Đã hủy' => ['c'=>0,'color'=>'#ef4444'],
+        'Đã trả hàng' => ['c'=>0,'color'=>'#94a3b8'],
+    ];
+    foreach($statusRaw as $sr){ $s=$sr['s']; $n=(int)$sr['c'];
+        if($s==='received') $statusBuckets['Tiếp nhận']['c']+=$n;
+        elseif(in_array($s,['delivering','shipping'])) $statusBuckets['Đang giao']['c']+=$n;
+        elseif(in_array($s,['delivered','shipped'])) $statusBuckets['Đã giao']['c']+=$n;
+        elseif($s==='completed') $statusBuckets['Đã hoàn thành']['c']+=$n;
+        elseif(in_array($s,['cancelled','canceled'])) $statusBuckets['Đã hủy']['c']+=$n;
+        elseif(in_array($s,['returned','refunded'])) $statusBuckets['Đã trả hàng']['c']+=$n;
+        else $statusBuckets['Đang chờ']['c']+=$n;
+    }
+    $topProducts = dbAll("SELECT id, name, sku, COALESCE(sold_count,0) AS sold, (SELECT file_path FROM product_images WHERE product_id=products.id ORDER BY is_main DESC, sort_order ASC LIMIT 1) AS img FROM products WHERE status='published' ORDER BY sold_count DESC, view_count DESC LIMIT 5");
 
     view('admin/dashboard', [
         'title'=>'Dashboard Admin',
         'role'=>'admin',
         'kpis'=>$kpis,
+        'pcts'=>$pcts,
+        'statusBuckets'=>$statusBuckets,
+        'topProducts'=>$topProducts,
         'recentOrders'=>$recentOrders,
         'chartData' => $chartData,
         'period' => $period,
-        'dateFrom' => $dateFrom,
-        'dateTo' => $dateTo,
         'dateFrom' => $dateFrom ?? '',
         'dateTo' => $dateTo ?? '',
         'page' => $page,
@@ -124,14 +232,14 @@ get('/admin/products', function() {    requireStaffPermission('products', '/admi
     if($q){$where.=" AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l]);}
     if($catId){$where.=" AND p.category_id=?"; $params[]=$catId;}
     if($brandId){$where.=" AND p.car_brand_id=?"; $params[]=$brandId;}
-    if($partBrand){$where.=" AND p.part_brand=?"; $params[]=$partBrand;}
+    if($partBrand){$where.=" AND (p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?)"; $params[]=$partBrand; $params[]=$partBrand.',%'; $params[]='%, '.$partBrand.',%'; $params[]='%, '.$partBrand;}
     $total=dbGet("SELECT COUNT(*) AS n FROM products p $where",$params)['n']??0;
     $totalPages=max(1,ceil($total/$perPage));
     $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
     $products=dbAll("SELECT p.*,COALESCE(pt.shop_name,'Admin') AS shop_name,c.name AS cat_name,b.name AS brand_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id $where ORDER BY p.created_at DESC LIMIT ? OFFSET ?",$p2);
     $categories=dbAll("SELECT * FROM categories ORDER BY sort_order");
     $carBrands=dbAll("SELECT * FROM brands ORDER BY name");
-    $partBrands=dbAll("SELECT DISTINCT part_brand FROM products WHERE part_brand IS NOT NULL AND part_brand != '' ORDER BY part_brand");
+    $partBrands=dbAll("SELECT name AS part_brand FROM product_brands ORDER BY sort_order, name");
 
     view('admin/products',['title'=>'San pham','role'=>'admin','products'=>$products,'categories'=>$categories,'carBrands'=>$carBrands,'partBrands'=>$partBrands,'tab'=>$tab,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'filterBrandId'=>$brandId,'filterPartBrand'=>$partBrand]);
 });
@@ -162,195 +270,192 @@ get('/admin/products/export-csv', function() {
     $template = $_GET['template'] ?? '';
     $selectedIds = [];
     if (!empty($_GET['ids'])) {
-        $selectedIds = array_map('intval', explode(',', $_GET['ids']));
-        $selectedIds = array_filter($selectedIds, function($v){ return $v > 0; });
+        $selectedIds = array_filter(array_map('intval', explode(',', $_GET['ids'])), function($v){ return $v > 0; });
     }
-    
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="products_' . date('Ymd_His') . '.csv"');
-    
+    header('Content-Disposition: attachment; filename="san-pham_' . date('Ymd_His') . '.csv"');
     $out = fopen('php://output', 'w');
-    // BOM for UTF-8
     fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
-    
-    $headers = ['name','sku','oem_code','part_brand','category_id','price','price_before_tax','stock','warranty_months','description','status'];
-    fputcsv($out, $headers);
-    
+    $__keys = csvHeadSel($out, 'products');
     if (!$template) {
-        $whereClause = '';
+        $sql = "SELECT p.*, c.name AS cat_name, b.name AS car_brand_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id";
+        $params = [];
         if (!empty($selectedIds)) {
-            $placeholders = implode(',', array_fill(0, count($selectedIds), '?'));
-            $whereClause = " WHERE id IN ($placeholders)";
-            $products = dbAll("SELECT name,sku,oem_code,part_brand,category_id,price,price_before_tax,stock,warranty_months,description,status FROM products" . $whereClause . " ORDER BY id DESC", $selectedIds);
-        } else {
-            $products = dbAll("SELECT name,sku,oem_code,part_brand,category_id,price,price_before_tax,stock,warranty_months,description,status FROM products ORDER BY id DESC");
+            $ph = implode(',', array_fill(0, count($selectedIds), '?'));
+            $sql .= " WHERE p.id IN ($ph)"; $params = $selectedIds;
         }
+        $sql .= " ORDER BY p.id DESC";
+        $products = dbAll($sql, $params);
+        $money = function($v){ return ((int)$v) ? number_format((int)$v, 0, ',', '.') : '0'; };
+        $clean = function($v){ return trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags((string)$v), ENT_QUOTES, 'UTF-8'))); };
         foreach ($products as $p) {
-            fputcsv($out, [
-                $p['name'], $p['sku'], $p['oem_code']??'', $p['part_brand']??'',
-                $p['category_id']??'', $p['price'], $p['price_before_tax']??0,
-                $p['stock'], $p['warranty_months']??12,
-                strip_tags($p['description']??''), $p['status']
-            ]);
+            $dims = ((int)($p['width_cm']??0) || (int)($p['depth_cm']??0) || (int)($p['height_cm']??0)) ? ((int)($p['width_cm']??0).'x'.(int)($p['depth_cm']??0).'x'.(int)($p['height_cm']??0)) : '';
+            csvRowSel($out, $__keys, ['name'=>$p['name'],'sku'=>$p['sku'],'oem'=>$p['oem_code']??'','category'=>$p['cat_name']??'','brand'=>$p['part_brand']??'','car_brand'=>$p['car_brand_name']??'','cost'=>$money($p['cost_price']??0),'price'=>$money($p['price']),'original'=>$money($p['original_price']??0),'stock'=>$p['stock']??0,'weight'=>$p['weight_g']??0,'dims'=>$dims,'warranty'=>$p['warranty_months']??12,'features'=>$clean($p['features']??''),'specs'=>$clean($p['specifications']??''),'description'=>$clean($p['description']??''),'image'=>$p['main_image']??'','status'=>($p['status']==='published'?'Đang bán':'Nháp'),'featured'=>(!empty($p['is_featured'])?'Có':'Không')]);
         }
     }
-    
     fclose($out);
     exit;
 });
 
-// Import products from CSV
-// Import products from CSV
+// Import products from CSV (header-based: chấp nhận tiêu đề tiếng Việt hoặc tiếng Anh, mọi thứ tự cột)
 post('/admin/products/import-csv', function() {
     requireStaffPermission('products', '/admin/login'); csrfCheck();
-    
-    if (empty($_FILES['csv_file']['tmp_name'])) {
-        flash('error', 'Vui lòng chọn file CSV.');
-        redirect('/admin/products');
-        return;
-    }
-    // ===== KIỂM TRA CHỈ CHẤP NHẬN FILE CSV =====
+    if (empty($_FILES['csv_file']['tmp_name'])) { flash('error', 'Vui lòng chọn file CSV.'); redirect('/admin/products'); return; }
     $uploadedFile = $_FILES['csv_file'];
-    $originalName = $uploadedFile['name'] ?? '';
-    $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-    $allowedMimes = ['text/csv', 'text/plain', 'application/csv', 'application/vnd.ms-excel'];
+    $ext = strtolower(pathinfo($uploadedFile['name'] ?? '', PATHINFO_EXTENSION));
+    $allowedMimes = ['text/csv','text/plain','application/csv','application/vnd.ms-excel'];
     $detectedMime = mime_content_type($uploadedFile['tmp_name']);
-    if ($ext !== 'csv') {
-        flash('error', 'Chỉ được phép import file CSV (.csv). File "' . htmlspecialchars($originalName) . '" không hợp lệ.');
-        redirect('/admin/products');
-        return;
-    }
-    if (!in_array($detectedMime, $allowedMimes) && !str_starts_with($detectedMime, 'text/')) {
-        flash('error', 'File không đúng định dạng CSV. Vui lòng kiểm tra lại.');
-        redirect('/admin/products');
-        return;
-    }
-    // ============================================
-
-    
-    $file = fopen($_FILES['csv_file']['tmp_name'], 'r');
-    if (!$file) {
-        flash('error', 'Không thể đọc file.');
-        redirect('/admin/products');
-        return;
-    }
-    
+    if ($ext !== 'csv') { flash('error', 'Chỉ được phép import file CSV (.csv).'); redirect('/admin/products'); return; }
+    if (!in_array($detectedMime, $allowedMimes) && !str_starts_with($detectedMime, 'text/')) { flash('error', 'File không đúng định dạng CSV.'); redirect('/admin/products'); return; }
+    $file = fopen($uploadedFile['tmp_name'], 'r');
+    if (!$file) { flash('error', 'Không thể đọc file.'); redirect('/admin/products'); return; }
     $dupSku = $_POST['dup_sku'] ?? 'skip';
-    $defaultStatus = $_POST['default_status'] ?? 'draft';
+    $defaultStatus = in_array($_POST['default_status'] ?? '', ['draft','published']) ? $_POST['default_status'] : 'draft';
     $updateStock = $_POST['update_stock'] ?? 'no';
     $updatePrice = $_POST['update_price'] ?? 'no';
-    
-    // Skip BOM if present
-    $bom = fread($file, 3);
-    if ($bom !== chr(0xEF).chr(0xBB).chr(0xBF)) {
-        rewind($file);
+    $bom = fread($file, 3); if ($bom !== chr(0xEF).chr(0xBB).chr(0xBF)) rewind($file);
+    $norm = function($s){ $s = strtolower(trim((string)$s)); $s = str_replace(['đ','Đ'], ['d','d'], $s); $s = removeAccents($s); $s = preg_replace('/\(.*?\)/', '', $s); $s = preg_replace('/[^a-z0-9]+/', ' ', $s); return trim(preg_replace('/\s+/', ' ', $s)); };
+    $aliases = [
+        'name'=>['ten san pham','name','ten hang','san pham'],
+        'sku'=>['ma sku','sku','ma hang','ma san pham'],
+        'oem'=>['ma oem','oem code','oem'],
+        'category'=>['danh muc','category id','category','nhom hang','loai hang'],
+        'brand'=>['thuong hieu','part brand','brand'],
+        'car_brand'=>['hang xe','car brand','carbrand'],
+        'price'=>['gia ban','price','don gia'],
+        'original_price'=>['gia goc','original price','gia gach ngang'],
+        'price_before_tax'=>['gia truoc thue','price before tax'],
+        'vat'=>['vat','vat rate','thue'],
+        'stock'=>['ton kho','stock','so luong'],
+        'weight'=>['khoi luong','weight g','weight','trong luong'],
+        'warranty'=>['bao hanh','warranty months','warranty'],
+        'short_specs'=>['thong so ngan','short specs'],
+        'description'=>['mo ta','description','desc'],
+        'features'=>['tinh nang','features'],
+        'cost'=>['gia nhap','cost price','gia von'],
+        'dims'=>['kich thuoc','dimensions','size'],
+        'specs'=>['thong so ky thuat','specifications','specs'],
+        'image'=>['anh dai dien','image','hinh anh','anh'],
+        'additional_images'=>['anh phu','additional images','anh bo sung'],
+        'status'=>['trang thai','status'],
+        'featured'=>['noi bat','is featured','featured'],
+    ];
+    $rawHeaders = fgetcsv($file);
+    $colMap = [];
+    if (is_array($rawHeaders)) {
+        foreach ($rawHeaders as $idx=>$h) { $nh = $norm($h); foreach ($aliases as $key=>$vars) { if (!isset($colMap[$key]) && in_array($nh, $vars, true)) { $colMap[$key] = $idx; break; } } }
     }
-    
-    $headers = fgetcsv($file); // skip header row
-    $imported = 0;
-    $skipped = 0;
-    $errors = [];
-    $lineNum = 1;
-    
-    // Get default category (first category)
+    if (!isset($colMap['name'])) { fclose($file); flash('error', 'File CSV không nhận diện được cột "Tên sản phẩm". Hãy tải file mẫu bằng nút Xuất CSV rồi nhập theo mẫu đó.'); redirect('/admin/products'); return; }
+    $imported = 0; $skipped = 0; $errors = []; $lineNum = 1;
     $defaultCat = dbGet("SELECT id FROM categories ORDER BY id LIMIT 1");
     $defaultCatId = $defaultCat ? $defaultCat['id'] : 1;
-    
+    $toInt = function($v){ return (int)preg_replace('/[^0-9]/', '', (string)$v); };
     while (($row = fgetcsv($file)) !== false) {
         $lineNum++;
-        if (count($row) < 2) { $errors[] = "Dòng $lineNum: thiếu dữ liệu"; continue; }
-        
-        $name = trim($row[0] ?? '');
-        $sku = trim($row[1] ?? '');
-        $oem = trim($row[2] ?? '');
-        $brand = trim($row[3] ?? '');
-        $catId = intval($row[4] ?? 0);
-        $price = intval($row[5] ?? 0);
-        $priceBefore = intval($row[6] ?? 0);
-        $stock = intval($row[7] ?? 0);
-        $warranty = intval($row[8] ?? 12);
-        $desc = $row[9] ?? '';
-        $status = in_array($row[10] ?? '', ['draft','published']) ? $row[10] : 'draft';
-        $carBrandName = trim($row[11] ?? '');
-        $imageUrl = trim($row[12] ?? '');
-        
-        // Resolve car_brand_id from name
+        if (count($row) < 1) continue;
+        $g = function($key) use ($row, $colMap){ return (isset($colMap[$key]) && isset($row[$colMap[$key]])) ? $row[$colMap[$key]] : ''; };
+        $name = trim((string)$g('name'));
+        if ($name === '') { $errors[] = "Dòng $lineNum: thiếu tên sản phẩm"; continue; }
+        $sku = trim((string)$g('sku'));
+        $oem = trim((string)$g('oem'));
+        $brand = trim((string)$g('brand'));
+        $carBrandName = trim((string)$g('car_brand'));
+        $price = $toInt($g('price'));
+        $originalPrice = $toInt($g('original_price'));
+        $priceBefore = $toInt($g('price_before_tax'));
+        $vat = $toInt($g('vat'));
+        $stock = $toInt($g('stock'));
+        $weight = $toInt($g('weight'));
+        $cost = $toInt($g('cost'));
+        $dimsRaw = trim((string)$g('dims')); $dimP = $dimsRaw!=='' ? preg_split('/[^0-9]+/', $dimsRaw, -1, PREG_SPLIT_NO_EMPTY) : [];
+        $width = (int)($dimP[0] ?? 0); $depth = (int)($dimP[1] ?? 0); $height = (int)($dimP[2] ?? 0);
+        $warranty = $toInt($g('warranty')); if (!$warranty) $warranty = 12;
+        $shortSpecs = trim((string)$g('short_specs'));
+        $desc = (string)$g('description');
+        $features = (string)$g('features');
+        $specs = (string)$g('specs');
+        $imageUrl = trim((string)$g('image'));
+        $additionalImages = trim((string)$g('additional_images'));
+        $catRaw = trim((string)$g('category'));
+        if ($catRaw === '') { $catId = $defaultCatId; }
+        elseif (ctype_digit($catRaw)) { $ce = dbGet("SELECT id FROM categories WHERE id=?", [(int)$catRaw]); $catId = $ce ? (int)$catRaw : $defaultCatId; }
+        else { $ce = dbGet("SELECT id FROM categories WHERE LOWER(name)=LOWER(?) OR LOWER(slug)=LOWER(?) LIMIT 1", [$catRaw, $catRaw]); $catId = $ce ? $ce['id'] : $defaultCatId; }
         $carBrandId = null;
-        if ($carBrandName) {
-            $br = dbGet("SELECT id FROM brands WHERE LOWER(name)=LOWER(?)", [$carBrandName]);
-            if ($br) $carBrandId = $br['id'];
-        }
-        
-        if (!$name || !$price) { $errors[] = "Dòng $lineNum: thiếu tên hoặc giá"; continue; }
-        
-        // Use default category if not specified
-        if (!$catId) $catId = $defaultCatId;
-        
-        $slug = preg_replace('/[^a-z0-9]+/', '-', strtolower(trim($name)));
-        $finalStatus = in_array($row[10] ?? '', ['draft','published']) ? $row[10] : $defaultStatus;
-        
-        // Check for existing product by SKU
-        $existing = null;
-        if ($sku) {
-            $existing = dbGet("SELECT id FROM products WHERE sku=?", [$sku]);
-        }
-        
+        if ($carBrandName) { $br = dbGet("SELECT id FROM brands WHERE LOWER(name)=LOWER(?)", [$carBrandName]); if ($br) $carBrandId = $br['id']; }
+        $stRaw = $norm($g('status'));
+        if (in_array($stRaw, ['published','dang ban','active','1'])) $finalStatus = 'published';
+        elseif (in_array($stRaw, ['draft','nhap','0'])) $finalStatus = 'draft';
+        else $finalStatus = $defaultStatus;
+        $fRaw = $norm($g('featured'));
+        $isFeatured = in_array($fRaw, ['co','1','yes','x','true']) ? 1 : 0;
+        if (!$priceBefore && $price > 0) $priceBefore = intval(round($price / 1.1));
+        $taxAmount = $price - $priceBefore;
+        $slug = trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(removeAccents($name))), '-');
+        $existing = $sku ? dbGet("SELECT id FROM products WHERE sku=?", [$sku]) : null;
         try {
             if ($existing && $dupSku === 'update') {
-                // Update existing product
-                $updates = ["name=?"];
-                $params = [$name];
-                if ($updatePrice === 'yes') { $updates[] = "price=?"; $updates[] = "price_before_tax=?"; $params[] = $price; $params[] = $priceBefore; }
-                if ($updateStock === 'yes') { $updates[] = "stock=?"; $params[] = $stock; }
+                $updates = ["name=?"]; $params = [$name];
+                if ($updatePrice === 'yes') { $updates[]="price=?"; $updates[]="price_before_tax=?"; $updates[]="tax_amount=?"; $params[]=$price; $params[]=$priceBefore; $params[]=$taxAmount; if ($originalPrice > 0) { $updates[]="original_price=?"; $params[]=$originalPrice; } if ($vat > 0) { $updates[]="vat_rate=?"; $params[]=$vat; } }
+                if ($updateStock === 'yes') { $updates[]="stock=?"; $params[]=$stock; }
+                if ($weight > 0) { $updates[]="weight_g=?"; $params[]=$weight; }
+                if ($cost > 0) { $updates[]="cost_price=?"; $params[]=$cost; }
+                if ($width||$depth||$height) { $updates[]="width_cm=?"; $updates[]="depth_cm=?"; $updates[]="height_cm=?"; $params[]=$width; $params[]=$depth; $params[]=$height; }
+                if ($shortSpecs !== '') { $updates[]="short_specs=?"; $params[]=$shortSpecs; }
+                if ($features !== '') { $updates[]="features=?"; $params[]=$features; }
+                if ($specs !== '') { $updates[]="specifications=?"; $params[]=$specs; }
+                if ($desc !== '') { $updates[]="description=?"; $params[]=$desc; }
+                $updates[]="category_id=?"; $params[]=$catId;
                 $params[] = $existing['id'];
                 dbRun("UPDATE products SET " . implode(',', $updates) . " WHERE id=?", $params);
                 $imported++;
             } elseif ($existing && $dupSku === 'skip') {
-                $skipped++;
-                $errors[] = "Dòng $lineNum: SKU \"{$sku}\" đã tồn tại";
+                $skipped++; $errors[] = "Dòng $lineNum: SKU \"{$sku}\" đã tồn tại";
             } else {
-                // Generate unique SKU if empty
-                if (!$sku) { $sku = 'CSV-' . strtoupper(substr(md5($name . time()), 0, 8)); }
-                
-                dbInsert("INSERT INTO products (name, sku, slug, oem_code, part_brand, car_brand_id, category_id, price, price_before_tax, stock, warranty_months, description, status, partner_id, video_url, published_at, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,datetime('now','localtime'),datetime('now','localtime'))",
-                    [$name, $sku, $slug, $oem, $brand, $carBrandId, $catId, $price, $priceBefore, $stock, $warranty, $desc, $finalStatus, trim($_POST['video_url'] ?? '')]);
-                // Handle image: local filename or URL
+                if (!$sku) { $sku = 'CSV-' . strtoupper(substr(md5($name . microtime()), 0, 8)); }
+                dbInsert("INSERT INTO products (name, sku, slug, oem_code, part_brand, car_brand_id, category_id, price, price_before_tax, tax_amount, original_price, vat_rate, stock, weight_g, cost_price, width_cm, depth_cm, height_cm, warranty_months, short_specs, description, features, specifications, is_featured, status, partner_id, video_url, published_at, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,datetime('now','localtime'),datetime('now','localtime'))",
+                    [$name, $sku, $slug, $oem, $brand, $carBrandId, $catId, $price, $priceBefore, $taxAmount, $originalPrice ?: null, $vat, $stock, $weight, $cost, $width, $depth, $height, $warranty, $shortSpecs, $desc, $features, $specs, $isFeatured, $finalStatus, trim($_POST['video_url'] ?? '')]);
                 if ($imageUrl) {
                     $newPid = dbGet("SELECT id FROM products WHERE sku=?", [$sku]);
                     if ($newPid) {
                         $imgName = null;
                         if (str_starts_with($imageUrl, 'http')) {
-                            // Download from URL
                             $ctx = stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0\r\n", 'timeout' => 10]]);
                             $imgData = @file_get_contents($imageUrl, false, $ctx);
                             if ($imgData && strlen($imgData) > 1000) {
-                                $imgExt = 'jpg';
-                                if (str_contains($imageUrl, '.webp')) $imgExt = 'webp';
-                                elseif (str_contains($imageUrl, '.png')) $imgExt = 'png';
+                                $imgExt = 'jpg'; if (str_contains($imageUrl, '.webp')) $imgExt = 'webp'; elseif (str_contains($imageUrl, '.png')) $imgExt = 'png';
                                 $imgName = 'p_' . uniqid() . '.' . $imgExt;
                                 file_put_contents('/opt/cooling-php/uploads/products/' . $imgName, $imgData);
                             }
                         } else {
-                            // Local filename already in uploads/products/
-                            $localPath = '/opt/cooling-php/uploads/products/' . $imageUrl;
-                            if (file_exists($localPath)) {
-                                $imgName = $imageUrl;
-                            }
+                            if (file_exists('/opt/cooling-php/uploads/products/' . $imageUrl)) $imgName = $imageUrl;
                         }
-                        if ($imgName) {
-                            dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 1, 0)", [$newPid['id'], $imgName]);
+                        if ($imgName) dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 1, 0)", [$newPid['id'], $imgName]);
+                        if (!empty($additionalImages)) {
+                            $extraImgs = array_filter(array_map('trim', explode(';', $additionalImages)));
+                            $sortIdx = 1;
+                            foreach ($extraImgs as $extraImg) {
+                                $extraName = null;
+                                if (str_starts_with($extraImg, 'http')) {
+                                    $ctx2 = stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0\r\n", 'timeout' => 10]]);
+                                    $imgData2 = @file_get_contents($extraImg, false, $ctx2);
+                                    if ($imgData2 && strlen($imgData2) > 1000) {
+                                        $eExt = 'jpg'; if (str_contains($extraImg, '.webp')) $eExt = 'webp'; elseif (str_contains($extraImg, '.png')) $eExt = 'png';
+                                        $extraName = 'p_' . uniqid() . '_' . $sortIdx . '.' . $eExt;
+                                        file_put_contents('/opt/cooling-php/uploads/products/' . $extraName, $imgData2);
+                                    }
+                                } else {
+                                    if (file_exists('/opt/cooling-php/uploads/products/' . $extraImg)) $extraName = $extraImg;
+                                }
+                                if ($extraName) { dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 0, ?)", [$newPid['id'], $extraName, $sortIdx]); $sortIdx++; }
+                            }
                         }
                     }
                 }
                 $imported++;
             }
-        } catch (\Exception $e) {
-            $errors[] = "Dòng $lineNum: " . $e->getMessage();
-        }
+        } catch (\Exception $e) { $errors[] = "Dòng $lineNum: " . $e->getMessage(); }
     }
-    
     fclose($file);
-    
     if ($imported > 0) {
         $msg = "Đã nhập thành công {$imported} sản phẩm.";
         if ($skipped > 0) $msg .= " Bỏ qua {$skipped} SP đã tồn tại (trùng SKU).";
@@ -431,7 +536,7 @@ get('/admin/orders/export-csv', function() {
     header('Content-Disposition: attachment; filename="' . $fname . '.csv"');
     $out = fopen('php://output', 'w');
     fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
-    fputcsv($out, ['code','full_name','phone','email','address','grand_total','delivery_status','payment_status','payment_type','created_at']);
+    $__keys = csvHeadSel($out, 'orders');
     $ids = !empty($_GET['ids']) ? array_map('intval', explode(',', $_GET['ids'])) : [];
     if (!empty($ids)) {
         $ph = implode(',', array_fill(0, count($ids), '?'));
@@ -439,26 +544,40 @@ get('/admin/orders/export-csv', function() {
     } else {
         $rows = dbAll("SELECT o.*, u.email FROM orders o LEFT JOIN users u ON u.id=o.user_id ORDER BY o.id DESC");
     }
-    foreach($rows as $r) fputcsv($out, [$r['code']??$r['order_code']??'',$r['shipping_full_name']??'',$r['shipping_phone']??'',$r['email']??'',$r['shipping_detail']??'',$r['grand_total'],$r['delivery_status'],$r['payment_status'],$r['payment_type']??'',$r['created_at']]);
+    $delM=['pending'=>'Đang chờ','received'=>'Tiếp nhận','delivering'=>'Đang giao','delivered'=>'Đã giao','completed'=>'Hoàn thành','cancelled'=>'Đã hủy','returned'=>'Đã trả hàng'];
+    $payM=['unpaid'=>'Chưa thanh toán','partial_paid'=>'Thanh toán một phần','paid'=>'Đã thanh toán','pending_refund'=>'Chờ hoàn tiền','refunded'=>'Đã hoàn tiền'];
+    $ptM=['cod'=>'COD','bank_transfer'=>'Chuyển khoản'];
+    foreach($rows as $r) csvRowSel($out, $__keys, ['code'=>$r['code']??$r['order_code']??'','customer'=>$r['shipping_full_name']??'','phone'=>$r['shipping_phone']??'','email'=>$r['email']??'','address'=>$r['shipping_detail']??'','total'=>number_format((int)($r['grand_total']??0),0,',','.'),'delivery'=>($delM[$r['delivery_status']??'']??($r['delivery_status']??'')),'payment'=>($payM[$r['payment_status']??'']??($r['payment_status']??'')),'paytype'=>($ptM[$r['payment_type']??'']??($r['payment_type']??'')),'created'=>$r['created_at']]);
     fclose($out); exit;
 });
 
 // ── EXPORT/IMPORT: Users ──
 get('/admin/users/export-csv', function() {
-    requireStaffPermission('users', '/auth/login');
+    requireStaffPermission('users|staff', '/auth/login');
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="users_' . date('Ymd') . '.csv"');
     $out = fopen('php://output', 'w');
     fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
-    fputcsv($out, ['full_name','email','phone','role','status','address','created_at']);
+    $__keys = csvHeadSel($out, 'users');
+    $txt = function($v){ $v = str_replace('"','',trim((string)$v)); return $v === '' ? '' : '="'.$v.'"'; };
+    $roleF = in_array($_GET['role'] ?? '', ['customer','staff','admin','partner']) ? $_GET['role'] : '';
     $ids = !empty($_GET['ids']) ? array_map('intval', explode(',', $_GET['ids'])) : [];
+    $base = "SELECT u.*, ii.invoice_type AS i_type, ii.buyer_name AS i_buyer, ii.company_name AS i_company, ii.tax_code AS i_tax, ii.address AS i_addr, ii.province AS i_prov, ii.id_number AS i_id, ii.email AS i_email, ii.phone AS i_phone, ii.bank_name AS i_bank, ii.bank_account AS i_acct FROM users u LEFT JOIN user_invoice_info ii ON ii.user_id=u.id";
     if (!empty($ids)) {
         $ph = implode(',', array_fill(0, count($ids), '?'));
-        $rows = dbAll("SELECT * FROM users WHERE id IN ($ph) ORDER BY id DESC", $ids);
+        $rows = dbAll("$base WHERE u.id IN ($ph) ORDER BY u.id DESC", $ids);
+    } elseif ($roleF !== '') {
+        $rows = dbAll("$base WHERE u.role=? AND u.email NOT LIKE '%_deleted_%' ORDER BY u.id DESC", [$roleF]);
     } else {
-        $rows = dbAll("SELECT * FROM users ORDER BY id DESC");
+        $rows = dbAll("$base WHERE u.email NOT LIKE '%_deleted_%' ORDER BY u.id DESC");
     }
-    foreach($rows as $r) fputcsv($out, [$r['full_name'],$r['email'],$r['phone']??'',$r['role'],$r['status'],$r['address']??'',$r['created_at']]);
+    $roleM=['admin'=>'Quản trị','staff'=>'Nhân viên','customer'=>'Khách hàng','partner'=>'Đối tác'];
+    $ustM=['active'=>'Hoạt động','suspended'=>'Tạm khóa','locked'=>'Đã khóa','banned'=>'Đã khóa','inactive'=>'Ngưng'];
+    foreach($rows as $r) {
+        $itype = ($r['i_type']??'')==='business' ? 'Tổ chức/Hộ KD' : (($r['i_type']??'')==='personal' ? 'Cá nhân' : '');
+        $iname = ($r['i_type']??'')==='business' ? ($r['i_company']??'') : ($r['i_buyer']??'');
+        csvRowSel($out, $__keys, ['name'=>$r['full_name'],'email'=>$r['email'],'phone'=>$txt($r['phone']??''),'role'=>($roleM[$r['role']??'']??($r['role']??'')),'status'=>($ustM[$r['status']??'']??($r['status']??'')),'address'=>$r['address']??'','created'=>($r['created_at']?date('d/m/Y H:i',strtotime($r['created_at'])):''),'inv_type'=>$itype,'inv_name'=>$iname,'inv_tax'=>$txt($r['i_tax']??''),'inv_addr'=>$r['i_addr']??'','inv_prov'=>$r['i_prov']??'','inv_cccd'=>$txt($r['i_id']??''),'inv_email'=>$r['i_email']??'','inv_phone'=>$txt($r['i_phone']??''),'inv_bank'=>$r['i_bank']??'','inv_acct'=>$txt($r['i_acct']??'')]);
+    }
     fclose($out); exit;
 });
 
@@ -475,14 +594,17 @@ get('/admin/categories/export-csv', function() {
     header('Content-Disposition: attachment; filename="' . $fname . '.csv"');
     $out = fopen('php://output', 'w');
     fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
-    fputcsv($out, ['id','name','slug','parent_id','sort_order','is_featured']);
+    $__keys = csvHeadSel($out, 'categories');
     if (!empty($selectedIds)) {
         $placeholders = implode(',', array_fill(0, count($selectedIds), '?'));
         $rows = dbAll("SELECT * FROM categories WHERE id IN ($placeholders) ORDER BY sort_order, name", $selectedIds);
     } else {
         $rows = dbAll("SELECT * FROM categories ORDER BY sort_order, name");
     }
-    foreach($rows as $r) fputcsv($out, [$r['id'],$r['name'],$r['slug']??'',$r['parent_id']??'',$r['sort_order']??0,$r['is_featured']??0]);
+    foreach($rows as $r) {
+        $pn = !empty($r['parent_id']) ? (dbGet("SELECT name FROM categories WHERE id=?", [$r['parent_id']])['name'] ?? '') : '';
+        csvRowSel($out, $__keys, ['id'=>$r['id'],'name'=>$r['name'],'slug'=>$r['slug']??'','parent'=>$pn,'sort'=>$r['sort_order']??0,'featured'=>(!empty($r['is_featured'])?'Có':'Không')]);
+    }
     fclose($out); exit;
 });
 
@@ -490,12 +612,12 @@ get('/admin/categories/export-csv', function() {
 get('/admin/brands/export-csv', function() {
     requireStaffPermission('brands', '/admin/login');
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="brands_' . date('Ymd') . '.csv"');
+    header('Content-Disposition: attachment; filename="hang-xe_' . date('Ymd') . '.csv"');
     $out = fopen('php://output', 'w');
     fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
-    fputcsv($out, ['id','name','slug','country','sort_order']);
-    $rows = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
-    foreach($rows as $r) fputcsv($out, [$r['id'],$r['name'],$r['slug']??'',$r['country']??'',$r['sort_order']??0]);
+    $__keys = csvHeadSel($out, 'brands');
+    $rows = dbAll("SELECT b.name AS brand_name, cm.name AS model_name, cm.slug AS model_slug, cm.year_from, cm.year_to FROM brands b LEFT JOIN car_models cm ON cm.brand_id=b.id ORDER BY b.sort_order, b.name COLLATE NOCASE, cm.name COLLATE NOCASE");
+    foreach($rows as $r) csvRowSel($out, $__keys, ['brand'=>$r['brand_name'],'model'=>$r['model_name']??'','model_slug'=>$r['model_slug']??'','year_from'=>$r['year_from']??'','year_to'=>$r['year_to']??'']);
     fclose($out); exit;
 });
 
@@ -506,9 +628,9 @@ get('/admin/product-brands/export-csv', function() {
     header('Content-Disposition: attachment; filename="product_brands_' . date('Ymd') . '.csv"');
     $out = fopen('php://output', 'w');
     fprintf($out, chr(0xEF).chr(0xBB).chr(0xBF));
-    fputcsv($out, ['id','name','description','sort_order']);
+    $__keys = csvHeadSel($out, 'product_brands');
     $rows = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
-    foreach($rows as $r) fputcsv($out, [$r['id'],$r['name'],$r['description']??'',$r['sort_order']??0]);
+    foreach($rows as $r) csvRowSel($out, $__keys, ['id'=>$r['id'],'name'=>$r['name'],'description'=>trim(preg_replace('/\s+/',' ', html_entity_decode(strip_tags((string)($r['description']??'')), ENT_QUOTES,'UTF-8'))),'sort'=>$r['sort_order']??0]);
     fclose($out); exit;
 });
 
@@ -634,8 +756,10 @@ post('/admin/chat/:id/delete', function($p) {
 
 // ── IMPORT: Users ──
 post('/admin/users/import-csv', function() {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
-    if (empty($_FILES['csv_file'])) { flash('error','Chưa chọn file'); redirect('/admin/users'); return; }
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
+    $importDefaultRole = in_array($_POST['import_role'] ?? '', ['staff','admin','customer','partner']) ? $_POST['import_role'] : 'customer';
+    $backList = $importDefaultRole==='staff' ? '/admin/staff-accounts' : ($importDefaultRole==='admin' ? '/admin/admin-accounts' : '/admin/users');
+    if (empty($_FILES['csv_file'])) { flash('error','Chưa chọn file'); redirect($backList); return; }
     // ===== KIỂM TRA CHỈ CHẤP NHẬN FILE CSV =====
     $uploadedFile = $_FILES['csv_file'];
     $originalName = $uploadedFile['name'] ?? '';
@@ -657,17 +781,25 @@ post('/admin/users/import-csv', function() {
     $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
     $bom = fread($handle, 3); if ($bom !== chr(0xEF).chr(0xBB).chr(0xBF)) rewind($handle);
     $header = fgetcsv($handle);
+    $map = csvColMap($header, ['name'=>['ho va ten','full name','name','ten'],'email'=>['email'],'phone'=>['sdt','phone','so dien thoai'],'role'=>['vai tro','role'],'status'=>['trang thai','status'],'address'=>['dia chi','address']]);
+    if (!isset($map['email'])) { fclose($handle); flash('error','File CSV không có cột "Email". Hãy nhập theo file mẫu (bấm nút Xuất CSV để lấy mẫu).'); redirect($backList); return; }
     $imported = 0; $errors = 0;
     while (($row = fgetcsv($handle)) !== false) {
-        if (count($row) < 2) { $errors++; continue; }
-        $name = trim($row[0]); $email = trim($row[1]); $phone = trim($row[2]??'');
-        $role = trim($row[3]??'customer'); $address = trim($row[4]??'');
+        if (count($row) < 1) { $errors++; continue; }
+        $name = trim((string)csvGet($row,$map,'name'));
+        $email = trim((string)csvGet($row,$map,'email'));
+        $phone = preg_replace('/[^0-9]/', '', (string)csvGet($row,$map,'phone'));
+        $roleRaw = csvNorm(csvGet($row,$map,'role'));
+        $role = ['quan tri'=>'admin','admin'=>'admin','nhan vien'=>'staff','staff'=>'staff','khach hang'=>'customer','customer'=>'customer','doi tac'=>'partner','partner'=>'partner'][$roleRaw] ?? $importDefaultRole;
+        $stRaw = csvNorm(csvGet($row,$map,'status'));
+        $status = in_array($stRaw, ['tam khoa','da khoa','khoa','suspended','locked','banned','inactive','ngung']) ? 'suspended' : 'active';
+        $address = trim((string)csvGet($row,$map,'address'));
         if (!$email) { $errors++; continue; }
         $existing = dbGet("SELECT id FROM users WHERE email=?", [$email]);
         if ($existing) { $errors++; continue; }
         try {
             dbInsert("INSERT INTO users (full_name,email,phone,role,address,password_hash,status,created_at) VALUES (?,?,?,?,?,?,?,datetime('now'))",
-                [$name, $email, $phone, $role, $address, password_hash('Cooling@123', PASSWORD_DEFAULT), 'active']);
+                [$name, $email, $phone, $role, $address, password_hash('Cooling@123', PASSWORD_DEFAULT), $status]);
             $imported++;
         } catch (\Exception $e) { $errors++; }
     }
@@ -681,7 +813,7 @@ post('/admin/users/import-csv', function() {
     } else {
         flash('error', 'File CSV rỗng hoặc không có dữ liệu hợp lệ.');
     }
-    redirect('/admin/users');
+    redirect($backList);
 });
 
 // ── IMPORT: Categories ──
@@ -708,14 +840,20 @@ post('/admin/categories/import-csv', function() {
 
     $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
     $bom = fread($handle, 3); if ($bom !== chr(0xEF).chr(0xBB).chr(0xBF)) rewind($handle);
-    fgetcsv($handle);
+    $header = fgetcsv($handle);
+    $map = csvColMap($header, ['name'=>['ten danh muc','name','ten'],'slug'=>['duong dan','slug'],'parent'=>['danh muc cha','parent id','parent'],'sort'=>['thu tu','sort order','sort'],'featured'=>['noi bat','is featured','featured']]);
+    if (!isset($map['name'])) { fclose($handle); flash('error','File CSV không có cột "Tên danh mục". Hãy nhập theo file mẫu.'); redirect('/admin/categories'); return; }
     $imported = 0; $duplicates = []; $errors = [];
     $lineNum = 1;
     while (($row = fgetcsv($handle)) !== false) {
         $lineNum++;
-        $name = trim($row[0]??''); if (!$name) { $errors[] = "Dòng $lineNum: tên rỗng"; continue; }
-        $slug = trim($row[1]??'') ?: preg_replace('/[^a-z0-9]+/', '-', strtolower($name));
-        $parentId = intval($row[2]??0) ?: null; $sort = intval($row[3]??0); $featured = intval($row[4]??0);
+        $name = trim((string)csvGet($row,$map,'name')); if (!$name) { $errors[] = "Dòng $lineNum: tên rỗng"; continue; }
+        $slug = trim((string)csvGet($row,$map,'slug')) ?: trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(removeAccents($name))), '-');
+        $pRaw = trim((string)csvGet($row,$map,'parent'));
+        $parentId = null;
+        if ($pRaw !== '') { if (ctype_digit($pRaw)) { $pe=dbGet("SELECT id FROM categories WHERE id=?",[(int)$pRaw]); $parentId=$pe?(int)$pRaw:null; } else { $pe=dbGet("SELECT id FROM categories WHERE LOWER(name)=LOWER(?) LIMIT 1",[$pRaw]); $parentId=$pe?$pe['id']:null; } }
+        $sort = csvInt(csvGet($row,$map,'sort'));
+        $featured = in_array(csvNorm(csvGet($row,$map,'featured')), ['co','1','yes','x','true']) ? 1 : 0;
         $existing = dbGet("SELECT id FROM categories WHERE name=?", [$name]);
         if ($existing) { $duplicates[] = "\"{$name}\""; continue; }
         try {
@@ -763,30 +901,42 @@ post('/admin/brands/import-csv', function() {
 
     $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
     $bom = fread($handle, 3); if ($bom !== chr(0xEF).chr(0xBB).chr(0xBF)) rewind($handle);
-    fgetcsv($handle);
-    $imported = 0; $duplicates = []; $errors = [];
+    $header = fgetcsv($handle);
+    $map = csvColMap($header, ['name'=>['hang xe','ten hang xe','ten hang','name','ten'],'model'=>['dong xe','ten dong xe','model'],'model_slug'=>['duong dan dong xe','duong dan','model slug','slug'],'year_from'=>['nam bat dau','year from','nam'],'year_to'=>['nam ket thuc','year to','den nam']]);
+    if (!isset($map['name'])) { fclose($handle); flash('error','File CSV không có cột "Hãng xe". Hãy nhập theo file mẫu (bấm nút Xuất CSV để lấy mẫu).'); redirect('/admin/brands'); return; }
+    $brandsAdded = 0; $modelsAdded = 0; $errors = [];
     $lineNum = 1;
     while (($row = fgetcsv($handle)) !== false) {
         $lineNum++;
-        $name = trim($row[0]??''); if (!$name) { $errors[] = "Dòng $lineNum: tên rỗng"; continue; }
-        $slug = trim($row[1]??'') ?: preg_replace('/[^a-z0-9]+/', '-', strtolower($name));
-        $sort = intval($row[2]??0);
-        $existing = dbGet("SELECT id FROM brands WHERE name=?", [$name]);
-        if ($existing) { $duplicates[] = "\"{$name}\""; continue; }
-        try {
-            dbInsert("INSERT INTO brands (name,slug,sort_order) VALUES (?,?,?)", [$name,$slug,$sort]);
-            $imported++;
-        } catch (\Exception $e) { $errors[] = "Dòng $lineNum: " . $e->getMessage(); }
+        $bname = trim((string)csvGet($row,$map,'name')); if ($bname === '') continue;
+        $b = dbGet("SELECT id FROM brands WHERE LOWER(name)=LOWER(?)", [$bname]);
+        if (!$b) {
+            $bslug = trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(removeAccents($bname))), '-');
+            try { dbInsert("INSERT INTO brands (name,slug,sort_order) VALUES (?,?,?)", [$bname,$bslug,100]); $brandsAdded++; }
+            catch (\Exception $e) { $errors[] = "Dòng $lineNum: " . $e->getMessage(); continue; }
+            $b = dbGet("SELECT id FROM brands WHERE LOWER(name)=LOWER(?)", [$bname]);
+        }
+        if (!$b) continue;
+        $brandId = (int)$b['id'];
+        $mname = trim((string)csvGet($row,$map,'model'));
+        if ($mname !== '') {
+            $exists = dbGet("SELECT id FROM car_models WHERE brand_id=? AND LOWER(name)=LOWER(?)", [$brandId, $mname]);
+            if (!$exists) {
+                $mslug = trim((string)csvGet($row,$map,'model_slug')); if ($mslug === '') $mslug = trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(removeAccents($mname))), '-');
+                $yf = csvInt(csvGet($row,$map,'year_from')); $yf = $yf > 0 ? $yf : null;
+                $yt = csvInt(csvGet($row,$map,'year_to')); $yt = $yt > 0 ? $yt : null;
+                try { dbInsert("INSERT INTO car_models (brand_id,name,slug,year_from,year_to) VALUES (?,?,?,?,?)", [$brandId,$mname,$mslug,$yf,$yt]); $modelsAdded++; }
+                catch (\Exception $e) { $errors[] = "Dòng $lineNum: " . $e->getMessage(); }
+            }
+        }
     }
     fclose($handle);
-    if ($imported > 0) {
-        $msg = "Đã nhập thành công $imported hãng xe.";
-        if (count($duplicates) > 0) $msg .= " Bỏ qua " . count($duplicates) . " hãng đã tồn tại.";
+    if ($brandsAdded + $modelsAdded > 0) {
+        $msg = "Đã nhập: $brandsAdded hãng xe mới, $modelsAdded dòng xe mới.";
+        if (count($errors) > 0) $msg .= " " . count($errors) . " dòng lỗi.";
         flash('success', $msg);
-    } elseif (count($duplicates) > 0) {
-        flash('error', "Không nhập được hãng nào. Tất cả " . count($duplicates) . " hãng đã tồn tại: " . implode(', ', array_slice($duplicates, 0, 5)));
     } else {
-        flash('error', 'Không nhập được hãng nào.' . (count($errors) > 0 ? ' ' . $errors[0] : ''));
+        flash('error', 'Không nhập được dữ liệu nào (có thể đã tồn tại).' . (count($errors) > 0 ? ' ' . $errors[0] : ''));
     }
     redirect('/admin/brands');
 });
@@ -815,13 +965,15 @@ post('/admin/product-brands/import-csv', function() {
 
     $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
     $bom = fread($handle, 3); if ($bom !== chr(0xEF).chr(0xBB).chr(0xBF)) rewind($handle);
-    fgetcsv($handle);
+    $header = fgetcsv($handle);
+    $map = csvColMap($header, ['name'=>['ten thuong hieu','ten','name'],'desc'=>['mo ta','description','desc'],'sort'=>['thu tu','sort order','sort']]);
+    if (!isset($map['name'])) { fclose($handle); flash('error','File CSV không có cột "Tên thương hiệu". Hãy nhập theo file mẫu.'); redirect('/admin/product-brands'); return; }
     $imported = 0; $duplicates = []; $errors = [];
     $lineNum = 1;
     while (($row = fgetcsv($handle)) !== false) {
         $lineNum++;
-        $name = trim($row[0]??''); if (!$name) continue;
-        $desc = trim($row[1]??''); $sort = intval($row[2]??0);
+        $name = trim((string)csvGet($row,$map,'name')); if (!$name) continue;
+        $desc = trim((string)csvGet($row,$map,'desc')); $sort = csvInt(csvGet($row,$map,'sort'));
         $existing = dbGet("SELECT id FROM product_brands WHERE name=?", [$name]);
         if ($existing) { $duplicates[] = "\"{$name}\""; continue; }
         try {
@@ -950,7 +1102,7 @@ get('/admin/orders', function() {
     $offset = ($page - 1) * $perPage;
     
     $p2 = array_merge($params, [$perPage, $offset]);
-    $orders = dbAll("SELECT o.*, u.full_name, COALESCE(u.email,'') AS email, u.phone, s.full_name AS staff_name 
+    $orders = dbAll("SELECT o.*, u.full_name, COALESCE(u.email,'') AS email, u.phone, s.full_name AS staff_name, s.role AS staff_role 
         FROM orders o LEFT JOIN users u ON u.id=o.user_id 
         LEFT JOIN users s ON s.id=o.created_by_staff
         $where ORDER BY o.created_at DESC LIMIT ? OFFSET ?", $p2);
@@ -1004,7 +1156,7 @@ post('/admin/orders/create', function() {
     $staffNote   = trim($_POST['staff_note'] ?? '');
     
     // Calculate totals using Finance Engine
-    $cfgRows = dbAll("SELECT key, value FROM system_config WHERE key IN ('default_tax_rate','default_shipping_fee','free_shipping_threshold','discount_quantity_threshold','discount_quantity_percent')");
+    $cfgRows = dbAll("SELECT key, value FROM system_config WHERE key IN ('default_tax_rate','default_shipping_fee','free_shipping_threshold','discount_quantity_threshold','discount_quantity_percent','shipping_origin_province','shipping_rates')");
     $cfg = []; foreach($cfgRows as $r) $cfg[$r['key']] = $r['value'];
     
     $taxRate = floatval($cfg['default_tax_rate'] ?? 0);
@@ -1019,6 +1171,11 @@ post('/admin/orders/create', function() {
         $subtotal += intval($it['price']) * max(1, intval($it['qty'])); 
         $totalQty += max(1, intval($it['qty']));
     }
+    $totalWeight = 0;
+    foreach ($items as $it) {
+        $pw = dbGet("SELECT weight_g FROM products WHERE id=?", [intval($it['product_id'])]);
+        $totalWeight += intval($pw['weight_g'] ?? 0) * max(1, intval($it['qty']));
+    }
     
     $discountTotal = 0;
     if ($discountQtyThreshold > 0 && $totalQty >= $discountQtyThreshold) {
@@ -1028,7 +1185,8 @@ post('/admin/orders/create', function() {
     $afterDiscount = $subtotal - $discountTotal;
     $taxAmount = 0; // VAT đã bao gồm trong giá sản phẩm, không tính thêm
 
-    $shipping = $afterDiscount >= $freeShipThreshold ? 0 : $shipFee;
+    $shipFee = calcShippingFee(trim($_POST['ship_province'] ?? ''), (int)$totalWeight, $cfg);
+    $shipping = ($freeShipThreshold > 0 && $afterDiscount >= $freeShipThreshold) ? 0 : $shipFee;
     $grandTotal = $afterDiscount + $shipping; // taxAmount = 0, VAT included in price
     
     $depositPct = 0; $depositAmt = 0; $remainAmt = 0; $payStatus = 'unpaid';
@@ -1133,10 +1291,26 @@ get('/admin/api/search-products', function() {
 });
 
 
+// Tự động tạo bản ghi trả hàng (order_returns) khi đơn ở trạng thái 'returned' mà chưa có yêu cầu nào.
+// Giúp trang 'Quản lý trả hàng' + tab 'Trả hàng' bắt được đơn admin đánh dấu trả hàng trực tiếp.
+function ensureAdminReturnRecord($orderId) {
+    $o = dbGet("SELECT id, user_id, delivery_status, refund_amount, grand_total, shipping_phone, shipping_detail, shipping_district, shipping_province FROM orders WHERE id=?", [$orderId]);
+    if (!$o) return;
+    if (($o['delivery_status'] ?? '') !== 'returned') return;        // chỉ tạo cho đơn THỰC SỰ trả hàng (không phải hủy đơn)
+    if (empty($o['user_id'])) return;                                 // trang trả hàng JOIN users -> cần user hợp lệ
+    $exists = dbGet("SELECT id FROM order_returns WHERE order_id=? LIMIT 1", [$orderId]);
+    if ($exists) return;                                              // đã có yêu cầu (KH gửi hoặc tạo trước) -> bỏ qua
+    $refund = intval(($o['refund_amount'] ?? 0) ?: ($o['grand_total'] ?? 0));
+    $addr = trim(($o['shipping_detail'] ?? '') . (!empty($o['shipping_district']) ? ', ' . $o['shipping_district'] : '') . (!empty($o['shipping_province']) ? ', ' . $o['shipping_province'] : ''));
+    $u = dbGet("SELECT COALESCE(email,'') AS email FROM users WHERE id=?", [$o['user_id']]);
+    dbInsert("INSERT INTO order_returns (order_id, user_id, reason, status, refund_amount, contact_phone, contact_email, contact_address, bank_account, bank_holder, bank_name, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,datetime('now','localtime'))",
+        [$orderId, $o['user_id'], 'Quản trị viên xác nhận trả hàng / hoàn tiền (tạo tự động từ trạng thái đơn).', 'approved', $refund, $o['shipping_phone'] ?? '', $u['email'] ?? '', $addr, '', '', '']);
+}
+
 // ── Update payment status ──
 post('/admin/orders/:id/payment-status', function($p) {
     requireStaffPermission('orders', '/admin/login'); csrfCheck();
-    $status = in_array($_POST['status'], ['paid','unpaid']) ? $_POST['status'] : 'unpaid';
+    $status = in_array($_POST['status'] ?? '', ['paid','unpaid','partial_paid','pending_refund','refunded']) ? $_POST['status'] : 'unpaid';
     if ($status === 'paid') {
         $order = dbGet("SELECT grand_total, code FROM orders WHERE id=?", [$p['id']]);
         $gt = $order['grand_total'] ?? 0;
@@ -1148,9 +1322,18 @@ post('/admin/orders/:id/payment-status', function($p) {
             dbInsert("INSERT INTO order_payments (order_id, payment_code, payment_type, payment_method, amount, created_at) VALUES (?,?,'thu_tien','admin_confirm',?,datetime('now','localtime'))",
                 [$p['id'], $payCode, $gt]);
         }
+    } elseif ($status === 'partial_paid') {
+        dbRun("UPDATE orders SET payment_status='partial_paid' WHERE id=?", [$p['id']]);
+    } elseif ($status === 'pending_refund') {
+        dbRun("UPDATE orders SET payment_status='pending_refund' WHERE id=?", [$p['id']]);
+    } elseif ($status === 'refunded') {
+        dbRun("UPDATE orders SET payment_status='refunded', refund_amount=COALESCE(NULLIF(paid_amount,0), grand_total) WHERE id=?", [$p['id']]);
+        // Đã hoàn tiền -> tự động chuyển giao hàng sang 'Đã trả hàng' (giữ nguyên nếu đơn đã hủy)
+        dbRun("UPDATE orders SET delivery_status='returned' WHERE id=? AND delivery_status NOT IN ('cancelled','returned')", [$p['id']]);
     } else {
         dbRun("UPDATE orders SET payment_status='unpaid', paid_amount=0, remaining_amount=grand_total WHERE id=?", [$p['id']]);
     }
+    ensureAdminReturnRecord($p['id']);
     flash('success', 'Đã cập nhật trạng thái thanh toán.');
     redirect('/admin/orders');
 });
@@ -1167,7 +1350,7 @@ post('/admin/orders/:id/delivery-status', function($p) {
     }
 
     $newStatus = $_POST['status'] ?? '';
-    $valid = ['pending','received','delivering','delivered','completed','cancelled'];
+    $valid = ['pending','received','delivering','delivered','completed','cancelled','returned'];
     if (!in_array($newStatus, $valid)) { flash('error','Trạng thái không hợp lệ.'); redirect('/admin/orders'); return; }
 
     // Forward-only check (except cancel which is always allowed)
@@ -1195,6 +1378,11 @@ post('/admin/orders/:id/delivery-status', function($p) {
         dbRun("UPDATE orders SET payment_status='refunded' WHERE id=? AND payment_status='paid'", [$p['id']]);
     }
 
+    // Đã trả hàng -> hoàn tiền nếu đơn đã thanh toán
+    if ($newStatus === 'returned' && in_array($order['payment_status'], ['paid','partial_paid'])) {
+        dbRun("UPDATE orders SET payment_status='refunded', refund_amount=COALESCE(NULLIF(paid_amount,0), grand_total) WHERE id=?", [$p['id']]);
+    }
+
     // If delivered + paid → auto complete
     if ($newStatus === 'delivered') {
         $pay = dbGet("SELECT payment_status FROM orders WHERE id=?", [$p['id']]);
@@ -1205,11 +1393,12 @@ post('/admin/orders/:id/delivery-status', function($p) {
 
     // Notify customer
     if ($order['user_id']) {
-        $msgMap = ['received'=>'Nhân viên đã tiếp nhận đơn hàng','delivering'=>'Đơn hàng đang được giao','delivered'=>'Đơn hàng đã được giao thành công','completed'=>'Đơn hàng đã hoàn thành','cancelled'=>'Đơn hàng đã bị hủy'];
+        $msgMap = ['received'=>'Nhân viên đã tiếp nhận đơn hàng','delivering'=>'Đơn hàng đang được giao','delivered'=>'Đơn hàng đã được giao thành công','completed'=>'Đơn hàng đã hoàn thành','cancelled'=>'Đơn hàng đã bị hủy','returned'=>'Đơn hàng đã được trả lại & hoàn tiền'];
         $msg = ($msgMap[$newStatus] ?? 'Trạng thái đơn hàng đã thay đổi') . ' (#' . $order['code'] . ')';
         dbRun("INSERT INTO user_notifications (user_id, type, title, message, link) VALUES (?,?,?,?,?)",
             [$order['user_id'], 'order', 'Cập nhật đơn hàng', $msg, '/customer/orders']);
     }
+    ensureAdminReturnRecord($p['id']);
     flash('success','Cập nhật trạng thái giao hàng thành công.');
     redirect('/admin/orders');
 });
@@ -1218,8 +1407,11 @@ post('/admin/orders/:id/delivery-status', function($p) {
 get('/admin/staff', function() {
     $user = requireStaffPermission('categories', '/auth/login');
     $staffRoles = dbAll("SELECT * FROM staff_roles ORDER BY created_at DESC");
-    $assignments = dbAll("SELECT sra.id AS assignment_id, sra.assigned_at, u.full_name, COALESCE(u.email,'') AS email, u.phone, sr.name AS role_name FROM staff_role_assignments sra INNER JOIN users u ON u.id=sra.user_id INNER JOIN staff_roles sr ON sr.id=sra.role_id ORDER BY sra.assigned_at DESC");
-    view('admin/staff', ['title'=>'Phân quyền nhân viên','userRole'=>'admin','staffRoles'=>$staffRoles,'assignments'=>$assignments]);
+    $spage = max(1, intval($_GET['spage'] ?? 1)); $sPer = 10;
+    $sTotal = (int)(dbGet("SELECT COUNT(DISTINCT user_id) AS n FROM staff_role_assignments")['n'] ?? 0);
+    $sTotalPages = max(1, (int)ceil($sTotal / $sPer)); $spage = min($spage, $sTotalPages);
+    $assignments = dbAll("SELECT u.id AS user_id, u.full_name, COALESCE(u.email,'') AS email, u.phone, GROUP_CONCAT(sra.id || '~' || sr.name, '|') AS roles, MAX(sra.assigned_at) AS assigned_at FROM staff_role_assignments sra INNER JOIN users u ON u.id=sra.user_id INNER JOIN staff_roles sr ON sr.id=sra.role_id GROUP BY u.id ORDER BY MAX(sra.assigned_at) DESC LIMIT ? OFFSET ?", [$sPer, ($spage-1)*$sPer]);
+    view('admin/staff', ['title'=>'Phân quyền nhân viên','userRole'=>'admin','staffRoles'=>$staffRoles,'assignments'=>$assignments,'sTotal'=>$sTotal,'spage'=>$spage,'sTotalPages'=>$sTotalPages]);
 });
 
 get('/admin/staff/roles/new', function() {
@@ -1267,7 +1459,7 @@ get('/admin/staff/roles/:id/assign', function($p) {
     $staffRole = dbGet('SELECT * FROM staff_roles WHERE id=?', [$p['id']]);
     if (!$staffRole) { flash('error','Không tìm thấy.'); redirect('/admin/staff'); }
     $assignedUsers = dbAll("SELECT u.full_name, u.email, sra.id AS assignment_id FROM staff_role_assignments sra INNER JOIN users u ON u.id=sra.user_id WHERE sra.role_id=?", [$p['id']]);
-    $availableUsers = dbAll("SELECT id, full_name, email FROM users WHERE role IN ('customer','staff') AND id NOT IN (SELECT user_id FROM staff_role_assignments WHERE role_id=?) ORDER BY full_name", [$p['id']]);
+    $availableUsers = dbAll("SELECT id, full_name, email FROM users WHERE role = 'staff' AND id NOT IN (SELECT user_id FROM staff_role_assignments WHERE role_id=?) ORDER BY full_name", [$p['id']]);
     view('admin/role-assign', ['title'=>'Phân công nhân viên','userRole'=>'admin','staffRole'=>$staffRole,'assignedUsers'=>$assignedUsers,'availableUsers'=>$availableUsers]);
 });
 
@@ -1305,6 +1497,17 @@ post('/admin/staff/unassign/:id', function($p) {
     redirect('/admin/staff');
 });
 
+post('/admin/staff/unassign-all/:id', function($p) {
+    requireRole('admin', '/admin/login'); csrfCheck();
+    $uid = (int)$p['id'];
+    dbRun('DELETE FROM staff_role_assignments WHERE user_id=?', [$uid]);
+    dbRun("UPDATE users SET role='customer' WHERE id=? AND role='staff'", [$uid]);
+    dbRun('DELETE FROM staff_permissions WHERE user_id=?', [$uid]);
+    dbInsert("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?,'system','Cập nhật quyền truy cập','Quyền nhân viên đã được thu hồi. Tài khoản đã chuyển về khách hàng.','/customer/orders',datetime('now','localtime'))", [$uid]);
+    flash('success','Đã hủy toàn bộ quyền của nhân viên.');
+    redirect('/admin/staff');
+});
+
 // ── STAFF DASHBOARD ─────────────────────────────────────────────────────────
 
 post('/admin/chat/mark-read', function() {
@@ -1319,8 +1522,28 @@ post('/admin/chat/mark-read', function() {
     exit;
 });
 
+get('/staff/login', function() {
+    $u = currentUser();
+    if ($u && ($u['role'] ?? '') === 'staff') redirect('/staff');
+    view('staff/login', ['title' => 'Đăng nhập Nhân viên']);
+});
+post('/staff/login', function() {
+    csrfCheck();
+    $email = strtolower(trim($_POST['email'] ?? '')); $password = $_POST['password'] ?? '';
+    if (!$email || !$password) { flash('error','Vui lòng nhập email và mật khẩu.'); redirect('/staff/login'); }
+    $user = dbGet('SELECT * FROM users WHERE email=?', [$email]);
+    if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email hoặc mật khẩu không đúng.'); redirect('/staff/login'); }
+    if ($user['role'] !== 'staff') { flash('error','Trang đăng nhập này chỉ dành cho nhân viên.'); redirect('/staff/login'); }
+    if (!staffHasAssignment($user['id'])) { flash('error','Tài khoản chưa được phân quyền nhân viên. Vui lòng liên hệ quản trị viên.'); redirect('/staff/login'); }
+    if ($user['status'] !== 'active') { flash('error','Tài khoản đang bị khóa.'); redirect('/staff/login'); }
+    loginUser($user['id']);
+    flash('success','Xin chào, '.$user['full_name'].'!');
+    redirect('/staff');
+});
+
 get('/staff', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
+    if (!staffHasAssignment($user['id'])) { flash('error','Tài khoản chưa được phân quyền nhân viên. Vui lòng liên hệ quản trị viên.'); redirect('/'); }
     $roleAssignment = dbGet("SELECT sra.*, sr.name AS role_name, sr.permissions FROM staff_role_assignments sra INNER JOIN staff_roles sr ON sr.id=sra.role_id WHERE sra.user_id=? ORDER BY sra.assigned_at DESC LIMIT 1", [$user['id']]);
     $perms = json_decode($roleAssignment['permissions'] ?? '[]', true) ?: [];
     if (in_array('orders', $perms) || in_array('create_order', $perms)) redirect('/staff/orders');
@@ -1329,14 +1552,14 @@ get('/staff', function() {
 });
 
 get('/staff/orders', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     // Redirect to admin orders (same view, staff has permission via requireStaffPermission)
     $qs = $_SERVER['QUERY_STRING'] ?? '';
     redirect('/admin/orders' . ($qs ? '?'.$qs : ''));
 });
 
 get('/staff/orders/create', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     $roleAssignment = dbGet("SELECT sra.*, sr.permissions FROM staff_role_assignments sra INNER JOIN staff_roles sr ON sr.id=sra.role_id WHERE sra.user_id=? ORDER BY sra.assigned_at DESC LIMIT 1", [$user['id']]);
     $perms = json_decode($roleAssignment['permissions'] ?? '[]', true) ?: [];
     if (!in_array('create_order', $perms)) { flash('error','Bạn không có quyền tạo đơn hàng hộ.'); redirect('/staff'); }
@@ -1346,7 +1569,7 @@ get('/staff/orders/create', function() {
 // Staff API routes
 
 post('/staff/notifications/read', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     dbRun("UPDATE user_notifications SET is_read=1 WHERE user_id=? AND is_read=0", [$user['id']]);
     header('Content-Type: application/json');
     echo json_encode(['ok'=>true]);
@@ -1355,7 +1578,7 @@ post('/staff/notifications/read', function() {
 
 
 post('/staff/notifications/:id/delete', function($p) {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     dbRun("DELETE FROM user_notifications WHERE id=? AND user_id=?", [$p['id'], $user['id']]);
     header('Content-Type: application/json');
     echo json_encode(['ok'=>true]);
@@ -1363,7 +1586,7 @@ post('/staff/notifications/:id/delete', function($p) {
 });
 
 get('/staff/api/search-customers', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     $q = trim($_GET['q'] ?? '');
     $users = dbAll("SELECT id, full_name, email, phone FROM users WHERE role='customer' AND (full_name LIKE ? OR phone LIKE ? OR email LIKE ?) LIMIT 10", ["%$q%","%$q%","%$q%"]);
     header('Content-Type: application/json');
@@ -1372,7 +1595,7 @@ get('/staff/api/search-customers', function() {
 });
 
 get('/staff/api/search-products', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     $q = trim($_GET['q'] ?? '');
     $prods = dbAll("SELECT id, name, sku, price, stock FROM products WHERE status='published' AND (name LIKE ? OR sku LIKE ? OR oem_code LIKE ?) LIMIT 15", ["%$q%","%$q%","%$q%"]);
     header('Content-Type: application/json');
@@ -1381,7 +1604,7 @@ get('/staff/api/search-products', function() {
 });
 
 post('/staff/orders/create', function() {
-    $user = requireRole('staff', '/auth/login');
+    $user = requireRole('staff', '/staff/login');
     $roleAssignment = dbGet("SELECT sr.permissions FROM staff_role_assignments sra INNER JOIN staff_roles sr ON sr.id=sra.role_id WHERE sra.user_id=?", [$user['id']]);
     $perms = json_decode($roleAssignment['permissions'] ?? '[]', true) ?: [];
     if (!in_array('create_order', $perms)) { flash('error','Không có quyền.'); redirect('/staff'); return; }
@@ -1413,6 +1636,18 @@ post('/staff/orders/create', function() {
         $p = dbGet("SELECT price FROM products WHERE id=?", [$it['product_id']]);
         if ($p) { $subtotal += $p['price'] * intval($it['qty']); $totalItems += intval($it['qty']); }
     }
+
+    // Phí ship theo vùng + cân nặng
+    $shipCfgRows = dbAll("SELECT key, value FROM system_config WHERE key IN ('default_shipping_fee','free_shipping_threshold','shipping_origin_province','shipping_rates')");
+    $shipCfg = []; foreach($shipCfgRows as $r) $shipCfg[$r['key']] = $r['value'];
+    $totalWeight = 0;
+    foreach ($items as $it) {
+        $pw = dbGet("SELECT weight_g FROM products WHERE id=?", [intval($it['product_id'])]);
+        $totalWeight += intval($pw['weight_g'] ?? 0) * max(1, intval($it['qty']));
+    }
+    $freeTh = intval($shipCfg['free_shipping_threshold'] ?? 0);
+    $shipFeeCalc = calcShippingFee($shipProvince, (int)$totalWeight, $shipCfg);
+    $shipping = ($freeTh > 0 && $subtotal >= $freeTh) ? 0 : $shipFeeCalc;
     
     // If no user_id, create a guest user
     if (!$userId) {
@@ -1423,11 +1658,11 @@ post('/staff/orders/create', function() {
     }
     
     $code = strtoupper(substr(bin2hex(random_bytes(5)), 0, 10));
-    $grand = $subtotal;
+    $grand = $subtotal + $shipping;
     
     // Create order
-    $orderId = dbInsert("INSERT INTO orders (code, user_id, grand_total, subtotal, total_items, payment_method, payment_type, payment_status, delivery_status, created_by_staff, staff_note, shipping_full_name, shipping_phone, shipping_detail, shipping_district, shipping_province, shipping_ward, customer_note, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now','localtime'))",
-        [$code, $userId, $grand, $subtotal, $totalItems, $payMethod, 'full', 'unpaid', $deliveryStatus,
+    $orderId = dbInsert("INSERT INTO orders (code, user_id, grand_total, subtotal, shipping_total, total_items, payment_method, payment_type, payment_status, delivery_status, created_by_staff, staff_note, shipping_full_name, shipping_phone, shipping_detail, shipping_district, shipping_province, shipping_ward, customer_note, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now','localtime'))",
+        [$code, $userId, $grand, $subtotal, $shipping, $totalItems, $payMethod, 'full', 'unpaid', $deliveryStatus,
          $user['id'], $staffNote, $shipName, $shipPhone, $shipAddress, $shipDistrict, $shipProvince, $shipWard, $staffNote]);
     
     // Create sub_order (required for order_items FK)
@@ -1455,10 +1690,10 @@ post('/staff/orders/create', function() {
 
 get('/admin/settings/finance', function() {
     requireStaffPermission('tax_config', '/auth/login');
-    $rows = dbAll("SELECT key, value FROM system_config WHERE key IN ('default_tax_rate','default_shipping_fee','free_shipping_threshold','discount_quantity_threshold','discount_quantity_percent')");
+    $rows = dbAll("SELECT key, value FROM system_config WHERE key IN ('default_tax_rate','default_shipping_fee','free_shipping_threshold','discount_quantity_threshold','discount_quantity_percent','shipping_origin_province','shipping_rates')");
     $config = [];
     foreach($rows as $r) $config[$r['key']] = $r['value'];
-    view('admin/finance-config', ['title'=>'Cấu hình Thuế & Giảm giá', 'role'=>'admin', 'config'=>$config]);
+    view('admin/finance-config', ['title'=>'Cấu hình Vận chuyển', 'role'=>'admin', 'config'=>$config]);
 });
 
 post('/admin/settings/finance', function() {
@@ -1466,8 +1701,6 @@ post('/admin/settings/finance', function() {
     
     $default_shipping_fee = $_POST['default_shipping_fee'] ?? '';
     $free_shipping_threshold = $_POST['free_shipping_threshold'] ?? '';
-    $discount_quantity_threshold = $_POST['discount_quantity_threshold'] ?? '';
-    $discount_quantity_percent = $_POST['discount_quantity_percent'] ?? '';
 
     // Phí vận chuyển mặc định phải là số không âm
     if (!is_numeric($default_shipping_fee) || $default_shipping_fee < 0) {
@@ -1481,40 +1714,59 @@ post('/admin/settings/finance', function() {
         redirect('/admin/settings/finance');
         return;
     }
-    // Số lượng SP để đạt giảm giá phải là số nguyên không âm
-    if (!is_numeric($discount_quantity_threshold) || $discount_quantity_threshold < 0) {
-        flash('error', 'Số lượng sản phẩm tối thiểu phải là số không âm.');
-        redirect('/admin/settings/finance');
-        return;
-    }
-    // Mức giảm giá phần trăm phải nằm trong khoảng từ 0 đến 100
-    if (!is_numeric($discount_quantity_percent) || $discount_quantity_percent < 0 || $discount_quantity_percent > 100) {
-        flash('error', 'Mức giảm giá phần trăm phải nằm từ 0% đến 100%.');
-        redirect('/admin/settings/finance');
-        return;
-    }
-
-    $keys = ['default_shipping_fee','free_shipping_threshold','discount_quantity_threshold','discount_quantity_percent'];
+    $keys = ['default_shipping_fee','free_shipping_threshold'];
     foreach($keys as $k) {
         $v = $_POST[$k] ?? '';
         dbRun("INSERT INTO system_config (key, value, updated_at) VALUES (?,?,datetime('now')) ON CONFLICT(key) DO UPDATE SET value=?, updated_at=datetime('now')", [$k, $v, $v]);
     }
-    flash('success', 'Đã lưu cấu hình tài chính & thuế.');
+    // Vùng miền + cân nặng
+    $origin = trim($_POST['shipping_origin_province'] ?? '');
+    $zones = ['noi_tinh','noi_mien','can_mien','lien_mien'];
+    $rates = [];
+    foreach ($zones as $z) {
+        $rates[] = [
+            'zone' => $z,
+            'base_weight' => max(1, intval($_POST['rate_'.$z.'_base_weight'] ?? 1000)),
+            'base_price'  => max(0, intval($_POST['rate_'.$z.'_base_price'] ?? 0)),
+            'step_weight' => max(1, intval($_POST['rate_'.$z.'_step_weight'] ?? 500)),
+            'step_price'  => max(0, intval($_POST['rate_'.$z.'_step_price'] ?? 0)),
+        ];
+    }
+    $extra = ['shipping_origin_province'=>$origin, 'shipping_rates'=>json_encode($rates, JSON_UNESCAPED_UNICODE)];
+    foreach ($extra as $k=>$v) {
+        dbRun("INSERT INTO system_config (key, value, updated_at) VALUES (?,?,datetime('now')) ON CONFLICT(key) DO UPDATE SET value=?, updated_at=datetime('now')", [$k, $v, $v]);
+    }
+    flash('success', 'Đã lưu cấu hình vận chuyển.');
     redirect('/admin/settings/finance');
+});
+
+post('/admin/vouchers/qty-discount', function() {
+    requireStaffPermission('vouchers', '/admin/login'); csrfCheck();
+    $t = $_POST['discount_quantity_threshold'] ?? '0';
+    $p = $_POST['discount_quantity_percent'] ?? '0';
+    if (!is_numeric($t) || $t < 0) { flash('error', 'Số lượng sản phẩm tối thiểu phải là số không âm.'); redirect('/admin/vouchers'); return; }
+    if (!is_numeric($p) || $p < 0 || $p > 100) { flash('error', 'Mức giảm giá phần trăm phải nằm từ 0% đến 100%.'); redirect('/admin/vouchers'); return; }
+    foreach (['discount_quantity_threshold'=>$t, 'discount_quantity_percent'=>$p] as $k=>$v) {
+        dbRun("INSERT INTO system_config (key, value, updated_at) VALUES (?,?,datetime('now')) ON CONFLICT(key) DO UPDATE SET value=?, updated_at=datetime('now')", [$k, $v, $v]);
+    }
+    flash('success', 'Đã lưu quy tắc giảm giá số lượng.');
+    redirect('/admin/vouchers');
 });
 
 
 post('/admin/users/bulk-delete', function() {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
+    $back = in_array($_POST['back'] ?? '', ['/admin/users','/admin/staff-accounts','/admin/admin-accounts']) ? $_POST['back'] : '/admin/users';
+    $__me = currentUser(); $__isSuper = !empty($__me['is_superadmin']);
     $ids = $_POST['ids'] ?? [];
-    if (empty($ids)) { flash('error', 'Chưa chọn tài khoản nào.'); redirect('/admin/users'); return; }
+    if (empty($ids)) { flash('error', 'Chưa chọn tài khoản nào.'); redirect($back); return; }
     $deleted = 0;
     $errors = [];
     foreach ($ids as $id) {
         $id = intval($id);
         if ($id <= 0) continue;
-        $u = dbGet("SELECT role, full_name FROM users WHERE id=?", [$id]);
-        if (!$u || $u['role'] === 'admin') continue;
+        $u = dbGet("SELECT role, full_name, is_superadmin FROM users WHERE id=?", [$id]);
+        if (!$u || $id == ($__me['id'] ?? 0) || !empty($u['is_superadmin']) || ($u['role'] === 'admin' && !$__isSuper)) continue;
         try {
             // Delete related records first to avoid FK constraint
             dbRun("DELETE FROM cart_items WHERE user_id=?", [$id]);
@@ -1554,14 +1806,14 @@ post('/admin/users/bulk-delete', function() {
     }
     if ($deleted > 0) flash('success', "Đã xóa/vô hiệu hóa $deleted tài khoản.");
     if (!empty($errors)) flash('error', 'Một số lỗi: ' . implode('; ', $errors));
-    redirect('/admin/users');
+    redirect($back);
 });
 
 get('/admin/users', function() {
     requireStaffPermission('users', '/auth/login');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
     $q=trim($_GET['q']??''); $status=$_GET['status']??''; $from=$_GET['from']??''; $to=$_GET['to']??'';
-    $where="WHERE u.role IN ('customer','staff')"; $params=[];
+    $where="WHERE u.role='customer' AND u.email NOT LIKE '%_deleted_%'"; $params=[];
     if($q){$where.=" AND (u.email LIKE ? OR u.full_name LIKE ? OR u.phone LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l]);}
     if($status==='active'){$where.=" AND u.status='active' AND (u.suspended_until IS NULL OR u.suspended_until<=datetime('now'))";}
     elseif($status==='suspended'){$where.=" AND (u.status!='active' OR (u.suspended_until IS NOT NULL AND u.suspended_until>datetime('now')))";}
@@ -1571,7 +1823,42 @@ get('/admin/users', function() {
     $totalPages=max(1,ceil($total/$perPage));
     $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
     $users=dbAll("SELECT u.* FROM users u $where ORDER BY u.created_at DESC LIMIT ? OFFSET ?",$p2);
-    view('admin/users',['title'=>'Nguoi dung','role'=>'admin','users'=>$users,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages]);
+    view('admin/users',['title'=>'Khách hàng','role'=>'admin','users'=>$users,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'listRole'=>'customer','listRoute'=>'/admin/users']);
+});
+
+get('/admin/staff-accounts', function() {
+    requireStaffPermission('staff', '/admin/login');
+    $perPage=20; $page=max(1,intval($_GET['page']??1));
+    $q=trim($_GET['q']??''); $status=$_GET['status']??''; $from=$_GET['from']??''; $to=$_GET['to']??'';
+    $where="WHERE u.role='staff' AND u.email NOT LIKE '%_deleted_%'"; $params=[];
+    if($q){$where.=" AND (u.email LIKE ? OR u.full_name LIKE ? OR u.phone LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l]);}
+    if($status==='active'){$where.=" AND u.status='active' AND (u.suspended_until IS NULL OR u.suspended_until<=datetime('now'))";}
+    elseif($status==='suspended'){$where.=" AND (u.status!='active' OR (u.suspended_until IS NOT NULL AND u.suspended_until>datetime('now')))";}
+    if($from){$where.=" AND u.created_at>=?"; $params[]=$from;}
+    if($to){$where.=" AND u.created_at<=?"; $params[]=$to.' 23:59:59';}
+    $total=dbGet("SELECT COUNT(*) AS n FROM users u $where",$params)['n']??0;
+    $totalPages=max(1,ceil($total/$perPage));
+    $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
+    $users=dbAll("SELECT u.* FROM users u $where ORDER BY u.created_at DESC LIMIT ? OFFSET ?",$p2);
+    view('admin/users',['title'=>'Nhân viên','role'=>'admin','users'=>$users,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'listRole'=>'staff','listRoute'=>'/admin/staff-accounts']);
+});
+
+get('/admin/admin-accounts', function() {
+    requireSuperAdmin('/admin');
+    $perPage=20; $page=max(1,intval($_GET['page']??1));
+    $q=trim($_GET['q']??''); $status=$_GET['status']??''; $from=$_GET['from']??''; $to=$_GET['to']??'';
+    $where="WHERE u.role='admin' AND COALESCE(u.is_superadmin,0)=0 AND u.email NOT LIKE '%_deleted_%'"; $params=[];
+    if($q){$where.=" AND (u.email LIKE ? OR u.full_name LIKE ? OR u.phone LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l]);}
+    if($status==='active'){$where.=" AND u.status='active' AND (u.suspended_until IS NULL OR u.suspended_until<=datetime('now'))";}
+    elseif($status==='suspended'){$where.=" AND (u.status!='active' OR (u.suspended_until IS NOT NULL AND u.suspended_until>datetime('now')))";}
+    if($from){$where.=" AND u.created_at>=?"; $params[]=$from;}
+    if($to){$where.=" AND u.created_at<=?"; $params[]=$to.' 23:59:59';}
+    $total=dbGet("SELECT COUNT(*) AS n FROM users u $where",$params)['n']??0;
+    $totalPages=max(1,ceil($total/$perPage));
+    $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
+    $users=dbAll("SELECT u.* FROM users u $where ORDER BY u.created_at DESC LIMIT ? OFFSET ?",$p2);
+    $pwLog=dbAll("SELECT al.created_at, al.meta FROM audit_logs al LEFT JOIN users tu ON tu.id=al.entity_id WHERE al.action='password_change' AND al.entity_type='user' AND tu.role='admin' AND COALESCE(tu.is_superadmin,0)=0 ORDER BY al.created_at DESC LIMIT 50");
+    view('admin/users',['title'=>'Quản trị viên','role'=>'admin','users'=>$users,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'listRole'=>'admin','listRoute'=>'/admin/admin-accounts','pwLog'=>$pwLog]);
 });
 
 get('/admin/reconciliation', function() {
@@ -1589,9 +1876,15 @@ get('/admin/withdrawals', function() {
 
 get('/admin/vouchers', function() {
     $user = requireStaffPermission('vouchers', '/admin/login');
-    $vouchers = dbAll("SELECT * FROM vouchers ORDER BY created_at DESC");
+    $perPage = 15; $page = max(1, intval($_GET['page'] ?? 1));
+    $vTotalAll = (int)(dbGet("SELECT COUNT(*) AS n FROM vouchers")['n'] ?? 0);
+    $vTotalPages = max(1, (int)ceil($vTotalAll / $perPage));
+    $page = min($page, $vTotalPages);
+    $vouchers = dbAll("SELECT * FROM vouchers ORDER BY created_at DESC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
     $brands = dbAll("SELECT DISTINCT part_brand FROM products WHERE part_brand IS NOT NULL AND part_brand != '' ORDER BY part_brand");
-    view('admin/vouchers', ['title'=>'Voucher toàn sàn','role'=>'admin','vouchers'=>$vouchers,'brands'=>$brands]);
+    $carBrands = dbAll("SELECT id, name FROM brands ORDER BY name");
+    $productBrands = dbAll("SELECT id, name FROM product_brands ORDER BY sort_order, name");
+    view('admin/vouchers', ['title'=>'Voucher toàn sàn','role'=>'admin','vouchers'=>$vouchers,'brands'=>$brands,'carBrands'=>$carBrands,'productBrands'=>$productBrands,'page'=>$page,'totalPages'=>$vTotalPages]);
 });
 
 post('/admin/vouchers/add', function() {
@@ -1641,10 +1934,25 @@ post('/admin/vouchers/add', function() {
     // Validate discount_type
     if (!in_array($discount_type, ['percent','amount'])) $discount_type = 'amount';
 
+    // Reject duplicate code with a friendly message (vouchers.code is UNIQUE)
+    if (dbGet("SELECT 1 FROM vouchers WHERE code=?", [$code])) {
+        flash('error', 'Mã voucher "' . $code . '" đã tồn tại. Vui lòng dùng mã khác.');
+        redirect('/admin/vouchers');
+        return;
+    }
+
+    // Shop scope: save applied car-brands / product-brands into scope_value (JSON)
+    $scope_value = null;
+    if ($scope === 'shop') {
+        $cb = array_values(array_filter(array_map('intval', $_POST['scope_brands'] ?? [])));
+        $pb = array_values(array_filter(array_map('intval', $_POST['scope_product_brands'] ?? [])));
+        $scope_value = json_encode(['car_brands' => $cb, 'product_brands' => $pb]);
+    }
+
     try {
         $user = currentUser();
-        dbInsert("INSERT INTO vouchers (code, name, scope, discount_type, discount_value, max_discount, min_order_amount, funded_by, total_quantity, max_per_user, valid_from, valid_to, status, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", 
-            [$code, $name, $scope, $discount_type, $discount_value, $max_discount, $min_order_amount, $funded_by, $total_quantity, $max_per_user, $valid_from, $valid_to, $status, $user['id']]);
+        dbInsert("INSERT INTO vouchers (code, name, scope, scope_value, discount_type, discount_value, max_discount, min_order_amount, funded_by, total_quantity, max_per_user, valid_from, valid_to, status, created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", 
+            [$code, $name, $scope, $scope_value, $discount_type, $discount_value, $max_discount, $min_order_amount, $funded_by, $total_quantity, $max_per_user, $valid_from, $valid_to, $status, $user['id']]);
         flash('success', "Đã thêm voucher: $code");
     } catch (Exception $e) {
         flash('error', 'Lỗi: ' . $e->getMessage());
@@ -1732,9 +2040,13 @@ get('/admin/reviews', function() {
         $params[] = $categoryId;
     }
     
-    $reviews = dbAll("SELECT r.*, u.full_name, p.name AS product_name FROM reviews r INNER JOIN users u ON u.id=r.user_id INNER JOIN products p ON p.id=r.product_id $where ORDER BY r.created_at DESC LIMIT 100", $params);
+    $perPage = 20; $page = max(1, intval($_GET['page'] ?? 1));
+    $rvTotal = (int)(dbGet("SELECT COUNT(*) AS n FROM reviews r INNER JOIN users u ON u.id=r.user_id INNER JOIN products p ON p.id=r.product_id $where", $params)['n'] ?? 0);
+    $rvTotalPages = max(1, (int)ceil($rvTotal / $perPage));
+    $page = min($page, $rvTotalPages);
+    $reviews = dbAll("SELECT r.*, u.full_name, p.name AS product_name FROM reviews r INNER JOIN users u ON u.id=r.user_id INNER JOIN products p ON p.id=r.product_id $where ORDER BY r.created_at DESC LIMIT ? OFFSET ?", array_merge($params, [$perPage, ($page-1)*$perPage]));
     $categories = dbAll("SELECT * FROM categories ORDER BY sort_order");
-    view('admin/reviews', ['title'=>'Kiểm duyệt đánh giá','role'=>'admin','reviews'=>$reviews,'rating'=>$rating,'categoryId'=>$categoryId,'categories'=>$categories]);
+    view('admin/reviews', ['title'=>'Kiểm duyệt đánh giá','role'=>'admin','reviews'=>$reviews,'rating'=>$rating,'categoryId'=>$categoryId,'categories'=>$categories,'total'=>$rvTotal,'page'=>$page,'totalPages'=>$rvTotalPages]);
 });
 
 get('/admin/catalog', function() {
@@ -1751,11 +2063,11 @@ get('/admin/audit', function() {
 });
 
 get('/admin/users/new', function() {
-    requireStaffPermission('users', '/auth/login');
+    requireStaffPermission('users|staff', '/auth/login');
     view('admin/user-edit',['title'=>'Them tai khoan','role'=>'admin','editUser'=>[]]);
 });
 post('/admin/users/new', function() {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
     $name=$_POST['full_name']??''; $email=strtolower(trim($_POST['email']??'')); $phone=$_POST['phone']??''; $addr=$_POST['address']??''; $role=$_POST['role']??'customer'; $pass=$_POST['password']??''; $notes=$_POST['notes']??'';
     if(!$name||!$email||strlen($pass)<6){flash('error','Thieu thong tin bat buoc.');redirect('/admin/users/new');}
     if(dbGet('SELECT 1 FROM users WHERE email=?',[$email])){flash('error','Email da ton tai.');redirect('/admin/users/new');}
@@ -1770,13 +2082,13 @@ post('/admin/users/new', function() {
     flash('success','Da tao tai khoan!');redirect('/admin/users');
 });
 get('/admin/users/:id/edit', function($p) {
-    requireStaffPermission('users', '/auth/login');
+    requireStaffPermission('users|staff', '/auth/login');
     $editUser=dbGet('SELECT * FROM users WHERE id=?',[$p['id']]);
     if(!$editUser){flash('error','Khong tim thay.');redirect('/admin/users');}
     view('admin/user-edit',['title'=>'Sua tai khoan','role'=>'admin','editUser'=>$editUser]);
 });
 post('/admin/users/:id/edit', function($p) {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
     $u=dbGet('SELECT * FROM users WHERE id=?',[$p['id']]);
     if(!$u){flash('error','Khong tim thay.');redirect('/admin/users');}
     $name=$_POST['full_name']??''; $phone=$_POST['phone']??''; $addr=$_POST['address']??''; $role=$_POST['role']??$u['role']; $pass=$_POST['password']??''; $notes=$_POST['notes']??'';
@@ -1786,8 +2098,23 @@ post('/admin/users/:id/edit', function($p) {
     if($role==='staff')dbRun("INSERT OR IGNORE INTO staff_permissions(user_id) VALUES(?)",[$p['id']]);
     flash('success','Da cap nhat!');redirect('/admin/users/'.$p['id'].'/edit');
 });
+post('/admin/users/:id/reset-password', function($p) {
+    requireStaffPermission('users|staff', '/admin/login'); csrfCheck();
+    $back = $_POST['back'] ?? ''; if (!preg_match('#^/admin/(users|staff-accounts|admin-accounts)#', $back)) $back = '/admin/staff-accounts';
+    $u = dbGet('SELECT id, full_name FROM users WHERE id=?', [$p['id']]);
+    if(!$u){ flash('error','Không tìm thấy tài khoản.'); redirect($back); return; }
+    $newPass = $_POST['new_password'] ?? '';
+    if(strlen($newPass) < 6){ flash('error','Mật khẩu mới phải tối thiểu 6 ký tự.'); redirect($back); return; }
+    dbRun("UPDATE users SET password_hash=?, updated_at=datetime('now') WHERE id=?", [password_hash($newPass, PASSWORD_BCRYPT), $p['id']]);
+    $__act = currentUser(); logPasswordChange($p['id'], (!empty($__act['is_superadmin']) ? 'superadmin_reset' : 'admin_reset'));
+    flash('success', 'Đã cấp lại mật khẩu cho ' . $u['full_name'] . '. Mật khẩu mới: ' . $newPass . ' — vui lòng gửi cho nhân viên.');
+    redirect($back);
+});
 post('/admin/users/:id/suspend', function($p) {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
+    $back = $_POST['back'] ?? ''; if (!preg_match('#^/admin/(users|staff-accounts|admin-accounts)#', $back)) $back = '/admin/users';
+    $__tg = dbGet("SELECT role, is_superadmin FROM users WHERE id=?", [$p['id']]); $__me = currentUser();
+    if (!$__tg || $p['id']==($__me['id']??0) || !empty($__tg['is_superadmin']) || ($__tg['role']==='admin' && empty($__me['is_superadmin']))) { flash('error','Bạn không có quyền thao tác với tài khoản này.'); redirect($back); return; }
     $days=intval($_POST['days']??0); $notes=trim($_POST['notes']??'');
     if($days>0){
         $until=date('Y-m-d H:i:s',strtotime("+{$days} days"));
@@ -1797,27 +2124,61 @@ post('/admin/users/:id/suspend', function($p) {
         dbRun("UPDATE users SET status='locked',suspended_until=NULL,notes=?,updated_at=datetime('now') WHERE id=?",[$notes,$p['id']]);
         flash('success','Da ngung tai khoan vinh vien.');
     }
-    redirect('/admin/users');
+    redirect($back . '#u' . (int)$p['id']);
 });
 post('/admin/users/:id/permissions', function($p) {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
-    $perms=['can_products','can_orders','can_content','can_users','can_vouchers','can_reviews'];
-    $vals=[]; foreach($perms as $k)$vals[$k]=isset($_POST[$k])?1:0;
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
+    $uid = (int)$p['id'];
+    $admin = currentUser();
+    $u = dbGet("SELECT id, role FROM users WHERE id=?", [$uid]);
+    if (!$u) { flash('error','Không tìm thấy tài khoản.'); redirect('/admin/users'); return; }
+    // Mỗi mục = 1 nhóm quyền (vai trò) trao TOÀN BỘ quyền con của nhóm đó
+    $depts = [
+        'can_products' => ['Quản lý sản phẩm', ['products','categories','brands','brand_models']],
+        'can_orders'   => ['Quản lý đơn hàng', ['orders','returns','create_order']],
+        'can_content'  => ['Quản lý nội dung', ['content']],
+        'can_users'    => ['Quản lý người dùng', ['users']],
+        'can_staff'    => ['Quản lý nhân viên', ['staff']],
+        'can_vouchers' => ['Quản lý voucher', ['vouchers','promotions']],
+        'can_reviews'  => ['Kiểm duyệt đánh giá', ['reviews']],
+    ];
+    $vals = []; $anyChecked = false;
+    foreach ($depts as $key => $info) {
+        $checked = isset($_POST[$key]) ? 1 : 0; $vals[$key] = $checked;
+        $roleName = $info[0]; $gperms = $info[1];
+        $role = dbGet("SELECT id FROM staff_roles WHERE name=?", [$roleName]);
+        if (!$role) {
+            dbRun("INSERT INTO staff_roles (name, description, permissions) VALUES (?,?,?)", [$roleName, 'Nhóm quyền hệ thống', json_encode($gperms, JSON_UNESCAPED_UNICODE)]);
+            $role = dbGet("SELECT id FROM staff_roles WHERE name=?", [$roleName]);
+        }
+        if ($checked) {
+            if (!dbGet("SELECT 1 FROM staff_role_assignments WHERE user_id=? AND role_id=?", [$uid, $role['id']])) {
+                dbRun("INSERT INTO staff_role_assignments (user_id, role_id, assigned_by) VALUES (?,?,?)", [$uid, $role['id'], $admin['id'] ?? null]);
+            }
+            $anyChecked = true;
+        } else {
+            dbRun("DELETE FROM staff_role_assignments WHERE user_id=? AND role_id=?", [$uid, $role['id']]);
+        }
+    }
+    if ($anyChecked && ($u['role'] ?? '') === 'customer') { dbRun("UPDATE users SET role='staff' WHERE id=?", [$uid]); }
     dbRun("INSERT OR REPLACE INTO staff_permissions(user_id,can_products,can_orders,can_content,can_users,can_vouchers,can_reviews,updated_at) VALUES(?,?,?,?,?,?,?,datetime('now'))",
-        [$p['id'],$vals['can_products'],$vals['can_orders'],$vals['can_content'],$vals['can_users'],$vals['can_vouchers'],$vals['can_reviews']]);
-    flash('success','Da luu phan quyen!');redirect('/admin/users/'.$p['id'].'/edit');
+        [$uid,$vals['can_products'],$vals['can_orders'],$vals['can_content'],$vals['can_users'],$vals['can_vouchers'],$vals['can_reviews']]);
+    flash('success','Đã lưu phân quyền! Nhân viên có quyền theo các nhóm đã tích.');
+    redirect('/admin/users/'.$uid.'/edit');
 });
 
 post('/admin/users/:id/lock', function($p) {
-    requireStaffPermission('users', '/auth/login'); csrfCheck();
+    requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
+    $back = $_POST['back'] ?? ''; if (!preg_match('#^/admin/(users|staff-accounts|admin-accounts)#', $back)) $back = '/admin/users';
     dbRun("UPDATE users SET status='locked', suspended_until=NULL WHERE id=?", [$p['id']]);
-    flash('success','Da khoa tai khoan.'); redirect('/admin/users');
+    flash('success','Da khoa tai khoan.'); redirect($back . '#u' . (int)$p['id']);
 });
 
 post('/admin/users/:id/unlock', function($p) {
-    $user = requireStaffPermission('users', '/auth/login'); csrfCheck();
-    dbRun("UPDATE users SET status='active' WHERE id=?", [$p['id']]);
-    flash('success','Đã mở khóa tài khoản.'); redirect('/admin/users');
+    $user = requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
+    $back = $_POST['back'] ?? ''; if (!preg_match('#^/admin/(users|staff-accounts|admin-accounts)#', $back)) $back = '/admin/users';
+    dbRun("UPDATE users SET status='active', suspended_until=NULL WHERE id=?", [$p['id']]);
+    flash('success','Đã mở khóa tài khoản.'); redirect($back . '#u' . (int)$p['id']);
 });
 
 get('/admin/post-on-behalf', function() {
@@ -1917,11 +2278,23 @@ post('/admin/products/new', function() {
     }
     // Validate giá gốc (tùy chọn nhưng phải >= 0 nếu có)
     $origRaw = trim($d['original_price'] ?? '');
-    if ($origRaw !== '' && (!ctype_digit($origRaw) || intval($origRaw) < 0)) {
-        $valErrors[] = 'Giá gốc phải là số nguyên không âm';
+    if ($origRaw !== '') {
+        if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
+            $valErrors[] = 'Giá gốc phải là số nguyên không âm';
+        } else if (intval($origRaw) <= $price) {
+            $valErrors[] = 'Giá gốc phải cao hơn Giá bán sau VAT';
+        }
     }
     if (!empty($valErrors)) {
         flash('error', 'Không thể đăng sản phẩm: ' . implode('. ', $valErrors));
+        redirect('/admin/products/new');
+        return;
+    }
+
+    // === DUPLICATE SKU GUARD (chống lỗi 500 do UNIQUE(partner_id,sku)) ===
+    $dupSku = dbGet("SELECT id, name FROM products WHERE partner_id=1 AND sku=?", [$sku]);
+    if ($dupSku) {
+        flash('error', 'Mã SKU "'.$sku.'" đã được dùng cho sản phẩm #'.$dupSku['id'].' ('.$dupSku['name'].'). Vui lòng dùng mã SKU khác.');
         redirect('/admin/products/new');
         return;
     }
@@ -1951,7 +2324,7 @@ post('/admin/products/new', function() {
         isset($d['show_on_home']) ? 1 : 0,
         isset($d['show_on_promo']) ? 1 : 0,
         isset($d['is_new']) ? 1 : 0,
-        isset($d['is_indexed']) ? 1 : 0,
+        ($status === 'published') ? 1 : 0, // index khi xuat ban (form khong co o rieng)
         intval($d['weight_g']??0) ?: null,
         intval($d['width_cm']??0) ?: null,
         intval($d['height_cm']??0) ?: null,
@@ -1964,6 +2337,21 @@ post('/admin/products/new', function() {
         intval($d['cost_price']??0) * $stock,
     ]);
 
+    // Multi-brand mapping
+    $brandIds = $_POST['car_brand_ids'] ?? [];
+    foreach ($brandIds as $bid) {
+        $bid_int = intval($bid);
+        if ($bid_int > 0) {
+            dbRun("INSERT OR IGNORE INTO product_brand_map (product_id, brand_id) VALUES (?,?)", [$id, $bid_int]);
+        }
+    }
+    $firstBrand = null;
+    foreach ($brandIds as $bid) {
+        if ($bid === 'HIDDEN') { $firstBrand = 'HIDDEN'; break; }
+        if (intval($bid) > 0) { $firstBrand = intval($bid); break; }
+    }
+    dbRun("UPDATE products SET car_brand_id=? WHERE id=?", [$firstBrand, $id]);
+
     // Handle images
     if (!empty($_FILES['images']['name'][0])) {
         $uploadDir = '/opt/cooling-php/uploads/products/';
@@ -1971,7 +2359,7 @@ post('/admin/products/new', function() {
             if (!is_uploaded_file($tmp)) continue;
             $ext = strtolower(pathinfo($_FILES['images']['name'][$k], PATHINFO_EXTENSION));
             if (!in_array($ext, ['jpg','jpeg','png','webp'])) continue;
-            $fname = uniqid('p_') . '.' . $ext;
+            $fname = seoImageName($_FILES['images']['name'][$k], $ext, $uploadDir);
             if (move_uploaded_file($tmp, $uploadDir . $fname)) {
                 dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
                     [$id, $fname, $k===0 ? 1 : 0, $k]);
@@ -2019,8 +2407,12 @@ post('/admin/products/:id/edit', function($p) {
         $editErrors[] = 'Giá nhập phải là số nguyên không âm';
     }
     $origRaw = trim($d['original_price'] ?? '');
-    if ($origRaw !== '' && (!ctype_digit($origRaw) || intval($origRaw) < 0)) {
-        $editErrors[] = 'Giá gốc phải là số nguyên không âm';
+    if ($origRaw !== '') {
+        if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
+            $editErrors[] = 'Giá gốc phải là số nguyên không âm';
+        } else if (intval($origRaw) <= $price) {
+            $editErrors[] = 'Giá gốc phải cao hơn Giá bán sau VAT';
+        }
     }
     if (!empty($editErrors)) {
         flash('error', 'Không thể cập nhật sản phẩm: ' . implode('. ', $editErrors));
@@ -2028,7 +2420,16 @@ post('/admin/products/:id/edit', function($p) {
         return;
     }
 
-    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=? WHERE id=?", [
+    // === DUPLICATE SKU GUARD (edit) ===
+    $editSku = trim($d['sku'] ?? '');
+    $dupSku = dbGet("SELECT id FROM products WHERE partner_id=1 AND sku=? AND id<>?", [$editSku, $p['id']]);
+    if ($dupSku) {
+        flash('error', 'Mã SKU "'.$editSku.'" đã được dùng cho sản phẩm #'.$dupSku['id'].'. Vui lòng dùng mã SKU khác.');
+        redirect('/admin/products/'.$p['id'].'/edit');
+        return;
+    }
+
+    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=? WHERE id=?", [
         trim($d['name']??''),
         trim($d['sku']??''),
         trim($d['oem_code']??''),
@@ -2041,6 +2442,8 @@ post('/admin/products/:id/edit', function($p) {
         intval($d['vat_rate']??10),
         intval($d['original_price']??0) ?: null,
         intval($d['stock']??0),
+        intval($d['min_stock']??0),
+        intval($d['max_stock']??1000),
         intval($d['warranty_months']??12),
         $d['description']??'',
         $status,
@@ -2048,7 +2451,7 @@ post('/admin/products/:id/edit', function($p) {
         isset($d['show_on_home'])?1:0,
         isset($d['show_on_promo'])?1:0,
         isset($d['is_new'])?1:0,
-        isset($d['is_indexed'])?1:0,
+        ($status === 'published') ? 1 : 0, // index khi xuat ban
         intval($d['weight_g']??0) ?: null,
         intval($d['width_cm']??0) ?: null,
         intval($d['height_cm']??0) ?: null,
@@ -2066,7 +2469,7 @@ post('/admin/products/:id/edit', function($p) {
             if (!is_uploaded_file($tmp)) continue;
             $ext = strtolower(pathinfo($_FILES['images']['name'][$k], PATHINFO_EXTENSION));
             if (!in_array($ext, ['jpg','jpeg','png','webp'])) continue;
-            $fname = uniqid('p_') . '.' . $ext;
+            $fname = seoImageName($_FILES['images']['name'][$k], $ext, $uploadDir);
             if (move_uploaded_file($tmp, $uploadDir . $fname)) {
                 $hasMain = dbGet('SELECT id FROM product_images WHERE product_id=? AND is_main=1', [$p['id']]);
                 $maxOrder = dbGet('SELECT COALESCE(MAX(sort_order),0) AS max_so FROM product_images WHERE product_id=?', [$p['id']]);
@@ -2127,6 +2530,16 @@ post('/admin/products/:id/edit', function($p) {
 // ── STATIC CONTENT MANAGEMENT ────────────────────────────────────────────
 
 // Banner management
+post('/admin/footer/update', function() {
+    requireStaffPermission('content', '/auth/login'); csrfCheck();
+    $fields = ['footer_logo_text','footer_desc','footer_copyright'];
+    foreach ($fields as $f) {
+        $val = trim($_POST[$f] ?? '');
+        dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)", [$f, $val]);
+    }
+    flash('success', 'Đã cập nhật Footer.');
+    redirect('/admin/content');
+});
 post('/admin/banner/update', function() {
     requireStaffPermission('content', '/auth/login'); csrfCheck();
     $fields = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url'];
@@ -2152,7 +2565,8 @@ get('/admin/content', function() {
     $user = requireStaffPermission('content', '/auth/login');
     $pages = dbAll('SELECT * FROM static_pages ORDER BY title');
     $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
-    view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages], ['bannerSettings'=>$bannerSettings]));
+    $footerSettings = []; $fkeys = ['footer_logo_text','footer_desc','footer_copyright']; foreach($fkeys as $fk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$fk]); $footerSettings[$fk]=$r['value']??'';}
+    view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages], ['bannerSettings'=>$bannerSettings, 'footerSettings'=>$footerSettings]));
 });
 
 get('/admin/content/:slug', function($p) {
@@ -2250,12 +2664,34 @@ post('/admin/news/:id/delete', function($p) {
     flash('success','Đã xóa bài.'); redirect('/admin/news');
 });
 
+get('/admin/products/:id/history', function($p) {
+    $user = requireStaffPermission('products', '/admin/login');
+    $pid = intval($p['id']);
+    $product = dbGet("SELECT p.*, c.name AS cat_name, b.name AS car_brand_name, ua.full_name AS approved_by_name FROM products p LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN users ua ON ua.id=p.approved_by WHERE p.id=?", [$pid]);
+    if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); return; }
+    $changes = dbAll("SELECT al.*, u.full_name, u.email FROM audit_logs al LEFT JOIN users u ON u.id=al.user_id WHERE al.entity_type='product' AND al.entity_id=? AND al.action!='view' ORDER BY al.created_at DESC LIMIT 200", [$pid]);
+    $viewTotal = dbGet("SELECT COUNT(*) AS c FROM audit_logs WHERE entity_type='product' AND entity_id=? AND action='view'", [$pid])['c'] ?? 0;
+    $viewPerPage = 50;
+    $viewPages = max(1, (int)ceil($viewTotal / $viewPerPage));
+    $viewPage = min(max(1, intval($_GET['page'] ?? 1)), $viewPages);
+    $views = dbAll("SELECT al.*, u.full_name, u.email FROM audit_logs al LEFT JOIN users u ON u.id=al.user_id WHERE al.entity_type='product' AND al.entity_id=? AND al.action='view' ORDER BY al.created_at DESC LIMIT ? OFFSET ?", [$pid, $viewPerPage, ($viewPage-1)*$viewPerPage]);
+    view('admin/product-history', compact('product','changes','views','viewTotal','viewPage','viewPages','viewPerPage') + ['title'=>'Lịch sử & lượt truy cập']);
+});
+
 post('/admin/products/:id/toggle-status', function($p) {
     requireStaffPermission('products', '/admin/login'); csrfCheck();
     $status = $_POST['status'] ?? 'hidden';
+    $__oldStatus = dbGet("SELECT status FROM products WHERE id=?", [$p['id']])['status'] ?? '';
     dbRun("UPDATE products SET status=? WHERE id=?", [$status, $p['id']]);
+    if ($status === 'published') {
+        dbRun("UPDATE products SET published_at=COALESCE(published_at, strftime('%Y-%m-%dT%H:%M:%fZ','now')) WHERE id=?", [$p['id']]);
+    }
+    $__actor = currentUser();
+    dbRun("INSERT INTO audit_logs (user_id, role, action, entity_type, entity_id, meta, ip, user_agent) VALUES (?,?,?,?,?,?,?,?)",
+        [$__actor['id'] ?? null, $__actor['role'] ?? 'admin', 'status_change', 'product', (int)$p['id'], 'Trạng thái: '.$__oldStatus.' → '.$status, $_SERVER['REMOTE_ADDR'] ?? '', mb_substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250)]);
     flash('success', 'Đã cập nhật trạng thái kinh doanh.');
-    redirect('/admin/products');
+    $ref = $_SERVER['HTTP_REFERER'] ?? '/admin/products';
+    redirect($ref);
 });
 
 post('/admin/products/:id/delete', function($p) {
@@ -2281,7 +2717,8 @@ post('/admin/products/:id/delete', function($p) {
     dbRun("DELETE FROM reviews WHERE product_id=?", [$pid]);
     dbRun("DELETE FROM products WHERE id=?", [$pid]);
     flash('success','Đã xóa sản phẩm thành công.');
-    redirect('/admin/products');
+    $ref = $_SERVER['HTTP_REFERER'] ?? '/admin/products';
+    redirect($ref);
 });
 post('/admin/upload-tinymce-image', function() {
     requireStaffPermission('products', '/admin/login'); csrfCheck();
@@ -2399,10 +2836,39 @@ get('/admin/settings', function() {
 });
 
 
+post('/admin/settings/account', function() {
+    $me = requireRole('admin', '/admin/login'); csrfCheck();
+    if (!password_verify($_POST['current_password'] ?? '', $me['password_hash'])) { flash('error','Mật khẩu hiện tại không đúng.'); redirect('/admin/settings'); return; }
+    $name = trim($_POST['full_name'] ?? '');
+    $email = strtolower(trim($_POST['login_email'] ?? ''));
+    $newPass = $_POST['new_password'] ?? '';
+    if ($name !== '' && $name !== $me['full_name']) { dbRun("UPDATE users SET full_name=?, updated_at=datetime('now') WHERE id=?", [$name, $me['id']]); }
+    if ($email !== '' && $email !== strtolower($me['email'])) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { flash('error','Email không hợp lệ.'); redirect('/admin/settings'); return; }
+        if (dbGet("SELECT 1 FROM users WHERE email=? AND id<>?", [$email, $me['id']])) { flash('error','Email này đã được dùng bởi tài khoản khác.'); redirect('/admin/settings'); return; }
+        dbRun("UPDATE users SET email=?, updated_at=datetime('now') WHERE id=?", [$email, $me['id']]);
+    }
+    if ($newPass !== '') {
+        if (strlen($newPass) < 6) { flash('error','Mật khẩu mới phải tối thiểu 6 ký tự.'); redirect('/admin/settings'); return; }
+        dbRun("UPDATE users SET password_hash=?, updated_at=datetime('now') WHERE id=?", [password_hash($newPass, PASSWORD_BCRYPT), $me['id']]);
+        logPasswordChange($me['id'], 'self_change');
+    }
+    flash('success','Đã cập nhật tài khoản quản trị.');
+    redirect('/admin/settings');
+});
 post('/admin/settings/general', function() {
     requireRole('admin', '/admin/login'); csrfCheck();
+    
     $phone = trim($_POST['site_phone'] ?? '');
+    if (!preg_match('/^[0-9]{10}$/', $phone)) {
+        flash('error', 'Hotline tư vấn phải là 10 chữ số liền nhau, không chứa chữ cái, khoảng trắng hay dấu chấm (VD: 0987654321).');
+        redirect('/admin/settings'); return;
+    }
+    
     dbRun("INSERT INTO system_config (key, value) VALUES ('site_phone',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$phone]);
+
+    $companyName = trim($_POST['company_name'] ?? '');
+    dbRun("INSERT INTO system_config (key, value) VALUES ('company_name',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$companyName]);
     
     if (!empty($_FILES['site_logo']['name']) && $_FILES['site_logo']['error'] === UPLOAD_ERR_OK) {
         $allowed = ['image/jpeg','image/png','image/gif','image/svg+xml','image/webp'];
@@ -2416,17 +2882,36 @@ post('/admin/settings/general', function() {
             }
         }
     }
+    // footer_logo: revert to text if requested
+    if (!empty($_POST['remove_footer_logo'])) {
+        dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('footer_logo_image', '')");
+    }
+    // footer_logo: upload + auto cut white background (KEEP original colors), output transparent PNG
+    if (!empty($_FILES['footer_logo']['name']) && $_FILES['footer_logo']['error'] === UPLOAD_ERR_OK) {
+        $fext = strtolower(pathinfo($_FILES['footer_logo']['name'], PATHINFO_EXTENSION));
+        if (in_array($fext, ['svg','png','jpg','jpeg','webp','gif'])) {
+            $base = 'footer_logo_' . time();
+            $rawPath = '/var/lib/cooling/uploads/' . $base . '.' . $fext;
+            if (move_uploaded_file($_FILES['footer_logo']['tmp_name'], $rawPath)) {
+                $finalName = $base . '.' . $fext;
+                if ($fext !== 'svg' && is_executable('/usr/bin/convert')) {
+                    $pngPath = '/var/lib/cooling/uploads/' . $base . '.png';
+                    $cmd = '/usr/bin/convert ' . escapeshellarg($rawPath) . ' -fuzz 12% -transparent white -strip PNG32:' . escapeshellarg($pngPath) . ' 2>&1';
+                    @exec($cmd, $__co, $__rc);
+                    if ($__rc === 0 && file_exists($pngPath)) { $finalName = $base . '.png'; @unlink($rawPath); }
+                }
+                dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('footer_logo_image', ?)", [$finalName]);
+            }
+        }
+    }
     flash('success','Đã lưu thông tin chung!');
     // contact_hotline_sync: auto-sync contact hotline
     if (!empty($phone)) {
         $formatted = preg_replace('/(\d{2})(\d{4})(\d{4})/', '$1 $2 $3', $phone);
+        if (preg_match('/^0[0-9]{9}$/', $phone)) {
+            $formatted = preg_replace('/^(\d{4})(\d{3})(\d{3})$/', '$1 $2 $3', $phone); // 0987 654 321 format
+        }
         dbRun("INSERT INTO system_config (key, value) VALUES ('contact_hotline',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$formatted]);
-    }
-        $phone = trim($_POST['site_phone'] ?? '');
-    $phone = preg_replace('/[^0-9]/', '', $phone);
-    if (!empty($phone) && !preg_match('/^0[0-9]{9}$/', $phone)) {
-        flash('error', 'Hotline phải là 10 chữ số bắt đầu từ 0.');
-        redirect('/admin/settings'); return;
     }
 redirect('/admin/settings');
 });
@@ -2465,11 +2950,16 @@ post('/admin/settings/social', function() {
 
 post('/admin/settings/payment', function() {
     requireStaffPermission('tax_config', '/auth/login'); csrfCheck();
-    $fields = ['payment_bank_name','payment_account_name','payment_account_number'];
+    $fields = ['payment_bank_name','payment_account_name','payment_account_number','payment_transfer_prefix'];
     foreach($fields as $f) {
         $val = trim($_POST[$f] ?? '');
         dbRun("INSERT INTO system_config (key, value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')", [$f, $val]);
     }
+
+    if (($_POST['remove_qr'] ?? '0') === '1') {
+        dbRun("DELETE FROM system_config WHERE key='payment_qr_image'");
+    }
+
     // Handle QR image upload
     if (!empty($_FILES['qr_image']['name']) && $_FILES['qr_image']['error'] === UPLOAD_ERR_OK) {
         $allowed = ['image/jpeg','image/png','image/gif','image/webp'];
@@ -2477,13 +2967,13 @@ post('/admin/settings/payment', function() {
         if (in_array($mime, $allowed)) {
             $ext = pathinfo($_FILES['qr_image']['name'], PATHINFO_EXTENSION);
             $fname = 'qr_' . time() . '.' . strtolower($ext);
-            $dest = '/var/lib/cooling/uploads/qr/' . $fname;
+            $dest = '/opt/cooling-php/uploads/qr/' . $fname;
             if (move_uploaded_file($_FILES['qr_image']['tmp_name'], $dest)) {
                 dbRun("INSERT INTO system_config (key, value) VALUES ('payment_qr_image',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')", [$fname]);
             }
         }
     }
-    flash('success','Đã lưu cài đặt thanh toán!');
+    flash('success', 'Đã lưu cấu hình thanh toán');
     redirect('/admin/settings');
 });
 
@@ -2609,6 +3099,14 @@ get('/admin/categories', function() {
     view('admin/categories', ['title'=>'Quản lý Danh mục', 'role'=>'admin', 'user'=>$user]);
 });
 
+function catUploadImage(): string {
+    if (empty($_FILES['image']['name'])) return '';
+    $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+    if (!in_array($ext, ['jpg','jpeg','png','gif','webp'])) return '';
+    $dir = UPLOAD_DIR.'/categories/'; if(!is_dir($dir)) @mkdir($dir,0775,true);
+    $fname = uniqid('cat_').'.'.$ext;
+    return move_uploaded_file($_FILES['image']['tmp_name'], $dir.$fname) ? $fname : '';
+}
 post('/admin/categories/add', function() {
     requireStaffPermission('categories', '/auth/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
@@ -2619,7 +3117,7 @@ post('/admin/categories/add', function() {
     if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/categories'); }
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
-        dbInsert("INSERT INTO categories (name, slug, parent_id, sort_order, is_featured) VALUES (?,?,?,?,?)", [$name, $slug, $parentId, $sort, $featured]);
+        $catImg=catUploadImage(); dbInsert("INSERT INTO categories (name, slug, parent_id, sort_order, is_featured, icon) VALUES (?,?,?,?,?,?)", [$name, $slug, $parentId, $sort, $featured, $catImg]);
         flash('success', "Đã thêm danh mục: $name");
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại. Vui lòng đổi slug khác.');
@@ -2637,7 +3135,7 @@ post('/admin/categories/:id/edit', function($p) {
     $featured = intval($_POST['is_featured'] ?? 0);
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
-        dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $p['id']]);
+        $catImg=catUploadImage(); if($catImg!==''){ dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, icon=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $catImg, $p['id']]); } else { dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $p['id']]); }
         flash('success', 'Đã cập nhật danh mục.');
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại.');
@@ -2650,8 +3148,21 @@ post('/admin/categories/:id/delete', function($p) {
     requireStaffPermission('categories', '/auth/login'); csrfCheck();
     // Reassign children to no parent
     dbRun("UPDATE categories SET parent_id=NULL WHERE parent_id=?", [$p['id']]);
-    dbRun("DELETE FROM categories WHERE id=?", [$p['id']]);
-    flash('success', 'Đã xóa danh mục.');
+    
+    // Check if category has products
+    $count = dbGet("SELECT COUNT(*) as c FROM products WHERE category_id=?", [$p['id']])['c'] ?? 0;
+    if ($count > 0) {
+        flash('error', "Không thể xóa danh mục vì đang chứa $count sản phẩm.");
+        redirect('/admin/categories');
+        return;
+    }
+    
+    try {
+        dbRun("DELETE FROM categories WHERE id=?", [$p['id']]);
+        flash('success', 'Đã xóa danh mục.');
+    } catch (Exception $e) {
+        flash('error', 'Không thể xóa danh mục này do có dữ liệu liên kết.');
+    }
     redirect('/admin/categories');
 });
 
@@ -2668,7 +3179,8 @@ post('/admin/promotions/:id/set-sale', function($p) {
     if (!$product) { flash('error', 'Không tìm thấy sản phẩm.'); redirect('/admin/promotions'); return; }
     if ($salePrice < 0) { flash('error', 'Giá khuyến mãi không được âm.'); redirect('/admin/promotions'); return; }
     if ($salePrice > 0 && $salePrice >= $product['price']) { flash('error', 'Giá khuyến mãi phải nhỏ hơn giá gốc (' . number_format($product['price']) . ' ₫).'); redirect('/admin/promotions'); return; }
-    dbRun("UPDATE products SET sale_price=? WHERE id=?", [$salePrice, $p['id']]);
+    $isOnSale = $salePrice > 0 ? 1 : 0;
+    dbRun("UPDATE products SET sale_price=?, is_on_sale=? WHERE id=?", [$salePrice, $isOnSale, $p['id']]);
     flash('success', 'Đã lưu giá khuyến mãi.');
     redirect('/admin/promotions');
 });
@@ -2752,7 +3264,52 @@ post('/admin/product-brands/:id/delete', function($p) {
 get('/admin/stores', function() {
     requireStaffPermission('stores', '/auth/login');
     $stores = dbAll("SELECT * FROM stores ORDER BY sort_order, name");
-    view('admin/stores', ['title'=>'Hệ thống cửa hàng','role'=>'admin','stores'=>$stores]);
+    $branchTypes = dbAll("SELECT code, name, is_active FROM store_branch_types ORDER BY sort_order, id");
+    view('admin/stores', ['title'=>'Hệ thống cửa hàng','role'=>'admin','stores'=>$stores,'branchTypes'=>$branchTypes]);
+});
+
+get('/admin/branch-types', function() {
+    requireStaffPermission('stores', '/auth/login');
+    $types = dbAll("SELECT * FROM store_branch_types ORDER BY sort_order, id");
+    view('admin/branch-types', ['title'=>'Loại chi nhánh cửa hàng','role'=>'admin','types'=>$types]);
+});
+
+post('/admin/branch-types/add', function() {
+    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    $name = trim($_POST['name'] ?? '');
+    $sort = (int)($_POST['sort_order'] ?? 0);
+    $active = isset($_POST['is_active']) ? 1 : 0;
+    if ($name === '') { flash('error', 'Tên loại không được để trống.'); redirect('/admin/branch-types'); return; }
+    $code = trim(preg_replace('/[^a-z0-9]+/', '_', strtolower(removeAccents($name))), '_');
+    if ($code === '') $code = 'loai';
+    $base = $code; $i = 2;
+    while (dbGet("SELECT id FROM store_branch_types WHERE code=?", [$code])) { $code = $base."_".$i; $i++; }
+    dbInsert("INSERT INTO store_branch_types (code, name, sort_order, is_active) VALUES (?,?,?,?)", [$code, $name, $sort, $active]);
+    flash('success', 'Đã thêm loại chi nhánh.');
+    redirect('/admin/branch-types');
+});
+
+post('/admin/branch-types/:id/edit', function($p) {
+    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    $name = trim($_POST['name'] ?? '');
+    $sort = (int)($_POST['sort_order'] ?? 0);
+    $active = isset($_POST['is_active']) ? 1 : 0;
+    if ($name === '') { flash('error', 'Tên loại không được để trống.'); redirect('/admin/branch-types'); return; }
+    dbRun("UPDATE store_branch_types SET name=?, sort_order=?, is_active=? WHERE id=?", [$name, $sort, $active, $p['id']]);
+    flash('success', 'Đã cập nhật loại chi nhánh.');
+    redirect('/admin/branch-types');
+});
+
+post('/admin/branch-types/:id/delete', function($p) {
+    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    $t = dbGet("SELECT code FROM store_branch_types WHERE id=?", [$p['id']]);
+    if ($t) {
+        $cnt = (int)(dbGet("SELECT COUNT(*) AS n FROM stores WHERE type=?", [$t['code']])['n'] ?? 0);
+        if ($cnt > 0) { flash('error', 'Không thể xóa: còn '.$cnt.' cửa hàng đang dùng loại này.'); redirect('/admin/branch-types'); return; }
+        dbRun("DELETE FROM store_branch_types WHERE id=?", [$p['id']]);
+        flash('success', 'Đã xóa loại chi nhánh.');
+    }
+    redirect('/admin/branch-types');
 });
 
 post('/admin/stores/add', function() {
@@ -2891,7 +3448,7 @@ post('/admin/orders/:id/delete', function($p) {
 
 // ── Invoice Info API ──
 get('/admin/users/:id/invoice-info', function($p) {
-    $user = requireStaffPermission('users', '/auth/login');
+    $user = requireStaffPermission('users|staff', '/auth/login');
     header('Content-Type: application/json');
     $info = dbGet("SELECT * FROM user_invoice_info WHERE user_id=?", [$p['id']]);
     echo json_encode($info ?: ['user_id'=>$p['id'],'invoice_type'=>'personal','buyer_name'=>'','tax_code'=>'','address'=>'','province'=>'','ward'=>'','id_number'=>'','passport'=>'','email'=>'','phone'=>'','bank_name'=>'','bank_account'=>'']);
@@ -2899,7 +3456,7 @@ get('/admin/users/:id/invoice-info', function($p) {
 });
 
 post('/admin/users/:id/invoice-info', function($p) {
-    $user = requireStaffPermission('users', '/auth/login'); csrfCheck();
+    $user = requireStaffPermission('users|staff', '/auth/login'); csrfCheck();
     header('Content-Type: application/json');
     $uid = intval($p['id']);
     $fields = ['invoice_type','buyer_name','tax_code','address','province','ward','id_number','passport','email','phone','bank_name','bank_account','company_name','legal_representative'];
@@ -2919,7 +3476,7 @@ post('/admin/users/:id/invoice-info', function($p) {
 
 // Admin user detail (AJAX)
 get('/admin/users/:id/detail', function($p) {
-    $user = requireStaffPermission('users', '/auth/login');
+    $user = requireStaffPermission('users|staff', '/auth/login');
     header('Content-Type: application/json');
     $u = dbGet("SELECT id,full_name,email,phone,role,status,address,avatar,created_at,notes,suspended_until FROM users WHERE id=?", [$p['id']]);
     if (!$u) { echo json_encode(['error'=>'not found']); exit; }
@@ -3121,7 +3678,7 @@ post('/admin/orders/:id/cancel', function($p) {
     foreach ($items as $it) { dbRun("UPDATE products SET stock=stock+?, sold_count=MAX(0,sold_count-?) WHERE id=?", [$it['quantity'],$it['quantity'],$it['product_id']]); }
     // Notify customer
     if ($order['uid']) {
-        dbRun("INSERT INTO notifications (user_id, type, title, message, link, created_at) VALUES (?, 'order_cancelled', ?, ?, ?, datetime('now'))",
+        dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'order_cancelled', ?, ?, ?, datetime('now'))",
             [$order['uid'], 'Đơn hàng đã bị hủy', 'Đơn hàng '.$order['code'].' đã bị hủy. Lý do: '.$reason, '/customer/orders/'.$p['id']]);
     }
     flash('success','Đã hủy đơn hàng '.$order['code'].' và thông báo cho khách.');

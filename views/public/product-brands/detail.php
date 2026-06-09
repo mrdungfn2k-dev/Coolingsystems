@@ -22,6 +22,11 @@
     <?php foreach($products as $p): require __DIR__.'/../../public/partials/prod-card.php'; ?>
     <?php endforeach; ?>
   </div>
+  <?php if(($totalPages ?? 1) > 1): ?>
+    <div style="display:flex;justify-content:center;margin-top:32px">
+      <?php require_once __DIR__.'/../../partials/pagination.php'; renderPagination($page, $totalPages, '', []); ?>
+    </div>
+  <?php endif; ?>
   <?php endif; ?>
 </div>
 </section>

@@ -29,7 +29,7 @@
       <input type="password" name="password2" required minlength="8" id="npw2" oninput="checkPwMatch()">
       <div id="pwMatch" style="margin-top:4px;font-size:12px;display:none"></div>
     </div>
-    <button type="submit" class="btn btn-gold btn-block btn-lg" id="submitBtn">Đặt lại mật khẩu</button>
+    <button type="submit" class="btn btn-navy btn-block btn-lg" id="submitBtn">Đặt lại mật khẩu</button>
   </form>
   <div class="text-center mt-2 fs-12 text-muted">
     Không nhận được OTP? <a href="/auth/forgot" class="text-navy">Gửi lại</a>

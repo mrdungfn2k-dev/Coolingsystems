@@ -19,7 +19,7 @@
           <div class="form-group">
             <label>Tìm khách hàng (theo tên hoặc SĐT)</label>
             <div style="display:flex;gap:8px">
-              <input type="text" id="customerSearch" placeholder="Nhập tên hoặc SĐT khách..." style="flex:1" oninput="searchCustomer(this.value)">
+              <input type="text" id="customerSearch" placeholder="Nhập tên hoặc SĐT khách..." style="flex:1;padding:10px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;box-sizing:border-box" oninput="searchCustomer(this.value)">
             </div>
             <div id="customerResults" style="display:none;border:1px solid var(--line);border-radius:4px;margin-top:4px;max-height:200px;overflow-y:auto;background:#fff"></div>
           </div>
@@ -51,7 +51,7 @@
         <div style="padding:14px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px;color:var(--navy)"> Sản phẩm</div>
         <div style="padding:16px">
           <div style="display:flex;gap:8px;margin-bottom:12px">
-            <input type="text" id="productSearch" placeholder="Tìm sản phẩm theo tên hoặc SKU..." style="flex:1" oninput="searchProduct(this.value)">
+            <input type="text" id="productSearch" placeholder="Tìm sản phẩm theo tên hoặc SKU..." style="flex:1;padding:10px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;box-sizing:border-box" oninput="searchProduct(this.value)">
           </div>
           <div id="productResults" style="display:none;border:1px solid var(--line);border-radius:4px;margin-bottom:12px;max-height:250px;overflow-y:auto;background:#fff"></div>
           

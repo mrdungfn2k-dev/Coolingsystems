@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1a3258">
-<title><?= e($title ?? '') ?>
 <?php
 // Dynamic system config - load all site settings
 $_sysConf = [];
@@ -15,11 +14,32 @@ $sysEmail = $_sysConf['contact_email'] ?? 'support@coolingsystem.vn';
 $sysWhatsapp = $_sysConf['social_whatsapp'] ?? '';
 $sysTiktok = $_sysConf['social_tiktok'] ?? '';
 $sysFacebook = $_sysConf['social_facebook'] ?? '';
+// === PER-PAGE SEO (consume $seo array if a view set it; safe fallbacks otherwise) ===
+$seo = (isset($seo) && is_array($seo)) ? $seo : [];
+$_defaultDesc = 'Sàn TMĐT phụ tùng ô tô chính hãng. Tra cứu phụ tùng theo dòng xe, mua hàng nhiều shop, bảo hành chính hãng.';
+$_metaDesc = !empty($seo['meta_description']) ? $seo['meta_description'] : $_defaultDesc;
 ?>
- — Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng</title>
-<meta name="description" content="Sàn TMĐT phụ tùng ô tô chính hãng. Tra cứu phụ tùng theo dòng xe, mua hàng nhiều shop, bảo hành chính hãng.">
-<link rel="stylesheet" href="/css/cooling.css?v=1779633952">
-<link rel="stylesheet" href="/css/mobile.css?v=1779633952">
+<title><?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (($title ?? '') . ' — Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng')) ?></title>
+<meta name="description" content="<?= e($_metaDesc) ?>">
+<?php if (!empty($seo['meta_keywords'])): ?>
+<meta name="keywords" content="<?= e($seo['meta_keywords']) ?>">
+<?php endif; ?>
+<?php if (!empty($seo['noindex'])): ?>
+<meta name="robots" content="noindex,follow">
+<?php endif; ?>
+<link rel="stylesheet" href="/css/cooling.css?v=20260608i">
+<style id="public-title-std">
+/* Đồng nhất tiêu đề các mục bên người dùng (theo mẫu "Giới thiệu"): navy, cùng cỡ + font */
+.sec-head .title h1, .sec-head .title h2,
+.pf-head .title h1, .pf-head .title h2 {
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif !important;
+  font-size:18px !important; font-weight:800 !important;
+  text-transform:uppercase !important; letter-spacing:0.04em !important;
+  color:var(--navy) !important; line-height:1.3 !important; margin:0 !important;
+}
+.promo-subhead { color:var(--navy) !important; font-family:'Inter',sans-serif !important; }
+</style>
+<link rel="stylesheet" href="/css/mobile.css?v=1780900000">
 
 <?php
 // === CANONICAL URL ===
@@ -28,6 +48,24 @@ $_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
 if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystem.vn';
 ?>
 <link rel="canonical" href="<?= e($_canonicalUrl) ?>">
+<!-- Open Graph / Twitter Card -->
+<meta property="og:site_name" content="Cooling">
+<meta property="og:type" content="<?= e($seo['og_type'] ?? 'website') ?>">
+<meta property="og:title" content="<?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (($title ?? '') . ' — Cooling')) ?>">
+<meta property="og:description" content="<?= e($_metaDesc) ?>">
+<meta property="og:url" content="<?= e($_canonicalUrl) ?>">
+<meta property="og:image" content="<?= e($seo['og_image'] ?? 'https://coolingsystem.vn/img/og-default.jpg') ?>">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* Global Alignment Fix */
+header.main .wrap, nav.primary .wrap, section.block .wrap, .sec-card .wrap, .hero-section .wrap, .trust .wrap, .top-bar .wrap, .site-breadcrumb .wrap {
+    max-width: 1280px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+</style>
 </head>
 <body>
 
@@ -55,6 +93,7 @@ if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https:/
 </div>
 <?php endif; ?>
 
+<style>.mobile-nav-links a[href="/customer/vouchers"]{display:none !important}</style>
 <!-- Mobile nav drawer -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
@@ -65,8 +104,8 @@ if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https:/
     <a href="/about">Giới thiệu</a>
     <a href="/products">Sản phẩm</a>
     <a href="/brands">Phụ tùng theo hãng</a>
-    <a href="/products?cat=he-thong-lam-mat">Hệ thống làm mát</a>
-    <a href="/promotions">Khuyến mại</a>
+    <a href="/product-brands">Thương hiệu</a>
+    <a href="/vouchers">Khuyến mại</a>
     <span class="nav-section-label">Hỗ trợ</span>
     <a href="/news">Tin tức</a>
     <a href="/policies">Chính sách</a>
@@ -150,16 +189,18 @@ if (isset($_breadcrumbMap[$_curPath])) {
 }
 if (!empty($_bcItems) && $_curPath !== '/'):
 ?>
-<nav class="site-breadcrumb" aria-label="Breadcrumb" style="max-width:100%;padding:10px 40px;font-size:13px;color:var(--ink-3);background:#f8f9fc;border-bottom:1px solid var(--line)">
-  <a href="/" style="color:var(--navy);text-decoration:none;font-weight:600">Trang chủ</a>
-  <?php foreach ($_bcItems as $bc): ?>
-    <span style="margin:0 6px;color:#ccc">›</span>
-    <?php if (!empty($bc[1])): ?>
-      <a href="<?= $bc[1] ?>" style="color:var(--navy);text-decoration:none"><?= $bc[0] ?></a>
-    <?php else: ?>
-      <span style="color:var(--ink-2)"><?= $bc[0] ?></span>
-    <?php endif; ?>
-  <?php endforeach; ?>
+<nav class="site-breadcrumb" aria-label="Breadcrumb" style="background:#f8f9fc;border-bottom:1px solid var(--line)">
+  <div class="wrap" style="padding-top:10px;padding-bottom:10px;font-size:13px;color:var(--ink-3);">
+    <a href="/" style="color:var(--navy);text-decoration:none;font-weight:600">Trang chủ</a>
+    <?php foreach ($_bcItems as $bc): ?>
+      <span style="margin:0 6px;color:#ccc">›</span>
+      <?php if (!empty($bc[1])): ?>
+        <a href="<?= $bc[1] ?>" style="color:var(--navy);text-decoration:none"><?= $bc[0] ?></a>
+      <?php else: ?>
+        <span style="color:var(--ink-2)"><?= $bc[0] ?></span>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
 </nav>
 <?php
 // Breadcrumb Schema.org JSON-LD
