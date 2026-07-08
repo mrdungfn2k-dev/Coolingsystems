@@ -101,6 +101,7 @@ $_abcMap = [
     '/admin/branch-types' => 'Loại chi nhánh cửa hàng',
     '/admin/settings/finance' => 'Cấu hình Vận chuyển',
     '/admin/settings' => 'Cài đặt hệ thống',
+    '/admin/banners' => 'Banner 2',
 ];
 $_abcLabel = $_abcMap[$_ap] ?? '';
 $_abcParent = '';

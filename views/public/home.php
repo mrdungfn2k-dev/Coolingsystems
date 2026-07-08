@@ -71,6 +71,60 @@
   </div>
 </section>
 
+<?php
+/* ===== Banner carousel trang chủ (admin quản lý ở /admin/banners) ===== */
+$__bnRaw = dbGet("SELECT value FROM system_config WHERE key='home_banners'")['value'] ?? '[]';
+$__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], function($b){ return !empty($b['active']) && !empty($b['img']); }));
+?>
+<?php if(!empty($__homeBanners)): ?>
+<section class="home-banners"><div class="wrap">
+  <div class="hbc" id="homeBannerCarousel">
+    <div class="hbc-track">
+      <?php foreach($__homeBanners as $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
+      <div class="hbc-slide">
+        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" loading="lazy"></a>
+        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" loading="lazy"><?php endif; ?>
+      </div>
+      <?php endforeach; ?>
+    </div>
+    <?php if(count($__homeBanners) > 1): ?>
+    <button class="hbc-nav prev" type="button" onclick="hbcMove(-1)" aria-label="Banner trước">&#8249;</button>
+    <button class="hbc-nav next" type="button" onclick="hbcMove(1)" aria-label="Banner sau">&#8250;</button>
+    <div class="hbc-dots"><?php foreach($__homeBanners as $i=>$b): ?><span class="hbc-dot<?= $i===0?' on':'' ?>" onclick="hbcGo(<?= $i ?>)"></span><?php endforeach; ?></div>
+    <?php endif; ?>
+  </div>
+</div></section>
+<style>
+.home-banners { padding: 16px 0 4px; }
+.home-banners .wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+.home-banners .hbc { position: relative; overflow: hidden; border-radius: 14px; box-shadow: 0 6px 22px rgba(20,40,80,.12); background:#0f2342; }
+.hbc-track { display: flex; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
+.hbc-slide { min-width: 100%; }
+.hbc-slide a, .hbc-slide img { display: block; width: 100%; }
+.hbc-slide img { aspect-ratio: 1600 / 250; object-fit: cover; }
+.hbc-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.9); border: none; cursor: pointer; font-size: 26px; line-height: 1; color: #1a3258; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,.18); transition: background .2s; z-index: 2; }
+.hbc-nav:hover { background: #fff; }
+.hbc-nav.prev { left: 14px; } .hbc-nav.next { right: 14px; }
+.hbc-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2; }
+.hbc-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.55); cursor: pointer; transition: all .25s; }
+.hbc-dot.on { background: #fff; width: 24px; border-radius: 5px; }
+@media (max-width: 768px) { .home-banners { padding: 12px 0 2px; } .home-banners .wrap { padding: 0 12px; } .home-banners .hbc { border-radius: 10px; } .hbc-slide img { aspect-ratio: 5 / 2; object-fit: cover; object-position: center; } .hbc-nav { width: 34px; height: 34px; font-size: 22px; } }
+</style>
+<script>
+(function(){
+  var car = document.getElementById('homeBannerCarousel'); if(!car) return;
+  var track = car.querySelector('.hbc-track');
+  var slides = car.querySelectorAll('.hbc-slide');
+  var dots = car.querySelectorAll('.hbc-dot');
+  var n = slides.length, cur = 0, timer = null;
+  window.hbcGo = function(i){ cur = (i % n + n) % n; if(track) track.style.transform = 'translateX(-' + (cur*100) + '%)'; for(var k=0;k<dots.length;k++) dots[k].classList.toggle('on', k===cur); };
+  window.hbcMove = function(d){ hbcGo(cur + d); start(); };
+  function start(){ if(timer){ clearInterval(timer); } if(n > 1){ timer = setInterval(function(){ if(!document.getElementById('homeBannerCarousel')){ clearInterval(timer); return; } hbcGo(cur + 1); }, 5000); } }
+  start();
+})();
+</script>
+<?php endif; ?>
+
 <section class="trust" id="cam-ket"><div class="wrap"><div class="trust-grid">
 <?php
 $trustSteps = dbAll("SELECT * FROM trust_steps WHERE is_active=1 ORDER BY sort_order ASC, id ASC");

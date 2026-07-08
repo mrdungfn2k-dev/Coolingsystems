@@ -3261,6 +3261,37 @@ post('/admin/product-brands/:id/delete', function($p) {
 
 
 // ── Stores Management ──
+
+// ===== Banner trang chu (luu JSON trong system_config) =====
+if (!function_exists('getHomeBanners')) {
+function getHomeBanners() { $v = dbGet("SELECT value FROM system_config WHERE key='home_banners'")['value'] ?? '[]'; $b = json_decode($v, true); return is_array($b) ? array_values($b) : []; }
+function saveHomeBanners($banners) { $json = json_encode(array_values($banners), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES); dbRun("INSERT INTO system_config (key, value, updated_at) VALUES ('home_banners',?,datetime('now')) ON CONFLICT(key) DO UPDATE SET value=?, updated_at=datetime('now')", [$json, $json]); }
+}
+get('/admin/banners', function() { requireRole(['admin'], '/admin/login'); view('admin/banners', ['title'=>'Banner trang chu','banners'=>getHomeBanners()]); });
+post('/admin/banners/add', function() { requireRole(['admin'], '/admin/login'); csrfCheck();
+  $link = trim($_POST['link'] ?? ''); $btitle = trim($_POST['btitle'] ?? ''); $img = '';
+  if (!empty($_FILES['image']['name']) && ($_FILES['image']['error'] ?? 1) === UPLOAD_ERR_OK) {
+    $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+    if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) { $dir = '/opt/cooling-php/uploads/banners/'; if (!is_dir($dir)) @mkdir($dir, 0775, true); $fname = 'hb_'.uniqid().'.'.$ext; if (move_uploaded_file($_FILES['image']['tmp_name'], $dir.$fname)) $img = $fname; }
+  }
+  if ($img === '') { flash('error', 'Vui long chon anh banner hop le (jpg/png/webp/gif).'); redirect('/admin/banners'); return; }
+  $banners = getHomeBanners(); $banners[] = ['img'=>$img, 'link'=>$link, 'title'=>$btitle, 'active'=>1]; saveHomeBanners($banners);
+  flash('success', 'Da them banner.'); redirect('/admin/banners');
+});
+post('/admin/banners/move', function() { requireRole(['admin'], '/admin/login'); csrfCheck();
+  $idx = (int)($_POST['idx'] ?? -1); $d = (($_POST['dir'] ?? '')==='up') ? -1 : 1; $banners = getHomeBanners(); $j = $idx + $d;
+  if (isset($banners[$idx], $banners[$j])) { $t=$banners[$idx]; $banners[$idx]=$banners[$j]; $banners[$j]=$t; saveHomeBanners($banners); }
+  redirect('/admin/banners');
+});
+post('/admin/banners/:idx/toggle', function($p) { requireRole(['admin'], '/admin/login'); csrfCheck();
+  $idx = (int)$p['idx']; $banners = getHomeBanners(); if (isset($banners[$idx])) { $banners[$idx]['active'] = empty($banners[$idx]['active']) ? 1 : 0; saveHomeBanners($banners); } redirect('/admin/banners');
+});
+post('/admin/banners/:idx/delete', function($p) { requireRole(['admin'], '/admin/login'); csrfCheck();
+  $idx = (int)$p['idx']; $banners = getHomeBanners();
+  if (isset($banners[$idx])) { $f = '/opt/cooling-php/uploads/banners/'.($banners[$idx]['img'] ?? ''); if (!empty($banners[$idx]['img']) && is_file($f)) @unlink($f); array_splice($banners, $idx, 1); saveHomeBanners($banners); flash('success', 'Da xoa banner.'); }
+  redirect('/admin/banners');
+});
+
 get('/admin/stores', function() {
     requireStaffPermission('stores', '/auth/login');
     $stores = dbAll("SELECT * FROM stores ORDER BY sort_order, name");

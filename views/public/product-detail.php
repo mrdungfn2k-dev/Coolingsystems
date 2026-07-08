@@ -343,21 +343,7 @@ if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product
               <div class="fs-12 text-muted mt-1">✓ Đối tác xác minh • Bảo hành chính hãng</div>
             </div>
           </div>
-          <?php if($user): ?>
-          <form method="post" action="/customer/chat/start" style="margin-top:12px">
-            <?= csrfField() ?>
-            <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>">
-            <button type="submit" class="btn-chat-shop" style="width:100%;justify-content:center">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-              Chat với Admin (Hỗ trợ)
-            </button>
-          </form>
-          <?php elseif(!$user): ?>
-          <a href="/auth/login?next=/products/<?= (int)$product['id'] ?>" class="btn-chat-shop" style="width:100%;justify-content:center;margin-top:12px;display:flex">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            Đăng nhập để chat với shop
-          </a>
-          <?php endif; ?>
+          <?php /* Nut chat da chuyen thanh icon noi (foot.php .floating-social) */ ?>
         </div>
 
         <div class="pd-trust">

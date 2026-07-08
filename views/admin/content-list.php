@@ -18,13 +18,21 @@
       <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
       <td><button onclick="document.getElementById('footerModal').style.display='flex'" class="btn btn-gold btn-sm">Sửa</button></td>
     </tr>
-    <!-- Banner row -->
+    <!-- Banner row (hero) -->
     <tr>
       <td><strong>Banner trang chủ</strong></td>
       <td class="fs-12"><code>hero-banner</code></td>
       <td class="fs-12">—</td>
       <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
       <td><button onclick="document.getElementById('bannerModal').style.display='flex'" class="btn btn-gold btn-sm">Sửa</button></td>
+    </tr>
+    <!-- Banner 2 (carousel trượt trang chủ) -->
+    <tr>
+      <td><strong>Banner 2</strong></td>
+      <td class="fs-12"><code>home-banners</code></td>
+      <td class="fs-12">—</td>
+      <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
+      <td><a href="/admin/banners" class="btn btn-gold btn-sm">Sửa</a></td>
     </tr>
     <!-- 4 Bước cam kết -->
     <tr>

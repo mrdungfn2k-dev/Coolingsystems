@@ -4,6 +4,7 @@
 <?php if(empty($reviews)): ?>
 <tr><td colspan="7" style="text-align:center;padding:30px;color:#888">Chưa có đánh giá nào.</td></tr>
 <?php else: ?>
+<?php $__rvSt=['published'=>'Đã duyệt','approved'=>'Đã duyệt','active'=>'Đã duyệt','visible'=>'Hiển thị','pending'=>'Chờ duyệt','hidden'=>'Đã ẩn','rejected'=>'Từ chối','draft'=>'Nháp']; ?>
 <?php foreach($reviews as $r):?>
 <?php
   $reviewImages = [];
@@ -37,7 +38,7 @@
     <span style="color:#ccc;font-size:11px">—</span>
   <?php endif; ?>
 </td>
-<td><span class="badge-status <?=e($r['status'])?>"><?=e($r['status'])?></span></td>
+<td><span class="badge-status <?=e($r['status'])?>"><?= e($__rvSt[$r['status']] ?? $r['status']) ?></span></td>
 <td class="fs-12"><?=relTime($r['created_at'])?></td>
 </tr>
 <?php endforeach;?>

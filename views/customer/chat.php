@@ -17,7 +17,7 @@ if ($thread) {
 .chat-topbar .nm{font-weight:700;font-size:15px;line-height:1.2}
 .chat-topbar .st{font-size:12px;opacity:.85;display:flex;align-items:center;gap:6px;margin-top:3px}
 .chat-topbar .st .dot{width:8px;height:8px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 0 3px rgba(74,222,128,.25)}
-.chat-body{height:420px;overflow-y:auto;padding:18px;background:#f4f7fb}
+.chat-body{height:520px;overflow-y:auto;padding:18px;background:#f4f7fb}
 .chat-body img{max-width:100% !important}
 .chat-empty{text-align:center;padding:46px 20px}
 .chat-empty .ic{width:74px;height:74px;border-radius:50%;background:#e8eef7;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
@@ -31,7 +31,7 @@ if ($thread) {
 .chat-form-wrap .chat-send-btn:hover{background:#0f2342}
 @media (max-width:480px){.chat-form-wrap{gap:6px;padding:10px}.chat-form-wrap .chat-send-btn{padding:0 16px}.chat-topbar{padding:12px 14px}}
 </style>
-<section class="block"><div class="wrap" style="max-width:760px;box-sizing:border-box;overflow:hidden;margin:24px auto">
+<section class="block"><div class="wrap" style="max-width:1280px;box-sizing:border-box;overflow:hidden;margin:24px auto">
   <div class="sec-card chat-card">
     <div class="sec-head"><div class="title"><span class="bar"></span><h2>Tin nhắn với Admin</h2></div></div>
     <div class="chat-topbar">
@@ -50,7 +50,7 @@ if ($thread) {
           $isMe = ($m['sender_role'] === 'customer');
         ?>
         <div style="display:flex;justify-content:<?= $isMe ? 'flex-end' : 'flex-start' ?>;margin-bottom:12px">
-          <div style="max-width:72%;word-break:break-word;overflow-wrap:break-word;padding:10px 14px;border-radius:<?= $isMe ? '16px 16px 4px 16px' : '16px 16px 16px 4px' ?>;background:<?= $isMe ? '#1a3258' : '#fff' ?>;color:<?= $isMe ? '#fff' : '#1f2937' ?>;box-shadow:0 1px 4px rgba(15,35,66,.08);font-size:14px;line-height:1.5">
+          <div style="max-width:620px;word-break:break-word;overflow-wrap:break-word;padding:10px 14px;border-radius:<?= $isMe ? '16px 16px 4px 16px' : '16px 16px 16px 4px' ?>;background:<?= $isMe ? '#1a3258' : '#fff' ?>;color:<?= $isMe ? '#fff' : '#1f2937' ?>;box-shadow:0 1px 4px rgba(15,35,66,.08);font-size:14px;line-height:1.5">
             <?php if (!empty($m['content'])): ?><?= nl2br(e($m['content'])) ?><?php endif; ?>
             <?php if (!empty($m['image_path'])): ?><img src="/uploads/chat/<?= e($m['image_path']) ?>" style="max-width:200px;border-radius:8px;margin-top:6px" onerror="this.style.display='none'"><?php endif; ?>
             <div style="font-size:10px;opacity:0.6;margin-top:4px;text-align:right"><?= date('H:i d/m', strtotime($m['created_at'])) ?></div>
@@ -134,7 +134,7 @@ function appendAdminMsg(m){
   var wrap=document.createElement('div'); wrap.style.cssText='display:flex;justify-content:flex-start;margin-bottom:12px';
   var img=''; if(m.image_path){ img='<img src="/uploads/chat/'+m.image_path+'" style="max-width:200px;border-radius:8px;margin-top:6px" onerror="this.style.display=&#39;none&#39;">'; }
   var ca=(m.created_at||''); var t=ca.length>=16 ? (ca.substr(11,5)+' '+ca.substr(8,2)+'/'+ca.substr(5,2)) : '';
-  wrap.innerHTML='<div style="max-width:72%;word-break:break-word;overflow-wrap:break-word;padding:10px 14px;border-radius:16px 16px 16px 4px;background:#fff;color:#1f2937;box-shadow:0 1px 4px rgba(15,35,66,.08);font-size:14px;line-height:1.5">'+(m.content?escapeChatHtml(m.content).replace(/\n/g,'<br>'):'')+img+'<div style="font-size:10px;opacity:.6;margin-top:4px;text-align:right">'+t+'</div></div>';
+  wrap.innerHTML='<div style="max-width:620px;word-break:break-word;overflow-wrap:break-word;padding:10px 14px;border-radius:16px 16px 16px 4px;background:#fff;color:#1f2937;box-shadow:0 1px 4px rgba(15,35,66,.08);font-size:14px;line-height:1.5">'+(m.content?escapeChatHtml(m.content).replace(/\n/g,'<br>'):'')+img+'<div style="font-size:10px;opacity:.6;margin-top:4px;text-align:right">'+t+'</div></div>';
   box.appendChild(wrap); box.scrollTop=box.scrollHeight;
 }
 function pollCustChat(){
