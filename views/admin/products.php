@@ -257,9 +257,9 @@ document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
         <?= csrfField() ?>
         <button type="button" title="Xóa sản phẩm"
           onclick="showDeleteModal(<?=$p['id']?>)"
-          style="display:inline-flex;align-items:center;justify-content:center;height:30px;width:30px;border-radius:6px;background:transparent;color:#9ca3af;border:none;cursor:pointer;opacity:0.3;transition:all 0.2s"
-          onmouseover="this.style.color='#dc2626'; this.style.opacity='1'; this.style.background='#fee2e2';"
-          onmouseout="this.style.color='#9ca3af'; this.style.opacity='0.3'; this.style.background='transparent';">
+          style="display:inline-flex;align-items:center;justify-content:center;height:30px;width:30px;border-radius:6px;background:#fdf2f2;color:#ef4444;border:1px solid #fca5a5;cursor:pointer;opacity:1;transition:all 0.2s"
+          onmouseover="this.style.color='#dc2626'; this.style.background='#fee2e2';"
+          onmouseout="this.style.color='#ef4444'; this.style.background='#fdf2f2';">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"></path></svg>
         </button>
       </form>
