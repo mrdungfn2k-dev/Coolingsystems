@@ -289,6 +289,16 @@ elseif ($step === 'reset') {
         }
         echo "<span class='ok'>🔄 Reset auto-increment xong</span>\n";
 
+        // Recreate default platform partner (Partner 1) and its user (User 5) and wallet (Wallet 1)
+        // to prevent 500 errors when admin adds products.
+        $pdo->exec("INSERT INTO users (id, role, email, phone, password_hash, full_name, status, email_verified, created_at, updated_at)
+            VALUES (5, 'partner', 'pmc@partner.vn', '0986103595', '$2a$08$Xc4tMCcvHK2uMPmGvB2nvenEWfdE88ST9ybb5T8sbsSYwJjiZoVKW', 'PMC Vietnam Co.,Ltd', 'active', 1, '2026-05-10T15:31:56.083Z', '2026-05-18T04:31:05.950Z')");
+        $pdo->exec("INSERT INTO partners (id, user_id, shop_name, shop_slug, type, tax_code, representative_name, warehouse_address, contact_phone, contact_email, bank_name, bank_account_number, bank_account_holder, description, status, approved_by, approved_at, created_at, updated_at)
+            VALUES (1, 5, 'PMC Phụ Tùng Hàn Quốc', 'pmc-phu-tung-han-quoc', 'business', '0301234567', 'PMC Vietnam Co.,Ltd', '123 Trường Chinh, Đống Đa, Hà Nội', '0986123456', 'pmc@partner.vn', 'Vietcombank', '0123456789012', 'PMC Vietnam Co.,Ltd', 'Đối tác chính hãng — chuyên phụ tùng OEM xe Hàn Quốc, cung cấp full warranty và hỗ trợ kỹ thuật 24/7.', 'active', 1, '2026-05-10T15:31:56.083Z', '2026-05-10T15:31:56.084Z', '2026-05-10T15:31:56.084Z')");
+        $pdo->exec("INSERT INTO wallets (partner_id, balance_available, balance_pending_settlement, balance_pending_withdraw, total_earned, total_withdrawn, updated_at)
+            VALUES (1, 0, 0, 0, 0, 0, '2026-05-10T15:31:56.084Z')");
+        echo "<span class='ok'>🌱 Khôi phục Đối tác mặc định (PMC Phụ Tùng Hàn Quốc - ID 1) xong</span>\n";
+
         $pdo->exec('COMMIT');
         $pdo->exec('PRAGMA foreign_keys = ON');
         $pdo->exec('VACUUM');
