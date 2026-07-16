@@ -187,6 +187,116 @@ function removeAccents($str) {
     return $str;
 }
 
+/**
+ * Build a stable ASCII slug for product URLs.
+ */
+function seoSlug(string $value): string {
+    $value = mb_strtolower(removeAccents(trim($value)), 'UTF-8');
+    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+    return trim((string)$value, '-');
+}
+
+/**
+ * Reproduce the legacy slug algorithm so old malformed URLs can be redirected.
+ */
+function legacyProductSlug(string $value): string {
+    $value = preg_replace('/\s+/', '-', strtolower(trim($value)));
+    return trim((string)preg_replace('/[^a-z0-9\-]/', '', $value), '-');
+}
+
+function uniqueProductSlug(string $value, int $excludeId = 0): string {
+    $base = seoSlug($value);
+    if ($base === '') $base = 'san-pham';
+
+    $slug = $base;
+    $suffix = 2;
+    while (dbGet('SELECT id FROM products WHERE slug=? AND id<>?', [$slug, $excludeId])) {
+        $slug = $base . '-' . $suffix;
+        $suffix++;
+    }
+    return $slug;
+}
+
+function rememberProductSlugRedirect(int $productId, string $oldSlug, string $newSlug): void {
+    $oldSlug = trim($oldSlug);
+    $newSlug = trim($newSlug);
+    if ($productId < 1 || $oldSlug === '' || $oldSlug === $newSlug) return;
+
+    dbRun("CREATE TABLE IF NOT EXISTS product_slug_redirects (
+        slug TEXT PRIMARY KEY,
+        product_id INTEGER NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE
+    )");
+    dbRun('INSERT OR REPLACE INTO product_slug_redirects (slug, product_id) VALUES (?,?)', [$oldSlug, $productId]);
+}
+
+function productPath(array $product): string {
+    $slug = trim((string)($product['slug'] ?? ''));
+    $identifier = $slug !== '' ? $slug : (string)(int)($product['id'] ?? 0);
+    return '/products/' . rawurlencode($identifier);
+}
+
+function productCanonicalUrl(array $product): string {
+    return 'https://coolingsystem.vn' . productPath($product);
+}
+
+/**
+ * Convert rich text (including text that was entity-encoded more than once)
+ * to clean, single-line text suitable for metadata and JSON-LD.
+ */
+function seoPlainText(?string $value): string {
+    $text = strip_tags((string)$value);
+    for ($i = 0; $i < 3; $i++) {
+        $decoded = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        if ($decoded === $text) break;
+        $text = $decoded;
+    }
+    $text = preg_replace('/[\x00-\x1F\x7F]+/', ' ', $text);
+    $text = preg_replace('/[\s\x{00A0}]+/u', ' ', (string)$text);
+    return trim((string)$text);
+}
+
+function seoTruncateText(?string $value, int $limit): string {
+    $text = seoPlainText($value);
+    if ($limit < 1 || mb_strlen($text, 'UTF-8') <= $limit) return $text;
+
+    $short = mb_substr($text, 0, $limit + 1, 'UTF-8');
+    $short = preg_replace('/\s+\S*$/u', '', $short);
+    if ($short === '' || mb_strlen($short, 'UTF-8') < (int)($limit * 0.6)) {
+        $short = mb_substr($text, 0, $limit, 'UTF-8');
+    }
+    return rtrim((string)$short, " \t\n\r\0\x0B,.;:-");
+}
+
+function productMetaTitle(array $product, int $limit = 65): string {
+    $source = seoPlainText(!empty($product['seo_title']) ? $product['seo_title'] : ($product['name'] ?? ''));
+    $source = preg_replace('/\s+[—\-]\s*CoolingSystem\s*$/iu', '', $source);
+    if (mb_strlen((string)$source, 'UTF-8') <= $limit) return (string)$source;
+
+    $oem = seoPlainText($product['oem_code'] ?? '');
+    if ($oem !== '' && mb_stripos((string)$source, $oem, 0, 'UTF-8') !== false) {
+        $withoutOem = trim((string)preg_replace('/\s*' . preg_quote($oem, '/') . '\s*/iu', ' ', (string)$source, 1));
+        $prefixLimit = max(20, $limit - mb_strlen($oem, 'UTF-8') - 1);
+        return trim(seoTruncateText($withoutOem, $prefixLimit) . ' ' . $oem);
+    }
+    return seoTruncateText((string)$source, $limit);
+}
+
+function jsonLd(array $data): string {
+    $json = json_encode(
+        $data,
+        JSON_UNESCAPED_UNICODE
+        | JSON_UNESCAPED_SLASHES
+        | JSON_HEX_TAG
+        | JSON_HEX_AMP
+        | JSON_HEX_APOS
+        | JSON_HEX_QUOT
+        | JSON_INVALID_UTF8_SUBSTITUTE
+    );
+    return $json === false ? '{}' : $json;
+}
+
 // Giữ tên file ảnh người dùng đặt (chuẩn SEO), chỉ chuẩn hóa: bỏ dấu TV, khoảng trắng/ký tự lạ -> '-', và tránh trùng tên.
 function seoImageName($originalName, $ext, $uploadDir) {
     $base = pathinfo((string)$originalName, PATHINFO_FILENAME);
@@ -362,4 +472,3 @@ function csvHeadSel($out, $section) {
 function csvRowSel($out, $keys, $row) {
     fputcsv($out, array_map(function($k) use($row){ return $row[$k] ?? ''; }, $keys));
 }
-

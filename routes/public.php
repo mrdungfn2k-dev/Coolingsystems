@@ -181,18 +181,43 @@ get('/products', function() {
 // Slug-based SEO-friendly URL: /products/dan-lanh-toyota-camry-2018-xyz
 get('/products/:slug', function($p) {
     $param = $p['slug'];
+    $product = null;
+    $productSelect = "SELECT p.*, COALESCE(pt.shop_name,'Cooling') AS shop_name, pt.shop_slug, pt.id AS partner_id, b.name as car_brand_name, c.name as category_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN categories c ON c.id=p.category_id";
     // If numeric ID, redirect to slug URL (301 for SEO)
     if(is_numeric($param)) {
-        $prod = dbGet("SELECT slug FROM products WHERE id=?", [(int)$param]);
+        $prod = dbGet("SELECT id, slug FROM products WHERE id=?", [(int)$param]);
         if($prod && !empty($prod['slug'])) {
-            header("Location: /products/".$prod['slug'], true, 301);
+            header('Location: ' . productPath($prod), true, 301);
             exit;
         }
         // No slug yet, serve by ID
-        $product = dbGet("SELECT p.*, COALESCE(pt.shop_name,'Cooling') AS shop_name, pt.shop_slug, pt.id AS partner_id, b.name as car_brand_name, c.name as category_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN categories c ON c.id=p.category_id WHERE p.id=?", [(int)$param]);
+        $product = dbGet($productSelect . " WHERE p.id=?", [(int)$param]);
     } else {
         // Lookup by slug
-        $product = dbGet("SELECT p.*, COALESCE(pt.shop_name,'Cooling') AS shop_name, pt.shop_slug, pt.id AS partner_id, b.name as car_brand_name, c.name as category_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN categories c ON c.id=p.category_id WHERE p.slug=?", [$param]);
+        $product = dbGet($productSelect . " WHERE p.slug=?", [$param]);
+
+        // Preserve every previous slug recorded during migrations or product edits.
+        if (!$product) {
+            $redirectTable = dbGet("SELECT 1 AS found FROM sqlite_master WHERE type='table' AND name='product_slug_redirects'");
+            if ($redirectTable) {
+                $redirectProduct = dbGet($productSelect . " INNER JOIN product_slug_redirects psr ON psr.product_id=p.id WHERE psr.slug=?", [$param]);
+                if ($redirectProduct) {
+                    header('Location: ' . productPath($redirectProduct), true, 301);
+                    exit;
+                }
+            }
+        }
+
+        // Fallback for legacy installs that have not created the redirect history yet.
+        if (!$product) {
+            $publishedProducts = dbAll($productSelect . " WHERE p.status='published'");
+            foreach ($publishedProducts as $candidate) {
+                if (legacyProductSlug((string)$candidate['name']) === $param) {
+                    header('Location: ' . productPath($candidate), true, 301);
+                    exit;
+                }
+            }
+        }
     }
     if (!$product) { http_response_code(404); view('errors/404',['title'=>'SP không tìm thấy']); return; }
     $images = dbAll("SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC", [(int)$product['id']]);
@@ -317,8 +342,11 @@ get('/promotions', function() {
 // ── Sitemap XML ──────────────────────────────────────────────────────────────
 get('/sitemap.xml', function() {
     header('Content-Type: application/xml; charset=UTF-8');
-    $products = dbAll("SELECT id, slug, updated_at FROM products WHERE status='published' ORDER BY updated_at DESC LIMIT 500");
-    $now = date('Y-m-d');
+    $products = dbAll("SELECT p.id, p.slug, p.name, p.updated_at,
+        (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC, sort_order ASC LIMIT 1) AS main_image
+        FROM products p
+        WHERE p.status='published' AND COALESCE(p.is_indexed,1)=1
+        ORDER BY p.updated_at DESC LIMIT 50000");
     echo '<?xml version="1.0" encoding="UTF-8"?>';
     echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
@@ -328,17 +356,20 @@ get('/sitemap.xml', function() {
     foreach ($statics as $s) {
         echo '<url><loc>https://coolingsystem.vn'.e($s).'</loc>';
         echo '<changefreq>weekly</changefreq><priority>'.($s==='/'?'1.0':'0.8').'</priority>';
-        echo '<lastmod>'.$now.'</lastmod></url>';
+        echo '</url>';
     }
 
     // Products
     foreach ($products as $p) {
-        $slug = $p['slug'] ?: $p['id'];
-        $mod = substr($p['updated_at']??$now, 0, 10);
+        $mod = substr($p['updated_at'] ?? '', 0, 10);
         echo '<url>';
-        echo '<loc>https://coolingsystem.vn/products/'.e($p['id']).'</loc>';
+        echo '<loc>'.e(productCanonicalUrl($p)).'</loc>';
         echo '<changefreq>weekly</changefreq><priority>0.9</priority>';
-        echo '<lastmod>'.$mod.'</lastmod>';
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $mod)) echo '<lastmod>'.$mod.'</lastmod>';
+        if (!empty($p['main_image'])) {
+            $imageUrl = 'https://coolingsystem.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($p['main_image']));
+            echo '<image:image><image:loc>'.e($imageUrl).'</image:loc><image:title>'.e(seoPlainText($p['name'])).'</image:title></image:image>';
+        }
         echo '</url>';
     }
 

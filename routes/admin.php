@@ -2198,7 +2198,7 @@ post('/admin/post-on-behalf', function() {
     $price = intval($_POST['price'] ?? 0);
     $stock = intval($_POST['stock'] ?? 0);
     if (!$partnerId || !$name || !$sku || !$price) { flash('error','Thiếu thông tin bắt buộc.'); redirect('/admin/post-on-behalf'); }
-    $slug = preg_replace('/[^a-z0-9]+/','-',strtolower(removeAccents($name)));
+    $slug = uniqueProductSlug($name);
     $id = dbInsert("INSERT INTO products (partner_id, sku, oem_code, part_brand, category_id, name, slug, description, price, compare_price, stock, warranty_months, status, admin_created, published_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'published',1,datetime('now'))",
         [$partnerId, $sku, $_POST['oem_code']??'', $_POST['part_brand']??'', intval($_POST['category_id']??0), $name, $slug, $_POST['description']??'', $price, intval($_POST['original_price']??0), $stock, intval($_POST['warranty_months']??12)]);
     flash('success','Đã đăng SP #'.$id.' thành công!');
@@ -2225,17 +2225,17 @@ post('/admin/post-on-behalf', function() {
     $catId = intval($_POST['category_id'] ?? 0) ?: null;
     $desc = trim($_POST['description'] ?? '');
     if (!$name || !$price) { flash('error','Thiếu tên hoặc giá'); redirect('/admin/post-on-behalf'); return; }
-    $slug = preg_replace('/[^a-z0-9]+/', '-', strtolower($name));
-    dbInsert("INSERT INTO products (partner_id, name, slug, oem_code, price, stock, category_id, description, status, published_at) VALUES (?,?,?,?,?,?,?,?,'published',datetime('now'))",
+    $slug = uniqueProductSlug($name);
+    $id = dbInsert("INSERT INTO products (partner_id, name, slug, oem_code, price, stock, category_id, description, status, published_at) VALUES (?,?,?,?,?,?,?,?,'published',datetime('now'))",
         [$partnerId, $name, $slug, $oem, $price, $stock, $catId, $desc]);
     // Save SEO fields
     $seoTitle = trim($_POST['seo_title'] ?? '');
     $seoDesc = trim($_POST['seo_description'] ?? '');
     $seoKeyword = trim($_POST['seo_keyword'] ?? '');
-    $seoSlug = trim($_POST['slug'] ?? '');
+    $seoSlug = !empty($_POST['slug']) ? uniqueProductSlug($_POST['slug'], (int)$id) : $slug;
     if ($seoTitle || $seoDesc || $seoKeyword || $seoSlug) {
-        dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=COALESCE(NULLIF(?,'''),slug) WHERE id=?",
-            [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $p['id']]);
+        dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=? WHERE id=?",
+            [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $id]);
     }
     
     flash('success','Đã đăng sản phẩm hộ đối tác.');
@@ -2261,8 +2261,7 @@ post('/admin/products/new', function() {
     $stock = intval($d['stock'] ?? 0);
     if ($stock > 1000) { $stock = 1000; }
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
-    $slug = trim($d['slug'] ?? '') ?: preg_replace('/\s+/','-',strtolower(trim($name)));
-    $slug = preg_replace('/[^a-z0-9\-]/','',$slug);
+    $slug = uniqueProductSlug(trim($d['slug'] ?? '') ?: $name);
 
     // === SERVER-SIDE VALIDATION ===
     $valErrors = [];
@@ -2371,7 +2370,7 @@ post('/admin/products/new', function() {
     $seoTitle = trim($d['seo_title'] ?? '');
     $seoDesc = trim($d['seo_description'] ?? '');
     $seoKeyword = trim($d['seo_keyword'] ?? '');
-    $seoSlug = trim($d['slug'] ?? '') ?: $slug;
+    $seoSlug = $slug;
     dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=? WHERE id=?",
         [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $id]);
     
@@ -2484,14 +2483,11 @@ post('/admin/products/:id/edit', function($p) {
     $seoTitle = trim($_POST['seo_title'] ?? '');
     $seoDesc = trim($_POST['seo_description'] ?? '');
     $seoKeyword = trim($_POST['seo_keyword'] ?? '');
-    $seoSlug = trim($_POST['slug'] ?? '');
-    if ($seoSlug) {
-        dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=? WHERE id=?",
-            [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $p['id']]);
-    } else {
-        dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=? WHERE id=?",
-            [$seoTitle, $seoDesc, $seoKeyword, $p['id']]);
-    }
+    $oldSlugRow = dbGet('SELECT slug FROM products WHERE id=?', [$p['id']]);
+    $seoSlug = uniqueProductSlug(trim($_POST['slug'] ?? '') ?: trim($d['name'] ?? ''), (int)$p['id']);
+    dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=? WHERE id=?",
+        [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $p['id']]);
+    rememberProductSlugRedirect((int)$p['id'], (string)($oldSlugRow['slug'] ?? ''), $seoSlug);
     // Save video_url if provided
     $videoUrl = trim($d['video_url'] ?? '');
     if ($videoUrl !== '') {

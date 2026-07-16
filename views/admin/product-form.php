@@ -413,7 +413,7 @@ function swTab(t){
             <?= isset($product) ? ' Cập nhật SP' : ' Đăng sản phẩm' ?>
           </button>
           <?php if(isset($product)):?>
-            <a href="/products/<?= $product['id'] ?>" target="_blank" class="btn btn-outline-navy btn-block btn-sm" style="margin-top:8px;text-align:center"> Xem trang SP</a>
+            <a href="<?= e(productPath($product)) ?>" target="_blank" class="btn btn-outline-navy btn-block btn-sm" style="margin-top:8px;text-align:center"> Xem trang SP</a>
           <?php endif;?>
         </div>
       </div>

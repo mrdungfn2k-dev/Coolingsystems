@@ -5,10 +5,11 @@ if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $
     $displayPrice = $p['sale_price'];
     $displayOriginalPrice = $p['price'];
 }
+$productPath = productPath($p);
 ?>
 <div class="prod-card">
   <!-- Ảnh sản phẩm — bấm vào xem chi tiết -->
-  <a href="/products/<?= $p['id'] ?>" class="prod-img-wrap" style="display:block;background:#fff;aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;margin-bottom:10px<?= !empty($p['main_image']) ? ';--pcbg:url(\'/uploads/products/'.e($p['main_image']).'\')' : '' ?>">
+  <a href="<?= e($productPath) ?>" class="prod-img-wrap" style="display:block;background:#fff;aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;margin-bottom:10px<?= !empty($p['main_image']) ? ';--pcbg:url(\'/uploads/products/'.e($p['main_image']).'\')' : '' ?>">
     <?php if ($p['main_image']): ?>
       <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" loading="lazy" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover;padding:0">
     <?php else: ?>
@@ -35,7 +36,7 @@ if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $
 
   <!-- Mã & tên -->
   <div style="font-size:10px;color:var(--ink-4);margin-bottom:3px">Cooling · <?= e($p['oem_code']??'') ?></div>
-  <a href="/products/<?= $p['id'] ?>" style="display:block;font-weight:600;font-size:13px;line-height:1.4;color:var(--navy-dark);text-decoration:none;margin-bottom:6px;min-height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical"><?= e($p['name']) ?></a>
+  <a href="<?= e($productPath) ?>" style="display:block;font-weight:600;font-size:13px;line-height:1.4;color:var(--navy-dark);text-decoration:none;margin-bottom:6px;min-height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical"><?= e($p['name']) ?></a>
 
   <?php $displayRating = floatval($p['rating_avg'] ?? $p['avg_rating'] ?? 0); $displayCount = intval($p['rating_count'] ?? $p['review_count'] ?? $p['rating_count'] ?? 0); if ($displayRating > 0): ?>
     <div style="margin-bottom:4px"><span style="color:var(--gold-warm);font-size:12px"><?= stars(round($displayRating)) ?></span> <span style="color:var(--ink-4);font-size:11px">(<?= $p['review_count']??0 ?>)</span></div>
@@ -86,7 +87,7 @@ if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
         </svg>
       </button>
-      <a href="/products/<?= $p['id'] ?>" style="font-size:11px;color:var(--navy);font-weight:700;text-decoration:none;display:flex;align-items:center;">Chi tiết <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left:2px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="<?= e($productPath) ?>" style="font-size:11px;color:var(--navy);font-weight:700;text-decoration:none;display:flex;align-items:center;">Chi tiết <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-left:2px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </div>

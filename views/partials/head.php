@@ -17,7 +17,7 @@ $sysFacebook = $_sysConf['social_facebook'] ?? '';
 // === PER-PAGE SEO (consume $seo array if a view set it; safe fallbacks otherwise) ===
 $seo = (isset($seo) && is_array($seo)) ? $seo : [];
 $_defaultDesc = 'Sàn TMĐT phụ tùng ô tô chính hãng. Tra cứu phụ tùng theo dòng xe, mua hàng nhiều shop, bảo hành chính hãng.';
-$_metaDesc = !empty($seo['meta_description']) ? $seo['meta_description'] : $_defaultDesc;
+$_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_description'] : $_defaultDesc, 160);
 ?>
 <title><?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (($title ?? '') . ' — Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng')) ?></title>
 <meta name="description" content="<?= e($_metaDesc) ?>">
@@ -46,6 +46,7 @@ $_metaDesc = !empty($seo['meta_description']) ? $seo['meta_description'] : $_def
 $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
 if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystem.vn';
+if (!empty($seo['canonical'])) $_canonicalUrl = $seo['canonical'];
 ?>
 <link rel="canonical" href="<?= e($_canonicalUrl) ?>">
 <!-- Open Graph / Twitter Card -->
@@ -206,23 +207,20 @@ if (!empty($_bcItems) && $_curPath !== '/'):
 // Breadcrumb Schema.org JSON-LD
 $_schemaItems = [['name' => 'Trang chủ', 'url' => 'https://coolingsystem.vn']];
 foreach ($_bcItems as $i => $bc) {
-    $_schemaItems[] = ['name' => strip_tags($bc[0]), 'url' => !empty($bc[1]) ? 'https://coolingsystem.vn'.$bc[1] : $_canonicalUrl];
+    $_schemaItems[] = ['name' => seoPlainText($bc[0]), 'url' => !empty($bc[1]) ? 'https://coolingsystem.vn'.$bc[1] : $_canonicalUrl];
 }
+$breadcrumbSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => array_map(static function(array $item, int $index): array {
+        return [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'name' => $item['name'],
+            'item' => $item['url'],
+        ];
+    }, $_schemaItems, array_keys($_schemaItems)),
+];
 ?>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    <?php foreach ($_schemaItems as $si => $item): ?>
-    {
-      "@type": "ListItem",
-      "position": <?= $si + 1 ?>,
-      "name": "<?= addslashes($item['name']) ?>",
-      "item": "<?= $item['url'] ?>"
-    }<?= $si < count($_schemaItems) - 1 ? ',' : '' ?>
-    <?php endforeach; ?>
-  ]
-}
-</script>
+<script type="application/ld+json"><?= jsonLd($breadcrumbSchema) ?></script>
 <?php endif; ?>

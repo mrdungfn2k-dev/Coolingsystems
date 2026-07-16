@@ -1,13 +1,33 @@
 <?php
 $title = $product['name'];
 $mainImg = !empty($images) ? 'https://coolingsystem.vn/uploads/products/'.$images[0]['file_path'] : null;
+$productUrl = productCanonicalUrl($product);
+$displayPrice = $product['price'] ?? 0;
+$displayOriginalPrice = $product['original_price'] ?? null;
+if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product['sale_price'] < $product['price']) {
+    $displayPrice = $product['sale_price'];
+    $displayOriginalPrice = $product['price'];
+}
+
+$descriptionHtml = preg_replace('#<\s*(/?)\s*h1\b#i', '<$1h2', (string)($product['description'] ?? ''));
+$descriptionPlain = seoPlainText($descriptionHtml);
+if (!empty($product['seo_description'])) {
+    $metaDescription = seoTruncateText($product['seo_description'], 155);
+} else {
+    $stockText = ($product['stock'] ?? 0) > 0 ? 'còn hàng' : 'tạm hết hàng';
+    $warrantyText = !empty($product['warranty_months']) ? ', bảo hành ' . (int)$product['warranty_months'] . ' tháng' : '';
+    $metaDescription = seoTruncateText(
+        ($product['name'] ?? '') . '. Giá ' . vnd((int)$displayPrice) . ', ' . $stockText . $warrantyText . ' tại CoolingSystem.',
+        155
+    );
+}
 $seo = [
-    'meta_title'       => (!empty($product['seo_title']) ? $product['seo_title'] : $product['name']) . ' — CoolingSystem',
-    'meta_description' => !empty($product['seo_description']) ? $product['seo_description'] : mb_substr(strip_tags($product['description']??''),0,155),
+    'meta_title'       => productMetaTitle($product),
+    'meta_description' => $metaDescription,
     'meta_keywords'    => !empty($product['seo_keyword']) ? $product['seo_keyword'] : $product['name'].', '.($product['oem_code']??'').', '.($product['part_brand']??'').', phụ tùng ô tô',
     'og_type'          => 'product',
     'og_image'         => $mainImg ?? 'https://coolingsystem.vn/img/og-default.jpg',
-    'canonical'        => 'https://coolingsystem.vn/products/'.(!empty($product['slug']) ? $product['slug'] : (int)$product['id']),
+    'canonical'        => $productUrl,
     'noindex'          => ($product['is_indexed']??1) == 0,
 ];
 require __DIR__ . '/../partials/head.php';
@@ -16,110 +36,86 @@ require __DIR__ . '/../partials/head.php';
 <!-- ══ GEO: Full Structured Data ══ -->
 <?php
 $catName = $product['category_name'] ?? 'Phụ tùng';
-// Extract FAQ from description (detect H3 starting with  emoji)
 $faqItems = [];
-$descHtml = $product['description'] ?? '';
-// Match: <h3> Question text</h3> followed by <p>Answer text</p>
-if(preg_match_all('#<h[23][^>]*>\s*(?:<[^>]+>)*\s*\s*(?:<[^>]+>)*\s*(.*?)</h[23]>\s*<p[^>]*>(.*?)</p>#si', $descHtml, $faqMatches, PREG_SET_ORDER)) {
+// Only mark up headings that are actual questions and whose answers are visible in the description.
+if (preg_match_all('#<h[23][^>]*>(.*?)</h[23]>\s*<p[^>]*>(.*?)</p>#si', $descriptionHtml, $faqMatches, PREG_SET_ORDER)) {
     foreach($faqMatches as $faq) {
-        $q = trim(strip_tags($faq[1]));
-        $a = trim(strip_tags($faq[2]));
-        if(mb_strlen($q) > 5 && mb_strlen($a) > 10) {
+        $q = seoPlainText($faq[1]);
+        $a = seoPlainText($faq[2]);
+        if (str_ends_with($q, '?') && mb_strlen($q) > 5 && mb_strlen($a) > 10) {
             $faqItems[] = ['q' => $q, 'a' => $a];
         }
     }
 }
-// Also match: <h3>Câu hỏi ... ?</h3><p>Answer</p> pattern
-if(empty($faqItems)) {
-    if(preg_match_all('#<h[23][^>]*>\s*(?:<[^>]+>)*\s*((?:Câu hỏi|Hỏi|Tại sao|Khi nào|Làm sao|Có nên|Bao lâu|Giá bao nhiêu)[^<]*\?)\s*(?:</[^>]+>)*\s*</h[23]>\s*<p[^>]*>(.*?)</p>#si', $descHtml, $faqMatches, PREG_SET_ORDER)) {
-        foreach($faqMatches as $faq) {
-            $q = trim(strip_tags($faq[1]));
-            $a = trim(strip_tags($faq[2]));
-            if(mb_strlen($q) > 5 && mb_strlen($a) > 10) {
-                $faqItems[] = ['q' => $q, 'a' => $a];
-            }
-        }
-    }
+
+$schemaImages = [];
+foreach ($images as $image) {
+    if (empty($image['file_path'])) continue;
+    $schemaImages[] = 'https://coolingsystem.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($image['file_path']));
+}
+
+$brandName = trim((string)($product['part_brand'] ?? ''));
+if ($brandName === '' || $brandName === 'HIDDEN') $brandName = 'CoolingSystem';
+$productSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => seoPlainText($product['name'] ?? ''),
+    'description' => seoTruncateText($descriptionPlain !== '' ? $descriptionPlain : $metaDescription, 5000),
+    'brand' => ['@type' => 'Brand', 'name' => $brandName],
+    'category' => seoPlainText($catName),
+    'url' => $productUrl,
+    'offers' => [
+        '@type' => 'Offer',
+        'priceCurrency' => 'VND',
+        'price' => number_format((float)$displayPrice, 0, '.', ''),
+        'availability' => ($product['stock'] ?? 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'itemCondition' => 'https://schema.org/NewCondition',
+        'url' => $productUrl,
+        'seller' => ['@type' => 'Organization', 'name' => 'CoolingSystem'],
+    ],
+];
+if (!empty($schemaImages)) $productSchema['image'] = $schemaImages;
+if (!empty($product['sku'])) $productSchema['sku'] = seoPlainText($product['sku']);
+if (!empty($product['oem_code'])) $productSchema['mpn'] = seoPlainText($product['oem_code']);
+if (($product['rating_avg'] ?? 0) > 0 && ($product['rating_count'] ?? 0) > 0) {
+    $productSchema['aggregateRating'] = [
+        '@type' => 'AggregateRating',
+        'ratingValue' => (float)$product['rating_avg'],
+        'reviewCount' => (int)$product['rating_count'],
+        'bestRating' => 5,
+        'worstRating' => 1,
+    ];
+}
+if (!empty($product['warranty_months'])) {
+    $productSchema['additionalProperty'] = [[
+        '@type' => 'PropertyValue',
+        'name' => 'Bảo hành',
+        'value' => (int)$product['warranty_months'] . ' tháng',
+    ]];
+}
+
+$faqSchema = null;
+if (!empty($faqItems)) {
+    $faqSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => array_map(static function(array $faq): array {
+            return [
+                '@type' => 'Question',
+                'name' => $faq['q'],
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['a']],
+            ];
+        }, $faqItems),
+    ];
 }
 ?>
 
-<!-- 1. Product Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "<?= e($product['name']) ?>",
-  "description": "<?= e(mb_substr(strip_tags($product['description']??''),0,300)) ?>",
-  "sku": "<?= e($product['sku']??'') ?>",
-  "mpn": "<?= e($product['oem_code']??'') ?>",
-  "brand": {
-    "@type": "Brand",
-    "name": "<?= e($product['part_brand']??'Cooling') ?>"
-  },
-  "category": "<?= e($catName) ?>",
-  <?php if($mainImg): ?>"image": "<?= e($mainImg) ?>",<?php endif; ?>
-  "url": "https://coolingsystem.vn/products/<?= !empty($product['slug']) ? e($product['slug']) : (int)$product['id'] ?>",
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "VND",
-    "price": "<?= $displayPrice ?>",
-    "availability": "<?= ($product['stock']??0)>0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' ?>",
-    "url": "https://coolingsystem.vn/products/<?= !empty($product['slug']) ? e($product['slug']) : (int)$product['id'] ?>",
-    "seller": {
-      "@type": "Organization",
-      "name": "Cooling — Phụ Tùng & Dịch Vụ Ô Tô"
-    }
-  }
-  <?php if(($product['rating_avg']??0)>0): ?>
-  ,"aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "<?= $product['rating_avg'] ?>",
-    "reviewCount": "<?= $product['rating_count']??0 ?>",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
-  <?php endif; ?>
-  <?php if(!empty($product['warranty_months'])): ?>
-  ,"additionalProperty": [{
-    "@type": "PropertyValue",
-    "name": "Bảo hành",
-    "value": "<?= $product['warranty_months'] ?> tháng"
-  }]
-  <?php endif; ?>
-}
-</script>
+<!-- Product Schema -->
+<script type="application/ld+json"><?= jsonLd($productSchema) ?></script>
 
-
-
-<?php
-$displayPrice = $product['price'] ?? 0;
-$displayOriginalPrice = $product['original_price'] ?? null;
-if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product['sale_price'] < $product['price']) {
-    $displayPrice = $product['sale_price'];
-    $displayOriginalPrice = $product['price'];
-}
-?>
-<?php if(!empty($faqItems)): ?>
-<!-- 3. FAQ Schema (auto-detected from content) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    <?php foreach($faqItems as $i => $faq): ?>
-    <?= $i > 0 ? ',' : '' ?>
-    {
-      "@type": "Question",
-      "name": "<?= e($faq['q']) ?>",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "<?= e($faq['a']) ?>"
-      }
-    }
-    <?php endforeach; ?>
-  ]
-}
-</script>
+<?php if($faqSchema): ?>
+<!-- FAQ Schema -->
+<script type="application/ld+json"><?= jsonLd($faqSchema) ?></script>
 <?php endif; ?>
 <style>
 .pd-grid{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:start}
@@ -358,7 +354,7 @@ if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product
     <?php if(!empty($product['description'])): ?>
     <div style="margin-top:32px;border-top:1px solid var(--line);padding-top:24px">
       <h2 class="serif text-navy mb-2" style="font-size:18px">Mô tả sản phẩm</h2>
-      <div style="line-height:1.9;color:var(--ink-2);font-size:14px" class="pd-content-html" itemprop="description"><?= $product['description'] ?></div>
+      <div style="line-height:1.9;color:var(--ink-2);font-size:14px" class="pd-content-html" itemprop="description"><?= $descriptionHtml ?></div>
     </div>
     <?php endif; ?>
 
