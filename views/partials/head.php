@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1a3258">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260716">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260716">
+<link rel="shortcut icon" href="/favicon.ico?v=20260716">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260716">
+<link rel="manifest" href="/site.webmanifest?v=20260716">
 <?php
 // Dynamic system config - load all site settings
 $_sysConf = [];
