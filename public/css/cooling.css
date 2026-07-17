@@ -2012,12 +2012,12 @@ input[type=text], input[type=email], input[type=search], input[type=url], input[
 /* PCBG-BLURFILL */
 .prod-img-wrap{position:relative !important;overflow:hidden !important;background:#fff !important}
 .prod-img-wrap::before{content:"" !important;position:absolute !important;inset:0 !important;z-index:0 !important;background-image:var(--pcbg,none) !important;background-size:cover !important;background-position:center !important;filter:blur(16px) saturate(1.08) !important;transform:scale(1.18) !important;pointer-events:none !important}
-.prod-img-wrap>img{position:relative !important;z-index:1 !important;width:100% !important;height:100% !important;object-fit:cover !important;padding:0 !important}
+.prod-img-wrap>img{position:relative !important;z-index:1 !important;width:100% !important;height:100% !important;object-fit:contain !important;padding:0 !important}
 .prod-img-wrap>span{z-index:2 !important}
 
-/* PCBG-UNIFORM */  /* identical square frame on every breakpoint */
-.prod-card a.prod-img-wrap[style*="aspect-ratio"]{aspect-ratio:1 !important;height:auto !important;width:100% !important}
-.prod-card a.prod-img-wrap[style*="aspect-ratio"]>img{width:100% !important;height:100% !important;max-height:none !important;min-height:0 !important;object-fit:cover !important;padding:0 !important;box-sizing:border-box !important}
+/* PCBG-UNIFORM */
+.prod-card a.prod-img-wrap[style*="aspect-ratio"]{aspect-ratio:4/3 !important;height:auto !important;width:100% !important}
+.prod-card a.prod-img-wrap[style*="aspect-ratio"]>img{width:100% !important;height:100% !important;max-height:none !important;min-height:0 !important;object-fit:contain !important;padding:0 !important;box-sizing:border-box !important}
 .prod-card a.prod-img-wrap[style*="aspect-ratio"]::before{z-index:0 !important}
 
 /* HIDE-DUP-BREADCRUMB */  /* an breadcrumb trung lap cua tung trang, giu .site-breadcrumb auto cua head.php */

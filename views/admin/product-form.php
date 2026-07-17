@@ -1,7 +1,5 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
-<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script src="/tinymce/tinymce.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.default.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
@@ -14,16 +12,6 @@
 .ts-dropdown .active { background:var(--navy) !important; color:#fff !important; }
 .ts-wrapper.focus .ts-control { border-color:var(--navy) !important; box-shadow:0 0 0 3px rgba(26,50,88,.12) !important; }
 </style>
-<script>
-function swTab(t){
-  ['desc','feat','spec'].forEach(function(x){
-    var panel=document.getElementById('panel'+x.charAt(0).toUpperCase()+x.slice(1));
-    var tab=document.getElementById('tab'+x.charAt(0).toUpperCase()+x.slice(1));
-    if(panel)panel.style.display=x===t?'block':'none';
-    if(tab){tab.classList.toggle('_tab-active',x===t);}
-  });
-}
-</script>
 <style>
 input[type="checkbox"]{outline:none!important;box-shadow:none!important;border:none!important;accent-color:#1a3258;}
 input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
@@ -54,11 +42,9 @@ input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
 </div>
 
 <form method="post" action="<?= isset($product) ? '/admin/products/'.$product['id'].'/edit' : '/admin/products/new' ?>"
-      enctype="multipart/form-data" id="productForm">
+      enctype="multipart/form-data" id="productForm" autocomplete="off">
   <?= csrfField() ?>
   <input type="hidden" name="description" id="descHidden">
-  <input type="hidden" name="seo_title_field" id="seoTitleHidden">
-  <input type="hidden" name="seo_description_field" id="seoDescHidden">
 
   <div class="form-layout">
     <!-- LEFT COLUMN -->
@@ -69,13 +55,19 @@ input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
         <div class="panel-body">
           <div class="form-group">
             <label>Tên sản phẩm <span class="req">*</span></label>
-            <input type="text" name="name" required minlength="5" maxlength="200"
+            <input type="text" name="name" id="productName" required minlength="5" maxlength="200"
                    value="<?= e($product['name']??'') ?>" placeholder="Tên đầy đủ sản phẩm">
+          </div>
+          <div class="form-group">
+            <label>Đường dẫn URL</label>
+            <input type="text" name="slug" id="productSlug" maxlength="180"
+                   data-auto="<?= isset($product) ? '0' : '1' ?>"
+                   value="<?= e($product['slug']??'') ?>" placeholder="Tự động tạo từ tên sản phẩm">
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Mã sản phẩm (SKU) <span class="req">*</span></label>
-              <input type="text" name="sku" required value="<?= e($product['sku']??'') ?>" placeholder="VD: CS-001">
+              <label>Mã sản phẩm (SKU)</label>
+              <input type="text" name="sku" value="<?= e($product['sku']??'') ?>" placeholder="Để trống sẽ dùng mã OEM">
             </div>
             <div class="form-group">
               <label>Mã OEM</label>
@@ -102,44 +94,6 @@ input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
                 <span style="color:#dc2626;font-weight:500">Không hiển thị mục Thương hiệu</span>
               </label>
               
-<style>
-/* Quill font size dropdown labels */
-.ql-snow .ql-picker.ql-size .ql-picker-label::before { content: 'Cỡ chữ'; }
-.ql-snow .ql-picker.ql-size .ql-picker-item::before { content: attr(data-value); }
-.ql-snow .ql-picker.ql-size .ql-picker-label[data-value]::before { content: attr(data-value); }
-
-/* Quill font family dropdown labels */
-.ql-snow .ql-picker.ql-font .ql-picker-label::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item::before { content: 'Sans Serif'; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before { content: 'Serif'; font-family: Georgia, serif; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before { content: 'Monospace'; font-family: monospace; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="sans-serif"]::before { content: 'Sans Serif'; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="arial"]::before { content: 'Arial'; font-family: Arial; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="times"]::before { content: 'Times New Roman'; font-family: 'Times New Roman'; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="verdana"]::before { content: 'Verdana'; font-family: Verdana; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="tahoma"]::before { content: 'Tahoma'; font-family: Tahoma; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="georgia"]::before { content: 'Georgia'; font-family: Georgia; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="impact"]::before { content: 'Impact'; font-family: Impact; }
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="courier"]::before { content: 'Courier New'; font-family: 'Courier New'; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before { content: 'Serif'; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before { content: 'Monospace'; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="sans-serif"]::before { content: 'Sans Serif'; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="arial"]::before { content: 'Arial'; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="times"]::before { content: 'Times New Roman'; }
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="georgia"]::before { content: 'Georgia'; }
-/* Apply actual fonts to items */
-.ql-font-serif { font-family: Georgia, serif; }
-.ql-font-monospace { font-family: 'Courier New', monospace; }
-.ql-font-sans-serif { font-family: Arial, sans-serif; }
-.ql-font-arial { font-family: Arial; }
-.ql-font-times { font-family: 'Times New Roman', serif; }
-.ql-font-verdana { font-family: Verdana; }
-.ql-font-tahoma { font-family: Tahoma; }
-.ql-font-georgia { font-family: Georgia; }
-.ql-font-impact { font-family: Impact; }
-.ql-font-courier { font-family: 'Courier New', monospace; }
-</style>
-
               <script>
               function updateBrandHidden(){
                 var sel = document.getElementById('partBrandSelect');
@@ -261,6 +215,8 @@ function swTab(t){
       else tab.classList.remove('_tab-active');
     }
   });
+  if(t==='feat' && typeof initFeatEditor==='function') initFeatEditor();
+  if(t==='spec' && typeof initSpecEditor==='function') initSpecEditor();
 }
 </script>
 
@@ -271,8 +227,8 @@ function swTab(t){
           <?php if(!empty($images)):?>
             <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px" id="existingImagesRow">
               <?php foreach($images as $img):?>
-                <div class="existing-img-wrap" data-img-id="<?= $img['id'] ?>" style="position:relative;width:90px;height:90px;border-radius:6px;overflow:hidden;border:2px solid #e0e0e0;flex-shrink:0">
-                  <img src="/uploads/products/<?= e($img['file_path']) ?>" style="width:100%;height:100%;object-fit:cover">
+                <div class="existing-img-wrap" data-img-id="<?= $img['id'] ?>" style="position:relative;width:120px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:2px solid #e0e0e0;flex-shrink:0;background:#fff">
+                  <img src="/uploads/products/<?= e($img['file_path']) ?>" style="width:100%;height:100%;object-fit:contain">
                   <button type="button" onclick="deleteProductImage(<?= $img['id'] ?>, this)" title="Xóa ảnh này"
                     style="position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s"
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
@@ -286,12 +242,19 @@ function swTab(t){
             <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;">
               <label style="cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:140px;height:140px;border:1px dashed #ccc;border-radius:8px;background:#f8f9fa;text-align:center;transition:all 0.2s" onmouseover="this.style.background='#f0f4f8';this.style.borderColor='var(--navy)'" onmouseout="this.style.background='#f8f9fa';this.style.borderColor='#ccc'">
                 <div style="padding:6px 14px;background:#fff;border:1px solid #ddd;border-radius:6px;color:#333;font-weight:600;font-size:13px;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:8px">Thêm ảnh</div>
-                <span style="font-size:12px;color:#888;padding:0 8px;line-height:1.4">Mỗi ảnh không quá 100 MB<br>(Tối đa 8 ảnh)</span>
+                <span style="font-size:12px;color:#888;padding:0 8px;line-height:1.4">Mỗi ảnh không quá 20 MB<br>(Tối đa 8 ảnh)</span>
                 <input type="file" id="img-picker" multiple accept="image/jpeg,image/png,image/webp" style="display:none">
               </label>
               <div id="img-preview-area" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
             </div>
             <input type="file" name="images[]" id="img-hidden-input" multiple accept="image/*" style="display:none">
+            <?php if (isset($product) && !empty($images)): ?>
+              <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;cursor:pointer;width:max-content;max-width:100%">
+                <input type="checkbox" name="replace_images" id="replaceImages" value="1" checked
+                       style="width:15px;height:15px;accent-color:var(--navy);flex:0 0 auto">
+                <span>Khi tải ảnh mới, thay toàn bộ bộ ảnh hiện tại</span>
+              </label>
+            <?php endif; ?>
           </div>
           <div id="imgPreviewRow" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>
 
@@ -350,6 +313,16 @@ function swTab(t){
              Panel này phân tích nội dung bạn đã nhập ở <b>Thông tin cơ bản</b>, <b>Mô tả</b>, <b>Đặc điểm</b>, <b>Thông số kỹ thuật</b> xem đã chuẩn SEO chưa — tương tự Rank Math / Yoast SEO trong WordPress.
           </div>
           <div class="form-group">
+            <label>Tiêu đề Google</label>
+            <input type="text" name="seo_title" id="seoTitle" maxlength="70"
+                   value="<?= e(!empty($product['seo_title']) ? $product['seo_title'] : ($product['meta_title']??'')) ?>" placeholder="Để trống để hệ thống tự tạo">
+          </div>
+          <div class="form-group">
+            <label>Mô tả Google</label>
+            <textarea name="seo_description" id="seoDescription" rows="3" maxlength="170"
+                      placeholder="Để trống để hệ thống tự tạo"><?= e(!empty($product['seo_description']) ? $product['seo_description'] : ($product['meta_description']??'')) ?></textarea>
+          </div>
+          <div class="form-group">
             <label>Từ khóa mục tiêu <span style="font-weight:400;color:#888;font-size:11px">(Focus Keyword — để kiểm tra)</span></label>
             <div style="display:flex;gap:8px;align-items:center">
               <input type="text" name="seo_keyword" id="seoKeyword" style="flex:1"
@@ -370,7 +343,7 @@ function swTab(t){
               Xem trước trên Google
             </div>
             <div id="seoPreviewTitle" style="font-size:18px;color:#1a0dab;line-height:1.3;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Tiêu đề sản phẩm — Cooling</div>
-            <div style="font-size:12px;color:#006621;margin-bottom:2px">https://coolingsystem.vn/products/...</div>
+            <div style="font-size:12px;color:#006621;margin-bottom:2px">https://coolingsystem.vn/products/<span id="seoPreviewSlug">...</span></div>
             <div id="seoPreviewDesc" style="font-size:13px;color:#545454;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Mô tả sản phẩm...</div>
           </div>
 
@@ -424,16 +397,16 @@ function swTab(t){
         <div class="panel-body">
           <div class="form-group">
             <label>Giá nhập <span style="color:#888;font-weight:normal;font-size:11px">(tùy chọn)</span></label>
-            <input type="number" name="cost_price" id="costPrice" min="0" max="100000000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>100000000)this.value=100000000" value="<?= $product['cost_price']??'' ?>" placeholder="VD: 400000">
+            <input type="text" name="cost_price" id="costPrice" inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" data-numeric-max="100000000" value="<?= $product['cost_price']??'' ?>" placeholder="VD: 400000">
           </div>
 
           <div class="form-group">
             <label>Giá bán sau VAT <span class="req">*</span></label>
-            <input type="number" name="price" id="priceAfterVat" required min="1000" max="100000000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>100000000)this.value=100000000" value="<?= $product['price']??'' ?>" placeholder="VD: 440000">
+            <input type="text" name="price" id="priceAfterVat" required inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" data-numeric-max="100000000" value="<?= $product['price']??'' ?>" placeholder="VD: 440000">
           </div>
           <div class="form-group">
             <label>Giá gốc (để gạch ngang)</label>
-            <input type="number" name="original_price" min="0" max="100000000" step="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>100000000)this.value=100000000" value="<?= $product['original_price']??'' ?>">
+            <input type="text" name="original_price" inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" data-numeric-max="100000000" value="<?= $product['original_price']??'' ?>">
           </div>
           
           <div class="form-group">
@@ -590,7 +563,11 @@ function tinymceImageUploadHandler(blobInfo, progress) {
   });
 }
 
-tinymce.init({
+function initDescEditor() {
+  var target = document.getElementById('tinymceDesc');
+  if (!target || target.dataset.editorLoading || tinymce.get('tinymceDesc')) return;
+  target.dataset.editorLoading = '1';
+  tinymce.init({
   selector: '#tinymceDesc',
   height: 300,
   language: 'vi',
@@ -650,8 +627,15 @@ tinymce.init({
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
-});
-tinymce.init({
+  });
+}
+initDescEditor();
+
+function initFeatEditor() {
+  var target = document.getElementById('tinymceFeat');
+  if (!target || target.dataset.editorLoading || tinymce.get('tinymceFeat')) return;
+  target.dataset.editorLoading = '1';
+  tinymce.init({
   selector: '#tinymceFeat',
   height: 250,
   language: 'vi',
@@ -711,8 +695,14 @@ tinymce.init({
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
-});
-tinymce.init({
+  });
+}
+
+function initSpecEditor() {
+  var target = document.getElementById('tinymceSpec');
+  if (!target || target.dataset.editorLoading || tinymce.get('tinymceSpec')) return;
+  target.dataset.editorLoading = '1';
+  tinymce.init({
   selector: '#tinymceSpec',
   height: 250,
   language: 'vi',
@@ -772,16 +762,25 @@ tinymce.init({
   setup: function(editor) {
     editor.on('change', function() { editor.save(); });
   }
-});
+  });
+}
 
 
 
 
 
 document.getElementById('productForm').addEventListener('submit', function(e) {
+  if (window.tinymce) tinymce.triggerSave();
   // === VALIDATE CÁC TRƯỜNG BẮT BUỘC ===
   var name  = (document.querySelector('input[name="name"]')?.value  || '').trim();
-  var sku   = (document.querySelector('input[name="sku"]')?.value   || '').trim();
+  var skuInput = document.querySelector('input[name="sku"]');
+  var oemInput = document.querySelector('input[name="oem_code"]');
+  var sku = (skuInput?.value || '').trim();
+  var oem = (oemInput?.value || '').trim();
+  if (!sku && oem && skuInput) {
+    skuInput.value = oem;
+    sku = oem;
+  }
   var price = (document.querySelector('input[name="price"]')?.value || '').trim();
   var stockEl = document.querySelector('input[name="stock"]');
   var stock = stockEl !== null ? stockEl.value : null;
@@ -792,7 +791,7 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
 
   var errors = [];
   if (!name)  errors.push('• Tên sản phẩm không được để trống');
-  if (!sku)   errors.push('• Mã sản phẩm (SKU) không được để trống');
+  if (!sku)   errors.push('• Vui lòng nhập mã sản phẩm (SKU) hoặc mã OEM');
   if (!price || parseInt(price) <= 0) errors.push('• Giá bán sau VAT phải lớn hơn 0');
   if (stock === '' || stock === null) errors.push('• Tồn kho hiện tại không được để trống');
   if (!catVal || catVal === '') errors.push('• Vui lòng chọn danh mục sản phẩm');
@@ -990,6 +989,13 @@ function pickKeyword(el) {
 function runSeoAnalysis() {
   var name = (document.querySelector('input[name="name"]')?.value || '').trim();
   var keyword = (document.getElementById('seoKeyword')?.value || '').toLowerCase().trim();
+  var slugInput = document.getElementById('productSlug');
+  var slug = (slugInput?.value || '').trim();
+  if (slugInput && slugInput.dataset.auto === '1' && name) {
+    slug = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    slugInput.value = slug;
+  }
 
   function readEditor(edId, taName) {
     if (typeof tinymce !== 'undefined') {
@@ -1021,8 +1027,12 @@ function runSeoAnalysis() {
   var allText = (name + ' ' + descText + ' ' + featText + ' ' + specText).toLowerCase();
 
   // Preview Google SERP
-  document.getElementById('seoPreviewTitle').textContent = name ? name + ' — CoolingSystem' : 'Tiêu đề sản phẩm...';
-  document.getElementById('seoPreviewDesc').textContent = descText ? descText.substring(0,155) : 'Mô tả sản phẩm...';
+  var customSeoTitle = (document.getElementById('seoTitle')?.value || '').trim();
+  var customSeoDesc = (document.getElementById('seoDescription')?.value || '').trim();
+  var previewTitle = customSeoTitle || name;
+  document.getElementById('seoPreviewTitle').textContent = previewTitle || 'Tiêu đề sản phẩm...';
+  document.getElementById('seoPreviewDesc').textContent = customSeoDesc || (descText ? descText.substring(0,155) : 'Mô tả sản phẩm...');
+  document.getElementById('seoPreviewSlug').textContent = slug || '...';
 
   // ── WEIGHTED SCORING (100 điểm) ──
   // Meta/Tiêu đề: 10đ | Mô tả: 35đ | Cấu trúc: 20đ | Từ khóa: 25đ | Hình ảnh: 10đ
@@ -1031,7 +1041,7 @@ function runSeoAnalysis() {
   function add(pass, msg, cat, pts) { if(pass) score += pts; checks.push({pass:pass,msg:msg,cat:cat,pts:pts}); }
 
   // ─ META / TIÊU ĐỀ (10đ)
-  add(name.length >= 20 && name.length <= 100, 'Tiêu đề dài ' + name.length + ' ký tự (tốt: 20-100)', 'meta', 5);
+  add(previewTitle.length >= 20 && previewTitle.length <= 70, 'Tiêu đề Google dài ' + previewTitle.length + ' ký tự (tốt: 20-70)', 'meta', 5);
   var catSel = document.querySelector('select[name="category_id"]');
   add(catSel && catSel.value && catSel.value !== '', 'Đã chọn danh mục sản phẩm', 'meta', 5);
 
@@ -1110,6 +1120,9 @@ setTimeout(function() {
   });
   document.querySelector('input[name="name"]')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
   document.querySelector('input[name="sku"]')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
+  document.getElementById('productSlug')?.addEventListener('input', function(){this.dataset.auto='0';clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,300);});
+  document.getElementById('seoTitle')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,300);});
+  document.getElementById('seoDescription')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,300);});
   document.getElementById('seoKeyword')?.addEventListener('input', function(){clearTimeout(window._seoT);window._seoT=setTimeout(runSeoAnalysis,500);});
   document.querySelector('select[name="category_id"]')?.addEventListener('change', function(){runSeoAnalysis();});
 }, 1500);
@@ -1198,13 +1211,16 @@ function saveImageOrder(container) {
 
   picker.addEventListener('change', function(e) {
     var newFiles = Array.from(e.target.files);
-    if (selectedFiles.length + newFiles.length > 8) {
-      alert('Tối đa 8 ảnh!');
+    var replaceImages = document.getElementById('replaceImages');
+    var existingCount = document.querySelectorAll('#existingImagesRow .existing-img-wrap').length;
+    var maximumNewImages = !replaceImages || replaceImages.checked ? 8 : Math.max(0, 8 - existingCount);
+    if (selectedFiles.length + newFiles.length > maximumNewImages) {
+      alert('Sản phẩm chỉ được có tối đa 8 ảnh.');
       return;
     }
     newFiles.forEach(function(file) {
-      if (file.size > 5 * 1024 * 1024) {
-        alert('Ảnh "' + file.name + '" quá 5MB, bỏ qua.');
+      if (file.size > 20 * 1024 * 1024) {
+        alert('Ảnh "' + file.name + '" quá 20 MB, bỏ qua.');
         return;
       }
       selectedFiles.push(file);
@@ -1220,10 +1236,10 @@ function saveImageOrder(container) {
       var wrapper = document.createElement('div');
       wrapper.className = 'existing-img-wrap';
       wrapper.setAttribute('data-file-idx', idx);
-      wrapper.style.cssText = 'position:relative;width:100px;height:100px;border:1px solid #d0d5dd;border-radius:6px;overflow:hidden;background:#f9fafb;cursor:grab;flex-shrink:0;';
+      wrapper.style.cssText = 'position:relative;width:120px;aspect-ratio:4/3;border:1px solid #d0d5dd;border-radius:6px;overflow:hidden;background:#fff;cursor:grab;flex-shrink:0;';
 
       var img = document.createElement('img');
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none;';
+      img.style.cssText = 'width:100%;height:100%;object-fit:contain;pointer-events:none;';
       var reader = new FileReader();
       reader.onload = function(e) { img.src = e.target.result; };
       reader.readAsDataURL(file);
@@ -1293,6 +1309,19 @@ function saveImageOrder(container) {
 
 // Initialize Tom Select for dropdowns
 document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('[data-numeric-max]').forEach(function(input) {
+    function normalizeNumericValue() {
+      var digits = input.value.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '');
+      var maximum = parseInt(input.getAttribute('data-numeric-max'), 10) || 0;
+      if (maximum > 0 && digits !== '' && parseInt(digits, 10) > maximum) {
+        digits = String(maximum);
+      }
+      if (input.value !== digits) input.value = digits;
+    }
+    input.addEventListener('input', normalizeNumericValue, {passive: true});
+    input.addEventListener('change', normalizeNumericValue);
+  });
+
   if (document.getElementById('partBrandSelect')) {
     new TomSelect('#partBrandSelect', {
       plugins: ['remove_button'],

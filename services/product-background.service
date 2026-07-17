@@ -1,0 +1,26 @@
+[Unit]
+Description=Cooling product background removal service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/cooling-php
+Environment=PYTHONUNBUFFERED=1
+Environment=U2NET_HOME=/var/lib/cooling/rembg-models
+Environment=NUMBA_CACHE_DIR=/var/cache/cooling-bgremove
+Environment=PRODUCT_BG_MODEL=isnet-general-use
+Environment=PRODUCT_BG_HOST=127.0.0.1
+Environment=PRODUCT_BG_PORT=7010
+Environment=OMP_NUM_THREADS=2
+ExecStart=/opt/cooling-bgremove-venv/bin/python /opt/cooling-php/services/product-background-service.py
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=300
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

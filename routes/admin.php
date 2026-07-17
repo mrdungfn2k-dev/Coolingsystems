@@ -358,6 +358,7 @@ post('/admin/products/import-csv', function() {
         if ($name === '') { $errors[] = "Dòng $lineNum: thiếu tên sản phẩm"; continue; }
         $sku = trim((string)$g('sku'));
         $oem = trim((string)$g('oem'));
+        $sku = resolveProductSku($sku, $oem);
         $brand = trim((string)$g('brand'));
         $carBrandName = trim((string)$g('car_brand'));
         $price = $toInt($g('price'));
@@ -390,7 +391,14 @@ post('/admin/products/import-csv', function() {
         $isFeatured = in_array($fRaw, ['co','1','yes','x','true']) ? 1 : 0;
         if (!$priceBefore && $price > 0) $priceBefore = intval(round($price / 1.1));
         $taxAmount = $price - $priceBefore;
-        $slug = trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(removeAccents($name))), '-');
+        $slug = uniqueProductSlug($name);
+        $autoSeoTitle = productMetaTitle(['name' => $name, 'oem_code' => $oem]);
+        $autoSeoDescription = productMetaDescription([
+            'name' => $name,
+            'price' => $price,
+            'stock' => $stock,
+            'warranty_months' => $warranty,
+        ]);
         $existing = $sku ? dbGet("SELECT id FROM products WHERE sku=?", [$sku]) : null;
         try {
             if ($existing && $dupSku === 'update') {
@@ -405,6 +413,9 @@ post('/admin/products/import-csv', function() {
                 if ($specs !== '') { $updates[]="specifications=?"; $params[]=$specs; }
                 if ($desc !== '') { $updates[]="description=?"; $params[]=$desc; }
                 $updates[]="category_id=?"; $params[]=$catId;
+                $updates[]="seo_title=CASE WHEN TRIM(COALESCE(seo_title,''))='' THEN ? ELSE seo_title END"; $params[]=$autoSeoTitle;
+                $updates[]="seo_description=CASE WHEN TRIM(COALESCE(seo_description,''))='' THEN ? ELSE seo_description END"; $params[]=$autoSeoDescription;
+                $updates[]="updated_at=datetime('now','localtime')";
                 $params[] = $existing['id'];
                 dbRun("UPDATE products SET " . implode(',', $updates) . " WHERE id=?", $params);
                 $imported++;
@@ -450,6 +461,15 @@ post('/admin/products/import-csv', function() {
                             }
                         }
                     }
+                }
+                $newProduct = dbGet("SELECT id FROM products WHERE partner_id=1 AND sku=?", [$sku]);
+                if ($newProduct) {
+                    dbRun("UPDATE products SET seo_title=?, seo_description=?, is_indexed=?, updated_at=datetime('now','localtime') WHERE id=?", [
+                        $autoSeoTitle,
+                        $autoSeoDescription,
+                        $finalStatus === 'published' ? 1 : 0,
+                        $newProduct['id'],
+                    ]);
                 }
                 $imported++;
             }
@@ -1541,6 +1561,11 @@ post('/staff/login', function() {
     redirect('/staff');
 });
 
+get('/staff/', function() {
+    header('Location: /staff', true, 301);
+    exit;
+});
+
 get('/staff', function() {
     $user = requireRole('staff', '/staff/login');
     if (!staffHasAssignment($user['id'])) { flash('error','Tài khoản chưa được phân quyền nhân viên. Vui lòng liên hệ quản trị viên.'); redirect('/'); }
@@ -2254,7 +2279,8 @@ post('/admin/products/new', function() {
     $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
     $d = $_POST;
     $name = trim($d['name'] ?? '');
-    $sku  = trim($d['sku']  ?? '');
+    $oem = trim($d['oem_code'] ?? '');
+    $sku = resolveProductSku($d['sku'] ?? '', $oem);
     $price = intval($d['price'] ?? 0);
     $priceBefore = intval($d['price_before_tax'] ?? 0);
     $taxAmt = intval($d['tax_amount'] ?? 0);
@@ -2262,11 +2288,25 @@ post('/admin/products/new', function() {
     if ($stock > 1000) { $stock = 1000; }
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $slug = uniqueProductSlug(trim($d['slug'] ?? '') ?: $name);
+    $seoTitle = trim($d['seo_title'] ?? '');
+    if ($seoTitle === '') {
+        $seoTitle = productMetaTitle(['name' => $name, 'oem_code' => $oem]);
+    }
+    $seoDesc = trim($d['seo_description'] ?? '');
+    if ($seoDesc === '') {
+        $seoDesc = productMetaDescription([
+            'name' => $name,
+            'price' => $price,
+            'stock' => $stock,
+            'warranty_months' => intval($d['warranty_months'] ?? 12),
+        ]);
+    }
+    $seoKeyword = trim($d['seo_keyword'] ?? '');
 
     // === SERVER-SIDE VALIDATION ===
     $valErrors = [];
     if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
-    if (!$sku)  $valErrors[] = 'Mã SKU không được để trống';
+    if (!$sku)  $valErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
     if ($price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
     if (!isset($d['stock']) || $d['stock'] === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
     if (empty($d['category_id'])) $valErrors[] = 'Vui lòng chọn danh mục sản phẩm';
@@ -2302,7 +2342,7 @@ post('/admin/products/new', function() {
         $name,
         $sku,
         $slug,
-        trim($d['oem_code']??''),
+        $oem,
         trim($d['part_brand']??''),
         intval($d['car_brand_id']??0) ?: null,
         intval($d['category_id']??0) ?: null,
@@ -2328,9 +2368,9 @@ post('/admin/products/new', function() {
         intval($d['width_cm']??0) ?: null,
         intval($d['height_cm']??0) ?: null,
         intval($d['depth_cm']??0) ?: null,
-        trim($d['seo_title']??''),
-        trim($d['seo_description']??''),
-        trim($d['seo_keyword']??''),
+        $seoTitle,
+        $seoDesc,
+        $seoKeyword,
         trim($d['video_url']??''),
         intval($d['cost_price']??0),
         intval($d['cost_price']??0) * $stock,
@@ -2351,30 +2391,37 @@ post('/admin/products/new', function() {
     }
     dbRun("UPDATE products SET car_brand_id=? WHERE id=?", [$firstBrand, $id]);
 
-    // Handle images
+    // Handle and normalize product images.
+    $imageUploadErrors = [];
     if (!empty($_FILES['images']['name'][0])) {
         $uploadDir = '/opt/cooling-php/uploads/products/';
+        $savedImageCount = 0;
         foreach ($_FILES['images']['tmp_name'] as $k => $tmp) {
             if (!is_uploaded_file($tmp)) continue;
-            $ext = strtolower(pathinfo($_FILES['images']['name'][$k], PATHINFO_EXTENSION));
-            if (!in_array($ext, ['jpg','jpeg','png','webp'])) continue;
-            $fname = seoImageName($_FILES['images']['name'][$k], $ext, $uploadDir);
-            if (move_uploaded_file($tmp, $uploadDir . $fname)) {
+            $upload = [
+                'name' => $_FILES['images']['name'][$k] ?? '',
+                'tmp_name' => $tmp,
+                'error' => $_FILES['images']['error'][$k] ?? UPLOAD_ERR_NO_FILE,
+                'size' => $_FILES['images']['size'][$k] ?? 0,
+            ];
+            $imageError = null;
+            $imageSeoBase = $name . ' ' . $sku . ($k > 0 ? ' ' . ($k + 1) : '');
+            $fname = storeNormalizedProductUpload($upload, $imageSeoBase, $uploadDir, $imageError);
+            if ($fname !== null) {
                 dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
-                    [$id, $fname, $k===0 ? 1 : 0, $k]);
+                    [$id, $fname, $savedImageCount === 0 ? 1 : 0, $savedImageCount]);
+                $savedImageCount++;
+            } else {
+                $imageUploadErrors[] = basename((string)$upload['name']) . ': ' . ($imageError ?: 'Không xử lý được ảnh.');
             }
         }
     }
 
-    // Save SEO fields
-    $seoTitle = trim($d['seo_title'] ?? '');
-    $seoDesc = trim($d['seo_description'] ?? '');
-    $seoKeyword = trim($d['seo_keyword'] ?? '');
-    $seoSlug = $slug;
-    dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=? WHERE id=?",
-        [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $id]);
-    
-    flash('success','Sản phẩm đã được đăng thành công!');
+    $successMessage = 'Sản phẩm đã được đăng thành công!';
+    if ($imageUploadErrors) {
+        $successMessage .= ' Một số ảnh chưa xử lý được: ' . implode('; ', $imageUploadErrors);
+    }
+    flash('success', $successMessage);
     redirect('/admin/products');
 });
 
@@ -2391,13 +2438,21 @@ get('/admin/products/:id/edit', function($p) {
 post('/admin/products/:id/edit', function($p) {
     $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
     $d = $_POST;
+    $currentProduct = dbGet('SELECT slug, seo_title, seo_description FROM products WHERE id=?', [$p['id']]);
+    if (!$currentProduct) {
+        flash('error', 'Không tìm thấy sản phẩm.');
+        redirect('/admin/products');
+        return;
+    }
     $price = intval($d['price'] ?? 0);
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
+    $editOem = trim($d['oem_code'] ?? '');
+    $editSku = resolveProductSku($d['sku'] ?? '', $editOem);
 
     // === SERVER-SIDE VALIDATION ===
     $editErrors = [];
     if (!trim($d['name'] ?? '')) $editErrors[] = 'Tên sản phẩm không được để trống';
-    if (!trim($d['sku']  ?? '')) $editErrors[] = 'Mã SKU không được để trống';
+    if (!$editSku) $editErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
     if ($price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
     if (!isset($d['stock']) || $d['stock'] === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
     if (empty($d['category_id'])) $editErrors[] = 'Vui lòng chọn danh mục sản phẩm';
@@ -2420,7 +2475,6 @@ post('/admin/products/:id/edit', function($p) {
     }
 
     // === DUPLICATE SKU GUARD (edit) ===
-    $editSku = trim($d['sku'] ?? '');
     $dupSku = dbGet("SELECT id FROM products WHERE partner_id=1 AND sku=? AND id<>?", [$editSku, $p['id']]);
     if ($dupSku) {
         flash('error', 'Mã SKU "'.$editSku.'" đã được dùng cho sản phẩm #'.$dupSku['id'].'. Vui lòng dùng mã SKU khác.');
@@ -2428,10 +2482,10 @@ post('/admin/products/:id/edit', function($p) {
         return;
     }
 
-    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=? WHERE id=?", [
+    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
         trim($d['name']??''),
-        trim($d['sku']??''),
-        trim($d['oem_code']??''),
+        $editSku,
+        $editOem,
         trim($d['part_brand']??''),
         intval($d['car_brand_id']??0) ?: null,
         intval($d['category_id']??0) ?: null,
@@ -2461,33 +2515,106 @@ post('/admin/products/:id/edit', function($p) {
         $p['id']
     ]);
 
-    // Handle new images
+    // Handle and normalize newly uploaded product images.
+    $imageUploadErrors = [];
     if (!empty($_FILES['images']['name'][0])) {
         $uploadDir = '/opt/cooling-php/uploads/products/';
+        $replaceImages = !empty($d['replace_images']);
+        $existingImages = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order, id', [$p['id']]);
+        $availableSlots = $replaceImages ? 8 : max(0, 8 - count($existingImages));
+        $savedUploads = [];
         foreach ($_FILES['images']['tmp_name'] as $k => $tmp) {
+            if (count($savedUploads) >= $availableSlots) {
+                $imageUploadErrors[] = 'Chỉ lưu tối đa 8 ảnh cho mỗi sản phẩm.';
+                break;
+            }
             if (!is_uploaded_file($tmp)) continue;
-            $ext = strtolower(pathinfo($_FILES['images']['name'][$k], PATHINFO_EXTENSION));
-            if (!in_array($ext, ['jpg','jpeg','png','webp'])) continue;
-            $fname = seoImageName($_FILES['images']['name'][$k], $ext, $uploadDir);
-            if (move_uploaded_file($tmp, $uploadDir . $fname)) {
-                $hasMain = dbGet('SELECT id FROM product_images WHERE product_id=? AND is_main=1', [$p['id']]);
-                $maxOrder = dbGet('SELECT COALESCE(MAX(sort_order),0) AS max_so FROM product_images WHERE product_id=?', [$p['id']]);
-                $nextOrder = ($maxOrder['max_so'] ?? 0) + 1 + $k;
-                dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
-                    [$p['id'], $fname, $hasMain ? 0 : 1, $nextOrder]);
+            $upload = [
+                'name' => $_FILES['images']['name'][$k] ?? '',
+                'tmp_name' => $tmp,
+                'error' => $_FILES['images']['error'][$k] ?? UPLOAD_ERR_NO_FILE,
+                'size' => $_FILES['images']['size'][$k] ?? 0,
+            ];
+            $imageError = null;
+            $imageSeoBase = trim($d['name'] ?? '') . ' ' . $editSku . ($k > 0 ? ' ' . ($k + 1) : '');
+            $fname = storeNormalizedProductUpload($upload, $imageSeoBase, $uploadDir, $imageError);
+            if ($fname !== null) {
+                $savedUploads[] = $fname;
+            } else {
+                $imageUploadErrors[] = basename((string)$upload['name']) . ': ' . ($imageError ?: 'Không xử lý được ảnh.');
+            }
+        }
+
+        if ($replaceImages && $savedUploads && $imageUploadErrors) {
+            foreach ($savedUploads as $fname) {
+                $newPath = $uploadDir . basename((string)$fname);
+                if (is_file($newPath)) @unlink($newPath);
+            }
+            $savedUploads = [];
+            $imageUploadErrors[] = 'Bộ ảnh cũ được giữ nguyên vì chưa xử lý thành công tất cả ảnh mới.';
+        }
+
+        if ($savedUploads) {
+            $pdo = db();
+            try {
+                $pdo->beginTransaction();
+                if ($replaceImages) {
+                    dbRun('DELETE FROM product_images WHERE product_id=?', [$p['id']]);
+                    foreach ($savedUploads as $index => $fname) {
+                        dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
+                            [$p['id'], $fname, $index === 0 ? 1 : 0, $index]);
+                    }
+                } else {
+                    $hasMain = (bool)dbGet('SELECT id FROM product_images WHERE product_id=? AND is_main=1', [$p['id']]);
+                    $maxOrder = dbGet('SELECT COALESCE(MAX(sort_order),-1) AS max_so FROM product_images WHERE product_id=?', [$p['id']]);
+                    $baseOrder = (int)($maxOrder['max_so'] ?? -1) + 1;
+                    foreach ($savedUploads as $index => $fname) {
+                        dbRun("INSERT INTO product_images (product_id,file_path,is_main,sort_order) VALUES (?,?,?,?)",
+                            [$p['id'], $fname, !$hasMain && $index === 0 ? 1 : 0, $baseOrder + $index]);
+                    }
+                }
+                dbRun("UPDATE products SET updated_at=datetime('now','localtime') WHERE id=?", [$p['id']]);
+                $pdo->commit();
+
+                if ($replaceImages) {
+                    foreach ($existingImages as $oldImage) {
+                        $oldPath = '/var/lib/cooling/uploads/products/' . basename((string)$oldImage['file_path']);
+                        if (is_file($oldPath)) @unlink($oldPath);
+                    }
+                }
+            } catch (Throwable $exception) {
+                if ($pdo->inTransaction()) $pdo->rollBack();
+                foreach ($savedUploads as $fname) {
+                    $newPath = $uploadDir . basename((string)$fname);
+                    if (is_file($newPath)) @unlink($newPath);
+                }
+                error_log('Product image update failed: ' . $exception->getMessage());
+                $imageUploadErrors[] = 'Không thể cập nhật bộ ảnh; bộ ảnh cũ vẫn được giữ nguyên.';
             }
         }
     }
 
     // Save SEO fields on edit
     $seoTitle = trim($_POST['seo_title'] ?? '');
+    if ($seoTitle === '') {
+        $seoTitle = productMetaTitle(['name' => trim($d['name'] ?? ''), 'oem_code' => $editOem]);
+    }
     $seoDesc = trim($_POST['seo_description'] ?? '');
+    if ($seoDesc === '') {
+        $seoDesc = productMetaDescription([
+            'name' => trim($d['name'] ?? ''),
+            'price' => $price,
+            'stock' => intval($d['stock'] ?? 0),
+            'warranty_months' => intval($d['warranty_months'] ?? 12),
+        ]);
+    }
     $seoKeyword = trim($_POST['seo_keyword'] ?? '');
-    $oldSlugRow = dbGet('SELECT slug FROM products WHERE id=?', [$p['id']]);
-    $seoSlug = uniqueProductSlug(trim($_POST['slug'] ?? '') ?: trim($d['name'] ?? ''), (int)$p['id']);
+    $requestedSlug = trim($_POST['slug'] ?? '');
+    $slugSource = $requestedSlug !== '' ? $requestedSlug : ((string)($currentProduct['slug'] ?? '') ?: trim($d['name'] ?? ''));
+    $seoSlug = uniqueProductSlug($slugSource, (int)$p['id']);
     dbRun("UPDATE products SET seo_title=?, seo_description=?, seo_keyword=?, slug=? WHERE id=?",
         [$seoTitle, $seoDesc, $seoKeyword, $seoSlug, $p['id']]);
-    rememberProductSlugRedirect((int)$p['id'], (string)($oldSlugRow['slug'] ?? ''), $seoSlug);
+    rememberProductSlugRedirect((int)$p['id'], (string)($currentProduct['slug'] ?? ''), $seoSlug);
     // Save video_url if provided
     $videoUrl = trim($d['video_url'] ?? '');
     if ($videoUrl !== '') {
@@ -2519,7 +2646,11 @@ post('/admin/products/:id/edit', function($p) {
     }
     dbRun("UPDATE products SET car_brand_id=? WHERE id=?", [$firstBrand, $p['id']]);
 
-    flash('success','Cập nhật sản phẩm thành công!');
+    $successMessage = 'Cập nhật sản phẩm thành công!';
+    if ($imageUploadErrors) {
+        $successMessage .= ' Một số ảnh chưa xử lý được: ' . implode('; ', $imageUploadErrors);
+    }
+    flash('success', $successMessage);
     redirect('/admin/products/'.$p['id'].'/edit');
 });
 
@@ -2678,7 +2809,11 @@ post('/admin/products/:id/toggle-status', function($p) {
     requireStaffPermission('products', '/admin/login'); csrfCheck();
     $status = $_POST['status'] ?? 'hidden';
     $__oldStatus = dbGet("SELECT status FROM products WHERE id=?", [$p['id']])['status'] ?? '';
-    dbRun("UPDATE products SET status=? WHERE id=?", [$status, $p['id']]);
+    dbRun("UPDATE products SET status=?, is_indexed=?, updated_at=datetime('now','localtime') WHERE id=?", [
+        $status,
+        $status === 'published' ? 1 : 0,
+        $p['id'],
+    ]);
     if ($status === 'published') {
         dbRun("UPDATE products SET published_at=COALESCE(published_at, strftime('%Y-%m-%dT%H:%M:%fZ','now')) WHERE id=?", [$p['id']]);
     }
@@ -2925,6 +3060,11 @@ post('/admin/products/delete-image', function() {
     if (file_exists($filePath)) { unlink($filePath); }
     // Delete DB record
     dbRun("DELETE FROM product_images WHERE id=?", [$imageId]);
+    if (!empty($img['is_main'])) {
+        $nextImage = dbGet("SELECT id FROM product_images WHERE product_id=? ORDER BY sort_order, id LIMIT 1", [$img['product_id']]);
+        if ($nextImage) dbRun("UPDATE product_images SET is_main=1 WHERE id=?", [$nextImage['id']]);
+    }
+    dbRun("UPDATE products SET updated_at=datetime('now','localtime') WHERE id=?", [$img['product_id']]);
     header('Content-Type: application/json');
     echo json_encode(['ok'=>true,'msg'=>'Đã xóa ảnh']);
 });

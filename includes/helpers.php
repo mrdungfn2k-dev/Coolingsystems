@@ -270,7 +270,8 @@ function seoTruncateText(?string $value, int $limit): string {
 }
 
 function productMetaTitle(array $product, int $limit = 65): string {
-    $source = seoPlainText(!empty($product['seo_title']) ? $product['seo_title'] : ($product['name'] ?? ''));
+    $customTitle = !empty($product['seo_title']) ? $product['seo_title'] : ($product['meta_title'] ?? '');
+    $source = seoPlainText($customTitle !== '' ? $customTitle : ($product['name'] ?? ''));
     $source = preg_replace('/\s+[—\-]\s*CoolingSystem\s*$/iu', '', $source);
     if (mb_strlen((string)$source, 'UTF-8') <= $limit) return (string)$source;
 
@@ -281,6 +282,23 @@ function productMetaTitle(array $product, int $limit = 65): string {
         return trim(seoTruncateText($withoutOem, $prefixLimit) . ' ' . $oem);
     }
     return seoTruncateText((string)$source, $limit);
+}
+
+function productMetaDescription(array $product, int $limit = 155): string {
+    $customDescription = !empty($product['seo_description']) ? $product['seo_description'] : ($product['meta_description'] ?? '');
+    $custom = seoPlainText($customDescription);
+    if ($custom !== '') return seoTruncateText($custom, $limit);
+
+    $name = seoPlainText($product['name'] ?? '');
+    $price = max(0, (int)($product['display_price'] ?? $product['price'] ?? 0));
+    $stockText = (int)($product['stock'] ?? 0) > 0 ? 'Còn hàng' : 'Tạm hết hàng';
+    $warranty = (int)($product['warranty_months'] ?? 0);
+    $parts = [$name];
+    if ($price > 0) $parts[] = 'Giá ' . number_format($price, 0, ',', '.') . ' đ';
+    $parts[] = $stockText;
+    if ($warranty > 0) $parts[] = 'Bảo hành ' . $warranty . ' tháng';
+
+    return seoTruncateText(implode('. ', array_filter($parts)) . ' tại CoolingSystem.', $limit);
 }
 
 function jsonLd(array $data): string {
@@ -309,6 +327,186 @@ function seoImageName($originalName, $ext, $uploadDir) {
     $i = 2;
     while (file_exists($dir . $fname)) { $fname = $slug . '-' . $i . '.' . $ext; $i++; }
     return $fname;
+}
+
+function resolveProductSku(?string $sku, ?string $oemCode): string {
+    $sku = trim((string)$sku);
+    return $sku !== '' ? $sku : trim((string)$oemCode);
+}
+
+function removeProductImageBackground(string $sourcePath, string $destinationPath, ?string &$error = null): bool {
+    $error = null;
+    $curl = '/usr/bin/curl';
+    if (!is_executable($curl)) {
+        $error = 'Máy chủ chưa sẵn sàng công cụ kết nối bộ tách nền.';
+        return false;
+    }
+
+    $command = escapeshellcmd($curl)
+        . ' --fail-with-body --silent --show-error'
+        . ' --connect-timeout 2 --max-time 90'
+        . ' --header ' . escapeshellarg('Content-Type: application/octet-stream')
+        . ' --data-binary ' . escapeshellarg('@' . $sourcePath)
+        . ' --output ' . escapeshellarg($destinationPath)
+        . ' ' . escapeshellarg('http://127.0.0.1:7010/remove')
+        . ' 2>&1';
+
+    $output = [];
+    $exitCode = 1;
+    exec($command, $output, $exitCode);
+
+    $imageInfo = is_file($destinationPath) ? @getimagesize($destinationPath) : false;
+    if ($exitCode !== 0 || !$imageInfo || strtolower((string)($imageInfo['mime'] ?? '')) !== 'image/png') {
+        $serviceMessage = trim(implode(' ', $output));
+        if ($serviceMessage !== '') {
+            error_log('Product background removal failed: ' . $serviceMessage);
+        }
+        @unlink($destinationPath);
+        $error = 'AI tách nền chưa xử lý an toàn được ảnh này. Ảnh gốc vẫn được giữ để kiểm tra lại.';
+        return false;
+    }
+
+    return true;
+}
+
+function normalizeProductImageFile(string $sourcePath, string $destinationPath, ?string &$error = null): bool {
+    $error = null;
+    if (!is_file($sourcePath) || !is_readable($sourcePath)) {
+        $error = 'Không đọc được ảnh gốc.';
+        return false;
+    }
+
+    $imageInfo = @getimagesize($sourcePath);
+    if (!$imageInfo || empty($imageInfo[0]) || empty($imageInfo[1])) {
+        $error = 'Tệp tải lên không phải là ảnh hợp lệ.';
+        return false;
+    }
+
+    $allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+    $mime = strtolower((string)($imageInfo['mime'] ?? ''));
+    if (!in_array($mime, $allowedMimes, true)) {
+        $error = 'Chỉ chấp nhận ảnh JPG, PNG hoặc WebP.';
+        return false;
+    }
+
+    $pixelCount = (int)$imageInfo[0] * (int)$imageInfo[1];
+    if ($pixelCount > 80000000) {
+        $error = 'Ảnh có kích thước điểm ảnh quá lớn.';
+        return false;
+    }
+
+    $convert = '/usr/bin/convert';
+    if (!is_executable($convert)) {
+        $error = 'Máy chủ chưa sẵn sàng công cụ chuẩn hóa ảnh.';
+        return false;
+    }
+
+    $destinationDir = dirname($destinationPath);
+    if (!is_dir($destinationDir) && !@mkdir($destinationDir, 0775, true)) {
+        $error = 'Không tạo được thư mục lưu ảnh.';
+        return false;
+    }
+
+    $temporaryPath = $destinationDir . '/.'
+        . pathinfo($destinationPath, PATHINFO_FILENAME)
+        . '-processing-' . bin2hex(random_bytes(4)) . '.webp';
+    $cutoutPath = $destinationDir . '/.'
+        . pathinfo($destinationPath, PATHINFO_FILENAME)
+        . '-cutout-' . bin2hex(random_bytes(4)) . '.png';
+
+    if (!removeProductImageBackground($sourcePath, $cutoutPath, $error)) {
+        return false;
+    }
+
+    $baseCommand = escapeshellcmd($convert)
+        . ' -limit memory 256MiB -limit map 512MiB '
+        . escapeshellarg($cutoutPath)
+        . ' -auto-orient -strip -colorspace sRGB ';
+    $finishCommand = ' -filter Lanczos -resize ' . escapeshellarg('1020x765')
+        . ' -gravity center -background ' . escapeshellarg('#ffffff')
+        . ' -alpha background -alpha off -extent ' . escapeshellarg('1200x900')
+        . ' -unsharp ' . escapeshellarg('0x0.68+0.58+0.024')
+        . ' -define webp:method=6 -define webp:alpha-quality=100'
+        . ' -quality 93 ' . escapeshellarg($temporaryPath) . ' 2>&1';
+
+    $output = [];
+    $exitCode = 1;
+    exec($baseCommand . ' -fuzz 4% -trim +repage ' . $finishCommand, $output, $exitCode);
+
+    // Fall back to the complete original frame if conservative edge trimming fails.
+    if ($exitCode !== 0 || !is_file($temporaryPath)) {
+        @unlink($temporaryPath);
+        $output = [];
+        exec($baseCommand . $finishCommand, $output, $exitCode);
+    }
+
+    @unlink($cutoutPath);
+
+    $normalizedInfo = is_file($temporaryPath) ? @getimagesize($temporaryPath) : false;
+    if ($exitCode !== 0 || !$normalizedInfo || (int)$normalizedInfo[0] !== 1200 || (int)$normalizedInfo[1] !== 900) {
+        @unlink($temporaryPath);
+        $error = 'Không thể chuẩn hóa ảnh này.';
+        return false;
+    }
+
+    if (!@rename($temporaryPath, $destinationPath)) {
+        @unlink($temporaryPath);
+        $error = 'Không thể lưu ảnh đã chuẩn hóa.';
+        return false;
+    }
+
+    @chmod($destinationPath, 0664);
+    return true;
+}
+
+function storeNormalizedProductUpload(array $file, string $seoBase, string $uploadDir, ?string &$error = null): ?string {
+    $error = null;
+    $tmpPath = (string)($file['tmp_name'] ?? '');
+    $uploadError = (int)($file['error'] ?? UPLOAD_ERR_NO_FILE);
+    if ($uploadError !== UPLOAD_ERR_OK || $tmpPath === '' || !is_uploaded_file($tmpPath)) {
+        $error = 'Ảnh tải lên không hợp lệ.';
+        return null;
+    }
+
+    $imageInfo = @getimagesize($tmpPath);
+    $mimeToExtension = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+    ];
+    $mime = strtolower((string)($imageInfo['mime'] ?? ''));
+    if (!isset($mimeToExtension[$mime])) {
+        $error = 'Chỉ chấp nhận ảnh JPG, PNG hoặc WebP.';
+        return null;
+    }
+
+    $uploadDir = rtrim($uploadDir, '/') . '/';
+    $seoBase = mb_substr(trim($seoBase), 0, 120, 'UTF-8');
+    $originalDir = '/var/lib/cooling/product-originals/';
+    if (!is_dir($originalDir) && !@mkdir($originalDir, 0770, true)) {
+        $error = 'Không tạo được thư mục lưu ảnh gốc.';
+        return null;
+    }
+
+    // A unique suffix prevents browsers/CDNs from reusing an older product
+    // image after an administrator replaces the image set.
+    $uploadVersion = gmdate('YmdHis') . '-' . bin2hex(random_bytes(4));
+    $outputName = seoImageName($seoBase . '-' . $uploadVersion, 'webp', $uploadDir);
+    $outputStem = pathinfo($outputName, PATHINFO_FILENAME);
+    $originalName = seoImageName($outputStem . '-original', $mimeToExtension[$mime], $originalDir);
+    $originalPath = $originalDir . $originalName;
+
+    if (!move_uploaded_file($tmpPath, $originalPath)) {
+        $error = 'Không thể lưu ảnh gốc.';
+        return null;
+    }
+    @chmod($originalPath, 0660);
+
+    if (!normalizeProductImageFile($originalPath, $uploadDir . $outputName, $error)) {
+        return null;
+    }
+
+    return $outputName;
 }
 
 function getRxnEmoji($type) {

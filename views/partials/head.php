@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1a3258">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260716">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260716">
-<link rel="shortcut icon" href="/favicon.ico?v=20260716">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260716">
-<link rel="manifest" href="/site.webmanifest?v=20260716">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-cooling-round-48x48.png?v=20260717-round">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-cooling-round-32x32.png?v=20260717-round">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-cooling-round-16x16.png?v=20260717-round">
+<link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260717-round">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260717-round">
+<link rel="manifest" href="/site.webmanifest?v=20260717-round">
 <?php
 // Dynamic system config - load all site settings
 $_sysConf = [];
@@ -32,7 +33,7 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <?php if (!empty($seo['noindex'])): ?>
 <meta name="robots" content="noindex,follow">
 <?php endif; ?>
-<link rel="stylesheet" href="/css/cooling.css?v=20260608i">
+<link rel="stylesheet" href="/css/cooling.css?v=20260716-stage3">
 <style id="public-title-std">
 /* Đồng nhất tiêu đề các mục bên người dùng (theo mẫu "Giới thiệu"): navy, cùng cỡ + font */
 .sec-head .title h1, .sec-head .title h2,
@@ -44,7 +45,7 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 }
 .promo-subhead { color:var(--navy) !important; font-family:'Inter',sans-serif !important; }
 </style>
-<link rel="stylesheet" href="/css/mobile.css?v=1780900000">
+<link rel="stylesheet" href="/css/mobile.css?v=20260716-stage3">
 
 <?php
 // === CANONICAL URL ===

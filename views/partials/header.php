@@ -43,8 +43,8 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         <svg class="logo-svg" width="180" height="76" viewBox="0 0 480 200"><use href="#cooling-logo"/></svg>
       <?php endif; ?>
     </a>
-    <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (mã OEM, tên phụ tùng, hãng xe...)','🔍');return false;}">
-      <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm theo mã OEM, tên phụ tùng, hãng xe...">
+    <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (SKU, mã OEM, tên phụ tùng...)','🔍');return false;}">
+      <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm theo SKU, mã OEM, tên phụ tùng...">
       <button class="submit" type="submit" aria-label="Tìm kiếm">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
@@ -196,7 +196,7 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
   </div>
   <div class="mobile-search-bar">
     <form method="get" action="/products" style="width:100%" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm','🔍');return false;}">
-      <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm kiếm phụ tùng, mã OEM...">
+      <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm phụ tùng, SKU, mã OEM...">
       <button type="submit" aria-label="Tìm kiếm" style="display:inline-flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
     </form>
   </div>

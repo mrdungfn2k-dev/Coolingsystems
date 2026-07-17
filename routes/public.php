@@ -4,6 +4,11 @@
 
 
 // ── Quên mật khẩu ──
+get('/cart', function() {
+    header('Location: /customer/cart', true, 301);
+    exit;
+});
+
 get('/', function() {
     $newDaysRow = dbGet("SELECT value FROM site_config WHERE key='new_product_days'");
     $newDays = intval($newDaysRow['value'] ?? 30);
@@ -74,7 +79,16 @@ get('/products', function() {
         if (!empty($qRaw)) {
             // Embed search directly in SQL to avoid PDO/SQLite UTF-8 LIKE bug
             $escaped = str_replace("'", "''", $qRaw);
-            $where[] = "(p.name LIKE '%" . $escaped . "%' OR p.oem_code LIKE '%" . $escaped . "%')";
+            $normalizedCode = strtoupper((string)preg_replace('/[^a-z0-9]+/i', '', $qRaw));
+            $searchSql = "(p.name LIKE '%" . $escaped . "%'"
+                . " OR p.oem_code LIKE '%" . $escaped . "%'"
+                . " OR p.sku LIKE '%" . $escaped . "%'";
+            if ($normalizedCode !== '') {
+                $normalizedSql = "REPLACE(REPLACE(REPLACE(REPLACE(UPPER(COALESCE(%s,'')),'-',''),' ',''),'.',''),'/','')";
+                $searchSql .= " OR " . sprintf($normalizedSql, 'p.oem_code') . " LIKE '%" . $normalizedCode . "%'"
+                    . " OR " . sprintf($normalizedSql, 'p.sku') . " LIKE '%" . $normalizedCode . "%'";
+            }
+            $where[] = $searchSql . ')';
         }
     }
     if (!empty($_GET['category'])) { $where[] = "p.category_id=?"; $params[] = intval($_GET['category']); }
@@ -165,9 +179,27 @@ get('/products', function() {
     $groupBy = (!empty($_GET['brand_id']) || !empty($_GET['model_id'])) ? 'GROUP BY p.id' : '';
     $_sql_total = "SELECT COUNT(DISTINCT p.id) AS n FROM products p $joins WHERE $wStr";
     // Also test with fresh PDO using same SQL string
-    $total = dbGet("SELECT COUNT(DISTINCT p.id) AS n FROM products p $joins WHERE $wStr", $params)['n'];
+    $total = (int)dbGet("SELECT COUNT(DISTINCT p.id) AS n FROM products p $joins WHERE $wStr", $params)['n'];
+    $totalPages = max(1, (int)ceil($total/$limit));
+
+    // Keep stale or malformed pagination URLs from serving empty 200 pages.
+    if (array_key_exists('page', $_GET)) {
+        $rawPage = is_scalar($_GET['page']) ? trim((string)$_GET['page']) : '';
+        $targetPage = min($page, $totalPages);
+        if ($targetPage <= 1 || $page > $totalPages || $rawPage !== (string)$page) {
+            $normalizedQuery = $_GET;
+            if ($targetPage <= 1) {
+                unset($normalizedQuery['page']);
+            } else {
+                $normalizedQuery['page'] = $targetPage;
+            }
+            $queryString = http_build_query($normalizedQuery, '', '&', PHP_QUERY_RFC3986);
+            header('Location: /products' . ($queryString !== '' ? '?' . $queryString : ''), true, 301);
+            exit;
+        }
+    }
+
     $products = dbAll("SELECT DISTINCT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p $joins WHERE $wStr ORDER BY $sort LIMIT $limit OFFSET $offset", $params);
-    $totalPages = max(1, ceil($total/$limit));
     $categories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY sort_order");
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
     $activeVehicle = null;
@@ -175,7 +207,11 @@ get('/products', function() {
         $activeVehicle = dbGet("SELECT b.name AS brand_name FROM brands b WHERE b.id=?", [intval($_GET['brand_id'])]);
     }
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
-    view('public/products', compact('products','total','page','totalPages','limit','categories','brands','activeVehicle','productBrands'));
+    $seo = [];
+    if ($page > 1 && count($_GET) === 1 && array_key_exists('page', $_GET)) {
+        $seo['canonical'] = 'https://coolingsystem.vn/products?page=' . $page;
+    }
+    view('public/products', compact('products','total','page','totalPages','limit','categories','brands','activeVehicle','productBrands','seo'));
 });
 
 // Slug-based SEO-friendly URL: /products/dan-lanh-toyota-camry-2018-xyz
@@ -183,24 +219,18 @@ get('/products/:slug', function($p) {
     $param = $p['slug'];
     $product = null;
     $productSelect = "SELECT p.*, COALESCE(pt.shop_name,'Cooling') AS shop_name, pt.shop_slug, pt.id AS partner_id, b.name as car_brand_name, c.name as category_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN categories c ON c.id=p.category_id";
-    // If numeric ID, redirect to slug URL (301 for SEO)
+    // Legacy numeric IDs were reused after catalog resets, so they cannot be redirected safely.
     if(is_numeric($param)) {
-        $prod = dbGet("SELECT id, slug FROM products WHERE id=?", [(int)$param]);
-        if($prod && !empty($prod['slug'])) {
-            header('Location: ' . productPath($prod), true, 301);
-            exit;
-        }
-        // No slug yet, serve by ID
-        $product = dbGet($productSelect . " WHERE p.id=?", [(int)$param]);
+        $product = null;
     } else {
         // Lookup by slug
-        $product = dbGet($productSelect . " WHERE p.slug=?", [$param]);
+        $product = dbGet($productSelect . " WHERE p.slug=? AND p.status='published'", [$param]);
 
         // Preserve every previous slug recorded during migrations or product edits.
         if (!$product) {
             $redirectTable = dbGet("SELECT 1 AS found FROM sqlite_master WHERE type='table' AND name='product_slug_redirects'");
             if ($redirectTable) {
-                $redirectProduct = dbGet($productSelect . " INNER JOIN product_slug_redirects psr ON psr.product_id=p.id WHERE psr.slug=?", [$param]);
+                $redirectProduct = dbGet($productSelect . " INNER JOIN product_slug_redirects psr ON psr.product_id=p.id WHERE psr.slug=? AND p.status='published'", [$param]);
                 if ($redirectProduct) {
                     header('Location: ' . productPath($redirectProduct), true, 301);
                     exit;
@@ -315,7 +345,10 @@ post('/contact', function() {
 get('/stores', function() { view('public/stores', ['title'=>'Hệ thống cửa hàng']); });
 get('/careers', function() { view('public/static', ['title'=>'Tuyển dụng','page'=>'tuyen-dung']); });
 get('/cam-ket', function() { view('public/static', ['title'=>'4 Bước cam kết','page'=>'4-buoc-cam-ket']); });
-get('/policies', function() { redirect('/policies/huong-dan-mua-hang'); });
+get('/policies', function() {
+    header('Location: /policies/huong-dan-mua-hang', true, 301);
+    exit;
+});
 get('/policies/:slug', function($p) {
     $slug = $p['slug'] ?? '';
     $page = dbGet("SELECT * FROM static_pages WHERE slug=?", [$slug]);
@@ -352,7 +385,19 @@ get('/sitemap.xml', function() {
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 
     // Static pages
-    $statics = ['/', '/products', '/brands', '/about', '/contact', '/news', '/stores', '/policies'];
+    $statics = [
+        '/',
+        '/products',
+        '/brands',
+        '/about',
+        '/contact',
+        '/news',
+        '/stores',
+        '/policies/huong-dan-mua-hang',
+        '/policies/chinh-sach-doi-tra',
+        '/policies/chinh-sach-bao-hanh',
+        '/policies/dieu-khoan-bao-mat',
+    ];
     foreach ($statics as $s) {
         echo '<url><loc>https://coolingsystem.vn'.e($s).'</loc>';
         echo '<changefreq>weekly</changefreq><priority>'.($s==='/'?'1.0':'0.8').'</priority>';
@@ -457,17 +502,29 @@ post('/newsletter', function() {
 
 // Product Brands public pages
 get('/product-brands', function() {
-    $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
-    view('public/product-brands/index', ['title' => 'Thuong hieu san pham', 'productBrands' => $productBrands]);
+    $productBrands = dbAll("SELECT pb.* FROM product_brands pb
+        WHERE EXISTS (
+            SELECT 1 FROM products p
+            WHERE p.status='published'
+            AND instr(',' || replace(lower(COALESCE(p.part_brand,'')), ', ', ',') || ',', ',' || lower(pb.name) || ',') > 0
+        )
+        ORDER BY pb.sort_order, pb.name");
+    $seo = empty($productBrands) ? ['noindex' => true] : [];
+    view('public/product-brands/index', ['title' => 'Thuong hieu san pham', 'productBrands' => $productBrands, 'seo' => $seo]);
 });
 
 get('/product-brands/:slug', function($p) {
     $brand = dbGet("SELECT * FROM product_brands WHERE slug=? OR id=?", [$p['slug'], (int)$p['slug']]);
     if (!$brand) { http_response_code(404); echo '404'; exit; }
     $limit = 12; $page = max(1, intval($_GET['page'] ?? 1)); $offset = ($page-1)*$limit;
-    $bWhere = "(p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?) AND p.status='published'";
-    $bParams = [$brand['name'], $brand['name'].',%', '%, '.$brand['name'].',%', '%, '.$brand['name']];
-    $total = dbGet("SELECT COUNT(*) AS n FROM products p WHERE $bWhere", $bParams)['n'];
+    $bWhere = "p.status='published' AND instr(',' || replace(lower(COALESCE(p.part_brand,'')), ', ', ',') || ',', ',' || lower(?) || ',') > 0";
+    $bParams = [$brand['name']];
+    $total = (int)dbGet("SELECT COUNT(*) AS n FROM products p WHERE $bWhere", $bParams)['n'];
+    if ($total === 0) {
+        http_response_code(404);
+        view('errors/404', ['title' => 'Thuong hieu chua co san pham']);
+        return;
+    }
     $totalPages = max(1, ceil($total/$limit));
     $products = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image, NULL AS shop_name, NULL AS partner_id FROM products p WHERE $bWhere ORDER BY p.created_at DESC LIMIT $limit OFFSET $offset", $bParams);
     view('public/product-brands/detail', ['title' => $brand['name'] . ' - Thuong hieu', 'brand' => $brand, 'products' => $products, 'page' => $page, 'totalPages' => $totalPages, 'total' => $total]);

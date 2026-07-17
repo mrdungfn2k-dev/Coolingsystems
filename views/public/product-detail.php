@@ -1,6 +1,6 @@
 <?php
 $title = $product['name'];
-$mainImg = !empty($images) ? 'https://coolingsystem.vn/uploads/products/'.$images[0]['file_path'] : null;
+$mainImg = !empty($images) ? 'https://coolingsystem.vn/uploads/products/'.str_replace('%2F', '/', rawurlencode($images[0]['file_path'])) : null;
 $productUrl = productCanonicalUrl($product);
 $displayPrice = $product['price'] ?? 0;
 $displayOriginalPrice = $product['original_price'] ?? null;
@@ -11,24 +11,15 @@ if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product
 
 $descriptionHtml = preg_replace('#<\s*(/?)\s*h1\b#i', '<$1h2', (string)($product['description'] ?? ''));
 $descriptionPlain = seoPlainText($descriptionHtml);
-if (!empty($product['seo_description'])) {
-    $metaDescription = seoTruncateText($product['seo_description'], 155);
-} else {
-    $stockText = ($product['stock'] ?? 0) > 0 ? 'còn hàng' : 'tạm hết hàng';
-    $warrantyText = !empty($product['warranty_months']) ? ', bảo hành ' . (int)$product['warranty_months'] . ' tháng' : '';
-    $metaDescription = seoTruncateText(
-        ($product['name'] ?? '') . '. Giá ' . vnd((int)$displayPrice) . ', ' . $stockText . $warrantyText . ' tại CoolingSystem.',
-        155
-    );
-}
+$metaDescription = productMetaDescription(array_merge($product, ['display_price' => $displayPrice]));
 $seo = [
     'meta_title'       => productMetaTitle($product),
     'meta_description' => $metaDescription,
-    'meta_keywords'    => !empty($product['seo_keyword']) ? $product['seo_keyword'] : $product['name'].', '.($product['oem_code']??'').', '.($product['part_brand']??'').', phụ tùng ô tô',
+    'meta_keywords'    => !empty($product['seo_keyword']) ? $product['seo_keyword'] : (!empty($product['focus_keyword']) ? $product['focus_keyword'] : $product['name'].', '.($product['oem_code']??'').', '.($product['part_brand']??'').', phụ tùng ô tô'),
     'og_type'          => 'product',
     'og_image'         => $mainImg ?? 'https://coolingsystem.vn/img/og-default.jpg',
     'canonical'        => $productUrl,
-    'noindex'          => ($product['is_indexed']??1) == 0,
+    'noindex'          => ($product['status'] ?? '') !== 'published' || ($product['is_indexed']??1) == 0,
 ];
 require __DIR__ . '/../partials/head.php';
 ?>
@@ -124,11 +115,11 @@ if (!empty($faqItems)) {
   .pd-gallery{position:relative !important;top:0 !important}
 }
 .pd-gallery{position:sticky;top:100px}
-.pd-main-img{background:#f5f7fb;border-radius:0;padding:0;text-align:center;min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pd-main-img img{max-width:100%;object-fit:cover;object-position:center;border-radius:0;width:100%;height:100%}
+.pd-main-img{background:#fff;border-radius:0;padding:0;text-align:center;aspect-ratio:4/3;min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pd-main-img img{max-width:100%;object-fit:contain;object-position:center;border-radius:0;width:100%;height:100%}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pd-thumb{width:62px;height:62px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
-.pd-thumb img{width:100%;height:100%;object-fit:cover}
+.pd-thumb img{width:100%;height:100%;object-fit:contain}
 .pd-thumb.active,.pd-thumb:hover{border-color:var(--gold-warm)}
 .pd-gallery{position:relative}
 .pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.95);border:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20;font-size:22px;font-weight:700;color:#1a3258;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s}
@@ -199,7 +190,7 @@ if (!empty($faqItems)) {
           <?php if(!empty($images)): ?>
             <img src="/uploads/products/<?= e($images[0]['file_path']) ?>"
                  alt="<?= e($product['name']) ?>" id="pdMainImg" loading="lazy"
-                 style="max-width:100%;object-fit:cover;object-position:center;border-radius:0;width:100%;height:100%">
+                 style="max-width:100%;object-fit:contain!important;object-position:center;border-radius:0;width:100%;height:100%">
           <?php else: ?>
             <div style="text-align:center;color:#ccc">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -467,7 +458,7 @@ function submitReview(e, form){
       </div>
       <?php endif; // end if userExistingReview ?>
       <?php else: ?>
-        <div style="margin-bottom:20px;font-size:13px"><a href="/auth/login?next=/products/<?= (int)$product['id'] ?>" class="text-navy fw-600">Đăng nhập</a> để viết đánh giá.</div>
+        <div style="margin-bottom:20px;font-size:13px"><a href="/auth/login" rel="nofollow" class="text-navy fw-600">Đăng nhập</a> để viết đánh giá.</div>
       <?php endif; ?>
 
       <?php if(!empty($reviews)): ?>

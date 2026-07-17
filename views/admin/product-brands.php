@@ -63,7 +63,7 @@ $productBrands = $productBrands ?? dbAll("SELECT * FROM product_brands ORDER BY 
     <div class="pb-slug"><?= e($b['slug'] ?? '') ?></div>
     <div class="pb-sub"><?= $cnt ?> sản phẩm &nbsp;·&nbsp; thứ tự #<?= (int)($b['sort_order'] ?? 0) ?></div>
     <div class="pb-actions">
-      <button type="button" class="adm-edit"
+      <button type="button" class="adm-edit pb-edit-btn"
         data-id="<?= (int)$b['id'] ?>"
         data-name="<?= e($b['name']) ?>"
         data-desc="<?= e($b['description'] ?? '') ?>"

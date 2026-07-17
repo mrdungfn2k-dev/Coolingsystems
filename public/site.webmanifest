@@ -3,12 +3,12 @@
   "short_name": "Cooling",
   "icons": [
     {
-      "src": "/favicon-192x192.png",
+      "src": "/favicon-cooling-round-192x192.png?v=20260717-round",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicon-512x512.png",
+      "src": "/favicon-cooling-round-512x512.png?v=20260717-round",
       "sizes": "512x512",
       "type": "image/png"
     }
