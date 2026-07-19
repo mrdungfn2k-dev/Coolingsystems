@@ -216,7 +216,9 @@ get('/products', function() {
 
 // Slug-based SEO-friendly URL: /products/dan-lanh-toyota-camry-2018-xyz
 get('/products/:slug', function($p) {
-    $param = $p['slug'];
+    // Browser links may carry legacy percent-encoded slugs from old imports.
+    // Decode once so they can be resolved through the redirect history.
+    $param = rawurldecode((string)$p['slug']);
     $product = null;
     $productSelect = "SELECT p.*, COALESCE(pt.shop_name,'Cooling') AS shop_name, pt.shop_slug, pt.id AS partner_id, b.name as car_brand_name, c.name as category_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN categories c ON c.id=p.category_id";
     // Legacy numeric IDs were reused after catalog resets, so they cannot be redirected safely.

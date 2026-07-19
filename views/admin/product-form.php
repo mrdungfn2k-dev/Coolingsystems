@@ -36,14 +36,22 @@ input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
 .drag-handle-hint { position:absolute; bottom:0; left:0; right:0; background:rgba(26,50,88,0.85); color:#fff; font-size:9px; text-align:center; padding:2px 0; font-weight:600; pointer-events:none; }
 
 </style>
+<?php
+$returnTo = $returnTo ?? '/admin/products';
+$formAction = isset($product)
+  ? '/admin/products/'.$product['id'].'/edit?return_to='.rawurlencode($returnTo)
+  : '/admin/products/new';
+?>
 <div class="dash-head">
   <h1><?= isset($product) ? ' Chỉnh sửa sản phẩm' : ' Đăng sản phẩm mới' ?></h1>
   <?php if(isset($product)):?><span class="badge-status status-<?= $product['status'] ?>"><?= $product['status'] ?></span><?php endif;?>
+  <?php if(isset($product)):?><a href="<?= e($returnTo) ?>" style="margin-left:auto;color:#1a3258;font-size:13px;font-weight:700;text-decoration:none">← Quay lại danh sách</a><?php endif;?>
 </div>
 
-<form method="post" action="<?= isset($product) ? '/admin/products/'.$product['id'].'/edit' : '/admin/products/new' ?>"
+<form method="post" action="<?= e($formAction) ?>"
       enctype="multipart/form-data" id="productForm" autocomplete="off">
   <?= csrfField() ?>
+  <?php if(isset($product)): ?><input type="hidden" name="return_to" value="<?= e($returnTo) ?>"><?php endif; ?>
   <input type="hidden" name="description" id="descHidden">
 
   <div class="form-layout">
@@ -411,7 +419,7 @@ function swTab(t){
           
           <div class="form-group">
             <label>Tồn kho hiện tại <span class="req">*</span></label>
-            <input type="number" name="stock" required min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999" value="<?= $product['stock']??0 ?>">
+            <input type="number" name="stock" required min="0" max="1000" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= $product['stock']??0 ?>">
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div class="form-group">
@@ -420,7 +428,7 @@ function swTab(t){
             </div>
             <div class="form-group">
               <label>Tồn kho tối đa</label>
-              <input type="number" name="max_stock" min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999" value="<?= $product['max_stock']??999 ?>">
+              <input type="number" name="max_stock" min="0" max="1000" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= $product['max_stock']??1000 ?>">
             </div>
           </div>
           <div class="form-group">
@@ -432,7 +440,7 @@ function swTab(t){
     </div><!-- /sidebar -->
   </div><!-- /form-layout -->
 
-<!-- Script previously restricted stock to 999, now handled inline -->
+<!-- Stock limits are validated in the browser and on the server. -->
 
 <!-- VIDEO SAN PHAM -->
 <div class="panel" style="margin-top:20px">
@@ -794,6 +802,9 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
   if (!sku)   errors.push('• Vui lòng nhập mã sản phẩm (SKU) hoặc mã OEM');
   if (!price || parseInt(price) <= 0) errors.push('• Giá bán sau VAT phải lớn hơn 0');
   if (stock === '' || stock === null) errors.push('• Tồn kho hiện tại không được để trống');
+  else if (!/^\d+$/.test(stock) || parseInt(stock, 10) > 1000) errors.push('• Tồn kho hiện tại chỉ được từ 0 đến 1000');
+  var maxStock = (document.querySelector('input[name="max_stock"]')?.value || '').trim();
+  if (maxStock !== '' && (!/^\d+$/.test(maxStock) || parseInt(maxStock, 10) > 1000)) errors.push('• Tồn kho tối đa chỉ được từ 0 đến 1000');
   if (!catVal || catVal === '') errors.push('• Vui lòng chọn danh mục sản phẩm');
 
   // Validate giá nhập (tùy chọn - nhưng nếu có thì phải là số nguyên >= 0)

@@ -241,7 +241,8 @@ get('/admin/products', function() {    requireStaffPermission('products', '/admi
     $carBrands=dbAll("SELECT * FROM brands ORDER BY name");
     $partBrands=dbAll("SELECT name AS part_brand FROM product_brands ORDER BY sort_order, name");
 
-    view('admin/products',['title'=>'San pham','role'=>'admin','products'=>$products,'categories'=>$categories,'carBrands'=>$carBrands,'partBrands'=>$partBrands,'tab'=>$tab,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'filterBrandId'=>$brandId,'filterPartBrand'=>$partBrand]);
+    $listReturnUrl = '/admin/products' . (!empty($_GET) ? '?' . http_build_query($_GET) : '');
+    view('admin/products',['title'=>'San pham','role'=>'admin','products'=>$products,'categories'=>$categories,'carBrands'=>$carBrands,'partBrands'=>$partBrands,'tab'=>$tab,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'filterBrandId'=>$brandId,'filterPartBrand'=>$partBrand,'listReturnUrl'=>$listReturnUrl]);
 });
 
 
@@ -2284,8 +2285,10 @@ post('/admin/products/new', function() {
     $price = intval($d['price'] ?? 0);
     $priceBefore = intval($d['price_before_tax'] ?? 0);
     $taxAmt = intval($d['tax_amount'] ?? 0);
-    $stock = intval($d['stock'] ?? 0);
-    if ($stock > 1000) { $stock = 1000; }
+    $stockRaw = trim((string)($d['stock'] ?? ''));
+    $maxStockRaw = trim((string)($d['max_stock'] ?? ''));
+    $stock = intval($stockRaw);
+    $maxStock = $maxStockRaw === '' ? 1000 : intval($maxStockRaw);
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $slug = uniqueProductSlug(trim($d['slug'] ?? '') ?: $name);
     $seoTitle = trim($d['seo_title'] ?? '');
@@ -2308,7 +2311,9 @@ post('/admin/products/new', function() {
     if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
     if (!$sku)  $valErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
     if ($price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
-    if (!isset($d['stock']) || $d['stock'] === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
+    if ($stockRaw === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
+    elseif (!ctype_digit($stockRaw) || $stock > 1000) $valErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
+    if ($maxStockRaw !== '' && (!ctype_digit($maxStockRaw) || $maxStock > 1000)) $valErrors[] = 'Tồn kho tối đa chỉ được từ 0 đến 1000';
     if (empty($d['category_id'])) $valErrors[] = 'Vui lòng chọn danh mục sản phẩm';
     // Validate giá nhập (tùy chọn nhưng phải >= 0 nếu có)
     $costRaw = trim($d['cost_price'] ?? '');
@@ -2353,7 +2358,7 @@ post('/admin/products/new', function() {
         intval($d['original_price']??0) ?: null,
         $stock,
         intval($d['min_stock']??5),
-        intval($d['max_stock']??1000),
+        $maxStock,
         $d['features']??'',
         $d['specifications']??'',
         intval($d['warranty_months']??12),
@@ -2427,24 +2432,33 @@ post('/admin/products/new', function() {
 
 get('/admin/products/:id/edit', function($p) {
     $user = requireStaffPermission('products', '/admin/login');
+    $returnTo = trim((string)($_GET['return_to'] ?? ''));
+    if (!preg_match('#^/admin/products(?:\?|$)#', $returnTo)) $returnTo = '/admin/products';
     $product = dbGet('SELECT * FROM products WHERE id=?', [$p['id']]);
     if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); }
     $categories = dbAll('SELECT * FROM categories ORDER BY sort_order');
     $brands = dbAll('SELECT * FROM brands ORDER BY name ASC');
     $images = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC', [$p['id']]);
-    view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images]);
+    view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images,'returnTo'=>$returnTo]);
 });
 
 post('/admin/products/:id/edit', function($p) {
     $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
     $d = $_POST;
+    $returnTo = trim((string)($d['return_to'] ?? ''));
+    if (!preg_match('#^/admin/products(?:\?|$)#', $returnTo)) $returnTo = '/admin/products';
+    $editUrl = '/admin/products/' . $p['id'] . '/edit?return_to=' . rawurlencode($returnTo);
     $currentProduct = dbGet('SELECT slug, seo_title, seo_description FROM products WHERE id=?', [$p['id']]);
     if (!$currentProduct) {
         flash('error', 'Không tìm thấy sản phẩm.');
-        redirect('/admin/products');
+        redirect($returnTo);
         return;
     }
     $price = intval($d['price'] ?? 0);
+    $stockRaw = trim((string)($d['stock'] ?? ''));
+    $maxStockRaw = trim((string)($d['max_stock'] ?? ''));
+    $stock = intval($stockRaw);
+    $maxStock = $maxStockRaw === '' ? 1000 : intval($maxStockRaw);
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $editOem = trim($d['oem_code'] ?? '');
     $editSku = resolveProductSku($d['sku'] ?? '', $editOem);
@@ -2454,7 +2468,9 @@ post('/admin/products/:id/edit', function($p) {
     if (!trim($d['name'] ?? '')) $editErrors[] = 'Tên sản phẩm không được để trống';
     if (!$editSku) $editErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
     if ($price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
-    if (!isset($d['stock']) || $d['stock'] === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
+    if ($stockRaw === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
+    elseif (!ctype_digit($stockRaw) || $stock > 1000) $editErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
+    if ($maxStockRaw !== '' && (!ctype_digit($maxStockRaw) || $maxStock > 1000)) $editErrors[] = 'Tồn kho tối đa chỉ được từ 0 đến 1000';
     if (empty($d['category_id'])) $editErrors[] = 'Vui lòng chọn danh mục sản phẩm';
     $costRaw = trim($d['cost_price'] ?? '');
     if ($costRaw !== '' && (!ctype_digit($costRaw) || intval($costRaw) < 0)) {
@@ -2470,7 +2486,7 @@ post('/admin/products/:id/edit', function($p) {
     }
     if (!empty($editErrors)) {
         flash('error', 'Không thể cập nhật sản phẩm: ' . implode('. ', $editErrors));
-        redirect('/admin/products/'.$p['id'].'/edit');
+        redirect($editUrl);
         return;
     }
 
@@ -2478,7 +2494,7 @@ post('/admin/products/:id/edit', function($p) {
     $dupSku = dbGet("SELECT id FROM products WHERE partner_id=1 AND sku=? AND id<>?", [$editSku, $p['id']]);
     if ($dupSku) {
         flash('error', 'Mã SKU "'.$editSku.'" đã được dùng cho sản phẩm #'.$dupSku['id'].'. Vui lòng dùng mã SKU khác.');
-        redirect('/admin/products/'.$p['id'].'/edit');
+        redirect($editUrl);
         return;
     }
 
@@ -2494,9 +2510,9 @@ post('/admin/products/:id/edit', function($p) {
         intval($d['tax_amount']??0),
         intval($d['vat_rate']??10),
         intval($d['original_price']??0) ?: null,
-        intval($d['stock']??0),
+        $stock,
         intval($d['min_stock']??0),
-        intval($d['max_stock']??1000),
+        $maxStock,
         intval($d['warranty_months']??12),
         $d['description']??'',
         $status,
@@ -2511,7 +2527,7 @@ post('/admin/products/:id/edit', function($p) {
         intval($d['depth_cm']??0) ?: null,
         trim($d['video_url']??''),
         intval($d['cost_price']??0),
-        intval($d['cost_price']??0) * intval($d['stock']??0),
+        intval($d['cost_price']??0) * $stock,
         $p['id']
     ]);
 
@@ -2651,7 +2667,7 @@ post('/admin/products/:id/edit', function($p) {
         $successMessage .= ' Một số ảnh chưa xử lý được: ' . implode('; ', $imageUploadErrors);
     }
     flash('success', $successMessage);
-    redirect('/admin/products/'.$p['id'].'/edit');
+    redirect($editUrl);
 });
 
 // ── STATIC CONTENT MANAGEMENT ────────────────────────────────────────────

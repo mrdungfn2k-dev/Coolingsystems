@@ -319,7 +319,7 @@ def _refine_chromatic_background(source: Image.Image, cutout: Image.Image) -> tu
     return refined, removed_ratio
 
 
-def process_image(payload: bytes) -> tuple[bytes, str, float]:
+def process_image(payload: bytes, safe_mask: bool = False) -> tuple[bytes, str, float]:
     try:
         with Image.open(io.BytesIO(payload)) as opened:
             width, height = opened.size
@@ -338,21 +338,30 @@ def process_image(payload: bytes) -> tuple[bytes, str, float]:
         foreground_ratio = _validate_foreground(result)
     else:
         with INFERENCE_LOCK:
-            result = remove(
-                image.convert("RGB"),
-                session=SESSION,
-                alpha_matting=True,
-                alpha_matting_foreground_threshold=240,
-                alpha_matting_background_threshold=10,
-                alpha_matting_erode_size=1,
-            )
+            if safe_mask:
+                result = remove(
+                    image.convert("RGB"),
+                    session=SESSION,
+                    alpha_matting=False,
+                    post_process_mask=True,
+                )
+            else:
+                result = remove(
+                    image.convert("RGB"),
+                    session=SESSION,
+                    alpha_matting=True,
+                    alpha_matting_foreground_threshold=240,
+                    alpha_matting_background_threshold=10,
+                    alpha_matting_erode_size=1,
+                )
         if not isinstance(result, Image.Image):
             raise ProcessingError("Background-removal engine returned invalid data")
         result = result.convert("RGBA")
         result, refined_ratio = _refine_chromatic_background(image, result)
         result = _denoise_preserving_edges(result)
         foreground_ratio = _validate_foreground(result)
-        action = "removed+chroma" if refined_ratio > 0 else "removed"
+        action_prefix = "safe-removed" if safe_mask else "removed"
+        action = action_prefix + "+chroma" if refined_ratio > 0 else action_prefix
 
     output = io.BytesIO()
     result.save(output, format="PNG", optimize=False)
@@ -378,7 +387,8 @@ class Handler(BaseHTTPRequestHandler):
         self._send_json(200, {"ok": True, "model": MODEL_NAME})
 
     def do_POST(self) -> None:
-        if self.path != "/remove":
+        request_path = self.path.split("?", 1)[0]
+        if request_path not in ("/remove", "/remove-safe"):
             self._send_json(404, {"ok": False, "error": "not_found"})
             return
 
@@ -392,7 +402,10 @@ class Handler(BaseHTTPRequestHandler):
 
         payload = self.rfile.read(content_length)
         try:
-            output, action, foreground_ratio = process_image(payload)
+            output, action, foreground_ratio = process_image(
+                payload,
+                safe_mask=request_path == "/remove-safe",
+            )
         except ProcessingError as exc:
             LOGGER.warning("Rejected image: %s", exc)
             self._send_json(422, {"ok": False, "error": str(exc)})
