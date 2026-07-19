@@ -126,7 +126,7 @@
                      placeholder="ten-san-pham-theo-url" style="flex:1">
               <button type="button" onclick="autoSlug()" class="btn btn-outline-navy btn-sm">Tạo slug</button>
             </div>
-            <div class="fs-12 text-muted mt-1">coolingsystem.vn/products/<span id="slugPreview" style="color:var(--navy);font-weight:600"><?= e($product['slug']??'...') ?></span></div>
+            <div class="fs-12 text-muted mt-1">coolingsystems.vn/products/<span id="slugPreview" style="color:var(--navy);font-weight:600"><?= e($product['slug']??'...') ?></span></div>
           </div>
 
           <div class="form-row">
@@ -267,7 +267,7 @@
             <!-- Google preview -->
             <div style="margin-top:8px;padding:10px;background:#f8f9fa;border-radius:4px;font-size:12px">
               <div style="color:#1a0dab;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="gpTitle">Tiêu đề sẽ hiển thị tại đây...</div>
-              <div style="color:#006621;font-size:11px">coolingsystem.vn › products › <span id="gpSlug">slug</span></div>
+              <div style="color:#006621;font-size:11px">coolingsystems.vn › products › <span id="gpSlug">slug</span></div>
               <div style="color:#545454;line-height:1.5" id="gpDesc">Mô tả ngắn sẽ hiển thị tại đây...</div>
             </div>
           </div>
@@ -284,7 +284,7 @@
           <div class="form-group">
             <label>Canonical URL (để trống = tự động)</label>
             <input type="text" name="canonical_url" value="<?= e($product['canonical_url']??'') ?>"
-                   placeholder="https://coolingsystem.vn/products/...">
+                   placeholder="https://coolingsystems.vn/products/...">
           </div>
 
           <div class="form-group">

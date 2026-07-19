@@ -238,7 +238,7 @@ function productPath(array $product): string {
 }
 
 function productCanonicalUrl(array $product): string {
-    return 'https://coolingsystem.vn' . productPath($product);
+    return 'https://coolingsystems.vn' . productPath($product);
 }
 
 /**
@@ -482,7 +482,7 @@ function storeNormalizedProductUpload(array $file, string $seoBase, string $uplo
 
     $uploadDir = rtrim($uploadDir, '/') . '/';
     $seoBase = mb_substr(trim($seoBase), 0, 120, 'UTF-8');
-    $originalDir = '/var/lib/cooling/product-originals/';
+    $originalDir = '/var/lib/coolingsystems/product-originals/';
     if (!is_dir($originalDir) && !@mkdir($originalDir, 0770, true)) {
         $error = 'Không tạo được thư mục lưu ảnh gốc.';
         return null;

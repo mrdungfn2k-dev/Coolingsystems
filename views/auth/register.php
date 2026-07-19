@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/cooling.css?v=<?= time() ?>">
 <?php
 $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+$_canonicalUrl = 'https://coolingsystems.vn' . rtrim($_canonicalPath, '/');
 ?>
 <link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
 <meta name="robots" content="noindex, nofollow">
@@ -48,7 +48,7 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
 @media(max-width:520px){.form-row{flex-direction:column;gap:0}.auth-card{padding:28px 20px}}
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystem.vn"},{"@type":"ListItem","position":2,"name":"Đăng ký","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystems.vn"},{"@type":"ListItem","position":2,"name":"Đăng ký","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
 </script>
 </head>
 <body>

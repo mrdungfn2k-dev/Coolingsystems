@@ -13,7 +13,7 @@
 .settings-card .form-group { margin-bottom:16px; }
 .settings-card label { display:block; font-size:13px; font-weight:700; color:#3a4658; margin-bottom:6px; }
 .settings-card label small { font-weight:400; color:#8a93a3; }
-.settings-card input[type=text], .settings-card input[type=url], .settings-card input[type=email], .settings-card input[type=tel], .settings-card textarea, .settings-card select { width:100%; min-height:42px; border:1px solid #dde3ec; border-radius:9px; padding:0 13px; font-size:14px; transition:border-color .15s, box-shadow .15s; box-sizing:border-box; background:#fff; }
+.settings-card input[type=text], .settings-card input[type=url], .settings-card input[type=email], .settings-card input[type=password], .settings-card input[type=tel], .settings-card textarea, .settings-card select { width:100%; min-height:42px; border:1px solid #dde3ec; border-radius:9px; padding:0 13px; font-size:14px; transition:border-color .15s, box-shadow .15s; box-sizing:border-box; background:#fff; }
 .settings-card textarea { padding:10px 13px; line-height:1.5; }
 .settings-card input:focus, .settings-card textarea:focus, .settings-card select:focus { border-color:var(--navy); outline:none; box-shadow:0 0 0 3px rgba(26,50,88,0.10); }
 .settings-card .field-hint { font-size:12px; color:#8a93a3; margin-top:6px; }
@@ -94,6 +94,46 @@
       <div style="width:100%"><button type="submit" class="btn-save">Lưu tài khoản quản trị</button></div>
     </form>
   </div>
+  <?php $smtp = function_exists('smtpConfig') ? smtpConfig() : ['enabled'=>false,'host'=>'','port'=>587,'encryption'=>'tls','username'=>'','from_email'=>'','from_name'=>'']; ?>
+  <div class="settings-card" style="grid-column:1 / -1">
+    <h3>✉ Cấu hình SMTP gửi email</h3>
+    <p style="font-size:13px;color:#666;margin:-5px 0 16px">Dùng SMTP của email doanh nghiệp, Gmail hoặc nhà cung cấp mail. Với Gmail, hãy dùng Mật khẩu ứng dụng 16 ký tự.</p>
+    <form method="post" action="/admin/settings/smtp" class="general-form">
+      <?= csrfField() ?>
+      <div>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" name="smtp_enabled" value="1" <?= !empty($smtp['enabled'])?'checked':'' ?>> Bật gửi mail qua SMTP</label>
+        <div class="form-group" style="margin-top:14px"><label>Máy chủ SMTP</label><input type="text" name="smtp_host" value="<?= htmlspecialchars($smtp['host']) ?>" placeholder="smtp.gmail.com"></div>
+        <div class="form-group"><label>Cổng SMTP</label><input type="text" name="smtp_port" value="<?= (int)$smtp['port'] ?>" inputmode="numeric" placeholder="587"></div>
+      </div>
+      <div>
+        <div class="form-group"><label>Bảo mật kết nối</label><select name="smtp_encryption"><option value="tls" <?= $smtp['encryption']==='tls'?'selected':'' ?>>STARTTLS (khuyến nghị, cổng 587)</option><option value="ssl" <?= $smtp['encryption']==='ssl'?'selected':'' ?>>SSL/TLS (cổng 465)</option><option value="none" <?= $smtp['encryption']==='none'?'selected':'' ?>>Không mã hóa</option></select></div>
+        <div class="form-group"><label>Tài khoản SMTP</label><input type="email" name="smtp_username" value="<?= htmlspecialchars($smtp['username']) ?>" placeholder="email@domain.com"></div>
+        <div class="form-group"><label>Mật khẩu ứng dụng <small>(để trống để giữ mật khẩu đã lưu)</small></label><input type="password" name="smtp_password" value="" autocomplete="new-password" placeholder="Mật khẩu ứng dụng SMTP"><?php if(!empty($smtp['password'])): ?><div class="field-hint" style="color:#15803d">Đã lưu mật khẩu ứng dụng. Ô này luôn để trống để bảo mật.</div><?php endif; ?></div>
+      </div>
+      <div>
+        <div class="form-group"><label>Email người gửi</label><input type="email" name="smtp_from_email" value="<?= htmlspecialchars($smtp['from_email']) ?>" placeholder="email@domain.com"></div>
+        <div class="form-group"><label>Tên người gửi</label><input type="text" name="smtp_from_name" value="<?= htmlspecialchars($smtp['from_name']) ?>" placeholder="COOLING PARTS & SERVICE"></div>
+        <button type="submit" class="btn-save">Lưu cấu hình SMTP</button>
+      </div>
+    </form>
+  </div>
+
+  <?php $inventoryAlertEmail = dbGet("SELECT value FROM settings WHERE key='inventory_alert_email'")['value'] ?? ''; $inventoryAlertEnabled = (dbGet("SELECT value FROM settings WHERE key='inventory_alert_enabled'")['value'] ?? '0') === '1'; ?>
+  <div class="settings-card" style="grid-column:1 / -1">
+    <h3>🔔 Cảnh báo tồn kho qua email</h3>
+    <p style="font-size:13px;color:#666;margin:-5px 0 16px">Khi tồn kho chạm hoặc thấp hơn mức tối thiểu, hệ thống gửi một email. Cảnh báo chỉ gửi lại sau khi tồn đã tăng cao hơn mức tối thiểu rồi giảm xuống lần nữa.</p>
+    <form method="post" action="/admin/settings/inventory-alert" style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end">
+      <?= csrfField() ?>
+      <label style="display:flex;align-items:center;gap:8px;margin:0 8px 11px 0;cursor:pointer"><input type="checkbox" name="inventory_alert_enabled" value="1" <?= $inventoryAlertEnabled?'checked':'' ?>> Bật gửi cảnh báo tồn kho</label>
+      <div class="form-group" style="margin:0;flex:1;min-width:280px"><label>Email nhận cảnh báo</label><input type="email" name="inventory_alert_email" value="<?= htmlspecialchars($inventoryAlertEmail) ?>" placeholder="admin@example.com"></div>
+      <button type="submit" class="btn-save">Lưu cấu hình cảnh báo</button>
+    </form>
+    <form method="post" action="/admin/settings/inventory-alert/test" style="margin-top:12px">
+      <?= csrfField() ?>
+      <button type="submit" class="btn-save" style="background:#fff;color:#1a3258;border:1px solid #1a3258">Gửi email kiểm tra</button>
+    </form>
+  </div>
+
   <!-- Social Media Links -->
   <div class="settings-card">
     <h3>🌐 Liên kết mạng xã hội</h3>

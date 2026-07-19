@@ -1,78 +1,28 @@
-<?php require __DIR__.'/../partials/dashboard-head.php'; ?>
-<div class="dash-head">
-  <h1>Phân công nhân viên cho vai trò: <span style="color:var(--gold-warm)"><?= e($staffRole['name']) ?></span></h1>
-</div>
-
-<?php $flashMsgs = getFlash(); foreach($flashMsgs as $fm): ?>
-  <div class="alert alert-<?= e($fm['type']) ?>"><?= e($fm['message']) ?></div>
-<?php endforeach; ?>
-
-<?php $perms = json_decode($staffRole['permissions'] ?? '[]', true) ?: []; ?>
-
+<?php require __DIR__ . '/../partials/dashboard-head.php'; ?>
+<div class="dash-head"><h1>Phân công nhân viên cho vai trò: <span style="color:var(--gold-warm)"><?= e($staffRole['name']) ?></span></h1></div>
+<?php foreach (getFlash() as $message): ?><div class="alert alert-<?= e($message['type']) ?>"><?= e($message['message']) ?></div><?php endforeach; ?>
+<?php $permissions = json_decode($staffRole['permissions'] ?? '[]', true) ?: []; ?>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-
-<!-- Phân công mới -->
-<div class="panel">
-  <div style="padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px">Phân công nhân viên mới</div>
-  <div style="padding:16px">
-    <form method="post" action="/admin/staff/roles/<?= $staffRole['id'] ?>/assign">
-      <?= csrfField() ?>
-      <div class="form-group" style="margin-bottom:12px">
-        <label style="font-size:12px">Chọn tài khoản để phân công</label>
-        <select name="user_id" required style="width:100%">
-          <option value="">— Chọn tài khoản —</option>
-          <?php foreach($availableUsers as $u): ?>
-            <option value="<?= $u['id'] ?>"><?= e($u['full_name']) ?> (<?= e($u['email']) ?>)</option>
-          <?php endforeach; ?>
-        </select>
-        <?php if(empty($availableUsers)): ?>
-          <p style="font-size:12px;color:#888;margin-top:6px">Tất cả người dùng đã được gán vai trò này.</p>
-        <?php endif; ?>
-      </div>
-      <button type="submit" class="btn btn-navy btn-sm">Phân công</button>
-    </form>
-    
-    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:#888">
-      <strong>Quyền của vai trò này:</strong>
-      <?php 
-      $pLabels = ['orders'=>'Đơn hàng','create_order'=>'Tạo đơn hộ','products'=>'Sản phẩm','reviews'=>'Đánh giá','contacts'=>'Quản lý liên hệ','users'=>'Người dùng','staff'=>'Nhân viên','vouchers'=>'Voucher','content'=>'Nội dung','reports'=>'Báo cáo'];
-      ?>
-      <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px">
-        <?php foreach($perms as $p): ?>
-          <span style="background:#e8f5e9;color:#2e7d32;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600"><?= $pLabels[$p] ?? $p ?></span>
-        <?php endforeach; ?>
-        <?php if(empty($perms)): ?><span style="color:#e74c3c">Chưa có quyền nào!</span><?php endif; ?>
-      </div>
+  <div class="panel"><div style="padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px">Phân công nhân viên mới</div><div style="padding:16px">
+    <?php if (empty($availableUsers)): ?>
+      <div class="alert alert-info" style="margin:0 0 14px">Chưa có tài khoản nhân viên đang hoạt động để phân công. Tài khoản quản trị, đối tác và khách hàng không được hiển thị tại đây.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><a href="/admin/users?role=staff" class="btn btn-outline-navy btn-sm">Danh sách nhân viên</a><a href="/admin/users/new?role=staff" class="btn btn-navy btn-sm">+ Thêm nhân viên</a></div>
+    <?php else: ?>
+      <form method="post" action="/admin/staff/roles/<?= (int)$staffRole['id'] ?>/assign"><?= csrfField() ?>
+        <div class="form-group" style="margin-bottom:12px"><label style="font-size:12px">Chọn tài khoản nhân viên đang hoạt động</label><select name="user_id" required style="width:100%"><option value="">— Chọn nhân viên —</option><?php foreach ($availableUsers as $user): ?><option value="<?= (int)$user['id'] ?>"><?= e($user['full_name']) ?> (<?= e($user['email']) ?>)</option><?php endforeach; ?></select></div>
+        <button type="submit" class="btn btn-navy btn-sm">Phân công</button>
+      </form>
+    <?php endif; ?>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:#667085">
+      <strong>Phạm vi quyền sẽ được cấp:</strong>
+      <?php if ($rbacTemplate): ?><p style="margin:7px 0">Vai trò mẫu RBAC có <?= (int)$matrixTaskCount ?> nhiệm vụ theo ma trận. <a href="/admin/staff/roles/<?= (int)$staffRole['id'] ?>/permissions">Xem toàn bộ quyền</a>.</p>
+      <?php else: ?><p style="margin:7px 0">Vai trò tùy chỉnh có <?= count($permissions) ?> quyền đã chọn. <a href="/admin/staff/roles/<?= (int)$staffRole['id'] ?>/permissions">Xem quyền</a>.</p><?php endif; ?>
+      <p style="margin:0">Hệ thống chỉ gán quyền cho tài khoản có loại <strong>Nhân viên</strong> và trạng thái <strong>Hoạt động</strong>. Mọi thao tác gán hoặc hủy đều được ghi nhật ký.</p>
     </div>
+  </div></div>
+  <div class="panel"><div style="padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px">Đang giữ vai trò này (<?= count($assignedUsers) ?>)</div>
+    <?php if (empty($assignedUsers)): ?><div style="padding:20px;text-align:center;color:#888;font-size:13px">Chưa có nhân viên nào</div><?php else: ?><table class="tbl"><thead><tr><th>Họ tên</th><th>Email</th><th>Hủy</th></tr></thead><tbody><?php foreach ($assignedUsers as $user): ?><tr><td><?= e($user['full_name']) ?></td><td class="fs-12"><?= e($user['email']) ?></td><td><form method="post" action="/admin/staff/unassign/<?= (int)$user['assignment_id'] ?>" onsubmit="return csConfirmForm(this,'Hủy phân quyền này?')"><?= csrfField() ?><button type="submit" class="btn btn-sm" style="background:#fee;color:#c62828;border:1px solid #fcc">Hủy</button></form></td></tr><?php endforeach; ?></tbody></table><?php endif; ?>
   </div>
 </div>
-
-<!-- Nhân viên đang giữ vai trò này -->
-<div class="panel">
-  <div style="padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px">Đang giữ vai trò này (<?= count($assignedUsers) ?>)</div>
-  <?php if(empty($assignedUsers)): ?>
-    <div style="padding:20px;text-align:center;color:#888;font-size:13px">Chưa có nhân viên nào</div>
-  <?php else: ?>
-  <table class="tbl">
-    <thead><tr><th>Họ tên</th><th>Email</th><th>Hủy</th></tr></thead>
-    <tbody>
-    <?php foreach($assignedUsers as $u): ?>
-    <tr>
-      <td><?= e($u['full_name']) ?></td>
-      <td class="fs-12"><?= e($u['email']) ?></td>
-      <td>
-        <form method="post" action="/admin/staff/unassign/<?= $u['assignment_id'] ?>" onsubmit="return csConfirmForm(this,'Hủy phân quyền?')">
-          <?= csrfField() ?><button type="submit" class="btn btn-sm" style="background:#fee;color:#c62828;border:1px solid #fcc">Hủy</button>
-        </form>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-    </tbody>
-  </table>
-  <?php endif; ?>
-</div>
-</div>
-
-<div style="margin-top:16px"><a href="/admin/staff" class="btn btn-outline-navy">← Quay lại Phân quyền</a></div>
-
-<?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
+<div style="margin-top:16px"><a href="/admin/staff" class="btn btn-outline-navy">Quay lại Phân quyền</a></div>
+<?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

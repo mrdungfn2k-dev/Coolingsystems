@@ -124,8 +124,8 @@
 </style>
 <?php
 $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
-if ($_canonicalPath === '/admin' || $_canonicalPath === '/admin/') $_canonicalUrl = 'https://coolingsystem.vn/admin';
+$_canonicalUrl = 'https://coolingsystems.vn' . rtrim($_canonicalPath, '/');
+if ($_canonicalPath === '/admin' || $_canonicalPath === '/admin/') $_canonicalUrl = 'https://coolingsystems.vn/admin';
 ?>
 <link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
 <meta name="robots" content="noindex, nofollow">

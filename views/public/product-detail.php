@@ -1,6 +1,6 @@
 <?php
 $title = $product['name'];
-$mainImg = !empty($images) ? 'https://coolingsystem.vn/uploads/products/'.str_replace('%2F', '/', rawurlencode($images[0]['file_path'])) : null;
+$mainImg = !empty($images) ? 'https://coolingsystems.vn/uploads/products/'.str_replace('%2F', '/', rawurlencode($images[0]['file_path'])) : null;
 $productUrl = productCanonicalUrl($product);
 $displayPrice = $product['price'] ?? 0;
 $displayOriginalPrice = $product['original_price'] ?? null;
@@ -17,7 +17,7 @@ $seo = [
     'meta_description' => $metaDescription,
     'meta_keywords'    => !empty($product['seo_keyword']) ? $product['seo_keyword'] : (!empty($product['focus_keyword']) ? $product['focus_keyword'] : $product['name'].', '.($product['oem_code']??'').', '.($product['part_brand']??'').', phụ tùng ô tô'),
     'og_type'          => 'product',
-    'og_image'         => $mainImg ?? 'https://coolingsystem.vn/img/og-default.jpg',
+    'og_image'         => $mainImg ?? 'https://coolingsystems.vn/img/og-default.jpg',
     'canonical'        => $productUrl,
     'noindex'          => ($product['status'] ?? '') !== 'published' || ($product['is_indexed']??1) == 0,
 ];
@@ -42,7 +42,7 @@ if (preg_match_all('#<h[23][^>]*>(.*?)</h[23]>\s*<p[^>]*>(.*?)</p>#si', $descrip
 $schemaImages = [];
 foreach ($images as $image) {
     if (empty($image['file_path'])) continue;
-    $schemaImages[] = 'https://coolingsystem.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($image['file_path']));
+    $schemaImages[] = 'https://coolingsystems.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($image['file_path']));
 }
 
 $brandName = trim((string)($product['part_brand'] ?? ''));

@@ -40,7 +40,7 @@
         <?= csrfField() ?>
         <div class="form-group">
             <label>Email quản trị</label>
-            <input type="email" name="email" required autofocus placeholder="admin@coolingsystem.vn">
+            <input type="email" name="email" required autofocus placeholder="admin@coolingsystems.vn">
         </div>
         <button type="submit" class="btn-submit">Gửi mã OTP</button>
     </form>

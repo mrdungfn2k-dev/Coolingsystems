@@ -1,6 +1,6 @@
 <?php
-define('DB_PATH', '/var/lib/cooling/cooling.db');
-define('UPLOAD_DIR', '/opt/cooling-php/uploads');
+define('DB_PATH', '/var/lib/coolingsystems/cooling.db');
+define('UPLOAD_DIR', '/var/lib/coolingsystems/uploads');
 define('SESSION_LIFETIME', 86400);
 define('COMMISSION_RATE', 5);
 define('COD_MAX', 10000000);

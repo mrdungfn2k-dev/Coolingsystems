@@ -12,7 +12,10 @@ if ($__sbU && (($__sbU['role'] ?? '') === 'staff')) {
     $__perms = array_values(array_unique($__perms));
     $__roleName = $__names ? implode(', ', $__names) : 'Nhân viên';
 }
-$sb = function($perm) use ($__isAdmin, $__perms) { if ($__isAdmin) return true; return in_array($perm, $__perms, true); };
+$sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
+  if ($__isAdmin || in_array($perm, $__perms, true)) return true;
+  return $__sbU && (($__sbU['role'] ?? '') === 'staff') && function_exists('rbacMenuCan') && rbacMenuCan((int)$__sbU['id'], $perm);
+};
 ?>
 
 <div class="dash">
@@ -29,18 +32,33 @@ $sb = function($perm) use ($__isAdmin, $__perms) { if ($__isAdmin) return true; 
     <style>.dash-nav a{display:flex;align-items:center;gap:10px}.dash-nav a .sb-ic{width:18px;height:18px;flex-shrink:0;opacity:.62}.dash-nav a.active .sb-ic{opacity:.95}</style>
     <nav class="dash-nav">
       <?php if($sb('reports')): ?><a href="/admin" class="<?= isActive('/admin') ?>"><?= sbIcon('home') ?>Tổng quan</a><?php endif; ?>
-      <?php if($sb('products')||$sb('categories')||$sb('brand_models')||$sb('brands')): ?>
+      <?php if($sb('serials')||$sb('products')||$sb('inventory')||$sb('products_create')||$sb('categories')||$sb('brand_models')||$sb('brands')): ?>
       <div class="sb-section">SẢN PHẨM<span class="sb-sec-desc">Sản phẩm · Danh mục · Thương hiệu · Hãng xe</span></div>
       <?php if($sb('products')): ?><a href="/admin/products" class="<?= (startsWith(currentPath(),'/admin/products') && currentPath()!=='/admin/products/new')?'active':'' ?>"><?= sbIcon('box') ?>Quản lý sản phẩm</a>
+      <a href="/admin/inventory" class="<?= startsWith(currentPath(),'/admin/inventory')?'active':'' ?>"><?= sbIcon('list') ?>Quản lý kho</a>
       <a href="/admin/products/new" class="<?= currentPath()==='/admin/products/new'?'active':'' ?>"><?= sbIcon('plus') ?>+ Đăng SP mới</a><?php endif; ?>
+      <?php if($sb('serials')): ?><a href="/admin/serials" class="<?= startsWith(currentPath(),'/admin/serials')?'active':'' ?>"><?= sbIcon('list') ?>Serial & Lô hàng</a><?php endif; ?>
       <?php if($sb('categories')): ?><a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>"><?= sbIcon('folder') ?>Danh mục</a><?php endif; ?>
       <?php if($sb('brand_models')): ?><a href="/admin/product-brands" class="<?= startsWith(currentPath(),'/admin/product-brands')?'active':'' ?>"><?= sbIcon('tag') ?>Thương hiệu</a><?php endif; ?>
       <?php if($sb('brands')): ?><a href="/admin/brands" class="<?= startsWith(currentPath(),'/admin/brands')?'active':'' ?>"><?= sbIcon('truck') ?>Hãng xe</a><?php endif; ?>
       <?php endif; ?>
-      <?php if($sb('orders')||$sb('returns')): ?>
+      <?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'finance.cashbook.view'))): ?>
+      <div class="sb-section">T&#192;I CH&#205;NH<span class="sb-sec-desc">Qu&#7929; &middot; Thu chi</span></div>
+      <a href="/admin/cashbook" class="<?= startsWith(currentPath(),'/admin/cashbook')?'active':'' ?>"><?= sbIcon('list') ?>S&#7893; qu&#7929;</a>
+      <?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'finance.bank_reconciliation.manage'))): ?>
+      <a href="/admin/bank-reconciliation" class="<?= startsWith(currentPath(),'/admin/bank-reconciliation')?'active':'' ?>"><?= sbIcon('list') ?>&#272;&#7889;i so&#225;t NH/QR</a>
+      <?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'finance.customer_debt.collect'))): ?>
+      <a href="/admin/customer-debts" class="<?= startsWith(currentPath(),'/admin/customer-debts')?'active':'' ?>"><?= sbIcon('list') ?>C&#244;ng n&#7907; kh&#225;ch h&#224;ng</a>
+      <?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'purchasing.suppliers.view'))): ?><a href="/admin/suppliers" class="<?= startsWith(currentPath(),'/admin/suppliers')?'active':'' ?>"><?= sbIcon('list') ?>Nh&#224; cung c&#7845;p</a><?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'purchasing.requests.create'))): ?><a href="/admin/purchase-requests" class="<?= startsWith(currentPath(),'/admin/purchase-requests')?'active':'' ?>"><?= sbIcon('list') ?>Y&#234;u c&#7847;u mua</a><?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'purchasing.receipts.create'))): ?><a href="/admin/purchase-receipts" class="<?= startsWith(currentPath(),'/admin/purchase-receipts')?'active':'' ?>"><?= sbIcon('list') ?>Nh&#7853;n h&#224;ng PO</a><?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'purchasing.quality.inspect'))): ?><a href="/admin/purchase-quality" class="<?= startsWith(currentPath(),'/admin/purchase-quality')?'active':'' ?>"><?= sbIcon('list') ?>Ki&#7875;m ch&#7845;t l&#432;&#7907;ng</a><?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'purchasing.costs.allocate'))): ?><a href="/admin/purchase-costs" class="<?= startsWith(currentPath(),'/admin/purchase-costs')?'active':'' ?>"><?= sbIcon('list') ?>Chi ph&#237; mua</a><?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'purchasing.returns.create'))): ?><a href="/admin/supplier-returns" class="<?= startsWith(currentPath(),'/admin/supplier-returns')?'active':'' ?>"><?= sbIcon('list') ?>Tr&#7843; h&#224;ng NCC</a><?php endif; ?><?php endif; ?><?php endif; ?><?php endif; ?><?php endif; ?><?php endif; ?>
+      <?php endif; ?>
+      <?php endif; ?>
+      <?php endif; ?>
+      <?php if($sb('orders')||$sb('returns')||$sb('create_order')): ?>
       <div class="sb-section">VẬN HÀNH<span class="sb-sec-desc">Đơn hàng · Trả hàng</span></div>
       <?php if($sb('orders')): ?><a href="/admin/orders" class="<?= startsWith(currentPath(),'/admin/orders')?'active':'' ?>"><?= sbIcon('cart') ?>Đơn hàng</a><?php endif; ?>
       <?php if($sb('returns')): ?><a href="/admin/returns" class="<?= startsWith(currentPath(),'/admin/returns')?'active':'' ?>"><?= sbIcon('undo') ?>Trả hàng</a><?php endif; ?>
+      <?php if($sb('warranties')): ?><a href="/admin/warranties" class="<?= startsWith(currentPath(),'/admin/warranties')?'active':'' ?>"><?= sbIcon('tool') ?>Bảo hành & Kỹ thuật</a><?php endif; ?>
+      <?php if($__isAdmin || ($__sbU && function_exists('rbacCan') && rbacCan((int)$__sbU['id'],'warranty.performance.view'))): ?><a href="/admin/warranties/performance" class="<?= currentPath()==='/admin/warranties/performance'?'active':'' ?>"><?= sbIcon('chart') ?>Hiệu suất kỹ thuật</a><?php endif; ?>
       <?php endif; ?>
       <?php if($__isAdmin||$sb('users')||$sb('staff')||$sb('content')): ?>
       <div class="sb-section">NHÂN SỰ<span class="sb-sec-desc">Phân quyền · Khách hàng · Nhân viên · Tin tức</span></div>
@@ -68,9 +86,9 @@ $sb = function($perm) use ($__isAdmin, $__perms) { if ($__isAdmin) return true; 
       <?php if($sb('promotions')): ?><a href="/admin/promotions" class="<?= isActive('/admin/promotions') ?>"><?= sbIcon('gift') ?>Khuyến mãi</a><?php endif; ?>
       <?php if($sb('vouchers')): ?><a href="/admin/vouchers" class="<?= startsWith(currentPath(),'/admin/vouchers')?'active':'' ?>"><?= sbIcon('ticket') ?>Voucher toàn sàn</a><?php endif; ?>
       <?php if($sb('tax_config')): ?><a href="/admin/settings/finance" class="<?= isActive('/admin/settings/finance') ?>"><?= sbIcon('truck') ?>Cấu hình Vận chuyển</a><?php endif; ?>
-      <?php if($__isAdmin): ?><a href="/admin/settings" class="<?= isActive('/admin/settings') ?>"><?= sbIcon('gear') ?>Cài đặt hệ thống</a><?php endif; ?>
+      <?php if($__isAdmin||$sb('settings')): ?><a href="/admin/settings" class="<?= isActive('/admin/settings') ?>"><?= sbIcon('gear') ?>Cài đặt hệ thống</a><?php endif; ?>
       <?php endif; ?>
-      <a href="<?= $__isAdmin ? '/admin/logout' : '/staff/logout' ?>"><?= sbIcon('logout') ?>Đăng xuất</a>
+      <a href="/admin/logout"><?= sbIcon('logout') ?>Đăng xuất</a>
     </nav>
   </aside>
   <div class="dash-main">
@@ -129,10 +147,10 @@ if ($_ap !== '/admin' && !empty($_abcLabel)):
 <?php endif; ?>
 <?php
 // === Admin BreadcrumbList JSON-LD Schema (for SEOQuake detection) ===
-$_adminSchemaItems = [['name' => 'Tổng quan', 'url' => 'https://coolingsystem.vn/admin']];
+$_adminSchemaItems = [['name' => 'Tổng quan', 'url' => 'https://coolingsystems.vn/admin']];
 if ($_ap !== '/admin' && !empty($_abcLabel)) {
     if (!empty($_abcParent) && isset($_abcMap[$_abcParent])) {
-        $_adminSchemaItems[] = ['name' => $_abcMap[$_abcParent], 'url' => 'https://coolingsystem.vn' . $_abcParent];
+        $_adminSchemaItems[] = ['name' => $_abcMap[$_abcParent], 'url' => 'https://coolingsystems.vn' . $_abcParent];
     }
     $_adminSchemaItems[] = ['name' => strip_tags($_abcLabel), 'url' => $_canonicalUrl];
 }

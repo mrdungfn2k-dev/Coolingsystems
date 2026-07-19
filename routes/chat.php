@@ -83,7 +83,7 @@ post('/chat/send', function() {
         if (in_array($mime, $allowed)) {
             $ext = pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
             $fname = 'chat_' . $tid . '_' . time() . '_' . rand(100,999) . '.' . strtolower($ext);
-            $dest = '/var/lib/cooling/uploads/chat/' . $fname;
+            $dest = '/var/lib/coolingsystems/uploads/chat/' . $fname;
             if (move_uploaded_file($_FILES['attachment']['tmp_name'], $dest)) {
                 $attachPath = $fname;
                 if (!$content) $content = '[Ảnh]';

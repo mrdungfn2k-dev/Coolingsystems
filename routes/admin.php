@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/inventory-alerts.php';
 get('/admin/login', function() { view('admin/login', ['title' => 'Đăng nhập Quản trị']); });
 
 post('/admin/login', function() {
@@ -222,7 +223,7 @@ get('/admin/partners', function() {
     view('admin/partners', ['title'=>'Quản lý đối tác','role'=>'admin','partners'=>$partners,'filterStatus'=>$status]);
 });
 
-get('/admin/products', function() {    requireStaffPermission('products', '/admin/login');
+get('/admin/products', function() {    requireStaffPermission('rbac:catalog.products.view|products', '/admin/login');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
     $q=trim($_GET['q']??''); $tab=$_GET['tab']??'all'; $catId=intval($_GET['cat']??0);
     $brandId=intval($_GET['brand_id']??$_GET['brand']??0); $partBrand=trim($_GET['part_brand']??$_GET['pbrand']??'');
@@ -248,7 +249,7 @@ get('/admin/products', function() {    requireStaffPermission('products', '/admi
 
 // Reorder product images (drag-and-drop)
 post('/admin/products/reorder-images', function() {
-    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
     $ids = json_decode($_POST['ids'] ?? '[]', true);
     if (!is_array($ids) || empty($ids)) {
         header('Content-Type: application/json');
@@ -267,7 +268,7 @@ post('/admin/products/reorder-images', function() {
 
 // Export products to CSV
 get('/admin/products/export-csv', function() {
-    requireStaffPermission('products', '/admin/login');
+    requireStaffPermission('rbac:catalog.products.view|products', '/admin/login');
     $template = $_GET['template'] ?? '';
     $selectedIds = [];
     if (!empty($_GET['ids'])) {
@@ -300,7 +301,7 @@ get('/admin/products/export-csv', function() {
 
 // Import products from CSV (header-based: chấp nhận tiêu đề tiếng Việt hoặc tiếng Anh, mọi thứ tự cột)
 post('/admin/products/import-csv', function() {
-    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.products.import|products', '/admin/login'); csrfCheck();
     if (empty($_FILES['csv_file']['tmp_name'])) { flash('error', 'Vui lòng chọn file CSV.'); redirect('/admin/products'); return; }
     $uploadedFile = $_FILES['csv_file'];
     $ext = strtolower(pathinfo($uploadedFile['name'] ?? '', PATHINFO_EXTENSION));
@@ -604,7 +605,7 @@ get('/admin/users/export-csv', function() {
 
 // ── EXPORT: Categories ──
 get('/admin/categories/export-csv', function() {
-    requireStaffPermission('categories', '/auth/login');
+    requireStaffPermission('rbac:integration.data.export|categories', '/auth/login');
     $selectedIds = [];
     if (!empty($_GET['ids'])) {
         $selectedIds = array_map('intval', explode(',', $_GET['ids']));
@@ -631,7 +632,7 @@ get('/admin/categories/export-csv', function() {
 
 // ── EXPORT: Brands (Hãng xe) ──
 get('/admin/brands/export-csv', function() {
-    requireStaffPermission('brands', '/admin/login');
+    requireStaffPermission('rbac:integration.data.export|brands', '/admin/login');
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="hang-xe_' . date('Ymd') . '.csv"');
     $out = fopen('php://output', 'w');
@@ -644,7 +645,7 @@ get('/admin/brands/export-csv', function() {
 
 // ── EXPORT: Product Brands (Thương hiệu SP) ──
 get('/admin/product-brands/export-csv', function() {
-    requireStaffPermission('brand_models', '/auth/login');
+    requireStaffPermission('rbac:integration.data.export|brand_models', '/auth/login');
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="product_brands_' . date('Ymd') . '.csv"');
     $out = fopen('php://output', 'w');
@@ -658,7 +659,7 @@ get('/admin/product-brands/export-csv', function() {
 
 // ── Admin Chat ──
 get('/admin/chat', function() {
-    requireRole(['admin','staff'], '/admin/login');
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login');
     try { dbRun("ALTER TABLE chat_threads ADD COLUMN is_hidden INTEGER DEFAULT 0"); } catch(\Exception $e) {}
     
     $threads = dbAll("SELECT t.*, u.full_name, u.email, u.avatar 
@@ -689,7 +690,7 @@ get('/admin/chat', function() {
     ]);
 });
 post('/admin/chat/send', function() {
-    requireRole(['admin','staff'], '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login'); csrfCheck();
     $threadId = intval($_POST['thread_id']);
     $content = trim($_POST['content'] ?? '');
     if (!$threadId || !$content) { echo json_encode(['error'=>'missing']); exit; }
@@ -708,7 +709,7 @@ post('/admin/chat/send', function() {
     exit;
 });
 post('/admin/chat/send-image', function() {
-    requireRole(['admin','staff'], '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login'); csrfCheck();
     $threadId = intval($_POST['thread_id']);
     if (!$threadId || empty($_FILES['image'])) { echo json_encode(['error'=>'missing']); exit; }
     $file = $_FILES['image'];
@@ -727,7 +728,7 @@ post('/admin/chat/send-image', function() {
     exit;
 });
 get('/admin/chat/poll', function() {
-    requireRole(['admin','staff'], '/admin/login');
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login');
     $threadId = intval($_GET['thread_id'] ?? 0);
     $afterId = intval($_GET['after_id'] ?? 0);
     if (!$threadId) { echo '[]'; exit; }
@@ -745,7 +746,7 @@ get('/admin/chat/poll', function() {
 
 // ── ẨN / XÓA HỘI THOẠI ────────────────────────────────────────────
 post('/admin/chat/:id/hide', function($p) {
-    requireRole(['admin','staff'], '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login'); csrfCheck();
     $threadId = intval($p['id']);
     $thread = dbGet("SELECT * FROM chat_threads WHERE id=?", [$threadId]);
     if (!$thread) { echo json_encode(['ok'=>false,'msg'=>'Không tìm thấy']); exit; }
@@ -755,7 +756,7 @@ post('/admin/chat/:id/hide', function($p) {
 });
 
 post('/admin/chat/:id/unhide', function($p) {
-    requireRole(['admin','staff'], '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login'); csrfCheck();
     $threadId = intval($p['id']);
     dbRun("UPDATE chat_threads SET is_hidden=0 WHERE id=?", [$threadId]);
     echo json_encode(['ok'=>true]);
@@ -763,7 +764,7 @@ post('/admin/chat/:id/unhide', function($p) {
 });
 
 post('/admin/chat/:id/delete', function($p) {
-    requireRole(['admin','staff'], '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('crm.engagement.manage', '/admin/login'); csrfCheck();
     $threadId = intval($p['id']);
     $thread = dbGet("SELECT * FROM chat_threads WHERE id=?", [$threadId]);
     if (!$thread) { echo json_encode(['ok'=>false,'msg'=>'Không tìm thấy']); exit; }
@@ -805,6 +806,7 @@ post('/admin/users/import-csv', function() {
     $map = csvColMap($header, ['name'=>['ho va ten','full name','name','ten'],'email'=>['email'],'phone'=>['sdt','phone','so dien thoai'],'role'=>['vai tro','role'],'status'=>['trang thai','status'],'address'=>['dia chi','address']]);
     if (!isset($map['email'])) { fclose($handle); flash('error','File CSV không có cột "Email". Hãy nhập theo file mẫu (bấm nút Xuất CSV để lấy mẫu).'); redirect($backList); return; }
     $imported = 0; $errors = 0;
+    $batchPassword = 'Cs@' . bin2hex(random_bytes(6));
     while (($row = fgetcsv($handle)) !== false) {
         if (count($row) < 1) { $errors++; continue; }
         $name = trim((string)csvGet($row,$map,'name'));
@@ -820,13 +822,13 @@ post('/admin/users/import-csv', function() {
         if ($existing) { $errors++; continue; }
         try {
             dbInsert("INSERT INTO users (full_name,email,phone,role,address,password_hash,status,created_at) VALUES (?,?,?,?,?,?,?,datetime('now'))",
-                [$name, $email, $phone, $role, $address, password_hash('Cooling@123', PASSWORD_DEFAULT), $status]);
+                [$name, $email, $phone, $role, $address, password_hash($batchPassword, PASSWORD_DEFAULT), $status]);
             $imported++;
         } catch (\Exception $e) { $errors++; }
     }
     fclose($handle);
     if ($imported > 0) {
-        $msg = "Đã nhập $imported tài khoản. Mật khẩu mặc định: Cooling@123";
+        $msg = "Đã nhập $imported tài khoản. Mật khẩu tạm của đợt nhập: $batchPassword";
         if ($errors > 0) $msg .= " ($errors dòng bỏ qua do email đã tồn tại hoặc lỗi)";
         flash('success', $msg);
     } elseif ($errors > 0) {
@@ -839,7 +841,7 @@ post('/admin/users/import-csv', function() {
 
 // ── IMPORT: Categories ──
 post('/admin/categories/import-csv', function() {
-    requireStaffPermission('categories', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:integration.data.import|categories', '/auth/login'); csrfCheck();
     if (empty($_FILES['csv_file'])) { flash('error','Chưa chọn file'); redirect('/admin/categories'); return; }
     // ===== KIỂM TRA CHỈ CHẤP NHẬN FILE CSV =====
     $uploadedFile = $_FILES['csv_file'];
@@ -900,7 +902,7 @@ post('/admin/categories/import-csv', function() {
 
 // ── IMPORT: Brands (Hãng xe) ──
 post('/admin/brands/import-csv', function() {
-    requireStaffPermission('brands', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:integration.data.import|brands', '/admin/login'); csrfCheck();
     if (empty($_FILES['csv_file'])) { flash('error','Chưa chọn file'); redirect('/admin/brands'); return; }
     // ===== KIỂM TRA CHỈ CHẤP NHẬN FILE CSV =====
     $uploadedFile = $_FILES['csv_file'];
@@ -964,7 +966,7 @@ post('/admin/brands/import-csv', function() {
 
 // ── IMPORT: Product Brands (Thương hiệu SP) ──
 post('/admin/product-brands/import-csv', function() {
-    requireStaffPermission('brand_models', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:integration.data.import|brand_models', '/auth/login'); csrfCheck();
     if (empty($_FILES['csv_file'])) { flash('error','Chưa chọn file'); redirect('/admin/product-brands'); return; }
     // ===== KIỂM TRA CHỈ CHẤP NHẬN FILE CSV =====
     $uploadedFile = $_FILES['csv_file'];
@@ -1094,7 +1096,7 @@ post('/admin/orders/import-csv', function() {
 // ── EXPORT/IMPORT: Categories ──
 
 get('/admin/orders', function() {
-    requireStaffPermission('orders', '/admin/login');
+    requireStaffPermission('rbac:sales.orders.view|orders', '/admin/login');
     $perPage = 20;
     $page = max(1, intval($_GET['page'] ?? 1));
     $q = trim($_GET['q'] ?? '');
@@ -1139,12 +1141,12 @@ get('/admin/orders', function() {
 });
 
 get('/admin/orders/create', function() {
-    $user = requireStaffPermission('create_order', '/admin/login');
+    $user = requireStaffPermission('rbac:sales.orders.create|create_order|orders', '/admin/login');
     view('admin/order-create', ['title'=>'Tạo đơn hàng hộ', 'role'=>'admin', 'currentUser'=>$user]);
 });
 
 get('/admin/orders/:id', function($p) {
-    requireStaffPermission('orders', '/admin/login');
+    requireStaffPermission('rbac:sales.orders.view|orders', '/admin/login');
     $order = dbGet("SELECT o.*, u.full_name, COALESCE(u.email,'') AS email, u.phone, s.full_name AS staff_name
         FROM orders o LEFT JOIN users u ON u.id=o.user_id
         LEFT JOIN users s ON s.id=o.created_by_staff
@@ -1163,7 +1165,7 @@ get('/admin/orders/:id', function($p) {
 
 
 post('/admin/orders/create', function() {
-    $user = requireStaffPermission('orders', '/admin/login'); csrfCheck();
+    $user = requireStaffPermission('rbac:sales.orders.create|orders', '/admin/login'); csrfCheck();
     $items = json_decode($_POST['items'] ?? '[]', true) ?: [];
     if (empty($items)) { flash('error','Vui lòng thêm ít nhất 1 sản phẩm.'); redirect('/admin/orders/create'); }
     $shipName  = trim($_POST['ship_name'] ?? '');
@@ -1241,6 +1243,7 @@ post('/admin/orders/create', function() {
             [$soId, $pid, $qty, $price, $price*$qty, $prod['name']??'', $prod['oem_code']??'']);
         dbRun("UPDATE products SET stock=MAX(0,stock-?) WHERE id=?", [$qty, $pid]);
         dbRun("UPDATE products SET total_import_value=cost_price*stock WHERE id=?", [$pid]);
+        inventoryCheckLowStockAlert($pid, 'admin_order');
     }
     
     // Notification for customer
@@ -1254,7 +1257,7 @@ post('/admin/orders/create', function() {
 });
 
 post('/admin/orders/:id/return/:return_id', function($p) {
-    requireStaffPermission('orders', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:sales.returns.approve|orders', '/admin/login'); csrfCheck();
     $action = $_POST['action'] ?? '';
     if ($action === 'approve') {
         dbRun("UPDATE order_returns SET status='approved' WHERE id=?", [$p['return_id']]);
@@ -1265,6 +1268,7 @@ post('/admin/orders/:id/return/:return_id', function($p) {
             if (!empty($ri['product_id']) && intval($ri['quantity']) > 0) {
                 dbRun("UPDATE products SET stock = stock + ? WHERE id=?", [intval($ri['quantity']), $ri['product_id']]);
                 dbRun("UPDATE products SET total_import_value=cost_price*stock WHERE id=?", [$ri['product_id']]);
+                inventoryCheckLowStockAlert((int)$ri['product_id'], 'admin_return');
             }
         }
         // Deduct refund from revenue
@@ -1330,7 +1334,7 @@ function ensureAdminReturnRecord($orderId) {
 
 // ── Update payment status ──
 post('/admin/orders/:id/payment-status', function($p) {
-    requireStaffPermission('orders', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:sales.payment.collect|orders', '/admin/login'); csrfCheck();
     $status = in_array($_POST['status'] ?? '', ['paid','unpaid','partial_paid','pending_refund','refunded']) ? $_POST['status'] : 'unpaid';
     if ($status === 'paid') {
         $order = dbGet("SELECT grand_total, code FROM orders WHERE id=?", [$p['id']]);
@@ -1360,7 +1364,7 @@ post('/admin/orders/:id/payment-status', function($p) {
 });
 
 post('/admin/orders/:id/delivery-status', function($p) {
-    requireStaffPermission('orders', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:sales.delivery.update|orders', '/admin/login'); csrfCheck();
     $order = dbGet("SELECT payment_status, delivery_status, payment_method, payment_type, user_id, code FROM orders WHERE id=?", [$p['id']]);
     if (!$order) { flash('error','Không tìm thấy đơn hàng.'); redirect('/admin/orders'); return; }
 
@@ -1394,7 +1398,10 @@ post('/admin/orders/:id/delivery-status', function($p) {
     if ($newStatus === 'cancelled' && $order['delivery_status'] !== 'cancelled') {
         $orderItems = dbAll("SELECT oi.product_id, oi.quantity FROM order_items oi INNER JOIN sub_orders so ON so.id=oi.sub_order_id WHERE so.order_id=?", [$p['id']]);
         foreach ($orderItems as $oi) {
-            if ($oi['product_id']) dbRun("UPDATE products SET stock = stock + ? WHERE id=?", [$oi['quantity'], $oi['product_id']]);
+            if ($oi['product_id']) {
+                dbRun("UPDATE products SET stock = stock + ? WHERE id=?", [$oi['quantity'], $oi['product_id']]);
+                inventoryCheckLowStockAlert((int)$oi['product_id'], 'admin_order_cancel');
+            }
         }
         dbRun("UPDATE orders SET payment_status='refunded' WHERE id=? AND payment_status='paid'", [$p['id']]);
     }
@@ -1425,8 +1432,165 @@ post('/admin/orders/:id/delivery-status', function($p) {
 });
 
 // ── STAFF PERMISSION ROUTES ─────────────────────────────────────────────────
+function rbacSanitizeRolePermissions(array $permissions): array {
+    $legacy = ['orders','create_order','returns','products','categories','brands','brand_models','content','static_pages','stores','users','reviews','contacts','chat','vouchers','promotions','staff','reports','tax_config'];
+    $capabilities = array_column(rbacCapabilityCatalog(), 'capability');
+    $allowed = array_flip(array_merge($legacy, array_map(fn($capability) => 'rbac:' . $capability, $capabilities)));
+    $result = [];
+    foreach ($permissions as $permission) {
+        $permission = (string)$permission;
+        if (isset($allowed[$permission])) $result[$permission] = true;
+    }
+    return array_keys($result);
+}
+
+get('/admin/serials', function() { requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login'); $serials=dbAll("SELECT serial.*,product.name AS product_name,product.sku FROM product_serials serial INNER JOIN products product ON product.id=serial.product_id ORDER BY serial.created_at DESC LIMIT 500"); $products=dbAll("SELECT id,sku,name FROM products ORDER BY name LIMIT 3000"); view('admin/serials',['title'=>'Quản lý Serial & Lô hàng','userRole'=>'admin','serials'=>$serials,'products'=>$products]); });
+post('/admin/serials', function() { $actor=requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login');csrfCheck();$productId=(int)($_POST['product_id']??0);$serial=trim($_POST['serial_no']??'');$end=trim($_POST['warranty_end_date']??'');if(!dbGet('SELECT id FROM products WHERE id=?',[$productId])||!$serial||!$end){flash('error','Nhập đầy đủ sản phẩm, serial và hạn bảo hành.');redirect('/admin/serials');}try{$id=dbInsert('INSERT INTO product_serials (product_id,serial_no,manufactured_at,warranty_end_date,created_by) VALUES (?,?,?,?,?)',[$productId,$serial,trim($_POST['manufactured_at']??''),$end,$actor['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id'],$actor['role'],'serial_created','product_serial',$id,json_encode(['product_id'=>$productId,'serial'=>$serial]),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã thêm serial.');}catch(Throwable $e){flash('error','Serial đã tồn tại hoặc dữ liệu không hợp lệ.');}redirect('/admin/serials'); });
+
+get('/admin/warranties/products', function() { requireStaffPermission('rbac:warranty.cases.view|returns','/admin/login'); $q=trim($_GET['q']??''); header('Content-Type: application/json; charset=utf-8'); if(mb_strlen($q)<2){echo '[]';exit;} $like='%'.$q.'%'; $rows=dbAll('SELECT id,sku,oem_code,name FROM products WHERE name LIKE ? OR sku LIKE ? OR oem_code LIKE ? ORDER BY name LIMIT 12',[$like,$like,$like]); echo json_encode(array_map(fn($row)=>['id'=>(int)$row['id'],'label'=>trim($row['sku'].' | '.$row['name'].(!empty($row['oem_code'])?' | OEM: '.$row['oem_code']:''))],$rows),JSON_UNESCAPED_UNICODE); exit; });
+get('/admin/cashbook', function() {
+    $user=requireStaffPermission('rbac:finance.cashbook.view|tax_config','/admin/login');
+    $selectedAccount=max(0,(int)($_GET['account']??0));$fromDate=trim($_GET['from']??'');$toDate=trim($_GET['to']??'');
+    if($fromDate!==''&&!preg_match('/^\d{4}-\d{2}-\d{2}$/',$fromDate))$fromDate='';if($toDate!==''&&!preg_match('/^\d{4}-\d{2}-\d{2}$/',$toDate))$toDate='';
+    $accounts=dbAll("SELECT account.*,COALESCE(SUM(CASE WHEN entry.direction='in' THEN entry.amount ELSE -entry.amount END),0) AS balance FROM cash_accounts account LEFT JOIN cash_ledger_entries entry ON entry.account_id=account.id AND entry.voided_at IS NULL WHERE account.is_active=1 GROUP BY account.id ORDER BY account.sort_order,account.id");
+    if($selectedAccount&&!dbGet('SELECT id FROM cash_accounts WHERE id=? AND is_active=1',[$selectedAccount]))$selectedAccount=0;
+    $where=['entry.voided_at IS NULL'];$params=[];if($selectedAccount){$where[]='entry.account_id=?';$params[]=$selectedAccount;}if($fromDate!==''){$where[]='entry.entry_date>=?';$params[]=$fromDate;}if($toDate!==''){$where[]='entry.entry_date<=?';$params[]=$toDate;}$sqlWhere=implode(' AND ',$where);
+    $entries=dbAll("SELECT entry.*,account.name AS account_name,void_request.id AS void_request_id,void_request.status AS void_request_status,void_request.created_by AS void_request_created_by,void_request.reason AS void_request_reason,void_request.rejection_reason AS void_request_rejection_reason FROM cash_ledger_entries entry INNER JOIN cash_accounts account ON account.id=entry.account_id LEFT JOIN cash_ledger_void_requests void_request ON void_request.ledger_entry_id=entry.id WHERE $sqlWhere ORDER BY entry.entry_date DESC,entry.id DESC LIMIT 500",$params);
+    $totalRow=dbGet("SELECT COALESCE(SUM(CASE WHEN entry.direction='in' THEN entry.amount ELSE 0 END),0) AS income,COALESCE(SUM(CASE WHEN entry.direction='out' THEN entry.amount ELSE 0 END),0) AS expense FROM cash_ledger_entries entry WHERE $sqlWhere",$params)?:['income'=>0,'expense'=>0];$totals=['income'=>(int)$totalRow['income'],'expense'=>(int)$totalRow['expense'],'net'=>(int)$totalRow['income']-(int)$totalRow['expense']];
+    $canCreateReceipt=(($user['role']??'')==='admin') || rbacHasCapability((int)$user['id'],'finance.receipts.create');$canCreateDisbursement=(($user['role']??'')==='admin') || rbacHasCapability((int)$user['id'],'finance.disbursements.create');$canApproveDisbursement=(($user['role']??'')==='admin') || rbacHasCapability((int)$user['id'],'finance.disbursements.approve');$canVoidEntry=(($user['role']??'')==='admin') || rbacHasCapability((int)$user['id'],'finance.ledger.void');$disbursements=dbAll("SELECT request.*,account.name AS account_name FROM cash_disbursement_requests request INNER JOIN cash_accounts account ON account.id=request.account_id ORDER BY CASE request.status WHEN 'pending' THEN 0 WHEN 'approved' THEN 1 ELSE 2 END,request.created_at DESC LIMIT 200");
+    view('admin/cashbook',['title'=>'S&#7893; qu&#7929;','userRole'=>'admin','accounts'=>$accounts,'entries'=>$entries,'totals'=>$totals,'selectedAccount'=>$selectedAccount,'fromDate'=>$fromDate,'toDate'=>$toDate,'canCreateReceipt'=>$canCreateReceipt,'canCreateDisbursement'=>$canCreateDisbursement,'canApproveDisbursement'=>$canApproveDisbursement,'canVoidEntry'=>$canVoidEntry,'currentUserId'=>(int)$user['id'],'disbursements'=>$disbursements]);
+});
+post('/admin/cashbook/receipts', function() {
+    $actor=requireStaffPermission('rbac:finance.receipts.create|tax_config','/admin/login');csrfCheck();
+    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payer=trim($_POST['payer_name']??'');$phone=preg_replace('/\D+/','',$_POST['payer_phone']??'');$email=strtolower(trim($_POST['payer_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
+    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payer===''||mb_strlen($payer)>120||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','D&#7919; li&#7879;u phi&#7871;u thu kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
+    $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Qu&#7929; nh&#7853;n ti&#7873;n kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
+    $amount=(int)$rawAmount;$code='PT'.date('ymdHis').random_int(10,99);$fullDescription=trim('Thu từ '.$payer.($description!==''?' - '.$description:''));
+    $entryId=dbInsert('INSERT INTO cash_ledger_entries (account_id,direction,amount,reference_type,reference_code,description,payer_phone,payer_email,entry_date,created_by) VALUES (?,?,?,?,?,?,?,?,?,?)',[$accountId,'in',$amount,'manual_receipt',$reference!==''?$reference:$code,$fullDescription,$phone,$email,$entryDate,$actor['id']??null]);
+    dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_receipt_created','cash_ledger_entry',$entryId,json_encode(['code'=>$code,'account_id'=>$accountId,'amount'=>$amount,'payer'=>$payer],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+    flash('success','&#272;&#227; t&#7841;o phi&#7871;u thu '.$code.' cho qu&#7929; '.$account['name'].'.');redirect('/admin/cashbook');
+});
+post('/admin/cashbook/disbursements', function() {
+    $actor=requireStaffPermission('rbac:finance.disbursements.create|tax_config','/admin/login');csrfCheck();
+    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payee=trim($_POST['payee_name']??'');$phone=preg_replace('/\D+/','',$_POST['payee_phone']??'');$email=strtolower(trim($_POST['payee_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
+    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payee===''||mb_strlen($payee)>120||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','D&#7919; li&#7879;u phi&#7871;u chi kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
+    $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Qu&#7929; chi kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
+    $amount=(int)$rawAmount;$code='PC'.date('ymdHis').random_int(10,99);
+    $requestId=dbInsert('INSERT INTO cash_disbursement_requests (code,account_id,amount,payee_name,payee_phone,payee_email,reference_code,description,entry_date,status,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[$code,$accountId,$amount,$payee,$phone,$email,$reference,$description,$entryDate,'pending',$actor['id']??null]);
+    dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_disbursement_created','cash_disbursement_request',$requestId,json_encode(['code'=>$code,'account_id'=>$accountId,'amount'=>$amount,'payee'=>$payee],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+    flash('success','&#272;&#227; t&#7841;o phi&#7871;u chi '.$code.' ch&#7901; duy&#7879;t.');redirect('/admin/cashbook');
+});
+post('/admin/cashbook/disbursements/:id/approve', function($p) {
+    $actor=requireStaffPermission('rbac:finance.disbursements.approve|tax_config','/admin/login');csrfCheck();$pdo=db();
+    try{$pdo->beginTransaction();$request=dbGet('SELECT * FROM cash_disbursement_requests WHERE id=?',[$p['id']]);if(!$request||$request['status']!=='pending')throw new RuntimeException('not_pending');if((int)$request['created_by']===(int)$actor['id'])throw new RuntimeException('self_approval');$balanceRow=dbGet("SELECT COALESCE(SUM(CASE WHEN direction='in' THEN amount ELSE -amount END),0) AS balance FROM cash_ledger_entries WHERE account_id=? AND voided_at IS NULL",[$request['account_id']]);if((int)($balanceRow['balance']??0)<(int)$request['amount'])throw new RuntimeException('insufficient');$updated=dbRun("UPDATE cash_disbursement_requests SET status='approved',approved_by=?,approved_at=datetime('now','localtime'),updated_at=datetime('now','localtime') WHERE id=? AND status='pending'",[$actor['id']??null,$request['id']]);if($updated->rowCount()!==1)throw new RuntimeException('changed');$description=trim('Chi cho '.$request['payee_name'].($request['description']!==''?' - '.$request['description']:''));$entryId=dbInsert('INSERT INTO cash_ledger_entries (account_id,direction,amount,reference_type,reference_id,reference_code,description,payer_phone,payer_email,entry_date,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[$request['account_id'],'out',$request['amount'],'cash_disbursement',$request['id'],$request['code'],$description,$request['payee_phone'],$request['payee_email'],$request['entry_date'],$actor['id']??null]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_disbursement_approved','cash_disbursement_request',$request['id'],json_encode(['entry_id'=>$entryId,'code'=>$request['code'],'amount'=>$request['amount']],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','&#272;&#227; duy&#7879;t phi&#7871;u chi v&#224; ghi v&#224;o s&#7893; qu&#7929;.');}catch(Throwable $exception){if($pdo->inTransaction())$pdo->rollBack();$messages=['self_approval'=>'Ng&#432;&#7901;i l&#7853;p kh&#244;ng th&#7875; t&#7921; duy&#7879;t phi&#7871;u chi.','insufficient'=>'S&#7889; d&#432; qu&#7929; kh&#244;ng &#273;&#7911; &#273;&#7875; duy&#7879;t phi&#7871;u chi.','not_pending'=>'Phi&#7871;u chi kh&#244;ng c&#242;n ch&#7901; duy&#7879;t.'];flash('error',$messages[$exception->getMessage()]??'Kh&#244;ng th&#7875; duy&#7879;t phi&#7871;u chi.');}redirect('/admin/cashbook');
+});
+post('/admin/cashbook/disbursements/:id/reject', function($p) {
+    $actor=requireStaffPermission('rbac:finance.disbursements.approve|tax_config','/admin/login');csrfCheck();$reason=trim($_POST['rejection_reason']??'');$request=dbGet('SELECT id,status,created_by FROM cash_disbursement_requests WHERE id=?',[$p['id']]);if(!$request||$request['status']!=='pending'){flash('error','Phi&#7871;u chi kh&#244;ng c&#242;n ch&#7901; duy&#7879;t.');redirect('/admin/cashbook');}if((int)$request['created_by']===(int)$actor['id']){flash('error','Ng&#432;&#7901;i l&#7853;p kh&#244;ng th&#7875; t&#7921; t&#7915; ch&#7889;i phi&#7871;u chi.');redirect('/admin/cashbook');}if($reason===''||mb_strlen($reason)>300){flash('error','H&#227;y nh&#7853;p l&#253; do t&#7915; ch&#7889;i, t&#7889;i &#273;a 300 k&#253; t&#7921;.');redirect('/admin/cashbook');}dbRun("UPDATE cash_disbursement_requests SET status='rejected',approved_by=?,approved_at=datetime('now','localtime'),rejection_reason=?,updated_at=datetime('now','localtime') WHERE id=? AND status='pending'",[$actor['id']??null,$reason,$request['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_disbursement_rejected','cash_disbursement_request',$request['id'],json_encode(['reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','&#272;&#227; t&#7915; ch&#7889;i phi&#7871;u chi.');redirect('/admin/cashbook');
+});
+post('/admin/cashbook/entries/:id/void-requests', function($p) {
+    $actor=requireStaffPermission('rbac:finance.ledger.void|tax_config','/admin/login');csrfCheck();$reason=trim($_POST['reason']??'');
+    if(mb_strlen($reason)<5||mb_strlen($reason)>300){flash('error','L&#253; do h&#7911;y ch&#7913;ng t&#7915; ph&#7843;i t&#7915; 5 &#273;&#7871;n 300 k&#253; t&#7921;.');redirect('/admin/cashbook');}
+    $entry=dbGet('SELECT id,voided_at FROM cash_ledger_entries WHERE id=?',[$p['id']]);if(!$entry||$entry['voided_at']!==null){flash('error','Ch&#7913;ng t&#7915; kh&#244;ng c&#242;n h&#7907;p l&#7879; &#273;&#7875; y&#234;u c&#7847;u h&#7911;y.');redirect('/admin/cashbook');}
+    if(dbGet('SELECT id FROM cash_ledger_void_requests WHERE ledger_entry_id=?',[$entry['id']])){flash('error','Ch&#7913;ng t&#7915; n&#224;y &#273;&#227; c&#243; y&#234;u c&#7847;u h&#7911;y.');redirect('/admin/cashbook');}
+    $code='HCT-'.date('Ymd-His').'-'.str_pad((string)$entry['id'],5,'0',STR_PAD_LEFT);$requestId=dbInsert("INSERT INTO cash_ledger_void_requests (code,ledger_entry_id,reason,status,created_by) VALUES (?,?,?,?,?)",[$code,$entry['id'],$reason,'pending',$actor['id']??null]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_ledger_void_requested','cash_ledger_entry',$entry['id'],json_encode(['request_id'=>$requestId,'code'=>$code,'reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','&#272;&#227; t&#7841;o y&#234;u c&#7847;u h&#7911;y ch&#7913;ng t&#7915; '.$code.'.');redirect('/admin/cashbook');
+});
+post('/admin/cashbook/void-requests/:id/approve', function($p) {
+    $actor=requireStaffPermission('rbac:finance.ledger.void|tax_config','/admin/login');csrfCheck();$pdo=db();
+    try{$pdo->beginTransaction();$request=dbGet("SELECT request.*,entry.voided_at FROM cash_ledger_void_requests request INNER JOIN cash_ledger_entries entry ON entry.id=request.ledger_entry_id WHERE request.id=?",[$p['id']]);if(!$request||$request['status']!=='pending'||$request['voided_at']!==null)throw new RuntimeException('invalid');if((int)$request['created_by']===(int)$actor['id'])throw new RuntimeException('self');$changed=dbRun("UPDATE cash_ledger_void_requests SET status='approved',approved_by=?,approved_at=datetime('now','localtime'),updated_at=datetime('now','localtime') WHERE id=? AND status='pending'",[$actor['id']??null,$request['id']]);if($changed->rowCount()!==1)throw new RuntimeException('invalid');dbRun("UPDATE cash_ledger_entries SET voided_at=datetime('now','localtime') WHERE id=? AND voided_at IS NULL",[$request['ledger_entry_id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_ledger_void_approved','cash_ledger_entry',$request['ledger_entry_id'],json_encode(['request_id'=>$request['id'],'reason'=>$request['reason']],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','&#272;&#227; duy&#7879;t h&#7911;y ch&#7913;ng t&#7915;. B&#250;t to&#225;n &#273;&#432;&#7907;c gi&#7919; l&#7841;i trong nh&#7853;t k&#253; v&#224; kh&#244;ng c&#242;n t&#237;nh v&#224;o s&#7893; qu&#7929;.');}catch(Throwable $exception){if($pdo->inTransaction())$pdo->rollBack();flash('error',$exception->getMessage()==='self'?'Ng&#432;&#7901;i y&#234;u c&#7847;u kh&#244;ng th&#7875; t&#7921; duy&#7879;t h&#7911;y.':'Kh&#244;ng th&#7875; duy&#7879;t y&#234;u c&#7847;u h&#7911;y ch&#7913;ng t&#7915;.');}redirect('/admin/cashbook');
+});
+post('/admin/cashbook/void-requests/:id/reject', function($p) {
+    $actor=requireStaffPermission('rbac:finance.ledger.void|tax_config','/admin/login');csrfCheck();$reason=trim($_POST['rejection_reason']??'');$request=dbGet('SELECT id,status,created_by,ledger_entry_id FROM cash_ledger_void_requests WHERE id=?',[$p['id']]);if(!$request||$request['status']!=='pending'||(int)$request['created_by']===(int)$actor['id']||mb_strlen($reason)<5||mb_strlen($reason)>300){flash('error','Kh&#244;ng th&#7875; t&#7915; ch&#7889;i y&#234;u c&#7847;u. C&#7847;n l&#253; do t&#7915; 5 &#273;&#7871;n 300 k&#253; t&#7921; v&#224; ng&#432;&#7901;i duy&#7879;t kh&#244;ng &#273;&#432;&#7907;c l&#224; ng&#432;&#7901;i y&#234;u c&#7847;u.');redirect('/admin/cashbook');}dbRun("UPDATE cash_ledger_void_requests SET status='rejected',approved_by=?,approved_at=datetime('now','localtime'),rejection_reason=?,updated_at=datetime('now','localtime') WHERE id=? AND status='pending'",[$actor['id']??null,$reason,$request['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_ledger_void_rejected','cash_ledger_entry',$request['ledger_entry_id'],json_encode(['request_id'=>$request['id'],'reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','&#272;&#227; t&#7915; ch&#7889;i y&#234;u c&#7847;u h&#7911;y ch&#7913;ng t&#7915;.');redirect('/admin/cashbook');
+});
+get('/admin/bank-reconciliation', function() {
+    $user=requireStaffPermission('rbac:finance.bank_reconciliation.manage|tax_config','/admin/login');$bankAccounts=dbAll("SELECT id,code,name FROM cash_accounts WHERE type='bank' AND is_active=1 ORDER BY sort_order,id");$bankLedgerEntries=dbAll("SELECT entry.id,entry.entry_date,entry.direction,entry.amount,entry.reference_code FROM cash_ledger_entries entry INNER JOIN cash_accounts account ON account.id=entry.account_id LEFT JOIN bank_reconciliation_transactions recon ON recon.ledger_entry_id=entry.id AND recon.status='matched' WHERE account.type='bank' AND account.is_active=1 AND entry.voided_at IS NULL AND recon.id IS NULL ORDER BY entry.entry_date DESC,entry.id DESC LIMIT 300");$transactions=dbAll("SELECT recon.*,account.name AS account_name,entry.reference_code AS ledger_reference FROM bank_reconciliation_transactions recon INNER JOIN cash_accounts account ON account.id=recon.account_id LEFT JOIN cash_ledger_entries entry ON entry.id=recon.ledger_entry_id ORDER BY recon.transaction_date DESC,recon.id DESC LIMIT 300");$summary=dbGet("SELECT SUM(CASE WHEN status='unmatched' THEN 1 ELSE 0 END) AS unmatched,SUM(CASE WHEN status='matched' THEN 1 ELSE 0 END) AS matched,COALESCE(SUM(CASE WHEN status='unmatched' THEN amount ELSE 0 END),0) AS unmatched_amount FROM bank_reconciliation_transactions")?:['unmatched'=>0,'matched'=>0,'unmatched_amount'=>0];$canManage=(($user['role']??'')==='admin')||rbacHasCapability((int)$user['id'],'finance.bank_reconciliation.manage');view('admin/bank-reconciliation',['title'=>'&#272;&#7889;i so&#225;t ng&#226;n h&#224;ng/QR','userRole'=>'admin','bankAccounts'=>$bankAccounts,'bankLedgerEntries'=>$bankLedgerEntries,'transactions'=>$transactions,'summary'=>$summary,'canManage'=>$canManage]);
+});
+post('/admin/bank-reconciliation', function() {
+    $actor=requireStaffPermission('rbac:finance.bank_reconciliation.manage|tax_config','/admin/login');csrfCheck();$accountId=(int)($_POST['account_id']??0);$direction=$_POST['direction']??'';$rawAmount=preg_replace('/\D/','',$_POST['amount']??'');$amount=(int)$rawAmount;$date=trim($_POST['transaction_date']??'');$reference=trim($_POST['bank_reference']??'');$description=trim($_POST['description']??'');$ledgerId=(int)($_POST['ledger_entry_id']??0);$words=$description===''?0:count(preg_split('/\s+/u',$description));
+    if(!$accountId||!in_array($direction,['in','out'],true)||$rawAmount===''||$amount<1||$amount>999999999999||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$date)||mb_strlen($reference)>120||$words>200){flash('error','D&#7919; li&#7879;u giao d&#7883;ch ng&#226;n h&#224;ng kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/bank-reconciliation');}$account=dbGet("SELECT id FROM cash_accounts WHERE id=? AND type='bank' AND is_active=1",[$accountId]);if(!$account){flash('error','T&#224;i kho&#7843;n ng&#226;n h&#224;ng kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/bank-reconciliation');}$status='unmatched';$matchedAt=null;
+    if($ledgerId){$entry=dbGet("SELECT entry.id FROM cash_ledger_entries entry WHERE entry.id=? AND entry.account_id=? AND entry.direction=? AND entry.amount=? AND entry.voided_at IS NULL",[$ledgerId,$accountId,$direction,$amount]);if(!$entry||dbGet("SELECT id FROM bank_reconciliation_transactions WHERE ledger_entry_id=? AND status='matched'",[$ledgerId])){flash('error','B&#250;t to&#225;n qu&#7929; kh&#244;ng kh&#7899;p t&#224;i kho&#7843;n, chi&#7873;u giao d&#7883;ch ho&#7863;c s&#7889; ti&#7873;n.');redirect('/admin/bank-reconciliation');}$status='matched';$matchedAt=date('Y-m-d H:i:s');}
+    $code='DST-'.date('Ymd-His').'-'.str_pad((string)random_int(1,9999),4,'0',STR_PAD_LEFT);$id=dbInsert("INSERT INTO bank_reconciliation_transactions (code,account_id,direction,amount,transaction_date,bank_reference,description,status,ledger_entry_id,created_by,matched_by,matched_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[$code,$accountId,$direction,$amount,$date,$reference,$description,$status,$ledgerId?:null,$actor['id']??null,$status==='matched'?($actor['id']??null):null,$matchedAt]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','bank_reconciliation_created','bank_reconciliation_transaction',$id,json_encode(['code'=>$code,'status'=>$status,'ledger_entry_id'=>$ledgerId?:null],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','&#272;&#227; ghi nh&#7853;n giao d&#7883;ch '. $code .($status==='matched'?' v&#224; &#273;&#7889;i so&#225;t th&#224;nh c&#244;ng.':' ch&#7901; &#273;&#7889;i so&#225;t.'));redirect('/admin/bank-reconciliation');
+});
+post('/admin/bank-reconciliation/:id/match', function($p) {
+    $actor=requireStaffPermission('rbac:finance.bank_reconciliation.manage|tax_config','/admin/login');csrfCheck();$ledgerId=(int)($_POST['ledger_entry_id']??0);$transaction=dbGet("SELECT * FROM bank_reconciliation_transactions WHERE id=?",[$p['id']]);if(!$transaction||$transaction['status']!=='unmatched'||!$ledgerId){flash('error','Kh&#244;ng th&#7875; &#273;&#7889;i so&#225;t giao d&#7883;ch.');redirect('/admin/bank-reconciliation');}$entry=dbGet("SELECT entry.id FROM cash_ledger_entries entry WHERE entry.id=? AND entry.account_id=? AND entry.direction=? AND entry.amount=? AND entry.voided_at IS NULL",[$ledgerId,$transaction['account_id'],$transaction['direction'],$transaction['amount']]);if(!$entry||dbGet("SELECT id FROM bank_reconciliation_transactions WHERE ledger_entry_id=? AND status='matched'",[$ledgerId])){flash('error','B&#250;t to&#225;n qu&#7929; kh&#244;ng kh&#7899;p ho&#7863;c &#273;&#227; &#273;&#432;&#7907;c &#273;&#7889;i so&#225;t.');redirect('/admin/bank-reconciliation');}dbRun("UPDATE bank_reconciliation_transactions SET status='matched',ledger_entry_id=?,matched_by=?,matched_at=datetime('now','localtime'),updated_at=datetime('now','localtime') WHERE id=? AND status='unmatched'",[$ledgerId,$actor['id']??null,$transaction['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','bank_reconciliation_matched','bank_reconciliation_transaction',$transaction['id'],json_encode(['ledger_entry_id'=>$ledgerId],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','&#272;&#227; &#273;&#7889;i so&#225;t giao d&#7883;ch th&#224;nh c&#244;ng.');redirect('/admin/bank-reconciliation');
+});
+get('/admin/customer-debts', function() {
+ $user=requireStaffPermission('rbac:finance.customer_debt.collect|tax_config','/admin/login');$accounts=dbAll("SELECT id,name FROM cash_accounts WHERE is_active=1 ORDER BY sort_order,id");$debt="CASE WHEN COALESCE(o.remaining_amount,0)>0 THEN o.remaining_amount ELSE MAX(o.grand_total-COALESCE(o.paid_amount,0)+COALESCE(o.refund_amount,0),0) END";$debtOrders=dbAll("SELECT o.*, $debt AS outstanding FROM orders o WHERE o.payment_status NOT IN ('paid','cancelled','refunded') AND ($debt)>0 ORDER BY o.created_at DESC LIMIT 300");$summary=dbGet("SELECT COUNT(*) AS orders,COALESCE(SUM($debt),0) AS outstanding FROM orders o WHERE o.payment_status NOT IN ('paid','cancelled','refunded') AND ($debt)>0")?:['orders'=>0,'outstanding'=>0];$canCollect=(($user['role']??'')==='admin')||rbacHasCapability((int)$user['id'],'finance.customer_debt.collect');view('admin/customer-debts',['title'=>'Thu công nợ khách hàng','userRole'=>'admin','accounts'=>$accounts,'debtOrders'=>$debtOrders,'summary'=>$summary,'canCollect'=>$canCollect,'selectedOrderCode'=>trim($_GET['order']??'')]);
+});
+post('/admin/customer-debts/collections', function() {
+ $actor=requireStaffPermission('rbac:finance.customer_debt.collect|tax_config','/admin/login');csrfCheck();$code=trim($_POST['order_code']??'');$accountId=(int)($_POST['account_id']??0);$raw=preg_replace('/\D/','',$_POST['amount']??'');$amount=(int)$raw;$date=trim($_POST['entry_date']??'');$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description));if($code===''||mb_strlen($code)>64||!$accountId||$raw===''||$amount<1||$amount>999999999999||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$date)||mb_strlen($reference)>64||$words>200){flash('error','Dữ liệu phiếu thu công nợ không hợp lệ.');redirect('/admin/customer-debts');}$pdo=db();try{$pdo->beginTransaction();$order=dbGet('SELECT * FROM orders WHERE code=?',[$code]);if(!$order||in_array($order['payment_status'],['paid','cancelled','refunded'],true))throw new RuntimeException('order');$outstanding=(int)$order['remaining_amount'];if($outstanding<=0)$outstanding=max(0,(int)$order['grand_total']-(int)$order['paid_amount']+(int)$order['refund_amount']);if($amount>$outstanding)throw new RuntimeException('amount');$account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account)throw new RuntimeException('account');$receipt='TCN-'.date('Ymd-His').'-'.str_pad((string)$order['id'],5,'0',STR_PAD_LEFT);$newRemaining=$outstanding-$amount;$newPaid=(int)$order['paid_amount']+$amount;dbRun("UPDATE orders SET paid_amount=?,remaining_amount=?,payment_status=?,updated_at=datetime('now','localtime') WHERE id=?",[$newPaid,$newRemaining,$newRemaining===0?'paid':'partial',$order['id']]);$entryId=dbInsert('INSERT INTO cash_ledger_entries (account_id,direction,amount,reference_type,reference_id,reference_code,description,payer_phone,payer_email,entry_date,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[$accountId,'in',$amount,'customer_debt',$order['id'],$receipt,trim('Thu công nợ đơn '.$order['code'].($description!==''?' - '.$description:'')),$order['shipping_phone'],$order['user_id']?((dbGet('SELECT email FROM users WHERE id=?',[$order['user_id']])['email']??'')):'' ,$date,$actor['id']??null]);$id=dbInsert('INSERT INTO customer_debt_collections (code,order_id,ledger_entry_id,account_id,amount,collection_date,reference_code,description,created_by) VALUES (?,?,?,?,?,?,?,?,?)',[$receipt,$order['id'],$entryId,$accountId,$amount,$date,$reference,$description,$actor['id']??null]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','customer_debt_collected','order',$order['id'],json_encode(['collection_id'=>$id,'amount'=>$amount,'remaining'=>$newRemaining],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','Đã thu công nợ cho đơn '.$order['code'].'.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();$m=['order'=>'Đơn hàng không còn đủ điều kiện thu công nợ.','amount'=>'Số tiền thu vượt quá công nợ còn lại.','account'=>'Quỹ nhận tiền không hợp lệ.'];flash('error',$m[$e->getMessage()]??'Không thể ghi nhận thu công nợ.');}redirect('/admin/customer-debts');
+});
+get('/admin/suppliers',function(){$u=requireStaffPermission('rbac:purchasing.suppliers.view|tax_config','/admin/login');$items=dbAll("SELECT * FROM suppliers ORDER BY is_active DESC,name LIMIT 500");$can=(($u['role']??'')==='admin')||rbacHasCapability((int)$u['id'],'purchasing.suppliers.manage');view('admin/suppliers',['title'=>'Nhà cung cấp','userRole'=>'admin','items'=>$items,'canManage'=>$can]);});
+post('/admin/suppliers',function(){$u=requireStaffPermission('rbac:purchasing.suppliers.manage|tax_config','/admin/login');csrfCheck();$name=trim($_POST['name']??'');$phone=preg_replace('/\D/','',$_POST['phone']??'');$email=trim($_POST['email']??'');$tax=trim($_POST['tax_code']??'');$address=trim($_POST['address']??'');if($name===''||mb_strlen($name)>160||($phone!==''&&!preg_match('/^0[35789]\d{8}$/',$phone))||($email!==''&&!filter_var($email,FILTER_VALIDATE_EMAIL))||mb_strlen($tax)>40||mb_strlen($address)>300){flash('error','Thông tin nhà cung cấp không hợp lệ.');redirect('/admin/suppliers');}$code='NCC-'.date('Ymd-His').'-'.random_int(100,999);$id=dbInsert('INSERT INTO suppliers (code,name,phone,email,tax_code,address,created_by) VALUES (?,?,?,?,?,?,?)',[$code,$name,$phone,$email,$tax,$address,$u['id']??null]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id']??null,$u['role']??'admin','supplier_created','supplier',$id,json_encode(['code'=>$code],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã tạo nhà cung cấp '.$code.'.');redirect('/admin/suppliers');});
+get('/admin/purchase-requests',function(){$u=requireStaffPermission('rbac:purchasing.requests.create|rbac:purchasing.requests.approve|rbac:purchasing.orders.create|rbac:purchasing.orders.approve|tax_config','/admin/login');$suppliers=dbAll("SELECT id,code,name FROM suppliers WHERE is_active=1 ORDER BY name");$low=dbAll("SELECT id,sku,oem_code,name,stock,min_stock,max_stock FROM products WHERE status!='deleted' AND stock<=min_stock ORDER BY stock,min_stock,name LIMIT 500");$items=dbAll("SELECT pr.*,s.name AS supplier_name,u.full_name AS creator_name,COUNT(DISTINCT pri.id) AS item_count,po.id AS po_id,po.code AS po_code,po.status AS po_status,po.created_by AS po_created_by,po.rejection_reason AS po_rejection_reason FROM purchase_requests pr INNER JOIN suppliers s ON s.id=pr.supplier_id LEFT JOIN users u ON u.id=pr.created_by LEFT JOIN purchase_request_items pri ON pri.request_id=pr.id LEFT JOIN purchase_orders po ON po.source_request_id=pr.id GROUP BY pr.id ORDER BY CASE pr.status WHEN 'pending' THEN 0 WHEN 'approved' THEN 1 ELSE 2 END,pr.created_at DESC LIMIT 200");$canCreate=(($u['role']??'')==='admin')||rbacHasCapability((int)$u['id'],'purchasing.requests.create');$canApprove=(($u['role']??'')==='admin')||rbacHasCapability((int)$u['id'],'purchasing.requests.approve');$canCreateOrder=(($u['role']??'')==='admin')||rbacHasCapability((int)$u['id'],'purchasing.orders.create');$canApproveOrder=(($u['role']??'')==='admin')||rbacHasCapability((int)$u['id'],'purchasing.orders.approve');view('admin/purchase-requests',['title'=>'Yêu cầu mua hàng','userRole'=>'admin','suppliers'=>$suppliers,'low'=>$low,'items'=>$items,'canCreate'=>$canCreate,'canApprove'=>$canApprove,'canCreateOrder'=>$canCreateOrder,'canApproveOrder'=>$canApproveOrder,'currentUserId'=>(int)$u['id']]);});
+post('/admin/purchase-requests',function(){$u=requireStaffPermission('rbac:purchasing.requests.create|tax_config','/admin/login');csrfCheck();$sid=(int)($_POST['supplier_id']??0);$note=trim($_POST['note']??'');$qty=$_POST['qty']??[];if(!$sid||mb_strlen($note)>500||!is_array($qty)){flash('error','Dữ liệu yêu cầu mua không hợp lệ.');redirect('/admin/purchase-requests');}$supplier=dbGet('SELECT id FROM suppliers WHERE id=? AND is_active=1',[$sid]);if(!$supplier){flash('error','Nhà cung cấp không hợp lệ.');redirect('/admin/purchase-requests');}$lines=[];foreach($qty as $id=>$n){$id=(int)$id;$n=(int)preg_replace('/\D/','',(string)$n);if($n>0&&$n<=100000){$p=dbGet("SELECT id,sku,name,stock,min_stock,max_stock FROM products WHERE id=? AND status!='deleted'",[$id]);if($p)$lines[]=[$p,$n];}}if(!$lines){flash('error','Hãy nhập số lượng mua cho ít nhất một sản phẩm.');redirect('/admin/purchase-requests');}$pdo=db();try{$pdo->beginTransaction();$code='YCM-'.date('Ymd-His').'-'.random_int(100,999);$rid=dbInsert("INSERT INTO purchase_requests (code,supplier_id,status,note,created_by) VALUES (?,?,'pending',?,?)",[$code,$sid,$note,$u['id']??null]);foreach($lines as [$p,$n])dbInsert('INSERT INTO purchase_request_items (request_id,product_id,sku,product_name,current_stock,min_stock,requested_qty) VALUES (?,?,?,?,?,?,?)',[$rid,$p['id'],$p['sku'],$p['name'],$p['stock'],$p['min_stock'],$n]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id']??null,$u['role']??'admin','purchase_request_created','purchase_request',$rid,json_encode(['code'=>$code,'lines'=>count($lines)],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','Đã tạo yêu cầu mua '.$code.' chờ duyệt.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();flash('error','Không thể tạo yêu cầu mua.');}redirect('/admin/purchase-requests');});
+post('/admin/purchase-requests/:id/approve',function($p){$u=requireStaffPermission('rbac:purchasing.requests.approve|tax_config','/admin/login');csrfCheck();$r=dbGet("SELECT * FROM purchase_requests WHERE id=?",[$p['id']]);if(!$r||$r['status']!=='pending'||(int)$r['created_by']===(int)$u['id']){flash('error','Không thể duyệt yêu cầu mua này.');redirect('/admin/purchase-requests');}dbRun("UPDATE purchase_requests SET status='approved',approved_by=?,approved_at=datetime('now','localtime') WHERE id=? AND status='pending'",[$u['id'],$r['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','purchase_request_approved','purchase_request',$r['id'],'{}',$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã duyệt yêu cầu mua.');redirect('/admin/purchase-requests');});
+post('/admin/purchase-requests/:id/reject',function($p){$u=requireStaffPermission('rbac:purchasing.requests.approve|tax_config','/admin/login');csrfCheck();$reason=trim($_POST['reason']??'');$r=dbGet("SELECT * FROM purchase_requests WHERE id=?",[$p['id']]);if(!$r||$r['status']!=='pending'||(int)$r['created_by']===(int)$u['id']||mb_strlen($reason)<5||mb_strlen($reason)>300){flash('error','Cần lý do từ chối 5-300 ký tự và người duyệt phải khác người lập.');redirect('/admin/purchase-requests');}dbRun("UPDATE purchase_requests SET status='rejected',approved_by=?,approved_at=datetime('now','localtime'),rejection_reason=? WHERE id=? AND status='pending'",[$u['id'],$reason,$r['id']]);flash('success','Đã từ chối yêu cầu mua.');redirect('/admin/purchase-requests');});
+post('/admin/purchase-requests/:id/purchase-order',function($p){$u=requireStaffPermission('rbac:purchasing.orders.create|tax_config','/admin/login');csrfCheck();$pdo=db();try{$pdo->beginTransaction();$r=dbGet("SELECT * FROM purchase_requests WHERE id=?",[$p['id']]);if(!$r||$r['status']!=='approved'||dbGet('SELECT id FROM purchase_orders WHERE source_request_id=?',[$r['id']]))throw new RuntimeException('invalid');$lines=dbAll("SELECT pri.*,COALESCE(p.cost_price,0) AS unit_cost FROM purchase_request_items pri INNER JOIN products p ON p.id=pri.product_id WHERE pri.request_id=?",[$r['id']]);if(!$lines)throw new RuntimeException('invalid');$total=0;foreach($lines as $line)$total+=(int)$line['requested_qty']*(int)$line['unit_cost'];$code='PO-'.date('Ymd-His').'-'.str_pad((string)$r['id'],5,'0',STR_PAD_LEFT);$oid=dbInsert("INSERT INTO purchase_orders (code,source_request_id,supplier_id,status,total_amount,created_by) VALUES (?,?,?,'draft',?,?)",[$code,$r['id'],$r['supplier_id'],$total,$u['id']]);foreach($lines as $line)dbInsert('INSERT INTO purchase_order_items (order_id,product_id,sku,product_name,ordered_qty,unit_cost,line_total) VALUES (?,?,?,?,?,?,?)',[$oid,$line['product_id'],$line['sku'],$line['product_name'],$line['requested_qty'],$line['unit_cost'],(int)$line['requested_qty']*(int)$line['unit_cost']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','purchase_order_created','purchase_order',$oid,json_encode(['code'=>$code,'request_id'=>$r['id']],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','Đã tạo PO '.$code.' ở trạng thái nháp.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();flash('error','Không thể tạo PO từ yêu cầu này.');}redirect('/admin/purchase-requests');});
+post('/admin/purchase-orders/:id/approve',function($p){$u=requireStaffPermission('rbac:purchasing.orders.approve|tax_config','/admin/login');csrfCheck();$po=dbGet('SELECT * FROM purchase_orders WHERE id=?',[$p['id']]);if(!$po||$po['status']!=='draft'||(int)$po['created_by']===(int)$u['id']){flash('error','Không thể duyệt PO này hoặc người tạo đang tự duyệt.');redirect('/admin/purchase-requests');}dbRun("UPDATE purchase_orders SET status='approved',approved_by=?,approved_at=datetime('now','localtime') WHERE id=? AND status='draft'",[$u['id'],$po['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','purchase_order_approved','purchase_order',$po['id'],json_encode(['code'=>$po['code']],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã duyệt PO '.$po['code'].'.');redirect('/admin/purchase-requests');});
+post('/admin/purchase-orders/:id/reject',function($p){$u=requireStaffPermission('rbac:purchasing.orders.approve|tax_config','/admin/login');csrfCheck();$reason=trim($_POST['po_rejection_reason']??'');$po=dbGet('SELECT * FROM purchase_orders WHERE id=?',[$p['id']]);if(!$po||$po['status']!=='draft'||(int)$po['created_by']===(int)$u['id']||mb_strlen($reason)<5||mb_strlen($reason)>300){flash('error','Cần lý do từ chối 5-300 ký tự và người duyệt phải khác người tạo PO.');redirect('/admin/purchase-requests');}dbRun("UPDATE purchase_orders SET status='rejected',approved_by=?,approved_at=datetime('now','localtime'),rejection_reason=? WHERE id=? AND status='draft'",[$u['id'],$reason,$po['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','purchase_order_rejected','purchase_order',$po['id'],json_encode(['reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã từ chối PO '.$po['code'].'.');redirect('/admin/purchase-requests');});
+get('/admin/purchase-receipts',function(){$u=requireStaffPermission('rbac:purchasing.receipts.create|tax_config','/admin/login');$orders=dbAll("SELECT po.id,po.code,s.name AS supplier_name FROM purchase_orders po INNER JOIN suppliers s ON s.id=po.supplier_id WHERE po.status IN ('approved','partially_received') ORDER BY po.created_at DESC");$selectedPo=max(0,(int)($_GET['po']??0));$selectedOrder=$selectedPo?dbGet("SELECT po.*,s.name AS supplier_name FROM purchase_orders po INNER JOIN suppliers s ON s.id=po.supplier_id WHERE po.id=? AND po.status IN ('approved','partially_received')",[$selectedPo]):null;$orderLines=$selectedOrder?dbAll('SELECT * FROM purchase_order_items WHERE order_id=? ORDER BY id',[$selectedPo]):[];$receipts=dbAll("SELECT gr.*,po.code AS po_code,s.name AS supplier_name,COUNT(gri.id) AS line_count FROM goods_receipts gr INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id LEFT JOIN goods_receipt_items gri ON gri.receipt_id=gr.id GROUP BY gr.id ORDER BY gr.created_at DESC LIMIT 200");view('admin/purchase-receipts',['title'=>'Nhận hàng theo PO','userRole'=>'admin','orders'=>$orders,'selectedPo'=>$selectedPo,'selectedOrder'=>$selectedOrder,'orderLines'=>$orderLines,'receipts'=>$receipts]);});
+post('/admin/purchase-receipts',function(){$u=requireStaffPermission('rbac:purchasing.receipts.create|tax_config','/admin/login');csrfCheck();$oid=(int)($_POST['order_id']??0);$date=trim($_POST['received_date']??'');$note=trim($_POST['note']??'');$qty=$_POST['qty']??[];if(!$oid||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$date)||mb_strlen($note)>500||!is_array($qty)){flash('error','Dữ liệu nhận hàng không hợp lệ.');redirect('/admin/purchase-receipts');}$pdo=db();try{$pdo->beginTransaction();$po=dbGet("SELECT * FROM purchase_orders WHERE id=? AND status IN ('approved','partially_received')",[$oid]);if(!$po)throw new RuntimeException('po');$lines=[];foreach($qty as $id=>$raw){$id=(int)$id;$n=(int)preg_replace('/\D/','',(string)$raw);if($n<1)continue;$line=dbGet('SELECT * FROM purchase_order_items WHERE id=? AND order_id=?',[$id,$oid]);if(!$line||$n>((int)$line['ordered_qty']-(int)$line['received_qty']))throw new RuntimeException('qty');$lines[]=[$line,$n];}if(!$lines)throw new RuntimeException('qty');$code='PNH-'.date('Ymd-His').'-'.random_int(100,999);$rid=dbInsert("INSERT INTO goods_receipts (code,order_id,received_date,status,note,created_by) VALUES (?,?,?,'pending_qc',?,?)",[$code,$oid,$date,$note,$u['id']]);foreach($lines as [$line,$n]){dbInsert('INSERT INTO goods_receipt_items (receipt_id,order_item_id,product_id,received_qty) VALUES (?,?,?,?)',[$rid,$line['id'],$line['product_id'],$n]);dbRun('UPDATE purchase_order_items SET received_qty=received_qty+? WHERE id=?',[$n,$line['id']]);}$remaining=(int)(dbGet('SELECT COALESCE(SUM(ordered_qty-received_qty),0) AS n FROM purchase_order_items WHERE order_id=?',[$oid])['n']??0);dbRun('UPDATE purchase_orders SET status=? WHERE id=?',[$remaining===0?'received':'partially_received',$oid]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','goods_receipt_created','goods_receipt',$rid,json_encode(['po'=>$po['code'],'remaining'=>$remaining],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','Đã ghi nhận phiếu '.$code.' chờ kiểm chất lượng.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();flash('error',$e->getMessage()==='qty'?'Số lượng nhận vượt quá số còn lại của PO.':'Không thể ghi nhận hàng về.');}redirect('/admin/purchase-receipts?po='.$oid);});
+get('/admin/purchase-quality',function(){$u=requireStaffPermission('rbac:purchasing.quality.inspect|tax_config','/admin/login');$pending=dbAll("SELECT gr.id,gr.code,po.code AS po_code,s.name AS supplier_name FROM goods_receipts gr INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id WHERE gr.status='pending_qc' ORDER BY gr.created_at");$selectedReceipt=max(0,(int)($_GET['receipt']??0));$receipt=$selectedReceipt?dbGet("SELECT gr.*,po.code AS po_code FROM goods_receipts gr INNER JOIN purchase_orders po ON po.id=gr.order_id WHERE gr.id=? AND gr.status='pending_qc'",[$selectedReceipt]):null;$lines=$receipt?dbAll("SELECT gri.*,p.name AS product_name,p.sku,p.oem_code FROM goods_receipt_items gri INNER JOIN products p ON p.id=gri.product_id WHERE gri.receipt_id=? ORDER BY gri.id",[$selectedReceipt]):[];view('admin/purchase-quality',['title'=>'Kiểm chất lượng hàng nhận','userRole'=>'admin','pending'=>$pending,'selectedReceipt'=>$selectedReceipt,'receipt'=>$receipt,'lines'=>$lines]);});
+post('/admin/purchase-quality/:id',function($p){$u=requireStaffPermission('rbac:purchasing.quality.inspect|tax_config','/admin/login');csrfCheck();$accepted=$_POST['accepted']??[];$notes=$_POST['line_note']??[];$qcNote=trim($_POST['qc_note']??'');if(!is_array($accepted)||mb_strlen($qcNote)>500){flash('error','Dữ liệu kiểm chất lượng không hợp lệ.');redirect('/admin/purchase-quality?receipt='.$p['id']);}$pdo=db();$changed=[];try{$pdo->beginTransaction();$receipt=dbGet("SELECT * FROM goods_receipts WHERE id=? AND status='pending_qc'",[$p['id']]);if(!$receipt)throw new RuntimeException('receipt');$lines=dbAll("SELECT gri.*,poi.unit_cost,p.stock,p.max_stock FROM goods_receipt_items gri INNER JOIN purchase_order_items poi ON poi.id=gri.order_item_id INNER JOIN products p ON p.id=gri.product_id WHERE gri.receipt_id=?",[$receipt['id']]);foreach($lines as $line){$ok=(int)preg_replace('/\D/','',(string)($accepted[$line['id']]??0));if($ok<0||$ok>(int)$line['received_qty'])throw new RuntimeException('qty');$allChecks=!empty($_POST['quantity_ok'][$line['id']])&&!empty($_POST['appearance_ok'][$line['id']])&&!empty($_POST['oem_ok'][$line['id']]);if($ok>0&&!$allChecks)throw new RuntimeException('check');if((int)$line['stock']+$ok>(int)$line['max_stock'])throw new RuntimeException('max');$bad=(int)$line['received_qty']-$ok;$lineNote=trim((string)($notes[$line['id']]??''));if(mb_strlen($lineNote)>300)throw new RuntimeException('note');dbRun('UPDATE goods_receipt_items SET accepted_qty=?,rejected_qty=?,quantity_ok=?,appearance_ok=?,oem_ok=?,qc_note=? WHERE id=?',[$ok,$bad,!empty($_POST['quantity_ok'][$line['id']])?1:0,!empty($_POST['appearance_ok'][$line['id']])?1:0,!empty($_POST['oem_ok'][$line['id']])?1:0,$lineNote,$line['id']]);if($ok>0){dbRun("UPDATE products SET stock=stock+?,total_import_value=total_import_value+(?*?),updated_at=datetime('now','localtime') WHERE id=?",[$ok,$ok,$line['unit_cost'],$line['product_id']]);dbInsert("INSERT INTO inventory_stock_movements (product_id,direction,quantity,reference_type,reference_id,note,created_by) VALUES (?,'in',?,'goods_receipt',?,?,?)",[$line['product_id'],$ok,$receipt['id'],$lineNote,$u['id']]);$changed[]=(int)$line['product_id'];}}dbRun("UPDATE goods_receipts SET status='qc_completed',qc_by=?,qc_at=datetime('now','localtime'),qc_note=? WHERE id=? AND status='pending_qc'",[$u['id'],$qcNote,$receipt['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','goods_receipt_quality_completed','goods_receipt',$receipt['id'],json_encode(['products'=>$changed],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();foreach(array_unique($changed) as $productId)if(function_exists('inventoryCheckLowStockAlert'))inventoryCheckLowStockAlert($productId,'purchase_receipt');flash('success','Đã hoàn tất kiểm chất lượng và nhập kho số lượng đạt.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();$m=['qty'=>'Số lượng đạt không hợp lệ.','check'=>'Sản phẩm có số lượng đạt phải vượt qua đủ ba tiêu chí.','max'=>'Nhập kho sẽ vượt tồn tối đa của sản phẩm.','note'=>'Ghi chú từng dòng tối đa 300 ký tự.'];flash('error',$m[$e->getMessage()]??'Không thể hoàn tất kiểm chất lượng.');}redirect('/admin/purchase-quality');});
+get('/admin/purchase-costs',function(){$u=requireStaffPermission('rbac:purchasing.costs.allocate|tax_config','/admin/login');$receipts=dbAll("SELECT gr.id,gr.code,po.code AS po_code,s.name AS supplier_name FROM goods_receipts gr INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id LEFT JOIN purchase_cost_allocations pca ON pca.receipt_id=gr.id WHERE gr.status='qc_completed' AND pca.id IS NULL AND EXISTS(SELECT 1 FROM goods_receipt_items gri WHERE gri.receipt_id=gr.id AND gri.accepted_qty>0) ORDER BY gr.qc_at");$items=dbAll("SELECT pca.*,gr.code AS receipt_code,po.code AS po_code,s.name AS supplier_name FROM purchase_cost_allocations pca INNER JOIN goods_receipts gr ON gr.id=pca.receipt_id INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id ORDER BY pca.created_at DESC LIMIT 200");view('admin/purchase-costs',['title'=>'Phân bổ chi phí mua','userRole'=>'admin','receipts'=>$receipts,'items'=>$items]);});
+post('/admin/purchase-costs',function(){$u=requireStaffPermission('rbac:purchasing.costs.allocate|tax_config','/admin/login');csrfCheck();$rid=(int)($_POST['receipt_id']??0);$shipping=(int)preg_replace('/\D/','',$_POST['shipping_cost']??'0');$tax=(int)preg_replace('/\D/','',$_POST['tax_cost']??'0');$other=(int)preg_replace('/\D/','',$_POST['other_cost']??'0');$note=trim($_POST['note']??'');$total=$shipping+$tax+$other;if(!$rid||$total<1||$total>999999999999||mb_strlen($note)>500){flash('error','Dữ liệu chi phí mua không hợp lệ.');redirect('/admin/purchase-costs');}$pdo=db();try{$pdo->beginTransaction();$receipt=dbGet("SELECT * FROM goods_receipts WHERE id=? AND status='qc_completed'",[$rid]);if(!$receipt||dbGet('SELECT id FROM purchase_cost_allocations WHERE receipt_id=?',[$rid]))throw new RuntimeException('receipt');$lines=dbAll("SELECT gri.id,gri.product_id,gri.accepted_qty,poi.unit_cost FROM goods_receipt_items gri INNER JOIN purchase_order_items poi ON poi.id=gri.order_item_id WHERE gri.receipt_id=? AND gri.accepted_qty>0 ORDER BY gri.id",[$rid]);if(!$lines)throw new RuntimeException('receipt');$weight=0;foreach($lines as $line)$weight+=(int)$line['accepted_qty']*max(0,(int)$line['unit_cost']);$useQty=$weight===0;if($useQty){foreach($lines as $line)$weight+=(int)$line['accepted_qty'];}$code='CPM-'.date('Ymd-His').'-'.random_int(100,999);$aid=dbInsert('INSERT INTO purchase_cost_allocations (code,receipt_id,shipping_cost,tax_cost,other_cost,total_cost,note,created_by) VALUES (?,?,?,?,?,?,?,?)',[$code,$rid,$shipping,$tax,$other,$total,$note,$u['id']]);$allocated=0;$last=count($lines)-1;foreach($lines as $index=>$line){$lineWeight=$useQty?(int)$line['accepted_qty']:(int)$line['accepted_qty']*(int)$line['unit_cost'];$amount=$index===$last?$total-$allocated:(int)floor($total*$lineWeight/$weight);$allocated+=$amount;dbInsert('INSERT INTO purchase_cost_allocation_items (allocation_id,receipt_item_id,product_id,allocated_cost) VALUES (?,?,?,?)',[$aid,$line['id'],$line['product_id'],$amount]);dbRun("UPDATE products SET total_import_value=total_import_value+?,cost_price=CASE WHEN stock>0 THEN ROUND((total_import_value+?)*1.0/stock) ELSE cost_price END,updated_at=datetime('now','localtime') WHERE id=?",[$amount,$amount,$line['product_id']]);}dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','purchase_cost_allocated','goods_receipt',$rid,json_encode(['allocation_id'=>$aid,'total'=>$total],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','Đã phân bổ '.$total.' đ vào giá vốn.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();flash('error','Phiếu không hợp lệ hoặc đã được phân bổ chi phí.');}redirect('/admin/purchase-costs');});
+get('/admin/supplier-returns',function(){$u=requireStaffPermission('rbac:purchasing.returns.create|tax_config','/admin/login');$receipts=dbAll("SELECT gr.id,gr.code,po.code AS po_code,s.name AS supplier_name FROM goods_receipts gr INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id WHERE gr.status='qc_completed' ORDER BY gr.qc_at DESC");$selectedReceipt=max(0,(int)($_GET['receipt']??0));$receipt=$selectedReceipt?dbGet("SELECT gr.*,po.code AS po_code,s.name AS supplier_name FROM goods_receipts gr INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id WHERE gr.id=? AND gr.status='qc_completed'",[$selectedReceipt]):null;$lines=$receipt?dbAll("SELECT gri.*,p.name AS product_name,p.sku,COALESCE((SELECT SUM(sri.return_qty) FROM supplier_return_items sri INNER JOIN supplier_returns sr ON sr.id=sri.return_id WHERE sri.receipt_item_id=gri.id AND sr.status!='rejected'),0) AS returned_qty FROM goods_receipt_items gri INNER JOIN products p ON p.id=gri.product_id WHERE gri.receipt_id=? ORDER BY gri.id",[$selectedReceipt]):[];$items=dbAll("SELECT sr.*,gr.code AS receipt_code,s.name AS supplier_name,COALESCE(SUM(sri.return_qty),0) AS total_qty FROM supplier_returns sr INNER JOIN goods_receipts gr ON gr.id=sr.receipt_id INNER JOIN purchase_orders po ON po.id=gr.order_id INNER JOIN suppliers s ON s.id=po.supplier_id LEFT JOIN supplier_return_items sri ON sri.return_id=sr.id GROUP BY sr.id ORDER BY sr.created_at DESC LIMIT 200");view('admin/supplier-returns',['title'=>'Trả hàng nhà cung cấp','userRole'=>'admin','receipts'=>$receipts,'selectedReceipt'=>$selectedReceipt,'receipt'=>$receipt,'lines'=>$lines,'items'=>$items]);});
+post('/admin/supplier-returns',function(){$u=requireStaffPermission('rbac:purchasing.returns.create|tax_config','/admin/login');csrfCheck();$rid=(int)($_POST['receipt_id']??0);$reason=trim($_POST['reason']??'');$qty=$_POST['qty']??[];if(!$rid||mb_strlen($reason)<5||mb_strlen($reason)>500||!is_array($qty)){flash('error','Lý do trả phải từ 5-500 ký tự.');redirect('/admin/supplier-returns?receipt='.$rid);}$pdo=db();try{$pdo->beginTransaction();$receipt=dbGet("SELECT * FROM goods_receipts WHERE id=? AND status='qc_completed'",[$rid]);if(!$receipt)throw new RuntimeException('receipt');$lines=[];foreach($qty as $id=>$raw){$id=(int)$id;$n=(int)preg_replace('/\D/','',(string)$raw);if($n<1)continue;$line=dbGet("SELECT gri.*,COALESCE((SELECT SUM(sri.returned_rejected_qty) FROM supplier_return_items sri INNER JOIN supplier_returns sr ON sr.id=sri.return_id WHERE sri.receipt_item_id=gri.id AND sr.status!='rejected'),0) AS used_bad,COALESCE((SELECT SUM(sri.returned_accepted_qty) FROM supplier_return_items sri INNER JOIN supplier_returns sr ON sr.id=sri.return_id WHERE sri.receipt_item_id=gri.id AND sr.status!='rejected'),0) AS used_good FROM goods_receipt_items gri WHERE gri.id=? AND gri.receipt_id=?",[$id,$rid]);if(!$line)throw new RuntimeException('qty');$badAvail=max(0,(int)$line['rejected_qty']-(int)$line['used_bad']);$goodAvail=max(0,(int)$line['accepted_qty']-(int)$line['used_good']);if($n>$badAvail+$goodAvail)throw new RuntimeException('qty');$bad=min($n,$badAvail);$good=$n-$bad;$lines[]=[$line,$n,$good,$bad];}if(!$lines)throw new RuntimeException('qty');$code='THNCC-'.date('Ymd-His').'-'.random_int(100,999);$returnId=dbInsert("INSERT INTO supplier_returns (code,receipt_id,status,reason,created_by) VALUES (?,?,'pending',?,?)",[$code,$rid,$reason,$u['id']]);foreach($lines as [$line,$n,$good,$bad])dbInsert('INSERT INTO supplier_return_items (return_id,receipt_item_id,product_id,return_qty,returned_accepted_qty,returned_rejected_qty) VALUES (?,?,?,?,?,?)',[$returnId,$line['id'],$line['product_id'],$n,$good,$bad]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$u['id'],$u['role']??'admin','supplier_return_created','supplier_return',$returnId,json_encode(['receipt_id'=>$rid,'lines'=>count($lines)],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();flash('success','Đã tạo phiếu trả '.$code.' chờ duyệt.');}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();flash('error',$e->getMessage()==='qty'?'Số lượng trả vượt quá số lượng còn có thể trả.':'Không thể tạo phiếu trả nhà cung cấp.');}redirect('/admin/supplier-returns');});
+get('/admin/warranties', function() {
+    requireStaffPermission('rbac:warranty.cases.view|returns', '/admin/login');
+    $cases=dbAll("SELECT warranty.*,product.name AS product_name,product.sku FROM warranty_cases warranty INNER JOIN products product ON product.id=warranty.product_id ORDER BY warranty.updated_at DESC LIMIT 300");
+    $products=dbAll("SELECT id,sku,name FROM products ORDER BY name LIMIT 3000");
+    view('admin/warranties',['title'=>'Bảo hành & Kỹ thuật','userRole'=>'admin','cases'=>$cases,'products'=>$products]);
+});
+post('/admin/warranties', function() {
+    $actor=requireStaffPermission('rbac:warranty.cases.create|returns','/admin/login');csrfCheck();$product=dbGet('SELECT id,warranty_months,name,sku FROM products WHERE id=?',[(int)($_POST['product_id']??0)]);$customerName=trim($_POST['customer_name']??'');$phone=preg_replace('/\D+/','',$_POST['customer_phone']??'');$customerEmail=strtolower(trim($_POST['customer_email']??''));$issue=trim($_POST['issue_description']??'');$words=$issue===''?0:count(preg_split('/\s+/u',$issue,-1,PREG_SPLIT_NO_EMPTY));
+    if(!$product){flash('error','Chon san pham hop le.');redirect('/admin/warranties');}
+    if($customerName===''||mb_strlen($customerName)>100){flash('error','Ten khach hang phai tu 1 den 100 ky tu.');redirect('/admin/warranties');}
+    if(!preg_match('/^0[35789]\d{8}$/',$phone)){flash('error','So dien thoai phai gom 10 chu so va bat dau bang 03, 05, 07, 08 hoac 09.');redirect('/admin/warranties');}if(!filter_var($customerEmail,FILTER_VALIDATE_EMAIL)||mb_strlen($customerEmail)>254){flash('error','Email khach hang khong hop le.');redirect('/admin/warranties');}
+    if($words<1||$words>200){flash('error','Noi dung yeu cau phai tu 1 den 200 tu.');redirect('/admin/warranties');}
+$purchase=trim($_POST['purchase_date']??'') ?: date('Y-m-d');$serialNo=trim($_POST['serial_no']??'');$serial=$serialNo ? dbGet('SELECT product_id,warranty_end_date FROM product_serials WHERE serial_no=?',[$serialNo]) : null;if($serial && (int)$serial['product_id']!==(int)$product['id']){flash('error','Serial không thuộc sản phẩm đã chọn.');redirect('/admin/warranties');}$months=max(0,(int)$product['warranty_months']);$end=$serial ? $serial['warranty_end_date'] : date('Y-m-d',strtotime('+'.$months.' months',strtotime($purchase)));$code='BH'.date('ymdHis').random_int(10,99);
+    $id=dbInsert('INSERT INTO warranty_cases (case_code,product_id,order_code,customer_name,customer_phone,customer_email,serial_no,issue_description,purchase_date,warranty_end_date,status,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',[$code,$product['id'],trim($_POST['order_code']??''),$customerName,$phone,$customerEmail,trim($_POST['serial_no']??''),$issue,$purchase,$end,'received',$actor['id']]);
+    dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id'],$actor['role'],'warranty_case_created','warranty_case',$id,json_encode(['case_code'=>$code,'product_id'=>$product['id']],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$emailBody='<h2 style="color:#1a3258;margin:0 0 12px">Phi&#7871;u b&#7843;o h&#224;nh</h2><p>Xin ch&#224;o <strong>'.htmlspecialchars($customerName,ENT_QUOTES,'UTF-8').'</strong>,</p><p>Cooling System &#273;&#227; ti&#7871;p nh&#7853;n phi&#7871;u b&#7843;o h&#224;nh c&#7911;a b&#7841;n.</p><table cellpadding="6" cellspacing="0" style="border-collapse:collapse;width:100%"><tr><td><strong>M&#227; phi&#7871;u</strong></td><td>'.htmlspecialchars($code,ENT_QUOTES,'UTF-8').'</td></tr><tr><td><strong>S&#7843;n ph&#7849;m</strong></td><td>'.htmlspecialchars($product['name'],ENT_QUOTES,'UTF-8').'</td></tr><tr><td><strong>SKU</strong></td><td>'.htmlspecialchars($product['sku'],ENT_QUOTES,'UTF-8').'</td></tr><tr><td><strong>Ng&#224;y mua</strong></td><td>'.htmlspecialchars($purchase,ENT_QUOTES,'UTF-8').'</td></tr><tr><td><strong>H&#7841;n b&#7843;o h&#224;nh</strong></td><td>'.htmlspecialchars($end,ENT_QUOTES,'UTF-8').'</td></tr></table><p><strong>N&#7897;i dung y&#234;u c&#7847;u:</strong><br>'.nl2br(htmlspecialchars($issue,ENT_QUOTES,'UTF-8')).'</p><p>Ch&#250;ng t&#244;i s&#7869; li&#234;n h&#7879; sau khi ki&#7875;m tra.</p>';$mailSent=sendEmail($customerEmail,html_entity_decode('Phi&#7871;u b&#7843;o h&#224;nh',ENT_QUOTES,'UTF-8').' '.$code.' - Cooling System',_emailLayout(html_entity_decode('Phi&#7871;u b&#7843;o h&#224;nh',ENT_QUOTES,'UTF-8'),$emailBody));if($mailSent){flash('success',"\u{0110}\u{00E3} t\u{1EA1}o phi\u{1EBF}u b\u{1EA3}o h\u{00E0}nh ".$code." v\u{00E0} \u{0111}\u{00E3} g\u{1EED}i email cho kh\u{00E1}ch h\u{00E0}ng.");}else{flash('warning',"\u{0110}\u{00E3} t\u{1EA1}o phi\u{1EBF}u b\u{1EA3}o h\u{00E0}nh ".$code." nh\u{01B0}ng ch\u{01B0}a g\u{1EED}i \u{0111}\u{01B0}\u{1EE3}c email. H\u{00E3}y ki\u{1EC3}m tra SMTP.");}redirect('/admin/warranties');
+});
+get('/admin/warranties/performance', function() {
+    $actor=requireStaffPermission('rbac:warranty.performance.view|returns','/admin/login');
+    $technicians=dbAll("SELECT DISTINCT user.id,user.full_name,user.phone FROM users user INNER JOIN staff_role_assignments assignment ON assignment.user_id=user.id INNER JOIN rbac_staff_role_links link ON link.staff_role_id=assignment.role_id WHERE user.role='staff' AND user.status='active' AND link.rbac_role_code='TECH' ORDER BY user.full_name");
+    $activeCases=dbAll("SELECT warranty.*,product.name AS product_name,product.sku,technician.full_name AS technician_name FROM warranty_cases warranty INNER JOIN products product ON product.id=warranty.product_id LEFT JOIN users technician ON technician.id=warranty.assigned_to WHERE warranty.status IN ('approved','assigned','in_progress') ORDER BY warranty.updated_at DESC LIMIT 300");
+    $summary=dbGet("SELECT COUNT(*) AS total,SUM(CASE WHEN status='completed' THEN 1 ELSE 0 END) AS completed,SUM(CASE WHEN status IN ('assigned','in_progress') THEN 1 ELSE 0 END) AS active,SUM(CASE WHEN (SELECT COUNT(*) FROM warranty_cases prior WHERE prior.customer_phone=warranty.customer_phone AND prior.product_id=warranty.product_id)>1 THEN 1 ELSE 0 END) AS repeat_cases FROM warranty_cases warranty") ?: [];
+    $performance=dbAll("SELECT COALESCE(technician.full_name,'') AS technician_name,COUNT(*) AS total_cases,SUM(CASE WHEN warranty.status IN ('assigned','in_progress') THEN 1 ELSE 0 END) AS active_cases,SUM(CASE WHEN warranty.status='completed' THEN 1 ELSE 0 END) AS completed_cases,ROUND(AVG(CASE WHEN warranty.status='completed' THEN julianday(warranty.updated_at)-julianday(warranty.created_at) END),1) AS average_days,SUM(CASE WHEN (SELECT COUNT(*) FROM warranty_cases prior WHERE prior.customer_phone=warranty.customer_phone AND prior.product_id=warranty.product_id)>1 THEN 1 ELSE 0 END) AS repeat_cases FROM warranty_cases warranty LEFT JOIN users technician ON technician.id=warranty.assigned_to GROUP BY warranty.assigned_to,technician.full_name ORDER BY completed_cases DESC,total_cases DESC,technician_name ASC");
+    $canAssign=(($actor['role']??'')==='admin') || rbacHasCapability((int)$actor['id'],'warranty.assign');
+    view('admin/warranty-performance',['title'=>'Hi&#7879;u su&#7845;t k&#7929; thu&#7853;t','userRole'=>'admin','technicians'=>$technicians,'activeCases'=>$activeCases,'summary'=>$summary,'performance'=>$performance,'canAssign'=>$canAssign]);
+});
+post('/admin/warranties/:id/assign', function($p) {
+    $actor=requireStaffPermission('rbac:warranty.assign|returns','/admin/login'); csrfCheck();
+    $case=dbGet("SELECT id,status,assigned_to FROM warranty_cases WHERE id=?",[$p['id']]);
+    if(!$case){flash('error','Kh&#244;ng t&#236;m th&#7845;y phi&#7871;u b&#7843;o h&#224;nh.');redirect('/admin/warranties/performance');}
+    if(!in_array($case['status'],['approved','assigned','in_progress'],true)){flash('error','Ch&#7881; ph&#226;n c&#244;ng k&#7929; thu&#7853;t vi&#234;n cho phi&#7871;u &#273;&#227; duy&#7879;t ho&#7863;c &#273;ang x&#7917; l&#253;.');redirect('/admin/warranties/performance');}
+    $technician=dbGet("SELECT user.id,user.full_name FROM users user INNER JOIN staff_role_assignments assignment ON assignment.user_id=user.id INNER JOIN rbac_staff_role_links link ON link.staff_role_id=assignment.role_id WHERE user.id=? AND user.role='staff' AND user.status='active' AND link.rbac_role_code='TECH'",[(int)($_POST['assigned_to']??0)]);
+    if(!$technician){flash('error','K&#7929; thu&#7853;t vi&#234;n kh&#244;ng h&#7907;p l&#7879; ho&#7863;c ch&#432;a &#273;&#432;&#7907;c g&#225;n vai tr&#242; TECH.');redirect('/admin/warranties/performance');}
+    $nextStatus=$case['status']==='approved'?'assigned':$case['status'];
+    dbRun("UPDATE warranty_cases SET assigned_to=?,status=?,updated_at=datetime('now','localtime') WHERE id=?",[$technician['id'],$nextStatus,$case['id']]);
+    dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','warranty_technician_assigned','warranty_case',$case['id'],json_encode(['assigned_to'=>$technician['id'],'technician'=>$technician['full_name'],'status'=>$nextStatus],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+    flash('success','&#272;&#227; ph&#226;n c&#244;ng k&#7929; thu&#7853;t vi&#234;n cho phi&#7871;u b&#7843;o h&#224;nh.');redirect('/admin/warranties/performance');
+});
+get('/admin/warranties/:id/documents', function($p) { requireStaffPermission('rbac:warranty.documents.print|returns','/admin/login'); $case=dbGet('SELECT warranty.*,product.name AS product_name,product.sku,product.oem_code FROM warranty_cases warranty INNER JOIN products product ON product.id=warranty.product_id WHERE warranty.id=?',[$p['id']]); if(!$case){flash('error',html_entity_decode('Kh&#244;ng t&#236;m th&#7845;y phi&#7871;u b&#7843;o h&#224;nh.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties');}if($case['status']!=='completed'){flash('error',html_entity_decode('Ch&#7913;ng t&#7915; ch&#7881; hi&#7875;n th&#7883; sau khi phi&#7871;u &#273;&#227; nghi&#7879;m thu.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties');} view('admin/warranty-documents',['title'=>'Ch&#7913;ng t&#7915; b&#7843;o h&#224;nh','userRole'=>'admin','case'=>$case]); });
+get('/admin/warranties/:id/documents/:type', function($p) { $actor=requireStaffPermission('rbac:warranty.documents.print|returns','/admin/login');$type=$p['type']??'';if(!in_array($type,['receipt','warranty','handover'],true)){http_response_code(404);view('errors/404',['title'=>'Kh&#244;ng t&#236;m th&#7845;y trang']);return;}$case=dbGet('SELECT warranty.*,product.name AS product_name,product.sku,product.oem_code FROM warranty_cases warranty INNER JOIN products product ON product.id=warranty.product_id WHERE warranty.id=?',[$p['id']]);if(!$case){flash('error',html_entity_decode('Kh&#244;ng t&#236;m th&#7845;y phi&#7871;u b&#7843;o h&#224;nh.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties');}if($case['status']!=='completed'){flash('error',html_entity_decode('Ch&#7913;ng t&#7915; ch&#7881; hi&#7875;n th&#7883; sau khi phi&#7871;u &#273;&#227; nghi&#7879;m thu.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties');}if($type==='handover'&&$case['status']!=='completed'){flash('error',html_entity_decode('Ch&#7881; in bi&#234;n b&#7843;n b&#224;n giao sau khi phi&#7871;u &#273;&#227; nghi&#7879;m thu.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties/'.$case['id'].'/documents');}$materials=dbAll('SELECT material.*,product.name AS product_name,product.sku,product.oem_code FROM warranty_materials material INNER JOIN products product ON product.id=material.product_id WHERE material.warranty_case_id=? ORDER BY material.issued_at ASC,material.id ASC',[$case['id']]);$statusLabels=['received'=>html_entity_decode('Ti&#7871;p nh&#7853;n',ENT_QUOTES,'UTF-8'),'checking'=>html_entity_decode('&#272;ang ki&#7875;m tra',ENT_QUOTES,'UTF-8'),'approved'=>html_entity_decode('&#272;&#227; duy&#7879;t',ENT_QUOTES,'UTF-8'),'assigned'=>html_entity_decode('&#272;&#227; ph&#226;n c&#244;ng',ENT_QUOTES,'UTF-8'),'in_progress'=>html_entity_decode('&#272;ang x&#7917; l&#253;',ENT_QUOTES,'UTF-8'),'completed'=>html_entity_decode('&#272;&#227; nghi&#7879;m thu',ENT_QUOTES,'UTF-8'),'rejected'=>html_entity_decode('T&#7915; ch&#7889;i',ENT_QUOTES,'UTF-8')];dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','warranty_document_printed','warranty_case',$case['id'],json_encode(['type'=>$type],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);view('admin/warranty-document-print',['case'=>$case,'materials'=>$materials,'documentType'=>$type,'statusLabel'=>$statusLabels[$case['status']]??$case['status']]); });
+get('/admin/warranties/material-products', function() { requireStaffPermission('rbac:warranty.materials.consume|returns','/admin/login'); $q=trim($_GET['q']??''); header('Content-Type: application/json; charset=utf-8'); if(mb_strlen($q)<2){echo '[]';exit;} $like='%'.$q.'%'; $rows=dbAll('SELECT id,sku,oem_code,name,stock FROM products WHERE stock>0 AND (name LIKE ? OR sku LIKE ? OR oem_code LIKE ?) ORDER BY name LIMIT 12',[$like,$like,$like]); echo json_encode(array_map(fn($row)=>['id'=>(int)$row['id'],'label'=>trim($row['sku'].' | '.$row['name'].' | Ton: '.$row['stock'].(!empty($row['oem_code'])?' | OEM: '.$row['oem_code']:''))],$rows),JSON_UNESCAPED_UNICODE); exit; });
+get('/admin/warranties/:id/materials', function($p) { $actor=requireStaffPermission('rbac:warranty.materials.consume|returns','/admin/login'); $case=dbGet('SELECT warranty.*,product.name AS product_name,product.sku FROM warranty_cases warranty INNER JOIN products product ON product.id=warranty.product_id WHERE warranty.id=?',[$p['id']]); if(!$case){flash('error',html_entity_decode('Kh&#244;ng t&#236;m th&#7845;y phi&#7871;u b&#7843;o h&#224;nh.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties');} $materials=dbAll("SELECT material.*,product.name AS product_name,product.sku,product.oem_code,COALESCE(CAST(material.issued_by AS TEXT),'') AS issued_by_name FROM warranty_materials material INNER JOIN products product ON product.id=material.product_id WHERE material.warranty_case_id=? ORDER BY material.issued_at DESC,material.id DESC",[$case['id']]); view('admin/warranty-materials',['title'=>'V&#7853;t t&#432; phi&#7871;u b&#7843;o h&#224;nh','userRole'=>'admin','case'=>$case,'materials'=>$materials]); });
+post('/admin/warranties/:id/materials', function($p) { $actor=requireStaffPermission('rbac:warranty.materials.consume|returns','/admin/login');csrfCheck();$case=dbGet('SELECT id,status FROM warranty_cases WHERE id=?',[$p['id']]);if(!$case){flash('error',html_entity_decode('Kh&#244;ng t&#236;m th&#7845;y phi&#7871;u b&#7843;o h&#224;nh.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties');}if(!in_array($case['status'],['approved','assigned','in_progress'],true)){flash('error',html_entity_decode('Ch&#7881; &#273;&#432;&#7907;c xu&#7845;t v&#7853;t t&#432; cho phi&#7871;u &#273;&#227; duy&#7879;t ho&#7863;c &#273;ang x&#7917; l&#253;.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties/'.$case['id'].'/materials');}$productId=(int)($_POST['product_id']??0);$rawQuantity=trim((string)($_POST['quantity']??''));$note=trim((string)($_POST['note']??''));if(!$productId||$rawQuantity===''||!ctype_digit($rawQuantity)||(int)$rawQuantity<1||(int)$rawQuantity>1000||mb_strlen($note)>300){flash('error',html_entity_decode('V&#7853;t t&#432;, s&#7889; l&#432;&#7907;ng ho&#7863;c ghi ch&#250; kh&#244;ng h&#7907;p l&#7879;.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties/'.$case['id'].'/materials');}$quantity=(int)$rawQuantity;$product=dbGet('SELECT id,name,sku,stock FROM products WHERE id=?',[$productId]);if(!$product){flash('error',html_entity_decode('Kh&#244;ng t&#236;m th&#7845;y v&#7853;t t&#432;.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties/'.$case['id'].'/materials');}$pdo=db();try{$pdo->beginTransaction();$changed=dbRun("UPDATE products SET stock=stock-?,updated_at=datetime('now','localtime') WHERE id=? AND stock>=?",[$quantity,$productId,$quantity]);if($changed->rowCount()!==1){throw new RuntimeException('insufficient stock');}$materialId=dbInsert('INSERT INTO warranty_materials (warranty_case_id,product_id,quantity,note,issued_by) VALUES (?,?,?,?,?)',[$case['id'],$productId,$quantity,$note,$actor['id']??null]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','warranty_material_issued','warranty_material',$materialId,json_encode(['warranty_case_id'=>$case['id'],'product_id'=>$productId,'quantity'=>$quantity],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);$pdo->commit();}catch(Throwable $exception){if($pdo->inTransaction()){$pdo->rollBack();}flash('error',html_entity_decode('Kh&#244;ng th&#7875; xu&#7845;t v&#7853;t t&#432;. T&#7891;n kho c&#243; th&#7875; kh&#244;ng &#273;&#7911;.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties/'.$case['id'].'/materials');}try{inventoryCheckLowStockAlert($productId,'warranty_material');}catch(Throwable $exception){}flash('success',html_entity_decode('&#272;&#227; xu&#7845;t v&#7853;t t&#432; cho phi&#7871;u b&#7843;o h&#224;nh.',ENT_QUOTES,'UTF-8'));redirect('/admin/warranties/'.$case['id'].'/materials'); });
+post('/admin/warranties/:id/status', function($p) {
+    $actor=requireStaffPermission('rbac:warranty.cases.view|returns','/admin/login');csrfCheck();$status=$_POST['status']??'';$case=dbGet('SELECT id,status,assigned_to FROM warranty_cases WHERE id=?',[$p['id']]);
+    if(!$case){flash('error','Khong tim thay phieu bao hanh.');redirect('/admin/warranties');}
+    $current=$case['status'];$rank=['received'=>0,'checking'=>1,'approved'=>2,'assigned'=>3,'in_progress'=>4,'completed'=>5];
+    if(in_array($current,['completed','rejected'],true)){flash('error','Phieu da ket thuc, khong the thay doi trang thai.');redirect('/admin/warranties');}
+    if($status!=='rejected'&&(!isset($rank[$status])||!isset($rank[$current])||$rank[$status]<=$rank[$current])){flash('error','Khong the quay lai hoac luu lai buoc truoc do.');redirect('/admin/warranties');}
+    $cap=['checking'=>'warranty.eligibility.check','approved'=>'warranty.approve','assigned'=>'warranty.assign','in_progress'=>'warranty.progress.update','completed'=>'warranty.close','rejected'=>'warranty.approve'][$status]??null;if(!$cap||!rbacHasCapability((int)$actor['id'],$cap)){if(($actor['role']??'')!=='admin'){flash('error','Ban khong co quyen cap nhat trang thai nay.');redirect('/admin/warranties');}}
+    if(in_array($status,['assigned','in_progress'],true)&&empty($case['assigned_to'])){flash('error','H&#227;y ph&#226;n c&#244;ng k&#7929; thu&#7853;t vi&#234;n tr&#432;&#7899;c khi chuy&#7875;n phi&#7871;u sang b&#432;&#7899;c n&#224;y.');redirect('/admin/warranties/performance');}
+    dbRun("UPDATE warranty_cases SET status=?,updated_at=datetime('now','localtime') WHERE id=?",[$status,$p['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id'],$actor['role'],'warranty_case_status','warranty_case',$p['id'],json_encode(['status'=>$status]),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã cập nhật phiếu bảo hành.');redirect('/admin/warranties');
+});
+
 get('/admin/staff', function() {
-    $user = requireStaffPermission('categories', '/auth/login');
+    $user = requireRbacOrLegacyStaffPermission('system.rbac.view', '/auth/login');
     $staffRoles = dbAll("SELECT * FROM staff_roles ORDER BY created_at DESC");
     $spage = max(1, intval($_GET['spage'] ?? 1)); $sPer = 10;
     $sTotal = (int)(dbGet("SELECT COUNT(DISTINCT user_id) AS n FROM staff_role_assignments")['n'] ?? 0);
@@ -1436,96 +1600,138 @@ get('/admin/staff', function() {
 });
 
 get('/admin/staff/roles/new', function() {
-    requireRole('admin', '/admin/login');
-    view('admin/role-form', ['title'=>'Tạo vai trò mới','userRole'=>'admin','staffRole'=>[]]);
+    requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login');
+    view('admin/role-form', ['title'=>'Tạo vai trò mới','userRole'=>'admin','staffRole'=>[],'rbacCapabilities'=>rbacCapabilityCatalog()]);
 });
 
 post('/admin/staff/roles/new', function() {
-    requireRole('admin', '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     if (!$name) { flash('error','Tên vai trò là bắt buộc.'); redirect('/admin/staff/roles/new'); }
-    $perms = json_encode(array_filter($_POST['permissions'] ?? []));
+    $perms = json_encode(rbacSanitizeRolePermissions($_POST['permissions'] ?? []), JSON_UNESCAPED_UNICODE);
     dbRun("INSERT INTO staff_roles (name, description, permissions) VALUES (?,?,?)", [$name, trim($_POST['description']??''), $perms]);
     flash('success',"Tạo vai trò '{$name}' thành công!");
     redirect('/admin/staff');
 });
 
 get('/admin/staff/roles/:id/edit', function($p) {
-    $user = requireStaffPermission('promotions', '/auth/login');
+    $user = requireRbacOrLegacyStaffPermission('system.rbac.manage', '/auth/login');
+    if (dbGet('SELECT 1 FROM rbac_staff_role_links WHERE staff_role_id=?', [$p['id']])) { flash('error','Vai tro RBAC mau chi doc; khong the sua truc tiep.'); redirect('/admin/staff'); }
     $staffRole = dbGet('SELECT * FROM staff_roles WHERE id=?', [$p['id']]);
     if (!$staffRole) { flash('error','Không tìm thấy.'); redirect('/admin/staff'); }
-    view('admin/role-form', ['title'=>'Sửa vai trò','userRole'=>'admin','staffRole'=>$staffRole]);
+    view('admin/role-form', ['title'=>'Sửa vai trò','userRole'=>'admin','staffRole'=>$staffRole,'rbacCapabilities'=>rbacCapabilityCatalog()]);
 });
 
 post('/admin/staff/roles/:id/edit', function($p) {
-    requireRole('admin', '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
+    if (dbGet('SELECT 1 FROM rbac_staff_role_links WHERE staff_role_id=?', [$p['id']])) { flash('error','Vai tro RBAC mau chi doc; khong the sua truc tiep.'); redirect('/admin/staff'); }
     $name = trim($_POST['name'] ?? '');
     if (!$name) { flash('error','Tên vai trò là bắt buộc.'); redirect('/admin/staff/roles/'.$p['id'].'/edit'); }
-    $perms = json_encode(array_values(array_filter($_POST['permissions'] ?? [])));
+    $perms = json_encode(rbacSanitizeRolePermissions($_POST['permissions'] ?? []), JSON_UNESCAPED_UNICODE);
     dbRun("UPDATE staff_roles SET name=?, description=?, permissions=? WHERE id=?", [$name, trim($_POST['description']??''), $perms, $p['id']]);
     flash('success','Cập nhật vai trò thành công!');
     redirect('/admin/staff');
 });
 
 post('/admin/staff/roles/:id/delete', function($p) {
-    requireRole('admin', '/admin/login'); csrfCheck();
+    requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
+    if (dbGet('SELECT 1 FROM rbac_staff_role_links WHERE staff_role_id=?', [$p['id']])) { flash('error','Vai tro RBAC mau duoc bao ve; khong the xoa.'); redirect('/admin/staff'); }
     dbRun('DELETE FROM staff_role_assignments WHERE role_id=?', [$p['id']]);
     dbRun('DELETE FROM staff_roles WHERE id=?', [$p['id']]);
     flash('success','Xóa vai trò thành công!');
     redirect('/admin/staff');
 });
 
-get('/admin/staff/roles/:id/assign', function($p) {
-    $user = requireRole('admin', '/admin/login');
+post('/admin/staff/roles/:id/duplicate', function($p) {
+    requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
+    $source = dbGet('SELECT * FROM staff_roles WHERE id=?', [$p['id']]);
+    if (!$source) { flash('error','Không tìm thấy vai trò.'); redirect('/admin/staff'); }
+    $template = dbGet('SELECT rbac_role_code FROM rbac_staff_role_links WHERE staff_role_id=?', [$p['id']]);
+    $permissions = $template ? array_map(fn($capability) => 'rbac:' . $capability, rbacTemplateCapabilities($template['rbac_role_code'])) : (json_decode($source['permissions'] ?? '[]', true) ?: []);
+    $newId = dbInsert('INSERT INTO staff_roles (name,description,permissions) VALUES (?,?,?)', ['Bản sao - ' . $source['name'], 'Vai trò tùy chỉnh được nhân bản từ ' . $source['name'] . '.', json_encode(rbacSanitizeRolePermissions($permissions), JSON_UNESCAPED_UNICODE)]);
+    flash('success','Đã tạo bản sao. Bạn có thể chỉnh sửa quyền của vai trò mới.');
+    redirect('/admin/staff/roles/' . $newId . '/edit');
+});
+
+get('/admin/staff/rbac/coverage', function() {
+    requireRbacOrLegacyStaffPermission('system.rbac.view', '/admin/login');
+    $coverage = dbAll("SELECT permission.code,permission.module_name,permission.feature_name,permission.action_name,GROUP_CONCAT(DISTINCT rule.capability) AS capabilities FROM rbac_permissions permission LEFT JOIN rbac_capability_rules rule ON rule.permission_code=permission.code GROUP BY permission.code ORDER BY permission.sort_order");
+    $summary = dbGet("SELECT COUNT(*) AS total, SUM(CASE WHEN EXISTS(SELECT 1 FROM rbac_capability_rules rule WHERE rule.permission_code=permission.code) THEN 1 ELSE 0 END) AS integrated FROM rbac_permissions permission") ?: ['total'=>0,'integrated'=>0];
+    $summary['pending'] = (int)$summary['total'] - (int)$summary['integrated'];
+    view('admin/rbac-coverage', ['title'=>'Bản đồ triển khai quyền RBAC','userRole'=>'admin','coverage'=>$coverage,'summary'=>$summary]);
+});
+
+get('/admin/staff/roles/:id/permissions', function($p) {
+    requireRbacOrLegacyStaffPermission('system.rbac.view', '/admin/login');
     $staffRole = dbGet('SELECT * FROM staff_roles WHERE id=?', [$p['id']]);
-    if (!$staffRole) { flash('error','Không tìm thấy.'); redirect('/admin/staff'); }
+    if (!$staffRole) { flash('error','Không tìm thấy vai trò.'); redirect('/admin/staff'); }
+    $rbacTemplate = dbGet('SELECT rbac_role_code FROM rbac_staff_role_links WHERE staff_role_id=?', [$p['id']]);
+    $matrixPermissions = [];
+    if ($rbacTemplate) {
+        $matrixPermissions = dbAll("SELECT permission.module_name, permission.feature_name, permission.action_name, role_permission.access_level, GROUP_CONCAT(DISTINCT rule.capability) AS capabilities FROM rbac_role_permissions role_permission INNER JOIN rbac_permissions permission ON permission.code=role_permission.permission_code LEFT JOIN rbac_capability_rules rule ON rule.permission_code=permission.code WHERE role_permission.role_code=? AND role_permission.access_level<>'NONE' GROUP BY permission.code, role_permission.access_level ORDER BY permission.sort_order", [$rbacTemplate['rbac_role_code']]);
+    } else {
+        $selected = json_decode($staffRole['permissions'] ?? '[]', true) ?: [];
+        foreach (rbacCapabilityCatalog() as $capability) {
+            if (in_array('rbac:' . $capability['capability'], $selected, true)) $matrixPermissions[] = ['module_name'=>$capability['module_name'], 'feature_name'=>$capability['feature_name'], 'action_name'=>$capability['action_name'], 'access_level'=>'Tùy chỉnh', 'capabilities'=>$capability['capability']];
+        }
+    }
+    view('admin/role-permissions', ['title'=>'Quyền của vai trò','userRole'=>'admin','staffRole'=>$staffRole,'rbacTemplate'=>$rbacTemplate,'matrixPermissions'=>$matrixPermissions]);
+});
+
+get('/admin/staff/roles/:id/assign', function($p) {
+    requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login');
+    $staffRole = dbGet('SELECT * FROM staff_roles WHERE id=?', [$p['id']]);
+    if (!$staffRole) { flash('error','Không tìm thấy vai trò.'); redirect('/admin/staff'); }
+    $rbacTemplate = dbGet('SELECT rbac_role_code FROM rbac_staff_role_links WHERE staff_role_id=?', [$p['id']]);
+    $matrixTaskCount = $rbacTemplate ? (int)(dbGet("SELECT COUNT(*) AS n FROM rbac_role_permissions WHERE role_code=? AND access_level<>'NONE'", [$rbacTemplate['rbac_role_code']])['n'] ?? 0) : 0;
     $assignedUsers = dbAll("SELECT u.full_name, u.email, sra.id AS assignment_id FROM staff_role_assignments sra INNER JOIN users u ON u.id=sra.user_id WHERE sra.role_id=?", [$p['id']]);
-    $availableUsers = dbAll("SELECT id, full_name, email FROM users WHERE role = 'staff' AND id NOT IN (SELECT user_id FROM staff_role_assignments WHERE role_id=?) ORDER BY full_name", [$p['id']]);
-    view('admin/role-assign', ['title'=>'Phân công nhân viên','userRole'=>'admin','staffRole'=>$staffRole,'assignedUsers'=>$assignedUsers,'availableUsers'=>$availableUsers]);
+    $availableUsers = dbAll("SELECT id, full_name, email FROM users WHERE role='staff' AND status='active' AND id NOT IN (SELECT user_id FROM staff_role_assignments WHERE role_id=?) ORDER BY full_name", [$p['id']]);
+    view('admin/role-assign', ['title'=>'Phân công nhân viên','userRole'=>'admin','staffRole'=>$staffRole,'rbacTemplate'=>$rbacTemplate,'matrixTaskCount'=>$matrixTaskCount,'assignedUsers'=>$assignedUsers,'availableUsers'=>$availableUsers]);
 });
 
 post('/admin/staff/roles/:id/assign', function($p) {
-    requireRole('admin', '/admin/login'); csrfCheck();
-    $userId = intval($_POST['user_id'] ?? 0);
-    if (!$userId) { flash('error','Chọn người dùng.'); redirect('/admin/staff/roles/'.$p['id'].'/assign'); }
-    $adminUser = requireRole('admin','/admin/login');
-    dbRun("INSERT OR IGNORE INTO staff_role_assignments (user_id, role_id, assigned_by) VALUES (?,?,?)", [$userId, $p['id'], $adminUser['id']]);
-    // Auto update role to staff
-    dbRun("UPDATE users SET role='staff' WHERE id=? AND role='customer'", [$userId]);
-    // Notify user
-    $roleName = dbGet("SELECT name FROM staff_roles WHERE id=?", [$p['id']])['name'] ?? 'Nhân viên';
-    dbInsert("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?,'system','Phân quyền mới','Bạn đã được phân công vai trò: " . $roleName . ". Đăng nhập lại để truy cập.','/staff',datetime('now','localtime'))", [$userId]);
-    dbRun("UPDATE users SET role='staff' WHERE id=? AND role='customer'", [$userId]);
-    flash('success','Phân công thành công!');
-    redirect('/admin/staff/roles/'.$p['id'].'/assign');
+    $actor = requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
+    $userId = (int)($_POST['user_id'] ?? 0);
+    $staffRole = dbGet('SELECT id,name FROM staff_roles WHERE id=?', [$p['id']]);
+    $target = $userId ? dbGet("SELECT id,full_name,role,status FROM users WHERE id=?", [$userId]) : null;
+    if (!$staffRole || !$target || $target['role'] !== 'staff' || $target['status'] !== 'active') {
+        flash('error','Chỉ có thể phân công cho tài khoản Nhân viên đang hoạt động.');
+        redirect('/admin/staff/roles/' . $p['id'] . '/assign');
+    }
+    $insert = dbRun("INSERT OR IGNORE INTO staff_role_assignments (user_id, role_id, assigned_by) VALUES (?,?,?)", [$userId, $p['id'], $actor['id']]);
+    if ($insert->rowCount() > 0) {
+        $assignment = dbGet('SELECT id FROM staff_role_assignments WHERE user_id=? AND role_id=?', [$userId, $p['id']]);
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$actor['id'], $actor['role'], 'rbac_role_assigned', 'staff_role_assignment', $assignment['id'] ?? null, json_encode(['target_user_id'=>$userId,'role_id'=>(int)$p['id'],'role_name'=>$staffRole['name']], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255)]);
+        dbInsert("INSERT INTO user_notifications (user_id,type,title,message,link,created_at) VALUES (?,'system','Phân quyền mới','Bạn đã được phân công vai trò: " . $staffRole['name'] . ". Đăng nhập lại để áp dụng quyền.','/staff',datetime('now','localtime'))", [$userId]);
+        flash('success','Phân công thành công và đã ghi nhật ký.');
+    } else {
+        flash('info','Nhân viên này đã giữ vai trò được chọn.');
+    }
+    redirect('/admin/staff/roles/' . $p['id'] . '/assign');
 });
 
 post('/admin/staff/unassign/:id', function($p) {
-    requireRole('admin', '/admin/login'); csrfCheck();
-    // Get user before deleting
-    $asgn = dbGet('SELECT user_id FROM staff_role_assignments WHERE id=?', [$p['id']]);
+    $actor = requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
+    $assignment = dbGet("SELECT assignment.id,assignment.user_id,assignment.role_id,staff_role.name AS role_name FROM staff_role_assignments assignment INNER JOIN staff_roles staff_role ON staff_role.id=assignment.role_id WHERE assignment.id=?", [$p['id']]);
+    if (!$assignment) { flash('error','Không tìm thấy phân công.'); redirect('/admin/staff'); }
     dbRun('DELETE FROM staff_role_assignments WHERE id=?', [$p['id']]);
-    // Revert to customer if no remaining assignments
-    if ($asgn) {
-        $left = dbGet('SELECT COUNT(*) as c FROM staff_role_assignments WHERE user_id=?', [$asgn['user_id']]);
-        if (($left['c'] ?? 0) == 0) {
-            dbRun("UPDATE users SET role='customer' WHERE id=?", [$asgn['user_id']]);
-            // Notify user
-            dbInsert("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?,'system','Cập nhật quyền truy cập','Quyền nhân viên đã được thu hồi. Tài khoản đã chuyển về khách hàng.','/customer/orders',datetime('now','localtime'))", [$asgn['user_id']]);
-        }
-    }
-    flash('success','Hủy phân quyền thành công!');
+    dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$actor['id'], $actor['role'], 'rbac_role_unassigned', 'staff_role_assignment', $assignment['id'], json_encode(['target_user_id'=>(int)$assignment['user_id'],'role_id'=>(int)$assignment['role_id'],'role_name'=>$assignment['role_name']], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255)]);
+    dbInsert("INSERT INTO user_notifications (user_id,type,title,message,link,created_at) VALUES (?,'system','Cập nhật quyền truy cập','Một vai trò nhân viên của bạn đã được thu hồi.','/staff',datetime('now','localtime'))", [$assignment['user_id']]);
+    flash('success','Đã hủy phân quyền và ghi nhật ký. Tài khoản vẫn là Nhân viên để có thể phân công lại.');
     redirect('/admin/staff');
 });
 
 post('/admin/staff/unassign-all/:id', function($p) {
-    requireRole('admin', '/admin/login'); csrfCheck();
-    $uid = (int)$p['id'];
-    dbRun('DELETE FROM staff_role_assignments WHERE user_id=?', [$uid]);
-    dbRun("UPDATE users SET role='customer' WHERE id=? AND role='staff'", [$uid]);
-    dbRun('DELETE FROM staff_permissions WHERE user_id=?', [$uid]);
-    dbInsert("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?,'system','Cập nhật quyền truy cập','Quyền nhân viên đã được thu hồi. Tài khoản đã chuyển về khách hàng.','/customer/orders',datetime('now','localtime'))", [$uid]);
-    flash('success','Đã hủy toàn bộ quyền của nhân viên.');
+    $actor = requireRbacOrLegacyStaffPermission('system.rbac.manage', '/admin/login'); csrfCheck();
+    $userId = (int)$p['id'];
+    $assignments = dbAll("SELECT assignment.id,assignment.role_id,staff_role.name AS role_name FROM staff_role_assignments assignment INNER JOIN staff_roles staff_role ON staff_role.id=assignment.role_id WHERE assignment.user_id=?", [$userId]);
+    foreach ($assignments as $assignment) {
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$actor['id'], $actor['role'], 'rbac_role_unassigned', 'staff_role_assignment', $assignment['id'], json_encode(['target_user_id'=>$userId,'role_id'=>(int)$assignment['role_id'],'role_name'=>$assignment['role_name']], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255)]);
+    }
+    dbRun('DELETE FROM staff_role_assignments WHERE user_id=?', [$userId]);
+    dbRun('DELETE FROM staff_permissions WHERE user_id=?', [$userId]);
+    if ($assignments) dbInsert("INSERT INTO user_notifications (user_id,type,title,message,link,created_at) VALUES (?,'system','Cập nhật quyền truy cập','Toàn bộ vai trò nhân viên của bạn đã được thu hồi.','/staff',datetime('now','localtime'))", [$userId]);
+    flash('success','Đã hủy toàn bộ quyền và ghi nhật ký. Tài khoản Nhân viên được giữ lại để có thể phân công lại.');
     redirect('/admin/staff');
 });
 
@@ -1705,6 +1911,7 @@ post('/staff/orders/create', function() {
                 [$subOrderId, $p['id'], $p['name'], $p['oem_code']??'', $img['file_path']??'', $p['price'], intval($it['qty']), $p['price']*intval($it['qty'])]);
             // Reduce stock
             dbRun("UPDATE products SET stock = MAX(0, stock - ?) WHERE id=?", [intval($it['qty']), $p['id']]);
+            inventoryCheckLowStockAlert((int)$p['id'], 'staff_order');
         }
     }
     
@@ -1836,7 +2043,9 @@ post('/admin/users/bulk-delete', function() {
 });
 
 get('/admin/users', function() {
-    requireStaffPermission('users', '/auth/login');
+    $user = requireStaffPermission('rbac:customers.view|users', '/auth/login');
+    $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
+    $canViewCustomerPii = !$detailedRbac || rbacCan((int)$user['id'], 'customers.pii.view');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
     $q=trim($_GET['q']??''); $status=$_GET['status']??''; $from=$_GET['from']??''; $to=$_GET['to']??'';
     $where="WHERE u.role='customer' AND u.email NOT LIKE '%_deleted_%'"; $params=[];
@@ -1849,11 +2058,12 @@ get('/admin/users', function() {
     $totalPages=max(1,ceil($total/$perPage));
     $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
     $users=dbAll("SELECT u.* FROM users u $where ORDER BY u.created_at DESC LIMIT ? OFFSET ?",$p2);
+    if (!$canViewCustomerPii) { foreach ($users as &$customerRow) { $customerRow['email']='***'; $customerRow['phone']='***'; $customerRow['address']='***'; } unset($customerRow); }
     view('admin/users',['title'=>'Khách hàng','role'=>'admin','users'=>$users,'total'=>$total,'page'=>$page,'totalPages'=>$totalPages,'listRole'=>'customer','listRoute'=>'/admin/users']);
 });
 
 get('/admin/staff-accounts', function() {
-    requireStaffPermission('staff', '/admin/login');
+    requireRbacOrLegacyStaffPermission('system.staff.view', '/admin/login');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
     $q=trim($_GET['q']??''); $status=$_GET['status']??''; $from=$_GET['from']??''; $to=$_GET['to']??'';
     $where="WHERE u.role='staff' AND u.email NOT LIKE '%_deleted_%'"; $params=[];
@@ -1901,7 +2111,7 @@ get('/admin/withdrawals', function() {
 });
 
 get('/admin/vouchers', function() {
-    $user = requireStaffPermission('vouchers', '/admin/login');
+    $user = requireStaffPermission('rbac:marketing.promotions.view|vouchers', '/admin/login');
     $perPage = 15; $page = max(1, intval($_GET['page'] ?? 1));
     $vTotalAll = (int)(dbGet("SELECT COUNT(*) AS n FROM vouchers")['n'] ?? 0);
     $vTotalPages = max(1, (int)ceil($vTotalAll / $perPage));
@@ -2051,7 +2261,7 @@ post('/admin/vouchers/:id/delete', function($p) {
 });
 
 get('/admin/reviews', function() {
-    $user = requireStaffPermission('reviews', '/admin/login');
+    $user = requireRbacOrLegacyStaffPermission('crm.complaints.manage', '/admin/login');
     $rating = intval($_GET['rating'] ?? 0);
     $categoryId = intval($_GET['category_id'] ?? 0);
     
@@ -2083,7 +2293,7 @@ get('/admin/catalog', function() {
 });
 
 get('/admin/audit', function() {
-    $user = requireRole('admin', '/admin/login');
+    $user = requireRbacOrLegacyStaffPermission('system.audit.view', '/admin/login');
     $logs = dbAll("SELECT al.*, u.full_name, u.email FROM audit_logs al LEFT JOIN users u ON u.id=al.user_id ORDER BY al.created_at DESC LIMIT 50");
     view('admin/audit', ['title'=>'Audit Log','role'=>'admin','logs'=>$logs]);
 });
@@ -2268,17 +2478,86 @@ post('/admin/post-on-behalf', function() {
     redirect('/admin/products');
 });
 
+
+// ── INVENTORY MANAGEMENT ───────────────────────────────────────────────────
+get('/admin/inventory', function() {
+    $user = requireStaffPermission('rbac:inventory.view|products', '/admin/login');
+    $perPage = 25;
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $q = trim((string)($_GET['q'] ?? ''));
+    $stockStatus = in_array($_GET['status'] ?? 'all', ['all','low','out'], true) ? $_GET['status'] : 'all';
+    $categoryId = max(0, (int)($_GET['category'] ?? 0));
+    $where = 'WHERE 1=1'; $params = [];
+    if ($q !== '') { $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)'; $like='%'.$q.'%'; array_push($params,$like,$like,$like); }
+    if ($categoryId) { $where .= ' AND p.category_id=?'; $params[]=$categoryId; }
+    if ($stockStatus === 'low') $where .= ' AND p.min_stock>0 AND p.stock<=p.min_stock';
+    if ($stockStatus === 'out') $where .= ' AND p.stock<=0';
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM products p $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total/$perPage));
+    $page = min($page,$totalPages);
+    $listParams=array_merge($params,[$perPage,($page-1)*$perPage]);
+    $products=dbAll("SELECT p.*,c.name AS category_name,(SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC,sort_order,id LIMIT 1) AS image FROM products p LEFT JOIN categories c ON c.id=p.category_id $where ORDER BY CASE WHEN p.min_stock>0 AND p.stock<=p.min_stock THEN 0 ELSE 1 END,p.updated_at DESC,p.id DESC LIMIT ? OFFSET ?",$listParams);
+    $summary=dbGet("SELECT COUNT(*) AS total,SUM(CASE WHEN min_stock>0 AND stock<=min_stock THEN 1 ELSE 0 END) AS low,SUM(CASE WHEN stock<=0 THEN 1 ELSE 0 END) AS out FROM products") ?: ['total'=>0,'low'=>0,'out'=>0];
+    $categories=dbAll('SELECT id,name FROM categories ORDER BY sort_order,name');
+    $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
+    $inventoryPermissions = [
+      'detailed'=>$detailedRbac,
+      'view_cost'=>!$detailedRbac || rbacCan((int)$user['id'], 'catalog.cost.view'),
+      'edit_cost'=>!$detailedRbac || rbacCan((int)$user['id'], 'catalog.cost.edit'),
+      'edit_price'=>!$detailedRbac || rbacCan((int)$user['id'], 'catalog.pricing.edit'),
+      'edit_stock'=>!$detailedRbac || rbacCan((int)$user['id'], 'inventory.update'),
+      'edit_thresholds'=>!$detailedRbac || rbacCan((int)$user['id'], 'inventory.thresholds.edit'),
+      'edit_warranty'=>!$detailedRbac || rbacCan((int)$user['id'], 'catalog.products.edit'),
+    ];
+    view('admin/inventory',['title'=>'Quản lý kho','role'=>'admin','products'=>$products,'summary'=>$summary,'categories'=>$categories,'q'=>$q,'stockStatus'=>$stockStatus,'categoryId'=>$categoryId,'inventoryPermissions'=>$inventoryPermissions,'page'=>$page,'totalPages'=>$totalPages]);
+});
+
+post('/admin/inventory/:id/update', function($p) {
+    $user=requireStaffPermission('rbac:inventory.update|rbac:catalog.pricing.edit|rbac:catalog.cost.edit|rbac:inventory.thresholds.edit|rbac:catalog.products.edit|products','/admin/login'); csrfCheck();
+    $product=dbGet('SELECT * FROM products WHERE id=?',[$p['id']]);
+    if(!$product){flash('error','Không tìm thấy sản phẩm.');redirect('/admin/inventory');return;}
+    $fields=['cost_price','price','original_price','stock','min_stock','max_stock','warranty_months']; $values=[];
+    foreach($fields as $field){$raw=trim((string)($_POST[$field]??'')); if($raw===''||!ctype_digit($raw)){flash('error','Dữ liệu kho không hợp lệ.');redirect('/admin/inventory');return;} $values[$field]=(int)$raw;}
+    $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
+    if ($detailedRbac) {
+        $fieldCapabilities = [
+          'cost_price'=>'catalog.cost.edit','price'=>'catalog.pricing.edit','original_price'=>'catalog.pricing.edit',
+          'stock'=>'inventory.update','min_stock'=>'inventory.thresholds.edit','max_stock'=>'inventory.thresholds.edit',
+          'warranty_months'=>'catalog.products.edit'
+        ];
+        foreach ($fieldCapabilities as $field=>$capability) {
+            if ((int)$product[$field] !== $values[$field] && !rbacCan((int)$user['id'], $capability)) {
+                flash('error','Ban khong co quyen thay doi truong du lieu nay.'); redirect('/admin/inventory'); return;
+            }
+        }
+    }
+    if($values['stock']>1000||$values['min_stock']>1000||$values['max_stock']>1000){flash('error','Tồn kho chỉ được từ 0 đến 1000.');redirect('/admin/inventory');return;}
+    if($values['min_stock']>$values['max_stock']){flash('error','Tồn tối thiểu không được lớn hơn tồn tối đa.');redirect('/admin/inventory');return;}
+    if($values['original_price']>0&&$values['original_price']<=$values['price']){flash('error','Giá gốc phải lớn hơn giá bán khi được nhập.');redirect('/admin/inventory');return;}
+    dbRun("UPDATE products SET cost_price=?,price=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?",[$values['cost_price'],$values['price'],$values['original_price']?:null,$values['stock'],$values['min_stock'],$values['max_stock'],$values['warranty_months'],$values['cost_price']*$values['stock'],$p['id']]);
+    inventoryCheckLowStockAlert((int)$p['id'], 'inventory_update');
+    $before=['cost_price'=>(int)$product['cost_price'],'price'=>(int)$product['price'],'original_price'=>(int)$product['original_price'],'stock'=>(int)$product['stock'],'min_stock'=>(int)$product['min_stock'],'max_stock'=>(int)$product['max_stock'],'warranty_months'=>(int)$product['warranty_months']];
+    try { dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$user['id'] ?? null,$user['role'] ?? 'admin','inventory_update','product',$p['id'],json_encode(['before'=>$before,'after'=>$values],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR'] ?? '',$_SERVER['HTTP_USER_AGENT'] ?? '']); } catch(Throwable $e) {}
+    flash('success','Đã cập nhật giá và tồn kho cho sản phẩm.');
+    redirect('/admin/inventory');
+});
+
 // ── PRODUCTS (Admin posts directly) ────────────────────────────────────────
 get('/admin/products/new', function() {
-    $user = requireStaffPermission('products', '/admin/login');
+    $user = requireStaffPermission('rbac:catalog.products.create|products', '/admin/login');
+    if ((($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']) && !rbacCan((int)$user['id'], 'catalog.codes.manage')) { flash('error','Ban khong co quyen tao ma SKU/OEM.'); redirect('/admin/products'); }
     $categories = dbAll('SELECT * FROM categories ORDER BY sort_order');
     $brands = dbAll('SELECT * FROM brands ORDER BY name ASC');
     view('admin/product-form', ['title'=>'Đăng SP mới','role'=>'admin','categories'=>$categories,'brands'=>$brands,'images'=>[]]);
 });
 
 post('/admin/products/new', function() {
-    $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
+    $user = requireStaffPermission('rbac:catalog.products.create|products', '/admin/login'); csrfCheck();
     $d = $_POST;
+    $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
+    if ($detailedRbac && !rbacCan((int)$user['id'], 'catalog.codes.manage')) { flash('error','Ban khong co quyen tao ma SKU/OEM.'); redirect('/admin/products'); return; }
+    if ($detailedRbac) { foreach (['price','price_before_tax','tax_amount','original_price','stock','min_stock','cost_price'] as $lockedField) $d[$lockedField]='0'; $d['max_stock']='1000'; $d['warranty_months']='0'; $d['_inventory_in_product_form']=''; }
+    $inventoryManagedSeparately = empty($d['_inventory_in_product_form']);
     $name = trim($d['name'] ?? '');
     $oem = trim($d['oem_code'] ?? '');
     $sku = resolveProductSku($d['sku'] ?? '', $oem);
@@ -2290,6 +2569,7 @@ post('/admin/products/new', function() {
     $stock = intval($stockRaw);
     $maxStock = $maxStockRaw === '' ? 1000 : intval($maxStockRaw);
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
+    if ($inventoryManagedSeparately) $status = 'draft';
     $slug = uniqueProductSlug(trim($d['slug'] ?? '') ?: $name);
     $seoTitle = trim($d['seo_title'] ?? '');
     if ($seoTitle === '') {
@@ -2310,10 +2590,12 @@ post('/admin/products/new', function() {
     $valErrors = [];
     if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
     if (!$sku)  $valErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
-    if ($price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
-    if ($stockRaw === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
-    elseif (!ctype_digit($stockRaw) || $stock > 1000) $valErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
-    if ($maxStockRaw !== '' && (!ctype_digit($maxStockRaw) || $maxStock > 1000)) $valErrors[] = 'Tồn kho tối đa chỉ được từ 0 đến 1000';
+    if (!$inventoryManagedSeparately) {
+        if ($price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
+        if ($stockRaw === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
+        elseif (!ctype_digit($stockRaw) || $stock > 1000) $valErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
+        if ($maxStockRaw !== '' && (!ctype_digit($maxStockRaw) || $maxStock > 1000)) $valErrors[] = 'Tồn kho tối đa chỉ được từ 0 đến 1000';
+    }
     if (empty($d['category_id'])) $valErrors[] = 'Vui lòng chọn danh mục sản phẩm';
     // Validate giá nhập (tùy chọn nhưng phải >= 0 nếu có)
     $costRaw = trim($d['cost_price'] ?? '');
@@ -2399,7 +2681,7 @@ post('/admin/products/new', function() {
     // Handle and normalize product images.
     $imageUploadErrors = [];
     if (!empty($_FILES['images']['name'][0])) {
-        $uploadDir = '/opt/cooling-php/uploads/products/';
+        $uploadDir = '/var/lib/coolingsystems/uploads/products/';
         $savedImageCount = 0;
         foreach ($_FILES['images']['tmp_name'] as $k => $tmp) {
             if (!is_uploaded_file($tmp)) continue;
@@ -2431,7 +2713,7 @@ post('/admin/products/new', function() {
 });
 
 get('/admin/products/:id/edit', function($p) {
-    $user = requireStaffPermission('products', '/admin/login');
+    $user = requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login');
     $returnTo = trim((string)($_GET['return_to'] ?? ''));
     if (!preg_match('#^/admin/products(?:\?|$)#', $returnTo)) $returnTo = '/admin/products';
     $product = dbGet('SELECT * FROM products WHERE id=?', [$p['id']]);
@@ -2439,16 +2721,17 @@ get('/admin/products/:id/edit', function($p) {
     $categories = dbAll('SELECT * FROM categories ORDER BY sort_order');
     $brands = dbAll('SELECT * FROM brands ORDER BY name ASC');
     $images = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC', [$p['id']]);
-    view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images,'returnTo'=>$returnTo]);
+    $canEditProductCodes = !(($user['role'] ?? '') === 'staff' && rbacUsesDetailedMode((int)$user['id'])) || rbacCan((int)$user['id'], 'catalog.codes.manage');
+    view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images,'returnTo'=>$returnTo,'canEditProductCodes'=>$canEditProductCodes]);
 });
 
 post('/admin/products/:id/edit', function($p) {
-    $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
+    $user = requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
     $d = $_POST;
     $returnTo = trim((string)($d['return_to'] ?? ''));
     if (!preg_match('#^/admin/products(?:\?|$)#', $returnTo)) $returnTo = '/admin/products';
     $editUrl = '/admin/products/' . $p['id'] . '/edit?return_to=' . rawurlencode($returnTo);
-    $currentProduct = dbGet('SELECT slug, seo_title, seo_description FROM products WHERE id=?', [$p['id']]);
+    $currentProduct = dbGet('SELECT * FROM products WHERE id=?', [$p['id']]);
     if (!$currentProduct) {
         flash('error', 'Không tìm thấy sản phẩm.');
         redirect($returnTo);
@@ -2462,6 +2745,12 @@ post('/admin/products/:id/edit', function($p) {
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $editOem = trim($d['oem_code'] ?? '');
     $editSku = resolveProductSku($d['sku'] ?? '', $editOem);
+    $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
+    if ($detailedRbac) {
+      $fieldCapabilities = ['sku'=>'catalog.codes.manage','oem_code'=>'catalog.codes.manage','price'=>'catalog.pricing.edit','original_price'=>'catalog.pricing.edit','cost_price'=>'catalog.cost.edit','stock'=>'inventory.update','min_stock'=>'inventory.thresholds.edit','max_stock'=>'inventory.thresholds.edit','warranty_months'=>'catalog.products.edit','status'=>'catalog.products.archive'];
+      $requested = ['sku'=>$editSku,'oem_code'=>$editOem,'price'=>$price,'original_price'=>intval($d['original_price']??0),'cost_price'=>intval($d['cost_price']??0),'stock'=>$stock,'min_stock'=>intval($d['min_stock']??0),'max_stock'=>$maxStock,'warranty_months'=>intval($d['warranty_months']??12),'status'=>$status];
+      foreach ($fieldCapabilities as $field=>$capability) { if ((string)($currentProduct[$field] ?? '') !== (string)$requested[$field] && !rbacCan((int)$user['id'], $capability)) { flash('error','Ban khong co quyen thay doi truong du lieu nay.'); redirect($editUrl); return; } }
+    }
 
     // === SERVER-SIDE VALIDATION ===
     $editErrors = [];
@@ -2530,11 +2819,12 @@ post('/admin/products/:id/edit', function($p) {
         intval($d['cost_price']??0) * $stock,
         $p['id']
     ]);
+    inventoryCheckLowStockAlert((int)$p['id'], 'product_edit');
 
     // Handle and normalize newly uploaded product images.
     $imageUploadErrors = [];
     if (!empty($_FILES['images']['name'][0])) {
-        $uploadDir = '/opt/cooling-php/uploads/products/';
+        $uploadDir = '/var/lib/coolingsystems/uploads/products/';
         $replaceImages = !empty($d['replace_images']);
         $existingImages = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order, id', [$p['id']]);
         $availableSlots = $replaceImages ? 8 : max(0, 8 - count($existingImages));
@@ -2594,7 +2884,7 @@ post('/admin/products/:id/edit', function($p) {
 
                 if ($replaceImages) {
                     foreach ($existingImages as $oldImage) {
-                        $oldPath = '/var/lib/cooling/uploads/products/' . basename((string)$oldImage['file_path']);
+                        $oldPath = '/var/lib/coolingsystems/uploads/products/' . basename((string)$oldImage['file_path']);
                         if (is_file($oldPath)) @unlink($oldPath);
                     }
                 }
@@ -2808,7 +3098,7 @@ post('/admin/news/:id/delete', function($p) {
 });
 
 get('/admin/products/:id/history', function($p) {
-    $user = requireStaffPermission('products', '/admin/login');
+    $user = requireStaffPermission('rbac:catalog.products.view|products', '/admin/login');
     $pid = intval($p['id']);
     $product = dbGet("SELECT p.*, c.name AS cat_name, b.name AS car_brand_name, ua.full_name AS approved_by_name FROM products p LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN users ua ON ua.id=p.approved_by WHERE p.id=?", [$pid]);
     if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); return; }
@@ -2822,7 +3112,7 @@ get('/admin/products/:id/history', function($p) {
 });
 
 post('/admin/products/:id/toggle-status', function($p) {
-    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.products.archive|products', '/admin/login'); csrfCheck();
     $status = $_POST['status'] ?? 'hidden';
     $__oldStatus = dbGet("SELECT status FROM products WHERE id=?", [$p['id']])['status'] ?? '';
     dbRun("UPDATE products SET status=?, is_indexed=?, updated_at=datetime('now','localtime') WHERE id=?", [
@@ -2842,7 +3132,7 @@ post('/admin/products/:id/toggle-status', function($p) {
 });
 
 post('/admin/products/:id/delete', function($p) {
-    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.products.archive|products', '/admin/login'); csrfCheck();
     $pid = intval($p['id']);
     // Check if product has order_items (cannot delete if ordered)
     $hasOrders = dbGet("SELECT COUNT(*) AS cnt FROM order_items WHERE product_id=?", [$pid])['cnt'] ?? 0;
@@ -2914,7 +3204,7 @@ post('/admin/upload-tinymce-image', function() {
 
 
 post('/admin/products/bulk-delete', function() {
-    $user = requireStaffPermission('products', '/admin/login'); csrfCheck();
+    $user = requireStaffPermission('rbac:catalog.products.archive|products', '/admin/login'); csrfCheck();
     header('Content-Type: application/json');
 
     $idsRaw = trim($_POST['ids'] ?? '');
@@ -2978,10 +3268,71 @@ post('/admin/notifications/:id/delete', function($p) {
 
 // ── System Settings ─────────────────────────────────────────────────────────
 get('/admin/settings', function() {
-    $user = requireRole('admin', '/admin/login');
+    $user = requireStaffPermission('rbac:system.settings.view', '/admin/login');
     view('admin/settings', ['title'=>'Cài đặt hệ thống', 'user'=>$user]);
 });
 
+
+post('/admin/settings/smtp', function() {
+    requireStaffPermission('rbac:system.smtp.manage', '/admin/login'); csrfCheck();
+    $enabled = !empty($_POST['smtp_enabled']) ? '1' : '0';
+    $host = strtolower(trim((string)($_POST['smtp_host'] ?? '')));
+    $port = (int)($_POST['smtp_port'] ?? 587);
+    $encryption = (string)($_POST['smtp_encryption'] ?? 'tls');
+    $username = trim((string)($_POST['smtp_username'] ?? ''));
+    $password = preg_replace('/\s+/', '', (string)($_POST['smtp_password'] ?? ''));
+    $fromEmail = trim((string)($_POST['smtp_from_email'] ?? ''));
+    $fromName = trim((string)($_POST['smtp_from_name'] ?? ''));
+    $oldPassword = inventoryAlertSetting('smtp_password');
+    if ($password === '') $password = preg_replace('/\s+/', '', $oldPassword);
+    if ($enabled === '1') {
+        if (!preg_match('/^[a-z0-9.-]+$/i', $host) || $port < 1 || $port > 65535 || !in_array($encryption, ['tls','ssl','none'], true) || !filter_var($username, FILTER_VALIDATE_EMAIL) || !filter_var($fromEmail, FILTER_VALIDATE_EMAIL) || $password === '') {
+            flash('error', 'Cấu hình SMTP chưa hợp lệ. Hãy kiểm tra máy chủ, cổng, bảo mật, email, và mật khẩu ứng dụng.');
+            redirect('/admin/settings'); return;
+        }
+    }
+    foreach (['smtp_enabled'=>$enabled,'smtp_host'=>$host,'smtp_port'=>(string)$port,'smtp_encryption'=>$encryption,'smtp_username'=>$username,'smtp_password'=>$password,'smtp_from_email'=>$fromEmail,'smtp_from_name'=>$fromName] as $key=>$value) {
+        dbRun('INSERT INTO settings (key,value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value', [$key,$value]);
+    }
+    flash('success', 'Đã lưu cấu hình SMTP. Hãy dùng nút Gửi email kiểm tra trong phần cảnh báo tồn kho để xác nhận.');
+    redirect('/admin/settings');
+});
+
+post('/admin/settings/inventory-alert', function() {
+    requireStaffPermission('rbac:inventory.alerts.manage', '/admin/login'); csrfCheck();
+    $enabled = !empty($_POST['inventory_alert_enabled']) ? '1' : '0';
+    $email = strtolower(trim((string)($_POST['inventory_alert_email'] ?? '')));
+    if ($enabled === '1' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        flash('error', 'Vui lòng nhập email nhận cảnh báo hợp lệ trước khi bật cảnh báo tồn kho.');
+        redirect('/admin/settings'); return;
+    }
+    dbRun("INSERT INTO settings (key,value) VALUES ('inventory_alert_enabled',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$enabled]);
+    dbRun("INSERT INTO settings (key,value) VALUES ('inventory_alert_email',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$email]);
+    flash('success', 'Đã lưu cấu hình email cảnh báo tồn kho.');
+    redirect('/admin/settings');
+});
+
+post('/admin/settings/inventory-alert/test', function() {
+    requireStaffPermission('rbac:inventory.alerts.manage', '/admin/login'); csrfCheck();
+    require_once __DIR__ . '/../includes/inventory-alerts.php';
+    $email = trim(inventoryAlertSetting('inventory_alert_email'));
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        flash('error', 'Hãy lưu một email nhận cảnh báo hợp lệ trước khi gửi kiểm tra.');
+        redirect('/admin/settings'); return;
+    }
+    $product = dbGet("SELECT id,name,sku,oem_code,stock,min_stock FROM products ORDER BY id LIMIT 1") ?: ['name'=>'Sản phẩm kiểm tra','sku'=>'TEST','oem_code'=>'','stock'=>0,'min_stock'=>5];
+    if (sendInventoryLowStockEmail($email, $product)) {
+        flash('success', 'Đã gửi email kiểm tra tới ' . $email . '.');
+    } else {
+        $smtpError = function_exists('smtpLastError') ? smtpLastError() : '';
+        if (str_contains($smtpError, '535')) {
+            flash('error', 'Gmail từ chối tài khoản hoặc Mật khẩu ứng dụng SMTP. Hãy tạo App Password mới, dán vào ô Mật khẩu ứng dụng rồi lưu lại.');
+        } else {
+            flash('error', 'Máy chủ chưa gửi được email kiểm tra. Hãy kiểm tra cấu hình SMTP.');
+        }
+    }
+    redirect('/admin/settings');
+});
 
 post('/admin/settings/account', function() {
     $me = requireRole('admin', '/admin/login'); csrfCheck();
@@ -3004,7 +3355,7 @@ post('/admin/settings/account', function() {
     redirect('/admin/settings');
 });
 post('/admin/settings/general', function() {
-    requireRole('admin', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:system.business.manage', '/admin/login'); csrfCheck();
     
     $phone = trim($_POST['site_phone'] ?? '');
     if (!preg_match('/^[0-9]{10}$/', $phone)) {
@@ -3023,7 +3374,7 @@ post('/admin/settings/general', function() {
         if (in_array($mime, $allowed) || in_array(strtolower(pathinfo($_FILES['site_logo']['name'], PATHINFO_EXTENSION)), ['svg','png','jpg','jpeg','webp'])) {
             $ext = pathinfo($_FILES['site_logo']['name'], PATHINFO_EXTENSION);
             $fname = 'logo_' . time() . '.' . strtolower($ext);
-            $dest = '/var/lib/cooling/uploads/' . $fname;
+            $dest = '/var/lib/coolingsystems/uploads/' . $fname;
             if (move_uploaded_file($_FILES['site_logo']['tmp_name'], $dest)) {
                 dbRun("INSERT INTO system_config (key, value) VALUES ('site_logo',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$fname]);
             }
@@ -3038,11 +3389,11 @@ post('/admin/settings/general', function() {
         $fext = strtolower(pathinfo($_FILES['footer_logo']['name'], PATHINFO_EXTENSION));
         if (in_array($fext, ['svg','png','jpg','jpeg','webp','gif'])) {
             $base = 'footer_logo_' . time();
-            $rawPath = '/var/lib/cooling/uploads/' . $base . '.' . $fext;
+            $rawPath = '/var/lib/coolingsystems/uploads/' . $base . '.' . $fext;
             if (move_uploaded_file($_FILES['footer_logo']['tmp_name'], $rawPath)) {
                 $finalName = $base . '.' . $fext;
                 if ($fext !== 'svg' && is_executable('/usr/bin/convert')) {
-                    $pngPath = '/var/lib/cooling/uploads/' . $base . '.png';
+                    $pngPath = '/var/lib/coolingsystems/uploads/' . $base . '.png';
                     $cmd = '/usr/bin/convert ' . escapeshellarg($rawPath) . ' -fuzz 12% -transparent white -strip PNG32:' . escapeshellarg($pngPath) . ' 2>&1';
                     @exec($cmd, $__co, $__rc);
                     if ($__rc === 0 && file_exists($pngPath)) { $finalName = $base . '.png'; @unlink($rawPath); }
@@ -3066,13 +3417,13 @@ redirect('/admin/settings');
 
 // Delete individual product image
 post('/admin/products/delete-image', function() {
-    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
     $imageId = (int)($_POST['image_id'] ?? 0);
     if (!$imageId) { echo json_encode(['ok'=>false,'msg'=>'ID ảnh không hợp lệ']); return; }
     $img = dbGet("SELECT * FROM product_images WHERE id=?", [$imageId]);
     if (!$img) { echo json_encode(['ok'=>false,'msg'=>'Ảnh không tồn tại']); return; }
     // Delete file
-    $filePath = '/var/lib/cooling/uploads/products/' . $img['file_path'];
+    $filePath = '/var/lib/coolingsystems/uploads/products/' . $img['file_path'];
     if (file_exists($filePath)) { unlink($filePath); }
     // Delete DB record
     dbRun("DELETE FROM product_images WHERE id=?", [$imageId]);
@@ -3086,7 +3437,7 @@ post('/admin/products/delete-image', function() {
 });
 
 post('/admin/settings/social', function() {
-    requireStaffPermission('tax_config', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:system.social.manage|tax_config', '/auth/login'); csrfCheck();
     $fields = ['social_whatsapp','social_tiktok','social_facebook'];
     foreach($fields as $f) {
         $val = trim($_POST[$f] ?? '');
@@ -3101,7 +3452,7 @@ post('/admin/settings/social', function() {
 });
 
 post('/admin/settings/payment', function() {
-    requireStaffPermission('tax_config', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:system.payment.manage|tax_config', '/auth/login'); csrfCheck();
     $fields = ['payment_bank_name','payment_account_name','payment_account_number','payment_transfer_prefix'];
     foreach($fields as $f) {
         $val = trim($_POST[$f] ?? '');
@@ -3132,12 +3483,12 @@ post('/admin/settings/payment', function() {
 
 // ── BRANDS (Hãng xe) CRUD ────────────────────────────────────────────────────
 get('/admin/brands', function() {
-    $user = requireStaffPermission('brands', '/admin/login');
+    $user = requireStaffPermission('rbac:catalog.vehicle.view|brands', '/admin/login');
     view('admin/brands', ['title'=>'Quản lý Hãng xe', 'role'=>'admin', 'user'=>$user]);
 });
 
 post('/admin/brands/add', function() {
-    requireStaffPermission('brands', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.vehicle.manage|brands', '/admin/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $sort = intval($_POST['sort_order'] ?? 100);
@@ -3147,7 +3498,7 @@ post('/admin/brands/add', function() {
     if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $fname = 'brand_' . time() . '.' . strtolower($ext);
-        $dest = '/var/lib/cooling/uploads/brands/' . $fname;
+        $dest = '/var/lib/coolingsystems/uploads/brands/' . $fname;
         if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0755, true);
         if (move_uploaded_file($_FILES['image']['tmp_name'], $dest)) {
             $imagePath = $fname;
@@ -3168,7 +3519,7 @@ post('/admin/brands/add', function() {
 });
 
 post('/admin/brands/:id/edit', function($p) {
-    requireStaffPermission('brands', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.vehicle.manage|brands', '/admin/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $sort = intval($_POST['sort_order'] ?? 100);
@@ -3178,7 +3529,7 @@ post('/admin/brands/:id/edit', function($p) {
     if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $fname = 'brand_' . time() . '.' . strtolower($ext);
-        $dest = '/var/lib/cooling/uploads/brands/' . $fname;
+        $dest = '/var/lib/coolingsystems/uploads/brands/' . $fname;
         if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0755, true);
         if (move_uploaded_file($_FILES['image']['tmp_name'], $dest)) {
             $imagePath = $fname;
@@ -3199,7 +3550,7 @@ post('/admin/brands/:id/edit', function($p) {
 });
 
 post('/admin/brands/:id/delete', function($p) {
-    requireStaffPermission('brands', '/admin/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.vehicle.manage|brands', '/admin/login'); csrfCheck();
     dbRun("DELETE FROM brands WHERE id=?", [$p['id']]);
     flash('success', 'Đã xóa hãng xe.');
     redirect('/admin/brands');
@@ -3247,7 +3598,7 @@ post('/admin/car-models/:id/delete', function($p) {
 
 // ── CATEGORIES CRUD ──────────────────────────────────────────────────────────
 get('/admin/categories', function() {
-    $user = requireStaffPermission('categories', '/auth/login');
+    $user = requireStaffPermission('rbac:catalog.taxonomy.view|categories', '/auth/login');
     view('admin/categories', ['title'=>'Quản lý Danh mục', 'role'=>'admin', 'user'=>$user]);
 });
 
@@ -3260,7 +3611,7 @@ function catUploadImage(): string {
     return move_uploaded_file($_FILES['image']['tmp_name'], $dir.$fname) ? $fname : '';
 }
 post('/admin/categories/add', function() {
-    requireStaffPermission('categories', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.taxonomy.manage|categories', '/auth/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $parentId = !empty($_POST['parent_id']) ? intval($_POST['parent_id']) : null;
@@ -3279,7 +3630,7 @@ post('/admin/categories/add', function() {
 });
 
 post('/admin/categories/:id/edit', function($p) {
-    requireStaffPermission('categories', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.taxonomy.manage|categories', '/auth/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $parentId = !empty($_POST['parent_id']) ? intval($_POST['parent_id']) : null;
@@ -3297,7 +3648,7 @@ post('/admin/categories/:id/edit', function($p) {
 });
 
 post('/admin/categories/:id/delete', function($p) {
-    requireStaffPermission('categories', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:catalog.taxonomy.manage|categories', '/auth/login'); csrfCheck();
     // Reassign children to no parent
     dbRun("UPDATE categories SET parent_id=NULL WHERE parent_id=?", [$p['id']]);
     
@@ -3320,12 +3671,12 @@ post('/admin/categories/:id/delete', function($p) {
 
 // ── PROMOTIONS (Khuyến mãi) CRUD ─────────────────────────────────────────────
 get('/admin/promotions', function() {
-    $user = requireStaffPermission('promotions', '/auth/login');
+    $user = requireStaffPermission('rbac:marketing.promotions.view|promotions', '/auth/login');
     view('admin/promotions', ['title'=>'Quản lý Khuyến mãi', 'role'=>'admin', 'user'=>$user]);
 });
 
 post('/admin/promotions/:id/set-sale', function($p) {
-    requireStaffPermission('promotions', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:marketing.promotions.manage|promotions', '/auth/login'); csrfCheck();
     $salePrice = intval($_POST['sale_price'] ?? 0);
     $product = dbGet("SELECT price FROM products WHERE id=?", [$p['id']]);
     if (!$product) { flash('error', 'Không tìm thấy sản phẩm.'); redirect('/admin/promotions'); return; }
@@ -3338,7 +3689,7 @@ post('/admin/promotions/:id/set-sale', function($p) {
 });
 
 post('/admin/promotions/:id/toggle', function($p) {
-    requireStaffPermission('promotions', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:marketing.promotions.manage|promotions', '/auth/login'); csrfCheck();
     $prod = dbGet("SELECT is_on_sale FROM products WHERE id=?", [$p['id']]);
     $newVal = $prod['is_on_sale'] ? 0 : 1;
     dbRun("UPDATE products SET is_on_sale=? WHERE id=?", [$newVal, $p['id']]);
@@ -3349,13 +3700,13 @@ post('/admin/promotions/:id/toggle', function($p) {
 
 // ===== Product Brands Management =====
 get('/admin/product-brands', function() {
-    requireStaffPermission('brand_models', '/auth/login');
+    requireStaffPermission('rbac:catalog.vehicle.view|brand_models', '/auth/login');
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     view('admin/product-brands', ['title' => 'Quan ly Thuong hieu', 'productBrands' => $productBrands]);
 });
 
 post('/admin/product-brands/new', function() {
-    requireStaffPermission('brand_models', '/auth/login');
+    requireStaffPermission('rbac:catalog.vehicle.manage|brand_models', '/auth/login');
     csrfCheck();
     $name = trim($_POST['name'] ?? '');
     if (!$name) { flash('error', 'Ten thuong hieu khong duoc de trong.'); redirect('/admin/product-brands'); return; }
@@ -3364,7 +3715,7 @@ post('/admin/product-brands/new', function() {
     if (!empty($_FILES['logo']['tmp_name']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
         $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp','svg'])) {
-            $dest = '/var/lib/cooling/uploads/product-brands/' . uniqid('pb_') . '.' . $ext;
+            $dest = '/var/lib/coolingsystems/uploads/product-brands/' . uniqid('pb_') . '.' . $ext;
             if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0777, true);
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $dest)) { $logoFile = basename($dest); }
         }
@@ -3381,7 +3732,7 @@ post('/admin/product-brands/new', function() {
 });
 
 post('/admin/product-brands/:id/edit', function($p) {
-    requireStaffPermission('brand_models', '/auth/login');
+    requireStaffPermission('rbac:catalog.vehicle.manage|brand_models', '/auth/login');
     csrfCheck();
     $name = trim($_POST['name'] ?? '');
     if (!$name) { flash('error', 'Ten khong duoc de trong.'); redirect('/admin/product-brands'); return; }
@@ -3393,7 +3744,7 @@ post('/admin/product-brands/:id/edit', function($p) {
     if (!empty($_FILES['logo']['tmp_name']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
         $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp','svg'])) {
-            $dest = '/var/lib/cooling/uploads/product-brands/' . uniqid('pb_') . '.' . $ext;
+            $dest = '/var/lib/coolingsystems/uploads/product-brands/' . uniqid('pb_') . '.' . $ext;
             if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0777, true);
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $dest)) { $logoFile = basename($dest); }
         }
@@ -3404,7 +3755,7 @@ post('/admin/product-brands/:id/edit', function($p) {
 });
 
 post('/admin/product-brands/:id/delete', function($p) {
-    requireStaffPermission('brand_models', '/auth/login');
+    requireStaffPermission('rbac:catalog.vehicle.manage|brand_models', '/auth/login');
     csrfCheck();
     dbRun("DELETE FROM product_brands WHERE id=?", [$p['id']]);
     flash('success', 'Da xoa thuong hieu.');
@@ -3445,20 +3796,20 @@ post('/admin/banners/:idx/delete', function($p) { requireRole(['admin'], '/admin
 });
 
 get('/admin/stores', function() {
-    requireStaffPermission('stores', '/auth/login');
+    requireStaffPermission('rbac:organization.branches.view|stores', '/auth/login');
     $stores = dbAll("SELECT * FROM stores ORDER BY sort_order, name");
     $branchTypes = dbAll("SELECT code, name, is_active FROM store_branch_types ORDER BY sort_order, id");
     view('admin/stores', ['title'=>'Hệ thống cửa hàng','role'=>'admin','stores'=>$stores,'branchTypes'=>$branchTypes]);
 });
 
 get('/admin/branch-types', function() {
-    requireStaffPermission('stores', '/auth/login');
+    requireStaffPermission('rbac:organization.branches.view|stores', '/auth/login');
     $types = dbAll("SELECT * FROM store_branch_types ORDER BY sort_order, id");
     view('admin/branch-types', ['title'=>'Loại chi nhánh cửa hàng','role'=>'admin','types'=>$types]);
 });
 
 post('/admin/branch-types/add', function() {
-    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:organization.branches.manage|stores', '/auth/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     $sort = (int)($_POST['sort_order'] ?? 0);
     $active = isset($_POST['is_active']) ? 1 : 0;
@@ -3473,7 +3824,7 @@ post('/admin/branch-types/add', function() {
 });
 
 post('/admin/branch-types/:id/edit', function($p) {
-    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:organization.branches.manage|stores', '/auth/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
     $sort = (int)($_POST['sort_order'] ?? 0);
     $active = isset($_POST['is_active']) ? 1 : 0;
@@ -3484,7 +3835,7 @@ post('/admin/branch-types/:id/edit', function($p) {
 });
 
 post('/admin/branch-types/:id/delete', function($p) {
-    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:organization.branches.manage|stores', '/auth/login'); csrfCheck();
     $t = dbGet("SELECT code FROM store_branch_types WHERE id=?", [$p['id']]);
     if ($t) {
         $cnt = (int)(dbGet("SELECT COUNT(*) AS n FROM stores WHERE type=?", [$t['code']])['n'] ?? 0);
@@ -3496,7 +3847,7 @@ post('/admin/branch-types/:id/delete', function($p) {
 });
 
 post('/admin/stores/add', function() {
-    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:organization.branches.manage|stores', '/auth/login'); csrfCheck();
     $name = trim($_POST['name']??'');
     if (!$name) { flash('error','Tên cửa hàng không được trống.'); redirect('/admin/stores'); return; }
     dbInsert("INSERT INTO stores (name,type,address,phone,hours,lat,lng,sort_order,is_active) VALUES (?,?,?,?,?,?,?,?,?)", [
@@ -3509,7 +3860,7 @@ post('/admin/stores/add', function() {
 });
 
 post('/admin/stores/:id/edit', function($p) {
-    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:organization.branches.manage|stores', '/auth/login'); csrfCheck();
     $name = trim($_POST['name']??'');
     if (!$name) { flash('error','Tên không được trống.'); redirect('/admin/stores'); return; }
     dbRun("UPDATE stores SET name=?,type=?,address=?,phone=?,hours=?,lat=?,lng=?,sort_order=?,is_active=? WHERE id=?", [
@@ -3522,7 +3873,7 @@ post('/admin/stores/:id/edit', function($p) {
 });
 
 post('/admin/stores/:id/delete', function($p) {
-    requireStaffPermission('stores', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:organization.branches.manage|stores', '/auth/login'); csrfCheck();
     dbRun("DELETE FROM stores WHERE id=?", [$p['id']]);
     flash('success','Đã xóa cửa hàng.');
     redirect('/admin/stores');
@@ -3530,7 +3881,7 @@ post('/admin/stores/:id/delete', function($p) {
 
 // ===== QUẢN LÝ TRẢ HÀNG =====
 get('/admin/returns', function() {
-    $user = requireStaffPermission('returns', '/auth/login');
+    $user = requireStaffPermission('rbac:sales.returns.view|returns', '/auth/login');
     $status = $_GET['status'] ?? '';
     $where = '';
     $whereCount = '';
@@ -3563,7 +3914,7 @@ get('/admin/returns', function() {
 });
 
 post('/admin/returns/:id/approve', function($p) {
-    requireStaffPermission('returns', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:sales.returns.approve|returns', '/auth/login'); csrfCheck();
     $ret = dbGet("SELECT r.*, o.code, o.user_id, o.grand_total FROM order_returns r JOIN orders o ON o.id=r.order_id WHERE r.id=?", [$p['id']]);
     if (!$ret) { flash('error','Không tìm thấy yêu cầu'); redirect('/admin/returns'); return; }
     
@@ -3588,7 +3939,7 @@ post('/admin/returns/:id/approve', function($p) {
 });
 
 post('/admin/returns/:id/reject', function($p) {
-    requireStaffPermission('returns', '/auth/login'); csrfCheck();
+    requireStaffPermission('rbac:sales.returns.approve|returns', '/auth/login'); csrfCheck();
     $ret = dbGet("SELECT r.*, o.code, o.user_id FROM order_returns r JOIN orders o ON o.id=r.order_id WHERE r.id=?", [$p['id']]);
     if (!$ret) { flash('error','Không tìm thấy yêu cầu'); redirect('/admin/returns'); return; }
     dbRun("UPDATE order_returns SET status='rejected' WHERE id=?", [$p['id']]);
@@ -3631,8 +3982,9 @@ post('/admin/orders/:id/delete', function($p) {
 
 // ── Invoice Info API ──
 get('/admin/users/:id/invoice-info', function($p) {
-    $user = requireStaffPermission('users|staff', '/auth/login');
+    $user = requireStaffPermission('rbac:customers.view|users|staff', '/auth/login');
     header('Content-Type: application/json');
+    if ((($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']) && !rbacCan((int)$user['id'], 'customers.pii.view')) { http_response_code(403); echo json_encode(['error'=>'forbidden']); exit; }
     $info = dbGet("SELECT * FROM user_invoice_info WHERE user_id=?", [$p['id']]);
     echo json_encode($info ?: ['user_id'=>$p['id'],'invoice_type'=>'personal','buyer_name'=>'','tax_code'=>'','address'=>'','province'=>'','ward'=>'','id_number'=>'','passport'=>'','email'=>'','phone'=>'','bank_name'=>'','bank_account'=>'']);
     exit;
@@ -3659,11 +4011,13 @@ post('/admin/users/:id/invoice-info', function($p) {
 
 // Admin user detail (AJAX)
 get('/admin/users/:id/detail', function($p) {
-    $user = requireStaffPermission('users|staff', '/auth/login');
+    $user = requireStaffPermission('rbac:customers.view|users|staff', '/auth/login');
     header('Content-Type: application/json');
     $u = dbGet("SELECT id,full_name,email,phone,role,status,address,avatar,created_at,notes,suspended_until FROM users WHERE id=?", [$p['id']]);
     if (!$u) { echo json_encode(['error'=>'not found']); exit; }
-    $invoice = dbGet("SELECT * FROM user_invoice_info WHERE user_id=?", [$p['id']]);
+    $canViewCustomerPii = !(($user['role'] ?? '') === 'staff' && rbacUsesDetailedMode((int)$user['id'])) || rbacCan((int)$user['id'], 'customers.pii.view');
+    $invoice = $canViewCustomerPii ? dbGet("SELECT * FROM user_invoice_info WHERE user_id=?", [$p['id']]) : null;
+    if (!$canViewCustomerPii) { $u['email']='***'; $u['phone']='***'; $u['address']='***'; }
     $orderCount = dbGet("SELECT COUNT(*) as c FROM orders WHERE user_id=?", [$p['id']])['c'] ?? 0;
     echo json_encode(['user'=>$u, 'invoice'=>$invoice, 'order_count'=>$orderCount]);
     exit;
@@ -3671,22 +4025,12 @@ get('/admin/users/:id/detail', function($p) {
 
 // ── Contact Messages Management ──
 get('/admin/contacts', function() {
-    $u = currentUser();
-    if (!$u) { redirect('/admin/login'); return; }
-    if ($u['role'] !== 'admin') {
-        $perm = dbGet("SELECT can_contacts FROM staff_permissions WHERE user_id=?", [$u['id']]);
-        if (!$perm || !$perm['can_contacts']) { http_response_code(403); echo '403 Forbidden'; return; }
-    }
+    $u = requireRbacOrLegacyStaffPermission('crm.customer_care.manage', '/admin/login');
     view('admin/contacts', ['title' => 'Quản lý liên hệ']);
 });
 
 post('/admin/contacts/:id/reply', function($p) {
-    $u = currentUser();
-    if (!$u) { redirect('/admin/login'); return; }
-    if ($u['role'] !== 'admin') {
-        $perm = dbGet("SELECT can_contacts FROM staff_permissions WHERE user_id=?", [$u['id']]);
-        if (!$perm || !$perm['can_contacts']) { http_response_code(403); echo '403 Forbidden'; return; }
-    } csrfCheck();
+    $u = requireRbacOrLegacyStaffPermission('crm.customer_care.manage', '/admin/login'); csrfCheck();
     $id = (int)$p['id'];
     $reply = trim($_POST['reply'] ?? '');
     if (empty($reply) || mb_strlen($reply) < 5 || mb_strlen($reply) > 100) {
@@ -3721,7 +4065,7 @@ post('/admin/contacts/:id/reply', function($p) {
         . '<hr style="border:none;border-top:1px solid #e0e0e0;margin:20px 0">'
         . '<p style="color:#999;font-size:12px">Nếu bạn cần thêm hỗ trợ, hãy gọi hotline: <strong>08 6585 6585</strong> hoặc trả lời email này.</p>'
         . '</div>'
-        . '<div style="background:#f8f9fa;padding:14px;text-align:center;font-size:11px;color:#999">© ' . date('Y') . ' Cooling — coolingsystem.vn</div>'
+        . '<div style="background:#f8f9fa;padding:14px;text-align:center;font-size:11px;color:#999">© ' . date('Y') . ' Cooling — coolingsystems.vn</div>'
         . '</div>';
 
     $emailSent = sendEmail($msg['email'], $subject, $html);
@@ -3735,12 +4079,7 @@ post('/admin/contacts/:id/reply', function($p) {
 });
 
 post('/admin/contacts/:id/mark-read', function($p) {
-    $u = currentUser();
-    if (!$u) { redirect('/admin/login'); return; }
-    if ($u['role'] !== 'admin') {
-        $perm = dbGet("SELECT can_contacts FROM staff_permissions WHERE user_id=?", [$u['id']]);
-        if (!$perm || !$perm['can_contacts']) { http_response_code(403); echo '403 Forbidden'; return; }
-    }
+    $u = requireRbacOrLegacyStaffPermission('crm.customer_care.manage', '/admin/login');
     $id = (int)$p['id'];
     dbRun("UPDATE contact_messages SET status='read', is_read=1 WHERE id=? AND status='new'", [$id]);
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) { header('Content-Type: application/json'); echo '{"ok":true}'; exit; }
@@ -3850,15 +4189,22 @@ post('/admin/settings/products', function() {
 
 // Admin cancel order + notify user
 post('/admin/orders/:id/cancel', function($p) {
-    requireRole(['admin','staff'], '/admin');
+    $user = requireRbacOrLegacyStaffPermission('sales.orders.cancel', '/admin');
     csrfCheck();
     $order = dbGet("SELECT o.*, u.id as uid FROM orders o LEFT JOIN users u ON u.id=o.user_id WHERE o.id=?", [$p['id']]);
     if (!$order) { flash('error','Đơn không tồn tại.'); redirect('/admin/orders'); return; }
+    if ((($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id'])) {
+        $afterPaymentOrDispatch = (($order['payment_status'] ?? '') === 'paid') || in_array(($order['delivery_status'] ?? ''), ['delivering','shipping','delivered','shipped','completed'], true);
+        if ($afterPaymentOrDispatch && !rbacCan((int)$user['id'], 'sales.orders.cancel_approved')) { flash('error','Ban khong co quyen huy don sau thanh toan hoac giao hang.'); redirect('/admin/orders'); return; }
+    }
     $reason = trim($_POST['cancel_reason'] ?? 'Admin hủy đơn');
     dbRun("UPDATE orders SET delivery_status='cancelled', updated_at=datetime('now') WHERE id=?", [$p['id']]);
     // Restore stock
     $items = dbAll("SELECT oi.* FROM order_items oi INNER JOIN sub_orders so ON so.id=oi.sub_order_id WHERE so.order_id=?", [$p['id']]);
-    foreach ($items as $it) { dbRun("UPDATE products SET stock=stock+?, sold_count=MAX(0,sold_count-?) WHERE id=?", [$it['quantity'],$it['quantity'],$it['product_id']]); }
+    foreach ($items as $it) {
+        dbRun("UPDATE products SET stock=stock+?, sold_count=MAX(0,sold_count-?) WHERE id=?", [$it['quantity'],$it['quantity'],$it['product_id']]);
+        inventoryCheckLowStockAlert((int)$it['product_id'], 'admin_refund');
+    }
     // Notify customer
     if ($order['uid']) {
         dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'order_cancelled', ?, ?, ?, datetime('now'))",

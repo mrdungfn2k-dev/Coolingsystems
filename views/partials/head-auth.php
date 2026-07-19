@@ -16,12 +16,12 @@
 <link rel="stylesheet" href="/css/mobile.css?v=1780900000">
 <?php
 $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
+$_canonicalUrl = 'https://coolingsystems.vn' . rtrim($_canonicalPath, '/');
 ?>
 <link rel="canonical" href="<?= htmlspecialchars($_canonicalUrl) ?>">
 <meta name="robots" content="noindex, nofollow">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystem.vn"},{"@type":"ListItem","position":2,"name":"<?= addslashes(e($title ?? 'Tài khoản')) ?>","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://coolingsystems.vn"},{"@type":"ListItem","position":2,"name":"<?= addslashes(e($title ?? 'Tài khoản')) ?>","item":"<?= htmlspecialchars($_canonicalUrl) ?>"}]}
 </script>
 </head>
 <body>

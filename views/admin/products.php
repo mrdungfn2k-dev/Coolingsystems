@@ -205,8 +205,6 @@ document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
   <th>Danh mục</th>
   <th>Hãng xe</th>
   <th>Thương hiệu</th>
-  <th>Giá bán (sau VAT)</th>
-  <th>Kho</th>
   <th>Trạng thái</th>
   <th style="text-align:center;min-width:220px">Thao tác</th>
 </tr></thead><tbody>
@@ -217,8 +215,6 @@ document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
   <td><?php if(!empty($p['cat_name'])): ?><span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258;border:1px solid #d3deec;white-space:nowrap"><?=e($p['cat_name'])?></span><?php else: ?><span style="color:#ccc">—</span><?php endif; ?></td>
   <td><?php if(!empty($p['brand_name'])): ?><span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258;border:1px solid #d3deec;white-space:nowrap"><?=e($p['brand_name'])?></span><?php else: ?><span style="color:#ccc">—</span><?php endif; ?></td>
   <td><?php if(!empty($p['part_brand'])): ?><span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258;border:1px solid #d3deec;white-space:nowrap"><?=e($p['part_brand'])?></span><?php else: ?><span style="color:#ccc">—</span><?php endif; ?></td>
-  <td><?=vnd($p['price'])?></td>
-  <td><?=$p['stock']?></td>
   <td><span class="badge-status <?=e($p['status'])?>"><?= $p['status']==='published' ? 'Xuất bản' : ($p['status']==='draft' ? 'Bản nháp' : e($p['status'])) ?></span></td>
   <td>
     <div style="display:flex;gap:6px;justify-content:center;align-items:center">

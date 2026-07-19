@@ -37,6 +37,7 @@ input[type="checkbox"]:focus{outline:none!important;box-shadow:none!important;}
 
 </style>
 <?php
+$canEditProductCodes = $canEditProductCodes ?? true;
 $returnTo = $returnTo ?? '/admin/products';
 $formAction = isset($product)
   ? '/admin/products/'.$product['id'].'/edit?return_to='.rawurlencode($returnTo)
@@ -75,11 +76,11 @@ $formAction = isset($product)
           <div class="form-row">
             <div class="form-group">
               <label>Mã sản phẩm (SKU)</label>
-              <input type="text" name="sku" value="<?= e($product['sku']??'') ?>" placeholder="Để trống sẽ dùng mã OEM">
+              <input type="text" name="sku" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['sku']??'') ?>" placeholder="Để trống sẽ dùng mã OEM">
             </div>
             <div class="form-group">
               <label>Mã OEM</label>
-              <input type="text" name="oem_code" value="<?= e($product['oem_code']??'') ?>" placeholder="VD: PFR6V">
+              <input type="text" name="oem_code" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code']??'') ?>" placeholder="VD: PFR6V">
             </div>
           </div>
           <div class="form-row">
@@ -351,7 +352,7 @@ function swTab(t){
               Xem trước trên Google
             </div>
             <div id="seoPreviewTitle" style="font-size:18px;color:#1a0dab;line-height:1.3;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Tiêu đề sản phẩm — Cooling</div>
-            <div style="font-size:12px;color:#006621;margin-bottom:2px">https://coolingsystem.vn/products/<span id="seoPreviewSlug">...</span></div>
+            <div style="font-size:12px;color:#006621;margin-bottom:2px">https://coolingsystems.vn/products/<span id="seoPreviewSlug">...</span></div>
             <div id="seoPreviewDesc" style="font-size:13px;color:#545454;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Mô tả sản phẩm...</div>
           </div>
 
@@ -399,44 +400,19 @@ function swTab(t){
         </div>
       </div>
 
-      <!-- GIÁ & TỒN KHO -->
-      <div class="panel">
-        <div class="panel-head"><h3> Giá & Tồn kho</h3></div>
-        <div class="panel-body">
-          <div class="form-group">
-            <label>Giá nhập <span style="color:#888;font-weight:normal;font-size:11px">(tùy chọn)</span></label>
-            <input type="text" name="cost_price" id="costPrice" inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" data-numeric-max="100000000" value="<?= $product['cost_price']??'' ?>" placeholder="VD: 400000">
-          </div>
-
-          <div class="form-group">
-            <label>Giá bán sau VAT <span class="req">*</span></label>
-            <input type="text" name="price" id="priceAfterVat" required inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" data-numeric-max="100000000" value="<?= $product['price']??'' ?>" placeholder="VD: 440000">
-          </div>
-          <div class="form-group">
-            <label>Giá gốc (để gạch ngang)</label>
-            <input type="text" name="original_price" inputmode="numeric" pattern="[0-9]*" maxlength="9" autocomplete="off" data-numeric-max="100000000" value="<?= $product['original_price']??'' ?>">
-          </div>
-          
-          <div class="form-group">
-            <label>Tồn kho hiện tại <span class="req">*</span></label>
-            <input type="number" name="stock" required min="0" max="1000" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= $product['stock']??0 ?>">
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div class="form-group">
-              <label>Tồn kho tối thiểu</label>
-              <input type="number" name="min_stock" min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999" value="<?= $product['min_stock']??5 ?>">
-            </div>
-            <div class="form-group">
-              <label>Tồn kho tối đa</label>
-              <input type="number" name="max_stock" min="0" max="1000" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= $product['max_stock']??1000 ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Bảo hành (tháng)</label>
-            <input type="number" name="warranty_months" value="<?= $product['warranty_months']??12 ?>" min="0" max="999" oninput="this.value=this.value.replace(/[^0-9]/g,'');if(parseInt(this.value)>999)this.value=999">
-          </div>
-        </div>
+      <!-- Giá và tồn kho được quản lý tập trung tại Quản lý kho. -->
+      <input type="hidden" name="_inventory_in_product_form" value="0">
+      <input type="hidden" name="price" value="<?= (int)($product['price'] ?? 0) ?>">
+      <input type="hidden" name="cost_price" value="<?= (int)($product['cost_price'] ?? 0) ?>">
+      <input type="hidden" name="original_price" value="<?= (int)($product['original_price'] ?? 0) ?>">
+      <input type="hidden" name="stock" value="<?= (int)($product['stock'] ?? 0) ?>">
+      <input type="hidden" name="min_stock" value="<?= (int)($product['min_stock'] ?? 5) ?>">
+      <input type="hidden" name="max_stock" value="<?= (int)($product['max_stock'] ?? 1000) ?>">
+      <input type="hidden" name="warranty_months" value="<?= (int)($product['warranty_months'] ?? 12) ?>">
+      <div class="panel" style="background:#f8fafc;border-style:dashed">
+        <div class="panel-body" style="font-size:12px;color:#64748b">Giá bán, giá nhập và tồn kho được cập nhật tại <a href="/admin/inventory" style="font-weight:700;color:#1a3258">Quản lý kho</a>.</div>
       </div>
+
     </div><!-- /sidebar -->
   </div><!-- /form-layout -->
 
@@ -800,11 +776,14 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
   var errors = [];
   if (!name)  errors.push('• Tên sản phẩm không được để trống');
   if (!sku)   errors.push('• Vui lòng nhập mã sản phẩm (SKU) hoặc mã OEM');
-  if (!price || parseInt(price) <= 0) errors.push('• Giá bán sau VAT phải lớn hơn 0');
-  if (stock === '' || stock === null) errors.push('• Tồn kho hiện tại không được để trống');
-  else if (!/^\d+$/.test(stock) || parseInt(stock, 10) > 1000) errors.push('• Tồn kho hiện tại chỉ được từ 0 đến 1000');
-  var maxStock = (document.querySelector('input[name="max_stock"]')?.value || '').trim();
-  if (maxStock !== '' && (!/^\d+$/.test(maxStock) || parseInt(maxStock, 10) > 1000)) errors.push('• Tồn kho tối đa chỉ được từ 0 đến 1000');
+  var inventoryManagedSeparately = document.querySelector('input[name="_inventory_in_product_form"]')?.value === '0';
+  if (!inventoryManagedSeparately) {
+    if (!price || parseInt(price) <= 0) errors.push('• Giá bán sau VAT phải lớn hơn 0');
+    if (stock === '' || stock === null) errors.push('• Tồn kho hiện tại không được để trống');
+    else if (!/^\d+$/.test(stock) || parseInt(stock, 10) > 1000) errors.push('• Tồn kho hiện tại chỉ được từ 0 đến 1000');
+    var maxStock = (document.querySelector('input[name="max_stock"]')?.value || '').trim();
+    if (maxStock !== '' && (!/^\d+$/.test(maxStock) || parseInt(maxStock, 10) > 1000)) errors.push('• Tồn kho tối đa chỉ được từ 0 đến 1000');
+  }
   if (!catVal || catVal === '') errors.push('• Vui lòng chọn danh mục sản phẩm');
 
   // Validate giá nhập (tùy chọn - nhưng nếu có thì phải là số nguyên >= 0)

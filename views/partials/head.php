@@ -16,7 +16,7 @@ $_sysConf = [];
 $_sysRows = dbAll("SELECT key, value FROM system_config");
 foreach ($_sysRows as $_sr) $_sysConf[$_sr['key']] = $_sr['value'];
 $sysHotline = $_sysConf['site_phone'] ?? $_sysConf['contact_hotline'] ?? '0947796471';
-$sysEmail = $_sysConf['contact_email'] ?? 'support@coolingsystem.vn';
+$sysEmail = $_sysConf['contact_email'] ?? 'support@coolingsystems.vn';
 $sysWhatsapp = $_sysConf['social_whatsapp'] ?? '';
 $sysTiktok = $_sysConf['social_tiktok'] ?? '';
 $sysFacebook = $_sysConf['social_facebook'] ?? '';
@@ -50,8 +50,8 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <?php
 // === CANONICAL URL ===
 $_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-$_canonicalUrl = 'https://coolingsystem.vn' . rtrim($_canonicalPath, '/');
-if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystem.vn';
+$_canonicalUrl = 'https://coolingsystems.vn' . rtrim($_canonicalPath, '/');
+if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystems.vn';
 if (!empty($seo['canonical'])) $_canonicalUrl = $seo['canonical'];
 ?>
 <link rel="canonical" href="<?= e($_canonicalUrl) ?>">
@@ -61,7 +61,7 @@ if (!empty($seo['canonical'])) $_canonicalUrl = $seo['canonical'];
 <meta property="og:title" content="<?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (($title ?? '') . ' — Cooling')) ?>">
 <meta property="og:description" content="<?= e($_metaDesc) ?>">
 <meta property="og:url" content="<?= e($_canonicalUrl) ?>">
-<meta property="og:image" content="<?= e($seo['og_image'] ?? 'https://coolingsystem.vn/img/og-default.jpg') ?>">
+<meta property="og:image" content="<?= e($seo['og_image'] ?? 'https://coolingsystems.vn/img/og-default.jpg') ?>">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 /* Global Alignment Fix */
@@ -211,9 +211,9 @@ if (!empty($_bcItems) && $_curPath !== '/'):
 </nav>
 <?php
 // Breadcrumb Schema.org JSON-LD
-$_schemaItems = [['name' => 'Trang chủ', 'url' => 'https://coolingsystem.vn']];
+$_schemaItems = [['name' => 'Trang chủ', 'url' => 'https://coolingsystems.vn']];
 foreach ($_bcItems as $i => $bc) {
-    $_schemaItems[] = ['name' => seoPlainText($bc[0]), 'url' => !empty($bc[1]) ? 'https://coolingsystem.vn'.$bc[1] : $_canonicalUrl];
+    $_schemaItems[] = ['name' => seoPlainText($bc[0]), 'url' => !empty($bc[1]) ? 'https://coolingsystems.vn'.$bc[1] : $_canonicalUrl];
 }
 $breadcrumbSchema = [
     '@context' => 'https://schema.org',

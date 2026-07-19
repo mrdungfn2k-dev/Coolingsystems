@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/inventory-alerts.php';
 
 // Customer notifications page
 get('/customer/notifications', function() {
@@ -63,7 +64,7 @@ post('/customer/orders/:id/return', function($p) {
     if (!empty($_FILES['return_image']['tmp_name'])) {
         $ext = strtolower(pathinfo($_FILES['return_image']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp'])) {
-            $dest = '/var/lib/cooling/uploads/returns/'.uniqid().'.'.$ext;
+            $dest = '/var/lib/coolingsystems/uploads/returns/'.uniqid().'.'.$ext;
             if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0777, true);
             if (move_uploaded_file($_FILES['return_image']['tmp_name'], $dest)) {
                 $imagePath = '/uploads/returns/'.basename($dest);
@@ -74,7 +75,7 @@ post('/customer/orders/:id/return', function($p) {
     if (!empty($_FILES['return_video']['tmp_name'])) {
         $vext = strtolower(pathinfo($_FILES['return_video']['name'], PATHINFO_EXTENSION));
         if (in_array($vext, ['mp4','webm','mov'])) {
-            $vdest = '/var/lib/cooling/uploads/returns/'.uniqid().'.'.$vext;
+            $vdest = '/var/lib/coolingsystems/uploads/returns/'.uniqid().'.'.$vext;
             if (!is_dir(dirname($vdest))) mkdir(dirname($vdest), 0777, true);
             if (move_uploaded_file($_FILES['return_video']['tmp_name'], $vdest)) {
                 $videoPath = '/uploads/returns/'.basename($vdest);
@@ -190,7 +191,7 @@ post('/customer/profile', function() {
     if ($avatarFile && $avatarFile['error'] === UPLOAD_ERR_OK) {
         $ext = strtolower(pathinfo($avatarFile['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp'])) {
-            $dest = '/var/lib/cooling/uploads/avatars/' . uniqid('av_') . '.' . $ext;
+            $dest = '/var/lib/coolingsystems/uploads/avatars/' . uniqid('av_') . '.' . $ext;
             if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0777, true);
             if (move_uploaded_file($avatarFile['tmp_name'], $dest)) { $newAvatar = basename($dest); }
         }
@@ -814,6 +815,7 @@ post('/customer/checkout', function() {
                 VALUES (?,?,?,?,?,?)", [$soId, $pi['product_id'], $pi['name'], $pi['price'], $pi['quantity'], $pi['price']*$pi['quantity']]);
             // Reduce stock
             dbRun("UPDATE products SET stock=MAX(0, stock-?) WHERE id=?", [$pi['quantity'], $pi['product_id']]);
+            inventoryCheckLowStockAlert((int)$pi['product_id'], 'customer_order');
         }
     }
 
@@ -945,6 +947,7 @@ post('/customer/orders/:id/cancel', function($p) {
     foreach ($orderItems as $oi) {
         if ($oi['product_id']) {
             dbRun("UPDATE products SET stock = stock + ? WHERE id=?", [$oi['quantity'], $oi['product_id']]);
+            inventoryCheckLowStockAlert((int)$oi['product_id'], 'customer_order_cancel');
         }
     }
     // Cancel images (optional, max 5)
@@ -1130,7 +1133,7 @@ post('/customer/chat/send', function() {
     $msg = trim($_POST['message'] ?? '');
     $imagePath = '';
     if (!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $dir = '/var/lib/cooling/uploads/chat/';
+        $dir = '/var/lib/coolingsystems/uploads/chat/';
         if (!is_dir($dir)) mkdir($dir, 0755, true);
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $fname = uniqid('chat_') . '.' . $ext;

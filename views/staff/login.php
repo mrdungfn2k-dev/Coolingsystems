@@ -39,7 +39,7 @@
         <?= csrfField() ?>
         <div class="form-group">
             <label>Email đăng nhập</label>
-            <input type="email" name="email" required autofocus placeholder="nhanvien@coolingsystem.vn">
+            <input type="email" name="email" required autofocus placeholder="nhanvien@coolingsystems.vn">
         </div>
         <div class="form-group">
             <label>Mật khẩu</label>

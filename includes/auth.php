@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/rbac.php';
 
 function currentUser(): ?array {
     if (!isset($_SESSION['user_id'])) return null;
@@ -52,10 +53,22 @@ function requireStaffPermission(string $permission, string $redirect = '/auth/lo
             [$user['id']]
         );
         $perms = []; foreach (($roleAssignment ?: []) as $rr) { $a = json_decode($rr['permissions'] ?? '[]', true); if (is_array($a)) $perms = array_merge($perms, $a); }
-        foreach (explode('|', $permission) as $__pp) { if (in_array($__pp, $perms)) return $user; }
+        foreach (explode('|', $permission) as $__pp) {
+            if (str_starts_with($__pp, 'rbac:') && rbacHasCapability((int)$user['id'], substr($__pp, 5))) return $user;
+            if (in_array($__pp, $perms, true)) return $user;
+        }
     }
     header('Location: ' . $redirect);
     exit;
+}
+
+function requireRbacOrLegacyStaffPermission(string $capability, string $redirect = '/auth/login'): array {
+    $user = requireLogin($redirect);
+    if (($user['role'] ?? '') === 'admin') return $user;
+    if (($user['role'] ?? '') === 'staff') {
+        if (!rbacUsesDetailedMode((int)$user['id']) || rbacHasCapability((int)$user['id'], $capability)) return $user;
+    }
+    header('Location: ' . $redirect); exit;
 }
 
 // True if this user has at least one staff role assignment (i.e. is an ACTIVE assigned staff).

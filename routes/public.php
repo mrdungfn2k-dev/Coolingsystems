@@ -209,7 +209,7 @@ get('/products', function() {
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     $seo = [];
     if ($page > 1 && count($_GET) === 1 && array_key_exists('page', $_GET)) {
-        $seo['canonical'] = 'https://coolingsystem.vn/products?page=' . $page;
+        $seo['canonical'] = 'https://coolingsystems.vn/products?page=' . $page;
     }
     view('public/products', compact('products','total','page','totalPages','limit','categories','brands','activeVehicle','productBrands','seo'));
 });
@@ -401,7 +401,7 @@ get('/sitemap.xml', function() {
         '/policies/dieu-khoan-bao-mat',
     ];
     foreach ($statics as $s) {
-        echo '<url><loc>https://coolingsystem.vn'.e($s).'</loc>';
+        echo '<url><loc>https://coolingsystems.vn'.e($s).'</loc>';
         echo '<changefreq>weekly</changefreq><priority>'.($s==='/'?'1.0':'0.8').'</priority>';
         echo '</url>';
     }
@@ -414,7 +414,7 @@ get('/sitemap.xml', function() {
         echo '<changefreq>weekly</changefreq><priority>0.9</priority>';
         if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $mod)) echo '<lastmod>'.$mod.'</lastmod>';
         if (!empty($p['main_image'])) {
-            $imageUrl = 'https://coolingsystem.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($p['main_image']));
+            $imageUrl = 'https://coolingsystems.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($p['main_image']));
             echo '<image:image><image:loc>'.e($imageUrl).'</image:loc><image:title>'.e(seoPlainText($p['name'])).'</image:title></image:image>';
         }
         echo '</url>';
