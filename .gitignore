@@ -31,3 +31,8 @@ test_*.php
 # IDE
 .idea/
 .vscode/
+
+# Sync/deploy scripts (local only)
+sync_vps_to_git.py
+__pycache__/
+*.pyc
