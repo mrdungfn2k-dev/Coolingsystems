@@ -376,6 +376,7 @@ get('/promotions', function() {
 
 // ── Sitemap XML ──────────────────────────────────────────────────────────────
 get('/sitemap.xml', function() {
+    http_response_code(200);
     header('Content-Type: application/xml; charset=UTF-8');
     $products = dbAll("SELECT p.id, p.slug, p.name, p.updated_at,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC, sort_order ASC LIMIT 1) AS main_image
