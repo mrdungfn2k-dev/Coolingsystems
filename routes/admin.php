@@ -2607,7 +2607,7 @@ post('/admin/products/new', function() {
     if ($origRaw !== '') {
         if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
             $valErrors[] = 'Giá gốc phải là số nguyên không âm';
-        } else if (intval($origRaw) < $price) {
+        } else if (intval($origRaw) > 0 && intval($origRaw) < $price) {
             $valErrors[] = 'Giá gốc không được nhỏ hơn Giá bán sau VAT';
         }
     }
@@ -2769,7 +2769,7 @@ post('/admin/products/:id/edit', function($p) {
     if ($origRaw !== '') {
         if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
             $editErrors[] = 'Giá gốc phải là số nguyên không âm';
-        } else if (intval($origRaw) < $price) {
+        } else if (intval($origRaw) > 0 && intval($origRaw) < $price) {
             $editErrors[] = 'Giá gốc không được nhỏ hơn Giá bán sau VAT';
         }
     }
