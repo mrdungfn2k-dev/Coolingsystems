@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /partner/dashboard
@@ -10,4 +10,4 @@ Disallow: /api/
 
 Crawl-delay: 1
 
-Sitemap: https://coolingsystem.vn/sitemap.xml
+Sitemap: https://coolingsystems.vn/sitemap.xml
