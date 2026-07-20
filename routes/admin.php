@@ -2533,7 +2533,7 @@ post('/admin/inventory/:id/update', function($p) {
     }
     if($values['stock']>1000||$values['min_stock']>1000||$values['max_stock']>1000){flash('error','Tồn kho chỉ được từ 0 đến 1000.');redirect('/admin/inventory');return;}
     if($values['min_stock']>$values['max_stock']){flash('error','Tồn tối thiểu không được lớn hơn tồn tối đa.');redirect('/admin/inventory');return;}
-    if($values['original_price']>0&&$values['original_price']<=$values['price']){flash('error','Giá gốc phải lớn hơn giá bán khi được nhập.');redirect('/admin/inventory');return;}
+    if($values['original_price']>0&&$values['original_price']<$values['price']){flash('error','Giá gốc không được nhỏ hơn giá bán khi được nhập.');redirect('/admin/inventory');return;}
     dbRun("UPDATE products SET cost_price=?,price=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?",[$values['cost_price'],$values['price'],$values['original_price']?:null,$values['stock'],$values['min_stock'],$values['max_stock'],$values['warranty_months'],$values['cost_price']*$values['stock'],$p['id']]);
     inventoryCheckLowStockAlert((int)$p['id'], 'inventory_update');
     $before=['cost_price'=>(int)$product['cost_price'],'price'=>(int)$product['price'],'original_price'=>(int)$product['original_price'],'stock'=>(int)$product['stock'],'min_stock'=>(int)$product['min_stock'],'max_stock'=>(int)$product['max_stock'],'warranty_months'=>(int)$product['warranty_months']];
@@ -2607,8 +2607,8 @@ post('/admin/products/new', function() {
     if ($origRaw !== '') {
         if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
             $valErrors[] = 'Giá gốc phải là số nguyên không âm';
-        } else if (intval($origRaw) <= $price) {
-            $valErrors[] = 'Giá gốc phải cao hơn Giá bán sau VAT';
+        } else if (intval($origRaw) < $price) {
+            $valErrors[] = 'Giá gốc không được nhỏ hơn Giá bán sau VAT';
         }
     }
     if (!empty($valErrors)) {
@@ -2769,8 +2769,8 @@ post('/admin/products/:id/edit', function($p) {
     if ($origRaw !== '') {
         if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
             $editErrors[] = 'Giá gốc phải là số nguyên không âm';
-        } else if (intval($origRaw) <= $price) {
-            $editErrors[] = 'Giá gốc phải cao hơn Giá bán sau VAT';
+        } else if (intval($origRaw) < $price) {
+            $editErrors[] = 'Giá gốc không được nhỏ hơn Giá bán sau VAT';
         }
     }
     if (!empty($editErrors)) {
