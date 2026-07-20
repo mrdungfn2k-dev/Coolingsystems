@@ -40,7 +40,7 @@ $canSaveInventory = $canEditCost || $canEditPrice || $canEditStock || $canEditTh
     <td class="num"><input form="<?= $formId ?>" name="min_stock" inputmode="numeric" pattern="[0-9]*" min="0" max="1000" <?= $canEditThresholds ? '' : 'readonly' ?> value="<?= (int)$product['min_stock'] ?>"></td>
     <td class="num"><input form="<?= $formId ?>" name="max_stock" inputmode="numeric" pattern="[0-9]*" min="0" max="1000" <?= $canEditThresholds ? '' : 'readonly' ?> value="<?= (int)$product['max_stock'] ?>"></td>
     <td class="num"><input form="<?= $formId ?>" name="warranty_months" inputmode="numeric" pattern="[0-9]*" min="0" max="999" <?= $canEditWarranty ? '' : 'readonly' ?> value="<?= (int)$product['warranty_months'] ?>"></td>
-<?php if($canSaveInventory): ?>    <td><button form="<?= $formId ?>" class="save" type="submit">Lưu</button></td><?php endif; ?>
+<?php if($canSaveInventory): ?>    <td><button form="<?= $formId ?>" class="save" type="submit">Lưu</button></td><?php endif; ?>    <td><a href="/admin/inventory/<?= (int)$product['id'] ?>/ledger" style="font-size:11px;color:#1a3258;text-decoration:none;white-space:nowrap" title="Xem thẻ kho">📋 Thẻ kho</a></td>
   </tr>
 <?php endforeach; if(!$products): ?><tr><td colspan="<?= $canViewCost ? 11 : 10 ?>" style="text-align:center;padding:30px;color:#718096">Không tìm thấy sản phẩm phù hợp.</td></tr><?php endif; ?>
 </tbody></table></div>

@@ -35,7 +35,12 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <?php if($sb('serials')||$sb('products')||$sb('inventory')||$sb('products_create')||$sb('categories')||$sb('brand_models')||$sb('brands')): ?>
       <div class="sb-section">SẢN PHẨM<span class="sb-sec-desc">Sản phẩm · Danh mục · Thương hiệu · Hãng xe</span></div>
       <?php if($sb('products')): ?><a href="/admin/products" class="<?= (startsWith(currentPath(),'/admin/products') && currentPath()!=='/admin/products/new')?'active':'' ?>"><?= sbIcon('box') ?>Quản lý sản phẩm</a>
-      <a href="/admin/inventory" class="<?= startsWith(currentPath(),'/admin/inventory')?'active':'' ?>"><?= sbIcon('list') ?>Quản lý kho</a>
+      <a href="/admin/inventory" class="<?= startsWith(currentPath(),'/admin/inventory') && !startsWith(currentPath(),'/admin/inventory/adjust')?'active':'' ?>">
+        <?= sbIcon('list') ?>Quản lý kho</a>
+      <a href="/admin/inventory/adjust" class="<?= startsWith(currentPath(),'/admin/inventory/adjust')?'active':'' ?>">
+        <?= sbIcon('plus') ?>Điều chỉnh tồn kho</a>
+      <a href="/admin/stocktake" class="<?= startsWith(currentPath(),'/admin/stocktake')?'active':'' ?>">
+        <?= sbIcon('list') ?>Kiểm kho</a>
       <a href="/admin/products/new" class="<?= currentPath()==='/admin/products/new'?'active':'' ?>"><?= sbIcon('plus') ?>+ Đăng SP mới</a><?php endif; ?>
       <?php if($sb('serials')): ?><a href="/admin/serials" class="<?= startsWith(currentPath(),'/admin/serials')?'active':'' ?>"><?= sbIcon('list') ?>Serial & Lô hàng</a><?php endif; ?>
       <?php if($sb('categories')): ?><a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>"><?= sbIcon('folder') ?>Danh mục</a><?php endif; ?>

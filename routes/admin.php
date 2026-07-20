@@ -2548,7 +2548,239 @@ post('/admin/inventory/:id/update', function($p) {
     redirect('/admin/inventory');
 });
 
+// ─── GIAI ĐOẠN B: KHO NÂNG CAO ───────────────────────────────────────────────
+
+// B1: Thẻ kho / Stock Ledger
+get('/admin/inventory/:id/ledger', function($p) {
+    $u = requireStaffPermission('rbac:inventory.view|products', '/admin/login');
+    $product = dbGet('SELECT * FROM products WHERE id=?', [(int)$p['id']]);
+    if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/inventory'); }
+    $dir      = in_array($_GET['dir']??'', ['in','out'], true) ? $_GET['dir'] : '';
+    $refType  = trim(preg_replace('/[^a-z_]/', '', $_GET['ref_type']??''));
+    $fromDate = trim($_GET['from']??'');
+    $toDate   = trim($_GET['to']??'');
+    $page     = max(1, (int)($_GET['page']??1));
+    $perPage  = 50;
+    $where    = 'WHERE m.product_id=?'; $params = [(int)$p['id']];
+    if ($dir)      { $where .= ' AND m.direction=?'; $params[] = $dir; }
+    if ($refType)  { $where .= ' AND m.reference_type=?'; $params[] = $refType; }
+    if ($fromDate) { $where .= " AND m.created_at >= ?"; $params[] = $fromDate.' 00:00:00'; }
+    if ($toDate)   { $where .= " AND m.created_at <= ?"; $params[] = $toDate.' 23:59:59'; }
+    $total = (int)(dbGet("SELECT COUNT(*) as c FROM inventory_stock_movements m $where", $params)['c']??0);
+    $totalPages = max(1,(int)ceil($total/$perPage));
+    $page = min($page, $totalPages);
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $movements = dbAll("SELECT m.*, u.full_name AS creator_name FROM inventory_stock_movements m LEFT JOIN users u ON u.id=m.created_by $where ORDER BY m.id DESC LIMIT ? OFFSET ?", $listParams);
+    // Tính running_total (chạy tổng ngược về quá khứ — chú ý: do DESC nên ta tính từ tồn hiện tại)
+    $curStock = (int)$product['stock'];
+    $allMvts = dbAll("SELECT id,direction,quantity FROM inventory_stock_movements WHERE product_id=? ORDER BY id DESC", [(int)$p['id']]);
+    $runMap = []; $run = $curStock;
+    foreach ($allMvts as $mv) { $runMap[$mv['id']] = $run; $run += ($mv['direction']==='in'?-1:1)*(int)$mv['quantity']; }
+    foreach ($movements as &$mv) { $mv['running_total'] = $runMap[$mv['id']] ?? 0; } unset($mv);
+    $stats = dbGet("SELECT COALESCE(SUM(CASE WHEN direction='in' AND created_at>=date('now','-30 days','localtime') THEN quantity ELSE 0 END),0) AS in_30d, COALESCE(SUM(CASE WHEN direction='out' AND created_at>=date('now','-30 days','localtime') THEN quantity ELSE 0 END),0) AS out_30d FROM inventory_stock_movements WHERE product_id=?", [(int)$p['id']]);
+    view('admin/inventory-ledger', ['title'=>'Thẻ kho — '.$product['name'],'userRole'=>'admin','product'=>$product,'movements'=>$movements,'totalMovements'=>$total,'totalPages'=>$totalPages,'page'=>$page,'dir'=>$dir,'refType'=>$refType,'fromDate'=>$fromDate,'toDate'=>$toDate,'stats'=>$stats]);
+});
+
+// B2a: Tìm sản phẩm (API JSON cho autocomplete điều chỉnh tồn)
+get('/admin/inventory/search-product', function() {
+    requireStaffPermission('rbac:inventory.view|products', '/admin/login');
+    $q = trim($_GET['q']??'');
+    if (mb_strlen($q) < 2) { header('Content-Type: application/json'); echo '[]'; exit; }
+    $like = '%'.$q.'%';
+    $rows = dbAll("SELECT id,name,sku,oem_code,stock,min_stock,max_stock FROM products WHERE (name LIKE ? OR sku LIKE ? OR oem_code LIKE ?) AND status='published' ORDER BY name LIMIT 20", [$like,$like,$like]);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($rows, JSON_UNESCAPED_UNICODE); exit;
+});
+
+// B2b: Hiển thị form điều chỉnh tồn
+get('/admin/inventory/adjust', function() {
+    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
+    $history = dbAll("SELECT m.*,p.name AS product_name,p.sku,u.full_name AS creator_name FROM inventory_stock_movements m INNER JOIN products p ON p.id=m.product_id LEFT JOIN users u ON u.id=m.created_by WHERE m.reference_type='manual_adjust' ORDER BY m.id DESC LIMIT 50");
+    view('admin/inventory-adjust', ['title'=>'Điều chỉnh tồn kho','userRole'=>'admin','history'=>$history]);
+});
+
+// B2c: Xử lý điều chỉnh tồn thủ công
+post('/admin/inventory/adjust', function() {
+    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
+    csrfCheck();
+    $pid     = (int)($_POST['product_id']??0);
+    $dir     = in_array($_POST['direction']??'', ['in','out','set'], true) ? $_POST['direction'] : '';
+    $qty     = (int)preg_replace('/\D/','',(string)($_POST['quantity']??''));
+    $reason  = trim($_POST['reason']??'');
+    if (!$pid || !$dir || $qty < 1 || $qty > 99999 || mb_strlen($reason) < 5 || mb_strlen($reason) > 500) {
+        flash('error','Dữ liệu điều chỉnh không hợp lệ (cần chọn sản phẩm, loại, số lượng ≥1, lý do 5-500 ký tự).');
+        redirect('/admin/inventory/adjust'); return;
+    }
+    $pdo = db(); try {
+        $pdo->beginTransaction();
+        $product = dbGet('SELECT * FROM products WHERE id=?', [$pid]);
+        if (!$product) throw new RuntimeException('notfound');
+        $before = (int)$product['stock'];
+        if ($dir === 'in') {
+            $after = $before + $qty;
+            dbRun("UPDATE products SET stock=stock+?,updated_at=datetime('now','localtime') WHERE id=?", [$qty, $pid]);
+            $mvDir = 'in';
+        } elseif ($dir === 'out') {
+            $after = max(0, $before - $qty);
+            dbRun("UPDATE products SET stock=MAX(0,stock-?),updated_at=datetime('now','localtime') WHERE id=?", [$qty, $pid]);
+            $mvDir = 'out';
+        } else { // set
+            $after = $qty;
+            dbRun("UPDATE products SET stock=?,updated_at=datetime('now','localtime') WHERE id=?", [$qty, $pid]);
+            $mvDir = $qty >= $before ? 'in' : 'out';
+            $qty   = abs($after - $before);
+        }
+        if ($qty > 0) {
+            dbInsert("INSERT INTO inventory_stock_movements (product_id,direction,quantity,reference_type,note,created_by) VALUES (?,?,?,'manual_adjust',?,?)", [$pid, $mvDir, $qty, $reason, $u['id']]);
+        }
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$u['id'],$u['role']??'admin','manual_stock_adjust','product',$pid, json_encode(['before'=>$before,'after'=>$after,'direction'=>$dir,'qty'=>(int)($_POST['quantity']??0),'reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+        $pdo->commit();
+        inventoryCheckLowStockAlert($pid, 'manual_adjust');
+        flash('success','Đã điều chỉnh tồn kho: '.$product['name'].' ('.$before.' → '.$after.').');
+    } catch (Throwable $e) { if($pdo->inTransaction())$pdo->rollBack(); flash('error','Lỗi khi điều chỉnh: '.$e->getMessage()); }
+    redirect('/admin/inventory/adjust');
+});
+
+// B3a: Danh sách phiếu kiểm kho
+get('/admin/stocktake', function() {
+    $u = requireStaffPermission('rbac:inventory.view|products', '/admin/login');
+    $canCreate = hasPermission($u,'inventory.adjust') || hasPermission($u,'tax_config');
+    $stocktakes = dbAll("SELECT st.*,u.full_name AS creator_name,COUNT(si.id) AS item_count,COALESCE(SUM(CASE WHEN si.actual_qty IS NOT NULL THEN si.actual_qty-si.system_qty ELSE 0 END),0) AS total_diff FROM stocktakes st LEFT JOIN users u ON u.id=st.created_by LEFT JOIN stocktake_items si ON si.stocktake_id=st.id GROUP BY st.id ORDER BY st.created_at DESC LIMIT 100");
+    view('admin/stocktake-list', ['title'=>'Kiểm kho','userRole'=>'admin','stocktakes'=>$stocktakes,'canCreate'=>$canCreate]);
+});
+
+// B3b: Form tạo phiếu kiểm kho mới
+get('/admin/stocktake/new', function() {
+    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
+    $categories   = dbAll('SELECT id,name FROM categories ORDER BY sort_order,name');
+    $totalProducts = (int)(dbGet("SELECT COUNT(*) as c FROM products WHERE status='published'")['c']??0);
+    $lowStockCount = (int)(dbGet("SELECT COUNT(*) as c FROM products WHERE status='published' AND min_stock>0 AND stock<=min_stock")['c']??0);
+    view('admin/stocktake-new', ['title'=>'Tạo phiếu kiểm kho','userRole'=>'admin','categories'=>$categories,'totalProducts'=>$totalProducts,'lowStockCount'=>$lowStockCount]);
+});
+
+// B3c: Tạo phiếu kiểm kho
+post('/admin/stocktake', function() {
+    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
+    csrfCheck();
+    $title  = trim($_POST['title']??'');
+    $scope  = in_array($_POST['scope']??'all', ['all','category','low_stock'], true) ? $_POST['scope'] : 'all';
+    $note   = trim($_POST['note']??'');
+    $catIds = array_map('intval', (array)($_POST['category_id']??[]));
+    if (mb_strlen($title)<3||mb_strlen($title)>200||mb_strlen($note)>500) { flash('error','Tiêu đề 3-200 ký tự, ghi chú tối đa 500.'); redirect('/admin/stocktake/new'); return; }
+    dbRun("CREATE TABLE IF NOT EXISTS stocktakes (id INTEGER PRIMARY KEY AUTOINCREMENT,code TEXT NOT NULL UNIQUE,title TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'counting',note TEXT,rejection_reason TEXT,created_by INTEGER,approved_by INTEGER,approved_at TEXT,created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')))");
+    dbRun("CREATE TABLE IF NOT EXISTS stocktake_items (id INTEGER PRIMARY KEY AUTOINCREMENT,stocktake_id INTEGER NOT NULL,product_id INTEGER NOT NULL,system_qty INTEGER NOT NULL,actual_qty INTEGER,note TEXT,FOREIGN KEY(stocktake_id) REFERENCES stocktakes(id) ON DELETE CASCADE)");
+    $pdo = db(); try {
+        $pdo->beginTransaction();
+        $code = 'KK-'.date('Ymd-His').'-'.random_int(100,999);
+        $stId = dbInsert("INSERT INTO stocktakes (code,title,status,note,created_by) VALUES (?,?,'counting',?,?)", [$code,$title,$note?:null,$u['id']]);
+        // Lấy sản phẩm theo phạm vi
+        if ($scope === 'all') $products = dbAll("SELECT id,stock FROM products WHERE status='published' ORDER BY name");
+        elseif ($scope === 'low_stock') $products = dbAll("SELECT id,stock FROM products WHERE status='published' AND min_stock>0 AND stock<=min_stock ORDER BY name");
+        elseif ($scope === 'category' && $catIds) {
+            $ph = implode(',',array_fill(0,count($catIds),'?'));
+            $products = dbAll("SELECT id,stock FROM products WHERE status='published' AND category_id IN ($ph) ORDER BY name", $catIds);
+        } else $products = [];
+        if (!$products) { $pdo->rollBack(); flash('error','Không có sản phẩm nào phù hợp với phạm vi đã chọn.'); redirect('/admin/stocktake/new'); return; }
+        foreach ($products as $pr) dbInsert("INSERT INTO stocktake_items (stocktake_id,product_id,system_qty) VALUES (?,?,?)", [$stId,$pr['id'],(int)$pr['stock']]);
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$u['id'],$u['role']??'admin','stocktake_created','stocktake',$stId, json_encode(['code'=>$code,'scope'=>$scope,'items'=>count($products)],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+        $pdo->commit();
+        flash('success','Đã tạo phiếu kiểm kho '.$code.' với '.count($products).' sản phẩm.');
+        redirect('/admin/stocktake/'.$stId);
+    } catch(Throwable $e) { if($pdo->inTransaction())$pdo->rollBack(); flash('error','Lỗi tạo phiếu: '.$e->getMessage()); redirect('/admin/stocktake/new'); }
+});
+
+// B3d: Chi tiết / đếm hàng
+get('/admin/stocktake/:id', function($p) {
+    $u = requireStaffPermission('rbac:inventory.view|products', '/admin/login');
+    $canApprove = hasPermission($u,'inventory.adjust') || hasPermission($u,'tax_config');
+    dbRun("CREATE TABLE IF NOT EXISTS stocktakes (id INTEGER PRIMARY KEY AUTOINCREMENT,code TEXT NOT NULL UNIQUE,title TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'counting',note TEXT,rejection_reason TEXT,created_by INTEGER,approved_by INTEGER,approved_at TEXT,created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')))");
+    dbRun("CREATE TABLE IF NOT EXISTS stocktake_items (id INTEGER PRIMARY KEY AUTOINCREMENT,stocktake_id INTEGER NOT NULL,product_id INTEGER NOT NULL,system_qty INTEGER NOT NULL,actual_qty INTEGER,note TEXT,FOREIGN KEY(stocktake_id) REFERENCES stocktakes(id) ON DELETE CASCADE)");
+    $stocktake = dbGet('SELECT * FROM stocktakes WHERE id=?', [(int)$p['id']]);
+    if (!$stocktake) { flash('error','Không tìm thấy phiếu kiểm kho.'); redirect('/admin/stocktake'); }
+    $items = dbAll("SELECT si.*,p.name AS product_name,p.sku FROM stocktake_items si INNER JOIN products p ON p.id=si.product_id WHERE si.stocktake_id=? ORDER BY p.name", [(int)$p['id']]);
+    $withDiff = array_filter($items, fn($i) => $i['actual_qty'] !== null && (int)$i['actual_qty'] !== (int)$i['system_qty']);
+    view('admin/stocktake-detail', ['title'=>'Kiểm kho '.$stocktake['code'],'userRole'=>'admin','stocktake'=>$stocktake,'items'=>$items,'canApprove'=>$canApprove,'withDiff'=>$withDiff]);
+});
+
+// B3e: Lưu tiến độ đếm hàng
+post('/admin/stocktake/:id/save-counts', function($p) {
+    $u = requireStaffPermission('rbac:inventory.view|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+    dbRun("CREATE TABLE IF NOT EXISTS stocktakes (id INTEGER PRIMARY KEY AUTOINCREMENT,code TEXT NOT NULL UNIQUE,title TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'counting',note TEXT,rejection_reason TEXT,created_by INTEGER,approved_by INTEGER,approved_at TEXT,created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')))");
+    dbRun("CREATE TABLE IF NOT EXISTS stocktake_items (id INTEGER PRIMARY KEY AUTOINCREMENT,stocktake_id INTEGER NOT NULL,product_id INTEGER NOT NULL,system_qty INTEGER NOT NULL,actual_qty INTEGER,note TEXT,FOREIGN KEY(stocktake_id) REFERENCES stocktakes(id) ON DELETE CASCADE)");
+    $st = dbGet("SELECT * FROM stocktakes WHERE id=? AND status IN ('draft','counting')", [$id]);
+    if (!$st) { flash('error','Phiếu không tồn tại hoặc không ở trạng thái có thể chỉnh sửa.'); redirect('/admin/stocktake'); return; }
+    $actual = $_POST['actual']??[]; $notes = $_POST['note']??[];
+    foreach ($actual as $itemId => $raw) {
+        $itemId = (int)$itemId; $v = trim((string)$raw);
+        $n = trim((string)($notes[$itemId]??''));
+        if ($v === '') { dbRun("UPDATE stocktake_items SET actual_qty=NULL,note=? WHERE id=? AND stocktake_id=?", [$n?:null,$itemId,$id]); continue; }
+        $qty = (int)preg_replace('/\D/','', $v);
+        if ($qty < 0 || $qty > 999999) continue;
+        dbRun("UPDATE stocktake_items SET actual_qty=?,note=? WHERE id=? AND stocktake_id=?", [$qty,$n?:null,$itemId,$id]);
+    }
+    $action = $_POST['action']??'save';
+    if ($action === 'submit') {
+        // Kiểm tra đã đếm hết chưa
+        $uncounted = (int)(dbGet("SELECT COUNT(*) as c FROM stocktake_items WHERE stocktake_id=? AND actual_qty IS NULL",[$id])['c']??0);
+        if ($uncounted > 0) { flash('error',"Còn $uncounted sản phẩm chưa được đếm. Vui lòng điền đầy đủ trước khi gửi duyệt."); redirect('/admin/stocktake/'.$id); return; }
+        dbRun("UPDATE stocktakes SET status='pending_approval' WHERE id=?", [$id]);
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$u['id'],$u['role']??'admin','stocktake_submitted','stocktake',$id,'{}', $_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+        flash('success','Đã gửi phiếu kiểm kho để duyệt.');
+    } else {
+        dbRun("UPDATE stocktakes SET status='counting' WHERE id=? AND status='draft'", [$id]);
+        flash('success','Đã lưu tiến độ đếm hàng.');
+    }
+    redirect('/admin/stocktake/'.$id);
+});
+
+// B3f: Duyệt kiểm kho — cập nhật tồn kho theo kết quả thực tế
+post('/admin/stocktake/:id/approve', function($p) {
+    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+    $pdo = db(); try {
+        $pdo->beginTransaction();
+        $st = dbGet("SELECT * FROM stocktakes WHERE id=? AND status='pending_approval'", [$id]);
+        if (!$st) throw new RuntimeException('status');
+        $items = dbAll("SELECT * FROM stocktake_items WHERE stocktake_id=? AND actual_qty IS NOT NULL", [$id]);
+        $updated = 0;
+        foreach ($items as $item) {
+            $diff = (int)$item['actual_qty'] - (int)$item['system_qty'];
+            if ($diff === 0) continue;
+            $dir = $diff > 0 ? 'in' : 'out';
+            $qty = abs($diff);
+            dbRun("UPDATE products SET stock=?,updated_at=datetime('now','localtime') WHERE id=?", [(int)$item['actual_qty'], $item['product_id']]);
+            dbInsert("INSERT INTO inventory_stock_movements (product_id,direction,quantity,reference_type,reference_id,note,created_by) VALUES (?,?,?,'stocktake',?,?,?)", [$item['product_id'],$dir,$qty,$id,'Kiểm kho: '.$st['code'],$u['id']]);
+            $updated++;
+        }
+        dbRun("UPDATE stocktakes SET status='approved',approved_by=?,approved_at=datetime('now','localtime') WHERE id=?", [$u['id'],$id]);
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$u['id'],$u['role']??'admin','stocktake_approved','stocktake',$id, json_encode(['code'=>$st['code'],'adjusted_products'=>$updated],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+        $pdo->commit();
+        flash('success','Đã duyệt phiếu '.$st['code'].' — cập nhật tồn kho cho '.$updated.' sản phẩm có chênh lệch.');
+    } catch(Throwable $e) { if($pdo->inTransaction())$pdo->rollBack(); flash('error',$e->getMessage()==='status'?'Phiếu không ở trạng thái chờ duyệt.':'Lỗi duyệt: '.$e->getMessage()); }
+    redirect('/admin/stocktake/'.$id);
+});
+
+// B3g: Từ chối kiểm kho
+post('/admin/stocktake/:id/reject', function($p) {
+    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id']; $reason = trim($_POST['rejection_reason']??'');
+    if (mb_strlen($reason)<5||mb_strlen($reason)>500) { flash('error','Lý do từ chối phải từ 5-500 ký tự.'); redirect('/admin/stocktake/'.$id); return; }
+    $st = dbGet("SELECT * FROM stocktakes WHERE id=? AND status='pending_approval'", [$id]);
+    if (!$st) { flash('error','Phiếu không ở trạng thái chờ duyệt.'); redirect('/admin/stocktake'); return; }
+    dbRun("UPDATE stocktakes SET status='rejected',approved_by=?,approved_at=datetime('now','localtime'),rejection_reason=? WHERE id=?", [$u['id'],$reason,$id]);
+    dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$u['id'],$u['role']??'admin','stocktake_rejected','stocktake',$id, json_encode(['code'=>$st['code'],'reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
+    flash('success','Đã từ chối phiếu kiểm kho '.$st['code'].'.');
+    redirect('/admin/stocktake/'.$id);
+});
+
+// ─── KẾT THÚC GIAI ĐOẠN B ────────────────────────────────────────────────────
+
 // ── PRODUCTS (Admin posts directly) ────────────────────────────────────────
+
 get('/admin/products/new', function() {
     $user = requireStaffPermission('rbac:catalog.products.create|products', '/admin/login');
     if ((($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']) && !rbacCan((int)$user['id'], 'catalog.codes.manage')) { flash('error','Ban khong co quyen tao ma SKU/OEM.'); redirect('/admin/products'); }
