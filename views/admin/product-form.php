@@ -1465,30 +1465,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!hasContent) return;
 
-    // Tạo Banner thông báo khôi phục ở phía trên form
-    var banner = document.createElement('div');
-    banner.style.cssText = 'background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:12px 16px;margin-bottom:20px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);';
-    banner.innerHTML = `
-      <div style="display:flex;align-items:center;gap:8px">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="color:#d97706"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-        <span style="font-weight:500">Phát hiện dữ liệu chưa lưu từ phiên làm việc trước. Bạn có muốn khôi phục lại không?</span>
+    // Tạo Popup Modal khôi phục ở giữa màn hình (màu xanh dương)
+    var overlay = document.createElement('div');
+    overlay.id = 'draft-restore-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.6);z-index:999999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);animation: fadeIn 0.2s ease;';
+    overlay.innerHTML = `
+      <div style="background:#fff;border-radius:16px;width:90%;max-width:440px;box-shadow:0 20px 25px -5px rgba(0,0,0,0.15), 0 10px 10px -5px rgba(0,0,0,0.1);border-top: 6px solid #2563eb;padding:28px 24px;text-align:center;animation: scaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);font-family:system-ui,-apple-system,sans-serif;">
+        <div style="width:56px;height:56px;background:#eff6ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#2563eb;">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        </div>
+        <h3 style="font-size:18px;font-weight:700;color:#1e3a8a;margin-bottom:8px;letter-spacing:-0.01em">Khôi phục bản nháp</h3>
+        <p style="color:#4b5563;font-size:14px;line-height:1.6;margin-bottom:24px;">Hệ thống phát hiện dữ liệu chưa lưu từ phiên làm việc trước. Bạn có muốn khôi phục lại không?</p>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button type="button" id="btn-restore-draft" style="background:#2563eb;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:700;font-size:14px;transition:background 0.2s;box-shadow:0 4px 6px -1px rgba(37,99,235,0.2);">Khôi phục</button>
+          <button type="button" id="btn-discard-draft" style="background:#fff;color:#4b5563;border:1px solid #d1d5db;padding:9px 23px;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px;transition:all 0.2s;">Bỏ qua</button>
+        </div>
       </div>
-      <div style="display:flex;gap:8px;flex-shrink:0">
-        <button type="button" id="btn-restore-draft" style="background:#d97706;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:background 0.2s">Khôi phục</button>
-        <button type="button" id="btn-discard-draft" style="background:transparent;color:#92400e;border:1px solid #d97706;padding:5px 13px;border-radius:6px;cursor:pointer;font-weight:600;font-size:12px;transition:all 0.2s">Bỏ qua</button>
-      </div>
+      <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleUp { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        #btn-restore-draft:hover { background: #1d4ed8 !important; }
+        #btn-discard-draft:hover { background: #f9fafb !important; border-color: #c4c5c7 !important; }
+      </style>
     `;
 
-    // Chèn banner ngay sau tiêu đề dash-head
-    var dashHead = document.querySelector('.dash-head');
-    if (dashHead) {
-      dashHead.parentNode.insertBefore(banner, dashHead.nextSibling);
-    }
+    document.body.appendChild(overlay);
 
     // Khi người dùng bấm "Bỏ qua"
     document.getElementById('btn-discard-draft').addEventListener('click', function() {
       localStorage.removeItem(draftKey);
-      banner.remove();
+      overlay.remove();
     });
 
     // Khi người dùng bấm "Khôi phục"
@@ -1531,7 +1537,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
 
-      banner.remove();
+      overlay.remove();
       if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
       showAutosaveStatus('Đã khôi phục toàn bộ dữ liệu bản nháp!');
     });
