@@ -326,5 +326,43 @@ document.addEventListener("DOMContentLoaded", function() {
   window.addEventListener('popstate', function(){ if(pjaxable(location.href)) load(location.href,'replace'); });
 })();
 </script>
+
+<script>
+// --- TỰ ĐỘNG ĐĂNG XUẤT KHI TREO MÁY 1 GIỜ (IDLE TIMEOUT) ---
+(function() {
+  var idleTime = 0;
+  var idleInterval = setInterval(timerIncrement, 60000); // 60000 ms = 1 phút
+
+  var events = ['mousemove', 'keypress', 'scroll', 'click', 'touchstart'];
+  events.forEach(function(evt) {
+    window.addEventListener(evt, resetTimer, { passive: true });
+  });
+
+  function resetTimer() {
+    idleTime = 0;
+  }
+
+  function timerIncrement() {
+    idleTime++;
+    if (idleTime >= 60) { // 60 phút = 1 giờ
+      clearInterval(idleInterval);
+      
+      var logoutUrl = '/auth/logout';
+      var path = window.location.pathname;
+      if (path.indexOf('/admin') === 0) {
+        logoutUrl = '/admin/logout';
+      } else if (path.indexOf('/staff') === 0) {
+        logoutUrl = '/staff/logout';
+      } else if (path.indexOf('/partner') === 0) {
+        logoutUrl = '/partner/logout';
+      } else if (path.indexOf('/superadmin-k9x27c') === 0) {
+        logoutUrl = '/superadmin-k9x27c/logout';
+      }
+
+      window.location.href = logoutUrl;
+    }
+  }
+})();
+</script>
 <?php require __DIR__ . '/col-picker.php'; ?>
 <?php require __DIR__ . '/foot.php'; ?>

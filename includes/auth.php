@@ -1,5 +1,26 @@
 <?php
 session_start();
+
+// Tự động đăng xuất nếu treo máy (không hoạt động) quá 1 giờ (3600 giây)
+if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 3600)) {
+        session_unset();
+        session_destroy();
+        $path = $_SERVER['REQUEST_URI'] ?? '';
+        if (str_starts_with($path, '/admin')) {
+            header('Location: /admin/login');
+        } elseif (str_starts_with($path, '/staff')) {
+            header('Location: /staff/login');
+        } elseif (str_starts_with($path, '/partner')) {
+            header('Location: /partner/login');
+        } else {
+            header('Location: /auth/login');
+        }
+        exit;
+    }
+    $_SESSION['last_activity'] = time(); // Cập nhật thời gian hoạt động mới nhất
+}
+
 require_once __DIR__ . '/rbac.php';
 
 function currentUser(): ?array {
