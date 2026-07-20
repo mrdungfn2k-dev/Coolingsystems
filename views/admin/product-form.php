@@ -1343,9 +1343,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (priceInput && originalInput && originalInput.value.trim() !== '') {
         var price = parseInt(priceInput.value) || 0;
         var original = parseInt(originalInput.value) || 0;
-        if (original <= price) {
+        if (original > 0 && original < price) {
           e.preventDefault();
-          alert('Lỗi: Giá gốc phải cao hơn Giá bán sau VAT!');
+          alert('Lỗi: Giá gốc không được nhỏ hơn Giá bán sau VAT!');
           originalInput.focus();
         }
       }
@@ -1353,3 +1353,189 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<script>
+// --- TỰ ĐỘNG LƯU BẢN NHÁP (AUTOSAVE & RESTORE) ---
+(function() {
+  var form = document.getElementById('productForm');
+  if (!form) return;
+
+  var isEdit = <?= isset($product) ? 'true' : 'false' ?>;
+  var productId = <?= isset($product) ? intval($product['id']) : 0 ?>;
+  var draftKey = isEdit ? ('product_draft_edit_' + productId) : 'product_draft_new';
+
+  // Lấy toàn bộ dữ liệu hiện tại của form
+  function getFormData() {
+    var data = {};
+    
+    // Lấy các input thông thường
+    var inputs = form.querySelectorAll('input[type="text"], input[type="number"], select, textarea');
+    inputs.forEach(function(input) {
+      if (input.name && !input.name.includes('_csrf') && input.id !== 'tinymceDesc' && input.id !== 'tinymceFeat' && input.id !== 'tinymceSpec') {
+        if (input.type === 'checkbox') {
+          data[input.name] = input.checked;
+        } else {
+          data[input.name] = input.value;
+        }
+      }
+    });
+
+    // Lấy dữ liệu TomSelect (Thương hiệu, Hãng xe, Danh mục)
+    ['partBrandSelect', 'carBrandSelect', 'categorySelect'].forEach(function(selectId) {
+      var select = document.getElementById(selectId);
+      if (select && select.tomselect) {
+        data[selectId] = select.tomselect.getValue();
+      }
+    });
+
+    // Lấy dữ liệu từ các trình soạn thảo TinyMCE
+    if (typeof tinymce !== 'undefined') {
+      ['tinymceDesc', 'tinymceFeat', 'tinymceSpec'].forEach(function(id) {
+        var ed = tinymce.get(id);
+        if (ed) {
+          data[id] = ed.getContent();
+        }
+      });
+    }
+
+    return data;
+  }
+
+  // Tự động lưu nháp
+  var saveTimeout;
+  function autosave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(function() {
+      var data = getFormData();
+      localStorage.setItem(draftKey, JSON.stringify(data));
+      showAutosaveStatus('Đã tự động lưu nháp...');
+    }, 1000);
+  }
+
+  function showAutosaveStatus(msg) {
+    var statusEl = document.getElementById('autosave-status');
+    if (!statusEl) {
+      statusEl = document.createElement('div');
+      statusEl.id = 'autosave-status';
+      statusEl.style.cssText = 'position:fixed;bottom:24px;right:24px;background:rgba(26,50,88,0.9);color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;z-index:99999;transition:opacity 0.3s;pointer-events:none;opacity:0;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+      document.body.appendChild(statusEl);
+    }
+    statusEl.textContent = msg;
+    statusEl.style.opacity = '1';
+    setTimeout(function() {
+      statusEl.style.opacity = '0';
+    }, 2000);
+  }
+
+  // Gắn sự kiện thay đổi cho các trường thông thường
+  form.addEventListener('input', autosave);
+  form.addEventListener('change', autosave);
+
+  // Gắn sự kiện thay đổi cho các trình soạn thảo TinyMCE
+  setTimeout(function() {
+    ['tinymceDesc', 'tinymceFeat', 'tinymceSpec'].forEach(function(id) {
+      var ed = tinymce.get(id);
+      if (ed) {
+        ed.on('Change KeyUp NodeChange', autosave);
+      }
+    });
+  }, 2500);
+
+  // Xóa bản nháp sau khi người dùng bấm Lưu/Cập nhật thành công
+  form.addEventListener('submit', function() {
+    localStorage.removeItem(draftKey);
+  });
+
+  // --- LOGIC KHÔI PHỤC BẢN NHÁP ---
+  window.addEventListener('load', function() {
+    var saved = localStorage.getItem(draftKey);
+    if (!saved) return;
+
+    var data;
+    try {
+      data = JSON.parse(saved);
+    } catch (e) {
+      return;
+    }
+
+    // Chỉ gợi ý khôi phục nếu bản nháp thực sự có nội dung
+    var hasContent = false;
+    if (data.name && data.name.trim().length > 0) hasContent = true;
+    if (data.tinymceDesc && data.tinymceDesc.trim().replace(/<[^>]+>/g, '').length > 0) hasContent = true;
+
+    if (!hasContent) return;
+
+    // Tạo Banner thông báo khôi phục ở phía trên form
+    var banner = document.createElement('div');
+    banner.style.cssText = 'background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:12px 16px;margin-bottom:20px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);';
+    banner.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="color:#d97706"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <span style="font-weight:500">Phát hiện dữ liệu chưa lưu từ phiên làm việc trước. Bạn có muốn khôi phục lại không?</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        <button type="button" id="btn-restore-draft" style="background:#d97706;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:background 0.2s">Khôi phục</button>
+        <button type="button" id="btn-discard-draft" style="background:transparent;color:#92400e;border:1px solid #d97706;padding:5px 13px;border-radius:6px;cursor:pointer;font-weight:600;font-size:12px;transition:all 0.2s">Bỏ qua</button>
+      </div>
+    `;
+
+    // Chèn banner ngay sau tiêu đề dash-head
+    var dashHead = document.querySelector('.dash-head');
+    if (dashHead) {
+      dashHead.parentNode.insertBefore(banner, dashHead.nextSibling);
+    }
+
+    // Khi người dùng bấm "Bỏ qua"
+    document.getElementById('btn-discard-draft').addEventListener('click', function() {
+      localStorage.removeItem(draftKey);
+      banner.remove();
+    });
+
+    // Khi người dùng bấm "Khôi phục"
+    document.getElementById('btn-restore-draft').addEventListener('click', function() {
+      // 1. Điền lại các ô input thông thường
+      Object.keys(data).forEach(function(key) {
+        var input = form.querySelector('[name="' + key + '"]');
+        if (input && key !== 'description' && key !== 'features' && key !== 'specifications') {
+          if (input.type === 'checkbox') {
+            input.checked = !!data[key];
+            input.dispatchEvent(new Event('change'));
+          } else {
+            input.value = data[key];
+            input.dispatchEvent(new Event('input'));
+          }
+        }
+      });
+
+      // 2. Điền lại các trường TomSelect
+      ['partBrandSelect', 'carBrandSelect', 'categorySelect'].forEach(function(selectId) {
+        var select = document.getElementById(selectId);
+        if (select && select.tomselect && data[selectId]) {
+          select.tomselect.setValue(data[selectId]);
+        }
+      });
+
+      // 3. Điền lại nội dung TinyMCE
+      ['tinymceDesc', 'tinymceFeat', 'tinymceSpec'].forEach(function(id) {
+        if (data[id]) {
+          var ed = tinymce.get(id);
+          if (ed) {
+            ed.setContent(data[id]);
+          } else {
+            // Đợi TinyMCE load hẳn nếu chưa khởi động xong
+            setTimeout(function() {
+              var ed2 = tinymce.get(id);
+              if (ed2) ed2.setContent(data[id]);
+            }, 1000);
+          }
+        }
+      });
+
+      banner.remove();
+      if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
+      showAutosaveStatus('Đã khôi phục toàn bộ dữ liệu bản nháp!');
+    });
+  });
+})();
+</script>
+
