@@ -11,6 +11,9 @@ require_once __DIR__ . '/../includes/helpers.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
+if ($method === 'HEAD') {
+    $method = 'GET';
+}
 
 // Static files
 if (preg_match('/\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$/i', $uri)) {
