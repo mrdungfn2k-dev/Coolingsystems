@@ -2515,7 +2515,8 @@ get('/admin/inventory', function() {
       'edit_thresholds'=>!$detailedRbac || rbacCan((int)$user['id'], 'inventory.thresholds.edit'),
       'edit_warranty'=>!$detailedRbac || rbacCan((int)$user['id'], 'catalog.products.edit'),
     ];
-    view('admin/inventory',['title'=>'Quản lý kho','role'=>'admin','products'=>$products,'summary'=>$summary,'categories'=>$categories,'q'=>$q,'stockStatus'=>$stockStatus,'categoryId'=>$categoryId,'inventoryPermissions'=>$inventoryPermissions,'page'=>$page,'totalPages'=>$totalPages]);
+    $history = dbAll("SELECT m.*, p.name AS product_name, p.sku, u.full_name AS creator_name FROM inventory_stock_movements m INNER JOIN products p ON p.id=m.product_id LEFT JOIN users u ON u.id=m.created_by WHERE m.reference_type='manual_adjust' ORDER BY m.id DESC LIMIT 15");
+    view('admin/inventory',['title'=>'Quản lý kho','role'=>'admin','products'=>$products,'summary'=>$summary,'categories'=>$categories,'q'=>$q,'stockStatus'=>$stockStatus,'categoryId'=>$categoryId,'inventoryPermissions'=>$inventoryPermissions,'page'=>$page,'totalPages'=>$totalPages,'history'=>$history]);
 });
 
 post('/admin/inventory/:id/update', function($p) {
@@ -2540,10 +2541,29 @@ post('/admin/inventory/:id/update', function($p) {
     if($values['stock']>1000||$values['min_stock']>1000||$values['max_stock']>1000){flash('error','Tồn kho chỉ được từ 0 đến 1000.');redirect('/admin/inventory');return;}
     if($values['min_stock']>$values['max_stock']){flash('error','Tồn tối thiểu không được lớn hơn tồn tối đa.');redirect('/admin/inventory');return;}
     if($values['original_price']>0&&$values['original_price']<$values['price']){flash('error','Giá gốc không được nhỏ hơn giá bán khi được nhập.');redirect('/admin/inventory');return;}
-    dbRun("UPDATE products SET cost_price=?,price=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?",[$values['cost_price'],$values['price'],$values['original_price']?:null,$values['stock'],$values['min_stock'],$values['max_stock'],$values['warranty_months'],$values['cost_price']*$values['stock'],$p['id']]);
-    inventoryCheckLowStockAlert((int)$p['id'], 'inventory_update');
-    $before=['cost_price'=>(int)$product['cost_price'],'price'=>(int)$product['price'],'original_price'=>(int)$product['original_price'],'stock'=>(int)$product['stock'],'min_stock'=>(int)$product['min_stock'],'max_stock'=>(int)$product['max_stock'],'warranty_months'=>(int)$product['warranty_months']];
-    try { dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$user['id'] ?? null,$user['role'] ?? 'admin','inventory_update','product',$p['id'],json_encode(['before'=>$before,'after'=>$values],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR'] ?? '',$_SERVER['HTTP_USER_AGENT'] ?? '']); } catch(Throwable $e) {}
+    
+    $stockDiff = $values['stock'] - (int)$product['stock'];
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+        dbRun("UPDATE products SET cost_price=?,price=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?",[$values['cost_price'],$values['price'],$values['original_price']?:null,$values['stock'],$values['min_stock'],$values['max_stock'],$values['warranty_months'],$values['cost_price']*$values['stock'],$p['id']]);
+        if ($stockDiff !== 0) {
+            $mvDir = $stockDiff > 0 ? 'in' : 'out';
+            dbInsert("INSERT INTO inventory_stock_movements (product_id,direction,quantity,reference_type,note,created_by) VALUES (?,?,?,?,?,?)", [
+                $p['id'], $mvDir, abs($stockDiff), 'manual_adjust', 'Cập nhật tồn kho trực tiếp qua Quản lý kho', $user['id'] ?? null
+            ]);
+        }
+        $before=['cost_price'=>(int)$product['cost_price'],'price'=>(int)$product['price'],'original_price'=>(int)$product['original_price'],'stock'=>(int)$product['stock'],'min_stock'=>(int)$product['min_stock'],'max_stock'=>(int)$product['max_stock'],'warranty_months'=>(int)$product['warranty_months']];
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$user['id'] ?? null,$user['role'] ?? 'admin','inventory_update','product',$p['id'],json_encode(['before'=>$before,'after'=>$values],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR'] ?? '',$_SERVER['HTTP_USER_AGENT'] ?? '']);
+        $pdo->commit();
+        inventoryCheckLowStockAlert((int)$p['id'], 'inventory_update');
+    } catch(Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error','Lỗi khi lưu dữ liệu kho.');
+        redirect('/admin/inventory');
+        return;
+    }
+    
     flash('success','Đã cập nhật giá và tồn kho cho sản phẩm.');
     redirect('/admin/inventory');
 });
@@ -2591,56 +2611,6 @@ get('/admin/inventory/search-product', function() {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($rows, JSON_UNESCAPED_UNICODE); exit;
 });
-
-// B2b: Hiển thị form điều chỉnh tồn
-get('/admin/inventory/adjust', function() {
-    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
-    $history = dbAll("SELECT m.*,p.name AS product_name,p.sku,u.full_name AS creator_name FROM inventory_stock_movements m INNER JOIN products p ON p.id=m.product_id LEFT JOIN users u ON u.id=m.created_by WHERE m.reference_type='manual_adjust' ORDER BY m.id DESC LIMIT 50");
-    view('admin/inventory-adjust', ['title'=>'Điều chỉnh tồn kho','userRole'=>'admin','history'=>$history]);
-});
-
-// B2c: Xử lý điều chỉnh tồn thủ công
-post('/admin/inventory/adjust', function() {
-    $u = requireStaffPermission('rbac:inventory.adjust|products', '/admin/login');
-    csrfCheck();
-    $pid     = (int)($_POST['product_id']??0);
-    $dir     = in_array($_POST['direction']??'', ['in','out','set'], true) ? $_POST['direction'] : '';
-    $qty     = (int)preg_replace('/\D/','',(string)($_POST['quantity']??''));
-    $reason  = trim($_POST['reason']??'');
-    if (!$pid || !$dir || $qty < 1 || $qty > 99999 || mb_strlen($reason) < 5 || mb_strlen($reason) > 500) {
-        flash('error','Dữ liệu điều chỉnh không hợp lệ (cần chọn sản phẩm, loại, số lượng ≥1, lý do 5-500 ký tự).');
-        redirect('/admin/inventory/adjust'); return;
-    }
-    $pdo = db(); try {
-        $pdo->beginTransaction();
-        $product = dbGet('SELECT * FROM products WHERE id=?', [$pid]);
-        if (!$product) throw new RuntimeException('notfound');
-        $before = (int)$product['stock'];
-        if ($dir === 'in') {
-            $after = $before + $qty;
-            dbRun("UPDATE products SET stock=stock+?,updated_at=datetime('now','localtime') WHERE id=?", [$qty, $pid]);
-            $mvDir = 'in';
-        } elseif ($dir === 'out') {
-            $after = max(0, $before - $qty);
-            dbRun("UPDATE products SET stock=MAX(0,stock-?),updated_at=datetime('now','localtime') WHERE id=?", [$qty, $pid]);
-            $mvDir = 'out';
-        } else { // set
-            $after = $qty;
-            dbRun("UPDATE products SET stock=?,updated_at=datetime('now','localtime') WHERE id=?", [$qty, $pid]);
-            $mvDir = $qty >= $before ? 'in' : 'out';
-            $qty   = abs($after - $before);
-        }
-        if ($qty > 0) {
-            dbInsert("INSERT INTO inventory_stock_movements (product_id,direction,quantity,reference_type,note,created_by) VALUES (?,?,?,'manual_adjust',?,?)", [$pid, $mvDir, $qty, $reason, $u['id']]);
-        }
-        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [$u['id'],$u['role']??'admin','manual_stock_adjust','product',$pid, json_encode(['before'=>$before,'after'=>$after,'direction'=>$dir,'qty'=>(int)($_POST['quantity']??0),'reason'=>$reason],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
-        $pdo->commit();
-        inventoryCheckLowStockAlert($pid, 'manual_adjust');
-        flash('success','Đã điều chỉnh tồn kho: '.$product['name'].' ('.$before.' → '.$after.').');
-    } catch (Throwable $e) { if($pdo->inTransaction())$pdo->rollBack(); flash('error','Lỗi khi điều chỉnh: '.$e->getMessage()); }
-    redirect('/admin/inventory/adjust');
-});
-
 // B3a: Danh sách phiếu kiểm kho
 get('/admin/stocktake', function() {
     $u = requireStaffPermission('rbac:inventory.view|products', '/admin/login');

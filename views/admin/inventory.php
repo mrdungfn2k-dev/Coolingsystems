@@ -42,7 +42,55 @@ $canSaveInventory = $canEditCost || $canEditPrice || $canEditStock || $canEditTh
     <td class="num"><input form="<?= $formId ?>" name="warranty_months" inputmode="numeric" pattern="[0-9]*" min="0" max="999" <?= $canEditWarranty ? '' : 'readonly' ?> value="<?= (int)$product['warranty_months'] ?>"></td>
 <?php if($canSaveInventory): ?>    <td><button form="<?= $formId ?>" class="save" type="submit">Lưu</button></td><?php endif; ?>    <td><a href="/admin/inventory/<?= (int)$product['id'] ?>/ledger" style="font-size:11px;color:#1a3258;text-decoration:none;white-space:nowrap" title="Xem thẻ kho">📋 Thẻ kho</a></td>
   </tr>
-<?php endforeach; if(!$products): ?><tr><td colspan="<?= $canViewCost ? 11 : 10 ?>" style="text-align:center;padding:30px;color:#718096">Không tìm thấy sản phẩm phù hợp.</td></tr><?php endif; ?>
+<?php endforeach; if(!$products): ?><tr><td colspan="<?= $canViewCost ? 12 : 11 ?>" style="text-align:center;padding:30px;color:#718096">Không tìm thấy sản phẩm phù hợp.</td></tr><?php endif; ?>
 </tbody></table></div>
 <?php if($totalPages>1): $base=['q'=>$q,'status'=>$stockStatus==='all'?null:$stockStatus,'category'=>$categoryId?:null]; ?><div class="pagination" style="margin-top:18px"><?php if($page>1): ?><a href="/admin/inventory?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?><span style="padding:0 10px;font-size:12px">Trang <?= $page ?> / <?= $totalPages ?></span><?php if($page<$totalPages): ?><a href="/admin/inventory?<?= e(http_build_query(array_filter($base+['page'=>$page+1]))) ?>">›</a><?php endif; ?></div><?php endif; ?>
+
+<!-- Lịch sử điều chỉnh thủ công gần đây -->
+<div class="panel" style="margin-top:24px">
+  <div style="padding:14px 16px;border-bottom:1px solid #edf2f7">
+    <h2 style="font-size:15px;font-weight:700;margin:0;color:#1e3a8a">Lịch sử điều chỉnh tồn kho thủ công gần đây</h2>
+  </div>
+  <div style="overflow:auto">
+    <table class="inventory-table">
+      <thead>
+        <tr>
+          <th>Thời gian</th>
+          <th>Sản phẩm</th>
+          <th>Chiều biến động</th>
+          <th style="text-align:right">SL chênh lệch</th>
+          <th>Ghi chú / Lý do</th>
+          <th>Người thực hiện</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($history as $h): ?>
+        <tr>
+          <td style="color:#667085;font-size:12px;white-space:nowrap;padding:10px 8px"><?= e(substr($h['created_at'],0,16)) ?></td>
+          <td style="padding:10px 8px">
+            <strong><?= e($h['product_name']) ?></strong>
+            <div style="font-size:11px;color:#667085;margin-top:2px">SKU: <?= e($h['sku']) ?></div>
+          </td>
+          <td style="padding:10px 8px">
+            <?php if($h['direction']==='in'): ?>
+              <span class="stock-flag">↑ Tăng tồn</span>
+            <?php else: ?>
+              <span class="stock-flag low">↓ Giảm tồn</span>
+            <?php endif; ?>
+          </td>
+          <td style="text-align:right;font-weight:700;color:<?= $h['direction']==='in'?'#059669':'#dc2626' ?>;padding:10px 8px">
+            <?= $h['direction']==='in'?'+':'-' ?><?= number_format((int)$h['quantity']) ?>
+          </td>
+          <td style="font-size:12px;color:#4a5568;padding:10px 8px"><?= e($h['note'] ?? '—') ?></td>
+          <td style="font-size:12px;color:#667085;padding:10px 8px"><?= e($h['creator_name'] ?? '—') ?></td>
+        </tr>
+        <?php endforeach; ?>
+        <?php if (!$history): ?>
+        <tr><td colspan="6" style="padding:25px;text-align:center;color:#667085">Chưa có lịch sử điều chỉnh tồn kho thủ công nào.</td></tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
