@@ -163,7 +163,7 @@ if (!empty($faqItems)) {
 <div id="cartToast" class="cart-toast"></div>
 
 <section class="block"><div class="wrap">
-<article itemscope itemtype="https://schema.org/Product">
+<article>
   <nav class="breadcrumb" aria-label="Điều hướng">
     <a href="/">Trang chủ</a><span class="sep">›</span>
     <a href="/products">Sản phẩm</a><span class="sep">›</span>
@@ -175,7 +175,7 @@ if (!empty($faqItems)) {
     <!-- Product Title (moved above grid for image-below-title layout) -->
     <div style="padding:20px 24px 0 24px">
 
-        <h1 class="serif text-navy" style="font-size:22px;margin-bottom:12px;line-height:1.4" itemprop="name"><?= e($product['name']) ?></h1>
+        <h1 class="serif text-navy" style="font-size:22px;margin-bottom:12px;line-height:1.4"><?= e($product['name']) ?></h1>
     </div>
     
     <div class="pd-grid">
