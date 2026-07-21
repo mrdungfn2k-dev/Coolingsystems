@@ -44,17 +44,26 @@ foreach ($images as $image) {
     if (empty($image['file_path'])) continue;
     $schemaImages[] = 'https://coolingsystems.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($image['file_path']));
 }
+if (empty($schemaImages)) {
+    $schemaImages[] = 'https://coolingsystems.vn/assets/images/default-avatar.png';
+}
 
 $brandName = trim((string)($product['part_brand'] ?? ''));
 if ($brandName === '' || $brandName === 'HIDDEN') $brandName = 'CoolingSystem';
+
+$productDesc = $descriptionPlain !== '' ? $descriptionPlain : ($metaDescription !== '' ? $metaDescription : $product['name']);
+
 $productSchema = [
     '@context' => 'https://schema.org',
     '@type' => 'Product',
     'name' => seoPlainText($product['name'] ?? ''),
-    'description' => seoTruncateText($descriptionPlain !== '' ? $descriptionPlain : $metaDescription, 5000),
+    'description' => seoTruncateText($productDesc, 5000),
     'brand' => ['@type' => 'Brand', 'name' => $brandName],
     'category' => seoPlainText($catName),
+    'image' => $schemaImages,
     'url' => $productUrl,
+    'sku' => !empty($product['sku']) ? seoPlainText($product['sku']) : 'SKU-' . $product['id'],
+    'mpn' => !empty($product['oem_code']) ? seoPlainText($product['oem_code']) : 'OEM-' . $product['id'],
     'offers' => [
         '@type' => 'Offer',
         'priceCurrency' => 'VND',
@@ -65,9 +74,6 @@ $productSchema = [
         'seller' => ['@type' => 'Organization', 'name' => 'CoolingSystem'],
     ],
 ];
-if (!empty($schemaImages)) $productSchema['image'] = $schemaImages;
-if (!empty($product['sku'])) $productSchema['sku'] = seoPlainText($product['sku']);
-if (!empty($product['oem_code'])) $productSchema['mpn'] = seoPlainText($product['oem_code']);
 if (($product['rating_avg'] ?? 0) > 0 && ($product['rating_count'] ?? 0) > 0) {
     $productSchema['aggregateRating'] = [
         '@type' => 'AggregateRating',
