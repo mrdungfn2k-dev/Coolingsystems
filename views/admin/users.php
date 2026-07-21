@@ -90,7 +90,7 @@
         <div style="display:flex;flex-wrap:nowrap;gap:5px;align-items:center">
           <a href="/admin/users/<?= $u['id'] ?>/edit" class="btn btn-sm" style="background:#1a3258;color:#fff;text-align:center;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em">Sửa</a>
 
-          <button class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em" onclick="showUserDetail(<?= $u['id'] ?>)">Chi tiết</button>
+          <a href="/admin/users/<?= $u['id'] ?>" class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em;text-decoration:none">Hồ sơ</a>
           <?php if ($isSuspended): ?>
             <form method="post" action="/admin/users/<?= $u['id'] ?>/unlock" style="display:block"><?= csrfField() ?><input type="hidden" name="back" value="<?= e($_SERVER['REQUEST_URI'] ?? $listRoute) ?>">
               <button class="btn btn-sm" style="background:#fff;color:#1a3258;border:1.5px solid #1a3258;padding:6px 10px;border-radius:5px;font-weight:600;text-transform:none;letter-spacing:.01em">Mở</button></form>

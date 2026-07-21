@@ -4423,3 +4423,375 @@ post('/admin/orders/:id/cancel', function($p) {
 });
 
 // Admin create order page
+
+// ─── GIAI ĐOẠN C: BÁN HÀNG NÂNG CAO & KHÁCH HÀNG ──────────────────────────────
+
+// C1: Danh sách xe khách hàng (Garages)
+get('/admin/garages', function() {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 30;
+    $q = trim((string)($_GET['q'] ?? ''));
+    $brandId = max(0, (int)($_GET['brand_id'] ?? 0));
+
+    $where = 'WHERE 1=1'; $params = [];
+    if ($q !== '') {
+        $where .= ' AND (u.full_name LIKE ? OR u.email LIKE ? OR u.phone LIKE ? OR b.name LIKE ? OR cm.name LIKE ?)';
+        $like = '%'.$q.'%';
+        array_push($params, $like, $like, $like, $like, $like);
+    }
+    if ($brandId) {
+        $where .= ' AND g.brand_id=?';
+        $params[] = $brandId;
+    }
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garages g INNER JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total/$perPage));
+    $page = min($page, $totalPages);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $garages = dbAll("SELECT g.*, u.full_name, u.email, u.phone, b.name AS brand_name, cm.name AS model_name FROM garages g INNER JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where ORDER BY g.created_at DESC LIMIT ? OFFSET ?", $listParams);
+
+    $summary = [
+        'total_garages' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages")['c'] ?? 0),
+        'total_owners' => (int)(dbGet("SELECT COUNT(DISTINCT user_id) AS c FROM garages")['c'] ?? 0),
+        'default_count' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages WHERE is_default=1")['c'] ?? 0),
+    ];
+    $brands = dbAll("SELECT id, name FROM brands ORDER BY name");
+
+    view('admin/garages', [
+        'title' => 'Garage khách hàng',
+        'garages' => $garages,
+        'summary' => $summary,
+        'brands' => $brands,
+        'q' => $q,
+        'brandId' => $brandId,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// C4: Danh sách hoa hồng (Commissions)
+get('/admin/commissions', function() {
+    $user = requireStaffPermission('rbac:finance.cashbook.view|products', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 30;
+    $partnerId = max(0, (int)($_GET['partner_id'] ?? 0));
+    $typeFilter = trim((string)($_GET['type'] ?? ''));
+    $statusFilter = trim((string)($_GET['status'] ?? ''));
+    $fromDate = trim((string)($_GET['from'] ?? ''));
+    $toDate = trim((string)($_GET['to'] ?? ''));
+
+    $where = 'WHERE 1=1'; $params = [];
+    if ($partnerId) {
+        $where .= ' AND ct.partner_id=?';
+        $params[] = $partnerId;
+    }
+    if ($typeFilter !== '') {
+        $where .= ' AND ct.type=?';
+        $params[] = $typeFilter;
+    }
+    if ($statusFilter !== '') {
+        $where .= ' AND ct.status=?';
+        $params[] = $statusFilter;
+    }
+    if ($fromDate !== '') {
+        $where .= ' AND ct.created_at >= ?';
+        $params[] = $fromDate . ' 00:00:00';
+    }
+    if ($toDate !== '') {
+        $where .= ' AND ct.created_at <= ?';
+        $params[] = $toDate . ' 23:59:59';
+    }
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM commission_transactions ct INNER JOIN partners pt ON pt.id=ct.partner_id $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total/$perPage));
+    $page = min($page, $totalPages);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $commissions = dbAll("SELECT ct.*, pt.shop_name, pt.contact_phone FROM commission_transactions ct INNER JOIN partners pt ON pt.id=ct.partner_id $where ORDER BY ct.created_at DESC LIMIT ? OFFSET ?", $listParams);
+
+    $summary = dbGet("SELECT COUNT(*) AS total_txn, COALESCE(SUM(CASE WHEN type='earn' THEN commission_fee ELSE 0 END),0) AS total_earn, COALESCE(SUM(CASE WHEN type='reversal' THEN commission_fee ELSE 0 END),0) AS total_reversal, COUNT(DISTINCT partner_id) AS partner_count FROM commission_transactions") ?: ['total_txn'=>0,'total_earn'=>0,'total_reversal'=>0,'partner_count'=>0];
+    $partners = dbAll("SELECT id, shop_name FROM partners ORDER BY shop_name");
+
+    view('admin/commissions', [
+        'title' => 'Hoa hồng bán hàng',
+        'commissions' => $commissions,
+        'summary' => $summary,
+        'partners' => $partners,
+        'partnerId' => $partnerId,
+        'typeFilter' => $typeFilter,
+        'statusFilter' => $statusFilter,
+        'fromDate' => $fromDate,
+        'toDate' => $toDate,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// C2: Hồ sơ chi tiết khách hàng (User detail)
+get('/admin/users/:id', function($p) {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    $uid = (int)$p['id'];
+    $customer = dbGet("SELECT * FROM users WHERE id=?", [$uid]);
+    if (!$customer) {
+        flash('error', 'Không tìm thấy khách hàng.');
+        redirect('/admin/users'); return;
+    }
+
+    $orders = dbAll("SELECT * FROM orders WHERE user_id=? ORDER BY created_at DESC", [$uid]);
+    $garages = dbAll("SELECT g.*, b.name AS brand_name, cm.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$uid]);
+    $debtCollections = dbAll("SELECT c.*, o.code AS order_code, ca.name AS account_name FROM customer_debt_collections c INNER JOIN orders o ON o.id=c.order_id LEFT JOIN cash_accounts ca ON ca.id=c.account_id WHERE o.user_id=? ORDER BY c.collection_date DESC, c.id DESC", [$uid]);
+
+    $totalSpent = 0; $totalDebt = 0;
+    foreach ($orders as $o) {
+        $totalSpent += (int)$o['paid_amount'];
+        $totalDebt += (int)$o['remaining_amount'];
+    }
+
+    view('admin/user-detail', [
+        'title' => 'Chi tiết khách hàng: ' . $customer['full_name'],
+        'user' => $customer,
+        'orders' => $orders,
+        'garages' => $garages,
+        'debtCollections' => $debtCollections,
+        'totalSpent' => $totalSpent,
+        'totalDebt' => $totalDebt
+    ]);
+});
+
+// C3: Báo giá - Danh sách (Quotations list)
+get('/admin/quotations', function() {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+    $q = trim((string)($_GET['q'] ?? ''));
+    $statusFilter = trim((string)($_GET['status'] ?? ''));
+
+    $where = 'WHERE 1=1'; $params = [];
+    if ($q !== '') {
+        $where .= ' AND (q.code LIKE ? OR u.full_name LIKE ? OR u.phone LIKE ?)';
+        $like = '%'.$q.'%';
+        array_push($params, $like, $like, $like);
+    }
+    if ($statusFilter !== '') {
+        $where .= ' AND q.status=?';
+        $params[] = $statusFilter;
+    }
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM quotations q INNER JOIN users u ON u.id=q.user_id $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total/$perPage));
+    $page = min($page, $totalPages);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $quotations = dbAll("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone, uc.full_name AS creator_name FROM quotations q INNER JOIN users u ON u.id=q.user_id LEFT JOIN users uc ON uc.id=q.created_by $where ORDER BY q.created_at DESC LIMIT ? OFFSET ?", $listParams);
+
+    view('admin/quotations', [
+        'title' => 'Báo giá độc lập',
+        'quotations' => $quotations,
+        'q' => $q,
+        'statusFilter' => $statusFilter,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// C3: Báo giá - Form tạo mới (New Quotation Form)
+get('/admin/quotations/new', function() {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    $customers = dbAll("SELECT id, full_name, phone FROM users WHERE status='active' AND role='customer' ORDER BY full_name");
+    view('admin/quotation-new', [
+        'title' => 'Tạo báo giá mới',
+        'customers' => $customers
+    ]);
+});
+
+// C3: Báo giá - Xử lý lưu tạo mới (Create Quotation)
+post('/admin/quotations', function() {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    csrfCheck();
+
+    $userId = (int)($_POST['user_id'] ?? 0);
+    $expiresAt = trim((string)($_POST['expires_at'] ?? ''));
+    $note = trim((string)($_POST['note'] ?? ''));
+    $items = $_POST['items'] ?? [];
+
+    if (!$userId || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $expiresAt) || !$items) {
+        flash('error', 'Thông tin báo giá không hợp lệ. Vui lòng chọn khách hàng và ít nhất một sản phẩm.');
+        redirect('/admin/quotations/new'); return;
+    }
+
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+
+        $code = 'BG-' . date('Ymd') . '-' . random_int(1000, 9999);
+        $grandTotal = 0;
+
+        $qId = dbInsert("INSERT INTO quotations (code, user_id, grand_total, status, note, expires_at, created_by) VALUES (?, ?, 0, 'pending', ?, ?, ?)", [
+            $code, $userId, $note ?: null, $expiresAt, $user['id'] ?? null
+        ]);
+
+        foreach ($items as $it) {
+            $pid = (int)($it['product_id'] ?? 0);
+            $qty = (int)($it['quantity'] ?? 0);
+            $price = (int)($it['price'] ?? 0);
+            if (!$pid || $qty < 1 || $price < 0) {
+                throw new RuntimeException('Sản phẩm hoặc số lượng báo giá không hợp lệ.');
+            }
+            $total = $qty * $price;
+            $grandTotal += $total;
+
+            dbRun("INSERT INTO quotation_items (quotation_id, product_id, quantity, price, total) VALUES (?, ?, ?, ?, ?)", [
+                $qId, $pid, $qty, $price, $total
+            ]);
+        }
+
+        dbRun("UPDATE quotations SET grand_total=? WHERE id=?", [$grandTotal, $qId]);
+        dbRun("INSERT INTO audit_logs (user_id, role, action, entity_type, entity_id, meta, ip, user_agent) VALUES (?, ?, 'quotation_created', 'quotation', ?, ?, ?, ?)", [
+            $user['id'] ?? null, $user['role'] ?? 'admin', $qId, json_encode(['code' => $code, 'grand_total' => $grandTotal], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
+        ]);
+
+        $pdo->commit();
+        flash('success', 'Đã tạo bảng báo giá #' . $code . ' thành công.');
+        redirect('/admin/quotations/' . $qId);
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error', 'Lỗi khi tạo báo giá: ' . $e->getMessage());
+        redirect('/admin/quotations/new');
+    }
+});
+
+// C3: Báo giá - Chi tiết báo giá (Quotation detail)
+get('/admin/quotations/:id', function($p) {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    $qid = (int)$p['id'];
+    $quotation = dbGet("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone, uc.full_name AS creator_name FROM quotations q INNER JOIN users u ON u.id=q.user_id LEFT JOIN users uc ON uc.id=q.created_by WHERE q.id=?", [$qid]);
+    if (!$quotation) {
+        flash('error', 'Không tìm thấy báo giá.');
+        redirect('/admin/quotations'); return;
+    }
+
+    $items = dbAll("SELECT qi.*, p.name AS product_name, p.sku FROM quotation_items qi INNER JOIN products p ON p.id=qi.product_id WHERE qi.quotation_id=? ORDER BY qi.id", [$qid]);
+
+    view('admin/quotation-detail', [
+        'title' => 'Chi tiết báo giá #' . $quotation['code'],
+        'quotation' => $quotation,
+        'items' => $items
+    ]);
+});
+
+// C3: Báo giá - Cập nhật trạng thái (Update Quotation Status: Gửi KH / Hủy)
+post('/admin/quotations/:id/status', function($p) {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    csrfCheck();
+    $qid = (int)$p['id'];
+    $status = trim((string)($_POST['status'] ?? ''));
+    if (!in_array($status, ['sent', 'cancelled'], true)) {
+        flash('error', 'Trạng thái chuyển đổi không hợp lệ.');
+        redirect('/admin/quotations/' . $qid); return;
+    }
+
+    $quotation = dbGet("SELECT * FROM quotations WHERE id=?", [$qid]);
+    if (!$quotation) {
+        flash('error', 'Không tìm thấy báo giá.');
+        redirect('/admin/quotations'); return;
+    }
+
+    dbRun("UPDATE quotations SET status=?, updated_at=datetime('now','localtime') WHERE id=?", [$status, $qid]);
+    dbRun("INSERT INTO audit_logs (user_id, role, action, entity_type, entity_id, meta, ip, user_agent) VALUES (?, ?, 'quotation_status_update', 'quotation', ?, ?, ?, ?)", [
+        $user['id'] ?? null, $user['role'] ?? 'admin', $qid, json_encode(['before' => $quotation['status'], 'after' => $status], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
+    ]);
+
+    flash('success', 'Đã cập nhật trạng thái báo giá.');
+    redirect('/admin/quotations/' . $qid);
+});
+
+// C3: Báo giá - Chuyển thành Đơn hàng (Convert Quotation to Order)
+post('/admin/quotations/:id/convert', function($p) {
+    $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    csrfCheck();
+    $qid = (int)$p['id'];
+
+    $quotation = dbGet("SELECT * FROM quotations WHERE id=?", [$qid]);
+    if (!$quotation || !in_array($quotation['status'], ['pending', 'sent'], true)) {
+        flash('error', 'Báo giá không đủ điều kiện chuyển thành đơn hàng.');
+        redirect('/admin/quotations/' . $qid); return;
+    }
+
+    $items = dbAll("SELECT qi.*, p.name AS product_name, p.sku, p.stock FROM quotation_items qi INNER JOIN products p ON p.id=qi.product_id WHERE qi.quotation_id=?", [$qid]);
+    if (!$items) {
+        flash('error', 'Báo giá không có sản phẩm nào.');
+        redirect('/admin/quotations/' . $qid); return;
+    }
+
+    // Kiểm tra tồn kho trước khi chuyển đổi
+    foreach ($items as $it) {
+        if ((int)$it['stock'] < (int)$it['quantity']) {
+            flash('error', 'Sản phẩm "' . $it['product_name'] . '" (SKU: ' . $it['sku'] . ') không đủ tồn kho (Tồn hiện tại: ' . $it['stock'] . ' — Cần: ' . $it['quantity'] . '). Vui lòng bổ sung kho trước khi chuyển đổi.');
+            redirect('/admin/quotations/' . $qid); return;
+        }
+    }
+
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+
+        $orderCode = 'DH-' . substr($quotation['code'], 3) . '-' . random_int(10, 99);
+        $customer = dbGet("SELECT * FROM users WHERE id=?", [$quotation['user_id']]);
+
+        $totalItems = 0;
+        foreach ($items as $it) {
+            $totalItems += (int)$it['quantity'];
+        }
+
+        // Tạo đơn hàng mới
+        $orderId = dbInsert("INSERT INTO orders (code, user_id, total_items, subtotal, grand_total, paid_amount, remaining_amount, payment_status, delivery_status, payment_method, shipping_full_name, shipping_phone, shipping_detail, customer_note, created_by_staff) VALUES (?, ?, ?, ?, ?, 0, ?, 'unpaid', 'pending', 'cod', ?, ?, ?, ?, ?)", [
+            $orderCode, $quotation['user_id'], $totalItems, $quotation['grand_total'], $quotation['grand_total'], $quotation['grand_total'],
+            $customer['full_name'] ?? 'Khách hàng', $customer['phone'] ?? '', $customer['address'] ?? '',
+            'Tự động chuyển từ Báo giá ' . $quotation['code'] . '. ' . ($quotation['note'] ?: ''),
+            $user['id'] ?? null
+        ]);
+
+        $subOrderCode = $orderCode . '-S01';
+        // Tạo sub_order
+        $subOrderId = dbInsert("INSERT INTO sub_orders (order_id, partner_id, code, subtotal, grand_total, status) VALUES (?, 1, ?, ?, ?, 'awaiting_confirm')", [
+            $orderId, $subOrderCode, $quotation['grand_total'], $quotation['grand_total']
+        ]);
+
+        foreach ($items as $it) {
+            // Thêm vào chi tiết đơn hàng
+            dbRun("INSERT INTO order_items (sub_order_id, product_id, quantity, price, original_price, total) VALUES (?, ?, ?, ?, ?, ?)", [
+                $subOrderId, $it['product_id'], $it['quantity'], $it['price'], $it['price'], $it['total']
+            ]);
+
+            // Trừ tồn kho và tăng bán chạy
+            dbRun("UPDATE products SET stock=stock-?, sold_count=sold_count+?, updated_at=datetime('now','localtime') WHERE id=?", [
+                $it['quantity'], $it['quantity'], $it['product_id']
+            ]);
+
+            // Ghi nhận biến động kho
+            dbInsert("INSERT INTO inventory_stock_movements (product_id, direction, quantity, reference_type, reference_id, note, created_by) VALUES (?, 'out', ?, 'order', ?, ?, ?)", [
+                $it['product_id'], $it['quantity'], $orderId, 'Xuất kho cho đơn hàng ' . $orderCode . ' (Chuyển từ báo giá)', $user['id'] ?? null
+            ]);
+
+            inventoryCheckLowStockAlert((int)$it['product_id'], 'admin_sale');
+        }
+
+        // Cập nhật trạng thái báo giá thành 'converted'
+        dbRun("UPDATE quotations SET status='converted', updated_at=datetime('now','localtime') WHERE id=?", [$qid]);
+
+        // Ghi log
+        dbRun("INSERT INTO audit_logs (user_id, role, action, entity_type, entity_id, meta, ip, user_agent) VALUES (?, ?, 'quotation_converted', 'quotation', ?, ?, ?, ?)", [
+            $user['id'] ?? null, $user['role'] ?? 'admin', $qid, json_encode(['order_id' => $orderId, 'order_code' => $orderCode], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
+        ]);
+
+        $pdo->commit();
+        flash('success', 'Đã chuyển đổi báo giá sang Đơn hàng ' . $orderCode . ' thành công.');
+        redirect('/admin/orders/' . $orderId);
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error', 'Lỗi khi chuyển đổi báo giá: ' . $e->getMessage());
+        redirect('/admin/quotations/' . $qid);
+    }
+});
