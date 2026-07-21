@@ -103,3 +103,25 @@ function requireSuperAdmin(string $redirect = '/admin'): array {
     if (empty($user['is_superadmin'])) { header('Location: ' . $redirect); exit; }
     return $user;
 }
+
+function hasPermission(array $user, string $permission): bool {
+    if (($user['role'] ?? '') === 'admin') return true;
+    if (($user['role'] ?? '') === 'staff') {
+        if (function_exists('rbacHasCapability') && rbacHasCapability((int)$user['id'], $permission)) {
+            return true;
+        }
+        $roleAssignment = dbAll(
+            "SELECT sr.permissions FROM staff_role_assignments sra 
+             INNER JOIN staff_roles sr ON sr.id = sra.role_id 
+             WHERE sra.user_id = ?",
+            [$user['id']]
+        );
+        $perms = [];
+        foreach (($roleAssignment ?: []) as $rr) {
+            $a = json_decode($rr['permissions'] ?? '[]', true);
+            if (is_array($a)) $perms = array_merge($perms, $a);
+        }
+        if (in_array($permission, $perms, true)) return true;
+    }
+    return false;
+}
