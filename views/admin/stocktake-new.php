@@ -13,7 +13,7 @@
     <div class="alert alert-<?= e($x['type']) ?>"><?= e($x['message']) ?></div>
 <?php endforeach; ?>
 
-<div class="panel" style="padding:24px;max-width:700px">
+<div class="panel" style="padding:24px">
     <form method="post" action="/admin/stocktake">
         <?= csrfField() ?>
 
@@ -26,17 +26,17 @@
 
         <div class="form-group">
             <label>Phạm vi sản phẩm</label>
-            <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
-                <label style="cursor:pointer;display:flex;align-items:center;gap:8px">
-                    <input type="radio" name="scope" value="all" <?= ($_POST['scope']??'all')==='all'?'checked':'' ?>>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+                <label style="cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:normal">
+                    <input type="radio" name="scope" value="all" <?= ($_POST['scope']??'all')==='all'?'checked':'' ?> style="width:auto;margin:0;flex-shrink:0">
                     <span><strong>Toàn bộ sản phẩm đang hoạt động</strong> (<?= number_format($totalProducts) ?> sản phẩm)</span>
                 </label>
-                <label style="cursor:pointer;display:flex;align-items:center;gap:8px">
-                    <input type="radio" name="scope" value="category" <?= ($_POST['scope']??'')==='category'?'checked':'' ?>>
+                <label style="cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:normal">
+                    <input type="radio" name="scope" value="category" <?= ($_POST['scope']??'')==='category'?'checked':'' ?> style="width:auto;margin:0;flex-shrink:0">
                     <span>Theo danh mục</span>
                 </label>
-                <label style="cursor:pointer;display:flex;align-items:center;gap:8px">
-                    <input type="radio" name="scope" value="low_stock" <?= ($_POST['scope']??'')==='low_stock'?'checked':'' ?>>
+                <label style="cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:normal">
+                    <input type="radio" name="scope" value="low_stock" <?= ($_POST['scope']??'')==='low_stock'?'checked':'' ?> style="width:auto;margin:0;flex-shrink:0">
                     <span>Chỉ hàng tồn thấp (<?= number_format($lowStockCount) ?> sản phẩm)</span>
                 </label>
             </div>
