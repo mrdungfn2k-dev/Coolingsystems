@@ -4445,12 +4445,12 @@ get('/admin/garages', function() {
         $params[] = $brandId;
     }
 
-    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garages g INNER JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where", $params)['c'] ?? 0);
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where", $params)['c'] ?? 0);
     $totalPages = max(1, (int)ceil($total/$perPage));
     $page = min($page, $totalPages);
 
     $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
-    $garages = dbAll("SELECT g.*, u.full_name, u.email, u.phone, b.name AS brand_name, cm.name AS model_name FROM garages g INNER JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where ORDER BY g.created_at DESC LIMIT ? OFFSET ?", $listParams);
+    $garages = dbAll("SELECT g.*, u.full_name, u.email, u.phone, b.name AS brand_name, cm.name AS model_name FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where ORDER BY g.created_at DESC LIMIT ? OFFSET ?", $listParams);
 
     $summary = [
         'total_garages' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages")['c'] ?? 0),
