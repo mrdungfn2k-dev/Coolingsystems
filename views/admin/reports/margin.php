@@ -4,6 +4,7 @@
     <h1>Báo cáo Lợi nhuận gộp theo SKU (Margin Report)</h1>
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Phân tích biên lợi nhuận, doanh thu và giá vốn từng mặt hàng phụ tùng.</p>
   </div>
+  <a href="/admin/reports/margin/export-csv?category_id=<?= (int)$catId ?>" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV / Excel</a>
 </div>
 
 <style>

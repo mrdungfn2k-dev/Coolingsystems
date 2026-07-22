@@ -4,7 +4,28 @@
     <h1>Chuyển kho nội bộ</h1>
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Tạo và theo dõi các phiếu điều chuyển phụ tùng giữa các kho và chi nhánh.</p>
   </div>
-  <a href="/admin/stock-transfers/new" class="btn btn-navy">+ Tạo phiếu chuyển kho mới</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button type="button" onclick="document.getElementById('importSTModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↑ Nhập CSV</button>
+    <a href="/admin/stock-transfers/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
+    <a href="/admin/stock-transfers/new" class="btn btn-navy">+ Tạo phiếu chuyển kho mới</a>
+  </div>
+</div>
+
+<div id="importSTModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
+  <form method="post" action="/admin/stock-transfers/import-csv" enctype="multipart/form-data" style="background:#fff;padding:24px;border-radius:10px;max-width:450px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+    <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+    <h3 style="margin:0 0 14px;color:#1a3258">Nhập phiếu chuyển kho từ CSV</h3>
+    <div style="margin-bottom:14px;font-size:12px;color:#64748b">
+      Định dạng CSV: <code>From_Warehouse, To_Warehouse, Product_SKU, Quantity, Note</code>
+    </div>
+    <div style="margin-bottom:18px">
+      <input type="file" name="csv_file" accept=".csv" required style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px">
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" onclick="document.getElementById('importSTModal').style.display='none'" class="btn btn-outline">Hủy</button>
+      <button type="submit" class="btn btn-navy">Tải lên & Nhập</button>
+    </div>
+  </form>
 </div>
 
 <?php foreach(getFlash() as $x): ?>

@@ -4,6 +4,7 @@
     <h1>Báo cáo KPI Nhân sự & Bán hàng</h1>
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Thống kê hiệu suất làm việc, doanh số phát sinh và hoa hồng thực nhận của từng nhân viên/đối tác.</p>
   </div>
+  <a href="/admin/reports/kpi/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV / Excel</a>
 </div>
 
 <style>

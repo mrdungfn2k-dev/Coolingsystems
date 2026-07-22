@@ -4,7 +4,10 @@
     <h1>Báo giá độc lập</h1>
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Tạo và gửi báo giá cho khách hàng trước khi chuyển đổi thành đơn hàng chính thức.</p>
   </div>
-  <a href="/admin/quotations/new" class="btn btn-navy">+ Tạo báo giá mới</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a href="/admin/quotations/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
+    <a href="/admin/quotations/new" class="btn btn-navy">+ Tạo báo giá mới</a>
+  </div>
 </div>
 
 <?php foreach(getFlash() as $x): ?>

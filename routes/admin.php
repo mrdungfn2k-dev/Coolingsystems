@@ -5285,3 +5285,362 @@ get('/admin/reports/kpi', function() {
         'staffKpis' => $staffKpis
     ]);
 });
+
+// ─── API TÌM KIẾM SẢN PHẨM AUTOCOMPLETE LIVE SEARCH ──────────────────────────────
+get('/admin/inventory/search-product', function() {
+    requireStaffPermission('rbac:products|orders|inventory', '/admin/login');
+    header('Content-Type: application/json');
+    $q = trim((string)($_GET['q'] ?? ''));
+    if ($q === '') { echo json_encode([]); return; }
+    $like = '%'.$q.'%';
+    $products = dbAll("SELECT id, name, sku, oem_code, stock, price, cost_price, location_code FROM products WHERE name LIKE ? OR sku LIKE ? OR oem_code LIKE ? ORDER BY name LIMIT 25", [$like, $like, $like]);
+    echo json_encode($products, JSON_UNESCAPED_UNICODE);
+});
+get('/admin/api/products/search', function() {
+    requireStaffPermission('rbac:products|orders|inventory', '/admin/login');
+    header('Content-Type: application/json');
+    $q = trim((string)($_GET['q'] ?? ''));
+    if ($q === '') { echo json_encode([]); return; }
+    $like = '%'.$q.'%';
+    $products = dbAll("SELECT id, name, sku, oem_code, stock, price, cost_price, location_code FROM products WHERE name LIKE ? OR sku LIKE ? OR oem_code LIKE ? ORDER BY name LIMIT 25", [$like, $like, $like]);
+    echo json_encode($products, JSON_UNESCAPED_UNICODE);
+});
+
+// ─── HELPER XUẤT CSV UTF-8 CHUẨN (HỖ TRỢ TIẾNG VIỆT EXCEL) ─────────────────────
+if (!function_exists('outputCsvFile')) {
+    function outputCsvFile($filename, array $headers, array $rows) {
+        header('Content-Type: text/csv; charset=UTF-8');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        $out = fopen('php://output', 'w');
+        fputs($out, "\xEF\xBB\xBF");
+        fputcsv($out, $headers);
+        foreach ($rows as $row) {
+            fputcsv($out, $row);
+        }
+        fclose($out);
+        exit;
+    }
+}
+
+// 1. Garage CSV Export & Import
+get('/admin/garages/export-csv', function() {
+    requireStaffPermission('rbac:users', '/admin/login');
+    $garages = dbAll("SELECT g.*, u.full_name AS customer_name, u.phone AS customer_phone, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id ORDER BY g.id DESC");
+    $headers = ['ID', 'Khách hàng', 'SĐT Khách hàng', 'Hãng xe', 'Dòng xe', 'Năm sản xuất', 'Phiên bản (Trim)', 'Biển số / Mô tả', 'Mặc định', 'Ngày tạo'];
+    $rows = [];
+    foreach ($garages as $g) {
+        $rows[] = [
+            $g['id'], $g['customer_name'] ?? '—', $g['customer_phone'] ?? '—', $g['brand_name'] ?? '—', $g['model_name'] ?? '—', $g['year'] ?? '—', $g['trim'] ?? '—', $g['label'] ?? '—', $g['is_default'] ? 'Có' : 'Không', $g['created_at'] ?? '—'
+        ];
+    }
+    outputCsvFile('garages_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+post('/admin/garages/import-csv', function() {
+    requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    if (!empty($_FILES['csv_file']['tmp_name'])) {
+        $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        if ($handle) {
+            $header = fgetcsv($handle);
+            $imported = 0;
+            while (($data = fgetcsv($handle)) !== false) {
+                if (count($data) >= 2) {
+                    $uid = (int)($data[0] ?? 0);
+                    $brand = trim((string)($data[1] ?? ''));
+                    $model = trim((string)($data[2] ?? ''));
+                    $year = trim((string)($data[3] ?? ''));
+                    $trim = trim((string)($data[4] ?? ''));
+                    $label = trim((string)($data[5] ?? ''));
+                    if ($uid > 0 && $label !== '') {
+                        dbInsert("INSERT INTO garages (user_id, year, trim, label, created_at) VALUES (?, ?, ?, ?, datetime('now','localtime'))", [
+                            $uid, $year ?: null, $trim ?: null, $label
+                        ]);
+                        $imported++;
+                    }
+                }
+            }
+            fclose($handle);
+            flash('success', 'Đã nhập thành công ' . $imported . ' xe vào Garage.');
+        }
+    } else {
+        flash('error', 'Vui lòng chọn file CSV.');
+    }
+    redirect('/admin/garages');
+});
+
+// 2. Hoa hồng CSV Export & Import
+get('/admin/commissions/export-csv', function() {
+    requireStaffPermission('rbac:finance', '/admin/login');
+    $list = dbAll("SELECT ct.*, COALESCE(p.shop_name, p.representative_name, 'Đối tác') AS partner_name, p.contact_phone FROM commission_transactions ct LEFT JOIN partners p ON p.id=ct.partner_id ORDER BY ct.created_at DESC");
+    $headers = ['ID', 'Mã giao dịch', 'Tên Đối tác', 'SĐT Đối tác', 'Loại (earn/payout)', 'Số tiền hoa hồng (đ)', 'Ghi chú', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $c) {
+        $rows[] = [
+            $c['id'], $c['code'] ?? '—', $c['partner_name'] ?? '—', $c['contact_phone'] ?? '—', $c['type'] ?? '—', $c['commission_fee'] ?? 0, $c['note'] ?? '—', $c['created_at'] ?? '—'
+        ];
+    }
+    outputCsvFile('commissions_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+post('/admin/commissions/import-csv', function() {
+    requireStaffPermission('rbac:finance', '/admin/login');
+    csrfCheck();
+    if (!empty($_FILES['csv_file']['tmp_name'])) {
+        $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        if ($handle) {
+            $header = fgetcsv($handle);
+            $imported = 0;
+            while (($data = fgetcsv($handle)) !== false) {
+                if (count($data) >= 3) {
+                    $pid = (int)($data[0] ?? 0);
+                    $type = trim((string)($data[1] ?? 'earn'));
+                    $fee = (int)($data[2] ?? 0);
+                    $note = trim((string)($data[3] ?? ''));
+                    if ($pid > 0 && $fee > 0) {
+                        $code = 'CT-IMP-' . random_int(1000, 9999);
+                        dbInsert("INSERT INTO commission_transactions (code, partner_id, type, commission_fee, note) VALUES (?, ?, ?, ?, ?)", [
+                            $code, $pid, $type, $fee, $note ?: null
+                        ]);
+                        $imported++;
+                    }
+                }
+            }
+            fclose($handle);
+            flash('success', 'Đã nhập thành công ' . $imported . ' giao dịch hoa hồng.');
+        }
+    } else {
+        flash('error', 'Vui lòng chọn file CSV.');
+    }
+    redirect('/admin/commissions');
+});
+
+// 3. Quotations Export CSV
+get('/admin/quotations/export-csv', function() {
+    requireStaffPermission('rbac:orders', '/admin/login');
+    $list = dbAll("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone FROM quotations q LEFT JOIN users u ON u.id=q.user_id ORDER BY q.id DESC");
+    $headers = ['Mã Báo giá', 'Tên Khách hàng', 'SĐT Khách hàng', 'Tổng tiền (đ)', 'Trạng thái', 'Ghi chú', 'Ngày hết hạn', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $q) {
+        $rows[] = [
+            $q['code'] ?? '—', $q['customer_name'] ?? 'Khách vãng lai', $q['customer_phone'] ?? '—', $q['grand_total'] ?? 0, $q['status'] ?? '—', $q['note'] ?? '—', $q['expires_at'] ?? '—', $q['created_at'] ?? '—'
+        ];
+    }
+    outputCsvFile('quotations_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// 4. Stock Counts Export & Import CSV
+get('/admin/stock-counts/export-csv', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $list = dbAll("SELECT sc.*, u.full_name AS creator_name FROM stock_counts sc LEFT JOIN users u ON u.id=sc.created_by ORDER BY sc.id DESC");
+    $headers = ['Mã Kiểm kho', 'Kho hàng', 'Trạng thái', 'Ghi chú', 'Người tạo', 'Ngày hoàn tất', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $sc) {
+        $rows[] = [
+            $sc['code'] ?? '—', $sc['warehouse_name'] ?? 'Kho chính', $sc['status'] ?? '—', $sc['note'] ?? '—', $sc['creator_name'] ?? 'System', $sc['completed_at'] ?? '—', $sc['created_at'] ?? '—'
+        ];
+    }
+    outputCsvFile('stock_counts_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+post('/admin/stock-counts/import-csv', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    if (!empty($_FILES['csv_file']['tmp_name'])) {
+        $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        if ($handle) {
+            $header = fgetcsv($handle);
+            $imported = 0;
+            while (($data = fgetcsv($handle)) !== false) {
+                if (count($data) >= 3) {
+                    $code = trim((string)($data[0] ?? ''));
+                    $sku = trim((string)($data[1] ?? ''));
+                    $actQty = (int)($data[2] ?? 0);
+                    $reason = trim((string)($data[3] ?? ''));
+
+                    $sc = dbGet("SELECT id FROM stock_counts WHERE code=?", [$code]);
+                    $prod = dbGet("SELECT id, stock FROM products WHERE sku=?", [$sku]);
+
+                    if ($sc && $prod) {
+                        $sysQty = (int)$prod['stock'];
+                        $diff = $actQty - $sysQty;
+                        dbRun("UPDATE stock_count_items SET actual_qty=?, diff_qty=?, reason=? WHERE stock_count_id=? AND product_id=?", [
+                            $actQty, $diff, $reason ?: null, $sc['id'], $prod['id']
+                        ]);
+                        $imported++;
+                    }
+                }
+            }
+            fclose($handle);
+            flash('success', 'Đã nhập kết quả kiểm đếm cho ' . $imported . ' sản phẩm.');
+        }
+    } else {
+        flash('error', 'Vui lòng chọn file CSV.');
+    }
+    redirect('/admin/stock-counts');
+});
+
+// 5. Stock Transfers Export & Import CSV
+get('/admin/stock-transfers/export-csv', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $list = dbAll("SELECT st.*, u.full_name AS creator_name FROM stock_transfers st LEFT JOIN users u ON u.id=st.created_by ORDER BY st.id DESC");
+    $headers = ['Mã Phiếu chuyển', 'Kho xuất hàng', 'Kho nhận hàng', 'Trạng thái', 'Ghi chú', 'Người tạo', 'Ngày vận chuyển', 'Ngày nhận hàng', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $st) {
+        $rows[] = [
+            $st['code'] ?? '—', $st['from_warehouse'] ?? 'Kho chính', $st['to_warehouse'] ?? 'Chi nhánh', $st['status'] ?? '—', $st['note'] ?? '—', $st['creator_name'] ?? 'System', $st['shipped_at'] ?? '—', $st['received_at'] ?? '—', $st['created_at'] ?? '—'
+        ];
+    }
+    outputCsvFile('stock_transfers_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+post('/admin/stock-transfers/import-csv', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    if (!empty($_FILES['csv_file']['tmp_name'])) {
+        $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        if ($handle) {
+            $header = fgetcsv($handle);
+            $imported = 0;
+            while (($data = fgetcsv($handle)) !== false) {
+                if (count($data) >= 4) {
+                    $fromWh = trim((string)($data[0] ?? 'Kho chính'));
+                    $toWh = trim((string)($data[1] ?? 'Chi nhánh'));
+                    $sku = trim((string)($data[2] ?? ''));
+                    $qty = (int)($data[3] ?? 1);
+                    $note = trim((string)($data[4] ?? ''));
+
+                    $prod = dbGet("SELECT id FROM products WHERE sku=?", [$sku]);
+                    if ($prod && $qty > 0) {
+                        $code = 'CK-IMP-' . random_int(1000, 9999);
+                        $stId = dbInsert("INSERT INTO stock_transfers (code, from_warehouse, to_warehouse, status, note, created_by) VALUES (?, ?, ?, 'pending', ?, ?)", [
+                            $code, $fromWh, $toWh, $note ?: null, $_SESSION['user_id'] ?? null
+                        ]);
+                        dbRun("INSERT INTO stock_transfer_items (transfer_id, product_id, quantity) VALUES (?, ?, ?)", [$stId, $prod['id'], $qty]);
+                        $imported++;
+                    }
+                }
+            }
+            fclose($handle);
+            flash('success', 'Đã tạo thành công ' . $imported . ' phiếu chuyển kho từ CSV.');
+        }
+    } else {
+        flash('error', 'Vui lòng chọn file CSV.');
+    }
+    redirect('/admin/stock-transfers');
+});
+
+// 6. Locations Export & Import CSV
+get('/admin/locations/export-csv', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $list = dbAll("SELECT wl.*, COUNT(p.id) AS product_count FROM warehouse_locations wl LEFT JOIN products p ON p.location_code=wl.code GROUP BY wl.id ORDER BY wl.code");
+    $headers = ['Mã vị trí', 'Khu vực / Kệ', 'Tầng', 'Khay / Ô', 'Số SP xếp', 'Ghi chú', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $loc) {
+        $rows[] = [
+            $loc['code'] ?? '—', $loc['area_name'] ?? '—', $loc['shelf_name'] ?? '—', $loc['bin_name'] ?? '—', $loc['product_count'] ?? 0, $loc['note'] ?? '—', $loc['created_at'] ?? '—'
+        ];
+    }
+    outputCsvFile('locations_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+post('/admin/locations/import-csv', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    if (!empty($_FILES['csv_file']['tmp_name'])) {
+        $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        if ($handle) {
+            $header = fgetcsv($handle);
+            $imported = 0;
+            while (($data = fgetcsv($handle)) !== false) {
+                if (count($data) >= 2) {
+                    $code = strtoupper(trim((string)($data[0] ?? '')));
+                    $area = trim((string)($data[1] ?? ''));
+                    $shelf = trim((string)($data[2] ?? ''));
+                    $bin = trim((string)($data[3] ?? ''));
+                    $note = trim((string)($data[4] ?? ''));
+
+                    if ($code !== '' && $area !== '') {
+                        try {
+                            dbInsert("INSERT INTO warehouse_locations (code, area_name, shelf_name, bin_name, note) VALUES (?, ?, ?, ?, ?)", [
+                                $code, $area, $shelf ?: null, $bin ?: null, $note ?: null
+                            ]);
+                            $imported++;
+                        } catch (Throwable $e) {}
+                    }
+                }
+            }
+            fclose($handle);
+            flash('success', 'Đã nhập thành công ' . $imported . ' vị trí kho.');
+        }
+    } else {
+        flash('error', 'Vui lòng chọn file CSV.');
+    }
+    redirect('/admin/locations');
+});
+
+// 7. Report XNT Export CSV
+get('/admin/reports/xnt/export-csv', function() {
+    requireStaffPermission('rbac:reports|products', '/admin/login');
+    $catId = max(0, (int)($_GET['category_id'] ?? 0));
+    $where = 'WHERE 1=1'; $params = [];
+    if ($catId > 0) { $where .= ' AND p.category_id=?'; $params[] = $catId; }
+
+    $items = dbAll("SELECT p.name, p.sku, p.oem_code, p.location_code, p.stock, p.sold_count, p.price, p.cost_price FROM products p $where ORDER BY p.name", $params);
+    $headers = ['Sản phẩm', 'Mã SKU', 'Mã OEM', 'Vị trí kho', 'Tồn đầu kỳ (ước tính)', 'Đã nhập', 'Đã xuất bán', 'Tồn cuối kỳ', 'Đơn giá bán (đ)', 'Giá vốn (đ)', 'Giá trị tồn kho (đ)'];
+    $rows = [];
+    foreach ($items as $it) {
+        $st = (int)$it['stock'];
+        $sd = (int)$it['sold_count'];
+        $cost = (int)($it['cost_price'] ?: $it['price']*0.7);
+        $rows[] = [
+            $it['name'], $it['sku'] ?: '—', $it['oem_code'] ?: '—', $it['location_code'] ?: '—', ($st + $sd), ($st + $sd), $sd, $st, (int)$it['price'], $cost, ($st * $cost)
+        ];
+    }
+    outputCsvFile('baocao_XNT_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// 8. Report Margin Export CSV
+get('/admin/reports/margin/export-csv', function() {
+    requireStaffPermission('rbac:reports|products', '/admin/login');
+    $catId = max(0, (int)($_GET['category_id'] ?? 0));
+    $where = 'WHERE p.sold_count > 0'; $params = [];
+    if ($catId > 0) { $where .= ' AND p.category_id=?'; $params[] = $catId; }
+
+    $items = dbAll("SELECT p.name, p.sku, p.price, p.cost_price, p.sold_count FROM products p $where ORDER BY (p.sold_count * (p.price - COALESCE(p.cost_price, p.price*0.7))) DESC", $params);
+    $headers = ['Sản phẩm', 'Mã SKU', 'Đơn giá bán (đ)', 'Giá vốn đơn vị (đ)', 'Đã bán', 'Tổng Doanh thu (đ)', 'Tổng Giá vốn (đ)', 'Lợi nhuận gộp (đ)', 'Biên lợi nhuận (%)'];
+    $rows = [];
+    foreach ($items as $it) {
+        $price = (int)$it['price'];
+        $cost = (int)($it['cost_price'] ?: $price*0.7);
+        $sold = (int)$it['sold_count'];
+        $rev = $sold * $price;
+        $cogs = $sold * $cost;
+        $profit = $rev - $cogs;
+        $margin = $rev > 0 ? round(($profit / $rev)*100, 1) : 0;
+        $rows[] = [
+            $it['name'], $it['sku'] ?: '—', $price, $cost, $sold, $rev, $cogs, $profit, $margin . '%'
+        ];
+    }
+    outputCsvFile('baocao_loi_nhuan_SKU_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// 9. Report KPI Export CSV
+get('/admin/reports/kpi/export-csv', function() {
+    requireStaffPermission('rbac:reports|products', '/admin/login');
+    $staffKpis = dbAll("SELECT u.full_name, u.phone, u.role,
+        COUNT(DISTINCT o.id) AS order_count,
+        COALESCE(SUM(o.grand_total), 0) AS total_sales,
+        COALESCE(SUM(ct.commission_fee), 0) AS total_commission
+        FROM users u
+        LEFT JOIN orders o ON o.user_id = u.id AND o.status = 'completed'
+        LEFT JOIN partners pt ON pt.contact_phone = u.phone
+        LEFT JOIN commission_transactions ct ON ct.partner_id = pt.id AND ct.type = 'earn'
+        WHERE u.role IN ('staff', 'admin', 'manager', 'customer', 'garage', 'technician')
+        GROUP BY u.id
+        ORDER BY total_sales DESC");
+
+    $headers = ['Họ và tên', 'Vai trò', 'Số điện thoại', 'Số đơn hoàn thành', 'Tổng Doanh số phát sinh (đ)', 'Hoa hồng ghi nhận (đ)'];
+    $rows = [];
+    foreach ($staffKpis as $k) {
+        $rows[] = [
+            $k['full_name'] ?? '—', $k['role'] ?? '—', $k['phone'] ?? '—', (int)$k['order_count'], (int)$k['total_sales'], (int)$k['total_commission']
+        ];
+    }
+    outputCsvFile('baocao_KPI_nhan_su_' . date('Ymd_His') . '.csv', $headers, $rows);
+});

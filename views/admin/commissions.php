@@ -4,6 +4,27 @@
     <h1>Hoa hồng bán hàng</h1>
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Theo dõi hoa hồng giao dịch của các đối tác/cộng tác viên.</p>
   </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button type="button" onclick="document.getElementById('importCommModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↑ Nhập CSV</button>
+    <a href="/admin/commissions/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
+  </div>
+</div>
+
+<div id="importCommModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
+  <form method="post" action="/admin/commissions/import-csv" enctype="multipart/form-data" style="background:#fff;padding:24px;border-radius:10px;max-width:450px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+    <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+    <h3 style="margin:0 0 14px;color:#1a3258">Nhập hoa hồng từ file CSV</h3>
+    <div style="margin-bottom:14px;font-size:12px;color:#64748b">
+      Định dạng CSV: <code>Partner_ID, Type(earn/payout), Fee, Note</code>
+    </div>
+    <div style="margin-bottom:18px">
+      <input type="file" name="csv_file" accept=".csv" required style="width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px">
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" onclick="document.getElementById('importCommModal').style.display='none'" class="btn btn-outline">Hủy</button>
+      <button type="submit" class="btn btn-navy">Tải lên & Nhập</button>
+    </div>
+  </form>
 </div>
 
 <?php foreach(getFlash() as $x): ?>

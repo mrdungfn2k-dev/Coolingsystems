@@ -4,6 +4,7 @@
     <h1>Báo cáo Xuất - Nhập - Tồn (XNT)</h1>
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Đối soát chi tiết biến động tồn kho: Tồn đầu kỳ, Tổng nhập, Tổng xuất và Tồn cuối kỳ.</p>
   </div>
+  <a href="/admin/reports/xnt/export-csv?from=<?= e($fromDate) ?>&to=<?= e($toDate) ?>&category_id=<?= (int)$catId ?>" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV / Excel</a>
 </div>
 
 <style>
