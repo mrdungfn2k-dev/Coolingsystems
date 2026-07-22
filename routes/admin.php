@@ -1462,8 +1462,8 @@ get('/admin/cashbook', function() {
 });
 post('/admin/cashbook/receipts', function() {
     $actor=requireStaffPermission('rbac:finance.receipts.create|tax_config','/admin/login');csrfCheck();
-    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payer=trim($_POST['payer_name']??'');$phone=preg_replace('/\D+/','',$_POST['payer_phone']??'');$email=strtolower(trim($_POST['payer_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$payerWords=$payer===''?0:count(preg_split('/\s+/u',$payer,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
-    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payer===''||$payerWords>50||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','Dữ liệu phiếu thu không hợp lệ (Tên người nộp tối đa 50 từ, diễn giải tối đa 200 từ).');redirect('/admin/cashbook');}
+    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payer=trim($_POST['payer_name']??'');$phone=preg_replace('/\D+/','',$_POST['payer_phone']??'');$email=strtolower(trim($_POST['payer_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$entryDate=trim($_POST['entry_date']??'');
+    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payer===''||mb_strlen($payer)>50||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||mb_strlen($description)>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','Dữ liệu phiếu thu không hợp lệ (Tên người nộp tối đa 50 ký tự, diễn giải tối đa 200 ký tự).');redirect('/admin/cashbook');}
     $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Quỹ nhận tiền không hợp lệ.');redirect('/admin/cashbook');}
     $amount=(int)$rawAmount;$code='PT'.date('ymdHis').random_int(10,99);$fullDescription=trim('Thu từ '.$payer.($description!==''?' - '.$description:''));
     $entryId=dbInsert('INSERT INTO cash_ledger_entries (account_id,direction,amount,reference_type,reference_code,description,payer_phone,payer_email,entry_date,created_by) VALUES (?,?,?,?,?,?,?,?,?,?)',[$accountId,'in',$amount,'manual_receipt',$reference!==''?$reference:$code,$fullDescription,$phone,$email,$entryDate,$actor['id']??null]);
@@ -1472,8 +1472,8 @@ post('/admin/cashbook/receipts', function() {
 });
 post('/admin/cashbook/disbursements', function() {
     $actor=requireStaffPermission('rbac:finance.disbursements.create|tax_config','/admin/login');csrfCheck();
-    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payee=trim($_POST['payee_name']??'');$phone=preg_replace('/\D+/','',$_POST['payee_phone']??'');$email=strtolower(trim($_POST['payee_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$payeeWords=$payee===''?0:count(preg_split('/\s+/u',$payee,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
-    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payee===''||$payeeWords>50||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','Dữ liệu phiếu chi không hợp lệ (Tên người nhận tối đa 50 từ, diễn giải tối đa 200 từ).');redirect('/admin/cashbook');}
+    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payee=trim($_POST['payee_name']??'');$phone=preg_replace('/\D+/','',$_POST['payee_phone']??'');$email=strtolower(trim($_POST['payee_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$entryDate=trim($_POST['entry_date']??'');
+    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payee===''||mb_strlen($payee)>50||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||mb_strlen($description)>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','Dữ liệu phiếu chi không hợp lệ (Tên người nhận tối đa 50 ký tự, diễn giải tối đa 200 ký tự).');redirect('/admin/cashbook');}
     $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Qu&#7929; chi kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
     $amount=(int)$rawAmount;$code='PC'.date('ymdHis').random_int(10,99);
     $requestId=dbInsert('INSERT INTO cash_disbursement_requests (code,account_id,amount,payee_name,payee_phone,payee_email,reference_code,description,entry_date,status,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[$code,$accountId,$amount,$payee,$phone,$email,$reference,$description,$entryDate,'pending',$actor['id']??null]);
@@ -5176,22 +5176,18 @@ post('/admin/locations', function() {
         redirect('/admin/locations'); return;
     }
 
-    $areaWords = $areaName !== '' ? count(preg_split('/\s+/u', $areaName)) : 0;
-    if (!$areaName || $areaWords > 50) {
-        flash('error', 'Vui lòng nhập Khu vực/Kệ hợp lệ (tối đa 50 từ).');
+    if (!$areaName || mb_strlen($areaName) > 50) {
+        flash('error', 'Vui lòng nhập Khu vực/Kệ hợp lệ (tối đa 50 ký tự).');
         redirect('/admin/locations'); return;
     }
 
-    $shelfWords = $shelfName !== '' ? count(preg_split('/\s+/u', $shelfName)) : 0;
-    $binWords = $binName !== '' ? count(preg_split('/\s+/u', $binName)) : 0;
-    if ($shelfWords > 50 || $binWords > 50) {
-        flash('error', 'Tên Tầng và Khay/Ô tối đa 50 từ.');
+    if (mb_strlen($shelfName) > 50 || mb_strlen($binName) > 50) {
+        flash('error', 'Tên Tầng và Khay/Ô tối đa 50 ký tự.');
         redirect('/admin/locations'); return;
     }
 
-    $noteWords = $note !== '' ? count(preg_split('/\s+/u', $note)) : 0;
-    if ($noteWords > 200) {
-        flash('error', 'Ghi chú tối đa 200 từ.');
+    if (mb_strlen($note) > 200) {
+        flash('error', 'Ghi chú tối đa 200 ký tự.');
         redirect('/admin/locations'); return;
     }
 
