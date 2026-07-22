@@ -41,8 +41,17 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap"></noscript>
-<!-- Critical Minified CSS loaded synchronously -->
-<link rel="stylesheet" href="/css/cooling.min.css?v=20260717-min1">
+<!-- Zero-latency Critical Inline CSS -->
+<style id="main-css">
+<?php
+$_cssFile = __DIR__ . '/../../public/css/cooling.min.css';
+if (file_exists($_cssFile)) {
+    echo file_get_contents($_cssFile);
+} else {
+    echo '/* CSS */';
+}
+?>
+</style>
 <!-- Critical inline CSS to prevent FOUC while CSS loads -->
 <style id="critical-inline">
 /* Đồng nhất tiêu đề các mục bên người dùng */
