@@ -5141,10 +5141,20 @@ post('/admin/stock-transfers/:id/status', function($p) {
 // D3: Vị trí kho - Danh sách
 get('/admin/locations', function() {
     $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
-    $locations = dbAll("SELECT wl.*, COUNT(p.id) AS product_count FROM warehouse_locations wl LEFT JOIN products p ON p.location_code=wl.code GROUP BY wl.id ORDER BY wl.code");
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM warehouse_locations")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $locations = dbAll("SELECT wl.*, COUNT(p.id) AS product_count FROM warehouse_locations wl LEFT JOIN products p ON p.location_code=wl.code GROUP BY wl.id ORDER BY wl.code LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+
     view('admin/locations', [
         'title' => 'Sơ đồ & Vị trí kho',
-        'locations' => $locations
+        'locations' => $locations,
+        'page' => $page,
+        'totalPages' => $totalPages
     ]);
 });
 
@@ -5191,6 +5201,8 @@ get('/admin/reports/xnt', function() {
     $fromDate = trim((string)($_GET['from'] ?? date('Y-m-01')));
     $toDate = trim((string)($_GET['to'] ?? date('Y-m-d')));
     $catId = max(0, (int)($_GET['category_id'] ?? 0));
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
 
     $where = 'WHERE 1=1'; $params = [];
     if ($catId > 0) {
@@ -5198,17 +5210,22 @@ get('/admin/reports/xnt', function() {
         $params[] = $catId;
     }
 
-    $items = dbAll("SELECT p.id, p.name, p.sku, p.oem_code, p.stock, p.sold_count, p.price, p.cost_price, p.location_code FROM products p $where ORDER BY p.name", $params);
+    $totalProducts = (int)(dbGet("SELECT COUNT(*) AS c FROM products p $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($totalProducts / $perPage));
+    $page = min($page, $totalPages);
+
+    $allAgg = dbGet("SELECT SUM(stock) AS tot_stock, SUM(sold_count) AS tot_sold FROM products p $where", $params);
+    $totalStock = (int)($allAgg['tot_stock'] ?? 0);
+    $totalExported = (int)($allAgg['tot_sold'] ?? 0);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $items = dbAll("SELECT p.id, p.name, p.sku, p.oem_code, p.stock, p.sold_count, p.price, p.cost_price, p.location_code FROM products p $where ORDER BY p.name LIMIT ? OFFSET ?", $listParams);
     $categories = dbAll("SELECT id, name FROM categories ORDER BY name");
 
-    $totalProducts = count($items);
-    $totalExported = 0; $totalStock = 0; $totalStockValue = 0;
+    $totalStockValue = 0;
     foreach ($items as $it) {
         $st = (int)$it['stock'];
-        $sd = (int)$it['sold_count'];
         $cost = (int)($it['cost_price'] ?: $it['price']*0.7);
-        $totalStock += $st;
-        $totalExported += $sd;
         $totalStockValue += ($st * $cost);
     }
 
@@ -5222,7 +5239,9 @@ get('/admin/reports/xnt', function() {
         'totalProducts' => $totalProducts,
         'totalExported' => $totalExported,
         'totalStock' => $totalStock,
-        'totalStockValue' => $totalStockValue
+        'totalStockValue' => $totalStockValue,
+        'page' => $page,
+        'totalPages' => $totalPages
     ]);
 });
 
@@ -5230,6 +5249,8 @@ get('/admin/reports/xnt', function() {
 get('/admin/reports/margin', function() {
     $user = requireStaffPermission('rbac:reports|products', '/admin/login');
     $catId = max(0, (int)($_GET['category_id'] ?? 0));
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
 
     $where = 'WHERE p.sold_count > 0'; $params = [];
     if ($catId > 0) {
@@ -5237,7 +5258,12 @@ get('/admin/reports/margin', function() {
         $params[] = $catId;
     }
 
-    $items = dbAll("SELECT p.id, p.name, p.sku, p.price, p.cost_price, p.sold_count FROM products p $where ORDER BY (p.sold_count * (p.price - COALESCE(p.cost_price, p.price*0.7))) DESC", $params);
+    $totalItems = (int)(dbGet("SELECT COUNT(*) AS c FROM products p $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($totalItems / $perPage));
+    $page = min($page, $totalPages);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $items = dbAll("SELECT p.id, p.name, p.sku, p.price, p.cost_price, p.sold_count FROM products p $where ORDER BY (p.sold_count * (p.price - COALESCE(p.cost_price, p.price*0.7))) DESC LIMIT ? OFFSET ?", $listParams);
     $categories = dbAll("SELECT id, name FROM categories ORDER BY name");
 
     $totalRevenue = 0; $totalCost = 0; $totalProfit = 0;
@@ -5261,13 +5287,22 @@ get('/admin/reports/margin', function() {
         'totalRevenue' => $totalRevenue,
         'totalCost' => $totalCost,
         'totalProfit' => $totalProfit,
-        'avgMargin' => $avgMargin
+        'avgMargin' => $avgMargin,
+        'page' => $page,
+        'totalPages' => $totalPages
     ]);
 });
 
 // D4: Báo cáo - KPI Bán hàng & Nhân sự
 get('/admin/reports/kpi', function() {
     $user = requireStaffPermission('rbac:reports|products', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $totalStaff = (int)(dbGet("SELECT COUNT(*) AS c FROM users WHERE role IN ('staff', 'admin', 'manager', 'customer', 'garage', 'technician')")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($totalStaff / $perPage));
+    $page = min($page, $totalPages);
+
     $staffKpis = dbAll("SELECT u.id, u.full_name, u.phone, u.role,
         COUNT(DISTINCT o.id) AS order_count,
         COALESCE(SUM(o.grand_total), 0) AS total_sales,
@@ -5278,11 +5313,14 @@ get('/admin/reports/kpi', function() {
         LEFT JOIN commission_transactions ct ON ct.partner_id = pt.id AND ct.type = 'earn'
         WHERE u.role IN ('staff', 'admin', 'manager', 'customer', 'garage', 'technician')
         GROUP BY u.id
-        ORDER BY total_sales DESC");
+        ORDER BY total_sales DESC
+        LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
 
     view('admin/reports/kpi', [
         'title' => 'Báo cáo KPI Nhân sự & Bán hàng',
-        'staffKpis' => $staffKpis
+        'staffKpis' => $staffKpis,
+        'page' => $page,
+        'totalPages' => $totalPages
     ]);
 });
 

@@ -76,6 +76,14 @@
 </table>
 </div>
 
+<?php if(isset($totalPages) && $totalPages > 1): ?>
+<div class="pagination" style="margin-top:16px">
+  <?php if($page>1): ?><a href="/admin/locations?page=<?= $page-1 ?>">‹</a><?php endif; ?>
+  <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>
+  <?php if($page<$totalPages): ?><a href="/admin/locations?page=<?= $page+1 ?>">›</a><?php endif; ?>
+</div>
+<?php endif; ?>
+
 <div id="newLocationModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
   <form method="post" action="/admin/locations" style="background:#fff;padding:24px;border-radius:10px;max-width:450px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
     <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">

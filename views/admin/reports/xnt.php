@@ -100,4 +100,12 @@
 </table>
 </div>
 
+<?php if(isset($totalPages) && $totalPages > 1): $base = ['from'=>$fromDate,'to'=>$toDate,'category_id'=>$catId?:null]; ?>
+<div class="pagination" style="margin-top:16px">
+  <?php if($page>1): ?><a href="/admin/reports/xnt?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?>
+  <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>
+  <?php if($page<$totalPages): ?><a href="/admin/reports/xnt?<?= e(http_build_query(array_filter($base+['page'=>$page+1]))) ?>">›</a><?php endif; ?>
+</div>
+<?php endif; ?>
+
 <?php require __DIR__.'/../../partials/dashboard-foot.php'; ?>
