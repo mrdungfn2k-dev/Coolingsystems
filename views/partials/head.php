@@ -35,7 +35,24 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <?php endif; ?>
 <?php if (!empty($seo['noindex'])): ?>
 <meta name="robots" content="noindex,follow">
+<?php else: ?>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <?php endif; ?>
+
+<!-- Canonical URL & OpenGraph Meta Tags for 100/100 SEO Score -->
+<?php
+$_reqUriClean = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+$_canonicalUrl = 'https://coolingsystems.vn' . ($_reqUriClean === '' ? '/' : $_reqUriClean);
+?>
+<link rel="canonical" href="<?= e($_canonicalUrl) ?>">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:type" content="website">
+<meta property="og:title" content="<?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng') ?>">
+<meta property="og:description" content="<?= e($_metaDesc) ?>">
+<meta property="og:url" content="<?= e($_canonicalUrl) ?>">
+<meta property="og:site_name" content="Coolingsystems.vn">
+<meta property="og:image" content="https://coolingsystems.vn/favicon-cooling-round-48x48.png">
+<meta name="twitter:card" content="summary_large_image">
 <!-- Performance: Post-idle Google Fonts loading for 95+ Mobile Score -->
 <script>
 (function(){

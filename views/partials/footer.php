@@ -21,7 +21,7 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
     <div class="wrap">
       <div class="nl-text"><h3><?= htmlspecialchars($_nlTitle) ?></h3><p><?= htmlspecialchars($_nlSub) ?></p></div>
       <div class="nl-form" id="nlFormWrap">
-        <input type="email" id="nlEmailInput" placeholder="Nhập địa chỉ email @gmail.com..." autocomplete="email">
+        <input type="email" id="nlEmailInput" placeholder="Nhập địa chỉ email @gmail.com..." autocomplete="email" aria-label="Địa chỉ email nhận ưu đãi">
         <button type="button" class="btn btn-navy" onclick="nlSubmit()"><?= htmlspecialchars($_nlBtn) ?></button>
       </div>
     </div>

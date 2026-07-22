@@ -42,7 +42,7 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
       <?php endif; ?>
     </a>
     <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (SKU, mã OEM, tên phụ tùng...)','🔍');return false;}">
-      <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm theo SKU, mã OEM, tên phụ tùng...">
+      <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm theo SKU, mã OEM, tên phụ tùng..." aria-label="Tìm kiếm phụ tùng theo SKU, mã OEM, tên sản phẩm">
       <button class="submit" type="submit" aria-label="Tìm kiếm">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
