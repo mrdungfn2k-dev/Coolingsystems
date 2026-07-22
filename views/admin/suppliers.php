@@ -20,20 +20,20 @@
       <input name="name" required maxlength="160" placeholder="Công ty TNHH Phụ tùng..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
     <div class="form-group">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Điện thoại liên hệ</label>
-      <input type="tel" name="phone" inputmode="numeric" maxlength="11" pattern="0[35789][0-9]{8,9}" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="VD: 0912345678" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Điện thoại liên hệ (10 số) <span style="color:#e11d48">*</span></label>
+      <input type="tel" name="phone" required inputmode="numeric" maxlength="10" minlength="10" pattern="0[35789][0-9]{8}" oninput="this.value=this.value.replace(/\D/g,'')" placeholder="VD: 0912345678" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
     <div class="form-group">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Email liên hệ</label>
-      <input type="email" name="email" maxlength="254" placeholder="VD: nhacungcap@gmail.com" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Email liên hệ <span style="color:#e11d48">*</span></label>
+      <input type="email" name="email" required maxlength="254" placeholder="VD: nhacungcap@gmail.com" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
     <div class="form-group">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Mã số thuế</label>
-      <input type="text" name="tax_code" inputmode="numeric" maxlength="14" pattern="[0-9\-]{10,14}" oninput="this.value=this.value.replace(/[^0-9\-]/g,'')" placeholder="MST 10-13 số..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Mã số thuế <span style="color:#e11d48">*</span></label>
+      <input type="text" name="tax_code" required inputmode="numeric" minlength="10" maxlength="14" pattern="[0-9\-]{10,14}" oninput="this.value=this.value.replace(/[^0-9\-]/g,'')" placeholder="MST 10-13 số..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
     <div class="form-group" style="grid-column:span 2">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Địa chỉ trụ sở / kho</label>
-      <input name="address" maxlength="300" placeholder="Số nhà, đường, quận/huyện, tỉnh/thành..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Địa chỉ trụ sở / kho <span style="color:#e11d48">*</span></label>
+      <input name="address" required minlength="5" maxlength="300" placeholder="Số nhà, đường, quận/huyện, tỉnh/thành..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
     <div style="grid-column: span 3; display:flex; justify-content:flex-end; margin-top:4px">
       <button class="btn btn-navy" style="padding:8px 20px">Tạo nhà cung cấp</button>
@@ -58,7 +58,7 @@
       <tr style="border-top:1px solid #edf1f5">
         <td style="padding:11px 12px;font-family:monospace;font-weight:700"><?=e($i['code'])?></td>
         <td style="padding:11px 12px"><strong style="color:#1a3258"><?=e($i['name'])?></strong><div style="font-size:11px;color:#64748b;margin-top:2px"><?=e($i['address']?:'—')?></div></td>
-        <td style="padding:11px 12px;font-size:13px"><?=e($i['phone']?:'—')?></td>
+        <td style="padding:11px 12px;font-size:13px;font-weight:600"><?=e($i['phone']?:'—')?></td>
         <td style="padding:11px 12px;font-size:13px;color:#0284c7"><?=e($i['email']?:'—')?></td>
         <td style="padding:11px 12px;font-size:13px;font-family:monospace"><?=e($i['tax_code']?:'—')?></td>
       </tr>
