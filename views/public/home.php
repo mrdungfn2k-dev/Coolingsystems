@@ -26,7 +26,7 @@
       <div class="actions"><a href="<?= e($heroBtn1Url) ?>" class="btn btn-gold btn-lg"><?= e($heroBtn1) ?></a><a href="<?= e($heroBtn2Url) ?>" class="btn btn-outline-light btn-lg"><?= e($heroBtn2) ?></a></div>
     </div>
     <aside class="vs-card">
-      <div class="head"><h3>Tìm phụ tùng cho xe của bạn</h3><div class="sub">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
+      <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#334155;font-weight:500;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
         <div class="vs-field">
           <label>Từ khóa / Tên sản phẩm</label>
@@ -238,7 +238,7 @@ foreach ($cats as $cat):
 .prod-pager button:hover:not(.active) { background: #f0f2f7; border-color: #1a3258; }
 .featured-paging { text-align: center; margin-top: 12px; }
 /* === Bộ lọc tìm phụ tùng (.cdd) — giống trang Sản phẩm, mở xuống dưới === */
-.vs-card .vs-field label { font-size:11px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
+.vs-card .vs-field label { font-size:11px; font-weight:700; color:#4a5568; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
 .vs-card .vs-input, .vs-card .cdd-trigger { width:100%; height:42px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--navy-dark); font-size:13.5px; font-weight:500; font-family:inherit; }
 .vs-card .vs-input { padding:0 14px; transition:border-color .15s, box-shadow .15s; }
 .vs-card .vs-input:hover { border-color:#b9c4d6; }

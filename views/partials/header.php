@@ -3,9 +3,7 @@
 .cat-dropdown a:hover{background:#f5f7fb!important;color:#c8a951!important}
 .all-cats-wrap .arrow{transition:transform 0.2s}
 .all-cats-wrap:hover .arrow,.all-cats-wrap.open .arrow{transform:rotate(180deg)}
-</style>
 
-<style>
 /* Modern search bar styling */
 header.main .search { border: 1px solid var(--line) !important; border-radius: 8px !important; }
 header.main .search:focus-within { border-color: var(--navy) !important; box-shadow: 0 0 0 3px var(--navy-soft) !important; }
@@ -36,11 +34,11 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
 <style>@media(min-width:901px){ .mobile-cart-btn{display:none!important;} }</style>
 <header class="main">
   <div class="wrap">
-    <a href="/" class="logo">
+    <a href="/" class="logo" aria-label="Trang chủ Cooling - Phụ tùng ô tô chính hãng">
       <?php if ($siteLogo): ?>
-        <img src="/uploads/<?= htmlspecialchars($siteLogo) ?>" style="max-width:180px; max-height:76px; object-fit:contain">
+        <img src="/uploads/<?= htmlspecialchars($siteLogo) ?>" alt="Cooling - Phụ tùng ô tô chính hãng" style="max-width:180px; max-height:76px; object-fit:contain" width="180" height="76">
       <?php else: ?>
-        <svg class="logo-svg" width="180" height="76" viewBox="0 0 480 200"><use href="#cooling-logo"/></svg>
+        <svg class="logo-svg" width="180" height="76" viewBox="0 0 480 200" aria-label="Cooling logo" role="img"><use href="#cooling-logo"/></svg>
       <?php endif; ?>
     </a>
     <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (SKU, mã OEM, tên phụ tùng...)','🔍');return false;}">
@@ -141,9 +139,9 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         <a href="/customer/profile" class="h-btn" style="display:flex;align-items:center;gap:8px">
           <div style="width:32px;height:32px;border-radius:50%;background:#f0f0f0;overflow:hidden;border:1px solid #d0d5e0;flex-shrink:0">
             <?php if(!empty($user['avatar'])): ?>
-              <img src="/uploads/avatars/<?= e($user['avatar']) ?>" style="width:100%;height:100%;object-fit:cover">
+              <img src="/uploads/avatars/<?= e($user['avatar']) ?>" alt="Ảnh đại diện <?= e($user['full_name'] ?? '') ?>" style="width:100%;height:100%;object-fit:cover">
             <?php else: ?>
-              <img src="/assets/images/default-avatar.png" style="width:100%;height:100%;object-fit:cover" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NjYyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00czEuNzktNCA0LTRtMCAxMGMtMi42NyAwLTggMS4zNC04IDR2MmgxNnYtMmMwLTIuNjYtNS4zMy00LTgtNHoiLz48L3N2Zz4='">
+              <img src="/assets/images/default-avatar.png" alt="Ảnh đại diện" style="width:100%;height:100%;object-fit:cover" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2NjYyI+PHBhdGggZD0iTTEyIDEyYzIuMjEgMCA0LTEuNzkgNC00czEuNzktNCA0LTRtMCAxMGMtMi42NyAwLTggMS4zNC04IDR2MmgxNnYtMmMwLTIuNjYtNS4zMy00LTgtNHoiLz48L3N2Zz4='">
             <?php endif; ?>
           </div>
           <div>
@@ -168,28 +166,28 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
     <div class="mobile-right-actions" style="display:flex;align-items:center;gap:8px;margin-left:auto;">
       <?php if ($user && in_array($user['role'], ['customer','staff'])): ?>
         <!-- Thông báo -->
-        <a href="/customer/notifications" class="mobile-icon-btn" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Thông báo">
-          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <a href="/customer/notifications" class="mobile-icon-btn" aria-label="Thông báo" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Thông báo">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
           <?php if (!empty($notiCount) && $notiCount > 0): ?>
             
           <?php endif; ?>
         </a>
         <!-- Tin nhắn -->
-        <a href="/customer/chat" class="mobile-icon-btn" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Tin nhắn">
-          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <a href="/customer/chat" class="mobile-icon-btn" aria-label="Tin nhắn" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Tin nhắn">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         </a>
         <!-- Yêu thích -->
-        <a href="/customer/favorites" class="mobile-icon-btn" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Yêu thích">
-          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <a href="/customer/favorites" class="mobile-icon-btn" aria-label="Danh sách yêu thích" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Yêu thích">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           <?php if (!empty($fav) && $fav > 0): ?>
             <span class="fav-badge-mobile"><?= min($fav, 99) ?></span>
           <?php endif; ?>
         </a>
       <?php endif; ?>
       <!-- Giỏ hàng -->
-      <a href="/customer/cart" class="mobile-cart-btn" style="position:relative;color:var(--navy);display:flex;align-items:center;padding:6px;">
-         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-         <?php if ($cart['cnt'] > 0): ?><span style="position:absolute;top:0px;right:0px;background:#c8962b;color:#fff;font-size:9px;font-weight:bold;border-radius:10px;min-width:15px;height:15px;line-height:15px;text-align:center;padding:0 3px;"><?= $cart['cnt'] ?></span><?php endif; ?>
+      <a href="/customer/cart" class="mobile-cart-btn" aria-label="Giỏ hàng<?= $cart['cnt'] > 0 ? ' (' . $cart['cnt'] . ' sản phẩm)' : '' ?>" style="position:relative;color:var(--navy);display:flex;align-items:center;padding:6px;">
+         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+         <?php if ($cart['cnt'] > 0): ?><span style="position:absolute;top:0px;right:0px;background:#c8962b;color:#fff;font-size:9px;font-weight:bold;border-radius:10px;min-width:15px;height:15px;line-height:15px;text-align:center;padding:0 3px;" aria-hidden="true"><?= $cart['cnt'] ?></span><?php endif; ?>
       </a>
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu"><span></span><span></span><span></span></button>
     </div>
