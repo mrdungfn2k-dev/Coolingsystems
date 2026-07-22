@@ -71,8 +71,13 @@ function switchLang() {
     if (btn) btn.textContent = 'VI/EN';
   }
 })();
+window.addEventListener('load', function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  document.body.appendChild(s);
+});
 </script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <style>
 /* Hide Google Translate bar */
 .goog-te-banner-frame { display: none !important; }

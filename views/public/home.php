@@ -100,9 +100,9 @@ $__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], fu
 <style>
 .home-banners { padding: 16px 0 4px; }
 .home-banners .wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-.home-banners .hbc { position: relative; overflow: hidden; border-radius: 14px; box-shadow: 0 6px 22px rgba(20,40,80,.12); background:#0f2342; aspect-ratio: 1600 / 250; width: 100%; }
+.home-banners .hbc { position: relative; overflow: hidden; border-radius: 14px; box-shadow: 0 6px 22px rgba(20,40,80,.12); background:#0f2342; width: 100%; height: 194px; min-height: 194px; max-height: 194px; }
 .hbc-track { display: flex; height: 100%; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
-.hbc-slide { min-width: 100%; height: 100%; }
+.hbc-slide { min-width: 100%; height: 100%; flex-shrink: 0; }
 .hbc-slide a, .hbc-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hbc-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.9); border: none; cursor: pointer; font-size: 26px; line-height: 1; color: #1a3258; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,.18); transition: background .2s; z-index: 2; }
 .hbc-nav:hover { background: #fff; }
