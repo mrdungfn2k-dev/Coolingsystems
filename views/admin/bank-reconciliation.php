@@ -59,8 +59,8 @@
       </select>
     </div>
     <div class="form-group" style="grid-column:span 3">
-      <label>Diễn giải <span id="bankDescriptionCount" style="font-weight:400;color:#667085">(0/200 ký tự)</span></label>
-      <textarea name="description" id="bankDescription" rows="3" maxlength="200" placeholder="Nội dung từ sao kê (tối đa 200 ký tự)"></textarea>
+      <label>Diễn giải <span id="bankDescriptionCount" style="font-weight:400;color:#667085">(0/200 từ)</span></label>
+      <textarea name="description" id="bankDescription" rows="3" placeholder="Nội dung từ sao kê (tối đa 200 từ)..."></textarea>
     </div>
     <div><button class="btn btn-navy">Ghi nhận &amp; đối soát</button></div>
   </form>
@@ -124,17 +124,29 @@
 
 <script>
 (function(){
-  var desc = document.getElementById('bankDescription'), counter = document.getElementById('bankDescriptionCount');
-  if(!desc) return;
-  function update() {
-    var len = desc.value.length;
-    if(counter) {
-      counter.textContent = '(' + len + '/200 ký tự)';
-      counter.style.color = len >= 200 ? '#e11d48' : '#667085';
+  function enforceLiveWordLimit(inputEl, maxWords, counterEl) {
+    if(!inputEl) return;
+    function update() {
+      var text = inputEl.value;
+      var words = text.trim() ? text.trim().split(/\s+/) : [];
+      if(words.length > maxWords) {
+        var regex = new RegExp('^(?:\\s*\\S+){' + maxWords + '}');
+        var match = text.match(regex);
+        if(match) {
+          inputEl.value = match[0];
+          words = inputEl.value.trim().split(/\s+/);
+        }
+      }
+      if(counterEl) {
+        counterEl.textContent = '(' + words.length + '/' + maxWords + ' từ)';
+        counterEl.style.color = words.length >= maxWords ? '#e11d48' : '#667085';
+      }
     }
+    inputEl.addEventListener('input', update);
+    update();
   }
-  desc.addEventListener('input', update);
-  update();
+
+  enforceLiveWordLimit(document.getElementById('bankDescription'), 200, document.getElementById('bankDescriptionCount'));
 })();
 </script>
 <?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

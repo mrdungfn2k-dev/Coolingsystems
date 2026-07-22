@@ -111,8 +111,8 @@
     </div>
 
     <div style="margin-bottom:20px">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ghi chú <span id="noteCharCnt" style="font-weight:400;color:#64748b">(0/200 ký tự)</span></label>
-      <textarea id="loc_note" name="note" rows="3" maxlength="200" placeholder="Mô tả loại phụ tùng lưu ở đây (tối đa 200 ký tự)..." style="width:100%;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:13px"></textarea>
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ghi chú <span id="noteWordCnt" style="font-weight:400;color:#64748b">(0/200 từ)</span></label>
+      <textarea id="loc_note" name="note" rows="3" placeholder="Mô tả loại phụ tùng lưu ở đây (tối đa 200 từ)..." style="width:100%;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:13px"></textarea>
     </div>
 
     <div style="display:flex;gap:10px;justify-content:flex-end">
@@ -137,10 +137,32 @@
     update();
   }
 
+  function enforceLiveWordLimit(inputEl, maxWords, counterEl) {
+    if(!inputEl) return;
+    function update() {
+      var text = inputEl.value;
+      var words = text.trim() ? text.trim().split(/\s+/) : [];
+      if(words.length > maxWords) {
+        var regex = new RegExp('^(?:\\s*\\S+){' + maxWords + '}');
+        var match = text.match(regex);
+        if(match) {
+          inputEl.value = match[0];
+          words = inputEl.value.trim().split(/\s+/);
+        }
+      }
+      if(counterEl) {
+        counterEl.textContent = '(' + words.length + '/' + maxWords + ' từ)';
+        counterEl.style.color = words.length >= maxWords ? '#e11d48' : '#64748b';
+      }
+    }
+    inputEl.addEventListener('input', update);
+    update();
+  }
+
   setupCharCounter(document.getElementById('loc_area'), 50, document.getElementById('areaCharCnt'));
   setupCharCounter(document.getElementById('loc_shelf'), 50, document.getElementById('shelfCharCnt'));
   setupCharCounter(document.getElementById('loc_bin'), 50, document.getElementById('binCharCnt'));
-  setupCharCounter(document.getElementById('loc_note'), 200, document.getElementById('noteCharCnt'));
+  enforceLiveWordLimit(document.getElementById('loc_note'), 200, document.getElementById('noteWordCnt'));
 })();
 </script>
 

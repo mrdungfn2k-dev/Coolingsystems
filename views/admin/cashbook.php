@@ -69,8 +69,8 @@
     <div class="form-group"><label>Email *</label><input name="payer_email" type="email" required maxlength="254" placeholder="email@nguoinop.com"></div>
     <div class="form-group"><label>Mã tham chiếu</label><input name="reference_code" maxlength="64" placeholder="Hóa đơn, biên nhận..."></div>
     <div class="form-group" style="grid-column:span 2">
-      <label>Diễn giải <span id="receiptCharCount" style="font-weight:400;color:#667085">0/200 ký tự</span></label>
-      <textarea name="description" id="receiptDescription" rows="2" maxlength="200" placeholder="Nội dung khoản thu (tối đa 200 ký tự)"></textarea>
+      <label>Diễn giải <span id="receiptWordCount" style="font-weight:400;color:#667085">(0/200 từ)</span></label>
+      <textarea name="description" id="receiptDescription" rows="2" placeholder="Nội dung khoản thu (tối đa 200 từ)..."></textarea>
     </div>
     <div style="grid-column:span 3"><button class="btn btn-navy">Tạo phiếu thu</button></div>
   </form>
@@ -105,8 +105,8 @@
     <div class="form-group"><label>Email *</label><input name="payee_email" type="email" required maxlength="254" placeholder="email@nguoinhan.com"></div>
     <div class="form-group"><label>Mã tham chiếu</label><input name="reference_code" maxlength="64" placeholder="Hóa đơn, biên nhận..."></div>
     <div class="form-group" style="grid-column:span 2">
-      <label>Diễn giải <span id="disbursementCharCount" style="font-weight:400;color:#667085">0/200 ký tự</span></label>
-      <textarea name="description" id="disbursementDescription" rows="2" maxlength="200" placeholder="Nội dung khoản chi (tối đa 200 ký tự)"></textarea>
+      <label>Diễn giải <span id="disbursementWordCount" style="font-weight:400;color:#667085">(0/200 từ)</span></label>
+      <textarea name="description" id="disbursementDescription" rows="2" placeholder="Nội dung khoản chi (tối đa 200 từ)..."></textarea>
     </div>
     <div style="grid-column:span 3"><button class="btn btn-navy">Tạo phiếu chi</button></div>
   </form>
@@ -184,15 +184,37 @@
     update();
   }
 
+  function enforceLiveWordLimit(inputEl, maxWords, counterEl) {
+    if(!inputEl) return;
+    function update() {
+      var text = inputEl.value;
+      var words = text.trim() ? text.trim().split(/\s+/) : [];
+      if(words.length > maxWords) {
+        var regex = new RegExp('^(?:\\s*\\S+){' + maxWords + '}');
+        var match = text.match(regex);
+        if(match) {
+          inputEl.value = match[0];
+          words = inputEl.value.trim().split(/\s+/);
+        }
+      }
+      if(counterEl) {
+        counterEl.textContent = '(' + words.length + '/' + maxWords + ' từ)';
+        counterEl.style.color = words.length >= maxWords ? '#e11d48' : '#667085';
+      }
+    }
+    inputEl.addEventListener('input', update);
+    update();
+  }
+
   // Phiếu thu
   var rForm = document.getElementById('cashReceiptForm');
   if(rForm) {
     var rPhone = rForm.querySelector('[name=payer_phone]'), rHint = document.getElementById('receiptPhoneHint');
     var rPayer = document.getElementById('receiptPayerName'), rPayerCnt = document.getElementById('payerCharCnt');
-    var rDesc = document.getElementById('receiptDescription'), rDescCnt = document.getElementById('receiptCharCount');
+    var rDesc = document.getElementById('receiptDescription'), rDescCnt = document.getElementById('receiptWordCount');
 
     setupCharCounter(rPayer, 50, rPayerCnt);
-    setupCharCounter(rDesc, 200, rDescCnt);
+    enforceLiveWordLimit(rDesc, 200, rDescCnt);
 
     function validPhone(phone, hint){
       var value = phone.value.replace(/\D/g,'').slice(0,10);
@@ -219,10 +241,10 @@
   if(dForm) {
     var dPhone = dForm.querySelector('[name=payee_phone]'), dHint = document.getElementById('disbursementPhoneHint');
     var dPayee = document.getElementById('disbursementPayeeName'), dPayeeCnt = document.getElementById('payeeCharCnt');
-    var dDesc = document.getElementById('disbursementDescription'), dDescCnt = document.getElementById('disbursementCharCount');
+    var dDesc = document.getElementById('disbursementDescription'), dDescCnt = document.getElementById('disbursementWordCount');
 
     setupCharCounter(dPayee, 50, dPayeeCnt);
-    setupCharCounter(dDesc, 200, dDescCnt);
+    enforceLiveWordLimit(dDesc, 200, dDescCnt);
 
     dPhone.addEventListener('input', function(){ validPhone(dPhone, dHint); });
     dPhone.addEventListener('blur', function(){ validPhone(dPhone, dHint); });
