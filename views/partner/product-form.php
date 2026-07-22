@@ -183,7 +183,7 @@
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
               <?php foreach($images as $img):?>
                 <div style="position:relative">
-                  <img src="/uploads/products/<?= e($img['file_path']) ?>" loading="lazy"> style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid var(--line)">
+                  <img src="/uploads/products/<?= e(implode('/', array_map('rawurlencode', explode('/', $img['file_path'])))) ?>" loading="lazy" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid var(--line)" onerror="this.onerror=null;this.src='/img/placeholder.png'">
                 </div>
               <?php endforeach;?>
             </div>

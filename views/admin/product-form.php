@@ -237,7 +237,7 @@ function swTab(t){
             <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px" id="existingImagesRow">
               <?php foreach($images as $img):?>
                 <div class="existing-img-wrap" data-img-id="<?= $img['id'] ?>" style="position:relative;width:120px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:2px solid #e0e0e0;flex-shrink:0;background:#fff">
-                  <img src="/uploads/products/<?= e($img['file_path']) ?>" style="width:100%;height:100%;object-fit:contain">
+                  <img src="/uploads/products/<?= e(implode('/', array_map('rawurlencode', explode('/', $img['file_path'])))) ?>" style="width:100%;height:100%;object-fit:contain" onerror="this.onerror=null;this.src='/img/placeholder.png'">
                   <button type="button" onclick="deleteProductImage(<?= $img['id'] ?>, this)" title="Xóa ảnh này"
                     style="position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s"
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
