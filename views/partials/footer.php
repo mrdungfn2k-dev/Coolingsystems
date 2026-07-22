@@ -55,7 +55,7 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
   ?>
   <div class="foot-bottom"><div class="wrap"><span><?= $_copyText ?></span></div></div>
 </footer>
-<div class="float-stack"><a href="tel:<?= $_hl ?>" class="float-btn gold">Gọi ngay</a></div>
+<div class="float-stack"><a href="tel:<?= $_hl ?>" class="float-btn gold" aria-label="Gọi ngay hotline tư vấn miễn phí 24/7 <?= $_hl ?>">Gọi ngay</a></div>
 
 <script>
 function nlSubmit() {

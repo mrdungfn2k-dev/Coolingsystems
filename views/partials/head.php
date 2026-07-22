@@ -239,6 +239,37 @@ $breadcrumbSchema = [
         ];
     }, $_schemaItems, array_keys($_schemaItems)),
 ];
+$websiteSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'WebSite',
+    'name' => 'Cooling',
+    'alternateName' => 'CoolingSystems.vn',
+    'url' => 'https://coolingsystems.vn',
+    'potentialAction' => [
+        '@type' => 'SearchAction',
+        'target' => [
+            '@type' => 'EntryPoint',
+            'urlTemplate' => 'https://coolingsystems.vn/products?q={search_term_string}'
+        ],
+        'query-input' => 'required name=search_term_string'
+    ]
+];
+$orgSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Organization',
+    'name' => 'Cooling',
+    'url' => 'https://coolingsystems.vn',
+    'logo' => 'https://coolingsystems.vn/uploads/logo_1780242378.jpg',
+    'contactPoint' => [
+        '@type' => 'ContactPoint',
+        'telephone' => '+84-947-796-471',
+        'contactType' => 'customer service',
+        'areaServed' => 'VN',
+        'availableLanguage' => 'Vietnamese'
+    ]
+];
 ?>
 <script type="application/ld+json"><?= jsonLd($breadcrumbSchema) ?></script>
+<script type="application/ld+json"><?= jsonLd($websiteSchema) ?></script>
+<script type="application/ld+json"><?= jsonLd($orgSchema) ?></script>
 <?php endif; ?>
