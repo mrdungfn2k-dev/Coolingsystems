@@ -88,6 +88,18 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <a href="/admin/reports/margin" class="<?= currentPath()==='/admin/reports/margin'?'active':'' ?>"><?= sbIcon('chart') ?>Lợi nhuận gộp SKU</a>
       <a href="/admin/reports/kpi" class="<?= currentPath()==='/admin/reports/kpi'?'active':'' ?>"><?= sbIcon('users') ?>KPI Bán hàng & NV</a>
       <?php endif; ?>
+      <?php if($__isAdmin || $sb('users')): ?>
+      <div class="sb-section">CRM & MARKETING<span class="sb-sec-desc">Phân khúc · Bảo dưỡng · Tickets · Campaign</span></div>
+      <a href="/admin/crm/segments" class="<?= currentPath()==='/admin/crm/segments'?'active':'' ?>"><?= sbIcon('users') ?>Phân khúc khách hàng</a>
+      <a href="/admin/crm/maintenance" class="<?= currentPath()==='/admin/crm/maintenance'?'active':'' ?>"><?= sbIcon('tool') ?>Lịch nhắc bảo dưỡng</a>
+      <a href="/admin/crm/tickets" class="<?= currentPath()==='/admin/crm/tickets'?'active':'' ?>"><?= sbIcon('message') ?>Khiếu nại & Hỗ trợ KH</a>
+      <a href="/admin/marketing/campaigns" class="<?= currentPath()==='/admin/marketing/campaigns'?'active':'' ?>"><?= sbIcon('gift') ?>Chiến dịch Marketing</a>
+      <?php endif; ?>
+      <?php if($__isAdmin): ?>
+      <div class="sb-section">AN TOÀN HỆ THỐNG<span class="sb-sec-desc">Cảnh báo bất thường · Sao lưu CSDL</span></div>
+      <a href="/admin/security/alerts" class="<?= currentPath()==='/admin/security/alerts'?'active':'' ?>"><?= sbIcon('shield') ?>Cảnh báo bất thường</a>
+      <a href="/admin/settings/backups" class="<?= currentPath()==='/admin/settings/backups'?'active':'' ?>"><?= sbIcon('gear') ?>Sao lưu CSDL (Backups)</a>
+      <?php endif; ?>
       <?php if($__isAdmin||$sb('stores')): ?>
       <div class="sb-section">CỬA HÀNG<span class="sb-sec-desc">Hệ thống · Loại chi nhánh</span></div>
       <?php if($sb('stores')): ?><a href="/admin/stores" class="<?= isActive('/admin/stores') ?>"><?= sbIcon('pin') ?>Hệ thống cửa hàng</a><?php endif; ?>
@@ -128,6 +140,12 @@ $_abcMap = [
     '/admin/reports/xnt' => 'Báo cáo Xuất-Nhập-Tồn',
     '/admin/reports/margin' => 'Báo cáo Lợi nhuận gộp',
     '/admin/reports/kpi' => 'Báo cáo KPI Nhân sự',
+    '/admin/crm/segments' => 'Phân khúc khách hàng',
+    '/admin/crm/maintenance' => 'Lịch nhắc bảo dưỡng',
+    '/admin/crm/tickets' => 'Khiếu nại & Hỗ trợ KH',
+    '/admin/marketing/campaigns' => 'Chiến dịch Marketing',
+    '/admin/security/alerts' => 'Cảnh báo bất thường',
+    '/admin/settings/backups' => 'Sao lưu CSDL',
     '/admin/staff' => 'Phân quyền NV',
     '/admin/users' => 'Người dùng',
     '/admin/brands' => 'Hãng xe',

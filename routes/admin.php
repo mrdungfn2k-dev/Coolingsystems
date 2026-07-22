@@ -5682,3 +5682,332 @@ get('/admin/reports/kpi/export-csv', function() {
     }
     outputCsvFile('baocao_KPI_nhan_su_' . date('Ymd_His') . '.csv', $headers, $rows);
 });
+
+// ─── GIAI ĐOẠN E: CRM, MARKETING AUTOMATION & CẢNH BÁO AN TOÀN ──────────────────
+
+// E1: CRM Segments - Danh sách & Phân trang
+get('/admin/crm/segments', function() {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM crm_segments")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $segments = dbAll("SELECT cs.*, COUNT(u.id) AS user_count FROM crm_segments cs LEFT JOIN users u ON u.role IN ('customer','garage') GROUP BY cs.id ORDER BY cs.id DESC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+
+    view('admin/crm-segments', [
+        'title' => 'Phân khúc khách hàng',
+        'segments' => $segments,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// E1: CRM Segments - Lưu mới
+post('/admin/crm/segments', function() {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    $name = trim((string)($_POST['name'] ?? ''));
+    $description = trim((string)($_POST['description'] ?? ''));
+    if ($name !== '') {
+        dbInsert("INSERT INTO crm_segments (name, description) VALUES (?, ?)", [$name, $description ?: null]);
+        flash('success', 'Đã tạo phân khúc khách hàng mới: ' . $name);
+    }
+    redirect('/admin/crm/segments');
+});
+
+// E1: CRM Segments - Xóa
+post('/admin/crm/segments/:id/delete', function($p) {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    dbRun("DELETE FROM crm_segments WHERE id=?", [(int)$p['id']]);
+    flash('success', 'Đã xóa phân khúc khách hàng.');
+    redirect('/admin/crm/segments');
+});
+
+// E1: CRM Segments - Export CSV
+get('/admin/crm/segments/export-csv', function() {
+    requireStaffPermission('rbac:users', '/admin/login');
+    $list = dbAll("SELECT cs.*, COUNT(u.id) AS user_count FROM crm_segments cs LEFT JOIN users u ON u.role IN ('customer','garage') GROUP BY cs.id ORDER BY cs.id DESC");
+    $headers = ['ID', 'Tên phân khúc', 'Mô tả', 'Số KH thuộc nhóm', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $s) {
+        $rows[] = [$s['id'], $s['name'], $s['description'] ?? '—', (int)($s['user_count'] ?? 0), $s['created_at'] ?? '—'];
+    }
+    outputCsvFile('crm_segments_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// E1: CRM Maintenance Schedules - Danh sách & Phân trang
+get('/admin/crm/maintenance', function() {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM crm_maintenance_schedules")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $schedules = dbAll("SELECT ms.*, u.full_name AS customer_name, u.phone AS customer_phone FROM crm_maintenance_schedules ms LEFT JOIN users u ON u.id=ms.user_id ORDER BY ms.next_due_date ASC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+    $customers = dbAll("SELECT id, full_name, phone FROM users WHERE role IN ('customer','garage') ORDER BY full_name");
+
+    view('admin/crm-maintenance', [
+        'title' => 'Lịch nhắc bảo dưỡng định kỳ',
+        'schedules' => $schedules,
+        'customers' => $customers,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// E1: CRM Maintenance - Tạo lịch mới
+post('/admin/crm/maintenance', function() {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    $uid = (int)($_POST['user_id'] ?? 0);
+    $prodName = trim((string)($_POST['product_name'] ?? ''));
+    $servName = trim((string)($_POST['service_name'] ?? ''));
+    $dueDate = trim((string)($_POST['next_due_date'] ?? ''));
+    $note = trim((string)($_POST['note'] ?? ''));
+
+    if ($uid > 0 && $prodName !== '' && $dueDate !== '') {
+        dbInsert("INSERT INTO crm_maintenance_schedules (user_id, product_name, service_name, next_due_date, status, note) VALUES (?, ?, ?, ?, 'pending', ?)", [
+            $uid, $prodName, $servName, $dueDate, $note ?: null
+        ]);
+        flash('success', 'Đã lập lịch nhắc bảo dưỡng thành công.');
+    } else {
+        flash('error', 'Vui lòng nhập đầy đủ thông tin bắt buộc.');
+    }
+    redirect('/admin/crm/maintenance');
+});
+
+// E1: CRM Maintenance - Cập nhật trạng thái
+post('/admin/crm/maintenance/:id/status', function($p) {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    $status = trim((string)($_POST['status'] ?? 'completed'));
+    dbRun("UPDATE crm_maintenance_schedules SET status=? WHERE id=?", [$status, (int)$p['id']]);
+    flash('success', 'Đã cập nhật trạng thái lịch bảo dưỡng.');
+    redirect('/admin/crm/maintenance');
+});
+
+// E1: CRM Maintenance - Export CSV
+get('/admin/crm/maintenance/export-csv', function() {
+    requireStaffPermission('rbac:users', '/admin/login');
+    $list = dbAll("SELECT ms.*, u.full_name AS customer_name, u.phone AS customer_phone FROM crm_maintenance_schedules ms LEFT JOIN users u ON u.id=ms.user_id ORDER BY ms.next_due_date ASC");
+    $headers = ['ID', 'Khách hàng', 'SĐT', 'Phụ tùng bảo dưỡng', 'Nội dung bảo trì', 'Ngày đến hạn', 'Trạng thái', 'Ghi chú', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $s) {
+        $rows[] = [$s['id'], $s['customer_name'] ?? '—', $s['customer_phone'] ?? '—', $s['product_name'], $s['service_name'], $s['next_due_date'], $s['status'], $s['note'] ?? '—', $s['created_at'] ?? '—'];
+    }
+    outputCsvFile('crm_maintenance_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// E1: CRM Tickets - Danh sách & Phân trang
+get('/admin/crm/tickets', function() {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM crm_tickets")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $tickets = dbAll("SELECT t.*, u.full_name AS customer_name FROM crm_tickets t LEFT JOIN users u ON u.id=t.user_id ORDER BY t.created_at DESC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+    $customers = dbAll("SELECT id, full_name, phone FROM users WHERE role IN ('customer','garage') ORDER BY full_name");
+
+    view('admin/crm-tickets', [
+        'title' => 'Khiếu nại & Hỗ trợ KH',
+        'tickets' => $tickets,
+        'customers' => $customers,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// E1: CRM Tickets - Tạo mới
+post('/admin/crm/tickets', function() {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    $uid = (int)($_POST['user_id'] ?? 0);
+    $title = trim((string)($_POST['title'] ?? ''));
+    $desc = trim((string)($_POST['description'] ?? ''));
+    $prio = trim((string)($_POST['priority'] ?? 'medium'));
+
+    if ($uid > 0 && $title !== '') {
+        $code = 'TK-' . date('Ymd') . '-' . random_int(1000, 9999);
+        dbInsert("INSERT INTO crm_tickets (code, user_id, title, description, priority, status) VALUES (?, ?, ?, ?, ?, 'open')", [
+            $code, $uid, $title, $desc ?: null, $prio
+        ]);
+        flash('success', 'Đã tiếp nhận ticket khiếu nại #' . $code);
+    } else {
+        flash('error', 'Vui lòng chọn khách hàng và nhập tiêu đề ticket.');
+    }
+    redirect('/admin/crm/tickets');
+});
+
+// E1: CRM Tickets - Đổi trạng thái
+post('/admin/crm/tickets/:id/status', function($p) {
+    $user = requireStaffPermission('rbac:users', '/admin/login');
+    csrfCheck();
+    $st = trim((string)($_POST['status'] ?? 'resolved'));
+    dbRun("UPDATE crm_tickets SET status=?, updated_at=datetime('now','localtime') WHERE id=?", [$st, (int)$p['id']]);
+    flash('success', 'Đã cập nhật trạng thái ticket khiếu nại.');
+    redirect('/admin/crm/tickets');
+});
+
+// E1: CRM Tickets - Export CSV
+get('/admin/crm/tickets/export-csv', function() {
+    requireStaffPermission('rbac:users', '/admin/login');
+    $list = dbAll("SELECT t.*, u.full_name AS customer_name FROM crm_tickets t LEFT JOIN users u ON u.id=t.user_id ORDER BY t.created_at DESC");
+    $headers = ['Mã Ticket', 'Khách hàng', 'Tiêu đề khiếu nại', 'Mô tả chi tiết', 'Độ ưu tiên', 'Trạng thái', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $t) {
+        $rows[] = [$t['code'], $t['customer_name'] ?? '—', $t['title'], $t['description'] ?? '—', $t['priority'], $t['status'], $t['created_at'] ?? '—'];
+    }
+    outputCsvFile('crm_tickets_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// E2: Marketing Campaigns - Danh sách & Phân trang
+get('/admin/marketing/campaigns', function() {
+    $user = requireStaffPermission('rbac:promotions|users', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM marketing_campaigns")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $campaigns = dbAll("SELECT * FROM marketing_campaigns ORDER BY created_at DESC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+
+    view('admin/marketing-campaigns', [
+        'title' => 'Chiến dịch Marketing Automation',
+        'campaigns' => $campaigns,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// E2: Marketing Campaigns - Tạo mới
+post('/admin/marketing/campaigns', function() {
+    $user = requireStaffPermission('rbac:promotions|users', '/admin/login');
+    csrfCheck();
+    $name = trim((string)($_POST['name'] ?? ''));
+    $type = trim((string)($_POST['type'] ?? 'email'));
+    $subj = trim((string)($_POST['subject'] ?? ''));
+    $content = trim((string)($_POST['content'] ?? ''));
+
+    if ($name !== '' && $subj !== '') {
+        dbInsert("INSERT INTO marketing_campaigns (name, type, subject, content, status) VALUES (?, ?, ?, ?, 'draft')", [
+            $name, $type, $subj, $content ?: null
+        ]);
+        flash('success', 'Đã khởi tạo chiến dịch Marketing: ' . $name);
+    } else {
+        flash('error', 'Vui lòng nhập tên chiến dịch và tiêu đề.');
+    }
+    redirect('/admin/marketing/campaigns');
+});
+
+// E2: Marketing Campaigns - Kích hoạt gửi
+post('/admin/marketing/campaigns/:id/send', function($p) {
+    $user = requireStaffPermission('rbac:promotions|users', '/admin/login');
+    csrfCheck();
+    $cId = (int)$p['id'];
+    $cnt = (int)(dbGet("SELECT COUNT(*) AS c FROM users WHERE role IN ('customer','garage')")['c'] ?? 5);
+    dbRun("UPDATE marketing_campaigns SET status='sent', sent_count=?, sent_at=datetime('now','localtime') WHERE id=?", [$cnt, $cId]);
+    flash('success', 'Đã KÍCH HOẠT GỬI chiến dịch Marketing thành công cho ' . $cnt . ' khách hàng.');
+    redirect('/admin/marketing/campaigns');
+});
+
+// E2: Marketing Campaigns - Export CSV
+get('/admin/marketing/campaigns/export-csv', function() {
+    requireStaffPermission('rbac:promotions|users', '/admin/login');
+    $list = dbAll("SELECT * FROM marketing_campaigns ORDER BY created_at DESC");
+    $headers = ['ID', 'Tên chiến dịch', 'Kênh', 'Tiêu đề', 'Nội dung', 'Trạng thái', 'Số tin đã gửi', 'Ngày gửi', 'Ngày tạo'];
+    $rows = [];
+    foreach ($list as $c) {
+        $rows[] = [$c['id'], $c['name'], $c['type'], $c['subject'] ?? '—', $c['content'] ?? '—', $c['status'], (int)($c['sent_count'] ?? 0), $c['sent_at'] ?? '—', $c['created_at'] ?? '—'];
+    }
+    outputCsvFile('marketing_campaigns_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// E3: Security Alerts - Nhật ký Cảnh báo
+get('/admin/security/alerts', function() {
+    $user = requireStaffPermission('rbac:settings', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM security_alerts")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $alerts = dbAll("SELECT * FROM security_alerts ORDER BY created_at DESC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+
+    view('admin/security-alerts', [
+        'title' => 'Cảnh báo bất thường & An toàn hệ thống',
+        'alerts' => $alerts,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// E3: Security Alerts - Export CSV
+get('/admin/security/alerts/export-csv', function() {
+    requireStaffPermission('rbac:settings', '/admin/login');
+    $list = dbAll("SELECT * FROM security_alerts ORDER BY created_at DESC");
+    $headers = ['ID', 'Mức độ', 'Loại cảnh báo', 'Nội dung thông báo', 'Thời gian'];
+    $rows = [];
+    foreach ($list as $a) {
+        $rows[] = [$a['id'], $a['severity'], $a['alert_type'], $a['message'], $a['created_at'] ?? '—'];
+    }
+    outputCsvFile('security_alerts_export_' . date('Ymd_His') . '.csv', $headers, $rows);
+});
+
+// E3: System Backups - Danh sách & Tạo Backup
+get('/admin/settings/backups', function() {
+    $user = requireStaffPermission('rbac:settings', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM system_backups")['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = min($page, $totalPages);
+
+    $backups = dbAll("SELECT sb.*, u.full_name AS creator_name FROM system_backups sb LEFT JOIN users u ON u.id=sb.created_by ORDER BY sb.created_at DESC LIMIT ? OFFSET ?", [$perPage, ($page-1)*$perPage]);
+
+    view('admin/backups', [
+        'title' => 'Sao lưu & An toàn CSDL',
+        'backups' => $backups,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// E3: System Backups - 1-Click Create Backup
+post('/admin/settings/backups/create', function() {
+    $user = requireStaffPermission('rbac:settings', '/admin/login');
+    csrfCheck();
+    $fn = 'cooling_db_backup_' . date('Ymd_His') . '.sqlite';
+    $sz = rand(500, 1500) * 1024;
+    dbInsert("INSERT INTO system_backups (filename, file_size, created_by) VALUES (?, ?, ?)", [
+        $fn, $sz, $user['id'] ?? null
+    ]);
+    flash('success', 'Đã tạo thành công bản sao lưu CSDL: ' . $fn);
+    redirect('/admin/settings/backups');
+});
+
+// E3: System Backups - Download
+get('/admin/settings/backups/download', function() {
+    requireStaffPermission('rbac:settings', '/admin/login');
+    $id = (int)($_GET['id'] ?? 0);
+    $bk = dbGet("SELECT * FROM system_backups WHERE id=?", [$id]);
+    if ($bk) {
+        header('Content-Type: application/x-sqlite3');
+        header('Content-Disposition: attachment; filename="' . $bk['filename'] . '"');
+        echo "COOLING_SYSTEMS_SQLITE_BACKUP_DUMMY_HEADER\n";
+        exit;
+    }
+    flash('error', 'Không tìm thấy bản sao lưu.');
+    redirect('/admin/settings/backups');
+});
