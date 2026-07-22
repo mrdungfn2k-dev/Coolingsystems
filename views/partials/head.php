@@ -36,11 +36,22 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <?php if (!empty($seo['noindex'])): ?>
 <meta name="robots" content="noindex,follow">
 <?php endif; ?>
-<!-- Performance: Preconnect & Non-blocking Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap"></noscript>
+<!-- Performance: Post-idle Google Fonts loading for 95+ Mobile Score -->
+<script>
+(function(){
+  var loadFonts = function(){
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap';
+    document.head.appendChild(l);
+  };
+  if (window.requestIdleCallback) {
+    requestIdleCallback(loadFonts);
+  } else {
+    window.addEventListener('load', loadFonts);
+  }
+})();
+</script>
 <!-- Zero-latency Critical Inline CSS -->
 <style id="main-css">
 <?php

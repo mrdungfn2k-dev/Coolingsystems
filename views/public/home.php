@@ -19,6 +19,9 @@
       $heroBtn2Url = dbGet("SELECT value FROM settings WHERE key='hero_btn2_url'")['value'] ?? '/contact';
       $heroBg = dbGet("SELECT value FROM settings WHERE key='hero_bg_image'")['value'] ?? '';
     ?>
+    <?php if ($heroBg): ?>
+    <link rel="preload" as="image" href="/uploads/banners/<?= e($heroBg) ?>" fetchpriority="high">
+    <?php endif; ?>
     <div class="banner"<?= $heroBg ? ' style="background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center"' : '' ?>>
       <span class="badge"><?= $heroBadge ?></span>
       <h1><?= $heroHeading ?></h1>
