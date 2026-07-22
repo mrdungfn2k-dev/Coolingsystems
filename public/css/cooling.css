@@ -200,7 +200,7 @@ nav.primary .promo-text .dot { width: 7px; height: 7px; background: var(--gold-l
 .hero-section { padding: 24px 0; background: var(--bg-soft); background-image: radial-gradient(ellipse 800px 400px at 90% 0%, rgba(201,161,74,0.05), transparent), radial-gradient(ellipse 600px 400px at 0% 100%, rgba(26,50,88,0.04), transparent); }
 .hero-section .wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 280px 1fr 320px; gap: 16px; align-items: stretch; }
 
-.cat-sidebar { background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; height: fit-content; box-shadow: var(--shadow-sm); }
+.cat-sidebar { background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; min-height: 420px; box-shadow: var(--shadow-sm); }
 .cat-sidebar .head { padding: 14px 18px; background: var(--navy); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; position: relative; }
 .cat-sidebar .head::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold-warm), var(--gold-deep)); }
 .cat-sidebar .head .lines { display: inline-flex; flex-direction: column; gap: 3px; }
@@ -228,7 +228,7 @@ nav.primary .promo-text .dot { width: 7px; height: 7px; background: var(--gold-l
 .banner p { font-size: 16px; color: rgba(255,255,255,0.8); max-width: 540px; margin-bottom: 32px; line-height: 1.65; font-weight: 300; }
 .banner .actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.vs-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--gold-warm); border-radius: 4px; padding: 22px; box-shadow: var(--shadow); height: fit-content; }
+.vs-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--gold-warm); border-radius: 4px; padding: 22px; box-shadow: var(--shadow); min-height: 420px; }
 .vs-card .head { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
 .vs-card h3 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 4px; letter-spacing: -0.01em; }
 .vs-card .sub { font-size: 11px; color: var(--ink-3); }
