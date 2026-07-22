@@ -58,8 +58,8 @@
     <div class="form-group"><label>Ngày ghi nhận *</label><input type="date" name="entry_date" value="<?= date('Y-m-d') ?>" required></div>
     
     <div class="form-group">
-      <label>Người nộp tiền * <span id="payerWordCnt" style="font-weight:400;color:#667085">(Tối đa 50 từ)</span></label>
-      <input name="payer_name" id="receiptPayerName" required maxlength="250" placeholder="Họ và tên người nộp tiền...">
+      <label>Người nộp tiền * <span id="payerWordCnt" style="font-weight:400;color:#667085">(0/50 từ)</span></label>
+      <input name="payer_name" id="receiptPayerName" required maxlength="250" placeholder="Họ và tên người nộp tiền (chặn gõ > 50 từ)...">
     </div>
     <div class="form-group">
       <label>Số điện thoại *</label>
@@ -70,7 +70,7 @@
     <div class="form-group"><label>Mã tham chiếu</label><input name="reference_code" maxlength="64" placeholder="Hóa đơn, biên nhận..."></div>
     <div class="form-group" style="grid-column:span 2">
       <label>Diễn giải <span id="receiptWordCount" style="font-weight:400;color:#667085">0/200 từ</span></label>
-      <textarea name="description" id="receiptDescription" rows="2" placeholder="Nội dung khoản thu"></textarea>
+      <textarea name="description" id="receiptDescription" rows="2" placeholder="Nội dung khoản thu (chặn gõ > 200 từ)"></textarea>
     </div>
     <div style="grid-column:span 3"><button class="btn btn-navy">Tạo phiếu thu</button></div>
   </form>
@@ -94,8 +94,8 @@
     <div class="form-group"><label>Ngày dự chi *</label><input type="date" name="entry_date" value="<?= date('Y-m-d') ?>" required></div>
     
     <div class="form-group">
-      <label>Người nhận tiền * <span id="payeeWordCnt" style="font-weight:400;color:#667085">(Tối đa 50 từ)</span></label>
-      <input name="payee_name" id="disbursementPayeeName" required maxlength="250" placeholder="Họ và tên người nhận tiền...">
+      <label>Người nhận tiền * <span id="payeeWordCnt" style="font-weight:400;color:#667085">(0/50 từ)</span></label>
+      <input name="payee_name" id="disbursementPayeeName" required maxlength="250" placeholder="Họ và tên người nhận tiền (chặn gõ > 50 từ)...">
     </div>
     <div class="form-group">
       <label>Số điện thoại *</label>
@@ -106,7 +106,7 @@
     <div class="form-group"><label>Mã tham chiếu</label><input name="reference_code" maxlength="64" placeholder="Hóa đơn, biên nhận..."></div>
     <div class="form-group" style="grid-column:span 2">
       <label>Diễn giải <span id="disbursementWordCount" style="font-weight:400;color:#667085">0/200 từ</span></label>
-      <textarea name="description" id="disbursementDescription" rows="2" placeholder="Nội dung khoản chi"></textarea>
+      <textarea name="description" id="disbursementDescription" rows="2" placeholder="Nội dung khoản chi (chặn gõ > 200 từ)"></textarea>
     </div>
     <div style="grid-column:span 3"><button class="btn btn-navy">Tạo phiếu chi</button></div>
   </form>
@@ -171,45 +171,73 @@
 
 <script>
 (function(){
-  var form=document.getElementById('cashReceiptForm');
-  if(!form)return;
-  var phone=form.querySelector('[name=payer_phone]'),hint=document.getElementById('receiptPhoneHint'),description=document.getElementById('receiptDescription'),counter=document.getElementById('receiptWordCount');
-  var payerInput=document.getElementById('receiptPayerName'),payerCounter=document.getElementById('payerWordCnt');
+  function enforceLiveWordLimit(inputEl, maxWords, counterEl) {
+    if(!inputEl) return;
+    inputEl.addEventListener('input', function() {
+      var text = this.value;
+      var words = text.trim() ? text.trim().split(/\s+/) : [];
+      if(words.length > maxWords) {
+        // Cắt bớt phần dư thừa vượt quá maxWords từ
+        var regex = new RegExp('^(?:\\s*\\S+){' + maxWords + '}');
+        var match = text.match(regex);
+        if(match) {
+          this.value = match[0];
+          words = this.value.trim().split(/\s+/);
+        }
+      }
+      if(counterEl) {
+        counterEl.textContent = '(' + words.length + '/' + maxWords + ' từ)';
+        counterEl.style.color = words.length >= maxWords ? '#e11d48' : '#667085';
+      }
+    });
+  }
 
-  function words(str){return str.trim()?str.trim().split(/\s+/).length:0}
-  function count(){var total=words(description.value);counter.textContent=total+'/200 từ';counter.style.color=total>200?'#b42318':'#667085'}
-  function validPhone(){var value=phone.value.replace(/\D/g,'').slice(0,10);phone.value=value;var valid=/^0[35789]\d{8}$/.test(value);if(!valid){phone.setCustomValidity('Số điện thoại phải có 10 số và bắt đầu bằng 03, 05, 07, 08 hoặc 09.');hint.style.color='#b42318'}else{phone.setCustomValidity('');hint.style.color='#667085'}return valid}
-  
-  phone.addEventListener('input',validPhone);phone.addEventListener('blur',validPhone);description.addEventListener('input',count);
-  
-  form.addEventListener('submit',function(event){
-    if(!validPhone()){event.preventDefault();phone.reportValidity();return}
-    if(words(payerInput.value)>50){event.preventDefault();alert('Tên người nộp tiền tối đa 50 từ.');return}
-    if(words(description.value)>200){event.preventDefault();alert('Diễn giải tối đa 200 từ.')}
-  });
-  count()
-})();
-</script>
+  // Phiếu thu
+  var rForm = document.getElementById('cashReceiptForm');
+  if(rForm) {
+    var rPhone = rForm.querySelector('[name=payer_phone]'), rHint = document.getElementById('receiptPhoneHint');
+    var rPayer = document.getElementById('receiptPayerName'), rPayerCnt = document.getElementById('payerWordCnt');
+    var rDesc = document.getElementById('receiptDescription'), rDescCnt = document.getElementById('receiptWordCount');
 
-<script>
-(function(){
-  var form=document.getElementById('cashDisbursementForm');
-  if(!form)return;
-  var phone=form.querySelector('[name=payee_phone]'),hint=document.getElementById('disbursementPhoneHint'),description=document.getElementById('disbursementDescription'),counter=document.getElementById('disbursementWordCount');
-  var payeeInput=document.getElementById('disbursementPayeeName'),payeeCounter=document.getElementById('payeeWordCnt');
+    enforceLiveWordLimit(rPayer, 50, rPayerCnt);
+    enforceLiveWordLimit(rDesc, 200, rDescCnt);
 
-  function words(str){return str.trim()?str.trim().split(/\s+/).length:0}
-  function count(){var total=words(description.value);counter.textContent=total+'/200 từ';counter.style.color=total>200?'#b42318':'#667085'}
-  function validPhone(){var value=phone.value.replace(/\D/g,'').slice(0,10);phone.value=value;var valid=/^0[35789]\d{8}$/.test(value);if(!valid){phone.setCustomValidity('Số điện thoại phải có 10 số và bắt đầu bằng 03, 05, 07, 08 hoặc 09.');hint.style.color='#b42318'}else{phone.setCustomValidity('');hint.style.color='#667085'}return valid}
-  
-  phone.addEventListener('input',validPhone);phone.addEventListener('blur',validPhone);description.addEventListener('input',count);
-  
-  form.addEventListener('submit',function(event){
-    if(!validPhone()){event.preventDefault();phone.reportValidity();return}
-    if(words(payeeInput.value)>50){event.preventDefault();alert('Tên người nhận tiền tối đa 50 từ.');return}
-    if(words(description.value)>200){event.preventDefault();alert('Diễn giải tối đa 200 từ.')}
-  });
-  count()
+    function validPhone(phone, hint){
+      var value = phone.value.replace(/\D/g,'').slice(0,10);
+      phone.value = value;
+      var valid = /^0[35789]\d{8}$/.test(value);
+      if(!valid){
+        phone.setCustomValidity('Số điện thoại phải có 10 số và bắt đầu bằng 03, 05, 07, 08 hoặc 09.');
+        if(hint) hint.style.color='#b42318';
+      } else {
+        phone.setCustomValidity('');
+        if(hint) hint.style.color='#667085';
+      }
+      return valid;
+    }
+    rPhone.addEventListener('input', function(){ validPhone(rPhone, rHint); });
+    rPhone.addEventListener('blur', function(){ validPhone(rPhone, rHint); });
+    rForm.addEventListener('submit', function(e){
+      if(!validPhone(rPhone, rHint)){ e.preventDefault(); rPhone.reportValidity(); }
+    });
+  }
+
+  // Phiếu chi
+  var dForm = document.getElementById('cashDisbursementForm');
+  if(dForm) {
+    var dPhone = dForm.querySelector('[name=payee_phone]'), dHint = document.getElementById('disbursementPhoneHint');
+    var dPayee = document.getElementById('disbursementPayeeName'), dPayeeCnt = document.getElementById('payeeWordCnt');
+    var dDesc = document.getElementById('disbursementDescription'), dDescCnt = document.getElementById('disbursementWordCount');
+
+    enforceLiveWordLimit(dPayee, 50, dPayeeCnt);
+    enforceLiveWordLimit(dDesc, 200, dDescCnt);
+
+    dPhone.addEventListener('input', function(){ validPhone(dPhone, dHint); });
+    dPhone.addEventListener('blur', function(){ validPhone(dPhone, dHint); });
+    dForm.addEventListener('submit', function(e){
+      if(!validPhone(dPhone, dHint)){ e.preventDefault(); dPhone.reportValidity(); }
+    });
+  }
 })();
 </script>
 

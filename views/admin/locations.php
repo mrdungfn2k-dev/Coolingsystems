@@ -95,24 +95,24 @@
     </div>
 
     <div style="margin-bottom:12px">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khu vực / Kệ <span style="color:#e11d48">*</span> <span id="areaWordCnt" style="font-weight:400;color:#64748b">(Tối đa 50 từ)</span></label>
-      <input type="text" id="loc_area" name="area_name" required maxlength="250" placeholder="Ví dụ: Kệ A, Kệ B, Khu Vực 1..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khu vực / Kệ <span style="color:#e11d48">*</span> <span id="areaWordCnt" style="font-weight:400;color:#64748b">(0/50 từ)</span></label>
+      <input type="text" id="loc_area" name="area_name" required maxlength="250" placeholder="Ví dụ: Kệ A, Kệ B, Khu Vực 1 (chặn > 50 từ)..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
       <div>
-        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Tầng <span style="font-weight:400;color:#64748b">(<=50 từ)</span></label>
+        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Tầng <span id="shelfWordCnt" style="font-weight:400;color:#64748b">(0/50 từ)</span></label>
         <input type="text" id="loc_shelf" name="shelf_name" maxlength="250" placeholder="Tầng 1, Tầng 2..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
       </div>
       <div>
-        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khay / Ô <span style="font-weight:400;color:#64748b">(<=50 từ)</span></label>
+        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khay / Ô <span id="binWordCnt" style="font-weight:400;color:#64748b">(0/50 từ)</span></label>
         <input type="text" id="loc_bin" name="bin_name" maxlength="250" placeholder="Khay 05, Ô 12..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
       </div>
     </div>
 
     <div style="margin-bottom:20px">
       <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ghi chú <span id="noteWordCnt" style="font-weight:400;color:#64748b">(0/200 từ)</span></label>
-      <textarea id="loc_note" name="note" rows="3" placeholder="Mô tả loại phụ tùng lưu ở đây..." style="width:100%;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:13px"></textarea>
+      <textarea id="loc_note" name="note" rows="3" placeholder="Mô tả loại phụ tùng lưu ở đây (chặn gõ > 200 từ)..." style="width:100%;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:13px"></textarea>
     </div>
 
     <div style="display:flex;gap:10px;justify-content:flex-end">
@@ -124,34 +124,36 @@
 
 <script>
 (function(){
-  var form = document.getElementById('locForm');
-  if(!form) return;
-  var area = document.getElementById('loc_area');
-  var note = document.getElementById('loc_note');
-  var noteCounter = document.getElementById('noteWordCnt');
-
-  function countWords(str) {
-    return str.trim() ? str.trim().split(/\s+/).length : 0;
+  function enforceLiveWordLimit(inputEl, maxWords, counterEl) {
+    if(!inputEl) return;
+    inputEl.addEventListener('input', function() {
+      var text = this.value;
+      var words = text.trim() ? text.trim().split(/\s+/) : [];
+      if(words.length > maxWords) {
+        // Trực tiếp cắt phần từ gõ quá giới hạn maxWords ngay trên ô nhập
+        var regex = new RegExp('^(?:\\s*\\S+){' + maxWords + '}');
+        var match = text.match(regex);
+        if(match) {
+          this.value = match[0];
+          words = this.value.trim().split(/\s+/);
+        }
+      }
+      if(counterEl) {
+        counterEl.textContent = '(' + words.length + '/' + maxWords + ' từ)';
+        counterEl.style.color = words.length >= maxWords ? '#e11d48' : '#64748b';
+      }
+    });
   }
 
-  note.addEventListener('input', function(){
-    var total = countWords(note.value);
-    noteCounter.textContent = '(' + total + '/200 từ)';
-    noteCounter.style.color = total > 200 ? '#e11d48' : '#64748b';
-  });
+  var area = document.getElementById('loc_area'), areaCnt = document.getElementById('areaWordCnt');
+  var shelf = document.getElementById('loc_shelf'), shelfCnt = document.getElementById('shelfWordCnt');
+  var bin = document.getElementById('loc_bin'), binCnt = document.getElementById('binWordCnt');
+  var note = document.getElementById('loc_note'), noteCnt = document.getElementById('noteWordCnt');
 
-  form.addEventListener('submit', function(e){
-    if (countWords(area.value) > 50) {
-      e.preventDefault();
-      alert('Tên Khu vực/Kệ tối đa 50 từ.');
-      return;
-    }
-    if (countWords(note.value) > 200) {
-      e.preventDefault();
-      alert('Ghi chú tối đa 200 từ.');
-      return;
-    }
-  });
+  enforceLiveWordLimit(area, 50, areaCnt);
+  enforceLiveWordLimit(shelf, 50, shelfCnt);
+  enforceLiveWordLimit(bin, 50, binCnt);
+  enforceLiveWordLimit(note, 200, noteCnt);
 })();
 </script>
 
