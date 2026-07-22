@@ -35,10 +35,10 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <?php if($sb('serials')||$sb('products')||$sb('inventory')||$sb('products_create')||$sb('categories')||$sb('brand_models')||$sb('brands')): ?>
       <div class="sb-section">SẢN PHẨM<span class="sb-sec-desc">Sản phẩm · Danh mục · Thương hiệu · Hãng xe</span></div>
       <?php if($sb('products')): ?><a href="/admin/products" class="<?= (startsWith(currentPath(),'/admin/products') && currentPath()!=='/admin/products/new')?'active':'' ?>"><?= sbIcon('box') ?>Quản lý sản phẩm</a>
-      <a href="/admin/inventory" class="<?= startsWith(currentPath(),'/admin/inventory')?'active':'' ?>">
-        <?= sbIcon('list') ?>Quản lý kho</a>
-      <a href="/admin/stocktake" class="<?= startsWith(currentPath(),'/admin/stocktake')?'active':'' ?>">
-        <?= sbIcon('list') ?>Kiểm kho</a>
+      <a href="/admin/inventory" class="<?= startsWith(currentPath(),'/admin/inventory')?'active':'' ?>"><?= sbIcon('list') ?>Quản lý tồn kho</a>
+      <a href="/admin/stock-counts" class="<?= startsWith(currentPath(),'/admin/stock-counts')?'active':'' ?>"><?= sbIcon('list') ?>Kiểm kê & Tồn kho</a>
+      <a href="/admin/stock-transfers" class="<?= startsWith(currentPath(),'/admin/stock-transfers')?'active':'' ?>"><?= sbIcon('truck') ?>Chuyển kho nội bộ</a>
+      <a href="/admin/locations" class="<?= startsWith(currentPath(),'/admin/locations')?'active':'' ?>"><?= sbIcon('pin') ?>Sơ đồ vị trí kho</a>
       <a href="/admin/products/new" class="<?= currentPath()==='/admin/products/new'?'active':'' ?>"><?= sbIcon('plus') ?>+ Đăng SP mới</a><?php endif; ?>
       <?php if($sb('serials')): ?><a href="/admin/serials" class="<?= startsWith(currentPath(),'/admin/serials')?'active':'' ?>"><?= sbIcon('list') ?>Serial & Lô hàng</a><?php endif; ?>
       <?php if($sb('categories')): ?><a href="/admin/categories" class="<?= startsWith(currentPath(),'/admin/categories')?'active':'' ?>"><?= sbIcon('folder') ?>Danh mục</a><?php endif; ?>
@@ -76,11 +76,17 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <a href="/admin/news/new" class="<?= currentPath()==='/admin/news/new'?'active':'' ?>"><?= sbIcon('plus') ?>+ Viết bài</a>
       <a href="/admin/content" class="<?= startsWith(currentPath(),'/admin/content')?'active':'' ?>"><?= sbIcon('file') ?>Quản lý trang tĩnh</a><?php endif; ?>
       <?php endif; ?>
-      <?php if($sb('chat')||$sb('reviews')||$sb('contacts')): ?>
+       <?php if($sb('chat')||$sb('reviews')||$sb('contacts')): ?>
       <div class="sb-section">HỖ TRỢ<span class="sb-sec-desc">Tin nhắn · Đánh giá · Liên hệ</span></div>
       <?php if($sb('chat')): ?><a href="/admin/chat" class="sb-link"><?= sbIcon('message') ?><span>Tin nhắn</span></a><?php endif; ?>
       <?php if($sb('reviews')): ?><a href="/admin/reviews" class="<?= isActive('/admin/reviews') ?>"><?= sbIcon('star') ?>Kiểm duyệt đánh giá</a><?php endif; ?>
       <?php if($sb('contacts')): ?><a href="/admin/contacts" class="<?= startsWith(currentPath(),'/admin/contacts')!==false?'active':'' ?>"><?= sbIcon('mail') ?>Liên hệ khách</a><?php endif; ?>
+      <?php endif; ?>
+      <?php if($__isAdmin || $sb('reports')): ?>
+      <div class="sb-section">BÁO CÁO QUẢN TRỊ<span class="sb-sec-desc">Xuất nhập tồn · Lợi nhuận · KPI</span></div>
+      <a href="/admin/reports/xnt" class="<?= currentPath()==='/admin/reports/xnt'?'active':'' ?>"><?= sbIcon('chart') ?>Báo cáo Xuất-Nhập-Tồn</a>
+      <a href="/admin/reports/margin" class="<?= currentPath()==='/admin/reports/margin'?'active':'' ?>"><?= sbIcon('chart') ?>Lợi nhuận gộp SKU</a>
+      <a href="/admin/reports/kpi" class="<?= currentPath()==='/admin/reports/kpi'?'active':'' ?>"><?= sbIcon('users') ?>KPI Bán hàng & NV</a>
       <?php endif; ?>
       <?php if($__isAdmin||$sb('stores')): ?>
       <div class="sb-section">CỬA HÀNG<span class="sb-sec-desc">Hệ thống · Loại chi nhánh</span></div>
@@ -114,6 +120,14 @@ $_abcMap = [
     '/admin/commissions' => 'Hoa hồng đối tác',
     '/admin/quotations' => 'Báo giá độc lập',
     '/admin/quotations/new' => 'Tạo báo giá mới',
+    '/admin/stock-counts' => 'Kiểm kê kho',
+    '/admin/stock-counts/new' => 'Tạo phiên kiểm kho',
+    '/admin/stock-transfers' => 'Chuyển kho nội bộ',
+    '/admin/stock-transfers/new' => 'Tạo phiếu chuyển kho',
+    '/admin/locations' => 'Vị trí kho phụ tùng',
+    '/admin/reports/xnt' => 'Báo cáo Xuất-Nhập-Tồn',
+    '/admin/reports/margin' => 'Báo cáo Lợi nhuận gộp',
+    '/admin/reports/kpi' => 'Báo cáo KPI Nhân sự',
     '/admin/staff' => 'Phân quyền NV',
     '/admin/users' => 'Người dùng',
     '/admin/brands' => 'Hãng xe',

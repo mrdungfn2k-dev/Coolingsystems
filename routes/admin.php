@@ -4822,3 +4822,466 @@ post('/admin/quotations/:id/convert', function($p) {
         redirect('/admin/quotations/' . $qid);
     }
 });
+
+// ─── GIAI ĐOẠN D: QUẢN LÝ KHO NÂNG CAO & BÁO CÁO QUẢN TRỊ ──────────────────────────────
+
+// D1: Kiểm kho - Danh sách
+get('/admin/stock-counts', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+    $q = trim((string)($_GET['q'] ?? ''));
+    $statusFilter = trim((string)($_GET['status'] ?? ''));
+
+    $where = 'WHERE 1=1'; $params = [];
+    if ($q !== '') {
+        $where .= ' AND (sc.code LIKE ? OR sc.note LIKE ?)';
+        $like = '%'.$q.'%';
+        array_push($params, $like, $like);
+    }
+    if ($statusFilter !== '') {
+        $where .= ' AND sc.status=?';
+        $params[] = $statusFilter;
+    }
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM stock_counts sc $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total/$perPage));
+    $page = min($page, $totalPages);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $stockCounts = dbAll("SELECT sc.*, u.full_name AS creator_name FROM stock_counts sc LEFT JOIN users u ON u.id=sc.created_by $where ORDER BY sc.created_at DESC LIMIT ? OFFSET ?", $listParams);
+
+    view('admin/stock-counts', [
+        'title' => 'Kiểm kê kho & Điều chỉnh tồn',
+        'stockCounts' => $stockCounts,
+        'q' => $q,
+        'statusFilter' => $statusFilter,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// D1: Kiểm kho - Form tạo mới
+get('/admin/stock-counts/new', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $categories = dbAll("SELECT id, name FROM categories ORDER BY name");
+    view('admin/stock-count-new', [
+        'title' => 'Tạo phiên kiểm kho mới',
+        'categories' => $categories
+    ]);
+});
+
+// D1: Kiểm kho - Xử lý lưu tạo mới
+post('/admin/stock-counts', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+
+    $whName = trim((string)($_POST['warehouse_name'] ?? 'Kho chính'));
+    $catId = max(0, (int)($_POST['category_id'] ?? 0));
+    $note = trim((string)($_POST['note'] ?? ''));
+
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+
+        $code = 'KK-' . date('Ymd') . '-' . random_int(1000, 9999);
+        $scId = dbInsert("INSERT INTO stock_counts (code, warehouse_name, status, note, created_by) VALUES (?, ?, 'in_progress', ?, ?)", [
+            $code, $whName, $note ?: null, $user['id'] ?? null
+        ]);
+
+        $sql = "SELECT id, stock FROM products WHERE 1=1";
+        $params = [];
+        if ($catId > 0) {
+            $sql .= " AND category_id=?";
+            $params[] = $catId;
+        }
+        $products = dbAll($sql, $params);
+
+        foreach ($products as $p) {
+            $sysQty = (int)$p['stock'];
+            dbRun("INSERT INTO stock_count_items (stock_count_id, product_id, system_qty, actual_qty, diff_qty) VALUES (?, ?, ?, ?, 0)", [
+                $scId, $p['id'], $sysQty, $sysQty
+            ]);
+        }
+
+        $pdo->commit();
+        flash('success', 'Đã khởi tạo phiên kiểm kho #' . $code . ' với ' . count($products) . ' sản phẩm.');
+        redirect('/admin/stock-counts/' . $scId);
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error', 'Lỗi khi tạo phiên kiểm kho: ' . $e->getMessage());
+        redirect('/admin/stock-counts/new');
+    }
+});
+
+// D1: Kiểm kho - Chi tiết & kiểm đếm
+get('/admin/stock-counts/:id', function($p) {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $scId = (int)$p['id'];
+    $stockCount = dbGet("SELECT sc.*, u.full_name AS creator_name FROM stock_counts sc LEFT JOIN users u ON u.id=sc.created_by WHERE sc.id=?", [$scId]);
+    if (!$stockCount) {
+        flash('error', 'Không tìm thấy phiên kiểm kho.');
+        redirect('/admin/stock-counts'); return;
+    }
+
+    $items = dbAll("SELECT sci.*, p.name AS product_name, p.sku, p.oem_code, p.location_code FROM stock_count_items sci INNER JOIN products p ON p.id=sci.product_id WHERE sci.stock_count_id=? ORDER BY p.name", [$scId]);
+
+    view('admin/stock-count-detail', [
+        'title' => 'Phiên kiểm kho #' . $stockCount['code'],
+        'stockCount' => $stockCount,
+        'items' => $items
+    ]);
+});
+
+// D1: Kiểm kho - Cập nhật số lượng đếm thực tế & Cân bằng kho
+post('/admin/stock-counts/:id', function($p) {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    $scId = (int)$p['id'];
+    $actionType = trim((string)($_POST['action_type'] ?? 'save'));
+    $itemsInput = $_POST['items'] ?? [];
+
+    $stockCount = dbGet("SELECT * FROM stock_counts WHERE id=?", [$scId]);
+    if (!$stockCount || $stockCount['status'] === 'completed') {
+        flash('error', 'Phiên kiểm kho đã hoàn tất hoặc không hợp lệ.');
+        redirect('/admin/stock-counts/' . $scId); return;
+    }
+
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+
+        foreach ($itemsInput as $sciId => $data) {
+            $actQty = max(0, (int)($data['actual_qty'] ?? 0));
+            $reason = trim((string)($data['reason'] ?? ''));
+
+            $itemObj = dbGet("SELECT * FROM stock_count_items WHERE id=? AND stock_count_id=?", [(int)$sciId, $scId]);
+            if ($itemObj) {
+                $diff = $actQty - (int)$itemObj['system_qty'];
+                dbRun("UPDATE stock_count_items SET actual_qty=?, diff_qty=?, reason=? WHERE id=?", [
+                    $actQty, $diff, $reason ?: null, (int)$sciId
+                ]);
+
+                // Nếu bấm nút hoàn tất & cân bằng tồn kho
+                if ($actionType === 'complete') {
+                    dbRun("UPDATE products SET stock=?, updated_at=datetime('now','localtime') WHERE id=?", [$actQty, $itemObj['product_id']]);
+                    if ($diff !== 0) {
+                        $dir = $diff > 0 ? 'in' : 'out';
+                        dbInsert("INSERT INTO inventory_stock_movements (product_id, direction, quantity, reference_type, reference_id, note, created_by) VALUES (?, ?, ?, 'stock_count', ?, ?, ?)", [
+                            $itemObj['product_id'], $dir, abs($diff), $scId, 'Cân bằng tồn kho từ kiểm kê #' . $stockCount['code'] . ($reason ? ' (Lý do: '.$reason.')' : ''), $user['id'] ?? null
+                        ]);
+                    }
+                }
+            }
+        }
+
+        if ($actionType === 'complete') {
+            dbRun("UPDATE stock_counts SET status='completed', completed_at=datetime('now','localtime'), updated_at=datetime('now','localtime') WHERE id=?", [$scId]);
+            flash('success', 'Đã CÂN BẰNG TỒN KHO thành công cho phiên kiểm kho #' . $stockCount['code'] . '. Tồn kho sản phẩm đã được cập nhật.');
+        } else {
+            dbRun("UPDATE stock_counts SET status='in_progress', updated_at=datetime('now','localtime') WHERE id=?", [$scId]);
+            flash('success', 'Đã lưu tiến độ kiểm đếm.');
+        }
+
+        $pdo->commit();
+        redirect('/admin/stock-counts/' . $scId);
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error', 'Lỗi khi cập nhật kiểm kho: ' . $e->getMessage());
+        redirect('/admin/stock-counts/' . $scId);
+    }
+});
+
+// D2: Chuyển kho - Danh sách
+get('/admin/stock-transfers', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    $perPage = 25;
+    $q = trim((string)($_GET['q'] ?? ''));
+    $statusFilter = trim((string)($_GET['status'] ?? ''));
+
+    $where = 'WHERE 1=1'; $params = [];
+    if ($q !== '') {
+        $where .= ' AND (st.code LIKE ? OR st.note LIKE ?)';
+        $like = '%'.$q.'%';
+        array_push($params, $like, $like);
+    }
+    if ($statusFilter !== '') {
+        $where .= ' AND st.status=?';
+        $params[] = $statusFilter;
+    }
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM stock_transfers st $where", $params)['c'] ?? 0);
+    $totalPages = max(1, (int)ceil($total/$perPage));
+    $page = min($page, $totalPages);
+
+    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $transfers = dbAll("SELECT st.*, u.full_name AS creator_name FROM stock_transfers st LEFT JOIN users u ON u.id=st.created_by $where ORDER BY st.created_at DESC LIMIT ? OFFSET ?", $listParams);
+
+    view('admin/stock-transfers', [
+        'title' => 'Chuyển kho nội bộ',
+        'transfers' => $transfers,
+        'q' => $q,
+        'statusFilter' => $statusFilter,
+        'page' => $page,
+        'totalPages' => $totalPages
+    ]);
+});
+
+// D2: Chuyển kho - Form tạo mới
+get('/admin/stock-transfers/new', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $products = dbAll("SELECT id, name, sku, stock FROM products ORDER BY name");
+    view('admin/stock-transfer-new', [
+        'title' => 'Tạo phiếu chuyển kho mới',
+        'products' => $products
+    ]);
+});
+
+// D2: Chuyển kho - Xử lý lưu tạo mới
+post('/admin/stock-transfers', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+
+    $fromWh = trim((string)($_POST['from_warehouse'] ?? 'Kho chính'));
+    $toWh = trim((string)($_POST['to_warehouse'] ?? 'Chi nhánh'));
+    $note = trim((string)($_POST['note'] ?? ''));
+    $items = $_POST['items'] ?? [];
+
+    if ($fromWh === $toWh || !$items) {
+        flash('error', 'Kho xuất và kho nhận phải khác nhau và phiếu chuyển phải chứa ít nhất một sản phẩm.');
+        redirect('/admin/stock-transfers/new'); return;
+    }
+
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+
+        $code = 'CK-' . date('Ymd') . '-' . random_int(1000, 9999);
+        $stId = dbInsert("INSERT INTO stock_transfers (code, from_warehouse, to_warehouse, status, note, created_by) VALUES (?, ?, ?, 'pending', ?, ?)", [
+            $code, $fromWh, $toWh, $note ?: null, $user['id'] ?? null
+        ]);
+
+        foreach ($items as $it) {
+            $pid = (int)($it['product_id'] ?? 0);
+            $qty = (int)($it['quantity'] ?? 0);
+            if ($pid && $qty > 0) {
+                dbRun("INSERT INTO stock_transfer_items (transfer_id, product_id, quantity) VALUES (?, ?, ?)", [
+                    $stId, $pid, $qty
+                ]);
+            }
+        }
+
+        $pdo->commit();
+        flash('success', 'Đã tạo phiếu chuyển kho #' . $code . ' thành công.');
+        redirect('/admin/stock-transfers/' . $stId);
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error', 'Lỗi khi tạo phiếu chuyển kho: ' . $e->getMessage());
+        redirect('/admin/stock-transfers/new');
+    }
+});
+
+// D2: Chuyển kho - Chi tiết
+get('/admin/stock-transfers/:id', function($p) {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $stId = (int)$p['id'];
+    $transfer = dbGet("SELECT st.*, u.full_name AS creator_name FROM stock_transfers st LEFT JOIN users u ON u.id=st.created_by WHERE st.id=?", [$stId]);
+    if (!$transfer) {
+        flash('error', 'Không tìm thấy phiếu chuyển kho.');
+        redirect('/admin/stock-transfers'); return;
+    }
+
+    $items = dbAll("SELECT sti.*, p.name AS product_name, p.sku, p.oem_code FROM stock_transfer_items sti INNER JOIN products p ON p.id=sti.product_id WHERE sti.transfer_id=?", [$stId]);
+
+    view('admin/stock-transfer-detail', [
+        'title' => 'Phiếu chuyển kho #' . $transfer['code'],
+        'transfer' => $transfer,
+        'items' => $items
+    ]);
+});
+
+// D2: Chuyển kho - Cập nhật trạng thái
+post('/admin/stock-transfers/:id/status', function($p) {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    $stId = (int)$p['id'];
+    $status = trim((string)($_POST['status'] ?? ''));
+
+    $transfer = dbGet("SELECT * FROM stock_transfers WHERE id=?", [$stId]);
+    if (!$transfer || $transfer['status'] === 'completed') {
+        flash('error', 'Phiếu chuyển kho không tồn tại hoặc đã hoàn tất.');
+        redirect('/admin/stock-transfers/' . $stId); return;
+    }
+
+    $pdo = db();
+    try {
+        $pdo->beginTransaction();
+
+        if ($status === 'shipping') {
+            dbRun("UPDATE stock_transfers SET status='shipping', shipped_at=datetime('now','localtime'), updated_at=datetime('now','localtime') WHERE id=?", [$stId]);
+            flash('success', 'Đã chuyển phiếu sang trạng thái Đang vận chuyển.');
+        } elseif ($status === 'completed') {
+            dbRun("UPDATE stock_transfers SET status='completed', received_at=datetime('now','localtime'), updated_at=datetime('now','localtime') WHERE id=?", [$stId]);
+            flash('success', 'Xác nhận ĐÃ NHẬN HÀNG VÀ HOÀN TẤT phiếu chuyển kho #' . $transfer['code']);
+        } elseif ($status === 'cancelled') {
+            dbRun("UPDATE stock_transfers SET status='cancelled', updated_at=datetime('now','localtime') WHERE id=?", [$stId]);
+            flash('success', 'Đã hủy phiếu chuyển kho.');
+        }
+
+        $pdo->commit();
+        redirect('/admin/stock-transfers/' . $stId);
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        flash('error', 'Lỗi cập nhật phiếu chuyển kho: ' . $e->getMessage());
+        redirect('/admin/stock-transfers/' . $stId);
+    }
+});
+
+// D3: Vị trí kho - Danh sách
+get('/admin/locations', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    $locations = dbAll("SELECT wl.*, COUNT(p.id) AS product_count FROM warehouse_locations wl LEFT JOIN products p ON p.location_code=wl.code GROUP BY wl.id ORDER BY wl.code");
+    view('admin/locations', [
+        'title' => 'Sơ đồ & Vị trí kho',
+        'locations' => $locations
+    ]);
+});
+
+// D3: Vị trí kho - Lưu mới
+post('/admin/locations', function() {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+
+    $code = strtoupper(trim((string)($_POST['code'] ?? '')));
+    $areaName = trim((string)($_POST['area_name'] ?? ''));
+    $shelfName = trim((string)($_POST['shelf_name'] ?? ''));
+    $binName = trim((string)($_POST['bin_name'] ?? ''));
+    $note = trim((string)($_POST['note'] ?? ''));
+
+    if (!$code || !$areaName) {
+        flash('error', 'Vui lòng nhập Mã vị trí và Khu vực/Kệ.');
+        redirect('/admin/locations'); return;
+    }
+
+    try {
+        dbInsert("INSERT INTO warehouse_locations (code, area_name, shelf_name, bin_name, note) VALUES (?, ?, ?, ?, ?)", [
+            $code, $areaName, $shelfName ?: null, $binName ?: null, $note ?: null
+        ]);
+        flash('success', 'Đã thêm vị trí kho mới: ' . $code);
+    } catch (Throwable $e) {
+        flash('error', 'Lỗi khi thêm vị trí kho (Mã có thể bị trùng): ' . $e->getMessage());
+    }
+    redirect('/admin/locations');
+});
+
+// D3: Vị trí kho - Xóa
+post('/admin/locations/:id/delete', function($p) {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+    dbRun("DELETE FROM warehouse_locations WHERE id=?", [$id]);
+    flash('success', 'Đã xóa vị trí kho.');
+    redirect('/admin/locations');
+});
+
+// D4: Báo cáo - Xuất Nhập Tồn
+get('/admin/reports/xnt', function() {
+    $user = requireStaffPermission('rbac:reports|products', '/admin/login');
+    $fromDate = trim((string)($_GET['from'] ?? date('Y-m-01')));
+    $toDate = trim((string)($_GET['to'] ?? date('Y-m-d')));
+    $catId = max(0, (int)($_GET['category_id'] ?? 0));
+
+    $where = 'WHERE 1=1'; $params = [];
+    if ($catId > 0) {
+        $where .= ' AND p.category_id=?';
+        $params[] = $catId;
+    }
+
+    $items = dbAll("SELECT p.id, p.name, p.sku, p.oem_code, p.stock, p.sold_count, p.price, p.cost_price, p.location_code FROM products p $where ORDER BY p.name", $params);
+    $categories = dbAll("SELECT id, name FROM categories ORDER BY name");
+
+    $totalProducts = count($items);
+    $totalExported = 0; $totalStock = 0; $totalStockValue = 0;
+    foreach ($items as $it) {
+        $st = (int)$it['stock'];
+        $sd = (int)$it['sold_count'];
+        $cost = (int)($it['cost_price'] ?: $it['price']*0.7);
+        $totalStock += $st;
+        $totalExported += $sd;
+        $totalStockValue += ($st * $cost);
+    }
+
+    view('admin/reports/xnt', [
+        'title' => 'Báo cáo Xuất - Nhập - Tồn',
+        'items' => $items,
+        'categories' => $categories,
+        'fromDate' => $fromDate,
+        'toDate' => $toDate,
+        'catId' => $catId,
+        'totalProducts' => $totalProducts,
+        'totalExported' => $totalExported,
+        'totalStock' => $totalStock,
+        'totalStockValue' => $totalStockValue
+    ]);
+});
+
+// D4: Báo cáo - Lợi nhuận gộp theo SKU
+get('/admin/reports/margin', function() {
+    $user = requireStaffPermission('rbac:reports|products', '/admin/login');
+    $catId = max(0, (int)($_GET['category_id'] ?? 0));
+
+    $where = 'WHERE p.sold_count > 0'; $params = [];
+    if ($catId > 0) {
+        $where .= ' AND p.category_id=?';
+        $params[] = $catId;
+    }
+
+    $items = dbAll("SELECT p.id, p.name, p.sku, p.price, p.cost_price, p.sold_count FROM products p $where ORDER BY (p.sold_count * (p.price - COALESCE(p.cost_price, p.price*0.7))) DESC", $params);
+    $categories = dbAll("SELECT id, name FROM categories ORDER BY name");
+
+    $totalRevenue = 0; $totalCost = 0; $totalProfit = 0;
+    foreach ($items as $it) {
+        $price = (int)$it['price'];
+        $cost = (int)($it['cost_price'] ?: $price*0.7);
+        $sold = (int)$it['sold_count'];
+        $rev = $sold * $price;
+        $cogs = $sold * $cost;
+        $totalRevenue += $rev;
+        $totalCost += $cogs;
+        $totalProfit += ($rev - $cogs);
+    }
+    $avgMargin = $totalRevenue > 0 ? round(($totalProfit / $totalRevenue)*100, 1) : 0;
+
+    view('admin/reports/margin', [
+        'title' => 'Báo cáo Lợi nhuận gộp theo SKU',
+        'items' => $items,
+        'categories' => $categories,
+        'catId' => $catId,
+        'totalRevenue' => $totalRevenue,
+        'totalCost' => $totalCost,
+        'totalProfit' => $totalProfit,
+        'avgMargin' => $avgMargin
+    ]);
+});
+
+// D4: Báo cáo - KPI Bán hàng & Nhân sự
+get('/admin/reports/kpi', function() {
+    $user = requireStaffPermission('rbac:reports|products', '/admin/login');
+    $staffKpis = dbAll("SELECT u.id, u.full_name, u.phone, u.role,
+        COUNT(DISTINCT o.id) AS order_count,
+        COALESCE(SUM(o.grand_total), 0) AS total_sales,
+        COALESCE(SUM(ct.commission_fee), 0) AS total_commission
+        FROM users u
+        LEFT JOIN orders o ON o.user_id = u.id AND o.status = 'completed'
+        LEFT JOIN partners pt ON pt.contact_phone = u.phone
+        LEFT JOIN commission_transactions ct ON ct.partner_id = pt.id AND ct.type = 'earn'
+        WHERE u.role IN ('staff', 'admin', 'manager', 'customer', 'garage', 'technician')
+        GROUP BY u.id
+        ORDER BY total_sales DESC");
+
+    view('admin/reports/kpi', [
+        'title' => 'Báo cáo KPI Nhân sự & Bán hàng',
+        'staffKpis' => $staffKpis
+    ]);
+});
