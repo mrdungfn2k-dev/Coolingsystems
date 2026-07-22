@@ -1,7 +1,7 @@
 <?php $title = 'Trang chủ'; $seo = ['meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng']; require __DIR__ . '/../partials/head.php'; ?>
-<section class="hero-section">
+<section class="hero-section" style="min-height:468px;contain:layout style size">
   <div class="wrap">
-    <aside class="cat-sidebar">
+    <aside class="cat-sidebar" style="min-height:420px;height:420px;overflow:hidden">
       <div class="head"><span class="lines"><span></span><span></span><span></span></span><span>Danh mục phụ tùng</span></div>
       <ul>
         <?php foreach ($sidebarCategories as $c): ?>
@@ -22,13 +22,13 @@
     <?php if ($heroBg): ?>
     <link rel="preload" as="image" href="/uploads/banners/<?= e($heroBg) ?>" fetchpriority="high">
     <?php endif; ?>
-    <div class="banner"<?= $heroBg ? ' style="background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center"' : '' ?>>
+    <div class="banner" style="min-height:420px;height:420px;overflow:hidden<?= $heroBg ? ';background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center' : '' ?>">
       <span class="badge"><?= $heroBadge ?></span>
       <h1><?= $heroHeading ?></h1>
       <p><?= $heroSubtext ?></p>
       <div class="actions"><a href="<?= e($heroBtn1Url) ?>" class="btn btn-gold btn-lg"><?= e($heroBtn1) ?></a><a href="<?= e($heroBtn2Url) ?>" class="btn btn-outline-light btn-lg"><?= e($heroBtn2) ?></a></div>
     </div>
-    <aside class="vs-card">
+    <aside class="vs-card" style="min-height:420px;height:420px;overflow:hidden">
       <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#334155;font-weight:500;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
         <div class="vs-field">
@@ -80,8 +80,8 @@ $__bnRaw = dbGet("SELECT value FROM system_config WHERE key='home_banners'")['va
 $__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], function($b){ return !empty($b['active']) && !empty($b['img']); }));
 ?>
 <?php if(!empty($__homeBanners)): ?>
-<section class="home-banners"><div class="wrap">
-  <div class="hbc" id="homeBannerCarousel">
+<section class="home-banners" style="min-height:214px;contain:layout style size"><div class="wrap">
+  <div class="hbc" id="homeBannerCarousel" style="height:194px;min-height:194px;max-height:194px;overflow:hidden">
     <div class="hbc-track">
       <?php foreach($__homeBanners as $__banIdx => $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
       <div class="hbc-slide">

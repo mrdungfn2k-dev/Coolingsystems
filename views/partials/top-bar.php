@@ -1,5 +1,5 @@
 <?php ?>
-<div class="top-bar">
+<div class="top-bar" style="min-height:38px;height:38px;contain:layout style size">
   <div class="wrap">
     <div class="left">
       <span class="badge-live"><span class="dot"></span> Đang phục vụ</span>

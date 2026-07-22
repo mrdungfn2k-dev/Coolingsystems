@@ -32,13 +32,13 @@ $siteLogo = $configMap['site_logo'] ?? '';
 $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
 ?>
 <style>@media(min-width:901px){ .mobile-cart-btn{display:none!important;} }</style>
-<header class="main">
+<header class="main" style="min-height:120px;height:120px;contain:layout style size">
   <div class="wrap">
-    <a href="/" class="logo" aria-label="Trang chủ Cooling - Phụ tùng ô tô chính hãng">
+    <a href="/" class="logo" aria-label="Trang chủ Cooling - Phụ tùng ô tô chính hãng" style="width:180px;height:76px;display:block">
       <?php if ($siteLogo): ?>
-        <img src="/uploads/<?= htmlspecialchars($siteLogo) ?>" alt="Cooling - Phụ tùng ô tô chính hãng" style="max-width:180px; max-height:76px; object-fit:contain" width="180" height="76">
+        <img src="/uploads/<?= htmlspecialchars($siteLogo) ?>" alt="Cooling - Phụ tùng ô tô chính hãng" style="width:180px;height:76px;max-width:180px;max-height:76px;object-fit:contain;aspect-ratio:180/76" width="180" height="76">
       <?php else: ?>
-        <svg class="logo-svg" width="180" height="76" viewBox="0 0 480 200" aria-label="Cooling logo" role="img"><use href="#cooling-logo"/></svg>
+        <svg class="logo-svg" width="180" height="76" style="width:180px;height:76px;aspect-ratio:180/76" viewBox="0 0 480 200" aria-label="Cooling logo" role="img"><use href="#cooling-logo"/></svg>
       <?php endif; ?>
     </a>
     <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (SKU, mã OEM, tên phụ tùng...)','🔍');return false;}">
