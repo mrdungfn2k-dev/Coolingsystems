@@ -5308,7 +5308,7 @@ get('/admin/reports/kpi', function() {
         COALESCE(SUM(o.grand_total), 0) AS total_sales,
         COALESCE(SUM(ct.commission_fee), 0) AS total_commission
         FROM users u
-        LEFT JOIN orders o ON o.user_id = u.id AND o.status = 'completed'
+        LEFT JOIN orders o ON o.user_id = u.id AND (o.payment_status = 'paid' OR o.delivery_status = 'completed')
         LEFT JOIN partners pt ON pt.contact_phone = u.phone
         LEFT JOIN commission_transactions ct ON ct.partner_id = pt.id AND ct.type = 'earn'
         WHERE u.role IN ('staff', 'admin', 'manager', 'customer', 'garage', 'technician')
@@ -5666,7 +5666,7 @@ get('/admin/reports/kpi/export-csv', function() {
         COALESCE(SUM(o.grand_total), 0) AS total_sales,
         COALESCE(SUM(ct.commission_fee), 0) AS total_commission
         FROM users u
-        LEFT JOIN orders o ON o.user_id = u.id AND o.status = 'completed'
+        LEFT JOIN orders o ON o.user_id = u.id AND (o.payment_status = 'paid' OR o.delivery_status = 'completed')
         LEFT JOIN partners pt ON pt.contact_phone = u.phone
         LEFT JOIN commission_transactions ct ON ct.partner_id = pt.id AND ct.type = 'earn'
         WHERE u.role IN ('staff', 'admin', 'manager', 'customer', 'garage', 'technician')
