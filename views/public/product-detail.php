@@ -249,7 +249,9 @@ if (!empty($faqItems)) {
           </div>
           <?php if(!empty($images)): ?>
             <img src="/uploads/products/<?= e($images[0]['file_path']) ?>"
-                 alt="<?= e($product['name']) ?>" id="pdMainImg" loading="lazy"
+                 alt="<?= e($product['name']) ?>" id="pdMainImg"
+                 fetchpriority="high" loading="eager"
+                 width="600" height="600"
                  style="max-width:100%;object-fit:contain!important;object-position:center;border-radius:0;width:100%;height:100%">
           <?php else: ?>
             <div style="text-align:center;color:#ccc">

@@ -10,6 +10,9 @@
 <link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260717-favicon-sync">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260717-favicon-sync">
 <link rel="manifest" href="/site.webmanifest?v=20260717-favicon-sync">
+<!-- Performance: Preconnect Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <?php
 // Dynamic system config - load all site settings
 $_sysConf = [];
@@ -33,19 +36,28 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <?php if (!empty($seo['noindex'])): ?>
 <meta name="robots" content="noindex,follow">
 <?php endif; ?>
-<link rel="stylesheet" href="/css/cooling.css?v=20260716-stage3">
-<style id="public-title-std">
-/* Đồng nhất tiêu đề các mục bên người dùng (theo mẫu "Giới thiệu"): navy, cùng cỡ + font */
+<!-- Performance: Preload critical CSS -->
+<link rel="preload" href="/css/cooling.css?v=20260717-perf1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css/cooling.css?v=20260717-perf1"></noscript>
+<link rel="preload" href="/css/mobile.css?v=20260717-perf1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css/mobile.css?v=20260717-perf1"></noscript>
+<!-- Performance: Async Google Fonts (non-blocking) -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap"></noscript>
+<!-- Critical inline CSS to prevent FOUC while CSS loads -->
+<style id="critical-inline">
+/* Đồng nhất tiêu đề các mục bên người dùng */
 .sec-head .title h1, .sec-head .title h2,
 .pf-head .title h1, .pf-head .title h2 {
   font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif !important;
   font-size:18px !important; font-weight:800 !important;
   text-transform:uppercase !important; letter-spacing:0.04em !important;
-  color:var(--navy) !important; line-height:1.3 !important; margin:0 !important;
+  color:#1a3258 !important; line-height:1.3 !important; margin:0 !important;
 }
-.promo-subhead { color:var(--navy) !important; font-family:'Inter',sans-serif !important; }
+.promo-subhead { color:#1a3258 !important; font-family:'Inter',sans-serif !important; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+:root { --navy:#1a3258; --gold:#c9a227; --gold-light:#e8c050; --line:#e5e7eb; --ink-2:#6b7280; --ink-3:#9ca3af; }
 </style>
-<link rel="stylesheet" href="/css/mobile.css?v=20260716-stage3">
 
 <?php
 // === CANONICAL URL ===

@@ -80,10 +80,10 @@ $__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], fu
 <section class="home-banners"><div class="wrap">
   <div class="hbc" id="homeBannerCarousel">
     <div class="hbc-track">
-      <?php foreach($__homeBanners as $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
+      <?php foreach($__homeBanners as $__banIdx => $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
       <div class="hbc-slide">
-        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" loading="lazy"></a>
-        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" loading="lazy"><?php endif; ?>
+        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" width="1200" height="450" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>></a>
+        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" width="1200" height="450" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>><?php endif; ?>
       </div>
       <?php endforeach; ?>
     </div>
@@ -205,7 +205,7 @@ foreach ($cats as $cat):
     <a href="/products?brand_id=<?= $b['id'] ?>" class="brand-card <?= !empty($b['image']) ? 'has-image' : '' ?>">
       <div class="brand-img-wrap">
         <?php if (!empty($b['image'])): ?>
-          <img src="/uploads/brands/<?= e($b['image']) ?>" alt="<?= e($b['name']) ?>" loading="lazy">
+          <img src="/uploads/brands/<?= e($b['image']) ?>" alt="<?= e($b['name']) ?>" width="120" height="60" loading="lazy">
         <?php else: ?>
           <span class="brand-initial"><?= strtoupper(mb_substr($b['name'], 0, 3)) ?></span>
         <?php endif; ?>
