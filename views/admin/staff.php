@@ -18,17 +18,28 @@
   transition: all 0.15s ease-in-out;
   border: 1px solid transparent;
 }
-.role-btn-blue { background: #1565c0 !important; color: #ffffff !important; border-color: #1565c0 !important; }
-.role-btn-blue:hover { background: #0d47a1 !important; }
 
-.role-btn-navy { background: #1a3258 !important; color: #ffffff !important; border-color: #1a3258 !important; }
-.role-btn-navy:hover { background: #0f213d !important; }
+/* Màu xanh navy chuẩn của toàn bộ hệ thống */
+.role-btn-navy { 
+  background: var(--navy, #1a3258) !important; 
+  color: #ffffff !important; 
+  border-color: var(--navy, #1a3258) !important; 
+}
+.role-btn-navy:hover { 
+  background: #0f213d !important; 
+  border-color: #0f213d !important; 
+}
 
-.role-btn-assign { background: #0284c7 !important; color: #ffffff !important; border-color: #0284c7 !important; }
-.role-btn-assign:hover { background: #0369a1 !important; }
-
-.role-btn-red { background: #ffffff !important; color: #dc2626 !important; border: 1px solid #fca5a5 !important; }
-.role-btn-red:hover { background: #fef2f2 !important; border-color: #f87171 !important; }
+/* Nút xóa / hủy màu đỏ nhạt phân biệt an toàn */
+.role-btn-red { 
+  background: #ffffff !important; 
+  color: #dc2626 !important; 
+  border: 1px solid #fca5a5 !important; 
+}
+.role-btn-red:hover { 
+  background: #fef2f2 !important; 
+  border-color: #f87171 !important; 
+}
 
 .role-btn-group {
   display: flex !important;
@@ -87,7 +98,7 @@
         <td><span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700"><?= $staffCount ?> nhân viên</span></td>
         <td style="vertical-align:middle;text-align:center">
           <div class="role-btn-group" style="margin:0 auto">
-            <a href="/admin/staff/roles/<?= (int)$role['id'] ?>/permissions" class="role-btn role-btn-blue">Xem quyền</a>
+            <a href="/admin/staff/roles/<?= (int)$role['id'] ?>/permissions" class="role-btn role-btn-navy">Xem quyền</a>
             <?php if ($template): ?>
               <form method="post" action="/admin/staff/roles/<?= (int)$role['id'] ?>/duplicate" style="margin:0;padding:0">
                 <?= csrfField() ?>
@@ -96,7 +107,7 @@
             <?php else: ?>
               <a href="/admin/staff/roles/<?= (int)$role['id'] ?>/edit" class="role-btn role-btn-navy">Sửa</a>
             <?php endif; ?>
-            <a href="/admin/staff/roles/<?= (int)$role['id'] ?>/assign" class="role-btn role-btn-assign">Phân công</a>
+            <a href="/admin/staff/roles/<?= (int)$role['id'] ?>/assign" class="role-btn role-btn-navy">Phân công</a>
             <?php if (!$template): ?>
               <form method="post" action="/admin/staff/roles/<?= (int)$role['id'] ?>/delete" style="margin:0;padding:0" onsubmit="return csConfirmForm(this,'Xóa vai trò này?')">
                 <?= csrfField() ?>
