@@ -41,9 +41,8 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap"></noscript>
-<!-- Critical CSS loaded synchronously to prevent CLS (Cumulative Layout Shift) -->
-<link rel="stylesheet" href="/css/cooling.css?v=20260717-perf3">
-<link rel="stylesheet" href="/css/mobile.css?v=20260717-perf3">
+<!-- Critical Minified CSS loaded synchronously -->
+<link rel="stylesheet" href="/css/cooling.min.css?v=20260717-min1">
 <!-- Critical inline CSS to prevent FOUC while CSS loads -->
 <style id="critical-inline">
 /* Đồng nhất tiêu đề các mục bên người dùng */
