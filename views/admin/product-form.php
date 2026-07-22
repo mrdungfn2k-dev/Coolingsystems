@@ -609,7 +609,13 @@ function initDescEditor() {
     }
   },
   setup: function(editor) {
-    editor.on('change', function() { editor.save(); });
+    editor.on('change keyup setcontent paste execCommand nodechange input', function() {
+      editor.save();
+      if (typeof runSeoAnalysis === 'function') {
+        clearTimeout(window._seoT);
+        window._seoT = setTimeout(runSeoAnalysis, 300);
+      }
+    });
   }
   });
 }
@@ -677,7 +683,13 @@ function initFeatEditor() {
     }
   },
   setup: function(editor) {
-    editor.on('change', function() { editor.save(); });
+    editor.on('change keyup setcontent paste execCommand nodechange input', function() {
+      editor.save();
+      if (typeof runSeoAnalysis === 'function') {
+        clearTimeout(window._seoT);
+        window._seoT = setTimeout(runSeoAnalysis, 300);
+      }
+    });
   }
   });
 }
@@ -744,7 +756,13 @@ function initSpecEditor() {
     }
   },
   setup: function(editor) {
-    editor.on('change', function() { editor.save(); });
+    editor.on('change keyup setcontent paste execCommand nodechange input', function() {
+      editor.save();
+      if (typeof runSeoAnalysis === 'function') {
+        clearTimeout(window._seoT);
+        window._seoT = setTimeout(runSeoAnalysis, 300);
+      }
+    });
   }
   });
 }
@@ -1038,18 +1056,25 @@ function runSeoAnalysis() {
   // ─ MÔ TẢ SẢN PHẨM (35đ)
   add(descText.length >= 150, 'Mô tả dài ' + descText.length + ' ký tự (tối thiểu 150)', 'desc', 8);
   add(descText.length >= 300, 'Mô tả chi tiết ≥300 ký tự (' + descText.length + ')', 'desc', 5);
-  var h2c = (descHtml.match(/<h2/gi)||[]).length;
-  var h3c = (descHtml.match(/<h3/gi)||[]).length;
+  var h2c = (descHtml.match(/<h2\b[^>]*>/gi)||[]).length;
+  var h3c = (descHtml.match(/<h3\b[^>]*>/gi)||[]).length;
   add(h2c + h3c >= 1, 'Mô tả có ' + (h2c+h3c) + ' heading H2/H3 (nên ≥1)', 'desc', 7);
   add(h2c + h3c >= 2, 'Mô tả có tổng ' + (h2c+h3c) + ' heading (nên ≥2)', 'desc', 5);
-  add(/<(ul|ol)/i.test(descHtml), 'Mô tả có danh sách bullet/numbered', 'desc', 5);
-  add(/<img/i.test(descHtml), 'Mô tả có chèn hình ảnh minh họa', 'desc', 5);
+  add(/<(ul|ol)\b[^>]*>/i.test(descHtml), 'Mô tả có danh sách bullet/numbered', 'desc', 5);
+  add(/<img\b[^>]*>/i.test(descHtml), 'Mô tả có chèn hình ảnh minh họa', 'desc', 5);
 
   // ─ CẤU TRÚC: ĐẶC ĐIỂM + THÔNG SỐ (20đ)
   add(featText.length >= 50, 'Đặc điểm dài ' + featText.length + ' ký tự (≥50)', 'struct', 5);
-  add(/<(ul|ol)/i.test(featHtml), 'Đặc điểm dùng danh sách', 'struct', 3);
-  var fb = (featHtml.match(/<(strong|b)>/gi)||[]).length;
-  add(fb >= 2, 'Đặc điểm có ' + fb + ' từ in đậm (≥2)', 'struct', 2);
+  add(/<(ul|ol)\b[^>]*>/i.test(featHtml), 'Đặc điểm dùng danh sách', 'struct', 3);
+  
+  // Đếm từ/thẻ in đậm chính xác
+  var tagMatches = (featHtml.match(/<(?:strong|b)\b[^>]*>([\s\S]*?)<\/(?:strong|b)>/gi) || []).length;
+  var styleMatches = (featHtml.match(/style="[^"]*font-weight:\s*(?:bold|[789]00)[^"]*"/gi) || []).length;
+  var mdMatches = (featHtml.match(/\*\*[^*]+\*\*/g) || []).length + (featHtml.match(/__[^_]+__/g) || []).length;
+  var fb = tagMatches || (featHtml.match(/<(?:strong|b)\b[^>]*>/gi) || []).length;
+  fb = Math.max(fb, styleMatches + mdMatches);
+
+  add(fb >= 2, 'Đặc điểm có ' + fb + ' cụm/từ in đậm (≥2)', 'struct', 2);
   add(specText.length >= 30, 'Thông số KT dài ' + specText.length + ' ký tự (≥30)', 'struct', 5);
   add(/<table/i.test(specHtml) || specText.length >= 80, 'Thông số có bảng hoặc nội dung chi tiết', 'struct', 5);
 
