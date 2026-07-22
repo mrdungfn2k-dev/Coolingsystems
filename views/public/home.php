@@ -82,8 +82,8 @@ $__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], fu
     <div class="hbc-track">
       <?php foreach($__homeBanners as $__banIdx => $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
       <div class="hbc-slide">
-        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" width="1200" height="450" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>></a>
-        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" width="1200" height="450" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>><?php endif; ?>
+        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" width="1600" height="250" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>></a>
+        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" width="1600" height="250" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>><?php endif; ?>
       </div>
       <?php endforeach; ?>
     </div>

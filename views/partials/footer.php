@@ -31,7 +31,7 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
       <div class="foot-brand">
         <?php $_fLogoImg = dbGet("SELECT value FROM settings WHERE key='footer_logo_image'")['value'] ?? ''; ?>
         <?php if($_fLogoImg && file_exists('/var/lib/coolingsystems/uploads/'.$_fLogoImg)): ?>
-          <div class="logo footer-logo-img-wrap"><img src="/uploads/<?= e($_fLogoImg) ?>" alt="<?= e($_footerLogo) ?>" class="footer-logo-img"></div>
+          <div class="logo footer-logo-img-wrap"><img src="/uploads/<?= e($_fLogoImg) ?>" alt="<?= e($_footerLogo) ?>" class="footer-logo-img" width="180" height="60" loading="lazy"></div>
         <?php else: ?>
           <div class="logo" style="font-size:24px;font-weight:900;color:#fff;letter-spacing:1px"><?= e($_footerLogo) ?></div>
         <?php endif; ?>
