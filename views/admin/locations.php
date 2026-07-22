@@ -85,34 +85,34 @@
 <?php endif; ?>
 
 <div id="newLocationModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
-  <form method="post" action="/admin/locations" style="background:#fff;padding:24px;border-radius:10px;max-width:450px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+  <form id="locForm" method="post" action="/admin/locations" style="background:#fff;padding:24px;border-radius:10px;max-width:500px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
     <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
     <h3 style="margin:0 0 16px;color:#1a3258">Thêm vị trí kho mới</h3>
 
     <div style="margin-bottom:12px">
       <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Mã vị trí (VD: KE-A-T1-K05) <span style="color:#e11d48">*</span></label>
-      <input type="text" name="code" required placeholder="Mã viết liền không dấu..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <input type="text" name="code" required pattern="[A-Z0-9\-]{3,30}" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9\-]/g,'')" placeholder="Mã viết liền không dấu (VD: KE-A-T1-K05)" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px;font-family:monospace;font-weight:700">
     </div>
 
     <div style="margin-bottom:12px">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khu vực / Kệ <span style="color:#e11d48">*</span></label>
-      <input type="text" name="area_name" required placeholder="Ví dụ: Kệ A, Kệ B, Khu Vực 1..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khu vực / Kệ <span style="color:#e11d48">*</span> <span id="areaWordCnt" style="font-weight:400;color:#64748b">(Tối đa 50 từ)</span></label>
+      <input type="text" id="loc_area" name="area_name" required maxlength="250" placeholder="Ví dụ: Kệ A, Kệ B, Khu Vực 1..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
       <div>
-        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Tầng</label>
-        <input type="text" name="shelf_name" placeholder="Tầng 1, Tầng 2..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Tầng <span style="font-weight:400;color:#64748b">(<=50 từ)</span></label>
+        <input type="text" id="loc_shelf" name="shelf_name" maxlength="250" placeholder="Tầng 1, Tầng 2..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
       </div>
       <div>
-        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khay / Ô</label>
-        <input type="text" name="bin_name" placeholder="Khay 05, Ô 12..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khay / Ô <span style="font-weight:400;color:#64748b">(<=50 từ)</span></label>
+        <input type="text" id="loc_bin" name="bin_name" maxlength="250" placeholder="Khay 05, Ô 12..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
       </div>
     </div>
 
     <div style="margin-bottom:20px">
-      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ghi chú</label>
-      <input type="text" name="note" placeholder="Mô tả loại phụ tùng lưu ở đây..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ghi chú <span id="noteWordCnt" style="font-weight:400;color:#64748b">(0/200 từ)</span></label>
+      <textarea id="loc_note" name="note" rows="3" placeholder="Mô tả loại phụ tùng lưu ở đây..." style="width:100%;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:13px"></textarea>
     </div>
 
     <div style="display:flex;gap:10px;justify-content:flex-end">
@@ -121,5 +121,38 @@
     </div>
   </form>
 </div>
+
+<script>
+(function(){
+  var form = document.getElementById('locForm');
+  if(!form) return;
+  var area = document.getElementById('loc_area');
+  var note = document.getElementById('loc_note');
+  var noteCounter = document.getElementById('noteWordCnt');
+
+  function countWords(str) {
+    return str.trim() ? str.trim().split(/\s+/).length : 0;
+  }
+
+  note.addEventListener('input', function(){
+    var total = countWords(note.value);
+    noteCounter.textContent = '(' + total + '/200 từ)';
+    noteCounter.style.color = total > 200 ? '#e11d48' : '#64748b';
+  });
+
+  form.addEventListener('submit', function(e){
+    if (countWords(area.value) > 50) {
+      e.preventDefault();
+      alert('Tên Khu vực/Kệ tối đa 50 từ.');
+      return;
+    }
+    if (countWords(note.value) > 200) {
+      e.preventDefault();
+      alert('Ghi chú tối đa 200 từ.');
+      return;
+    }
+  });
+})();
+</script>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

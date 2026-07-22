@@ -1445,7 +1445,7 @@ function rbacSanitizeRolePermissions(array $permissions): array {
 }
 
 get('/admin/serials', function() { requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login'); $serials=dbAll("SELECT serial.*,product.name AS product_name,product.sku FROM product_serials serial INNER JOIN products product ON product.id=serial.product_id ORDER BY serial.created_at DESC LIMIT 500"); $products=dbAll("SELECT id,sku,name FROM products ORDER BY name LIMIT 3000"); view('admin/serials',['title'=>'Quản lý Serial & Lô hàng','userRole'=>'admin','serials'=>$serials,'products'=>$products]); });
-post('/admin/serials', function() { $actor=requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login');csrfCheck();$productId=(int)($_POST['product_id']??0);$serial=trim($_POST['serial_no']??'');$end=trim($_POST['warranty_end_date']??'');if(!dbGet('SELECT id FROM products WHERE id=?',[$productId])||!$serial||!$end){flash('error','Nhập đầy đủ sản phẩm, serial và hạn bảo hành.');redirect('/admin/serials');}try{$id=dbInsert('INSERT INTO product_serials (product_id,serial_no,manufactured_at,warranty_end_date,created_by) VALUES (?,?,?,?,?)',[$productId,$serial,trim($_POST['manufactured_at']??''),$end,$actor['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id'],$actor['role'],'serial_created','product_serial',$id,json_encode(['product_id'=>$productId,'serial'=>$serial]),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã thêm serial.');}catch(Throwable $e){flash('error','Serial đã tồn tại hoặc dữ liệu không hợp lệ.');}redirect('/admin/serials'); });
+post('/admin/serials', function() { $actor=requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login');csrfCheck();$productId=(int)($_POST['product_id']??0);$serial=strtoupper(trim($_POST['serial_no']??''));$mfg=trim($_POST['manufactured_at']??'');$end=trim($_POST['warranty_end_date']??'');if(!$productId||!dbGet('SELECT id FROM products WHERE id=?',[$productId])){flash('error','Vui lòng gõ tìm và chọn sản phẩm hợp lệ từ danh sách gợi ý.');redirect('/admin/serials');}if($serial===''||!preg_match('/^[A-Z0-9\-]{3,50}$/',$serial)){flash('error','Số serial không hợp lệ (chỉ gồm chữ cái A-Z, chữ số 0-9 và dấu gạch ngang, 3-50 ký tự).');redirect('/admin/serials');}if($end===''||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$end)){flash('error','Vui lòng chọn Hạn bảo hành hợp lệ.');redirect('/admin/serials');}try{$id=dbInsert('INSERT INTO product_serials (product_id,serial_no,manufactured_at,warranty_end_date,created_by) VALUES (?,?,?,?,?)',[$productId,$serial,$mfg!==''?$mfg:null,$end,$actor['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id'],$actor['role']??'admin','serial_created','product_serial',$id,json_encode(['product_id'=>$productId,'serial'=>$serial],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã thêm số serial '.$serial.' thành công.');}catch(Throwable $e){flash('error','Số Serial '.$serial.' đã tồn tại trong hệ thống (đảm bảo tính duy nhất).');}redirect('/admin/serials'); });
 
 get('/admin/warranties/products', function() { requireStaffPermission('rbac:warranty.cases.view|returns','/admin/login'); $q=trim($_GET['q']??''); header('Content-Type: application/json; charset=utf-8'); if(mb_strlen($q)<2){echo '[]';exit;} $like='%'.$q.'%'; $rows=dbAll('SELECT id,sku,oem_code,name FROM products WHERE name LIKE ? OR sku LIKE ? OR oem_code LIKE ? ORDER BY name LIMIT 12',[$like,$like,$like]); echo json_encode(array_map(fn($row)=>['id'=>(int)$row['id'],'label'=>trim($row['sku'].' | '.$row['name'].(!empty($row['oem_code'])?' | OEM: '.$row['oem_code']:''))],$rows),JSON_UNESCAPED_UNICODE); exit; });
 get('/admin/cashbook', function() {
@@ -1462,18 +1462,18 @@ get('/admin/cashbook', function() {
 });
 post('/admin/cashbook/receipts', function() {
     $actor=requireStaffPermission('rbac:finance.receipts.create|tax_config','/admin/login');csrfCheck();
-    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payer=trim($_POST['payer_name']??'');$phone=preg_replace('/\D+/','',$_POST['payer_phone']??'');$email=strtolower(trim($_POST['payer_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
-    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payer===''||mb_strlen($payer)>120||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','D&#7919; li&#7879;u phi&#7871;u thu kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
-    $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Qu&#7929; nh&#7853;n ti&#7873;n kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
+    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payer=trim($_POST['payer_name']??'');$phone=preg_replace('/\D+/','',$_POST['payer_phone']??'');$email=strtolower(trim($_POST['payer_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$payerWords=$payer===''?0:count(preg_split('/\s+/u',$payer,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
+    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payer===''||$payerWords>50||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','Dữ liệu phiếu thu không hợp lệ (Tên người nộp tối đa 50 từ, diễn giải tối đa 200 từ).');redirect('/admin/cashbook');}
+    $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Quỹ nhận tiền không hợp lệ.');redirect('/admin/cashbook');}
     $amount=(int)$rawAmount;$code='PT'.date('ymdHis').random_int(10,99);$fullDescription=trim('Thu từ '.$payer.($description!==''?' - '.$description:''));
     $entryId=dbInsert('INSERT INTO cash_ledger_entries (account_id,direction,amount,reference_type,reference_code,description,payer_phone,payer_email,entry_date,created_by) VALUES (?,?,?,?,?,?,?,?,?,?)',[$accountId,'in',$amount,'manual_receipt',$reference!==''?$reference:$code,$fullDescription,$phone,$email,$entryDate,$actor['id']??null]);
     dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id']??null,$actor['role']??'admin','cash_receipt_created','cash_ledger_entry',$entryId,json_encode(['code'=>$code,'account_id'=>$accountId,'amount'=>$amount,'payer'=>$payer],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);
-    flash('success','&#272;&#227; t&#7841;o phi&#7871;u thu '.$code.' cho qu&#7929; '.$account['name'].'.');redirect('/admin/cashbook');
+    flash('success','Đã tạo phiếu thu '.$code.' cho quỹ '.$account['name'].'.');redirect('/admin/cashbook');
 });
 post('/admin/cashbook/disbursements', function() {
     $actor=requireStaffPermission('rbac:finance.disbursements.create|tax_config','/admin/login');csrfCheck();
-    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payee=trim($_POST['payee_name']??'');$phone=preg_replace('/\D+/','',$_POST['payee_phone']??'');$email=strtolower(trim($_POST['payee_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
-    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payee===''||mb_strlen($payee)>120||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','D&#7919; li&#7879;u phi&#7871;u chi kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
+    $accountId=(int)($_POST['account_id']??0);$rawAmount=preg_replace('/\D+/','',(string)($_POST['amount']??''));$payee=trim($_POST['payee_name']??'');$phone=preg_replace('/\D+/','',$_POST['payee_phone']??'');$email=strtolower(trim($_POST['payee_email']??''));$reference=trim($_POST['reference_code']??'');$description=trim($_POST['description']??'');$words=$description===''?0:count(preg_split('/\s+/u',$description,-1,PREG_SPLIT_NO_EMPTY));$payeeWords=$payee===''?0:count(preg_split('/\s+/u',$payee,-1,PREG_SPLIT_NO_EMPTY));$entryDate=trim($_POST['entry_date']??'');
+    if(!$accountId||$rawAmount===''||(int)$rawAmount<1||(int)$rawAmount>999999999999||$payee===''||$payeeWords>50||!preg_match('/^0[35789]\d{8}$/',$phone)||!filter_var($email,FILTER_VALIDATE_EMAIL)||mb_strlen($email)>254||mb_strlen($reference)>64||$words>200||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$entryDate)){flash('error','Dữ liệu phiếu chi không hợp lệ (Tên người nhận tối đa 50 từ, diễn giải tối đa 200 từ).');redirect('/admin/cashbook');}
     $account=dbGet('SELECT id,name FROM cash_accounts WHERE id=? AND is_active=1',[$accountId]);if(!$account){flash('error','Qu&#7929; chi kh&#244;ng h&#7907;p l&#7879;.');redirect('/admin/cashbook');}
     $amount=(int)$rawAmount;$code='PC'.date('ymdHis').random_int(10,99);
     $requestId=dbInsert('INSERT INTO cash_disbursement_requests (code,account_id,amount,payee_name,payee_phone,payee_email,reference_code,description,entry_date,status,created_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)',[$code,$accountId,$amount,$payee,$phone,$email,$reference,$description,$entryDate,'pending',$actor['id']??null]);
@@ -5171,8 +5171,27 @@ post('/admin/locations', function() {
     $binName = trim((string)($_POST['bin_name'] ?? ''));
     $note = trim((string)($_POST['note'] ?? ''));
 
-    if (!$code || !$areaName) {
-        flash('error', 'Vui lòng nhập Mã vị trí và Khu vực/Kệ.');
+    if (!$code || !preg_match('/^[A-Z0-9\-]{3,30}$/', $code)) {
+        flash('error', 'Mã vị trí không hợp lệ (Viết liền không dấu, từ 3-30 ký tự, VD: KE-A-T1-K05).');
+        redirect('/admin/locations'); return;
+    }
+
+    $areaWords = $areaName !== '' ? count(preg_split('/\s+/u', $areaName)) : 0;
+    if (!$areaName || $areaWords > 50) {
+        flash('error', 'Vui lòng nhập Khu vực/Kệ hợp lệ (tối đa 50 từ).');
+        redirect('/admin/locations'); return;
+    }
+
+    $shelfWords = $shelfName !== '' ? count(preg_split('/\s+/u', $shelfName)) : 0;
+    $binWords = $binName !== '' ? count(preg_split('/\s+/u', $binName)) : 0;
+    if ($shelfWords > 50 || $binWords > 50) {
+        flash('error', 'Tên Tầng và Khay/Ô tối đa 50 từ.');
+        redirect('/admin/locations'); return;
+    }
+
+    $noteWords = $note !== '' ? count(preg_split('/\s+/u', $note)) : 0;
+    if ($noteWords > 200) {
+        flash('error', 'Ghi chú tối đa 200 từ.');
         redirect('/admin/locations'); return;
     }
 
@@ -5182,7 +5201,7 @@ post('/admin/locations', function() {
         ]);
         flash('success', 'Đã thêm vị trí kho mới: ' . $code);
     } catch (Throwable $e) {
-        flash('error', 'Lỗi khi thêm vị trí kho (Mã có thể bị trùng): ' . $e->getMessage());
+        flash('error', 'Lỗi khi thêm vị trí kho (Mã vị trí ' . $code . ' đã tồn tại trên hệ thống).');
     }
     redirect('/admin/locations');
 });
