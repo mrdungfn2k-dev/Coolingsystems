@@ -5218,6 +5218,7 @@ get('/admin/reports/xnt', function() {
     $fromDate = trim((string)($_GET['from'] ?? date('Y-m-01')));
     $toDate = trim((string)($_GET['to'] ?? date('Y-m-d')));
     $catId = max(0, (int)($_GET['category_id'] ?? 0));
+    $q = trim((string)($_GET['q'] ?? ''));
     $page = max(1, (int)($_GET['page'] ?? 1));
     $perPage = 25;
 
@@ -5225,6 +5226,11 @@ get('/admin/reports/xnt', function() {
     if ($catId > 0) {
         $where .= ' AND p.category_id=?';
         $params[] = $catId;
+    }
+    if ($q !== '') {
+        $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)';
+        $like = '%' . $q . '%';
+        $params[] = $like; $params[] = $like; $params[] = $like;
     }
 
     $totalProducts = (int)(dbGet("SELECT COUNT(*) AS c FROM products p $where", $params)['c'] ?? 0);
@@ -5253,6 +5259,7 @@ get('/admin/reports/xnt', function() {
         'fromDate' => $fromDate,
         'toDate' => $toDate,
         'catId' => $catId,
+        'q' => $q,
         'totalProducts' => $totalProducts,
         'totalExported' => $totalExported,
         'totalStock' => $totalStock,
