@@ -60,21 +60,21 @@
   <tbody>
     <?php foreach($quotations as $qt): ?>
     <tr>
-      <td style="font-family:monospace;font-weight:700">#<?= e($qt['code']) ?></td>
+      <td style="font-family:monospace;font-weight:700">#<?= e($qt['code'] ?? '') ?></td>
       <td>
-        <strong style="color:#1f365b"><?= e($qt['customer_name'] ?: '—') ?></strong>
-        <div style="font-size:11px;color:#718096;margin-top:2px"><?= e($qt['customer_phone'] ?: '') ?></div>
+        <strong style="color:#1f365b"><?= e($qt['customer_name'] ?? '—') ?></strong>
+        <div style="font-size:11px;color:#718096;margin-top:2px"><?= e($qt['customer_phone'] ?? '') ?></div>
       </td>
-      <td style="text-align:right;font-weight:700;color:#1e3a8a"><?= number_format((int)$qt['grand_total']) ?> đ</td>
+      <td style="text-align:right;font-weight:700;color:#1e3a8a"><?= number_format((int)($qt['grand_total'] ?? 0)) ?> đ</td>
       <td>
-        <span class="q-status q-status-<?= e($qt['status']) ?>">
-          <?= ['pending'=>'Chờ duyệt','sent'=>'Đã gửi KH','converted'=>'Đã xuất đơn','expired'=>'Hết hạn','cancelled'=>'Đã hủy'][$qt['status']] ?? e($qt['status']) ?>
+        <span class="q-status q-status-<?= e($qt['status'] ?? 'pending') ?>">
+          <?= ['pending'=>'Chờ duyệt','sent'=>'Đã gửi KH','converted'=>'Đã xuất đơn','expired'=>'Hết hạn','cancelled'=>'Đã hủy'][$qt['status'] ?? 'pending'] ?? e($qt['status'] ?? '') ?>
         </span>
       </td>
-      <td style="color:#e11d48;font-weight:500"><?= e(substr($qt['expires_at'],0,10)) ?></td>
-      <td style="font-size:12px;color:#6b7280;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($qt['note']) ?>"><?= e($qt['note'] ?: '—') ?></td>
-      <td style="font-size:12px;color:#6b7280"><?= e($qt['creator_name'] ?: 'System') ?></td>
-      <td style="font-size:12px;color:#9ca3af"><?= date('d/m/Y H:i', strtotime($qt['created_at'])) ?></td>
+      <td style="color:#e11d48;font-weight:500"><?= e(substr((string)($qt['expires_at'] ?? ''),0,10)) ?></td>
+      <td style="font-size:12px;color:#6b7280;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($qt['note'] ?? '') ?>"><?= e(!empty($qt['note']) ? $qt['note'] : '—') ?></td>
+      <td style="font-size:12px;color:#6b7280"><?= e($qt['creator_name'] ?? 'System') ?></td>
+      <td style="font-size:12px;color:#9ca3af"><?= !empty($qt['created_at']) ? date('d/m/Y H:i', strtotime($qt['created_at'])) : '—' ?></td>
       <td>
         <div style="display:flex;gap:5px">
           <a href="/admin/quotations/<?= (int)$qt['id'] ?>" class="btn btn-outline" style="padding:4px 8px;font-size:12px">Chi tiết</a>

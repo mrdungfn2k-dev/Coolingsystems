@@ -4579,12 +4579,12 @@ get('/admin/quotations', function() {
         $params[] = $statusFilter;
     }
 
-    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM quotations q INNER JOIN users u ON u.id=q.user_id $where", $params)['c'] ?? 0);
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM quotations q LEFT JOIN users u ON u.id=q.user_id $where", $params)['c'] ?? 0);
     $totalPages = max(1, (int)ceil($total/$perPage));
     $page = min($page, $totalPages);
 
     $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
-    $quotations = dbAll("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone, uc.full_name AS creator_name FROM quotations q INNER JOIN users u ON u.id=q.user_id LEFT JOIN users uc ON uc.id=q.created_by $where ORDER BY q.created_at DESC LIMIT ? OFFSET ?", $listParams);
+    $quotations = dbAll("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone, uc.full_name AS creator_name FROM quotations q LEFT JOIN users u ON u.id=q.user_id LEFT JOIN users uc ON uc.id=q.created_by $where ORDER BY q.created_at DESC LIMIT ? OFFSET ?", $listParams);
 
     view('admin/quotations', [
         'title' => 'Báo giá độc lập',
@@ -4653,7 +4653,21 @@ post('/admin/quotations', function() {
         ]);
 
         $pdo->commit();
-        flash('success', 'Đã tạo bảng báo giá #' . $code . ' thành công.');
+
+        // Gửi email báo giá cho khách hàng
+        try {
+            require_once __DIR__ . '/../includes/mailer.php';
+            $customer = dbGet("SELECT * FROM users WHERE id=?", [$userId]);
+            $qObj = dbGet("SELECT * FROM quotations WHERE id=?", [$qId]);
+            $qItems = dbAll("SELECT qi.*, p.name AS product_name FROM quotation_items qi INNER JOIN products p ON p.id=qi.product_id WHERE qi.quotation_id=?", [$qId]);
+            if ($customer && $qObj && $qItems) {
+                sendQuotationEmail($qObj, $customer, $qItems);
+            }
+        } catch (Throwable $e) {
+            error_log('[Quotation Email Error] ' . $e->getMessage());
+        }
+
+        flash('success', 'Đã tạo bảng báo giá #' . $code . ' thành công và gửi email thông báo cho khách hàng.');
         redirect('/admin/quotations/' . $qId);
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) $pdo->rollBack();
@@ -4666,7 +4680,7 @@ post('/admin/quotations', function() {
 get('/admin/quotations/:id', function($p) {
     $user = requireStaffPermission('rbac:users|products', '/admin/login');
     $qid = (int)$p['id'];
-    $quotation = dbGet("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone, uc.full_name AS creator_name FROM quotations q INNER JOIN users u ON u.id=q.user_id LEFT JOIN users uc ON uc.id=q.created_by WHERE q.id=?", [$qid]);
+    $quotation = dbGet("SELECT q.*, u.full_name AS customer_name, u.phone AS customer_phone, uc.full_name AS creator_name FROM quotations q LEFT JOIN users u ON u.id=q.user_id LEFT JOIN users uc ON uc.id=q.created_by WHERE q.id=?", [$qid]);
     if (!$quotation) {
         flash('error', 'Không tìm thấy báo giá.');
         redirect('/admin/quotations'); return;
@@ -4703,7 +4717,20 @@ post('/admin/quotations/:id/status', function($p) {
         $user['id'] ?? null, $user['role'] ?? 'admin', $qid, json_encode(['before' => $quotation['status'], 'after' => $status], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
     ]);
 
-    flash('success', 'Đã cập nhật trạng thái báo giá.');
+    if ($status === 'sent') {
+        try {
+            require_once __DIR__ . '/../includes/mailer.php';
+            $customer = dbGet("SELECT * FROM users WHERE id=?", [$quotation['user_id']]);
+            $qItems = dbAll("SELECT qi.*, p.name AS product_name FROM quotation_items qi INNER JOIN products p ON p.id=qi.product_id WHERE qi.quotation_id=?", [$qid]);
+            if ($customer && $qItems) {
+                sendQuotationEmail($quotation, $customer, $qItems);
+            }
+        } catch (Throwable $e) {
+            error_log('[Quotation Status Email Error] ' . $e->getMessage());
+        }
+    }
+
+    flash('success', 'Đã cập nhật trạng thái báo giá và gửi email cho khách hàng.');
     redirect('/admin/quotations/' . $qid);
 });
 

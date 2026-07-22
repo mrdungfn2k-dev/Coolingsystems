@@ -103,6 +103,65 @@ function sendOTPEmail(string $email, string $name, string $otp): bool {
     return sendEmail($email, 'Mã OTP đặt lại mật khẩu — Cooling System', _emailLayout('Đặt lại mật khẩu', "<h2 style='color:#1a3258;margin:0 0 12px'>Đặt lại mật khẩu</h2><p>Xin chào <strong>" . htmlspecialchars($name) . "</strong>,</p><p>Mã OTP của bạn là:</p><p style='text-align:center;font-size:34px;font-weight:800;color:#1a3258;letter-spacing:8px'>{$otp}</p><p>Mã có hiệu lực trong 15 phút.</p>"));
 }
 
+function sendQuotationEmail(array $quotation, array $customer, array $items): bool {
+    $email = trim((string)($customer['email'] ?? ''));
+    if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+    $name = htmlspecialchars($customer['full_name'] ?? 'Khách hàng');
+    $code = htmlspecialchars($quotation['code'] ?? '');
+    $totalFormatted = number_format((int)($quotation['grand_total'] ?? 0), 0, ',', '.') . ' đ';
+    $expiresAt = !empty($quotation['expires_at']) ? date('d/m/Y', strtotime($quotation['expires_at'])) : '—';
+    $note = !empty($quotation['note']) ? htmlspecialchars($quotation['note']) : '';
+
+    $itemRows = '';
+    foreach ($items as $it) {
+        $pName = htmlspecialchars($it['product_name'] ?? '');
+        $qty = (int)($it['quantity'] ?? 1);
+        $price = number_format((int)($it['price'] ?? 0), 0, ',', '.') . ' đ';
+        $subtotal = number_format((int)($it['total'] ?? 0), 0, ',', '.') . ' đ';
+        $itemRows .= "<tr>
+            <td style='padding:10px;border-bottom:1px solid #edf2f7;'>{$pName}</td>
+            <td style='padding:10px;border-bottom:1px solid #edf2f7;text-align:center;'>{$qty}</td>
+            <td style='padding:10px;border-bottom:1px solid #edf2f7;text-align:right;'>{$price}</td>
+            <td style='padding:10px;border-bottom:1px solid #edf2f7;text-align:right;font-weight:bold;'>{$subtotal}</td>
+        </tr>";
+    }
+
+    $noteBlock = $note !== '' ? "<div style='margin-top:6px;font-size:13px;color:#475569;'>Ghi chú: {$note}</div>" : '';
+
+    $body = "<h2 style='color:#1a3258;margin:0 0 12px'>Báo giá mới từ Cooling System</h2>
+    <p>Xin chào <strong>{$name}</strong>,</p>
+    <p>Chúng tôi xin gửi đến bạn bảng báo giá chi tiết <strong>#{$code}</strong>:</p>
+    
+    <table width='100%' cellpadding='0' cellspacing='0' style='margin:20px 0;border-collapse:collapse;font-size:14px;'>
+        <thead>
+            <tr style='background:#f8fafc;color:#64748b;'>
+                <th style='padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;'>Sản phẩm</th>
+                <th style='padding:10px;text-align:center;border-bottom:2px solid #e2e8f0;'>Số lượng</th>
+                <th style='padding:10px;text-align:right;border-bottom:2px solid #e2e8f0;'>Đơn giá</th>
+                <th style='padding:10px;text-align:right;border-bottom:2px solid #e2e8f0;'>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            {$itemRows}
+        </tbody>
+    </table>
+    
+    <div style='background:#f1f5f9;padding:16px;border-radius:8px;margin-bottom:20px;'>
+        <div style='display:flex;justify-content:space-between;font-size:15px;font-weight:bold;color:#1a3258;'>
+            <span>TỔNG GIÁ TRỊ BÁO GIÁ:</span>
+            <span style='color:#1e3a8a;'>{$totalFormatted}</span>
+        </div>
+        <div style='margin-top:8px;font-size:13px;color:#64748b;'>Hạn hiệu lực báo giá: <strong>{$expiresAt}</strong></div>
+        {$noteBlock}
+    </div>
+    
+    <p style='font-size:14px;color:#475569;'>Nếu bạn đồng ý với báo giá này hoặc có câu hỏi, vui lòng liên hệ hotline <strong>0947.795.471</strong> hoặc phản hồi email này.</p>";
+
+    return sendEmail($email, "Báo giá #{$code} — Cooling System", _emailLayout("Báo giá #{$code}", $body));
+}
+
 function _emailLayout(string $title, string $body): string {
     return '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="margin:0;padding:0;background:#f5f7fa;font-family:Arial,sans-serif"><table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fa;padding:40px 0"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%"><tr><td style="background:#1a3258;padding:24px 32px;border-radius:10px 10px 0 0;text-align:center"><div style="color:#f0c040;font-size:28px;font-weight:900;letter-spacing:2px">COOLING</div><div style="color:rgba(255,255,255,0.7);font-size:12px;margin-top:2px">PARTS &amp; SERVICE</div></td></tr><tr><td style="background:#ffffff;padding:32px 36px;border-radius:0 0 10px 10px">' . $body . '</td></tr><tr><td style="padding:16px;text-align:center;color:#aaa;font-size:11px">© ' . date('Y') . ' Cooling System · <a href="https://coolingsystems.vn" style="color:#1a3258">coolingsystems.vn</a></td></tr></table></td></tr></table></body></html>';
 }
