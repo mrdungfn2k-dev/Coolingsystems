@@ -79,8 +79,16 @@ $formAction = isset($product)
               <input type="text" name="sku" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['sku']??'') ?>" placeholder="Để trống sẽ dùng mã OEM">
             </div>
             <div class="form-group">
-              <label>Mã OEM</label>
-              <input type="text" name="oem_code" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code']??'') ?>" placeholder="VD: PFR6V">
+              <label>Mã OEM chính</label>
+              <input type="text" name="oem_code" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code']??'') ?>" placeholder="VD: 447710-8370">
+              <small style="color:#64748b;font-size:11px">Có thể nhập nhiều mã, cách nhau dấu phẩy</small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mã OEM phụ / Cross-ref <span style="color:#94a3b8;font-weight:400;font-size:12px">(tùy chọn)</span></label>
+              <input type="text" name="oem_code2" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code2']??'') ?>" placeholder="VD: 8846048040 (OE Reference, mã đối chiếu)">
+              <small style="color:#64748b;font-size:11px">Mã OEM thứ hai hoặc mã đối chiếu từ nhà sản xuất khác</small>
             </div>
           </div>
           <div class="form-row">
@@ -560,7 +568,7 @@ function initDescEditor() {
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
     'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | link image | code fullscreen'
   ],
-  font_family_formats: 'Mặc định=; Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
+  font_family_formats: 'Times New Roman=times new roman,times,serif; Arial=arial,helvetica,sans-serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
   font_size_formats: '8px 9px 10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 60px 72px',
   table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
   table_default_styles: { 'border-collapse': 'collapse', 'width': '100%' },
@@ -570,7 +578,7 @@ function initDescEditor() {
     { title: 'Bảng sọc', value: 'table-striped' }
   ],
   content_style: `
-    body { font-family: Inter, Arial, sans-serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
+    body { font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
     table { border-collapse: collapse; width: 100%; margin: 12px 0; }
     th { background: #0b1d3a; color: #fff; font-weight: 700; padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
     td { padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
@@ -608,6 +616,11 @@ function initDescEditor() {
       input.click();
     }
   },
+  paste_preprocess: function(editor, args) {
+    // Tự động xóa font-family inline khi paste từ Word / web / Google Docs
+    args.content = args.content.replace(/font-family\s*:\s*[^;'"<>]+;?/gi, '');
+    args.content = args.content.replace(/\s*face="[^"]*"/gi, '');
+  },
   setup: function(editor) {
     editor.on('change keyup setcontent paste execCommand nodechange input', function() {
       editor.save();
@@ -615,6 +628,15 @@ function initDescEditor() {
         clearTimeout(window._seoT);
         window._seoT = setTimeout(runSeoAnalysis, 300);
       }
+    });
+    // Xóa font-family còn sót sau khi paste (fallback về Times New Roman theo body)
+    editor.on('PastePostProcess', function(e) {
+      e.node.querySelectorAll('[style]').forEach(function(el) {
+        el.style.fontFamily = '';
+      });
+      e.node.querySelectorAll('font[face]').forEach(function(el) {
+        el.removeAttribute('face');
+      });
     });
   }
   });
@@ -634,7 +656,7 @@ function initFeatEditor() {
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
     'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | link image | code fullscreen'
   ],
-  font_family_formats: 'Mặc định=; Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
+  font_family_formats: 'Times New Roman=times new roman,times,serif; Arial=arial,helvetica,sans-serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
   font_size_formats: '8px 9px 10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 60px 72px',
   table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
   table_default_styles: { 'border-collapse': 'collapse', 'width': '100%' },
@@ -644,7 +666,7 @@ function initFeatEditor() {
     { title: 'Bảng sọc', value: 'table-striped' }
   ],
   content_style: `
-    body { font-family: Inter, Arial, sans-serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
+    body { font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
     table { border-collapse: collapse; width: 100%; margin: 12px 0; }
     th { background: #0b1d3a; color: #fff; font-weight: 700; padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
     td { padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
@@ -682,6 +704,11 @@ function initFeatEditor() {
       input.click();
     }
   },
+  paste_preprocess: function(editor, args) {
+    // Tự động xóa font-family inline khi paste từ Word / web / Google Docs
+    args.content = args.content.replace(/font-family\s*:\s*[^;'"<>]+;?/gi, '');
+    args.content = args.content.replace(/\s*face="[^"]*"/gi, '');
+  },
   setup: function(editor) {
     editor.on('change keyup setcontent paste execCommand nodechange input', function() {
       editor.save();
@@ -689,6 +716,15 @@ function initFeatEditor() {
         clearTimeout(window._seoT);
         window._seoT = setTimeout(runSeoAnalysis, 300);
       }
+    });
+    // Xóa font-family còn sót sau khi paste (fallback về Times New Roman theo body)
+    editor.on('PastePostProcess', function(e) {
+      e.node.querySelectorAll('[style]').forEach(function(el) {
+        el.style.fontFamily = '';
+      });
+      e.node.querySelectorAll('font[face]').forEach(function(el) {
+        el.removeAttribute('face');
+      });
     });
   }
   });
@@ -707,7 +743,7 @@ function initSpecEditor() {
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
     'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | link image | code fullscreen'
   ],
-  font_family_formats: 'Mặc định=; Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
+  font_family_formats: 'Times New Roman=times new roman,times,serif; Arial=arial,helvetica,sans-serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
   font_size_formats: '8px 9px 10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 60px 72px',
   table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
   table_default_styles: { 'border-collapse': 'collapse', 'width': '100%' },
@@ -717,7 +753,7 @@ function initSpecEditor() {
     { title: 'Bảng sọc', value: 'table-striped' }
   ],
   content_style: `
-    body { font-family: Inter, Arial, sans-serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
+    body { font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.9; color: #333; padding: 16px; }
     table { border-collapse: collapse; width: 100%; margin: 12px 0; }
     th { background: #0b1d3a; color: #fff; font-weight: 700; padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
     td { padding: 10px 14px; border: 1px solid #ddd; text-align: left; }
@@ -755,6 +791,11 @@ function initSpecEditor() {
       input.click();
     }
   },
+  paste_preprocess: function(editor, args) {
+    // Tự động xóa font-family inline khi paste từ Word / web / Google Docs
+    args.content = args.content.replace(/font-family\s*:\s*[^;'"<>]+;?/gi, '');
+    args.content = args.content.replace(/\s*face="[^"]*"/gi, '');
+  },
   setup: function(editor) {
     editor.on('change keyup setcontent paste execCommand nodechange input', function() {
       editor.save();
@@ -762,6 +803,15 @@ function initSpecEditor() {
         clearTimeout(window._seoT);
         window._seoT = setTimeout(runSeoAnalysis, 300);
       }
+    });
+    // Xóa font-family còn sót sau khi paste (fallback về Times New Roman theo body)
+    editor.on('PastePostProcess', function(e) {
+      e.node.querySelectorAll('[style]').forEach(function(el) {
+        el.style.fontFamily = '';
+      });
+      e.node.querySelectorAll('font[face]').forEach(function(el) {
+        el.removeAttribute('face');
+      });
     });
   }
   });
