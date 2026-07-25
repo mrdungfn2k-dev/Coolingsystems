@@ -11,15 +11,14 @@ client.connect(HOST, username=USER, password=PASS, timeout=15)
 sftp = client.open_sftp()
 
 files_to_upload = [
-    ("routes/admin.php", "/opt/coolingsystems/routes/admin.php"),
-    ("views/admin/product-form.php", "/opt/coolingsystems/views/admin/product-form.php")
+    ("views/public/product-detail.php", "/opt/coolingsystems/views/public/product-detail.php")
 ]
 
 for local, remote in files_to_upload:
     local_path = os.path.join(r"c:\xampp2\htdocs\coolingsystems", local)
     sftp.put(local_path, remote)
-    print(f"✅ Uploaded restored {local} -> {remote}")
+    print(f"✅ Uploaded {local} -> {remote}")
 
 sftp.close()
 client.close()
-print("🎉 Revert watermark integration on VPS complete!")
+print("🎉 Product Detail SKU/OEM display uploaded to VPS successfully!")
