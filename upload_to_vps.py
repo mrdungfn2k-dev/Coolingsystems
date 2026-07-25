@@ -12,6 +12,7 @@ sftp = client.open_sftp()
 
 files_to_upload = [
     ("includes/gemini_watermark_service.php", "/opt/coolingsystems/includes/gemini_watermark_service.php"),
+    ("clean_watermark_ai.py", "/opt/coolingsystems/includes/clean_watermark_ai.py"),
     ("routes/admin.php", "/opt/coolingsystems/routes/admin.php"),
     ("views/admin/product-form.php", "/opt/coolingsystems/views/admin/product-form.php")
 ]
@@ -23,4 +24,4 @@ for local, remote in files_to_upload:
 
 sftp.close()
 client.close()
-print("🎉 Deployment to VPS complete!")
+print("🎉 AI Inpainting deployment to VPS complete!")
