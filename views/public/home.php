@@ -22,7 +22,7 @@
     <?php if ($heroBg): ?>
     <link rel="preload" as="image" href="/uploads/banners/<?= e($heroBg) ?>" fetchpriority="high">
     <?php endif; ?>
-    <div class="banner" style="min-height:420px;height:420px;overflow:hidden<?= $heroBg ? ';background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center' : '' ?>">
+    <div class="banner" style="overflow:hidden<?= $heroBg ? ';background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center' : '' ?>">
       <span class="badge"><?= $heroBadge ?></span>
       <h1><?= $heroHeading ?></h1>
       <p><?= $heroSubtext ?></p>
@@ -80,8 +80,8 @@ $__bnRaw = dbGet("SELECT value FROM system_config WHERE key='home_banners'")['va
 $__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], function($b){ return !empty($b['active']) && !empty($b['img']); }));
 ?>
 <?php if(!empty($__homeBanners)): ?>
-<section class="home-banners" style="min-height:214px;contain:layout style size"><div class="wrap">
-  <div class="hbc" id="homeBannerCarousel" style="height:194px;min-height:194px;max-height:194px;overflow:hidden">
+<section class="home-banners"><div class="wrap">
+  <div class="hbc" id="homeBannerCarousel">
     <div class="hbc-track">
       <?php foreach($__homeBanners as $__banIdx => $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
       <div class="hbc-slide">

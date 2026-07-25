@@ -230,7 +230,7 @@ get('/admin/products', function() {    requireStaffPermission('rbac:catalog.prod
     $where='WHERE 1=1'; $params=[];
     if($tab==='draft'){$where.=" AND p.status='draft'";}
     elseif($tab==='published'){$where.=" AND p.status='published'";}
-    if($q){$where.=" AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l]);}
+    if($q){$where.=" AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ? OR p.oem_code2 LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l,$l]);}
     if($catId){$where.=" AND p.category_id=?"; $params[]=$catId;}
     if($brandId){$where.=" AND p.car_brand_id=?"; $params[]=$brandId;}
     if($partBrand){$where.=" AND (p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?)"; $params[]=$partBrand; $params[]=$partBrand.',%'; $params[]='%, '.$partBrand.',%'; $params[]='%, '.$partBrand;}
@@ -2496,7 +2496,7 @@ get('/admin/inventory', function() {
     $stockStatus = in_array($_GET['status'] ?? 'all', ['all','low','out'], true) ? $_GET['status'] : 'all';
     $categoryId = max(0, (int)($_GET['category'] ?? 0));
     $where = 'WHERE 1=1'; $params = [];
-    if ($q !== '') { $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)'; $like='%'.$q.'%'; array_push($params,$like,$like,$like); }
+    if ($q !== '') { $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ? OR p.oem_code2 LIKE ?)'; $like='%'.$q.'%'; array_push($params,$like,$like,$like,$like); }
     if ($categoryId) { $where .= ' AND p.category_id=?'; $params[]=$categoryId; }
     if ($stockStatus === 'low') $where .= ' AND p.min_stock>0 AND p.stock<=p.min_stock';
     if ($stockStatus === 'out') $where .= ' AND p.stock<=0';
@@ -2770,6 +2770,7 @@ post('/admin/products/new', function() {
     $inventoryManagedSeparately = empty($d['_inventory_in_product_form']);
     $name = trim($d['name'] ?? '');
     $oem = trim($d['oem_code'] ?? '');
+    $oem2 = trim($d['oem_code2'] ?? '');
     $sku = resolveProductSku($d['sku'] ?? '', $oem);
     $price = intval($d['price'] ?? 0);
     $priceBefore = intval($d['price_before_tax'] ?? 0);
@@ -2835,11 +2836,12 @@ post('/admin/products/new', function() {
         return;
     }
 
-    $id = dbInsert("INSERT INTO products (name,sku,slug,oem_code,part_brand,car_brand_id,category_id,price,price_before_tax,tax_amount,vat_rate,original_price,stock,min_stock,max_stock,features,specifications,warranty_months,description,status,is_featured,show_on_home,show_on_promo,is_new,is_indexed,partner_id,published_at,created_at,weight_g,width_cm,height_cm,depth_cm,seo_title,seo_description,seo_keyword,video_url,cost_price,total_import_value) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime('now','localtime'),datetime('now','localtime'),?,?,?,?,?,?,?,?,?,?)", [
+    $id = dbInsert("INSERT INTO products (name,sku,slug,oem_code,oem_code2,part_brand,car_brand_id,category_id,price,price_before_tax,tax_amount,vat_rate,original_price,stock,min_stock,max_stock,features,specifications,warranty_months,description,status,is_featured,show_on_home,show_on_promo,is_new,is_indexed,partner_id,published_at,created_at,weight_g,width_cm,height_cm,depth_cm,seo_title,seo_description,seo_keyword,video_url,cost_price,total_import_value) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime('now','localtime'),datetime('now','localtime'),?,?,?,?,?,?,?,?,?,?)", [
         $name,
         $sku,
         $slug,
         $oem,
+        $oem2,
         trim($d['part_brand']??''),
         intval($d['car_brand_id']??0) ?: null,
         intval($d['category_id']??0) ?: null,
@@ -2954,11 +2956,12 @@ post('/admin/products/:id/edit', function($p) {
     $maxStock = $maxStockRaw === '' ? 1000 : intval($maxStockRaw);
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $editOem = trim($d['oem_code'] ?? '');
+    $editOem2 = trim($d['oem_code2'] ?? '');
     $editSku = resolveProductSku($d['sku'] ?? '', $editOem);
     $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
     if ($detailedRbac) {
-      $fieldCapabilities = ['sku'=>'catalog.codes.manage','oem_code'=>'catalog.codes.manage','price'=>'catalog.pricing.edit','original_price'=>'catalog.pricing.edit','cost_price'=>'catalog.cost.edit','stock'=>'inventory.update','min_stock'=>'inventory.thresholds.edit','max_stock'=>'inventory.thresholds.edit','warranty_months'=>'catalog.products.edit','status'=>'catalog.products.archive'];
-      $requested = ['sku'=>$editSku,'oem_code'=>$editOem,'price'=>$price,'original_price'=>intval($d['original_price']??0),'cost_price'=>intval($d['cost_price']??0),'stock'=>$stock,'min_stock'=>intval($d['min_stock']??0),'max_stock'=>$maxStock,'warranty_months'=>intval($d['warranty_months']??12),'status'=>$status];
+      $fieldCapabilities = ['sku'=>'catalog.codes.manage','oem_code'=>'catalog.codes.manage','oem_code2'=>'catalog.codes.manage','price'=>'catalog.pricing.edit','original_price'=>'catalog.pricing.edit','cost_price'=>'catalog.cost.edit','stock'=>'inventory.update','min_stock'=>'inventory.thresholds.edit','max_stock'=>'inventory.thresholds.edit','warranty_months'=>'catalog.products.edit','status'=>'catalog.products.archive'];
+      $requested = ['sku'=>$editSku,'oem_code'=>$editOem,'oem_code2'=>$editOem2,'price'=>$price,'original_price'=>intval($d['original_price']??0),'cost_price'=>intval($d['cost_price']??0),'stock'=>$stock,'min_stock'=>intval($d['min_stock']??0),'max_stock'=>$maxStock,'warranty_months'=>intval($d['warranty_months']??12),'status'=>$status];
       foreach ($fieldCapabilities as $field=>$capability) { if ((string)($currentProduct[$field] ?? '') !== (string)$requested[$field] && !rbacCan((int)$user['id'], $capability)) { flash('error','Ban khong co quyen thay doi truong du lieu nay.'); redirect($editUrl); return; } }
     }
 
@@ -2997,10 +3000,11 @@ post('/admin/products/:id/edit', function($p) {
         return;
     }
 
-    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
+    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,oem_code2=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
         trim($d['name']??''),
         $editSku,
         $editOem,
+        $editOem2,
         trim($d['part_brand']??''),
         intval($d['car_brand_id']??0) ?: null,
         intval($d['category_id']??0) ?: null,
@@ -3221,8 +3225,12 @@ get('/admin/content/:slug', function($p) {
 
 post('/admin/content/:slug', function($p) {
     $user = requireStaffPermission('content', '/auth/login'); csrfCheck();
+    $page = dbGet('SELECT * FROM static_pages WHERE slug=?', [$p['slug']]);
     $content = $_POST['content'] ?? '';
     $title   = trim($_POST['title'] ?? '');
+    if (!$title && $page) {
+        $title = $page['title'];
+    }
     if (!$title) { flash('error','Cần có tiêu đề.'); redirect('/admin/content/'.$p['slug']); }
     $exists = dbGet('SELECT id FROM static_pages WHERE slug=?', [$p['slug']]);
     if ($exists) {
@@ -5228,9 +5236,9 @@ get('/admin/reports/xnt', function() {
         $params[] = $catId;
     }
     if ($q !== '') {
-        $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ?)';
+        $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ? OR p.oem_code2 LIKE ?)';
         $like = '%' . $q . '%';
-        $params[] = $like; $params[] = $like; $params[] = $like;
+        $params[] = $like; $params[] = $like; $params[] = $like; $params[] = $like;
     }
 
     $totalProducts = (int)(dbGet("SELECT COUNT(*) AS c FROM products p $where", $params)['c'] ?? 0);

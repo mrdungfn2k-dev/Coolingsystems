@@ -1296,20 +1296,23 @@ body { padding-bottom: 0 !important; }
 /* ── Banner spacing: gap between nav and hero ── */
 @media (max-width: 900px) {
   .hero-section {
-    margin-top: 16px !important;
+    margin-top: 12px !important;
     padding-top: 0 !important;
+    min-height: auto !important;
+    height: auto !important;
   }
   .hero-section .banner {
     border-radius: 10px !important;
-    margin: 0 8px !important;
-    min-height: 300px !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    padding: 30px 20px !important;
+    padding: 24px 18px !important;
   }
   .hero-section .banner h1 {
-    font-size: 26px !important;
+    font-size: 22px !important;
     line-height: 1.3 !important;
   }
   .hero-section .banner p {
@@ -1319,28 +1322,49 @@ body { padding-bottom: 0 !important; }
   .hero-section .banner .actions {
     flex-direction: column !important;
     gap: 8px !important;
-    margin-top: 16px !important;
+    margin-top: 14px !important;
   }
   .hero-section .banner .actions .btn {
     width: 100% !important;
     text-align: center !important;
-    padding: 12px 20px !important;
+    padding: 10px 16px !important;
   }
 }
 
 /* ── Full responsive: all phone sizes ── */
 @media (max-width: 480px) {
   .hero-section {
-    margin-top: 14px !important;
+    margin-top: 10px !important;
   }
   .hero-section .banner {
-    min-height: 260px !important;
-    padding: 24px 16px !important;
-    margin: 0 6px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 20px 14px !important;
+    margin: 0 !important;
   }
   .hero-section .banner h1 {
-    font-size: 22px !important;
+    font-size: 19px !important;
   }
+  .home-banners .hbc {
+    border-radius: 8px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 16 / 8 !important;
+  }
+  .hbc-slide img {
+    object-fit: contain !important;
+    background: #0f2342 !important;
+  }
+  .hbc-nav {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 16px !important;
+    background: rgba(255,255,255,0.7) !important;
+  }
+  .hbc-nav.prev { left: 4px !important; }
+  .hbc-nav.next { right: 4px !important; }
+}
   /* Product cards */
   .p-grid {
     grid-template-columns: repeat(2, 1fr) !important;

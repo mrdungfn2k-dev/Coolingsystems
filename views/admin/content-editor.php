@@ -23,8 +23,15 @@
   <div class="editor-layout">
     <div>
       <div class="panel">
-        <div class="panel-head">
-          <h3>Nội dung trang <code style="font-size:12px;background:#f0f0f0;padding:2px 8px;border-radius:4px"><?= e($page['slug']) ?></code></h3>
+        <div class="panel-head" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px">
+          <div style="flex:1">
+            <label style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px;display:block;text-transform:uppercase">Tiêu đề trang</label>
+            <input type="text" name="title" value="<?= e($page['title'] ?? '') ?>" class="form-control" placeholder="Nhập tiêu đề trang..." required style="font-weight:700;font-size:15px;padding:6px 12px">
+          </div>
+          <div style="text-align:right">
+            <label style="font-size:11px;font-weight:700;color:#888;margin-bottom:4px;display:block">MÃ SLUG</label>
+            <code style="font-size:12px;background:#f0f0f0;padding:4px 8px;border-radius:4px"><?= e($page['slug']) ?></code>
+          </div>
         </div>
         <div class="panel-body" style="padding:0">
           <textarea id="tinymceContent" name="content"><?= htmlspecialchars($page['content'] ?? '') ?></textarea>
