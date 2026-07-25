@@ -5245,12 +5245,36 @@ get('/admin/reports/xnt', function() {
     $totalPages = max(1, (int)ceil($totalProducts / $perPage));
     $page = min($page, $totalPages);
 
-    $allAgg = dbGet("SELECT SUM(stock) AS tot_stock, SUM(sold_count) AS tot_sold FROM products p $where", $params);
-    $totalStock = (int)($allAgg['tot_stock'] ?? 0);
-    $totalExported = (int)($allAgg['tot_sold'] ?? 0);
+    $fromStart = $fromDate . ' 00:00:00';
+    $toEnd = $toDate . ' 23:59:59';
 
-    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
-    $items = dbAll("SELECT p.id, p.name, p.sku, p.oem_code, p.stock, p.sold_count, p.price, p.cost_price, p.location_code FROM products p $where ORDER BY p.name LIMIT ? OFFSET ?", $listParams);
+    // Tính Tổng xuất kho thực tế từ bảng order_items qua sub_orders theo khoảng ngày lọc
+    $totalExported = (int)(dbGet("
+        SELECT COALESCE(SUM(oi.quantity), 0) AS tot_sold
+        FROM order_items oi
+        JOIN sub_orders so ON oi.sub_order_id = so.id
+        JOIN orders o ON so.order_id = o.id
+        JOIN products p ON oi.product_id = p.id
+        $where AND so.status NOT IN ('cancelled', 'refunded', 'returning')
+        AND o.created_at BETWEEN ? AND ?
+    ", array_merge($params, [$fromStart, $toEnd]))['tot_sold'] ?? 0);
+
+    $totalStock = (int)(dbGet("SELECT SUM(stock) AS tot_stock FROM products p $where", $params)['tot_stock'] ?? 0);
+
+    $listParams = array_merge([$fromStart, $toEnd], $params, [$perPage, ($page-1)*$perPage]);
+    $items = dbAll("
+        SELECT p.id, p.name, p.sku, p.oem_code, p.stock, p.price, p.cost_price, p.location_code,
+               COALESCE((
+                   SELECT SUM(oi.quantity) 
+                   FROM order_items oi 
+                   JOIN sub_orders so ON oi.sub_order_id = so.id
+                   JOIN orders o ON so.order_id = o.id 
+                   WHERE oi.product_id = p.id 
+                     AND so.status NOT IN ('cancelled', 'refunded', 'returning')
+                     AND o.created_at BETWEEN ? AND ?
+               ), 0) AS sold_count
+        FROM products p $where ORDER BY p.name LIMIT ? OFFSET ?
+    ", $listParams);
     $categories = dbAll("SELECT id, name FROM categories ORDER BY name");
 
     $totalStockValue = 0;
@@ -5647,12 +5671,36 @@ post('/admin/locations/import-csv', function() {
 // 7. Report XNT Export CSV
 get('/admin/reports/xnt/export-csv', function() {
     requireStaffPermission('rbac:reports|products', '/admin/login');
+    $fromDate = trim((string)($_GET['from'] ?? date('Y-m-01')));
+    $toDate = trim((string)($_GET['to'] ?? date('Y-m-d')));
+    $fromStart = $fromDate . ' 00:00:00';
+    $toEnd = $toDate . ' 23:59:59';
     $catId = max(0, (int)($_GET['category_id'] ?? 0));
+    $q = trim((string)($_GET['q'] ?? ''));
+
     $where = 'WHERE 1=1'; $params = [];
     if ($catId > 0) { $where .= ' AND p.category_id=?'; $params[] = $catId; }
+    if ($q !== '') {
+        $where .= ' AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ? OR p.oem_code2 LIKE ?)';
+        $like = '%' . $q . '%';
+        $params[] = $like; $params[] = $like; $params[] = $like; $params[] = $like;
+    }
 
-    $items = dbAll("SELECT p.name, p.sku, p.oem_code, p.location_code, p.stock, p.sold_count, p.price, p.cost_price FROM products p $where ORDER BY p.name", $params);
-    $headers = ['Sản phẩm', 'Mã SKU', 'Mã OEM', 'Vị trí kho', 'Tồn đầu kỳ (ước tính)', 'Đã nhập', 'Đã xuất bán', 'Tồn cuối kỳ', 'Đơn giá bán (đ)', 'Giá vốn (đ)', 'Giá trị tồn kho (đ)'];
+    $listParams = array_merge([$fromStart, $toEnd], $params);
+    $items = dbAll("
+        SELECT p.name, p.sku, p.oem_code, p.location_code, p.stock, p.price, p.cost_price,
+               COALESCE((
+                   SELECT SUM(oi.quantity) 
+                   FROM order_items oi 
+                   JOIN sub_orders so ON oi.sub_order_id = so.id
+                   JOIN orders o ON so.order_id = o.id 
+                   WHERE oi.product_id = p.id 
+                     AND so.status NOT IN ('cancelled', 'refunded', 'returning')
+                     AND o.created_at BETWEEN ? AND ?
+               ), 0) AS sold_count
+        FROM products p $where ORDER BY p.name", $listParams);
+
+    $headers = ['Sản phẩm', 'Mã SKU', 'Mã OEM', 'Vị trí kho', 'Tồn đầu kỳ (ước tính)', 'Đã nhập', 'Đã xuất kho', 'Tồn cuối kỳ', 'Đơn giá bán (đ)', 'Giá vốn (đ)', 'Giá trị tồn kho (đ)'];
     $rows = [];
     foreach ($items as $it) {
         $st = (int)$it['stock'];

@@ -56,7 +56,7 @@
     <div class="rpt-card-val"><?= number_format($totalProducts) ?></div>
   </div>
   <div class="rpt-card">
-    <div class="rpt-card-title">Tổng xuất bán</div>
+    <div class="rpt-card-title">Tổng xuất kho</div>
     <div class="rpt-card-val" style="color:#0284c7"><?= number_format($totalExported) ?></div>
   </div>
   <div class="rpt-card">
@@ -79,7 +79,7 @@
       <th>Vị trí kho</th>
       <th style="text-align:right">Tồn đầu kỳ (ước tính)</th>
       <th style="text-align:right">Đã nhập</th>
-      <th style="text-align:right">Đã xuất bán</th>
+      <th style="text-align:right">Đã xuất kho</th>
       <th style="text-align:right">Tồn cuối kỳ</th>
       <th style="text-align:right">Giá trị tồn kho</th>
     </tr>
