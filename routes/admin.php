@@ -6044,6 +6044,49 @@ get('/admin/security/alerts/export-csv', function() {
     outputCsvFile('security_alerts_export_' . date('Ymd_His') . '.csv', $headers, $rows);
 });
 
+// E4: API tự động nhận diện và xóa watermark logo bằng Gemini AI
+post('/admin/api/clean-watermark', function() {
+    header('Content-Type: application/json; charset=utf-8');
+    requireStaffPermission('rbac:products', '/admin/login');
+    require_once __DIR__ . '/../includes/gemini_watermark_service.php';
+
+    if (empty($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        echo json_encode(['ok' => false, 'message' => 'Vui lòng chọn file ảnh hợp lệ.']);
+        exit;
+    }
+
+    $tmpPath = $_FILES['image']['tmp_name'];
+    $origName = $_FILES['image']['name'] ?? 'product.jpg';
+    $ext = strtolower(pathinfo($origName, PATHINFO_EXTENSION)) ?: 'jpg';
+    if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp'])) {
+        $ext = 'jpg';
+    }
+
+    $targetDir = __DIR__ . '/../public/uploads/products';
+    if (!is_dir($targetDir)) {
+        @mkdir($targetDir, 0777, true);
+    }
+
+    $cleanedFileName = 'clean_' . date('Ymd_His') . '_' . substr(md5(uniqid()), 0, 6) . '.' . $ext;
+    $targetPath = $targetDir . '/' . $cleanedFileName;
+
+    $res = GeminiWatermarkCleaner::processImage($tmpPath, $targetPath);
+
+    if ($res['success']) {
+        $webPath = '/uploads/products/' . $cleanedFileName;
+        echo json_encode([
+            'ok' => true,
+            'cleaned' => $res['cleaned'],
+            'message' => $res['message'],
+            'url' => $webPath,
+            'file_name' => $cleanedFileName
+        ]);
+    } else {
+        echo json_encode(['ok' => false, 'message' => $res['message']]);
+    }
+    exit;
+});
+
 // E3: System Backups - Danh sách & Tạo Backup
 get('/admin/settings/backups', function() {
     $user = requireStaffPermission('rbac:settings', '/admin/login');
