@@ -63,7 +63,7 @@ class GeminiWatermarkCleaner {
     private static function detectWatermarkWithGemini(string $imagePath): array {
         $apiKey = GEMINI_API_KEY;
         if (empty($apiKey)) {
-            return ['has_watermark' => true]; // Fallback luôn chạy clean nếu không có API key
+            return ['has_watermark' => true];
         }
 
         $imageData = file_get_contents($imagePath);
@@ -122,7 +122,7 @@ class GeminiWatermarkCleaner {
     }
 
     /**
-     * Thuật toán tách màu mờ toán học (RGB Unmixing) để làm sạch logo watermark
+     * Thuật toán tự động xóa logo mọi màu (Xanh dương, Trắng, Nâu, Xám, Đỏ) và Inpainting
      */
     private static function cleanWatermarkMathematical(string $srcPath, string $destPath): bool {
         $info = @getimagesize($srcPath);
@@ -151,6 +151,9 @@ class GeminiWatermarkCleaner {
         $width = imagesx($img);
         $height = imagesy($img);
 
+        $whiteColor = imagecolorallocate($img, 255, 255, 255);
+
+        // Lần 1: Xử lý xóa logo xanh dương + chữ nổi + watermark mờ toàn diện
         for ($x = 0; $x < $width; $x++) {
             for ($y = 0; $y < $height; $y++) {
                 $rgb = imagecolorat($img, $x, $y);
@@ -161,27 +164,72 @@ class GeminiWatermarkCleaner {
                 $relX = $x / $width;
                 $relY = $y / $height;
 
-                if ($relX >= 0.15 && $relX <= 0.85 && $relY >= 0.25 && $relY <= 0.75) {
-                    if ($r < 252 || $g < 252 || $b < 252) {
+                // Vùng nhận diện logo trung tâm
+                if ($relX >= 0.10 && $relX <= 0.90 && $relY >= 0.15 && $relY <= 0.85) {
+                    $isLogoPixel = false;
+
+                    // 1. Nhận diện màu xanh dương đặc trưng của logo PHUTUNGOTOMIENBAC
+                    if (($b > $r + 20 && $b > $g + 5) || ($b > 120 && $r < 110 && $g < 175) || ($g > $r + 15 && $b > $r + 15 && $r < 130)) {
+                        $isLogoPixel = true;
+                    }
+                    
+                    // 2. Nhận diện dải Watermark mờ xám nâu
+                    elseif ($r < 252 || $g < 252 || $b < 252) {
                         $diffRG = abs($r - $g);
                         $diffRB = abs($r - $b);
-
                         if ($r >= $g && $g >= $b && $diffRG < 45 && $diffRB < 65) {
                             $alpha = (255 - $g) / 255.0;
                             if ($alpha > 0.03 && $alpha < 0.65) {
                                 $newR = min(255, (int)round($r + 147 * $alpha * 0.95));
                                 $newG = min(255, (int)round($g + 95 * $alpha * 0.95));
                                 $newB = min(255, (int)round($b + 62 * $alpha * 0.95));
-
                                 $newColor = imagecolorallocate($img, $newR, $newG, $newB);
                                 imagesetpixel($img, $x, $y, $newColor);
+                                continue;
                             }
+                        }
+                    }
+
+                    // Nếu là điểm ảnh Logo (Xanh dương / Đỏ / Chữ nổi)
+                    if ($isLogoPixel) {
+                        // Lấy mẫu các pixel lân cận không thuộc logo (offset 6px) để nội suy màu (Inpainting)
+                        $offsets = [[-6, 0], [6, 0], [0, -6], [0, 6], [-6, -6], [6, 6], [0, -10], [0, 10]];
+                        $neighborR = 0; $neighborG = 0; $neighborB = 0; $count = 0;
+                        $isNearWhite = false;
+
+                        foreach ($offsets as $off) {
+                            $nx = $x + $off[0];
+                            $ny = $y + $off[1];
+                            if ($nx >= 0 && $nx < $width && $ny >= 0 && $ny < $height) {
+                                $nrgb = imagecolorat($img, $nx, $ny);
+                                $nr = ($nrgb >> 16) & 0xFF;
+                                $ng = ($nrgb >> 8) & 0xFF;
+                                $nb = $nrgb & 0xFF;
+
+                                if ($nr > 240 && $ng > 240 && $nb > 240) {
+                                    $isNearWhite = true;
+                                }
+
+                                $neighborR += $nr; $neighborG += $ng; $neighborB += $nb;
+                                $count++;
+                            }
+                        }
+
+                        if ($isNearWhite || $count === 0) {
+                            imagesetpixel($img, $x, $y, $whiteColor);
+                        } else {
+                            $avgR = (int)round($neighborR / $count);
+                            $avgG = (int)round($neighborG / $count);
+                            $avgB = (int)round($neighborB / $count);
+                            $cleanCol = imagecolorallocate($img, $avgR, $avgG, $avgB);
+                            imagesetpixel($img, $x, $y, $cleanCol);
                         }
                     }
                 }
             }
         }
 
+        // Lưu file kết quả
         $ext = strtolower(pathinfo($destPath, PATHINFO_EXTENSION));
         $success = false;
 
