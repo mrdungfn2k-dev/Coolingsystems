@@ -1289,10 +1289,7 @@ function saveImageOrder(container) {
         alert('Ảnh "' + file.name + '" quá 20 MB, bỏ qua.');
         return;
       }
-      var fileObj = { file: file, status: 'processing', cleanedUrl: null };
-      selectedFiles.push(fileObj);
-      var currentIdx = selectedFiles.length - 1;
-      autoCleanWatermark(fileObj, currentIdx);
+      selectedFiles.push(file);
     });
 
     renderPreviews();
@@ -1300,46 +1297,9 @@ function saveImageOrder(container) {
     picker.value = '';
   });
 
-  function autoCleanWatermark(fileObj, idx) {
-    var formData = new FormData();
-    formData.append('image', fileObj.file);
-
-    fetch('/admin/api/clean-watermark', {
-      method: 'POST',
-      body: formData
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.ok && data.url) {
-        fileObj.cleanedUrl = data.url;
-        fileObj.status = data.cleaned ? 'cleaned' : 'clean';
-        fetch(data.url)
-          .then(function(res) { return res.blob(); })
-          .then(function(blob) {
-            fileObj.file = new File([blob], fileObj.file.name, { type: blob.type || 'image/jpeg' });
-            syncHiddenInput();
-            renderPreviews();
-          })
-          .catch(function() {
-            fileObj.status = 'done';
-            renderPreviews();
-          });
-      } else {
-        fileObj.status = 'done';
-        renderPreviews();
-      }
-    })
-    .catch(function() {
-      fileObj.status = 'done';
-      renderPreviews();
-    });
-  }
-
   function renderPreviews() {
     preview.innerHTML = '';
-    selectedFiles.forEach(function(fileObj, idx) {
-      var file = fileObj.file || fileObj;
-      var status = fileObj.status || 'done';
+    selectedFiles.forEach(function(file, idx) {
       var wrapper = document.createElement('div');
       wrapper.className = 'existing-img-wrap';
       wrapper.setAttribute('data-file-idx', idx);
@@ -1347,35 +1307,17 @@ function saveImageOrder(container) {
 
       var img = document.createElement('img');
       img.style.cssText = 'width:100%;height:100%;object-fit:contain;pointer-events:none;';
-      
-      if (fileObj.cleanedUrl) {
-        img.src = fileObj.cleanedUrl;
-      } else {
-        var reader = new FileReader();
-        reader.onload = function(e) { img.src = e.target.result; };
-        reader.readAsDataURL(file);
-      }
-
-      if (status === 'processing') {
-        var loader = document.createElement('div');
-        loader.style.cssText = 'position:absolute;inset:0;background:rgba(15,23,42,0.75);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;text-align:center;padding:4px;z-index:3;';
-        loader.innerHTML = '<div style="width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:4px"></div>✨ AI đang xóa logo...<style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
-        wrapper.appendChild(loader);
-      } else if (status === 'cleaned') {
-        var badge = document.createElement('div');
-        badge.style.cssText = 'position:absolute;top:2px;left:2px;background:rgba(16,185,129,0.9);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;z-index:3;box-shadow:0 1px 3px rgba(0,0,0,0.2)';
-        badge.textContent = '✨ Đã xóa Logo AI';
-        wrapper.appendChild(badge);
-      }
+      var reader = new FileReader();
+      reader.onload = function(e) { img.src = e.target.result; };
+      reader.readAsDataURL(file);
 
       var removeBtn = document.createElement('button');
       removeBtn.type = 'button';
       removeBtn.innerHTML = '&times;';
       removeBtn.title = 'Bỏ ảnh này';
-      removeBtn.style.cssText = 'position:absolute;top:2px;right:2px;width:22px;height:22px;background:rgba(220,38,38,0.9);color:#fff;border:none;border-radius:50%;font-size:16px;line-height:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);z-index:4;';
+      removeBtn.style.cssText = 'position:absolute;top:2px;right:2px;width:24px;height:24px;background:rgba(220,38,38,0.9);color:#fff;border:none;border-radius:50%;font-size:18px;line-height:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);z-index:2;';
       removeBtn.setAttribute('data-idx', idx);
-      removeBtn.addEventListener('click', function(ev) {
-        ev.stopPropagation();
+      removeBtn.addEventListener('click', function() {
         var i = parseInt(this.getAttribute('data-idx'));
         selectedFiles.splice(i, 1);
         renderPreviews();
@@ -1420,10 +1362,7 @@ function saveImageOrder(container) {
 
   function syncHiddenInput() {
     var dt = new DataTransfer();
-    selectedFiles.forEach(function(item) {
-      var f = item.file || item;
-      if (f instanceof File) dt.items.add(f);
-    });
+    selectedFiles.forEach(function(f) { dt.items.add(f); });
     hiddenInput.files = dt.files;
   }
 
