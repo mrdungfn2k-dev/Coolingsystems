@@ -1,7 +1,7 @@
 <?php $title = 'Trang chủ'; $seo = ['meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng']; require __DIR__ . '/../partials/head.php'; ?>
-<section class="hero-section" style="min-height:468px;contain:layout style size">
+<section class="hero-section">
   <div class="wrap">
-    <aside class="cat-sidebar" style="min-height:420px;height:420px;overflow:hidden">
+    <aside class="cat-sidebar">
       <div class="head"><span class="lines"><span></span><span></span><span></span></span><span>Danh mục phụ tùng</span></div>
       <ul>
         <?php foreach ($sidebarCategories as $c): ?>
@@ -28,7 +28,7 @@
       <p><?= $heroSubtext ?></p>
       <div class="actions"><a href="<?= e($heroBtn1Url) ?>" class="btn btn-gold btn-lg"><?= e($heroBtn1) ?></a><a href="<?= e($heroBtn2Url) ?>" class="btn btn-outline-light btn-lg"><?= e($heroBtn2) ?></a></div>
     </div>
-    <aside class="vs-card" style="min-height:420px;height:420px;overflow:hidden">
+    <aside class="vs-card">
       <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#334155;font-weight:500;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
         <div class="vs-field">

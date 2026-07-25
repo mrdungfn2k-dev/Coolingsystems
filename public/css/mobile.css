@@ -1293,23 +1293,32 @@ body { padding-bottom: 0 !important; }
   }
 }
 
-/* ── Banner spacing: gap between nav and hero ── */
+/* ── Mobile Layout Flow: Hero Section, Search Box, Home Banner Carousel ── */
 @media (max-width: 900px) {
   .hero-section {
     margin-top: 12px !important;
-    padding-top: 0 !important;
+    padding: 0 !important;
     min-height: auto !important;
     height: auto !important;
+    contain: none !important;
   }
-  .hero-section .banner {
-    border-radius: 10px !important;
-    margin: 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
+  .hero-section .wrap {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    gap: 16px !important;
+    padding: 0 12px !important;
+  }
+  .cat-sidebar {
+    display: none !important;
+  }
+  .hero-section .banner {
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
     padding: 24px 18px !important;
+    border-radius: 10px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
   }
   .hero-section .banner h1 {
     font-size: 22px !important;
@@ -1329,18 +1338,31 @@ body { padding-bottom: 0 !important; }
     text-align: center !important;
     padding: 10px 16px !important;
   }
+  .vs-card {
+    display: block !important;
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 16px !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  .home-banners {
+    margin-top: 16px !important;
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
 }
 
-/* ── Full responsive: all phone sizes ── */
 @media (max-width: 480px) {
   .hero-section {
     margin-top: 10px !important;
   }
   .hero-section .banner {
-    min-height: 0 !important;
-    height: auto !important;
     padding: 20px 14px !important;
-    margin: 0 !important;
   }
   .hero-section .banner h1 {
     font-size: 19px !important;
