@@ -125,8 +125,16 @@ html, body { font-display: swap; text-rendering: optimizeSpeed; -webkit-font-smo
 .p-img, .product-card .img, .product-thumb { aspect-ratio: 4 / 3; width: 100%; overflow: hidden; contain: layout style; }
 .p-img img, .product-card .img img, .product-thumb img { width: 100%; height: 100%; object-fit: contain; decoding: async; }
 
-/* Hide Mobile Nav Drawer on Desktop (> 900px) */
-.mobile-nav-drawer, .mobile-nav-overlay { display: none !important; }
+/* Hide all Mobile-only elements on Desktop (> 900px) */
+@media (min-width: 901px) {
+  .mobile-search-bar,
+  .mobile-right-actions,
+  .mobile-cart-btn,
+  .mobile-menu-toggle,
+  .mobile-bottom-bar,
+  .mobile-nav-drawer,
+  .mobile-nav-overlay { display: none !important; }
+}
 @media (max-width: 900px) {
   .mobile-nav-drawer { display: block !important; }
   .mobile-nav-overlay.open { display: block !important; }
