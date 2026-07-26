@@ -42,33 +42,28 @@ $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_descr
 <!-- Canonical URL & OpenGraph Meta Tags for 100/100 SEO Score -->
 <?php
 $_reqUriClean = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
-$_canonicalUrl = 'https://coolingsystems.vn' . ($_reqUriClean === '' ? '/' : $_reqUriClean);
+$_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$_canonicalUrl = 'https://coolingsystems.vn' . rtrim($_canonicalPath, '/');
+if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystems.vn';
+if (!empty($seo['canonical'])) $_canonicalUrl = $seo['canonical'];
+$_ogImage = !empty($seo['og_image']) ? $seo['og_image'] : 'https://coolingsystems.vn/favicon-cooling-round-48x48.png';
 ?>
 <link rel="canonical" href="<?= e($_canonicalUrl) ?>">
 <meta property="og:locale" content="vi_VN">
-<meta property="og:type" content="website">
+<meta property="og:type" content="<?= e($seo['og_type'] ?? 'website') ?>">
 <meta property="og:title" content="<?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng') ?>">
 <meta property="og:description" content="<?= e($_metaDesc) ?>">
 <meta property="og:url" content="<?= e($_canonicalUrl) ?>">
 <meta property="og:site_name" content="Coolingsystems.vn">
-<meta property="og:image" content="https://coolingsystems.vn/favicon-cooling-round-48x48.png">
-<meta name="twitter:card" content="summary_large_image">
-<!-- Performance: Post-idle Google Fonts loading for 95+ Mobile Score -->
-<script>
-(function(){
-  var loadFonts = function(){
-    var l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap';
-    document.head.appendChild(l);
-  };
-  if (window.requestIdleCallback) {
-    requestIdleCallback(loadFonts);
-  } else {
-    window.addEventListener('load', loadFonts);
-  }
-})();
-</script>
+<meta property="og:image" content="<?= e($_ogImage) ?>">
+<?php if (!empty($seo['preload_image'])): ?>
+<link rel="preload" as="image" href="<?= e($seo['preload_image']) ?>" fetchpriority="high">
+<?php endif; ?>
+
+<!-- High-performance Google Fonts loading -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap"></noscript>
+
 <!-- Zero-latency Critical Inline CSS -->
 <style id="main-css">
 <?php
@@ -80,7 +75,7 @@ if (file_exists($_cssFile)) {
 }
 ?>
 </style>
-<!-- Critical inline CSS to prevent FOUC while CSS loads -->
+<!-- Critical inline CSS to eliminate CLS & FOUC for 95+ Desktop Score -->
 <style id="critical-inline">
 /* Đồng nhất tiêu đề các mục bên người dùng */
 .sec-head .title h1, .sec-head .title h2,
@@ -93,25 +88,7 @@ if (file_exists($_cssFile)) {
 .promo-subhead { color:#1a3258 !important; font-family:'Inter',sans-serif !important; }
 body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 :root { --navy:#1a3258; --gold:#c9a227; --gold-light:#e8c050; --line:#e5e7eb; --ink-2:#6b7280; --ink-3:#9ca3af; }
-</style>
 
-<?php
-// === CANONICAL URL ===
-$_canonicalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-$_canonicalUrl = 'https://coolingsystems.vn' . rtrim($_canonicalPath, '/');
-if ($_canonicalPath === '/' || $_canonicalPath === '') $_canonicalUrl = 'https://coolingsystems.vn';
-if (!empty($seo['canonical'])) $_canonicalUrl = $seo['canonical'];
-?>
-<link rel="canonical" href="<?= e($_canonicalUrl) ?>">
-<!-- Open Graph / Twitter Card -->
-<meta property="og:site_name" content="Cooling">
-<meta property="og:type" content="<?= e($seo['og_type'] ?? 'website') ?>">
-<meta property="og:title" content="<?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (($title ?? '') . ' — Cooling')) ?>">
-<meta property="og:description" content="<?= e($_metaDesc) ?>">
-<meta property="og:url" content="<?= e($_canonicalUrl) ?>">
-<meta property="og:image" content="<?= e($seo['og_image'] ?? 'https://coolingsystems.vn/img/og-default.jpg') ?>">
-<meta name="twitter:card" content="summary_large_image">
-<style>
 /* Global Alignment Fix */
 header.main .wrap, nav.primary .wrap, section.block .wrap, .sec-card .wrap, .hero-section .wrap, .trust .wrap, .top-bar .wrap, .site-breadcrumb .wrap {
     max-width: 1280px !important;
@@ -120,6 +97,24 @@ header.main .wrap, nav.primary .wrap, section.block .wrap, .sec-card .wrap, .her
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+/* ZERO CLS Layout Containment */
+.hero-section { min-height: 440px; contain: layout style; }
+.hero-section .wrap { display: flex; gap: 20px; align-items: stretch; min-height: 440px; }
+.cat-sidebar { width: 260px; flex-shrink: 0; min-height: 440px; contain: style; }
+.hero-section .banner { flex: 1; min-height: 440px; contain: layout style; }
+.vs-card { width: 340px; flex-shrink: 0; min-height: 440px; contain: style; }
+
+/* Home Banner Carousel Zero CLS */
+.home-banners { margin-top: 20px; overflow: hidden; contain: layout style; }
+.hbc { position: relative; width: 100%; aspect-ratio: 1600 / 250; min-height: 180px; overflow: hidden; border-radius: 8px; background: #1a3258; contain: strict; }
+.hbc-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
+.hbc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; overflow: hidden; }
+.hbc-slide img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1600 / 250; }
+
+/* Product Cards Zero CLS */
+.p-img, .product-card .img, .product-thumb { aspect-ratio: 4 / 3; width: 100%; overflow: hidden; }
+.p-img img, .product-card .img img, .product-thumb img { width: 100%; height: 100%; object-fit: contain; }
 </style>
 </head>
 <body>

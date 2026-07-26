@@ -14,7 +14,9 @@ files_to_upload = [
     ("includes/helpers.php", "/opt/coolingsystems/includes/helpers.php"),
     ("views/partials/confirm-modal.php", "/opt/coolingsystems/views/partials/confirm-modal.php"),
     ("views/admin/product-form.php", "/opt/coolingsystems/views/admin/product-form.php"),
-    ("routes/admin.php", "/opt/coolingsystems/routes/admin.php")
+    ("routes/admin.php", "/opt/coolingsystems/routes/admin.php"),
+    ("views/partials/head.php", "/opt/coolingsystems/views/partials/head.php"),
+    ("views/public/home.php", "/opt/coolingsystems/views/public/home.php")
 ]
 
 for local, remote in files_to_upload:
@@ -24,4 +26,4 @@ for local, remote in files_to_upload:
 
 sftp.close()
 client.close()
-print("🎉 Product Image features & Enter key modal updated to VPS successfully!")
+print("🎉 Performance optimizations & Zero CLS deployed to VPS successfully!")

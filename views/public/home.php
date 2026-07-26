@@ -1,4 +1,16 @@
-<?php $title = 'Trang chủ'; $seo = ['meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng']; require __DIR__ . '/../partials/head.php'; ?>
+<?php 
+$title = 'Trang chủ'; 
+$seo = ['meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng']; 
+
+// Tải banner trước để sinh preload high-priority cho LCP < 1.0s
+$__bnRaw = dbGet("SELECT value FROM system_config WHERE key='home_banners'")['value'] ?? '[]';
+$__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], function($b){ return !empty($b['active']) && !empty($b['img']); }));
+if (!empty($__homeBanners[0]['img'])) {
+    $seo['preload_image'] = '/uploads/banners/' . $__homeBanners[0]['img'];
+}
+
+require __DIR__ . '/../partials/head.php'; 
+?>
 <section class="hero-section">
   <div class="wrap">
     <aside class="cat-sidebar">
