@@ -376,7 +376,7 @@ function normalizeProductImageFile(string $sourcePath, string $destinationPath, 
         return false;
     }
 
-    $convert = findBinary('convert');
+    $convert = (is_file('/usr/bin/convert') && is_executable('/usr/bin/convert')) ? '/usr/bin/convert' : null;
     if ($convert) {
         $cmd = escapeshellcmd($convert) . ' ' . escapeshellarg($sourcePath)
             . ' -auto-orient -strip -quality 93 '
