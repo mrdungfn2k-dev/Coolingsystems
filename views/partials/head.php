@@ -98,23 +98,39 @@ header.main .wrap, nav.primary .wrap, section.block .wrap, .sec-card .wrap, .her
     margin-right: auto !important;
 }
 
-/* ZERO CLS Layout Containment */
-.hero-section { min-height: 440px; contain: layout style; }
-.hero-section .wrap { display: flex; gap: 20px; align-items: stretch; min-height: 440px; }
-.cat-sidebar { width: 260px; flex-shrink: 0; min-height: 440px; contain: style; }
-.hero-section .banner { flex: 1; min-height: 440px; contain: layout style; }
-.vs-card { width: 340px; flex-shrink: 0; min-height: 440px; contain: style; }
+/* ZERO CLS Layout Containment & Font Swap (Fix 0.189 Mobile CLS 100%) */
+@font-face { font-display: swap; }
+html, body { font-display: swap; text-rendering: optimizeSpeed; -webkit-font-smoothing: antialiased; }
+.vs-field label { display: block !important; font-size: 11px !important; color: var(--ink-3) !important; margin-bottom: 5px !important; font-weight: 600 !important; height: 16px !important; line-height: 16px !important; }
+.vs-field select, .vs-field input, .cdd-trigger { height: 42px !important; line-height: 42px !important; min-height: 42px !important; box-sizing: border-box !important; }
+.vs-field { min-height: 64px !important; height: 64px !important; margin-bottom: 12px !important; contain: layout size !important; overflow: hidden !important; }
+.vs-card { contain: layout style !important; min-height: 420px !important; }
+.accent { display: inline-block !important; contain: layout style !important; }
+
+@media (max-width: 900px) {
+  .hero-section { min-height: auto !important; }
+  .vs-card { width: 100% !important; min-height: 380px !important; contain: layout style !important; }
+  .hero-section .banner { min-height: 240px !important; contain: layout style !important; }
+  .vs-field { width: 100% !important; min-height: 64px !important; height: 64px !important; contain: layout size !important; }
+}
 
 /* Home Banner Carousel Zero CLS */
 .home-banners { margin-top: 20px; overflow: hidden; contain: layout style; }
 .hbc { position: relative; width: 100%; aspect-ratio: 1600 / 250; min-height: 180px; overflow: hidden; border-radius: 8px; background: #1a3258; contain: strict; }
 .hbc-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
 .hbc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; overflow: hidden; }
-.hbc-slide img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1600 / 250; }
+.hbc-slide img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1600 / 250; decoding: async; }
 
 /* Product Cards Zero CLS */
-.p-img, .product-card .img, .product-thumb { aspect-ratio: 4 / 3; width: 100%; overflow: hidden; }
-.p-img img, .product-card .img img, .product-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.p-img, .product-card .img, .product-thumb { aspect-ratio: 4 / 3; width: 100%; overflow: hidden; contain: layout style; }
+.p-img img, .product-card .img img, .product-thumb img { width: 100%; height: 100%; object-fit: contain; decoding: async; }
+
+/* Hide Mobile Nav Drawer on Desktop (> 900px) */
+.mobile-nav-drawer, .mobile-nav-overlay { display: none !important; }
+@media (max-width: 900px) {
+  .mobile-nav-drawer { display: block !important; }
+  .mobile-nav-overlay.open { display: block !important; }
+}
 </style>
 </head>
 <body>
