@@ -241,18 +241,16 @@ function swTab(t){
       <div class="panel">
         <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
           <h3 style="margin:0"> Hình ảnh sản phẩm</h3>
-          <?php if(!empty($images)):?>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-              <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;user-select:none;color:#475569">
-                <input type="checkbox" id="selectAllImagesCb" onchange="toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:var(--navy);cursor:pointer">
-                <span>Chọn tất cả</span>
-              </label>
-              <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
-                      style="display:none;background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 5px rgba(239,68,68,0.3);transition:all 0.2s;align-items:center;gap:6px">
-                 Xóa <span id="selectedImgCount" style="background:rgba(255,255,255,0.25);padding:1px 6px;border-radius:10px;font-size:11px">0</span> ảnh đã chọn
-              </button>
-            </div>
-          <?php endif;?>
+          <div id="imageActionBar" style="display:none;align-items:center;gap:10px;flex-wrap:wrap">
+            <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;user-select:none;color:#475569">
+              <input type="checkbox" id="selectAllImagesCb" onchange="toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:var(--navy);cursor:pointer">
+              <span>Chọn tất cả</span>
+            </label>
+            <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
+                    style="display:none;background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 5px rgba(239,68,68,0.3);transition:all 0.2s;align-items:center;gap:6px">
+               Xóa <span id="selectedImgCount" style="background:rgba(255,255,255,0.25);padding:1px 6px;border-radius:10px;font-size:11px">0</span> ảnh đã chọn
+            </button>
+          </div>
         </div>
         <div class="panel-body">
           <?php if(!empty($images)):?>
@@ -510,21 +508,29 @@ function previewVideo(url) {
 
 <script>
 function updateImageSelectionState() {
-  var checkboxes = document.querySelectorAll('.img-select-checkbox');
-  var selected = document.querySelectorAll('.img-select-checkbox:checked');
+  var savedCbs = Array.from(document.querySelectorAll('.img-select-checkbox'));
+  var newCbs = Array.from(document.querySelectorAll('.img-select-checkbox-new'));
+  var allCbs = savedCbs.concat(newCbs);
+
+  var selectedSaved = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
+  var selectedNew = Array.from(document.querySelectorAll('.img-select-checkbox-new:checked'));
+  var totalSelected = selectedSaved.length + selectedNew.length;
+
+  var actionBar = document.getElementById('imageActionBar');
   var btn = document.getElementById('btnDeleteSelectedImgs');
   var countSpan = document.getElementById('selectedImgCount');
   var selectAllCb = document.getElementById('selectAllImagesCb');
 
-  if (countSpan) countSpan.textContent = selected.length;
-  if (btn) btn.style.display = selected.length > 0 ? 'inline-flex' : 'none';
+  if (actionBar) actionBar.style.display = allCbs.length > 0 ? 'flex' : 'none';
+  if (countSpan) countSpan.textContent = totalSelected;
+  if (btn) btn.style.display = totalSelected > 0 ? 'inline-flex' : 'none';
 
   if (selectAllCb) {
-    selectAllCb.checked = checkboxes.length > 0 && selected.length === checkboxes.length;
-    selectAllCb.indeterminate = selected.length > 0 && selected.length < checkboxes.length;
+    selectAllCb.checked = allCbs.length > 0 && totalSelected === allCbs.length;
+    selectAllCb.indeterminate = totalSelected > 0 && totalSelected < allCbs.length;
   }
 
-  checkboxes.forEach(function(cb) {
+  allCbs.forEach(function(cb) {
     var wrap = cb.closest('.existing-img-wrap');
     if (wrap) {
       if (cb.checked) {
@@ -539,62 +545,74 @@ function updateImageSelectionState() {
 }
 
 function toggleSelectAllImages(masterCb) {
-  var checkboxes = document.querySelectorAll('.img-select-checkbox');
-  checkboxes.forEach(function(cb) {
+  var allCbs = document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new');
+  allCbs.forEach(function(cb) {
     cb.checked = masterCb.checked;
   });
   updateImageSelectionState();
 }
 
 async function deleteSelectedProductImages() {
-  var selected = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
-  if (selected.length === 0) {
-    alert('Vui lòng chọn ít nhất 1 ảnh để xóa.');
+  var selectedSaved = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
+  var selectedNew = Array.from(document.querySelectorAll('.img-select-checkbox-new:checked'));
+  var totalSelected = selectedSaved.length + selectedNew.length;
+
+  if (totalSelected === 0) {
+    alert('Vui lòng chọn ít nhất 1 ảnh để bỏ/xóa.');
     return;
   }
 
-  var msg = selected.length === 1 ? 'Bạn có chắc muốn xóa ảnh này?' : ('Bạn có chắc muốn xóa ' + selected.length + ' ảnh đã chọn?');
+  var msg = totalSelected === 1 ? 'Bạn có chắc muốn xóa ảnh này?' : ('Bạn có chắc muốn xóa ' + totalSelected + ' ảnh đã chọn?');
   if (!(await csConfirmAsync(msg))) return;
 
-  var imageIds = selected.map(cb => cb.dataset.imgId);
-  var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
+  // 1. Remove selected new preview files from memory
+  if (selectedNew.length > 0 && typeof window.__removeSelectedNewFiles === 'function') {
+    var newIndexes = selectedNew.map(cb => parseInt(cb.dataset.fileIdx)).filter(n => !isNaN(n));
+    window.__removeSelectedNewFiles(newIndexes);
+  }
 
-  var wraps = selected.map(cb => cb.closest('.existing-img-wrap')).filter(Boolean);
-  wraps.forEach(wrap => {
-    wrap.style.opacity = '0.4';
-    wrap.style.pointerEvents = 'none';
-  });
+  // 2. Delete selected saved DB images via AJAX
+  if (selectedSaved.length > 0) {
+    var imageIds = selectedSaved.map(cb => cb.dataset.imgId);
+    var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
+    var wraps = selectedSaved.map(cb => cb.closest('.existing-img-wrap')).filter(Boolean);
+    
+    wraps.forEach(wrap => {
+      wrap.style.opacity = '0.4';
+      wrap.style.pointerEvents = 'none';
+    });
 
-  fetch('/admin/products/delete-images-bulk', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: '_csrf=' + encodeURIComponent(csrf) + '&image_ids=' + encodeURIComponent(JSON.stringify(imageIds))
-  })
-  .then(r => r.json())
-  .then(data => {
-    if (data.ok) {
-      wraps.forEach(wrap => {
-        wrap.style.transition = 'all 0.3s ease';
-        wrap.style.transform = 'scale(0)';
-        wrap.style.opacity = '0';
-        setTimeout(() => wrap.remove(), 300);
+    try {
+      var r = await fetch('/admin/products/delete-images-bulk', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: '_csrf=' + encodeURIComponent(csrf) + '&image_ids=' + encodeURIComponent(JSON.stringify(imageIds))
       });
-      setTimeout(() => updateImageSelectionState(), 350);
-    } else {
-      alert('Lỗi: ' + (data.msg || 'Không thể xóa các ảnh đã chọn'));
+      var data = await r.json();
+      if (data.ok) {
+        wraps.forEach(wrap => {
+          wrap.style.transition = 'all 0.3s ease';
+          wrap.style.transform = 'scale(0)';
+          wrap.style.opacity = '0';
+          setTimeout(() => wrap.remove(), 300);
+        });
+      } else {
+        alert('Lỗi: ' + (data.msg || 'Không thể xóa các ảnh đã chọn'));
+        wraps.forEach(wrap => {
+          wrap.style.opacity = '1';
+          wrap.style.pointerEvents = 'auto';
+        });
+      }
+    } catch(err) {
+      alert('Lỗi kết nối: ' + err.message);
       wraps.forEach(wrap => {
         wrap.style.opacity = '1';
         wrap.style.pointerEvents = 'auto';
       });
     }
-  })
-  .catch(err => {
-    alert('Lỗi kết nối: ' + err.message);
-    wraps.forEach(wrap => {
-      wrap.style.opacity = '1';
-      wrap.style.pointerEvents = 'auto';
-    });
-  });
+  }
+
+  setTimeout(function() { updateImageSelectionState(); }, 350);
 }
 
 async function deleteProductImage(imageId, btn) {
@@ -602,7 +620,6 @@ async function deleteProductImage(imageId, btn) {
   var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
   var wrap = btn.closest('.existing-img-wrap');
   
-  // Visual feedback
   wrap.style.opacity = '0.4';
   wrap.style.pointerEvents = 'none';
   
@@ -1410,7 +1427,14 @@ function saveImageOrder(container) {
       var wrapper = document.createElement('div');
       wrapper.className = 'existing-img-wrap';
       wrapper.setAttribute('data-file-idx', idx);
-      wrapper.style.cssText = 'position:relative;width:120px;aspect-ratio:4/3;border:1px solid #d0d5dd;border-radius:6px;overflow:hidden;background:#fff;cursor:grab;flex-shrink:0;';
+      wrapper.style.cssText = 'position:relative;width:120px;aspect-ratio:4/3;border:1px solid #d0d5dd;border-radius:6px;overflow:hidden;background:transparent;cursor:grab;flex-shrink:0;transition:all 0.2s;';
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'img-select-checkbox-new';
+      cb.setAttribute('data-file-idx', idx);
+      cb.style.cssText = 'position:absolute;top:4px;left:4px;z-index:10;width:18px;height:18px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3);';
+      cb.onchange = function() { if (typeof updateImageSelectionState === 'function') updateImageSelectionState(); };
 
       var img = document.createElement('img');
       img.style.cssText = 'width:100%;height:100%;object-fit:contain;pointer-events:none;';
@@ -1422,10 +1446,13 @@ function saveImageOrder(container) {
       removeBtn.type = 'button';
       removeBtn.innerHTML = '&times;';
       removeBtn.title = 'Bỏ ảnh này';
-      removeBtn.style.cssText = 'position:absolute;top:2px;right:2px;width:24px;height:24px;background:rgba(220,38,38,0.9);color:#fff;border:none;border-radius:50%;font-size:18px;line-height:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);z-index:2;';
+      removeBtn.style.cssText = 'position:absolute;top:4px;right:4px;width:22px;height:22px;background:rgba(220,38,38,0.9);color:#fff;border:none;border-radius:50%;font-size:16px;line-height:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);z-index:10;';
       removeBtn.setAttribute('data-idx', idx);
-      removeBtn.addEventListener('click', function() {
+      removeBtn.addEventListener('click', async function() {
         var i = parseInt(this.getAttribute('data-idx'));
+        if (typeof csConfirmAsync === 'function') {
+          if (!(await csConfirmAsync('Bạn có chắc muốn bỏ ảnh này?'))) return;
+        }
         selectedFiles.splice(i, 1);
         renderPreviews();
         syncHiddenInput();
@@ -1440,11 +1467,14 @@ function saveImageOrder(container) {
         label.textContent = 'Ảnh ' + (idx + 1);
       }
 
+      wrapper.appendChild(cb);
       wrapper.appendChild(img);
       wrapper.appendChild(removeBtn);
       wrapper.appendChild(label);
       preview.appendChild(wrapper);
     });
+
+    if (typeof updateImageSelectionState === 'function') updateImageSelectionState();
 
     if (sortableNew) sortableNew.destroy();
     if (selectedFiles.length > 1) {
@@ -1466,6 +1496,18 @@ function saveImageOrder(container) {
       });
     }
   }
+
+  window.__removeSelectedNewFiles = function(indexes) {
+    // Remove in descending index order
+    indexes.sort(function(a,b){ return b - a; });
+    indexes.forEach(function(idx) {
+      if (idx >= 0 && idx < selectedFiles.length) {
+        selectedFiles.splice(idx, 1);
+      }
+    });
+    renderPreviews();
+    syncHiddenInput();
+  };
 
   function syncHiddenInput() {
     var dt = new DataTransfer();
