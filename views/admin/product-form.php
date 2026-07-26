@@ -257,14 +257,16 @@ function swTab(t){
             <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px" id="existingImagesRow">
               <?php foreach($images as $img):?>
                 <div class="existing-img-wrap" data-img-id="<?= $img['id'] ?>" style="position:relative;width:120px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:2px solid #e2e8f0;flex-shrink:0;background:transparent;transition:all 0.2s">
-                  <input type="checkbox" class="img-select-checkbox" data-img-id="<?= $img['id'] ?>" onchange="updateImageSelectionState()"
-                         style="position:absolute;top:4px;left:4px;z-index:10;width:18px;height:18px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3)">
+                  <input type="checkbox" class="img-select-checkbox" data-img-id="<?= $img['id'] ?>" onchange="updateImageSelectionState()" onclick="event.stopPropagation();"
+                         style="position:absolute;top:4px;left:4px;z-index:20;width:20px;height:20px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3)">
                   <img src="/uploads/products/<?= e(implode('/', array_map('rawurlencode', explode('/', $img['file_path'])))) ?>" style="width:100%;height:100%;object-fit:contain" onerror="this.onerror=null;this.src='/img/placeholder.png'">
                   <button type="button" onclick="deleteProductImage(<?= $img['id'] ?>, this)" title="Xóa ảnh này"
-                    style="position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s;z-index:10"
+                    style="position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s;z-index:20"
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
                     onmouseout="this.style.background='rgba(231,76,60,0.9)';this.style.transform='scale(1)'"
                   ></button>
+                  <button type="button" onclick="openImgLightbox(this.previousElementSibling.previousElementSibling.src);event.stopPropagation();" title="Xem ảnh lớn"
+                    style="position:absolute;bottom:4px;right:4px;width:20px;height:20px;border-radius:4px;background:rgba(0,0,0,0.5);color:#fff;border:none;cursor:pointer;font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:20">🔍</button>
                 </div>
               <?php endforeach;?>
             </div>
@@ -316,10 +318,19 @@ function swTab(t){
   };
   document.addEventListener('mousedown', function(e){ downX=e.clientX; downY=e.clientY; }, true);
   document.addEventListener('click', function(ev){
-    if(ev.target.closest('button')) return;                 // X = delete, don't open viewer
+    if(ev.target.closest('button') || ev.target.closest('input') || ev.target.closest('label')) return; // Bỏ qua button, checkbox, label
     var wrap=ev.target.closest('.existing-img-wrap');       // wrapper of BOTH saved & new thumbs
     if(!wrap || !wrap.closest('#existingImagesRow, #img-preview-area, #imgPreviewRow')) return;
     if(Math.abs(ev.clientX-downX)+Math.abs(ev.clientY-downY) > 6) return; // was a drag (reorder)
+
+    // Clicking image tile toggles its selection checkbox!
+    var cb = wrap.querySelector('input[type="checkbox"]');
+    if(cb) {
+      cb.checked = !cb.checked;
+      if (typeof updateImageSelectionState === 'function') updateImageSelectionState();
+      return;
+    }
+
     var im=wrap.querySelector('img');
     if(!im || !im.src) return;
     ev.preventDefault(); ev.stopPropagation();
@@ -1433,7 +1444,8 @@ function saveImageOrder(container) {
       cb.type = 'checkbox';
       cb.className = 'img-select-checkbox-new';
       cb.setAttribute('data-file-idx', idx);
-      cb.style.cssText = 'position:absolute;top:4px;left:4px;z-index:10;width:18px;height:18px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3);';
+      cb.style.cssText = 'position:absolute;top:4px;left:4px;z-index:20;width:20px;height:20px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3);';
+      cb.onclick = function(e) { e.stopPropagation(); };
       cb.onchange = function() { if (typeof updateImageSelectionState === 'function') updateImageSelectionState(); };
 
       var img = document.createElement('img');
