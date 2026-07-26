@@ -11,7 +11,10 @@ client.connect(HOST, username=USER, password=PASS, timeout=15)
 sftp = client.open_sftp()
 
 files_to_upload = [
-    ("views/public/product-detail.php", "/opt/coolingsystems/views/public/product-detail.php")
+    ("includes/helpers.php", "/opt/coolingsystems/includes/helpers.php"),
+    ("views/partials/confirm-modal.php", "/opt/coolingsystems/views/partials/confirm-modal.php"),
+    ("views/admin/product-form.php", "/opt/coolingsystems/views/admin/product-form.php"),
+    ("routes/admin.php", "/opt/coolingsystems/routes/admin.php")
 ]
 
 for local, remote in files_to_upload:
@@ -21,4 +24,4 @@ for local, remote in files_to_upload:
 
 sftp.close()
 client.close()
-print("🎉 Product Detail SKU/OEM display uploaded to VPS successfully!")
+print("🎉 Product Image features & Enter key modal updated to VPS successfully!")

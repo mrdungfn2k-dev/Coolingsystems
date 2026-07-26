@@ -17,6 +17,19 @@
     document.getElementById('csConfirmOk').addEventListener('click',function(){var f=_ok;close();if(typeof f==='function')f();});
     document.getElementById('csConfirmCancel').addEventListener('click',function(){var f=_cancel;close();if(typeof f==='function')f();});
     m.addEventListener('click',function(ev){if(ev.target===m){var f=_cancel;close();if(typeof f==='function')f();}});
+    document.addEventListener('keydown', function(e) {
+      var modal = document.getElementById('csConfirmModal');
+      if (!modal || modal.style.display !== 'flex') return;
+      if (e.key === 'Enter') {
+        e.preventDefault(); e.stopPropagation();
+        var okBtn = document.getElementById('csConfirmOk');
+        if (okBtn) okBtn.click();
+      } else if (e.key === 'Escape') {
+        e.preventDefault(); e.stopPropagation();
+        var cancelBtn = document.getElementById('csConfirmCancel');
+        if (cancelBtn) cancelBtn.click();
+      }
+    }, true);
   }
   window.csConfirm=function(message,onOk,onCancel){ var m=document.getElementById('csConfirmModal');
     if(!m){ if(window.confirm(message)){if(onOk)onOk();}else{if(onCancel)onCancel();} return; }

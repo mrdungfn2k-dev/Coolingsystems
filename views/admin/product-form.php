@@ -239,15 +239,31 @@ function swTab(t){
 
       <!-- HÌNH ẢNH -->
       <div class="panel">
-        <div class="panel-head"><h3> Hình ảnh sản phẩm</h3></div>
+        <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <h3 style="margin:0"> Hình ảnh sản phẩm</h3>
+          <?php if(!empty($images)):?>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;user-select:none;color:#475569">
+                <input type="checkbox" id="selectAllImagesCb" onchange="toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:var(--navy);cursor:pointer">
+                <span>Chọn tất cả</span>
+              </label>
+              <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
+                      style="display:none;background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 5px rgba(239,68,68,0.3);transition:all 0.2s;align-items:center;gap:6px">
+                 Xóa <span id="selectedImgCount" style="background:rgba(255,255,255,0.25);padding:1px 6px;border-radius:10px;font-size:11px">0</span> ảnh đã chọn
+              </button>
+            </div>
+          <?php endif;?>
+        </div>
         <div class="panel-body">
           <?php if(!empty($images)):?>
             <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px" id="existingImagesRow">
               <?php foreach($images as $img):?>
-                <div class="existing-img-wrap" data-img-id="<?= $img['id'] ?>" style="position:relative;width:120px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:2px solid #e0e0e0;flex-shrink:0;background:#fff">
+                <div class="existing-img-wrap" data-img-id="<?= $img['id'] ?>" style="position:relative;width:120px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:2px solid #e2e8f0;flex-shrink:0;background:transparent;transition:all 0.2s">
+                  <input type="checkbox" class="img-select-checkbox" data-img-id="<?= $img['id'] ?>" onchange="updateImageSelectionState()"
+                         style="position:absolute;top:4px;left:4px;z-index:10;width:18px;height:18px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3)">
                   <img src="/uploads/products/<?= e(implode('/', array_map('rawurlencode', explode('/', $img['file_path'])))) ?>" style="width:100%;height:100%;object-fit:contain" onerror="this.onerror=null;this.src='/img/placeholder.png'">
                   <button type="button" onclick="deleteProductImage(<?= $img['id'] ?>, this)" title="Xóa ảnh này"
-                    style="position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s"
+                    style="position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s;z-index:10"
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
                     onmouseout="this.style.background='rgba(231,76,60,0.9)';this.style.transform='scale(1)'"
                   ></button>
@@ -493,6 +509,94 @@ function previewVideo(url) {
 </form>
 
 <script>
+function updateImageSelectionState() {
+  var checkboxes = document.querySelectorAll('.img-select-checkbox');
+  var selected = document.querySelectorAll('.img-select-checkbox:checked');
+  var btn = document.getElementById('btnDeleteSelectedImgs');
+  var countSpan = document.getElementById('selectedImgCount');
+  var selectAllCb = document.getElementById('selectAllImagesCb');
+
+  if (countSpan) countSpan.textContent = selected.length;
+  if (btn) btn.style.display = selected.length > 0 ? 'inline-flex' : 'none';
+
+  if (selectAllCb) {
+    selectAllCb.checked = checkboxes.length > 0 && selected.length === checkboxes.length;
+    selectAllCb.indeterminate = selected.length > 0 && selected.length < checkboxes.length;
+  }
+
+  checkboxes.forEach(function(cb) {
+    var wrap = cb.closest('.existing-img-wrap');
+    if (wrap) {
+      if (cb.checked) {
+        wrap.style.borderColor = '#ef4444';
+        wrap.style.boxShadow = '0 0 0 2px rgba(239, 68, 68, 0.3)';
+      } else {
+        wrap.style.borderColor = '#e2e8f0';
+        wrap.style.boxShadow = 'none';
+      }
+    }
+  });
+}
+
+function toggleSelectAllImages(masterCb) {
+  var checkboxes = document.querySelectorAll('.img-select-checkbox');
+  checkboxes.forEach(function(cb) {
+    cb.checked = masterCb.checked;
+  });
+  updateImageSelectionState();
+}
+
+async function deleteSelectedProductImages() {
+  var selected = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
+  if (selected.length === 0) {
+    alert('Vui lòng chọn ít nhất 1 ảnh để xóa.');
+    return;
+  }
+
+  var msg = selected.length === 1 ? 'Bạn có chắc muốn xóa ảnh này?' : ('Bạn có chắc muốn xóa ' + selected.length + ' ảnh đã chọn?');
+  if (!(await csConfirmAsync(msg))) return;
+
+  var imageIds = selected.map(cb => cb.dataset.imgId);
+  var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
+
+  var wraps = selected.map(cb => cb.closest('.existing-img-wrap')).filter(Boolean);
+  wraps.forEach(wrap => {
+    wrap.style.opacity = '0.4';
+    wrap.style.pointerEvents = 'none';
+  });
+
+  fetch('/admin/products/delete-images-bulk', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: '_csrf=' + encodeURIComponent(csrf) + '&image_ids=' + encodeURIComponent(JSON.stringify(imageIds))
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.ok) {
+      wraps.forEach(wrap => {
+        wrap.style.transition = 'all 0.3s ease';
+        wrap.style.transform = 'scale(0)';
+        wrap.style.opacity = '0';
+        setTimeout(() => wrap.remove(), 300);
+      });
+      setTimeout(() => updateImageSelectionState(), 350);
+    } else {
+      alert('Lỗi: ' + (data.msg || 'Không thể xóa các ảnh đã chọn'));
+      wraps.forEach(wrap => {
+        wrap.style.opacity = '1';
+        wrap.style.pointerEvents = 'auto';
+      });
+    }
+  })
+  .catch(err => {
+    alert('Lỗi kết nối: ' + err.message);
+    wraps.forEach(wrap => {
+      wrap.style.opacity = '1';
+      wrap.style.pointerEvents = 'auto';
+    });
+  });
+}
+
 async function deleteProductImage(imageId, btn) {
   if (!(await csConfirmAsync('Bạn có chắc muốn xóa ảnh này?'))) return;
   var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
@@ -513,7 +617,10 @@ async function deleteProductImage(imageId, btn) {
       wrap.style.transition = 'all 0.3s ease';
       wrap.style.transform = 'scale(0)';
       wrap.style.opacity = '0';
-      setTimeout(() => wrap.remove(), 300);
+      setTimeout(() => {
+        wrap.remove();
+        updateImageSelectionState();
+      }, 300);
     } else {
       alert('Lỗi: ' + (data.msg || 'Không thể xóa'));
       wrap.style.opacity = '1';

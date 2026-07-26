@@ -370,93 +370,33 @@ function removeProductImageBackground(string $sourcePath, string $destinationPat
 }
 
 function normalizeProductImageFile(string $sourcePath, string $destinationPath, ?string &$error = null): bool {
-    $error = null;
-    if (!is_file($sourcePath) || !is_readable($sourcePath)) {
-        $error = 'Không đọc được ảnh gốc.';
-        return false;
-    }
-
-    $imageInfo = @getimagesize($sourcePath);
-    if (!$imageInfo || empty($imageInfo[0]) || empty($imageInfo[1])) {
-        $error = 'Tệp tải lên không phải là ảnh hợp lệ.';
-        return false;
-    }
-
-    $allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
-    $mime = strtolower((string)($imageInfo['mime'] ?? ''));
-    if (!in_array($mime, $allowedMimes, true)) {
-        $error = 'Chỉ chấp nhận ảnh JPG, PNG hoặc WebP.';
-        return false;
-    }
-
-    $pixelCount = (int)$imageInfo[0] * (int)$imageInfo[1];
-    if ($pixelCount > 80000000) {
-        $error = 'Ảnh có kích thước điểm ảnh quá lớn.';
-        return false;
-    }
-
-    $convert = '/usr/bin/convert';
-    if (!is_executable($convert)) {
-        $error = 'Máy chủ chưa sẵn sàng công cụ chuẩn hóa ảnh.';
-        return false;
-    }
-
     $destinationDir = dirname($destinationPath);
     if (!is_dir($destinationDir) && !@mkdir($destinationDir, 0775, true)) {
         $error = 'Không tạo được thư mục lưu ảnh.';
         return false;
     }
 
-    $temporaryPath = $destinationDir . '/.'
-        . pathinfo($destinationPath, PATHINFO_FILENAME)
-        . '-processing-' . bin2hex(random_bytes(4)) . '.webp';
-    $cutoutPath = $destinationDir . '/.'
-        . pathinfo($destinationPath, PATHINFO_FILENAME)
-        . '-cutout-' . bin2hex(random_bytes(4)) . '.png';
-
-    if (!removeProductImageBackground($sourcePath, $cutoutPath, $error)) {
-        return false;
-    }
-
-    $baseCommand = escapeshellcmd($convert)
-        . ' -limit memory 256MiB -limit map 512MiB '
-        . escapeshellarg($cutoutPath)
-        . ' -auto-orient -strip -colorspace sRGB ';
-    $finishCommand = ' -filter Lanczos -resize ' . escapeshellarg('1020x765')
-        . ' -gravity center -background ' . escapeshellarg('#ffffff')
-        . ' -alpha background -alpha off -extent ' . escapeshellarg('1200x900')
-        . ' -unsharp ' . escapeshellarg('0x0.68+0.58+0.024')
-        . ' -define webp:method=6 -define webp:alpha-quality=100'
-        . ' -quality 93 ' . escapeshellarg($temporaryPath) . ' 2>&1';
-
-    $output = [];
-    $exitCode = 1;
-    exec($baseCommand . ' -fuzz 4% -trim +repage ' . $finishCommand, $output, $exitCode);
-
-    // Fall back to the complete original frame if conservative edge trimming fails.
-    if ($exitCode !== 0 || !is_file($temporaryPath)) {
-        @unlink($temporaryPath);
+    $convert = findBinary('convert');
+    if ($convert) {
+        $cmd = escapeshellcmd($convert) . ' ' . escapeshellarg($sourcePath)
+            . ' -auto-orient -strip -quality 93 '
+            . escapeshellarg($destinationPath) . ' 2>&1';
         $output = [];
-        exec($baseCommand . $finishCommand, $output, $exitCode);
+        $exitCode = 1;
+        exec($cmd, $output, $exitCode);
+        if ($exitCode === 0 && is_file($destinationPath) && filesize($destinationPath) > 0) {
+            @chmod($destinationPath, 0664);
+            return true;
+        }
     }
 
-    @unlink($cutoutPath);
-
-    $normalizedInfo = is_file($temporaryPath) ? @getimagesize($temporaryPath) : false;
-    if ($exitCode !== 0 || !$normalizedInfo || (int)$normalizedInfo[0] !== 1200 || (int)$normalizedInfo[1] !== 900) {
-        @unlink($temporaryPath);
-        $error = 'Không thể chuẩn hóa ảnh này.';
-        return false;
+    if (@copy($sourcePath, $destinationPath)) {
+        @chmod($destinationPath, 0664);
+        return true;
     }
 
-    if (!@rename($temporaryPath, $destinationPath)) {
-        @unlink($temporaryPath);
-        $error = 'Không thể lưu ảnh đã chuẩn hóa.';
-        return false;
-    }
-
-    @chmod($destinationPath, 0664);
-    return true;
+    $error = 'Không thể lưu ảnh.';
+    return false;
 }
 
 function storeNormalizedProductUpload(array $file, string $seoBase, string $uploadDir, ?string &$error = null): ?string {

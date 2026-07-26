@@ -3654,6 +3654,50 @@ post('/admin/products/delete-image', function() {
     echo json_encode(['ok'=>true,'msg'=>'Đã xóa ảnh']);
 });
 
+// Delete multiple product images (bulk)
+post('/admin/products/delete-images-bulk', function() {
+    requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
+    $rawIds = $_POST['image_ids'] ?? [];
+    if (is_string($rawIds)) {
+        $rawIds = json_decode($rawIds, true) ?: explode(',', $rawIds);
+    }
+    $imageIds = array_filter(array_map('intval', (array)$rawIds), function($v) { return $v > 0; });
+    if (empty($imageIds)) {
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => false, 'msg' => 'Vui lòng chọn ít nhất 1 ảnh để xóa']);
+        return;
+    }
+
+    $deletedCount = 0;
+    $productId = 0;
+
+    foreach ($imageIds as $imageId) {
+        $img = dbGet("SELECT * FROM product_images WHERE id=?", [$imageId]);
+        if (!$img) continue;
+        $productId = $img['product_id'];
+
+        $filePath = '/var/lib/coolingsystems/uploads/products/' . $img['file_path'];
+        if (file_exists($filePath)) { @unlink($filePath); }
+
+        dbRun("DELETE FROM product_images WHERE id=?", [$imageId]);
+        $deletedCount++;
+    }
+
+    if ($productId > 0) {
+        $hasMain = dbGet("SELECT id FROM product_images WHERE product_id=? AND is_main=1", [$productId]);
+        if (!$hasMain) {
+            $nextImage = dbGet("SELECT id FROM product_images WHERE product_id=? ORDER BY sort_order, id LIMIT 1", [$productId]);
+            if ($nextImage) {
+                dbRun("UPDATE product_images SET is_main=1 WHERE id=?", [$nextImage['id']]);
+            }
+        }
+        dbRun("UPDATE products SET updated_at=datetime('now','localtime') WHERE id=?", [$productId]);
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode(['ok' => true, 'msg' => "Đã xóa {$deletedCount} ảnh", 'deleted_count' => $deletedCount]);
+});
+
 post('/admin/settings/social', function() {
     requireStaffPermission('rbac:system.social.manage|tax_config', '/auth/login'); csrfCheck();
     $fields = ['social_whatsapp','social_tiktok','social_facebook'];
