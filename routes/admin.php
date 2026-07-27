@@ -3189,18 +3189,25 @@ post('/admin/footer/update', function() {
 });
 post('/admin/banner/update', function() {
     requireStaffPermission('content', '/auth/login'); csrfCheck();
-    $fields = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url'];
+    $fields = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_show_text','hero_banner_link'];
     foreach ($fields as $f) {
-        $val = trim($_POST[$f] ?? '');
+        $val = isset($_POST[$f]) ? trim($_POST[$f]) : '';
         dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)", [$f, $val]);
+    }
+    // Chon banner mau
+    if (!empty($_POST['preset_banner'])) {
+        $preset = trim($_POST['preset_banner']);
+        dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('hero_bg_image', ?)", [$preset]);
     }
     // Handle bg image upload
     if (!empty($_FILES['hero_bg_image']['tmp_name']) && is_uploaded_file($_FILES['hero_bg_image']['tmp_name'])) {
         @mkdir('/opt/cooling-php/uploads/banners', 0755, true);
+        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
         $ext = strtolower(pathinfo($_FILES['hero_bg_image']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp'])) {
             $fname = 'hero_' . time() . '.' . $ext;
             move_uploaded_file($_FILES['hero_bg_image']['tmp_name'], '/opt/cooling-php/uploads/banners/' . $fname);
+            @copy('/opt/cooling-php/uploads/banners/' . $fname, '/var/lib/coolingsystems/uploads/banners/' . $fname);
             dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('hero_bg_image', ?)", [$fname]);
         }
     }
@@ -3211,7 +3218,7 @@ post('/admin/banner/update', function() {
 get('/admin/content', function() {
     $user = requireStaffPermission('content', '/auth/login');
     $pages = dbAll('SELECT * FROM static_pages ORDER BY title');
-    $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
+    $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image','hero_show_text','hero_banner_link']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
     $footerSettings = []; $fkeys = ['footer_logo_text','footer_desc','footer_copyright']; foreach($fkeys as $fk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$fk]); $footerSettings[$fk]=$r['value']??'';}
     view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages], ['bannerSettings'=>$bannerSettings, 'footerSettings'=>$footerSettings]));
 });

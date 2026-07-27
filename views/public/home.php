@@ -30,16 +30,33 @@ require __DIR__ . '/../partials/head.php';
       $heroBtn2 = dbGet("SELECT value FROM settings WHERE key='hero_btn2_text'")['value'] ?? 'Tư vấn miễn phí';
       $heroBtn2Url = dbGet("SELECT value FROM settings WHERE key='hero_btn2_url'")['value'] ?? '/contact';
       $heroBg = dbGet("SELECT value FROM settings WHERE key='hero_bg_image'")['value'] ?? '';
+      $heroShowText = dbGet("SELECT value FROM settings WHERE key='hero_show_text'")['value'] ?? '1';
+      $heroBannerLink = dbGet("SELECT value FROM settings WHERE key='hero_banner_link'")['value'] ?? '';
     ?>
     <?php if ($heroBg): ?>
     <link rel="preload" as="image" href="/uploads/banners/<?= e($heroBg) ?>" fetchpriority="high">
     <?php endif; ?>
-    <div class="banner" style="overflow:hidden<?= $heroBg ? ';background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center' : '' ?>">
-      <span class="badge"><?= $heroBadge ?></span>
-      <h1><?= $heroHeading ?></h1>
-      <p><?= $heroSubtext ?></p>
-      <div class="actions"><a href="<?= e($heroBtn1Url) ?>" class="btn btn-gold btn-lg"><?= e($heroBtn1) ?></a><a href="<?= e($heroBtn2Url) ?>" class="btn btn-outline-light btn-lg"><?= e($heroBtn2) ?></a></div>
-    </div>
+
+    <?php if ($heroShowText === '0' && $heroBg): ?>
+      <!-- Chế độ TẮT chữ: Hiển thị nguyên bức ảnh đồ họa Banner -->
+      <div class="banner pure-image-banner" style="padding:0;overflow:hidden;background:#0f172a;display:flex;align-items:center;justify-content:center;border-radius:12px;min-height:360px">
+        <?php if (!empty($heroBannerLink)): ?>
+          <a href="<?= e($heroBannerLink) ?>" style="display:block;width:100%;height:100%">
+            <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:block">
+          </a>
+        <?php else: ?>
+          <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:block">
+        <?php endif; ?>
+      </div>
+    <?php else: ?>
+      <!-- Chế độ BẬT chữ đè lên banner -->
+      <div class="banner" style="overflow:hidden<?= $heroBg ? ';background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center' : '' ?>">
+        <span class="badge"><?= $heroBadge ?></span>
+        <h1><?= $heroHeading ?></h1>
+        <p><?= $heroSubtext ?></p>
+        <div class="actions"><a href="<?= e($heroBtn1Url) ?>" class="btn btn-gold btn-lg"><?= e($heroBtn1) ?></a><a href="<?= e($heroBtn2Url) ?>" class="btn btn-outline-light btn-lg"><?= e($heroBtn2) ?></a></div>
+      </div>
+    <?php endif; ?>
     <aside class="vs-card">
       <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#334155;font-weight:500;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
@@ -174,7 +191,7 @@ foreach ($cats as $cat):
   if (!isset($cat['cnt'])) {
     $cat['cnt'] = dbGet("SELECT COUNT(*) as n FROM products WHERE category_id=? AND status='published'", [$cat['id']])['n'] ?? 0;
   }
-  $catProds = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT 30", [$cat['id']]);
+  $catProds = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT 6", [$cat['id']]);
   if (empty($catProds)) continue;
 ?>
 <section class="block"><div class="wrap"><div class="sec-card">

@@ -20,7 +20,8 @@ files_to_upload = [
     ("views/public/partials/prod-card.php", "/opt/coolingsystems/views/public/partials/prod-card.php"),
     ("public/css/cooling.css", "/opt/coolingsystems/public/css/cooling.css"),
     ("public/css/cooling.min.css", "/opt/coolingsystems/public/css/cooling.min.css"),
-    ("views/partials/foot.php", "/opt/coolingsystems/views/partials/foot.php")
+    ("views/partials/foot.php", "/opt/coolingsystems/views/partials/foot.php"),
+    ("views/admin/content-list.php", "/opt/coolingsystems/views/admin/content-list.php")
 ]
 
 for local, remote in files_to_upload:
