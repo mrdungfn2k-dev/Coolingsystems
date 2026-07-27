@@ -10,6 +10,15 @@
 <link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260717-favicon-sync">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260717-favicon-sync">
 <link rel="manifest" href="/site.webmanifest?v=20260717-favicon-sync">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-773TVBRSGE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-773TVBRSGE');
+</script>
 <!-- Performance: Preconnect Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
