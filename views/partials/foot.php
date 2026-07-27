@@ -148,7 +148,7 @@ window.alert=function(msg){coolToastShow(msg);};
 
 <!-- Floating Social Bubbles -->
 <style>
-.floating-social { position: fixed; bottom: 95px; right: 24px; display: flex; flex-direction: column; gap: 6px; z-index: 9999; }
+.floating-social { position: fixed; bottom: 100px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
 .floating-social a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.22); transition: transform 0.25s ease, box-shadow 0.25s ease; color: #fff; text-decoration: none; position: relative; z-index: 10; }
 
 /* Continuous Visible Ripple Wave Effect (Gợn sóng rõ nét, nổi bật) */
@@ -170,7 +170,7 @@ window.alert=function(msg){coolToastShow(msg);};
 @keyframes rippleWave {
   0% { transform: scale(1); opacity: 0.8; }
   50% { opacity: 0.5; }
-  100% { transform: scale(1.26); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
 }
 
 .floating-social a:hover { transform: translateY(-2px) scale(1.08); box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
@@ -183,7 +183,7 @@ window.alert=function(msg){coolToastShow(msg);};
 .floating-social a:hover .tooltip { opacity: 1; transform: translateX(0); }
 
 /* Ripple animation on Hotline "Gọi ngay" button in float-stack */
-.float-stack { position: fixed; right: 20px; bottom: 24px; z-index: 9998; display: flex; flex-direction: column; gap: 6px; }
+.float-stack { position: fixed; right: 20px; bottom: 24px; z-index: 9998; display: flex; flex-direction: column; gap: 8px; }
 .float-stack .float-btn { position: relative; z-index: 10; }
 .float-stack .float-btn::before {
   content: '';
@@ -202,7 +202,7 @@ window.alert=function(msg){coolToastShow(msg);};
 }
 
 @media (max-width: 768px) {
-  .floating-social { bottom: 135px; right: 14px; gap: 5px; }
+  .floating-social { bottom: 138px; right: 14px; gap: 9px; }
   .floating-social a { width: 42px; height: 42px; }
   .floating-social a svg { width: 20px; height: 20px; }
   .floating-social .tooltip { display: none; }
