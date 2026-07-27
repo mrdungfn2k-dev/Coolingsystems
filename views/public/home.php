@@ -1,13 +1,36 @@
 <?php 
 $title = 'Trang chủ'; 
-$seo = ['meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng']; 
 
-// Tải banner trước để sinh preload high-priority cho LCP < 1.0s
-$__bnRaw = dbGet("SELECT value FROM system_config WHERE key='home_banners'")['value'] ?? '[]';
-$__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], function($b){ return !empty($b['active']) && !empty($b['img']); }));
-if (!empty($__homeBanners[0]['img'])) {
-    $seo['preload_image'] = '/uploads/banners/' . $__homeBanners[0]['img'];
+$heroBg = dbGet("SELECT value FROM settings WHERE key='hero_bg_image'")['value'] ?? '';
+$heroShowText = dbGet("SELECT value FROM settings WHERE key='hero_show_text'")['value'] ?? '1';
+$heroBannerLink = dbGet("SELECT value FROM settings WHERE key='hero_banner_link'")['value'] ?? '';
+
+$rawBannersList = json_decode(dbGet("SELECT value FROM settings WHERE key='home_banners_list'")['value'] ?? '[]', true);
+if (empty($rawBannersList) && !empty($heroBg)) {
+    $rawBannersList = [['img' => $heroBg, 'link' => $heroBannerLink]];
 }
+if (empty($rawBannersList)) {
+    $rawBannersList = [
+        ['img' => 'hero_cooling_banner_1.webp', 'link' => '/products'],
+        ['img' => 'hero_cooling_banner_2.webp', 'link' => '/contact']
+    ];
+}
+
+// Chuyển sang ảnh WebP nếu có sẵn tệp nén để tối ưu LCP < 1.0s
+foreach ($rawBannersList as &$bnItem) {
+    $webpName = preg_replace('/\.(png|jpg|jpeg)$/i', '.webp', $bnItem['img']);
+    $localWebp = __DIR__ . '/../../public/uploads/banners/' . $webpName;
+    if (file_exists($localWebp)) {
+        $bnItem['img'] = $webpName;
+    }
+}
+unset($bnItem);
+
+$firstBannerImg = $rawBannersList[0]['img'] ?? '';
+$seo = [
+    'meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng',
+    'preload_image' => !empty($firstBannerImg) ? '/uploads/banners/' . $firstBannerImg : ''
+];
 
 require __DIR__ . '/../partials/head.php'; 
 ?>
@@ -29,20 +52,6 @@ require __DIR__ . '/../partials/head.php';
       $heroBtn1Url = dbGet("SELECT value FROM settings WHERE key='hero_btn1_url'")['value'] ?? '/products';
       $heroBtn2 = dbGet("SELECT value FROM settings WHERE key='hero_btn2_text'")['value'] ?? 'Tư vấn miễn phí';
       $heroBtn2Url = dbGet("SELECT value FROM settings WHERE key='hero_btn2_url'")['value'] ?? '/contact';
-      $heroBg = dbGet("SELECT value FROM settings WHERE key='hero_bg_image'")['value'] ?? '';
-      $heroShowText = dbGet("SELECT value FROM settings WHERE key='hero_show_text'")['value'] ?? '1';
-      $heroBannerLink = dbGet("SELECT value FROM settings WHERE key='hero_banner_link'")['value'] ?? '';
-
-      $rawBannersList = json_decode(dbGet("SELECT value FROM settings WHERE key='home_banners_list'")['value'] ?? '[]', true);
-      if (empty($rawBannersList) && !empty($heroBg)) {
-          $rawBannersList = [['img' => $heroBg, 'link' => $heroBannerLink]];
-      }
-      if (empty($rawBannersList)) {
-          $rawBannersList = [
-              ['img' => 'hero_cooling_banner_1.png', 'link' => '/products'],
-              ['img' => 'hero_cooling_banner_2.png', 'link' => '/contact']
-          ];
-      }
     ?>
 
     <?php if ($heroShowText === '0'): ?>
@@ -53,10 +62,10 @@ require __DIR__ . '/../partials/head.php';
             <div class="hero-slide-item <?= $idx === 0 ? 'active' : '' ?>" style="position:absolute;inset:0;opacity:<?= $idx === 0 ? '1' : '0' ?>;transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease;z-index:<?= $idx === 0 ? '2' : '1' ?>;pointer-events:<?= $idx === 0 ? 'auto' : 'none' ?>">
               <?php if (!empty($bn['link'])): ?>
                 <a href="<?= e($bn['link']) ?>" style="display:block;width:100%;height:100%">
-                  <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                  <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="1024" height="440" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
                 </a>
               <?php else: ?>
-                <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="1024" height="440" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
               <?php endif; ?>
             </div>
           <?php endforeach; ?>
@@ -66,12 +75,12 @@ require __DIR__ . '/../partials/head.php';
           <!-- Chấm tròn chuyển slide -->
           <div class="hero-slider-dots" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px">
             <?php foreach ($rawBannersList as $idx => $bn): ?>
-              <button type="button" onclick="setHeroSlide(<?= $idx ?>)" class="hero-dot-btn <?= $idx === 0 ? 'active' : '' ?>" style="width:<?= $idx === 0 ? '28px' : '10px' ?>;height:6px;border-radius:4px;border:none;background:<?= $idx === 0 ? '#ffffff' : 'rgba(255,255,255,0.4)' ?>;cursor:pointer;transition:all 0.3s ease"></button>
+              <button type="button" onclick="setHeroSlide(<?= $idx ?>)" aria-label="Chuyển sang banner số <?= $idx + 1 ?>" class="hero-dot-btn <?= $idx === 0 ? 'active' : '' ?>" style="width:<?= $idx === 0 ? '28px' : '10px' ?>;height:6px;border-radius:4px;border:none;background:<?= $idx === 0 ? '#ffffff' : 'rgba(255,255,255,0.7)' ?>;cursor:pointer;transition:all 0.3s ease"></button>
             <?php endforeach; ?>
           </div>
           <!-- Nút bấm qua trái / qua phải -->
-          <button type="button" onclick="prevHeroSlide()" class="hero-nav-btn prev" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(15,23,42,0.5);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">&lsaquo;</button>
-          <button type="button" onclick="nextHeroSlide()" class="hero-nav-btn next" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(15,23,42,0.5);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">&rsaquo;</button>
+          <button type="button" onclick="prevHeroSlide()" aria-label="Xem banner trước đó" class="hero-nav-btn prev" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(15,23,42,0.65);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">&lsaquo;</button>
+          <button type="button" onclick="nextHeroSlide()" aria-label="Xem banner tiếp theo" class="hero-nav-btn next" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(15,23,42,0.65);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">&rsaquo;</button>
         <?php endif; ?>
       </div>
 
@@ -133,17 +142,17 @@ require __DIR__ . '/../partials/head.php';
       </div>
     <?php endif; ?>
     <aside class="vs-card">
-      <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#334155;font-weight:500;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
+      <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#0f172a;font-weight:600;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
         <div class="vs-field">
           <label>Từ khóa / Tên sản phẩm</label>
-          <input type="text" name="q" placeholder="Nhập tên phụ tùng, mã OEM..." class="vs-input">
+          <input type="text" name="q" placeholder="Nhập tên phụ tùng, mã OEM..." class="vs-input" aria-label="Nhập tên phụ tùng hoặc mã OEM">
         </div>
         <div class="vs-field">
           <label>Danh mục</label>
           <input type="hidden" name="cat" id="vsi-cat" value="">
           <div class="cdd" data-target="vsi-cat">
-            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)"><span class="cdd-label">— Tất cả danh mục —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)" aria-label="Chọn Danh mục phụ tùng"><span class="cdd-label">— Tất cả danh mục —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
             <div class="cdd-panel">
               <div class="cdd-opt sel" data-val="" onclick="vsCddPick(this)">— Tất cả danh mục —</div>
               <?php foreach ($sidebarCategories as $c): ?><div class="cdd-opt" data-val="<?= e($c['slug']) ?>" onclick="vsCddPick(this)"><?= e($c['name']) ?></div><?php endforeach; ?>
@@ -154,7 +163,7 @@ require __DIR__ . '/../partials/head.php';
           <label>Thương hiệu SP</label>
           <input type="hidden" name="pb" id="vsi-pb" value="">
           <div class="cdd" data-target="vsi-pb">
-            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)"><span class="cdd-label">— Tất cả thương hiệu —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)" aria-label="Chọn Thương hiệu sản phẩm"><span class="cdd-label">— Tất cả thương hiệu —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
             <div class="cdd-panel">
               <div class="cdd-opt sel" data-val="" onclick="vsCddPick(this)">— Tất cả thương hiệu —</div>
               <?php if(!empty($productBrands)): foreach ($productBrands as $pbr): ?><div class="cdd-opt" data-val="<?= e($pbr['name']) ?>" onclick="vsCddPick(this)"><?= e($pbr['name']) ?></div><?php endforeach; endif; ?>
@@ -165,7 +174,7 @@ require __DIR__ . '/../partials/head.php';
           <label>Hãng xe</label>
           <input type="hidden" name="brand_id" id="vsi-brand" value="">
           <div class="cdd" data-target="vsi-brand">
-            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)"><span class="cdd-label">— Tất cả hãng xe —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)" aria-label="Chọn Hãng xe"><span class="cdd-label">— Tất cả hãng xe —</span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
             <div class="cdd-panel">
               <div class="cdd-opt sel" data-val="" onclick="vsCddPick(this)">— Tất cả hãng xe —</div>
               <?php foreach ($brands as $b): ?><div class="cdd-opt" data-val="<?= $b['id'] ?>" onclick="vsCddPick(this)"><?= e($b['name']) ?></div><?php endforeach; ?>
@@ -338,7 +347,7 @@ aside.vs-card form { overflow: visible !important; display: flex; flex-direction
 .vs-card .vs-field:nth-child(4) { z-index: 20 !important; }
 .vs-card .vs-field.open-field, .vs-card .vs-field:focus-within { z-index: 99999 !important; }
 
-.vs-card .vs-field label { font-size:11px; font-weight:700; color:#4a5568; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
+.vs-card .vs-field label { font-size:11.5px; font-weight:800 !important; color:#0f172a !important; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
 .vs-card .vs-input, .vs-card .cdd-trigger { width:100%; height:42px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--navy-dark); font-size:13.5px; font-weight:500; font-family:inherit; }
 .vs-card .vs-input { padding:0 14px; transition:border-color .15s, box-shadow .15s; }
 .vs-card .vs-input:hover { border-color:#b9c4d6; }
