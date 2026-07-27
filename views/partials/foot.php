@@ -352,6 +352,24 @@ if ($__sapU && ($__sapU['role'] ?? '') === 'staff') {
     clearPageTimers();                              /* dọn timer trang cũ (poll chat...) */
     m.innerHTML=nm.innerHTML;
     var t=doc.querySelector('title'); if(t) document.title=t.textContent;
+
+    /* Synchronize primary header nav, mobile drawer, and bottom bar active states during PJAX swaps */
+    var newNav=doc.querySelector('nav.primary'), curNav=document.querySelector('nav.primary');
+    if(newNav && curNav){
+      curNav.innerHTML=newNav.innerHTML;
+      var activeLink = curNav.querySelector('.nav-link.active');
+      var wrap = document.getElementById('navScrollWrap');
+      if(activeLink && wrap){
+        var elRect = wrap.getBoundingClientRect();
+        var linkRect = activeLink.getBoundingClientRect();
+        wrap.scrollLeft = Math.max(0, activeLink.offsetLeft - (elRect.width / 2) + (linkRect.width / 2));
+      }
+    }
+    var newMobNav=doc.querySelector('.mobile-nav-links'), curMobNav=document.querySelector('.mobile-nav-links');
+    if(newMobNav && curMobNav) curMobNav.innerHTML=newMobNav.innerHTML;
+    var newBottomBar=doc.querySelector('.mobile-bottom-bar'), curBottomBar=document.querySelector('.mobile-bottom-bar');
+    if(newBottomBar && curBottomBar) curBottomBar.innerHTML=newBottomBar.innerHTML;
+
     runScripts(m, function(){ reinit(m); });
     if(mode==='push') history.pushState({cpjax:1},'',url); else history.replaceState({cpjax:1},'',url);
     m.style.opacity=''; m.style.pointerEvents=''; busy=false; window.scrollTo(0,0);
