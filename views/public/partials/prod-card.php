@@ -11,7 +11,7 @@ $productPath = productPath($p);
   <!-- Ảnh sản phẩm — bấm vào xem chi tiết -->
   <a href="<?= e($productPath) ?>" class="prod-img-wrap" style="display:block;background:#fff;aspect-ratio:4/3;border-radius:6px;overflow:hidden;position:relative;margin-bottom:10px<?= !empty($p['main_image']) ? ';--pcbg:url(\'/uploads/products/'.e($p['main_image']).'\')' : '' ?>">
     <?php if ($p['main_image']): ?>
-      <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" loading="lazy" style="position:relative;z-index:1;width:100%;height:100%;object-fit:contain!important;padding:0">
+      <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" width="280" height="210" loading="lazy" decoding="async" style="position:relative;z-index:1;width:100%;height:100%;object-fit:contain!important;padding:0">
     <?php else: ?>
       <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ccc">
         <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -91,39 +91,3 @@ $productPath = productPath($p);
     </div>
   </div>
 </div>
-<script>
-if (typeof toggleFav === 'undefined') {
-function toggleFav(btn, productId) {
-  var isFav = btn.getAttribute('data-fav') === '1';
-  var newFav = !isFav;
-  var svg = btn.querySelector('svg');
-  // Optimistic UI
-  svg.setAttribute('fill', newFav ? '#e74c3c' : 'none');
-  btn.setAttribute('data-fav', newFav ? '1' : '0');
-  btn.title = newFav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích';
-  // Send to server
-  var csrf = document.querySelector('meta[name="csrf-token"]');
-  var token = csrf ? csrf.getAttribute('content') : (document.querySelector('input[name="_csrf"]') ? document.querySelector('input[name="_csrf"]').value : '');
-  fetch('/customer/favorites/toggle', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: '_csrf=' + encodeURIComponent(token) + '&product_id=' + productId
-  }).then(r => r.json()).then(data => {
-    if (!data.ok) {
-      // Revert
-      svg.setAttribute('fill', isFav ? '#e74c3c' : 'none');
-      btn.setAttribute('data-fav', isFav ? '1' : '0');
-      if (data.redirect) window.location.href = data.redirect;
-    } else {
-      svg.setAttribute('fill', data.fav ? '#e74c3c' : 'none');
-      btn.setAttribute('data-fav', data.fav ? '1' : '0');
-      if (typeof updateFavBadge === 'function' && data.count !== undefined) updateFavBadge(data.count);
-    }
-  }).catch(()=>{
-    // Revert on error
-    svg.setAttribute('fill', isFav ? '#e74c3c' : 'none');
-    btn.setAttribute('data-fav', isFav ? '1' : '0');
-  });
-}
-}
-</script>
