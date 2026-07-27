@@ -149,9 +149,9 @@ window.alert=function(msg){coolToastShow(msg);};
 <!-- Floating Social Bubbles -->
 <style>
 .floating-social { position: fixed; bottom: 95px; right: 24px; display: flex; flex-direction: column; gap: 6px; z-index: 9999; }
-.floating-social a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; color: #fff; text-decoration: none; position: relative; z-index: 10; }
+.floating-social a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.22); transition: transform 0.25s ease, box-shadow 0.25s ease; color: #fff; text-decoration: none; position: relative; z-index: 10; }
 
-/* Continuous Compact Ripple Wave Effect (Gợn sóng nhỏ gọn với khoảng cách ~5px) */
+/* Continuous Visible Ripple Wave Effect (Gợn sóng rõ nét, nổi bật) */
 .floating-social a::before,
 .floating-social a::after {
   content: '';
@@ -160,18 +160,20 @@ window.alert=function(msg){coolToastShow(msg);};
   border-radius: 50%;
   background: inherit;
   z-index: -1;
-  animation: rippleWave 2.8s infinite ease-out;
+  animation: rippleWave 2.4s infinite cubic-bezier(0.25, 1, 0.5, 1);
   pointer-events: none;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 .floating-social a::after {
-  animation-delay: 1.4s;
+  animation-delay: 1.2s;
 }
 @keyframes rippleWave {
-  0% { transform: scale(1); opacity: 0.45; }
-  100% { transform: scale(1.18); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { opacity: 0.5; }
+  100% { transform: scale(1.26); opacity: 0; }
 }
 
-.floating-social a:hover { transform: translateY(-2px) scale(1.08); box-shadow: 0 6px 18px rgba(0,0,0,0.28); }
+.floating-social a:hover { transform: translateY(-2px) scale(1.08); box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
 .floating-social a.fb { background: #1877F2; }
 .floating-social a.tt { background: #000000; }
 .floating-social a.wa { background: #25D366; }
@@ -190,12 +192,13 @@ window.alert=function(msg){coolToastShow(msg);};
   border-radius: 999px;
   background: inherit;
   z-index: -1;
-  animation: floatRipple 2.8s infinite ease-out;
+  animation: floatRipple 2.4s infinite cubic-bezier(0.25, 1, 0.5, 1);
   pointer-events: none;
 }
 @keyframes floatRipple {
-  0% { transform: scale(1); opacity: 0.4; }
-  100% { transform: scale(1.14); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.75; }
+  50% { opacity: 0.45; }
+  100% { transform: scale(1.18); opacity: 0; }
 }
 
 @media (max-width: 768px) {
