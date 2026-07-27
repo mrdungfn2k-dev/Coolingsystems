@@ -341,7 +341,7 @@ foreach ($cats as $cat):
 .vs-card .cdd-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:left; }
 .vs-card .cdd-arrow { flex-shrink:0; color:#1a3258; transition:transform .2s; }
 .vs-card .cdd.open .cdd-arrow { transform:rotate(180deg); }
-.vs-card .cdd-panel { display:none; position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); overflow-y:auto; max-height:280px; z-index:60; padding:6px; }
+.vs-card .cdd-panel { display:none; position:fixed; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); overflow-y:auto; max-height:260px; z-index:99999; padding:6px; -webkit-overflow-scrolling:touch; }
 .vs-card .cdd.open .cdd-panel { display:block; }
 .vs-card .cdd-opt { padding:10px 12px; border-radius:7px; font-size:13.5px; color:var(--navy-dark); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background .12s; }
 .vs-card .cdd-opt:hover { background:#f1f5fb; }
@@ -351,22 +351,44 @@ foreach ($cats as $cat):
 .prod-pager button:disabled { opacity:.4; cursor:default; }
 </style>
 <script>
-/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở xuống dưới */
+/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở định vị fixed chuẩn 100% */
 function vsCddToggle(btn){
-  var cdd=btn.closest('.cdd'); var open=cdd.classList.contains('open');
+  var cdd = btn.closest('.cdd');
+  var open = cdd.classList.contains('open');
   document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
-  if(!open) cdd.classList.add('open');
+  if(!open) {
+    cdd.classList.add('open');
+    var panel = cdd.querySelector('.cdd-panel');
+    if(panel) {
+      var r = btn.getBoundingClientRect();
+      panel.style.position = 'fixed';
+      panel.style.top = (r.bottom + 4) + 'px';
+      panel.style.left = r.left + 'px';
+      panel.style.width = r.width + 'px';
+      panel.style.zIndex = '99999';
+    }
+  }
 }
 function vsCddPick(opt){
-  var cdd=opt.closest('.cdd');
-  var t=document.getElementById(cdd.getAttribute('data-target'));
-  if(t) t.value=opt.getAttribute('data-val')||'';
-  var lbl=cdd.querySelector('.cdd-label'); if(lbl) lbl.textContent=opt.textContent;
+  var cdd = opt.closest('.cdd');
+  var t = document.getElementById(cdd.getAttribute('data-target'));
+  if(t) t.value = opt.getAttribute('data-val') || '';
+  var lbl = cdd.querySelector('.cdd-label'); if(lbl) lbl.textContent = opt.textContent;
   cdd.querySelectorAll('.cdd-opt').forEach(function(o){ o.classList.remove('sel'); });
-  opt.classList.add('sel'); cdd.classList.remove('open');
+  opt.classList.add('sel');
+  cdd.classList.remove('open');
 }
 document.addEventListener('click', function(ev){
-  if(!ev.target.closest('.vs-card .cdd')) document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+  if(!ev.target.closest('.vs-card .cdd')) {
+    document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+  }
+});
+window.addEventListener('scroll', function(e){
+  if(e.target && e.target.closest && e.target.closest('.cdd-panel')) return;
+  document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+}, true);
+window.addEventListener('resize', function(){
+  document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
 });
 </script>
 
