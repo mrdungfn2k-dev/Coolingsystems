@@ -235,10 +235,10 @@ nav.primary .promo-text .dot { width: 7px; height: 7px; background: var(--gold-l
 .vs-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 16px; }
 .vs-progress .step { height: 3px; background: var(--line); border-radius: 2px; transition: background 0.3s; }
 .vs-progress .step.done { background: linear-gradient(90deg, var(--gold-warm), var(--gold-deep)); }
-.vs-field { margin-bottom: 12px; }
-.vs-field label { display: block; font-size: 11px; color: var(--ink-3); margin-bottom: 5px; font-weight: 600; letter-spacing: 0.04em; }
+.vs-field { margin-bottom: 12px; min-height: 64px !important; height: 64px !important; contain: layout size !important; overflow: hidden !important; }
+.vs-field label { display: block; font-size: 11px; color: var(--ink-3); margin-bottom: 5px; font-weight: 600; letter-spacing: 0.04em; height: 16px !important; line-height: 16px !important; }
 .vs-field label .req { color: var(--gold-deep); }
-.vs-field select, .vs-field input { width: 100%; padding: 11px 14px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-family: inherit; background: #fff; color: var(--ink); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23767676' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; transition: border 0.2s; }
+.vs-field select, .vs-field input, .cdd-trigger { width: 100%; height: 42px !important; line-height: 42px !important; min-height: 42px !important; padding: 0 14px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-family: inherit; background: #fff; color: var(--ink); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23767676' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; transition: border 0.2s; box-sizing: border-box !important; }
 .vs-field input { background-image: none; cursor: text; }
 .vs-field select:hover, .vs-field input:hover { border-color: var(--navy); }
 .vs-field select:focus, .vs-field input:focus { outline: none; border-color: var(--gold-warm); box-shadow: 0 0 0 3px var(--gold-soft); }
@@ -362,22 +362,136 @@ section.block .wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
 .cat-tile h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; line-height: 1.3; }
 .cat-tile .count { font-size: 11px; color: var(--ink-3); font-weight: 500; }
 
-/* ============ BRANDS ============ */
-.brands-grid { display: grid; grid-template-columns: repeat(6, 1fr); background: transparent; gap: 16px; }
-.brand-card { aspect-ratio: 1.4; background: #fff; display: grid; place-items: center; text-align: center; cursor: pointer; transition: all 0.3s var(--ease); padding: 0; position: relative; overflow: hidden; border: 1px solid #e0e6f0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.brand-card .brand-img-wrap { width: 100%; height: 100%; overflow: hidden; position: absolute; inset: 0; }
-.brand-card .brand-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
-.brand-card:hover .brand-img-wrap img { transform: scale(1.06); }
-.brand-card .brand-info { position: relative; z-index: 2; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 50%, transparent 100%); }
-.brand-card.has-image .brand-info { background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 50%, transparent 100%); }
-.brand-card.has-image .name { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
-.brand-card.has-image .count { color: rgba(255,255,255,0.85); }
-.brand-card.has-image:hover .brand-info { background: linear-gradient(to top, rgba(26,50,88,0.8) 0%, rgba(26,50,88,0.25) 50%, transparent 100%); }
-.brand-card:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-.brand-card .name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--navy); letter-spacing: 0.01em; margin-bottom: 4px; transition: color 0.3s; }
-.brand-card:hover .name { color: var(--gold-light); }
-.brand-card .count { font-size: 11px; color: var(--ink-3); font-weight: 500; transition: color 0.3s; font-family: 'JetBrains Mono', monospace; }
-.brand-card:hover .count { color: rgba(255,255,255,0.6); }
+/* ============ BRANDS (Phụ tùng theo hãng xe - Logo hiển thị 100% nguyên vẹn) ============ */
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+.brand-card {
+  display: flex !important;
+  flex-direction: column !important;
+  aspect-ratio: unset !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  position: relative !important;
+  padding: 0 !important;
+}
+
+.brand-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--navy) !important;
+  box-shadow: 0 12px 28px rgba(26, 50, 88, 0.14) !important;
+}
+
+.brand-card .brand-img-wrap {
+  width: 100% !important;
+  height: 96px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px 16px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  inset: auto !important;
+}
+
+.brand-card .brand-img-wrap img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06)) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.brand-card:hover .brand-img-wrap img {
+  transform: scale(1.08) !important;
+}
+
+.brand-card .brand-initial {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: var(--navy) !important;
+  background: #f1f5f9 !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.brand-card .brand-info {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 10px 12px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #f1f5f9 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  height: auto !important;
+  gap: 3px !important;
+  transition: background 0.3s ease !important;
+}
+
+.brand-card.has-image .brand-info {
+  background: #f8fafc !important;
+}
+
+.brand-card:hover .brand-info,
+.brand-card.has-image:hover .brand-info {
+  background: #f1f5f9 !important;
+}
+
+.brand-card .name,
+.brand-card.has-image .name {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #1a3258 !important;
+  text-shadow: none !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  transition: color 0.2s ease !important;
+}
+
+.brand-card:hover .name {
+  color: var(--gold-deep, #c8a951) !important;
+}
+
+.brand-card .count,
+.brand-card.has-image .count {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  background: #e2e8f0 !important;
+  padding: 2px 9px !important;
+  border-radius: 10px !important;
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  transition: all 0.2s ease !important;
+}
+
+.brand-card:hover .count {
+  background: var(--navy) !important;
+  color: #ffffff !important;
+}
 
 /* ============ PROMO ============ */
 .promo-band { padding: 24px 0; }
