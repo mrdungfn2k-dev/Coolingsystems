@@ -1436,31 +1436,71 @@ function saveImageOrder(container) {
   var preview = document.getElementById('img-preview-area');
   var hiddenInput = document.getElementById('img-hidden-input');
   if (!picker || !preview || !hiddenInput) return;
+  if (picker.dataset.hasListener === '1') return;
+  picker.dataset.hasListener = '1';
+
   var selectedFiles = [];
   var sortableNew = null;
 
-  picker.addEventListener('change', function(e) {
-    var newFiles = Array.from(e.target.files);
+  function handleNewFiles(incomingFiles) {
     var replaceImages = document.getElementById('replaceImages');
     var existingCount = document.querySelectorAll('#existingImagesRow .existing-img-wrap').length;
-    var maximumNewImages = !replaceImages || replaceImages.checked ? 8 : Math.max(0, 8 - existingCount);
-    if (selectedFiles.length + newFiles.length > maximumNewImages) {
-      alert('Sản phẩm chỉ được có tối đa 8 ảnh.');
-      return;
-    }
+    var maximumNewImages = (!replaceImages || replaceImages.checked) ? 8 : Math.max(0, 8 - existingCount);
 
-    newFiles.forEach(function(file) {
+    incomingFiles.forEach(function(file) {
+      if (!file.type || !file.type.match(/^image\//i)) return;
       if (file.size > 20 * 1024 * 1024) {
         alert('Ảnh "' + file.name + '" quá 20 MB, bỏ qua.');
         return;
       }
-      selectedFiles.push(file);
+      // Deduplicate check
+      var isDuplicate = selectedFiles.some(function(f) {
+        return f.name === file.name && f.size === file.size && f.lastModified === file.lastModified;
+      });
+      if (!isDuplicate) {
+        if (selectedFiles.length >= maximumNewImages) {
+          alert('Sản phẩm chỉ được chọn tối đa ' + maximumNewImages + ' ảnh mới.');
+          return;
+        }
+        selectedFiles.push(file);
+      }
     });
 
     renderPreviews();
     syncHiddenInput();
-    picker.value = '';
+  }
+
+  picker.addEventListener('change', function(e) {
+    if (e.target.files && e.target.files.length) {
+      handleNewFiles(Array.from(e.target.files));
+      picker.value = '';
+    }
   });
+
+  // Hỗ trợ kéo thả
+  var dropBox = picker.closest('label');
+  if (dropBox) {
+    ['dragenter', 'dragover'].forEach(function(evtName) {
+      dropBox.addEventListener(evtName, function(e) {
+        e.preventDefault(); e.stopPropagation();
+        dropBox.style.borderColor = 'var(--navy)';
+        dropBox.style.background = '#e2e8f0';
+      });
+    });
+    ['dragleave', 'drop'].forEach(function(evtName) {
+      dropBox.addEventListener(evtName, function(e) {
+        e.preventDefault(); e.stopPropagation();
+        dropBox.style.borderColor = '#ccc';
+        dropBox.style.background = '#f8f9fa';
+      });
+    });
+    dropBox.addEventListener('drop', function(e) {
+      var dt = e.dataTransfer;
+      if (dt && dt.files && dt.files.length) {
+        handleNewFiles(Array.from(dt.files));
+      }
+    });
+  }
 
   function renderPreviews() {
     preview.innerHTML = '';
@@ -1490,8 +1530,9 @@ function saveImageOrder(container) {
       removeBtn.title = 'Bỏ ảnh này';
       removeBtn.style.cssText = 'position:absolute;top:4px;right:4px;width:22px;height:22px;background:rgba(220,38,38,0.9);color:#fff;border:none;border-radius:50%;font-size:16px;line-height:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);z-index:10;';
       removeBtn.setAttribute('data-idx', idx);
-      removeBtn.addEventListener('click', async function() {
-        var i = parseInt(this.getAttribute('data-idx'));
+      removeBtn.addEventListener('click', async function(e) {
+        e.stopPropagation();
+        var i = parseInt(this.getAttribute('data-idx'), 10);
         if (typeof csConfirmAsync === 'function') {
           if (!(await csConfirmAsync('Bạn có chắc muốn bỏ ảnh này?'))) return;
         }
@@ -1536,16 +1577,13 @@ function saveImageOrder(container) {
         animation: 200,
         ghostClass: 'sortable-ghost',
         chosenClass: 'sortable-chosen',
-        onEnd: function() {
-          var newOrder = [];
-          var items = preview.querySelectorAll('[data-file-idx]');
-          items.forEach(function(el) {
-            var oldIdx = parseInt(el.getAttribute('data-file-idx'));
-            newOrder.push(selectedFiles[oldIdx]);
-          });
-          selectedFiles = newOrder;
-          renderPreviews();
-          syncHiddenInput();
+        onEnd: function(evt) {
+          if (evt.oldIndex !== undefined && evt.newIndex !== undefined && evt.oldIndex !== evt.newIndex) {
+            var movedItem = selectedFiles.splice(evt.oldIndex, 1)[0];
+            selectedFiles.splice(evt.newIndex, 0, movedItem);
+            renderPreviews();
+            syncHiddenInput();
+          }
         }
       });
     }
