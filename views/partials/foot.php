@@ -148,10 +148,10 @@ window.alert=function(msg){coolToastShow(msg);};
 
 <!-- Floating Social Bubbles -->
 <style>
-.floating-social { position: fixed; bottom: 110px; right: 30px; display: flex; flex-direction: column; gap: 20px; z-index: 9999; }
-.floating-social a { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.2); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; color: #fff; text-decoration: none; position: relative; z-index: 10; }
+.floating-social { position: fixed; bottom: 95px; right: 24px; display: flex; flex-direction: column; gap: 6px; z-index: 9999; }
+.floating-social a { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; color: #fff; text-decoration: none; position: relative; z-index: 10; }
 
-/* Continuous Subtle Ripple Wave Effect (Gợn sóng nhỏ gọn, tinh tế, không chèn đè) */
+/* Continuous Compact Ripple Wave Effect (Gợn sóng nhỏ gọn với khoảng cách ~5px) */
 .floating-social a::before,
 .floating-social a::after {
   content: '';
@@ -160,28 +160,28 @@ window.alert=function(msg){coolToastShow(msg);};
   border-radius: 50%;
   background: inherit;
   z-index: -1;
-  animation: rippleWave 3s infinite ease-out;
+  animation: rippleWave 2.8s infinite ease-out;
   pointer-events: none;
 }
 .floating-social a::after {
-  animation-delay: 1.5s;
+  animation-delay: 1.4s;
 }
 @keyframes rippleWave {
-  0% { transform: scale(1); opacity: 0.5; }
-  100% { transform: scale(1.32); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.45; }
+  100% { transform: scale(1.18); opacity: 0; }
 }
 
-.floating-social a:hover { transform: translateY(-3px) scale(1.1); box-shadow: 0 8px 22px rgba(0,0,0,0.3); }
+.floating-social a:hover { transform: translateY(-2px) scale(1.08); box-shadow: 0 6px 18px rgba(0,0,0,0.28); }
 .floating-social a.fb { background: #1877F2; }
 .floating-social a.tt { background: #000000; }
 .floating-social a.wa { background: #25D366; }
 .floating-social a.chat { background: #1a3258; }
-.floating-social a svg { width: 23px; height: 23px; fill: currentColor; z-index: 2; }
-.floating-social .tooltip { position: absolute; right: 60px; background: rgba(15,23,42,0.92); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; font-weight: 600; transform: translateX(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.floating-social a svg { width: 22px; height: 22px; fill: currentColor; z-index: 2; }
+.floating-social .tooltip { position: absolute; right: 58px; background: rgba(15,23,42,0.92); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; font-weight: 600; transform: translateX(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 .floating-social a:hover .tooltip { opacity: 1; transform: translateX(0); }
 
 /* Ripple animation on Hotline "Gọi ngay" button in float-stack */
-.float-stack { position: fixed; right: 20px; bottom: 30px; z-index: 9998; display: flex; flex-direction: column; gap: 8px; }
+.float-stack { position: fixed; right: 20px; bottom: 24px; z-index: 9998; display: flex; flex-direction: column; gap: 6px; }
 .float-stack .float-btn { position: relative; z-index: 10; }
 .float-stack .float-btn::before {
   content: '';
@@ -190,20 +190,20 @@ window.alert=function(msg){coolToastShow(msg);};
   border-radius: 999px;
   background: inherit;
   z-index: -1;
-  animation: floatRipple 3s infinite ease-out;
+  animation: floatRipple 2.8s infinite ease-out;
   pointer-events: none;
 }
 @keyframes floatRipple {
-  0% { transform: scale(1); opacity: 0.45; }
-  100% { transform: scale(1.18); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.14); opacity: 0; }
 }
 
 @media (max-width: 768px) {
-  .floating-social { bottom: 140px; right: 16px; gap: 16px; }
-  .floating-social a { width: 44px; height: 44px; }
-  .floating-social a svg { width: 21px; height: 21px; }
+  .floating-social { bottom: 135px; right: 14px; gap: 5px; }
+  .floating-social a { width: 42px; height: 42px; }
+  .floating-social a svg { width: 20px; height: 20px; }
   .floating-social .tooltip { display: none; }
-  .float-stack { bottom: 78px; right: 16px; }
+  .float-stack { bottom: 78px; right: 14px; }
 }
 </style>
 <?php if (!str_starts_with(currentPath(), '/admin') && !str_starts_with(currentPath(), '/partner')): ?>
