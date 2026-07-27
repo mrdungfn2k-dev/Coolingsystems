@@ -3405,9 +3405,11 @@ post('/admin/upload-tinymce-image', function() {
     $extension = $ext[$mime] ?? 'jpg';
     $filename = 'tinymce_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
 
-    $uploadDir = __DIR__ . '/../uploads/content/';
+    $uploadDir = is_dir('/var/lib/coolingsystems/uploads')
+        ? '/var/lib/coolingsystems/uploads/content/'
+        : __DIR__ . '/../uploads/content/';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0775, true);
+        @mkdir($uploadDir, 0775, true);
     }
 
     $dest = $uploadDir . $filename;

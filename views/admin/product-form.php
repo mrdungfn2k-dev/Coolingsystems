@@ -265,8 +265,8 @@ function swTab(t){
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
                     onmouseout="this.style.background='rgba(231,76,60,0.9)';this.style.transform='scale(1)'"
                   ></button>
-                  <button type="button" onclick="openImgLightbox(this.previousElementSibling.previousElementSibling.src);event.stopPropagation();" title="Xem ảnh lớn"
-                    style="position:absolute;bottom:4px;right:4px;width:20px;height:20px;border-radius:4px;background:rgba(0,0,0,0.5);color:#fff;border:none;cursor:pointer;font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:20">🔍</button>
+                  <button type="button" onclick="var img=this.closest('.existing-img-wrap').querySelector('img'); if(img) openImgLightbox(img.currentSrc||img.src); event.stopPropagation();" title="Xem ảnh lớn"
+                    style="position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:4px;background:rgba(15,23,42,0.85);color:#fff;border:1px solid rgba(255,255,255,0.4);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:30;box-shadow:0 2px 5px rgba(0,0,0,0.4)">🔍</button>
                 </div>
               <?php endforeach;?>
             </div>
@@ -683,7 +683,9 @@ function tinymceImageUploadHandler(blobInfo, progress) {
     };
     xhr.onerror = function() { reject('Lỗi kết nối máy chủ'); };
     var fd = new FormData();
-    fd.append('file', blobInfo.blob(), blobInfo.filename());
+    var blob = blobInfo.blob();
+    var filename = (typeof blobInfo.filename === 'function' && blobInfo.filename()) ? blobInfo.filename() : ('image_' + Date.now() + '.png');
+    fd.append('file', blob, filename);
     var csrf = document.querySelector('input[name="_csrf"]');
     if (csrf) fd.append('_csrf', csrf.value);
     xhr.send(fd);
@@ -729,6 +731,8 @@ function initDescEditor() {
   branding: false,
   license_key: 'gpl',
   automatic_uploads: true,
+  paste_data_images: true,
+  images_upload_url: '/admin/upload-tinymce-image',
   images_upload_handler: tinymceImageUploadHandler,
   file_picker_types: 'image',
   file_picker_callback: function(cb, value, meta) {
@@ -737,16 +741,21 @@ function initDescEditor() {
       input.type = 'file'; input.accept = 'image/*';
       input.onchange = function() {
         var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function() {
-          var id = 'blobid' + Date.now();
-          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-          var base64 = reader.result.split(',')[1];
-          var blobInfo = blobCache.create(id, file, base64);
-          blobCache.add(blobInfo);
-          cb(blobInfo.blobUri(), { title: file.name });
-        };
-        reader.readAsDataURL(file);
+        if (!file) return;
+        var fd = new FormData();
+        fd.append('file', file);
+        var csrf = document.querySelector('input[name="_csrf"]');
+        if (csrf) fd.append('_csrf', csrf.value);
+        fetch('/admin/upload-tinymce-image', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(data => {
+          if (data.location) {
+            cb(data.location, { title: file.name });
+          } else {
+            alert('Lỗi upload: ' + (data.msg || 'Không thể tải ảnh'));
+          }
+        })
+        .catch(err => alert('Lỗi kết nối: ' + err.message));
       };
       input.click();
     }
@@ -817,6 +826,8 @@ function initFeatEditor() {
   branding: false,
   license_key: 'gpl',
   automatic_uploads: true,
+  paste_data_images: true,
+  images_upload_url: '/admin/upload-tinymce-image',
   images_upload_handler: tinymceImageUploadHandler,
   file_picker_types: 'image',
   file_picker_callback: function(cb, value, meta) {
@@ -825,16 +836,21 @@ function initFeatEditor() {
       input.type = 'file'; input.accept = 'image/*';
       input.onchange = function() {
         var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function() {
-          var id = 'blobid' + Date.now();
-          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-          var base64 = reader.result.split(',')[1];
-          var blobInfo = blobCache.create(id, file, base64);
-          blobCache.add(blobInfo);
-          cb(blobInfo.blobUri(), { title: file.name });
-        };
-        reader.readAsDataURL(file);
+        if (!file) return;
+        var fd = new FormData();
+        fd.append('file', file);
+        var csrf = document.querySelector('input[name="_csrf"]');
+        if (csrf) fd.append('_csrf', csrf.value);
+        fetch('/admin/upload-tinymce-image', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(data => {
+          if (data.location) {
+            cb(data.location, { title: file.name });
+          } else {
+            alert('Lỗi upload: ' + (data.msg || 'Không thể tải ảnh'));
+          }
+        })
+        .catch(err => alert('Lỗi kết nối: ' + err.message));
       };
       input.click();
     }
@@ -904,6 +920,8 @@ function initSpecEditor() {
   branding: false,
   license_key: 'gpl',
   automatic_uploads: true,
+  paste_data_images: true,
+  images_upload_url: '/admin/upload-tinymce-image',
   images_upload_handler: tinymceImageUploadHandler,
   file_picker_types: 'image',
   file_picker_callback: function(cb, value, meta) {
@@ -912,16 +930,21 @@ function initSpecEditor() {
       input.type = 'file'; input.accept = 'image/*';
       input.onchange = function() {
         var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function() {
-          var id = 'blobid' + Date.now();
-          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-          var base64 = reader.result.split(',')[1];
-          var blobInfo = blobCache.create(id, file, base64);
-          blobCache.add(blobInfo);
-          cb(blobInfo.blobUri(), { title: file.name });
-        };
-        reader.readAsDataURL(file);
+        if (!file) return;
+        var fd = new FormData();
+        fd.append('file', file);
+        var csrf = document.querySelector('input[name="_csrf"]');
+        if (csrf) fd.append('_csrf', csrf.value);
+        fetch('/admin/upload-tinymce-image', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(data => {
+          if (data.location) {
+            cb(data.location, { title: file.name });
+          } else {
+            alert('Lỗi upload: ' + (data.msg || 'Không thể tải ảnh'));
+          }
+        })
+        .catch(err => alert('Lỗi kết nối: ' + err.message));
       };
       input.click();
     }
@@ -1479,9 +1502,20 @@ function saveImageOrder(container) {
         label.textContent = 'Ảnh ' + (idx + 1);
       }
 
+      var zoomBtn = document.createElement('button');
+      zoomBtn.type = 'button';
+      zoomBtn.innerHTML = '🔍';
+      zoomBtn.title = 'Xem ảnh lớn';
+      zoomBtn.style.cssText = 'position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:4px;background:rgba(15,23,42,0.85);color:#fff;border:1px solid rgba(255,255,255,0.4);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:30;box-shadow:0 2px 5px rgba(0,0,0,0.4);';
+      zoomBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openImgLightbox(img.src);
+      });
+
       wrapper.appendChild(cb);
       wrapper.appendChild(img);
       wrapper.appendChild(removeBtn);
+      wrapper.appendChild(zoomBtn);
       wrapper.appendChild(label);
       preview.appendChild(wrapper);
     });
