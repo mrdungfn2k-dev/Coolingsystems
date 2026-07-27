@@ -328,45 +328,60 @@ foreach ($cats as $cat):
 .prod-pager button.active { background: #1a3258; color: #fff; border-color: #1a3258; }
 .prod-pager button:hover:not(.active) { background: #f0f2f7; border-color: #1a3258; }
 .featured-paging { text-align: center; margin-top: 12px; }
-/* === Bộ lọc tìm phụ tùng (.cdd) — giống trang Sản phẩm, mở xuống dưới === */
+/* === Bộ lọc tìm phụ tùng (.cdd) trong vs-card === */
+aside.vs-card { overflow: visible !important; position: relative !important; z-index: 20 !important; }
+aside.vs-card form { overflow: visible !important; }
+.vs-card .vs-field { position: relative !important; overflow: visible !important; margin-bottom: 12px; }
 .vs-card .vs-field label { font-size:11px; font-weight:700; color:#4a5568; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
 .vs-card .vs-input, .vs-card .cdd-trigger { width:100%; height:42px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--navy-dark); font-size:13.5px; font-weight:500; font-family:inherit; }
 .vs-card .vs-input { padding:0 14px; transition:border-color .15s, box-shadow .15s; }
 .vs-card .vs-input:hover { border-color:#b9c4d6; }
 .vs-card .vs-input:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
-.vs-card .cdd { position:relative; }
+
+.vs-card .cdd { position:relative !important; z-index:10 !important; }
+.vs-card .cdd.open { z-index:9999 !important; }
 .vs-card .cdd-trigger { padding:0 12px 0 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:pointer; transition:border-color .15s, box-shadow .15s; }
 .vs-card .cdd-trigger:hover { border-color:#b9c4d6; }
 .vs-card .cdd.open .cdd-trigger { border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
 .vs-card .cdd-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:left; }
 .vs-card .cdd-arrow { flex-shrink:0; color:#1a3258; transition:transform .2s; }
 .vs-card .cdd.open .cdd-arrow { transform:rotate(180deg); }
-.vs-card .cdd-panel { display:none; position:fixed; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); overflow-y:auto; max-height:260px; z-index:99999; padding:6px; -webkit-overflow-scrolling:touch; }
-.vs-card .cdd.open .cdd-panel { display:block; }
+
+.vs-card .cdd-panel {
+  display: none !important;
+  position: absolute !important;
+  top: calc(100% + 4px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 14px 38px rgba(15,23,42,0.22) !important;
+  overflow-y: auto !important;
+  max-height: 230px !important;
+  z-index: 10000 !important;
+  padding: 6px !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+.vs-card .cdd.open .cdd-panel { display: block !important; }
+
 .vs-card .cdd-opt { padding:10px 12px; border-radius:7px; font-size:13.5px; color:var(--navy-dark); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background .12s; }
 .vs-card .cdd-opt:hover { background:#f1f5fb; }
 .vs-card .cdd-opt.sel { background:var(--navy); color:#fff; font-weight:600; }
+
 /* phân trang rút gọn (ellipsis) */
 .prod-pager .pp-dots { min-width:24px; height:36px; display:inline-flex; align-items:center; justify-content:center; color:#9aa3b2; font-weight:700; }
 .prod-pager button:disabled { opacity:.4; cursor:default; }
 </style>
 <script>
-/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở định vị fixed chuẩn 100% */
+/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở tuyệt đối nổi bật */
 function vsCddToggle(btn){
   var cdd = btn.closest('.cdd');
   var open = cdd.classList.contains('open');
   document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
   if(!open) {
     cdd.classList.add('open');
-    var panel = cdd.querySelector('.cdd-panel');
-    if(panel) {
-      var r = btn.getBoundingClientRect();
-      panel.style.position = 'fixed';
-      panel.style.top = (r.bottom + 4) + 'px';
-      panel.style.left = r.left + 'px';
-      panel.style.width = r.width + 'px';
-      panel.style.zIndex = '99999';
-    }
   }
 }
 function vsCddPick(opt){
@@ -382,13 +397,6 @@ document.addEventListener('click', function(ev){
   if(!ev.target.closest('.vs-card .cdd')) {
     document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
   }
-});
-window.addEventListener('scroll', function(e){
-  if(e.target && e.target.closest && e.target.closest('.cdd-panel')) return;
-  document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
-}, true);
-window.addEventListener('resize', function(){
-  document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
 });
 </script>
 
