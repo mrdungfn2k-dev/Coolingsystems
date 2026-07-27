@@ -38,14 +38,14 @@ require __DIR__ . '/../partials/head.php';
     <?php endif; ?>
 
     <?php if ($heroShowText === '0' && $heroBg): ?>
-      <!-- Chế độ TẮT chữ: Hiển thị nguyên bức ảnh đồ họa Banner -->
-      <div class="banner pure-image-banner" style="padding:0;overflow:hidden;background:#0f172a;display:flex;align-items:center;justify-content:center;border-radius:12px;min-height:360px">
+      <!-- Chế độ TẮT chữ: Hiển thị nguyên bức ảnh đồ họa Banner TỰ ĐỘNG FULL KHỚP MÀN HÌNH -->
+      <div class="banner pure-image-banner" style="padding:0;overflow:hidden;background:#0f172a;display:flex;align-items:center;justify-content:center;border-radius:12px;width:100%;height:100%;min-height:440px">
         <?php if (!empty($heroBannerLink)): ?>
           <a href="<?= e($heroBannerLink) ?>" style="display:block;width:100%;height:100%">
-            <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
           </a>
         <?php else: ?>
-          <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;display:block">
+          <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
         <?php endif; ?>
       </div>
     <?php else: ?>

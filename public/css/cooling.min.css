@@ -218,6 +218,8 @@ nav.primary .promo-text .dot { width: 7px; height: 7px; background: var(--gold-l
 .cat-sidebar li.featured a::before { background: var(--gold-warm); }
 
 .banner { background: linear-gradient(110deg, rgba(15,35,66,0.95) 0%, rgba(26,50,88,0.85) 50%, rgba(42,69,112,0.7) 100%), radial-gradient(circle at 80% 30%, rgba(201,161,74,0.4), transparent 60%), var(--navy-dark); border-radius: 4px; padding: 60px 56px; color: #fff; position: relative; overflow: hidden; min-height: 420px; display: flex; flex-direction: column; justify-content: center; }
+.banner.pure-image-banner { padding: 0 !important; min-height: 100% !important; height: 100% !important; width: 100% !important; background: #0f172a !important; border-radius: 12px !important; overflow: hidden !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+.banner.pure-image-banner a, .banner.pure-image-banner img { width: 100% !important; height: 100% !important; min-height: 100% !important; object-fit: cover !important; object-position: center !important; display: block !important; border-radius: 12px !important; }
 .banner::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(201,161,74,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,161,74,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
 .banner > * { position: relative; z-index: 1; }
 .banner-mark { position: absolute; bottom: -40px; right: -20px; width: 380px; opacity: 0.04; pointer-events: none; }
