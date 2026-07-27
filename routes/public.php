@@ -595,3 +595,66 @@ get('/chat', function() {
     redirect('/customer/chat');
 });
 
+// ── Dynamic Sitemap.xml Generator for 100% Google Indexing ──
+get('/sitemap.xml', function() {
+    header('Content-Type: application/xml; charset=utf-8');
+    
+    $baseUrl = 'https://coolingsystems.vn';
+    $xml = [];
+    $xml[] = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    
+    // Trang chủ
+    $xml[] = '  <url>';
+    $xml[] = '    <loc>' . $baseUrl . '/</loc>';
+    $xml[] = '    <changefreq>daily</changefreq>';
+    $xml[] = '    <priority>1.0</priority>';
+    $xml[] = '  </url>';
+    
+    // Trang sản phẩm tổng hợp
+    $xml[] = '  <url>';
+    $xml[] = '    <loc>' . $baseUrl . '/products</loc>';
+    $xml[] = '    <changefreq>daily</changefreq>';
+    $xml[] = '    <priority>0.9</priority>';
+    $xml[] = '  </url>';
+    
+    // Các trang tĩnh
+    $staticPages = ['/contact', '/vouchers', '/blogs'];
+    foreach ($staticPages as $sp) {
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . $sp . '</loc>';
+        $xml[] = '    <changefreq>monthly</changefreq>';
+        $xml[] = '    <priority>0.7</priority>';
+        $xml[] = '  </url>';
+    }
+    
+    // Tất cả sản phẩm đã xuất bản (Published)
+    $prods = dbAll("SELECT slug, updated_at, created_at FROM products WHERE status='published' ORDER BY id DESC");
+    foreach ($prods as $p) {
+        if (empty($p['slug'])) continue;
+        $date = !empty($p['updated_at']) ? date('Y-m-d', strtotime($p['updated_at'])) : (!empty($p['created_at']) ? date('Y-m-d', strtotime($p['created_at'])) : date('Y-m-d'));
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/products/' . htmlspecialchars($p['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <lastmod>' . $date . '</lastmod>';
+        $xml[] = '    <changefreq>weekly</changefreq>';
+        $xml[] = '    <priority>0.8</priority>';
+        $xml[] = '  </url>';
+    }
+    
+    // Tất cả danh mục
+    $cats = dbAll("SELECT slug FROM categories");
+    foreach ($cats as $c) {
+        if (empty($c['slug'])) continue;
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/products?cat=' . htmlspecialchars($c['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <changefreq>weekly</changefreq>';
+        $xml[] = '    <priority>0.7</priority>';
+        $xml[] = '  </url>';
+    }
+    
+    $xml[] = '</urlset>';
+    
+    echo implode("\n", $xml);
+    exit;
+});
+
