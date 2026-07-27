@@ -135,43 +135,62 @@
         </div>
       </div>
 
-      <!-- Chọn Banner Đồ Họa Mẫu Có Sẵn -->
-      <div class="form-group" style="margin-top:16px;background:#f8fafc;padding:14px;border-radius:8px;border:1px solid #e2e8f0">
-        <label style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:8px;display:block">Chọn Banner Đồ Họa Mẫu Có Sẵn (Hoặc tải tệp bên dưới)</label>
-        <input type="hidden" name="preset_banner" id="presetBannerInput" value="">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div onclick="selectPresetBanner('hero_cooling_banner_1.png', this)" class="preset-banner-card" style="border:2px solid <?= ($bannerSettings['hero_bg_image'] ?? '') === 'hero_cooling_banner_1.png' ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;transition:all 0.2s">
-            <img src="/uploads/banners/hero_cooling_banner_1.png" style="width:100%;height:90px;object-fit:cover;display:block">
-            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 1: Động cơ & Hệ thống làm mát high-tech</div>
-          </div>
-          <div onclick="selectPresetBanner('hero_cooling_banner_2.png', this)" class="preset-banner-card" style="border:2px solid <?= ($bannerSettings['hero_bg_image'] ?? '') === 'hero_cooling_banner_2.png' ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;transition:all 0.2s">
-            <img src="/uploads/banners/hero_cooling_banner_2.png" style="width:100%;height:90px;object-fit:cover;display:block">
-            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 2: Bộ sưu tập phụ tùng làm mát 3D</div>
-          </div>
+      <!-- Quản Lý Danh Sách Nhiều Banner (Multi-Banner Slider) -->
+      <?php
+        $rawList = json_decode($bannerSettings['home_banners_list'] ?? '[]', true);
+        if (empty($rawList) && !empty($bannerSettings['hero_bg_image'])) {
+            $rawList = [['img' => $bannerSettings['hero_bg_image'], 'link' => $bannerSettings['hero_banner_link'] ?? '']];
+        }
+        if (empty($rawList)) {
+            $rawList = [
+                ['img' => 'hero_cooling_banner_1.png', 'link' => '/products'],
+                ['img' => 'hero_cooling_banner_2.png', 'link' => '/contact']
+            ];
+        }
+        $activeImgNames = array_column($rawList, 'img');
+      ?>
+
+      <div class="form-group" style="margin-top:16px;background:#f8fafc;padding:16px;border-radius:8px;border:1px solid #e2e8f0">
+        <label style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:8px;display:block">Danh Sách Banner Hiện Tại (Chạy Slide Tự Động)</label>
+        <div id="bannerListWrap" style="display:flex;flex-direction:column;gap:10px">
+          <?php foreach ($rawList as $idx => $bn): ?>
+            <div class="banner-item-row" style="display:flex;align-items:center;gap:12px;background:#fff;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px">
+              <img src="/uploads/banners/<?= e($bn['img']) ?>" style="width:90px;height:50px;object-fit:cover;border-radius:4px">
+              <input type="hidden" name="existing_banners[]" value="<?= e($bn['img']) ?>">
+              <div style="flex:1">
+                <div style="font-size:11px;font-weight:700;color:#334155;margin-bottom:2px"><?= e($bn['img']) ?></div>
+                <input type="text" name="existing_banner_links[]" value="<?= e($bn['link'] ?? '') ?>" placeholder="Đường dẫn liên kết (ví dụ: /products)" style="width:100%;padding:4px 8px;font-size:12px;border:1px solid #ddd;border-radius:4px">
+              </div>
+              <button type="button" onclick="this.closest('.banner-item-row').remove()" style="background:#ef4444;color:#fff;border:none;padding:6px 10px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">Xóa</button>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
-      <script>
-        function selectPresetBanner(filename, el) {
-          document.querySelectorAll('.preset-banner-card').forEach(c => {
-            c.style.borderColor = '#cbd5e1';
-            c.style.boxShadow = 'none';
-          });
-          document.getElementById('presetBannerInput').value = filename;
-          el.style.borderColor = 'var(--navy)';
-          el.style.boxShadow = '0 0 0 3px rgba(26,50,88,0.2)';
-        }
-      </script>
+
+      <!-- Chọn Banner Đồ Họa Mẫu Có Sẵn -->
+      <div class="form-group" style="margin-top:16px;background:#f8fafc;padding:14px;border-radius:8px;border:1px solid #e2e8f0">
+        <label style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:8px;display:block">Tích Chọn Thêm Banner Đồ Họa Mẫu Có Sẵn Vào Slide</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label class="preset-banner-card" style="border:2px solid <?= in_array('hero_cooling_banner_1.png', $activeImgNames) ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;display:block">
+            <input type="checkbox" name="selected_presets[]" value="hero_cooling_banner_1.png" <?= in_array('hero_cooling_banner_1.png', $activeImgNames) ? 'checked' : '' ?> style="position:absolute;top:8px;left:8px;z-index:2;width:18px;height:18px;accent-color:var(--navy)">
+            <img src="/uploads/banners/hero_cooling_banner_1.png" style="width:100%;height:90px;object-fit:cover;display:block">
+            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 1: Động cơ & Hệ thống làm mát high-tech</div>
+          </label>
+          <label class="preset-banner-card" style="border:2px solid <?= in_array('hero_cooling_banner_2.png', $activeImgNames) ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;display:block">
+            <input type="checkbox" name="selected_presets[]" value="hero_cooling_banner_2.png" <?= in_array('hero_cooling_banner_2.png', $activeImgNames) ? 'checked' : '' ?> style="position:absolute;top:8px;left:8px;z-index:2;width:18px;height:18px;accent-color:var(--navy)">
+            <img src="/uploads/banners/hero_cooling_banner_2.png" style="width:100%;height:90px;object-fit:cover;display:block">
+            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 2: Bộ sưu tập phụ tùng làm mát 3D</div>
+          </label>
+        </div>
+      </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px">
         <div class="form-group">
-          <label style="font-weight:600;font-size:12px;text-transform:uppercase;color:#555;margin-bottom:4px;display:block">Hoặc Tải ảnh Banner mới từ máy tính</label>
-          <input type="file" name="hero_bg_image" accept="image/*" style="padding:8px">
-          <?php if(!empty($bannerSettings['hero_bg_image'])): ?>
-            <div style="margin-top:4px;font-size:11px;color:#888">Ảnh hiện tại: <strong><?= e($bannerSettings['hero_bg_image']) ?></strong></div>
-          <?php endif; ?>
+          <label style="font-weight:600;font-size:12px;text-transform:uppercase;color:#555;margin-bottom:4px;display:block">Tải lên nhiều ảnh Banner mới từ máy tính</label>
+          <input type="file" name="hero_banner_files[]" multiple accept="image/*" style="padding:8px;width:100%">
         </div>
         <div class="form-group" style="display:flex;align-items:flex-end">
-          <button type="submit" class="btn btn-navy btn-sm" style="padding:10px 24px">Lưu Banner</button>
+          <button type="submit" class="btn btn-navy btn-sm" style="padding:10px 24px">Lưu Danh Sách Banner</button>
         </div>
       </div>
     </form>

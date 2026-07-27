@@ -3194,31 +3194,93 @@ post('/admin/banner/update', function() {
         $val = isset($_POST[$f]) ? trim($_POST[$f]) : '';
         dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)", [$f, $val]);
     }
-    // Chon banner mau
-    if (!empty($_POST['preset_banner'])) {
-        $preset = trim($_POST['preset_banner']);
-        dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('hero_bg_image', ?)", [$preset]);
+    
+    // Multi-banner items from form (presets or existing list)
+    $bannersList = [];
+    
+    // Existing banners array from form
+    if (!empty($_POST['existing_banners']) && is_array($_POST['existing_banners'])) {
+        foreach ($_POST['existing_banners'] as $idx => $img) {
+            $img = trim($img);
+            if (!empty($img)) {
+                $link = trim($_POST['existing_banner_links'][$idx] ?? '');
+                $bannersList[] = ['img' => $img, 'link' => $link];
+            }
+        }
     }
-    // Handle bg image upload
+    
+    // Selected presets
+    if (!empty($_POST['selected_presets']) && is_array($_POST['selected_presets'])) {
+        foreach ($_POST['selected_presets'] as $presetImg) {
+            $presetImg = trim($presetImg);
+            if (!empty($presetImg)) {
+                $exists = false;
+                foreach ($bannersList as $b) {
+                    if ($b['img'] === $presetImg) { $exists = true; break; }
+                }
+                if (!$exists) {
+                    $bannersList[] = ['img' => $presetImg, 'link' => '/products'];
+                }
+            }
+        }
+    }
+
+    // Multiple file uploads
+    if (!empty($_FILES['hero_banner_files']['tmp_name']) && is_array($_FILES['hero_banner_files']['tmp_name'])) {
+        @mkdir('/opt/cooling-php/uploads/banners', 0755, true);
+        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
+        @mkdir(__DIR__ . '/../public/uploads/banners', 0755, true);
+        
+        foreach ($_FILES['hero_banner_files']['tmp_name'] as $idx => $tmpName) {
+            if (!empty($tmpName) && is_uploaded_file($tmpName)) {
+                $ext = strtolower(pathinfo($_FILES['hero_banner_files']['name'][$idx], PATHINFO_EXTENSION));
+                if (in_array($ext, ['jpg','jpeg','png','webp'])) {
+                    $fname = 'hero_' . time() . '_' . $idx . '.' . $ext;
+                    move_uploaded_file($tmpName, '/opt/cooling-php/uploads/banners/' . $fname);
+                    @copy('/opt/cooling-php/uploads/banners/' . $fname, '/var/lib/coolingsystems/uploads/banners/' . $fname);
+                    @copy('/opt/cooling-php/uploads/banners/' . $fname, __DIR__ . '/../public/uploads/banners/' . $fname);
+                    $bannersList[] = ['img' => $fname, 'link' => ''];
+                }
+            }
+        }
+    }
+
+    // Single file upload backwards compatibility
     if (!empty($_FILES['hero_bg_image']['tmp_name']) && is_uploaded_file($_FILES['hero_bg_image']['tmp_name'])) {
         @mkdir('/opt/cooling-php/uploads/banners', 0755, true);
         @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
+        @mkdir(__DIR__ . '/../public/uploads/banners', 0755, true);
         $ext = strtolower(pathinfo($_FILES['hero_bg_image']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp'])) {
             $fname = 'hero_' . time() . '.' . $ext;
             move_uploaded_file($_FILES['hero_bg_image']['tmp_name'], '/opt/cooling-php/uploads/banners/' . $fname);
             @copy('/opt/cooling-php/uploads/banners/' . $fname, '/var/lib/coolingsystems/uploads/banners/' . $fname);
-            dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('hero_bg_image', ?)", [$fname]);
+            @copy('/opt/cooling-php/uploads/banners/' . $fname, __DIR__ . '/../public/uploads/banners/' . $fname);
+            $bannersList[] = ['img' => $fname, 'link' => ''];
         }
     }
-    flash('success', 'Đã cập nhật banner trang chủ.');
+
+    // Default fallback if list is still empty
+    if (empty($bannersList)) {
+        $bannersList[] = ['img' => 'hero_cooling_banner_1.png', 'link' => '/products'];
+    }
+
+    // Save JSON list
+    dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('home_banners_list', ?)", [json_encode($bannersList, JSON_UNESCAPED_UNICODE)]);
+    
+    // Update main single bg image for backwards compatibility
+    if (!empty($bannersList[0]['img'])) {
+        dbRun("INSERT OR REPLACE INTO settings (key, value) VALUES ('hero_bg_image', ?)", [$bannersList[0]['img']]);
+    }
+    
+    flash('success', 'Đã cập nhật danh sách banner trang chủ.');
     redirect('/admin/content');
 });
 
 get('/admin/content', function() {
     $user = requireStaffPermission('content', '/auth/login');
     $pages = dbAll('SELECT * FROM static_pages ORDER BY title');
-    $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image','hero_show_text','hero_banner_link']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
+    $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image','hero_show_text','hero_banner_link','home_banners_list']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
     $footerSettings = []; $fkeys = ['footer_logo_text','footer_desc','footer_copyright']; foreach($fkeys as $fk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$fk]); $footerSettings[$fk]=$r['value']??'';}
     view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages], ['bannerSettings'=>$bannerSettings, 'footerSettings'=>$footerSettings]));
 });

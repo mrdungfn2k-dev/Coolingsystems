@@ -32,22 +32,97 @@ require __DIR__ . '/../partials/head.php';
       $heroBg = dbGet("SELECT value FROM settings WHERE key='hero_bg_image'")['value'] ?? '';
       $heroShowText = dbGet("SELECT value FROM settings WHERE key='hero_show_text'")['value'] ?? '1';
       $heroBannerLink = dbGet("SELECT value FROM settings WHERE key='hero_banner_link'")['value'] ?? '';
-    ?>
-    <?php if ($heroBg): ?>
-    <link rel="preload" as="image" href="/uploads/banners/<?= e($heroBg) ?>" fetchpriority="high">
-    <?php endif; ?>
 
-    <?php if ($heroShowText === '0' && $heroBg): ?>
-      <!-- Chế độ TẮT chữ: Hiển thị nguyên bức ảnh đồ họa Banner TỰ ĐỘNG FULL KHỚP MÀN HÌNH -->
-      <div class="banner pure-image-banner" style="padding:0;overflow:hidden;background:#0f172a;display:flex;align-items:center;justify-content:center;border-radius:12px;width:100%;height:100%;min-height:440px">
-        <?php if (!empty($heroBannerLink)): ?>
-          <a href="<?= e($heroBannerLink) ?>" style="display:block;width:100%;height:100%">
-            <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
-          </a>
-        <?php else: ?>
-          <img src="/uploads/banners/<?= e($heroBg) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+      $rawBannersList = json_decode(dbGet("SELECT value FROM settings WHERE key='home_banners_list'")['value'] ?? '[]', true);
+      if (empty($rawBannersList) && !empty($heroBg)) {
+          $rawBannersList = [['img' => $heroBg, 'link' => $heroBannerLink]];
+      }
+      if (empty($rawBannersList)) {
+          $rawBannersList = [
+              ['img' => 'hero_cooling_banner_1.png', 'link' => '/products'],
+              ['img' => 'hero_cooling_banner_2.png', 'link' => '/contact']
+          ];
+      }
+    ?>
+
+    <?php if ($heroShowText === '0'): ?>
+      <!-- Chế độ TẮT chữ: Slidesshow Banner Đồ Họa Tự Động Chuyển Tiếp -->
+      <div class="banner pure-image-banner hero-slider-wrap" id="heroSliderWrap" style="padding:0;overflow:hidden;background:#0f172a;position:relative;border-radius:12px;width:100%;height:100%;min-height:440px">
+        <div class="hero-slides-container" style="position:relative;width:100%;height:100%">
+          <?php foreach ($rawBannersList as $idx => $bn): ?>
+            <div class="hero-slide-item <?= $idx === 0 ? 'active' : '' ?>" style="position:absolute;inset:0;opacity:<?= $idx === 0 ? '1' : '0' ?>;transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease;z-index:<?= $idx === 0 ? '2' : '1' ?>;pointer-events:<?= $idx === 0 ? 'auto' : 'none' ?>">
+              <?php if (!empty($bn['link'])): ?>
+                <a href="<?= e($bn['link']) ?>" style="display:block;width:100%;height:100%">
+                  <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                </a>
+              <?php else: ?>
+                <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+              <?php endif; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+
+        <?php if (count($rawBannersList) > 1): ?>
+          <!-- Chấm tròn chuyển slide -->
+          <div class="hero-slider-dots" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px">
+            <?php foreach ($rawBannersList as $idx => $bn): ?>
+              <button type="button" onclick="setHeroSlide(<?= $idx ?>)" class="hero-dot-btn <?= $idx === 0 ? 'active' : '' ?>" style="width:<?= $idx === 0 ? '28px' : '10px' ?>;height:6px;border-radius:4px;border:none;background:<?= $idx === 0 ? '#ffffff' : 'rgba(255,255,255,0.4)' ?>;cursor:pointer;transition:all 0.3s ease"></button>
+            <?php endforeach; ?>
+          </div>
+          <!-- Nút bấm qua trái / qua phải -->
+          <button type="button" onclick="prevHeroSlide()" class="hero-nav-btn prev" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(15,23,42,0.5);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">&lsaquo;</button>
+          <button type="button" onclick="nextHeroSlide()" class="hero-nav-btn next" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(15,23,42,0.5);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">&rsaquo;</button>
         <?php endif; ?>
       </div>
+
+      <script>
+      (function(){
+        var slides = document.querySelectorAll('.hero-slide-item');
+        var dots = document.querySelectorAll('.hero-dot-btn');
+        if (!slides.length || slides.length <= 1) return;
+        var current = 0;
+        var timer = null;
+
+        window.setHeroSlide = function(idx) {
+          current = idx;
+          slides.forEach(function(s, i) {
+            if (i === current) {
+              s.style.opacity = '1';
+              s.style.zIndex = '2';
+              s.style.pointerEvents = 'auto';
+            } else {
+              s.style.opacity = '0';
+              s.style.zIndex = '1';
+              s.style.pointerEvents = 'none';
+            }
+          });
+          dots.forEach(function(d, i) {
+            d.style.background = i === current ? '#ffffff' : 'rgba(255,255,255,0.4)';
+            d.style.width = i === current ? '28px' : '10px';
+          });
+        };
+
+        window.nextHeroSlide = function() {
+          var next = (current + 1) % slides.length;
+          setHeroSlide(next);
+        };
+
+        window.prevHeroSlide = function() {
+          var prev = (current - 1 + slides.length) % slides.length;
+          setHeroSlide(prev);
+        };
+
+        function startAuto() { stopAuto(); timer = setInterval(nextHeroSlide, 4500); }
+        function stopAuto() { if (timer) clearInterval(timer); }
+
+        var wrap = document.getElementById('heroSliderWrap');
+        if (wrap) {
+          wrap.addEventListener('mouseenter', stopAuto);
+          wrap.addEventListener('mouseleave', startAuto);
+        }
+        startAuto();
+      })();
+      </script>
     <?php else: ?>
       <!-- Chế độ BẬT chữ đè lên banner -->
       <div class="banner" style="overflow:hidden<?= $heroBg ? ';background-image:url(/uploads/banners/'.$heroBg.');background-size:cover;background-position:center' : '' ?>">
