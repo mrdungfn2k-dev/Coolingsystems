@@ -330,8 +330,14 @@ foreach ($cats as $cat):
 .featured-paging { text-align: center; margin-top: 12px; }
 /* === Bộ lọc tìm phụ tùng (.cdd) trong vs-card === */
 aside.vs-card { overflow: visible !important; position: relative !important; z-index: 20 !important; }
-aside.vs-card form { overflow: visible !important; }
+aside.vs-card form { overflow: visible !important; display: flex; flex-direction: column; position: relative; }
 .vs-card .vs-field { position: relative !important; overflow: visible !important; margin-bottom: 12px; }
+.vs-card .vs-field:nth-child(1) { z-index: 50 !important; }
+.vs-card .vs-field:nth-child(2) { z-index: 40 !important; }
+.vs-card .vs-field:nth-child(3) { z-index: 30 !important; }
+.vs-card .vs-field:nth-child(4) { z-index: 20 !important; }
+.vs-card .vs-field.open-field, .vs-card .vs-field:focus-within { z-index: 99999 !important; }
+
 .vs-card .vs-field label { font-size:11px; font-weight:700; color:#4a5568; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; display:block; }
 .vs-card .vs-input, .vs-card .cdd-trigger { width:100%; height:42px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--navy-dark); font-size:13.5px; font-weight:500; font-family:inherit; }
 .vs-card .vs-input { padding:0 14px; transition:border-color .15s, box-shadow .15s; }
@@ -339,7 +345,7 @@ aside.vs-card form { overflow: visible !important; }
 .vs-card .vs-input:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
 
 .vs-card .cdd { position:relative !important; z-index:10 !important; }
-.vs-card .cdd.open { z-index:9999 !important; }
+.vs-card .cdd.open { z-index:99999 !important; }
 .vs-card .cdd-trigger { padding:0 12px 0 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:pointer; transition:border-color .15s, box-shadow .15s; }
 .vs-card .cdd-trigger:hover { border-color:#b9c4d6; }
 .vs-card .cdd.open .cdd-trigger { border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
@@ -360,7 +366,7 @@ aside.vs-card form { overflow: visible !important; }
   box-shadow: 0 14px 38px rgba(15,23,42,0.22) !important;
   overflow-y: auto !important;
   max-height: 230px !important;
-  z-index: 10000 !important;
+  z-index: 100000 !important;
   padding: 6px !important;
   -webkit-overflow-scrolling: touch !important;
 }
@@ -375,27 +381,33 @@ aside.vs-card form { overflow: visible !important; }
 .prod-pager button:disabled { opacity:.4; cursor:default; }
 </style>
 <script>
-/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở tuyệt đối nổi bật */
+/* custom dropdown (form-mode) cho bộ lọc tìm phụ tùng trang chủ — mở tuyệt đối nổi bật không đè chữ */
 function vsCddToggle(btn){
   var cdd = btn.closest('.cdd');
+  var field = btn.closest('.vs-field');
   var open = cdd.classList.contains('open');
   document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+  document.querySelectorAll('.vs-card .vs-field.open-field').forEach(function(x){ x.classList.remove('open-field'); });
   if(!open) {
     cdd.classList.add('open');
+    if(field) field.classList.add('open-field');
   }
 }
 function vsCddPick(opt){
   var cdd = opt.closest('.cdd');
+  var field = opt.closest('.vs-field');
   var t = document.getElementById(cdd.getAttribute('data-target'));
   if(t) t.value = opt.getAttribute('data-val') || '';
   var lbl = cdd.querySelector('.cdd-label'); if(lbl) lbl.textContent = opt.textContent;
   cdd.querySelectorAll('.cdd-opt').forEach(function(o){ o.classList.remove('sel'); });
   opt.classList.add('sel');
   cdd.classList.remove('open');
+  if(field) field.classList.remove('open-field');
 }
 document.addEventListener('click', function(ev){
   if(!ev.target.closest('.vs-card .cdd')) {
     document.querySelectorAll('.vs-card .cdd.open').forEach(function(x){ x.classList.remove('open'); });
+    document.querySelectorAll('.vs-card .vs-field.open-field').forEach(function(x){ x.classList.remove('open-field'); });
   }
 });
 </script>
