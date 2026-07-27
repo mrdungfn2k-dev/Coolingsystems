@@ -265,7 +265,7 @@ function swTab(t){
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
                     onmouseout="this.style.background='rgba(231,76,60,0.9)';this.style.transform='scale(1)'"
                   ></button>
-                  <button type="button" onclick="var img=this.closest('.existing-img-wrap').querySelector('img'); if(img) openImgLightbox(img.currentSrc||img.src); event.stopPropagation();" title="Xem ảnh lớn"
+                  <button type="button" class="img-zoom-btn" onclick="var img=this.closest('.existing-img-wrap').querySelector('img'); if(img) window.openImgLightbox(img.currentSrc||img.src); event.stopPropagation();" title="Xem ảnh lớn"
                     style="position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:4px;background:rgba(15,23,42,0.85);color:#fff;border:1px solid rgba(255,255,255,0.4);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:30;box-shadow:0 2px 5px rgba(0,0,0,0.4)">🔍</button>
                 </div>
               <?php endforeach;?>
@@ -306,11 +306,11 @@ function swTab(t){
 <script>
 (function(){
   var downX=0, downY=0;
-  function openImgLightbox(src){
+  window.openImgLightbox = function(src){
     if(!src) return;
     document.getElementById('imgLightboxImg').src=src;
     document.getElementById('imgLightbox').style.display='flex';
-  }
+  };
   window.closeImgLightbox=function(e){
     if(e && e.target && e.target.id==='imgLightboxImg') return; // clicking the image itself keeps it open
     var lb=document.getElementById('imgLightbox');
@@ -318,6 +318,13 @@ function swTab(t){
   };
   document.addEventListener('mousedown', function(e){ downX=e.clientX; downY=e.clientY; }, true);
   document.addEventListener('click', function(ev){
+    if(ev.target.closest('.img-zoom-btn')) {
+      ev.preventDefault(); ev.stopPropagation();
+      var wrap = ev.target.closest('.existing-img-wrap');
+      var im = wrap ? wrap.querySelector('img') : null;
+      if (im && im.src) window.openImgLightbox(im.currentSrc || im.src);
+      return;
+    }
     if(ev.target.closest('button') || ev.target.closest('input') || ev.target.closest('label')) return; // Bỏ qua button, checkbox, label
     var wrap=ev.target.closest('.existing-img-wrap');       // wrapper of BOTH saved & new thumbs
     if(!wrap || !wrap.closest('#existingImagesRow, #img-preview-area, #imgPreviewRow')) return;
@@ -334,7 +341,7 @@ function swTab(t){
     var im=wrap.querySelector('img');
     if(!im || !im.src) return;
     ev.preventDefault(); ev.stopPropagation();
-    openImgLightbox(im.currentSrc || im.src);
+    window.openImgLightbox(im.currentSrc || im.src);
   }, true);
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape'){ var lb=document.getElementById('imgLightbox'); if(lb && lb.style.display==='flex') window.closeImgLightbox(); }
@@ -1509,7 +1516,8 @@ function saveImageOrder(container) {
       zoomBtn.style.cssText = 'position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:4px;background:rgba(15,23,42,0.85);color:#fff;border:1px solid rgba(255,255,255,0.4);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:30;box-shadow:0 2px 5px rgba(0,0,0,0.4);';
       zoomBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        openImgLightbox(img.src);
+        e.preventDefault();
+        if (typeof window.openImgLightbox === 'function') window.openImgLightbox(img.src);
       });
 
       wrapper.appendChild(cb);
