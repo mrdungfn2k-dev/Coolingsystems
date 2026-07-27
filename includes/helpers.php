@@ -107,11 +107,19 @@ function orderStatus(string $s): string {
 }
 
 function currentPath(): string {
-    return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $uri = $_SERVER['REQUEST_URI'] ?? '/';
+    return parse_url($uri, PHP_URL_PATH) ?? '/';
 }
 
 function isActive(string $path): string {
-    return currentPath() === $path ? 'active' : '';
+    $current = currentPath();
+    if ($path === '/') {
+        return ($current === '/' || $current === '/index.php') ? 'active' : '';
+    }
+    if ($path === '/vouchers' && ($current === '/promotions' || str_starts_with($current, '/promotions'))) {
+        return 'active';
+    }
+    return ($current === $path || str_starts_with($current, $path . '/')) ? 'active' : '';
 }
 
 function startsWith(string $haystack, string $needle): bool {
