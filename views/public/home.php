@@ -68,13 +68,15 @@ require __DIR__ . '/../partials/head.php';
                 <a href="<?= e($bn['link']) ?>" style="display:block;width:100%;height:100%">
                   <picture>
                     <source media="(max-width: 640px)" srcset="/uploads/banners/<?= e($mobImg) ?>" type="image/webp">
-                    <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="800" height="350" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                    <source media="(min-width: 641px)" srcset="/uploads/banners/<?= e($bn['img']) ?>" type="image/webp">
+                    <img src="/uploads/banners/<?= e($mobImg) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="640" height="280" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
                   </picture>
                 </a>
               <?php else: ?>
                 <picture>
                   <source media="(max-width: 640px)" srcset="/uploads/banners/<?= e($mobImg) ?>" type="image/webp">
-                  <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="800" height="350" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                  <source media="(min-width: 641px)" srcset="/uploads/banners/<?= e($bn['img']) ?>" type="image/webp">
+                  <img src="/uploads/banners/<?= e($mobImg) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="640" height="280" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
                 </picture>
               <?php endif; ?>
             </div>
