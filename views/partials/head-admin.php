@@ -24,25 +24,36 @@ html, body {
   background-color: var(--bg-soft, #f8fafc) !important;
 }
 .dash {
-  display: grid !important;
-  grid-template-columns: 260px minmax(0, 1fr) !important;
+  display: block !important;
   min-height: 100vh !important;
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
+  position: relative !important;
+  background: var(--bg-soft, #f8fafc) !important;
 }
 .dash-sidebar {
   background: var(--navy-dark, #0f172a) !important;
   color: #fff !important;
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
   left: 0 !important;
+  bottom: 0 !important;
+  width: 260px !important;
   height: 100vh !important;
   height: 100dvh !important;
   overflow-y: auto !important;
   box-sizing: border-box !important;
   border-radius: 0 !important;
   margin: 0 !important;
+  z-index: 1000 !important;
+  padding-bottom: 30px !important;
+}
+.dash-main {
+  margin-left: 260px !important;
+  width: calc(100% - 260px) !important;
+  min-height: 100vh !important;
+  box-sizing: border-box !important;
 }
 
 /* === ADMIN UI STANDARDIZATION (tester feedback) === */
