@@ -32,7 +32,7 @@ html, body {
   position: relative !important;
   background: var(--bg-soft, #f8fafc) !important;
 }
-.dash-sidebar {
+body .dash-sidebar {
   background: var(--navy-dark, #0f172a) !important;
   color: #fff !important;
   position: fixed !important;
@@ -42,12 +42,13 @@ html, body {
   width: 260px !important;
   height: 100vh !important;
   height: 100dvh !important;
+  max-height: none !important;
   overflow-y: auto !important;
   box-sizing: border-box !important;
   border-radius: 0 !important;
   margin: 0 !important;
   z-index: 1000 !important;
-  padding-bottom: 30px !important;
+  padding: 24px 0 40px 0 !important;
 }
 .dash-main {
   margin-left: 260px !important;
