@@ -241,14 +241,14 @@ function swTab(t){
       <div class="panel">
         <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
           <h3 style="margin:0"> Hình ảnh sản phẩm</h3>
-          <div id="imageActionBar" style="display:none;align-items:center;gap:10px;flex-wrap:wrap">
-            <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;user-select:none;color:#475569">
-              <input type="checkbox" id="selectAllImagesCb" onchange="toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:var(--navy);cursor:pointer">
+          <div id="imageActionBar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;cursor:pointer;user-select:none;color:#334155;background:#f1f5f9;padding:6px 12px;border-radius:6px;border:1px solid #cbd5e1">
+              <input type="checkbox" id="selectAllImagesCb" onchange="toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer">
               <span>Chọn tất cả</span>
             </label>
             <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
-                    style="display:none;background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 5px rgba(239,68,68,0.3);transition:all 0.2s;align-items:center;gap:6px">
-               Xóa <span id="selectedImgCount" style="background:rgba(255,255,255,0.25);padding:1px 6px;border-radius:10px;font-size:11px">0</span> ảnh đã chọn
+                    style="background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(239,68,68,0.35);transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;cursor:pointer">
+               Xóa <span id="selectedImgCount" style="background:rgba(255,255,255,0.3);padding:1px 7px;border-radius:10px;font-size:11px;font-weight:800">0</span> ảnh đã chọn
             </button>
           </div>
         </div>
@@ -541,7 +541,7 @@ function updateImageSelectionState() {
 
   if (actionBar) actionBar.style.display = allCbs.length > 0 ? 'flex' : 'none';
   if (countSpan) countSpan.textContent = totalSelected;
-  if (btn) btn.style.display = totalSelected > 0 ? 'inline-flex' : 'none';
+  if (btn) btn.style.display = 'inline-flex';
 
   if (selectAllCb) {
     selectAllCb.checked = allCbs.length > 0 && totalSelected === allCbs.length;
@@ -561,6 +561,9 @@ function updateImageSelectionState() {
     }
   });
 }
+document.addEventListener('DOMContentLoaded', function() {
+  updateImageSelectionState();
+});
 
 function toggleSelectAllImages(masterCb) {
   var allCbs = document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new');
