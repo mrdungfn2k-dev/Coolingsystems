@@ -567,14 +567,21 @@ document.addEventListener('DOMContentLoaded', function() {
     el.appendChild(div);
   }
 
-  /* === E. Init === */
-  initFeaturedPagination();
-  initCatPagination();
+  /* === E. Init (Yield main thread for 95+ Desktop TBT) === */
+  var _runInit = function() {
+    initFeaturedPagination();
+    initCatPagination();
+  };
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(_runInit, { timeout: 1000 });
+  } else {
+    setTimeout(_runInit, 120);
+  }
   var lastM = isMobile();
   window.addEventListener('resize', function() {
     var now = isMobile();
     if (now !== lastM) { lastM = now; initFeaturedPagination(); initCatPagination(); }
-  });
+  }, { passive: true });
 });
 </script>
 

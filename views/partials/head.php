@@ -10,10 +10,13 @@
 <link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260717-favicon-sync">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260717-favicon-sync">
 <link rel="manifest" href="/site.webmanifest?v=20260717-favicon-sync">
-<!-- Google tag (gtag.js) - Defer to prevent blocking LCP -->
+<!-- Google tag (gtag.js) - Lazy load on interaction to eliminate TBT -->
 <script>
-window.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
+(function() {
+  var _gtagLoaded = false;
+  function _loadGtag() {
+    if (_gtagLoaded) return;
+    _gtagLoaded = true;
     var s = document.createElement('script');
     s.src = 'https://www.googletagmanager.com/gtag/js?id=G-773TVBRSGE';
     s.async = true;
@@ -22,8 +25,12 @@ window.addEventListener('DOMContentLoaded', function() {
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-773TVBRSGE');
-  }, 1500);
-});
+  }
+  ['touchstart', 'scroll', 'mousemove', 'keydown', 'pointerdown'].forEach(function(evt) {
+    window.addEventListener(evt, _loadGtag, {once: true, passive: true});
+  });
+  setTimeout(_loadGtag, 6000);
+})();
 </script>
 <!-- Performance: Preconnect Google Fonts & Preload LCP Image -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,7 +139,8 @@ html, body { font-display: swap; text-rendering: optimizeSpeed; -webkit-font-smo
 }
 
 /* Home Banner Carousel Zero CLS */
-.home-banners { margin-top: 20px; overflow: hidden; contain: layout style; }
+.home-banners { margin-top: 20px; overflow: hidden; contain: layout style; content-visibility: auto; contain-intrinsic-size: 1px 250px; }
+.trust, footer { content-visibility: auto; contain-intrinsic-size: 1px 300px; }
 .hbc { position: relative; width: 100%; aspect-ratio: 1600 / 250; min-height: 180px; overflow: hidden; border-radius: 8px; background: #1a3258; contain: strict; }
 .hbc-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
 .hbc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; overflow: hidden; }
