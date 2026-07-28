@@ -10,18 +10,26 @@
 <link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260717-favicon-sync">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260717-favicon-sync">
 <link rel="manifest" href="/site.webmanifest?v=20260717-favicon-sync">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-773TVBRSGE"></script>
+<!-- Google tag (gtag.js) - Defer to prevent blocking LCP -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-773TVBRSGE');
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    var s = document.createElement('script');
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-773TVBRSGE';
+    s.async = true;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-773TVBRSGE');
+  }, 1500);
+});
 </script>
-<!-- Performance: Preconnect Google Fonts -->
+<!-- Performance: Preconnect Google Fonts & Preload LCP Image -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/uploads/banners/hero_cooling_banner_1_mob.webp" fetchpriority="high" type="image/webp" media="(max-width: 640px)">
+<link rel="preload" as="image" href="/uploads/banners/hero_cooling_banner_1.webp" fetchpriority="high" type="image/webp" media="(min-width: 641px)">
 <?php
 // Dynamic system config - load all site settings
 $_sysConf = [];
@@ -132,7 +140,7 @@ html, body { font-display: swap; text-rendering: optimizeSpeed; -webkit-font-smo
 
 /* Product Cards Zero CLS */
 .p-img, .product-card .img, .product-thumb { aspect-ratio: 4 / 3; width: 100%; overflow: hidden; contain: layout style; }
-.p-img img, .product-card .img img, .product-thumb img { width: 100%; height: 100%; object-fit: contain; decoding: async; }
+.p-img img, .product-card .img img, .product-thumb img, .prod-img-wrap img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; decoding: async; }
 
 /* Hide all Mobile-only elements on Desktop (> 900px) */
 @media (min-width: 901px) {
@@ -176,50 +184,12 @@ html, body { font-display: swap; text-rendering: optimizeSpeed; -webkit-font-smo
 </div>
 <?php endif; ?>
 
-<style>.mobile-nav-links a[href="/customer/vouchers"]{display:none !important}</style>
-<!-- Mobile nav drawer -->
-<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-<div class="mobile-nav-drawer" id="mobileNavDrawer">
-  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
-  <div class="mobile-nav-links">
-    <span class="nav-section-label">Khám phá</span>
-    <a href="/">Trang chủ</a>
-    <a href="/about">Giới thiệu</a>
-    <a href="/products">Sản phẩm</a>
-    <a href="/brands">Phụ tùng theo hãng</a>
-    <a href="/product-brands">Thương hiệu</a>
-    <a href="/vouchers">Khuyến mại</a>
-    <span class="nav-section-label">Hỗ trợ</span>
-    <a href="/news">Tin tức</a>
-    <a href="/policies">Chính sách</a>
-    <a href="/stores">Hệ thống cửa hàng</a>
-    <?php if ($user && in_array($user['role'], ['customer','staff'])): ?>
-      <span class="nav-section-label">Tài khoản của tôi</span>
-      <a href="/customer/orders">Đơn hàng</a>
-      <a href="/customer/favorites">Yêu thích</a>
-      <a href="/customer/vouchers">Voucher</a>
-      <a href="/customer/profile">Hồ sơ</a>
-      <a href="/auth/logout">Đăng xuất</a>
-    <?php elseif ($user && $user['role'] === 'partner'): ?>
-      <span class="nav-section-label">Quản lý</span>
-      <a href="/partner/dashboard">Dashboard</a>
-      <a href="/partner/logout">Đăng xuất</a>
-    <?php elseif ($user && $user['role'] === 'admin'): ?>
-      <a href="/admin">Admin Panel</a>
-      <a href="/admin/logout">Đăng xuất</a>
-    <?php endif; ?>
-  </div>
-  <?php if (!$user): ?>
-  <div class="mobile-nav-actions">
-    <a href="/auth/login" class="action-outline">Đăng nhập</a>
-    <a href="/auth/register" class="action-gold">Đăng ký</a>
-  </div>
-  <?php endif; ?>
-  <div style="padding:14px 20px;border-top:1px solid rgba(255,255,255,0.08);margin-top:8px;">
-    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;">Tư vấn miễn phí</div>
-    <a href="tel:<?= preg_replace('/[^0-9]/', '', $sysHotline) ?>" style="font-size:22px;font-weight:800;color:var(--gold-light);text-decoration:none;display:block;"><?= htmlspecialchars($sysHotline) ?></a>
-  </div>
-</div>
+<style>
+.mobile-nav-overlay, .mobile-nav-drawer { display: none !important; visibility: hidden !important; }
+.mobile-nav-overlay.open { display: block !important; visibility: visible !important; position: fixed !important; inset: 0 !important; z-index: 99998 !important; background: rgba(0,0,0,0.6) !important; backdrop-filter: blur(4px) !important; }
+.mobile-nav-drawer.open { display: block !important; visibility: visible !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 85% !important; max-width: 320px !important; height: 100vh !important; height: 100dvh !important; z-index: 99999 !important; background: #0f172a !important; overflow-y: auto !important; }
+.mobile-nav-links a[href="/customer/vouchers"]{display:none !important}
+</style>
 
 <div class="site-shell">
   <?php require __DIR__ . '/top-bar.php'; ?>

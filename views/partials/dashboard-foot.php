@@ -365,4 +365,5 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 <?php require __DIR__ . '/col-picker.php'; ?>
-<?php require __DIR__ . '/foot.php'; ?>
+</body>
+</html>

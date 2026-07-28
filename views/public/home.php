@@ -2,7 +2,7 @@
 $title = 'Trang chủ'; 
 
 $heroBg = dbGet("SELECT value FROM settings WHERE key='hero_bg_image'")['value'] ?? '';
-$heroShowText = dbGet("SELECT value FROM settings WHERE key='hero_show_text'")['value'] ?? '1';
+$heroShowText = dbGet("SELECT value FROM settings WHERE key='hero_show_text'")['value'] ?? '0';
 $heroBannerLink = dbGet("SELECT value FROM settings WHERE key='hero_banner_link'")['value'] ?? '';
 
 $rawBannersList = json_decode(dbGet("SELECT value FROM settings WHERE key='home_banners_list'")['value'] ?? '[]', true);
@@ -28,7 +28,8 @@ unset($bnItem);
 
 $firstBannerImg = $rawBannersList[0]['img'] ?? '';
 $seo = [
-    'meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng',
+    'meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng | Hệ Thống Làm Mát Ô Tô',
+    'meta_description' => 'Cooling Systems - Chuyên cung cấp phụ tùng hệ thống điện lạnh và làm mát xe ô tô chính hãng toàn quốc: Dàn lạnh, dàn nóng, lốc điều hòa, quạt gió ô tô. Bảo hành uy tín.',
     'preload_image' => !empty($firstBannerImg) ? '/uploads/banners/' . $firstBannerImg : ''
 ];
 
@@ -44,6 +45,7 @@ require __DIR__ . '/../partials/head.php';
         <?php endforeach; ?>
       </ul>
     </aside>
+
     <?php
       $heroBadge = dbGet("SELECT value FROM settings WHERE key='hero_badge'")['value'] ?? 'Phụ tùng & Dịch vụ Ô tô — Est. 2026';
       $heroHeading = dbGet("SELECT value FROM settings WHERE key='hero_heading'")['value'] ?? 'Phụ tùng <span class="accent">chính hãng</span><br>cho mọi hành trình.';
@@ -56,16 +58,24 @@ require __DIR__ . '/../partials/head.php';
 
     <?php if ($heroShowText === '0'): ?>
       <!-- Chế độ TẮT chữ: Slidesshow Banner Đồ Họa Tự Động Chuyển Tiếp -->
-      <div class="banner pure-image-banner hero-slider-wrap" id="heroSliderWrap" style="padding:0;overflow:hidden;background:#0f172a;position:relative;border-radius:12px;width:100%;height:100%;min-height:440px">
+      <div class="banner pure-image-banner hero-slider-wrap" id="heroSliderWrap" style="padding:0;overflow:hidden;background:#0f172a;position:relative;border-radius:12px;width:100%;aspect-ratio:16/7;min-height:220px">
         <div class="hero-slides-container" style="position:relative;width:100%;height:100%">
-          <?php foreach ($rawBannersList as $idx => $bn): ?>
+          <?php foreach ($rawBannersList as $idx => $bn): 
+            $mobImg = preg_replace('/\.webp$/i', '_mob.webp', $bn['img']);
+          ?>
             <div class="hero-slide-item <?= $idx === 0 ? 'active' : '' ?>" style="position:absolute;inset:0;opacity:<?= $idx === 0 ? '1' : '0' ?>;transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease;z-index:<?= $idx === 0 ? '2' : '1' ?>;pointer-events:<?= $idx === 0 ? 'auto' : 'none' ?>">
               <?php if (!empty($bn['link'])): ?>
                 <a href="<?= e($bn['link']) ?>" style="display:block;width:100%;height:100%">
-                  <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="1024" height="440" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                  <picture>
+                    <source media="(max-width: 640px)" srcset="/uploads/banners/<?= e($mobImg) ?>" type="image/webp">
+                    <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="800" height="350" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                  </picture>
                 </a>
               <?php else: ?>
-                <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="1024" height="440" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                <picture>
+                  <source media="(max-width: 640px)" srcset="/uploads/banners/<?= e($mobImg) ?>" type="image/webp">
+                  <img src="/uploads/banners/<?= e($bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="800" height="350" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+                </picture>
               <?php endif; ?>
             </div>
           <?php endforeach; ?>
@@ -196,10 +206,18 @@ $__homeBanners = array_values(array_filter(json_decode($__bnRaw, true) ?: [], fu
 <section class="home-banners"><div class="wrap">
   <div class="hbc" id="homeBannerCarousel">
     <div class="hbc-track">
-      <?php foreach($__homeBanners as $__banIdx => $b): $__bp=__DIR__.'/../../uploads/banners/'.$b['img']; $src='/uploads/banners/'.e($b['img']).(is_file($__bp)?'?v='.filemtime($__bp):''); $alt=e($b['title'] ?? ''); ?>
+      <?php foreach($__homeBanners as $__banIdx => $b): 
+        $imgName = $b['img'];
+        $bWebp = preg_replace('/\.(png|jpg|jpeg)$/i', '.webp', $imgName);
+        $webpPath = __DIR__ . '/../../uploads/banners/' . $bWebp;
+        $finalImg = is_file($webpPath) ? $bWebp : $imgName;
+        $fullPath = __DIR__ . '/../../uploads/banners/' . $finalImg;
+        $src = '/uploads/banners/' . e($finalImg) . (is_file($fullPath) ? '?v=' . filemtime($fullPath) : '');
+        $alt = e($b['title'] ?? ''); 
+      ?>
       <div class="hbc-slide">
-        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" width="1600" height="250" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>></a>
-        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" width="1600" height="250" <?= $__banIdx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?>><?php endif; ?>
+        <?php if(!empty($b['link'])): ?><a href="<?= e($b['link']) ?>"><img src="<?= $src ?>" alt="<?= $alt ?>" width="800" height="200" loading="lazy" decoding="async"></a>
+        <?php else: ?><img src="<?= $src ?>" alt="<?= $alt ?>" width="800" height="200" loading="lazy" decoding="async"><?php endif; ?>
       </div>
       <?php endforeach; ?>
     </div>

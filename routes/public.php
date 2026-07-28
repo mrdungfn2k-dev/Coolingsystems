@@ -37,8 +37,8 @@ get('/', function() {
         ORDER BY total_purchased DESC, avg_rating DESC LIMIT 10");
 
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
-    $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c ORDER BY sort_order LIMIT 12");
-    $sidebarCategories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY is_featured DESC, sort_order LIMIT 12");
+    $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c WHERE (c.is_active=1 OR c.is_active IS NULL) ORDER BY sort_order, id");
+    $sidebarCategories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     $trustSteps = dbAll("SELECT * FROM trust_steps WHERE is_active=1 ORDER BY sort_order");
     view('public/home', compact('featured','bestSellers','brands','categories','sidebarCategories','productBrands','trustSteps'));
@@ -59,7 +59,17 @@ get('/vouchers', function() {
 
 get('/products', function() {
     $limit = 12; $page = max(1, intval($_GET['page'] ?? 1)); $offset = ($page-1)*$limit;
-    $where = ["p.status='published'"]; $params = []; $joins = '';
+    $joins = '';
+    $where = ["p.status='published'"]; $params = [];
+    
+    // Optimized active category check (ultra fast index scan)
+    $inactiveCatRows = dbAll("SELECT id FROM categories WHERE is_active=0");
+    if (!empty($inactiveCatRows)) {
+        $inactiveIds = array_map('intval', array_column($inactiveCatRows, 'id'));
+        $placeholders = implode(',', array_fill(0, count($inactiveIds), '?'));
+        $where[] = "(p.category_id IS NULL OR p.category_id NOT IN ($placeholders))";
+        $params = array_merge($params, $inactiveIds);
+    }
     if (!empty($_GET['q'])) {
         $qRaw = trim($_GET['q']);
         // Check length
@@ -95,16 +105,16 @@ get('/products', function() {
     else if (!empty($_GET['cat'])) {
         $joins .= " LEFT JOIN categories c ON c.id=p.category_id";
         // Include child categories
-        $catRow = dbGet("SELECT id FROM categories WHERE slug=?", [$_GET['cat']]);
+        $catRow = dbGet("SELECT id FROM categories WHERE slug=? AND (is_active=1 OR is_active IS NULL)", [$_GET['cat']]);
         if ($catRow) {
             $catIds = [$catRow['id']];
-            $childCats = dbAll("SELECT id FROM categories WHERE parent_id=?", [$catRow['id']]);
+            $childCats = dbAll("SELECT id FROM categories WHERE parent_id=? AND (is_active=1 OR is_active IS NULL)", [$catRow['id']]);
             foreach ($childCats as $cc) $catIds[] = $cc['id'];
             $placeholders = implode(',', array_fill(0, count($catIds), '?'));
             $where[] = "p.category_id IN ($placeholders)";
             $params = array_merge($params, $catIds);
         } else {
-            $where[] = "c.slug=?"; $params[] = $_GET['cat'];
+            $where[] = "0=1";
         }
     }
     if (!empty($_GET['brand_id']) && empty($_GET['model_id']) && empty($_GET['year'])) {
@@ -200,7 +210,7 @@ get('/products', function() {
     }
 
     $products = dbAll("SELECT DISTINCT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p $joins WHERE $wStr ORDER BY $sort LIMIT $limit OFFSET $offset", $params);
-    $categories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY sort_order");
+    $categories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY sort_order");
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
     $activeVehicle = null;
     if (!empty($_GET['brand_id'])) {

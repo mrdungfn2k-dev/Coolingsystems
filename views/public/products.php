@@ -42,7 +42,7 @@ if (!function_exists('cdd')) {
     .cdd-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:left; }
     .cdd-arrow { flex-shrink:0; color:#1a3258; transition:transform .2s; }
     .cdd.open .cdd-arrow { transform:rotate(180deg); }
-    .cdd-panel { display:none; position:fixed; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); overflow-y:auto; -webkit-overflow-scrolling:touch; z-index:9999; padding:6px; }
+    .cdd-panel { display:none; position:fixed; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); max-height:320px; overflow-y:auto; -webkit-overflow-scrolling:touch; z-index:9999; padding:6px; }
     .cdd.open .cdd-panel { display:block; }
     .cdd-opt { padding:11px 12px; border-radius:7px; font-size:13.5px; color:var(--navy-dark); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background .12s; }
     .cdd-opt:hover { background:#f1f5fb; }

@@ -20,11 +20,9 @@ $niSvg=['cart'=>'<circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r
 $maxSold=1; foreach(($topProducts??[]) as $tp){ if(($tp['sold']??0)>$maxSold)$maxSold=$tp['sold']; }
 ?>
 <style>
-.db-wrap{--card-r:14px}
-.db-cards{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:18px}
-@media(max-width:1500px){.db-cards{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:760px){.db-cards{grid-template-columns:repeat(2,1fr)}}
-.db-card{background:#fff;border-radius:var(--card-r);padding:13px 14px;box-shadow:0 1px 4px rgba(20,40,80,.06);border:1px solid #eef1f6;display:flex;align-items:flex-start;gap:11px}
+.db-wrap{--card-r:14px;width:100%;max-width:100%;box-sizing:border-box;overflow-x:hidden}
+.db-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px;width:100%;box-sizing:border-box}
+.db-card{background:#fff;border-radius:var(--card-r);padding:13px 14px;box-shadow:0 1px 4px rgba(20,40,80,.06);border:1px solid #eef1f6;display:flex;align-items:flex-start;gap:11px;min-width:0;box-sizing:border-box}
 .db-card .ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .db-card .ic svg{width:21px;height:21px;stroke:#fff;fill:none;stroke-width:2}
 .db-body{min-width:0;flex:1}

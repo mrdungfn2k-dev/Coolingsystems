@@ -4,7 +4,14 @@
    ADMIN: Quản lý Hãng xe (Brands & Car Models)
    ───────────────────────────────────────────────── */
 
-$brands = dbAll("SELECT b.*, COUNT(m.id) AS model_count FROM brands b LEFT JOIN car_models m ON m.brand_id=b.id GROUP BY b.id ORDER BY b.sort_order, b.name");
+$brands = dbAll("SELECT b.*, 
+  (SELECT COUNT(*) FROM car_models m WHERE m.brand_id = b.id) AS model_count, 
+  (SELECT COUNT(DISTINCT p.id) FROM products p 
+   LEFT JOIN product_fitments pf ON pf.product_id=p.id 
+   LEFT JOIN product_brand_map pbm ON pbm.product_id=p.id 
+   WHERE (p.car_brand_id=b.id OR pf.brand_id=b.id OR pbm.brand_id=b.id OR p.name LIKE '%' || b.name || '%')
+  ) AS product_count 
+  FROM brands b ORDER BY b.sort_order, b.name");
 $activeBrand = null;
 $models = [];
 if (!empty($_GET['brand_id'])) {
@@ -302,7 +309,6 @@ function loadBrandModels(id, aEl, e){
   return false;
 }
 </script>
-<?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
 
 <div id="csvImportBrands" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">
 <div style="background:#fff;border-radius:12px;padding:28px;max-width:500px;width:95%;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
@@ -410,3 +416,4 @@ function loadBrandModels(id, aEl, e){
 })();
 </script>
 </form></div></div>
+<?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

@@ -232,7 +232,15 @@ get('/admin/products', function() {    requireStaffPermission('rbac:catalog.prod
     elseif($tab==='published'){$where.=" AND p.status='published'";}
     if($q){$where.=" AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ? OR p.oem_code2 LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l,$l]);}
     if($catId){$where.=" AND p.category_id=?"; $params[]=$catId;}
-    if($brandId){$where.=" AND p.car_brand_id=?"; $params[]=$brandId;}
+    if($brandId){
+        $brandRow = dbGet("SELECT name FROM brands WHERE id=?", [$brandId]);
+        $bName = $brandRow['name'] ?? '';
+        $where .= " AND (p.car_brand_id=? OR EXISTS(SELECT 1 FROM product_fitments pf WHERE pf.product_id=p.id AND pf.brand_id=?) OR EXISTS(SELECT 1 FROM product_brand_map pbm WHERE pbm.product_id=p.id AND pbm.brand_id=?)".($bName ? " OR p.name LIKE ?" : "").")";
+        $params[] = $brandId;
+        $params[] = $brandId;
+        $params[] = $brandId;
+        if ($bName) $params[] = '%' . $bName . '%';
+    }
     if($partBrand){$where.=" AND (p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?)"; $params[]=$partBrand; $params[]=$partBrand.',%'; $params[]='%, '.$partBrand.',%'; $params[]='%, '.$partBrand;}
     $total=dbGet("SELECT COUNT(*) AS n FROM products p $where",$params)['n']??0;
     $totalPages=max(1,ceil($total/$perPage));
@@ -3043,14 +3051,24 @@ post('/admin/products/:id/edit', function($p) {
         return;
     }
 
+    // === FOREIGN KEY SAFETY GUARDS ===
+    $catId = intval($d['category_id']??0) ?: null;
+    if ($catId && !dbGet("SELECT id FROM categories WHERE id=?", [$catId])) {
+        $catId = null;
+    }
+    $carBrandId = intval($d['car_brand_id']??0) ?: null;
+    if ($carBrandId && !dbGet("SELECT id FROM car_brands WHERE id=?", [$carBrandId])) {
+        $carBrandId = null;
+    }
+
     dbRun("UPDATE products SET name=?,sku=?,oem_code=?,oem_code2=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
         trim($d['name']??''),
         $editSku,
         $editOem,
         $editOem2,
         trim($d['part_brand']??''),
-        intval($d['car_brand_id']??0) ?: null,
-        intval($d['category_id']??0) ?: null,
+        $carBrandId,
+        $catId,
         $price,
         intval($d['price_before_tax']??0),
         intval($d['tax_amount']??0),
@@ -3925,12 +3943,18 @@ post('/admin/brands/:id/edit', function($p) {
     redirect('/admin/brands');
 });
 
-post('/admin/brands/:id/delete', function($p) {
-    requireStaffPermission('rbac:catalog.vehicle.manage|brands', '/admin/login'); csrfCheck();
-    dbRun("DELETE FROM brands WHERE id=?", [$p['id']]);
-    flash('success', 'Đã xóa hãng xe.');
+$delBrandAction = function($p) {
+    requireStaffPermission('rbac:catalog.vehicle.manage|brands', '/admin/login');
+    $id = intval($p['id'] ?? 0);
+    if ($id > 0) {
+        dbRun("DELETE FROM brands WHERE id=?", [$id]);
+        dbRun("UPDATE products SET car_brand_id=NULL WHERE car_brand_id=?", [$id]);
+        flash('success', 'Đã xóa hãng xe thành công.');
+    }
     redirect('/admin/brands');
-});
+};
+get('/admin/brands/:id/delete', $delBrandAction);
+post('/admin/brands/:id/delete', $delBrandAction);
 
 // ── CAR MODELS CRUD ──────────────────────────────────────────────────────────
 post('/admin/car-models/add', function() {
@@ -4005,6 +4029,15 @@ post('/admin/categories/add', function() {
     redirect($redir);
 });
 
+post('/admin/categories/:id/toggle-active', function($p) {
+    requireStaffPermission('rbac:catalog.taxonomy.manage|categories', '/auth/login');
+    $isActive = intval($_POST['is_active'] ?? 1);
+    dbRun("UPDATE categories SET is_active=? WHERE id=?", [$isActive, $p['id']]);
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true, 'is_active' => $isActive]);
+    exit;
+});
+
 post('/admin/categories/:id/edit', function($p) {
     requireStaffPermission('rbac:catalog.taxonomy.manage|categories', '/auth/login'); csrfCheck();
     $name = trim($_POST['name'] ?? '');
@@ -4012,9 +4045,10 @@ post('/admin/categories/:id/edit', function($p) {
     $parentId = !empty($_POST['parent_id']) ? intval($_POST['parent_id']) : null;
     $sort = intval($_POST['sort_order'] ?? 100);
     $featured = intval($_POST['is_featured'] ?? 0);
+    $isActive = intval($_POST['is_active'] ?? 1);
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
-        $catImg=catUploadImage(); if($catImg!==''){ dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, icon=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $catImg, $p['id']]); } else { dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $p['id']]); }
+        $catImg=catUploadImage(); if($catImg!==''){ dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=?, icon=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $catImg, $p['id']]); } else { dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $p['id']]); }
         flash('success', 'Đã cập nhật danh mục.');
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại.');

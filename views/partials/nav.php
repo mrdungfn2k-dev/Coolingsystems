@@ -37,7 +37,7 @@
     </a>
     <div class="cat-dropdown" style="display:none;position:absolute;top:100%;left:0;min-width:280px;background:#fff;border-radius:0 0 8px 8px;box-shadow:0 8px 24px rgba(0,0,0,0.18);z-index:999;max-height:420px;overflow-y:auto">
       <?php
-        $navCats = dbAll("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY is_featured DESC, sort_order LIMIT 15");
+        $navCats = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
         foreach($navCats as $nc):
       ?>
       <a href="/products?cat=<?= e($nc['slug']) ?>" style="display:flex;align-items:center;padding:11px 18px;color:#1a3258;text-decoration:none;font-size:13px;font-weight:600;border-bottom:1px solid #f0f0f0;transition:all 0.15s">
@@ -60,6 +60,7 @@
     <a href="/stores" class="nav-link <?= isActive('/stores') ?>">Hệ thống cửa hàng</a>
 
   </div>
+</nav>
 
 <script>
 (function(){
@@ -91,4 +92,3 @@
   }
 })();
 </script>
-</nav>

@@ -49,6 +49,13 @@ if (!empty($_GET['parent_id'])) {
 .csv-export-wrap.open .csv-export-menu { display:block; }
 .csv-export-menu a { display:block; padding:10px 16px; color:#333; text-decoration:none; font-size:13px; transition:background 0.15s; }
 .csv-export-menu a:hover { background:#f5f7fa; }
+.cat-toggle-switch { position: relative; display: inline-block; width: 36px; height: 20px; vertical-align: middle; }
+.cat-toggle-switch input { opacity: 0; width: 0; height: 0; }
+.cat-slider { position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .2s; border-radius: 20px; }
+.cat-slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .2s; border-radius: 50%; }
+.cat-toggle-switch input:checked + .cat-slider { background-color: #10b981; }
+.cat-toggle-switch input:checked + .cat-slider:before { transform: translateX(16px); }
+.hidden-badge { background:#fee2e2; color:#dc2626; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; margin-left:6px; }
 </style>
 
 <?php $flash = getFlash(); foreach($flash as $f): ?>
@@ -89,13 +96,21 @@ if (!empty($_GET['parent_id'])) {
                     <a href="/admin/categories?parent_id=<?= $cat['id'] ?>" style="text-decoration:none;flex:1;display:flex;align-items:center;gap:10px">
                         <?php if(!empty($cat['icon'])): ?><img src="/uploads/categories/<?= e($cat['icon']) ?>" style="width:46px;height:46px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;flex-shrink:0"><?php else: ?><span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:8px;border:1px dashed #cbd5e1;background:#f1f5f9;color:#9aa7bd;font-size:9px;flex-shrink:0">Ảnh</span><?php endif; ?>
                         <div style="flex:1;min-width:0">
-                            <div class="panel-item-name"><?= e($cat['name']) ?><?php if ($cat['is_featured']): ?><span class="featured-badge">Nổi bật</span><?php endif; ?></div>
+                            <div class="panel-item-name">
+                                <?= e($cat['name']) ?>
+                                <?php if ($cat['is_featured']): ?><span class="featured-badge">Nổi bật</span><?php endif; ?>
+                                <?php if (isset($cat['is_active']) && intval($cat['is_active']) === 0): ?><span class="hidden-badge">Đã ẩn</span><?php endif; ?>
+                            </div>
                             <div class="panel-item-sub"><?= $cat['product_count'] ?> sản phẩm</div>
                         </div>
                     </a>
                 </div>
-                <div class="panel-item-actions">
-                    <button class="adm-edit" onclick="openCatEditModal(<?= $cat['id'] ?>, null, '<?= e($cat['name']) ?>', '<?= e($cat['slug']) ?>', <?= $cat['sort_order'] ?>, <?= $cat['is_featured'] ?>, '<?= e($cat['icon']??'') ?>')">Sửa</button>
+                <div class="panel-item-actions" style="align-items:center;gap:10px">
+                    <label class="cat-toggle-switch" title="Gạt để Ẩn / Hiện danh mục" onclick="event.stopPropagation()">
+                        <input type="checkbox" <?= (isset($cat['is_active']) && intval($cat['is_active']) === 0) ? '' : 'checked' ?> onchange="toggleCatActive(<?= $cat['id'] ?>, this.checked)">
+                        <span class="cat-slider"></span>
+                    </label>
+                    <button class="adm-edit" onclick="openCatEditModal(<?= $cat['id'] ?>, null, '<?= e($cat['name']) ?>', '<?= e($cat['slug']) ?>', <?= $cat['sort_order'] ?>, <?= $cat['is_featured'] ?>, '<?= e($cat['icon']??'') ?>', <?= intval($cat['is_active']??1) ?>)">Sửa</button>
                     <form method="post" action="/admin/categories/<?= $cat['id'] ?>/delete" style="margin:0" onsubmit="return csConfirmForm(this,'Xóa danh mục này và toàn bộ danh mục con?')">
                         <?= csrfField() ?>
                         <button type="submit" class="adm-del">Xóa</button>
@@ -333,6 +348,20 @@ function updateCatCount() {
     var total = parentCount + childCount;
     var el = document.getElementById('catSelectedCount');
     if (el) el.textContent = total > 0 ? total + ' danh mục đã chọn' : '';
+}
+
+function toggleCatActive(catId, isActive) {
+    fetch('/admin/categories/' + catId + '/toggle-active', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'is_active=' + (isActive ? 1 : 0)
+    }).then(r => r.json()).then(data => {
+        if (!data.success) alert(data.error || 'Có lỗi xảy ra');
+        else location.reload();
+    }).catch(e => {
+        console.error(e);
+        location.reload();
+    });
 }
 </script>
 

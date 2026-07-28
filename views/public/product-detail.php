@@ -175,24 +175,26 @@ if (!empty($faqItems)) {
   .pd-gallery{position:relative !important;top:0 !important}
 }
 .pd-gallery{position:sticky;top:100px}
-.pd-main-img{background:#fff;border-radius:0;padding:0;text-align:center;aspect-ratio:4/3;min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pd-main-img img{max-width:100%;object-fit:contain;object-position:center;border-radius:0;width:100%;height:100%}
+.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:4/3;min-height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pd-main-img img{max-width:100%;object-fit:cover!important;object-position:center;border-radius:8px;width:100%;height:100%}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pd-thumb{width:62px;height:62px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
 .pd-thumb img{width:100%;height:100%;object-fit:contain}
 .pd-thumb.active,.pd-thumb:hover{border-color:var(--gold-warm)}
 .pd-gallery{position:relative}
-.pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.95);border:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20;font-size:22px;font-weight:700;color:#1a3258;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s}
+.pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.95);border:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:30;font-size:22px;font-weight:700;color:#1a3258;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s}
 .pd-nav:hover{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.2)}
 .pd-nav.prev{left:8px}
 .pd-nav.next{right:8px}
 .pd-counter{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,0.55);color:#fff;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;z-index:5}
 .pd-main-img{position:relative;overflow:hidden;cursor:zoom-in}
 .pd-main-img.zoomed{cursor:zoom-out}
-.pd-zoom-controls{position:absolute;bottom:10px;right:10px;display:flex;gap:6px;z-index:10}
+.pd-zoom-controls{position:absolute;bottom:10px;right:10px;display:flex;gap:6px;z-index:30}
 .pd-zoom-btn{width:32px;height:32px;background:rgba(255,255,255,0.92);border:1px solid #ddd;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;font-weight:700;color:#333;transition:all 0.15s;box-shadow:0 2px 6px rgba(0,0,0,0.12)}
 .pd-zoom-btn:hover{background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
-.pd-zoom-lens{position:absolute;width:120px;height:120px;border:2px solid var(--gold-warm);border-radius:4px;pointer-events:none;display:none;background:rgba(212,168,75,0.1)}
+.pd-zoom-lens{position:absolute;width:130px;height:130px;border:2px solid var(--gold-warm,#c8a951);background:rgba(200,169,81,0.18);box-shadow:0 0 12px rgba(0,0,0,0.25);pointer-events:none;display:none;z-index:25;border-radius:4px}
+.pd-zoom-window{position:absolute;top:0;left:calc(100% + 16px);width:420px;height:420px;border:1px solid #cbd5e1;background-color:#fff;background-repeat:no-repeat;border-radius:12px;box-shadow:0 12px 36px rgba(0,0,0,0.22);display:none;z-index:100;pointer-events:none;overflow:hidden}
+@media(max-width:1080px){.pd-zoom-window{width:300px;height:300px;left:0;top:calc(100% + 10px)}}
 .pd-main-img img{transition:opacity 0.3s ease,transform 0.25s ease;pointer-events:none}
 .pd-price-big{font-size:30px;font-weight:800;color:var(--navy);line-height:1.2}
 .pd-price-was{font-size:14px;color:#aaa;text-decoration:line-through;margin-left:8px}
@@ -252,7 +254,7 @@ if (!empty($faqItems)) {
                  alt="<?= e($product['name']) ?>" id="pdMainImg"
                  fetchpriority="high" loading="eager"
                  width="600" height="600"
-                 style="max-width:100%;object-fit:contain!important;object-position:center;border-radius:0;width:100%;height:100%">
+                 style="max-width:100%;width:100%;height:100%;object-fit:cover!important;object-position:center;border-radius:8px">
           <?php else: ?>
             <div style="text-align:center;color:#ccc">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -262,8 +264,8 @@ if (!empty($faqItems)) {
             </div>
           <?php endif; ?>
           <?php if(!empty($images) && count($images) > 1): ?>
-            <button class="pd-nav prev" onclick="slideImg(-1)" aria-label="Ảnh trước">‹</button>
-            <button class="pd-nav next" onclick="slideImg(1)" aria-label="Ảnh sau">›</button>
+            <button class="pd-nav prev" onclick="slideImg(-1, event)" aria-label="Ảnh trước">‹</button>
+            <button class="pd-nav next" onclick="slideImg(1, event)" aria-label="Ảnh sau">›</button>
             <div class="pd-counter"><span id="imgIdx">1</span>/<?= count($images) ?></div>
           <?php endif; ?>
         </div>
@@ -743,15 +745,18 @@ var _imgList = [<?php if(!empty($images)): foreach($images as $img): ?>'<?= e($i
 var _imgIdx = 0;
 var _autoTimer = null;
 
-function slideImg(dir) {
+function slideImg(dir, e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
   if(!_imgList.length) return;
   _imgIdx = (_imgIdx + dir + _imgList.length) % _imgList.length;
   var main = document.getElementById('pdMainImg');
-  main.style.opacity = '0.3';
-  setTimeout(function(){
-    main.src = '/uploads/products/' + _imgList[_imgIdx];
-    main.style.opacity = '1';
-  }, 150);
+  if(main) {
+    main.style.opacity = '0.3';
+    setTimeout(function(){
+      main.src = '/uploads/products/' + _imgList[_imgIdx];
+      main.style.opacity = '1';
+    }, 150);
+  }
   document.querySelectorAll('.pd-thumb').forEach(function(t,i){ t.classList.toggle('active', i===_imgIdx); });
   var c = document.getElementById('imgIdx'); if(c) c.textContent = _imgIdx+1;
   resetAuto();
@@ -908,8 +913,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var img = document.getElementById('pdMainImg');
   if (!container || !img) return;
 
+  // Click handler: ONLY zoom when clicking directly on image (ignore arrows, counter & zoom btns)
   container.addEventListener('click', function(e) {
-    if (e.target.closest('.pd-zoom-btn')) return;
+    if (e.target.closest('.pd-zoom-btn') || e.target.closest('.pd-nav') || e.target.closest('.pd-counter')) return;
     if (_pdZoomLevel < _pdZoomMax) {
       pdZoom(1);
     } else {
@@ -917,16 +923,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Mouse move pan when zoomed (Desktop)
+  // In-Place Inner Container Zoom (Soi phóng to trực tiếp trong khung hình khi rà chuột)
   container.addEventListener('mousemove', function(e) {
-    if (_pdZoomLevel <= 1) return;
     var rect = container.getBoundingClientRect();
     var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
     var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
     img.style.transformOrigin = x + '% ' + y + '%';
+
+    if (_pdZoomLevel === 1) {
+      img.style.transform = 'scale(2.2)';
+      img.style.transition = 'transform 0.1s ease-out';
+    }
   });
+
   container.addEventListener('mouseleave', function() {
-    if (_pdZoomLevel > 1) img.style.transformOrigin = 'center center';
+    if (_pdZoomLevel === 1) {
+      img.style.transform = 'scale(1)';
+      img.style.transformOrigin = 'center center';
+      img.style.transition = 'transform 0.25s ease';
+    }
   });
 
   

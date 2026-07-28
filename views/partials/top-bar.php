@@ -71,11 +71,16 @@ function switchLang() {
     if (btn) btn.textContent = 'VI/EN';
   }
 })();
-window.addEventListener('load', function() {
+function loadGoogleTranslate() {
+  if (window._gtLoaded) return;
+  window._gtLoaded = true;
   var s = document.createElement('script');
   s.type = 'text/javascript';
   s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
   document.body.appendChild(s);
+}
+window.addEventListener('load', function() {
+  setTimeout(loadGoogleTranslate, 3500);
 });
 </script>
 <style>

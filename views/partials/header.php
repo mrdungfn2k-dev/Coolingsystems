@@ -4,21 +4,28 @@
 .all-cats-wrap .arrow{transition:transform 0.2s}
 .all-cats-wrap:hover .arrow,.all-cats-wrap.open .arrow{transform:rotate(180deg)}
 
-/* Modern search bar styling */
-header.main .search { border: 1px solid var(--line) !important; border-radius: 8px !important; }
+/* Modern header & search bar responsive layout */
+header.main { min-height: 90px !important; height: auto !important; padding: 12px 0 !important; background: #fff !important; }
+header.main .wrap { max-width: 1280px !important; margin: 0 auto !important; padding: 0 20px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; flex-wrap: wrap !important; gap: 14px 20px !important; }
+header.main .search { border: 1px solid var(--line) !important; border-radius: 8px !important; display: flex !important; flex: 1 1 260px !important; max-width: 580px !important; min-width: 200px !important; margin: 0 !important; }
 header.main .search:focus-within { border-color: var(--navy) !important; box-shadow: 0 0 0 3px var(--navy-soft) !important; }
-header.main .search .submit { flex-shrink:0; padding:0!important; min-width:48px!important; width:48px!important; background:transparent!important; color:#888!important; border-left:1px solid var(--line)!important; border-radius:0!important; display:flex; align-items:center; justify-content:center; }
+header.main .search .submit { flex-shrink:0; padding:0!important; min-width:48px!important; width:48px!important; background:transparent!important; color:#555!important; border-left:1px solid var(--line)!important; border-radius:0!important; display:flex; align-items:center; justify-content:center; }
 header.main .search .submit::before { display:none!important; }
 header.main .search .submit:hover { background:var(--bg-soft)!important; color:var(--navy)!important; }
-@media(min-width: 901px) {
-  header.main .wrap { max-width: 1280px !important; padding: 0 20px !important; gap: 20px !important; }
-  header.main .search { display:flex; flex: 1 1 auto; max-width: 600px; min-width: 250px !important; margin: 0 auto !important; }
-  header.main .search input { flex:1; min-width: 180px !important; width: 100%; padding-right: 12px; }
-  header.main .hotline { margin-left: 0 !important; }
+header.main .search input { flex:1; min-width:140px!important; width:100%; padding:10px 14px; color:#1e293b; font-size:14px; }
+header.main .header-actions { display: flex !important; align-items: center !important; gap: 8px !important; flex-shrink: 0 !important; }
+
+@media(min-width: 641px) {
+  .mobile-search-bar { display: none !important; }
+  .mobile-right-actions { display: none !important; }
+  .mobile-cart-btn { display: none !important; }
 }
-@media(max-width: 900px) {
-  header.main .search { display:flex; flex: 1; min-width: 150px !important; margin: 0 8px !important; }
-  header.main .search input { flex:1; min-width: 80px !important; width: 100%; }
+@media(max-width: 640px) {
+  header.main .hotline { display: none !important; }
+  header.main .search { display: none !important; }
+  header.main .header-actions { display: none !important; }
+  .mobile-search-bar { display: flex !important; }
+  .mobile-right-actions { display: flex !important; }
 }
 </style>
 <?php 
@@ -31,8 +38,7 @@ foreach($sysConfig as $cfg) {
 $siteLogo = $configMap['site_logo'] ?? '';
 $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
 ?>
-<style>@media(min-width:901px){ .mobile-cart-btn{display:none!important;} }</style>
-<header class="main" style="min-height:120px;height:120px;contain:layout style size">
+<header class="main">
   <div class="wrap">
     <a href="/" class="logo" aria-label="Trang chủ Cooling - Phụ tùng ô tô chính hãng" style="width:180px;height:76px;display:block">
       <?php if ($siteLogo): ?>
