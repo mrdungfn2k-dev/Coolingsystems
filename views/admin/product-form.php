@@ -261,10 +261,10 @@ function swTab(t){
                          style="position:absolute;top:4px;left:4px;z-index:20;width:20px;height:20px;accent-color:#ef4444;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.3)">
                   <img src="/uploads/products/<?= e(implode('/', array_map('rawurlencode', explode('/', $img['file_path'])))) ?>" style="width:100%;height:100%;object-fit:contain" onerror="this.onerror=null;this.src='/img/placeholder.png'">
                   <button type="button" onclick="deleteProductImage(<?= $img['id'] ?>, this)" title="Xóa ảnh này"
-                    style="position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s;z-index:20"
+                    style="position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,0.9);color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:all 0.15s;z-index:20"
                     onmouseover="this.style.background='#c0392b';this.style.transform='scale(1.15)'"
                     onmouseout="this.style.background='rgba(231,76,60,0.9)';this.style.transform='scale(1)'"
-                  ></button>
+                  >&times;</button>
                   <button type="button" class="img-zoom-btn" onclick="var img=this.closest('.existing-img-wrap').querySelector('img'); if(img) window.openImgLightbox(img.currentSrc||img.src); event.stopPropagation();" title="Xem ảnh lớn"
                     style="position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:4px;background:rgba(15,23,42,0.85);color:#fff;border:1px solid rgba(255,255,255,0.4);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:30;box-shadow:0 2px 5px rgba(0,0,0,0.4)">🔍</button>
                 </div>
@@ -581,7 +581,13 @@ async function deleteSelectedProductImages() {
   }
 
   var msg = totalSelected === 1 ? 'Bạn có chắc muốn xóa ảnh này?' : ('Bạn có chắc muốn xóa ' + totalSelected + ' ảnh đã chọn?');
-  if (!(await csConfirmAsync(msg))) return;
+  var confirmed = false;
+  if (typeof window.csConfirmAsync === 'function') {
+    confirmed = await window.csConfirmAsync(msg);
+  } else {
+    confirmed = confirm(msg);
+  }
+  if (!confirmed) return;
 
   // 1. Remove selected new preview files from memory
   if (selectedNew.length > 0 && typeof window.__removeSelectedNewFiles === 'function') {
@@ -592,7 +598,7 @@ async function deleteSelectedProductImages() {
   // 2. Delete selected saved DB images via AJAX
   if (selectedSaved.length > 0) {
     var imageIds = selectedSaved.map(cb => cb.dataset.imgId);
-    var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
+    var csrf = document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_csrf"]')?.value || '';
     var wraps = selectedSaved.map(cb => cb.closest('.existing-img-wrap')).filter(Boolean);
     
     wraps.forEach(wrap => {
@@ -614,6 +620,7 @@ async function deleteSelectedProductImages() {
           wrap.style.opacity = '0';
           setTimeout(() => wrap.remove(), 300);
         });
+        if (typeof window.coolToastShow === 'function') window.coolToastShow('Đã xóa ' + imageIds.length + ' ảnh thành công!', '✅');
       } else {
         alert('Lỗi: ' + (data.msg || 'Không thể xóa các ảnh đã chọn'));
         wraps.forEach(wrap => {
@@ -634,12 +641,21 @@ async function deleteSelectedProductImages() {
 }
 
 async function deleteProductImage(imageId, btn) {
-  if (!(await csConfirmAsync('Bạn có chắc muốn xóa ảnh này?'))) return;
-  var csrf = document.querySelector('input[name="_csrf"]')?.value || '';
+  var confirmed = false;
+  if (typeof window.csConfirmAsync === 'function') {
+    confirmed = await window.csConfirmAsync('Bạn có chắc muốn xóa ảnh này?');
+  } else {
+    confirmed = confirm('Bạn có chắc muốn xóa ảnh này?');
+  }
+  if (!confirmed) return;
+
+  var csrf = document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_csrf"]')?.value || '';
   var wrap = btn.closest('.existing-img-wrap');
   
-  wrap.style.opacity = '0.4';
-  wrap.style.pointerEvents = 'none';
+  if (wrap) {
+    wrap.style.opacity = '0.4';
+    wrap.style.pointerEvents = 'none';
+  }
   
   fetch('/admin/products/delete-image', {
     method: 'POST',
@@ -649,11 +665,6 @@ async function deleteProductImage(imageId, btn) {
   .then(r => r.json())
   .then(data => {
     if (data.ok) {
-      wrap.style.transition = 'all 0.3s ease';
-      wrap.style.transform = 'scale(0)';
-      wrap.style.opacity = '0';
-      setTimeout(() => {
-        wrap.remove();
         updateImageSelectionState();
       }, 300);
     } else {
