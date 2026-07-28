@@ -15,6 +15,36 @@
 <meta name="description" content="Trang quản trị hệ thống Cooling — Quản lý sản phẩm, đơn hàng, khách hàng và cài đặt.">
 <link rel="stylesheet" href="/css/cooling.css?v=1780930000">
 <style id="admin-ui-standardize">
+/* === ADMIN FULL BLEED LAYOUT RESET (Zero white gaps top/bottom/left) === */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  background-color: var(--bg-soft, #f8fafc) !important;
+}
+.dash {
+  display: grid !important;
+  grid-template-columns: 260px minmax(0, 1fr) !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.dash-sidebar {
+  background: var(--navy-dark, #0f172a) !important;
+  color: #fff !important;
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
 /* === ADMIN UI STANDARDIZATION (tester feedback) === */
 /* Consistent heading hierarchy in admin content — clean Inter, not the slanted Playfair serif */
 .dash-main h1 { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif !important; font-size:24px !important; font-weight:700 !important; font-style:normal !important; letter-spacing:-0.01em !important; line-height:1.3 !important; color:var(--navy-dark) !important; }
