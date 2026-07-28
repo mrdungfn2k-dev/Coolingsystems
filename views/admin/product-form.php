@@ -242,9 +242,9 @@ function swTab(t){
         <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
           <h3 style="margin:0"> Hình ảnh sản phẩm</h3>
           <div id="imageActionBar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <button type="button" id="btnSelectAllImgs" onclick="toggleSelectAllImages(event)" class="btn btn-sm"
+            <button type="button" id="btnSelectAllImgs" onclick="handleSelectAllToggle()" class="btn btn-sm"
                     style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:8px">
-              <input type="checkbox" id="selectAllImagesCb" onclick="event.stopPropagation();toggleSelectAllImages(event)" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer">
+              <input type="checkbox" id="selectAllImagesCb" style="width:16px;height:16px;accent-color:#ef4444;pointer-events:none">
               <span>CHỌN TẤT CẢ</span>
             </button>
             <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
@@ -526,66 +526,66 @@ function previewVideo(url) {
 </form>
 
 <script>
-function updateImageSelectionState() {
-  var savedCbs = Array.from(document.querySelectorAll('.img-select-checkbox'));
-  var newCbs = Array.from(document.querySelectorAll('.img-select-checkbox-new'));
-  var allCbs = savedCbs.concat(newCbs);
+window.handleSelectAllToggle = function() {
+  var masterCb = document.getElementById('selectAllImagesCb');
+  var allCbs = Array.from(document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new, #existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"]')).filter(cb => cb !== masterCb);
+  
+  if (allCbs.length === 0) return;
 
-  var selectedSaved = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
-  var selectedNew = Array.from(document.querySelectorAll('.img-select-checkbox-new:checked'));
-  var totalSelected = selectedSaved.length + selectedNew.length;
+  var selectedCount = allCbs.filter(cb => cb.checked).length;
+  var shouldSelect = selectedCount < allCbs.length;
+
+  if (masterCb) masterCb.checked = shouldSelect;
+
+  allCbs.forEach(function(cb) {
+    cb.checked = shouldSelect;
+  });
+
+  updateImageSelectionState();
+};
+
+window.toggleSelectAllImages = function(e) {
+  window.handleSelectAllToggle();
+};
+
+window.updateImageSelectionState = function() {
+  var masterCb = document.getElementById('selectAllImagesCb');
+  var allCbs = Array.from(document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new, #existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"]')).filter(cb => cb !== masterCb);
+
+  var selectedCount = allCbs.filter(cb => cb.checked).length;
 
   var actionBar = document.getElementById('imageActionBar');
   var btn = document.getElementById('btnDeleteSelectedImgs');
   var countSpan = document.getElementById('selectedImgCount');
-  var selectAllCb = document.getElementById('selectAllImagesCb');
 
   if (actionBar) actionBar.style.display = allCbs.length > 0 ? 'flex' : 'none';
-  if (countSpan) countSpan.textContent = totalSelected;
+  if (countSpan) countSpan.textContent = selectedCount;
   if (btn) btn.style.display = 'inline-flex';
 
-  if (selectAllCb) {
-    selectAllCb.checked = allCbs.length > 0 && totalSelected === allCbs.length;
-    selectAllCb.indeterminate = totalSelected > 0 && totalSelected < allCbs.length;
+  if (masterCb) {
+    masterCb.checked = allCbs.length > 0 && selectedCount === allCbs.length;
+    masterCb.indeterminate = selectedCount > 0 && selectedCount < allCbs.length;
   }
 
   allCbs.forEach(function(cb) {
-    var wrap = cb.closest('.existing-img-wrap');
+    var wrap = cb.closest('.existing-img-wrap, .new-img-wrap') || cb.parentElement;
     if (wrap) {
       if (cb.checked) {
         wrap.style.borderColor = '#ef4444';
-        wrap.style.boxShadow = '0 0 0 2px rgba(239, 68, 68, 0.3)';
+        wrap.style.outline = '3px solid #ef4444';
+        wrap.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.4)';
       } else {
         wrap.style.borderColor = '#e2e8f0';
+        wrap.style.outline = 'none';
         wrap.style.boxShadow = 'none';
       }
     }
   });
-}
+};
+
 document.addEventListener('DOMContentLoaded', function() {
   updateImageSelectionState();
 });
-
-function toggleSelectAllImages(e) {
-  if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-  var masterCb = document.getElementById('selectAllImagesCb');
-  if (!masterCb) return;
-
-  // Nếu sự kiện nổ từ button click (không phải trực tiếp ô input), đảo state
-  if (e && e.target && e.target.id !== 'selectAllImagesCb') {
-    masterCb.checked = !masterCb.checked;
-  }
-
-  var targetState = masterCb.checked;
-  var allCbs = document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new, #existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"]');
-  allCbs.forEach(function(cb) {
-    if (cb !== masterCb) {
-      cb.checked = targetState;
-    }
-  });
-
-  updateImageSelectionState();
-}
 
 async function deleteSelectedProductImages() {
   var selectedSaved = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
