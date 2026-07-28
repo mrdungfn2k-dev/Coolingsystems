@@ -242,10 +242,11 @@ function swTab(t){
         <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
           <h3 style="margin:0"> Hình ảnh sản phẩm</h3>
           <div id="imageActionBar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;cursor:pointer;user-select:none;color:#334155;background:#f1f5f9;padding:6px 12px;border-radius:6px;border:1px solid #cbd5e1">
-              <input type="checkbox" id="selectAllImagesCb" onchange="toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer">
+            <button type="button" onclick="toggleSelectAllImages(this)" class="btn btn-sm"
+                    style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:8px">
+              <input type="checkbox" id="selectAllImagesCb" onclick="event.stopPropagation();toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer">
               <span>Chọn tất cả</span>
-            </label>
+            </button>
             <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
                     style="background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(239,68,68,0.35);transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;cursor:pointer">
                Xóa <span id="selectedImgCount" style="background:rgba(255,255,255,0.3);padding:1px 7px;border-radius:10px;font-size:11px;font-weight:800">0</span> ảnh đã chọn
@@ -565,11 +566,21 @@ document.addEventListener('DOMContentLoaded', function() {
   updateImageSelectionState();
 });
 
-function toggleSelectAllImages(masterCb) {
+function toggleSelectAllImages(triggerEl) {
+  var masterCb = document.getElementById('selectAllImagesCb');
+  if (!masterCb) return;
+
+  // Nếu bấm vào khung button (không phải bấm trực tiếp vào ô input), đảo trạng thái checkbox master
+  if (!triggerEl || triggerEl.nodeName !== 'INPUT') {
+    masterCb.checked = !masterCb.checked;
+  }
+
+  var isChecked = masterCb.checked;
   var allCbs = document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new');
   allCbs.forEach(function(cb) {
-    cb.checked = masterCb.checked;
+    cb.checked = isChecked;
   });
+
   updateImageSelectionState();
 }
 
