@@ -80,7 +80,7 @@ $_ogImage = !empty($seo['og_image']) ? $seo['og_image'] : 'https://coolingsystem
 <meta property="og:url" content="<?= e($_canonicalUrl) ?>">
 <meta property="og:site_name" content="Coolingsystems.vn">
 <meta property="og:image" content="<?= e($_ogImage) ?>">
-<?php if (!empty($seo['preload_image'])): ?>
+<?php if (!empty($seo['preload_image']) && strpos($seo['preload_image'], 'hero_cooling_banner_1') === false): ?>
 <link rel="preload" as="image" href="<?= e($seo['preload_image']) ?>" fetchpriority="high">
 <?php endif; ?>
 
