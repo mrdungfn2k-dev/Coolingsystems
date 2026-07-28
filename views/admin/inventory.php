@@ -93,4 +93,79 @@ $canSaveInventory = $canEditCost || $canEditPrice || $canEditStock || $canEditTh
   </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('form[id^="inventory-"]').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.querySelector('button[form="' + form.id + '"]');
+      var tr = form.closest('tr');
+      var origBtnText = btn ? btn.innerHTML : 'Lưu';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = 'Đang lưu...';
+      }
+      
+      var formData = new FormData(form);
+      // Collect inputs outside the form that use form="" attribute
+      document.querySelectorAll('input[form="' + form.id + '"]').forEach(function(inp) {
+        if (inp.name) formData.set(inp.name, inp.value);
+      });
+      
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json'
+        },
+        body: formData
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (btn) btn.disabled = false;
+        if (res.ok) {
+          if (btn) {
+            btn.innerHTML = '✓ Đã lưu';
+            btn.style.background = '#16a34a';
+            setTimeout(function() {
+              btn.innerHTML = origBtnText;
+              btn.style.background = '#1a3258';
+            }, 2000);
+          }
+          if (tr && res.isLow !== undefined) {
+            var flagTd = tr.querySelector('.stock-flag');
+            if (flagTd) {
+              if (res.isLow) {
+                flagTd.className = 'stock-flag low';
+                flagTd.textContent = 'Cảnh báo';
+                tr.className = 'low';
+              } else {
+                flagTd.className = 'stock-flag';
+                flagTd.textContent = 'Bình thường';
+                tr.className = '';
+              }
+            }
+          }
+        } else {
+          if (btn) {
+            btn.innerHTML = origBtnText;
+            btn.style.background = '#1a3258';
+          }
+          alert(res.message || 'Có lỗi xảy ra khi lưu.');
+        }
+      })
+      .catch(function(err) {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origBtnText;
+          btn.style.background = '#1a3258';
+        }
+        // Fallback to normal form submit if fetch fails
+        form.submit();
+      });
+    });
+  });
+});
+</script>
+
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

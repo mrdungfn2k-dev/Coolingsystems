@@ -2523,10 +2523,31 @@ get('/admin/inventory', function() {
 
 post('/admin/inventory/:id/update', function($p) {
     $user=requireStaffPermission('rbac:inventory.update|rbac:catalog.pricing.edit|rbac:catalog.cost.edit|rbac:inventory.thresholds.edit|rbac:catalog.products.edit|products','/admin/login'); csrfCheck();
+    
+    $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') 
+              || (str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json'));
+
+    $targetUrl = '/admin/inventory';
+    if (!empty($_SERVER['HTTP_REFERER']) && str_contains($_SERVER['HTTP_REFERER'], '/admin/inventory')) {
+        $targetUrl = $_SERVER['HTTP_REFERER'];
+    }
+
     $product=dbGet('SELECT * FROM products WHERE id=?',[$p['id']]);
-    if(!$product){flash('error','Không tìm thấy sản phẩm.');redirect('/admin/inventory');return;}
+    if(!$product){
+        if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Không tìm thấy sản phẩm.']); exit; }
+        flash('error','Không tìm thấy sản phẩm.'); redirect($targetUrl); return;
+    }
+
     $fields=['cost_price','price','original_price','stock','min_stock','max_stock','warranty_months']; $values=[];
-    foreach($fields as $field){$raw=trim((string)($_POST[$field]??'')); if($raw===''||!ctype_digit($raw)){flash('error','Dữ liệu kho không hợp lệ.');redirect('/admin/inventory');return;} $values[$field]=(int)$raw;}
+    foreach($fields as $field){
+        $raw=trim((string)($_POST[$field]??'')); 
+        if($raw===''||!ctype_digit($raw)){
+            if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Dữ liệu kho không hợp lệ.']); exit; }
+            flash('error','Dữ liệu kho không hợp lệ.'); redirect($targetUrl); return;
+        } 
+        $values[$field]=(int)$raw;
+    }
+
     $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
     if ($detailedRbac) {
         $fieldCapabilities = [
@@ -2536,13 +2557,23 @@ post('/admin/inventory/:id/update', function($p) {
         ];
         foreach ($fieldCapabilities as $field=>$capability) {
             if ((int)$product[$field] !== $values[$field] && !rbacCan((int)$user['id'], $capability)) {
-                flash('error','Ban khong co quyen thay doi truong du lieu nay.'); redirect('/admin/inventory'); return;
+                if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Bạn không có quyền thay đổi trường dữ liệu này.']); exit; }
+                flash('error','Ban khong co quyen thay doi truong du lieu nay.'); redirect($targetUrl); return;
             }
         }
     }
-    if($values['stock']>1000||$values['min_stock']>1000||$values['max_stock']>1000){flash('error','Tồn kho chỉ được từ 0 đến 1000.');redirect('/admin/inventory');return;}
-    if($values['min_stock']>$values['max_stock']){flash('error','Tồn tối thiểu không được lớn hơn tồn tối đa.');redirect('/admin/inventory');return;}
-    if($values['original_price']>0&&$values['original_price']<$values['price']){flash('error','Giá gốc không được nhỏ hơn giá bán khi được nhập.');redirect('/admin/inventory');return;}
+    if($values['stock']>1000||$values['min_stock']>1000||$values['max_stock']>1000){
+        if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Tồn kho chỉ được từ 0 đến 1000.']); exit; }
+        flash('error','Tồn kho chỉ được từ 0 đến 1000.'); redirect($targetUrl); return;
+    }
+    if($values['min_stock']>$values['max_stock']){
+        if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Tồn tối thiểu không được lớn hơn tồn tối đa.']); exit; }
+        flash('error','Tồn tối thiểu không được lớn hơn tồn tối đa.'); redirect($targetUrl); return;
+    }
+    if($values['original_price']>0&&$values['original_price']<$values['price']){
+        if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Giá gốc không được nhỏ hơn giá bán khi được nhập.']); exit; }
+        flash('error','Giá gốc không được nhỏ hơn giá bán khi được nhập.'); redirect($targetUrl); return;
+    }
     
     $stockDiff = $values['stock'] - (int)$product['stock'];
     $pdo = db();
@@ -2561,13 +2592,25 @@ post('/admin/inventory/:id/update', function($p) {
         inventoryCheckLowStockAlert((int)$p['id'], 'inventory_update');
     } catch(Throwable $e) {
         if ($pdo->inTransaction()) $pdo->rollBack();
+        if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Lỗi khi lưu dữ liệu kho: '.$e->getMessage()]); exit; }
         flash('error','Lỗi khi lưu dữ liệu kho.');
-        redirect('/admin/inventory');
+        redirect($targetUrl);
         return;
     }
     
+    $isLow = $values['min_stock'] > 0 && $values['stock'] <= $values['min_stock'];
+    if ($isAjax) {
+        echo json_encode([
+            'ok' => true,
+            'message' => 'Đã cập nhật giá và tồn kho cho sản phẩm.',
+            'isLow' => $isLow,
+            'values' => $values
+        ]);
+        exit;
+    }
+    
     flash('success','Đã cập nhật giá và tồn kho cho sản phẩm.');
-    redirect('/admin/inventory');
+    redirect($targetUrl);
 });
 
 // ─── GIAI ĐOẠN B: KHO NÂNG CAO ───────────────────────────────────────────────
