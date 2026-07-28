@@ -242,10 +242,10 @@ function swTab(t){
         <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
           <h3 style="margin:0"> Hình ảnh sản phẩm</h3>
           <div id="imageActionBar" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-            <button type="button" onclick="toggleSelectAllImages(this)" class="btn btn-sm"
+            <button type="button" id="btnSelectAllImgs" onclick="toggleSelectAllImages(event)" class="btn btn-sm"
                     style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:8px">
-              <input type="checkbox" id="selectAllImagesCb" onclick="event.stopPropagation();toggleSelectAllImages(this)" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer">
-              <span>Chọn tất cả</span>
+              <input type="checkbox" id="selectAllImagesCb" onclick="event.stopPropagation();toggleSelectAllImages(event)" style="width:16px;height:16px;accent-color:#ef4444;cursor:pointer">
+              <span>CHỌN TẤT CẢ</span>
             </button>
             <button type="button" id="btnDeleteSelectedImgs" onclick="deleteSelectedProductImages()" class="btn btn-sm"
                     style="background:#ef4444;color:#fff;border:none;font-weight:700;font-size:12.5px;padding:6px 14px;border-radius:6px;box-shadow:0 2px 6px rgba(239,68,68,0.35);transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;cursor:pointer">
@@ -566,19 +566,22 @@ document.addEventListener('DOMContentLoaded', function() {
   updateImageSelectionState();
 });
 
-function toggleSelectAllImages(triggerEl) {
+function toggleSelectAllImages(e) {
+  if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
   var masterCb = document.getElementById('selectAllImagesCb');
   if (!masterCb) return;
 
-  // Nếu bấm vào khung button (không phải bấm trực tiếp vào ô input), đảo trạng thái checkbox master
-  if (!triggerEl || triggerEl.nodeName !== 'INPUT') {
+  // Nếu sự kiện nổ từ button click (không phải trực tiếp ô input), đảo state
+  if (e && e.target && e.target.id !== 'selectAllImagesCb') {
     masterCb.checked = !masterCb.checked;
   }
 
-  var isChecked = masterCb.checked;
-  var allCbs = document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new');
+  var targetState = masterCb.checked;
+  var allCbs = document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new, #existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"]');
   allCbs.forEach(function(cb) {
-    cb.checked = isChecked;
+    if (cb !== masterCb) {
+      cb.checked = targetState;
+    }
   });
 
   updateImageSelectionState();
