@@ -526,9 +526,13 @@ function previewVideo(url) {
 </form>
 
 <script>
-window.handleSelectAllToggle = function() {
+window.handleSelectAllToggle = function(e) {
+  if (e) {
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+  }
   var masterCb = document.getElementById('selectAllImagesCb');
-  var allCbs = Array.from(document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new, #existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"]')).filter(cb => cb !== masterCb);
+  var allCbs = Array.from(document.querySelectorAll('#existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"], .img-select-checkbox, .img-select-checkbox-new')).filter(cb => cb !== masterCb);
   
   if (allCbs.length === 0) return;
 
@@ -545,12 +549,12 @@ window.handleSelectAllToggle = function() {
 };
 
 window.toggleSelectAllImages = function(e) {
-  window.handleSelectAllToggle();
+  window.handleSelectAllToggle(e);
 };
 
 window.updateImageSelectionState = function() {
   var masterCb = document.getElementById('selectAllImagesCb');
-  var allCbs = Array.from(document.querySelectorAll('.img-select-checkbox, .img-select-checkbox-new, #existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"]')).filter(cb => cb !== masterCb);
+  var allCbs = Array.from(document.querySelectorAll('#existingImagesRow input[type="checkbox"], #img-preview-area input[type="checkbox"], #imgPreviewRow input[type="checkbox"], .img-select-checkbox, .img-select-checkbox-new')).filter(cb => cb !== masterCb);
 
   var selectedCount = allCbs.filter(cb => cb.checked).length;
 
@@ -588,9 +592,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function deleteSelectedProductImages() {
-  var selectedSaved = Array.from(document.querySelectorAll('.img-select-checkbox:checked'));
-  var selectedNew = Array.from(document.querySelectorAll('.img-select-checkbox-new:checked'));
-  var totalSelected = selectedSaved.length + selectedNew.length;
+  var masterCb = document.getElementById('selectAllImagesCb');
+  var allCheckedCbs = Array.from(document.querySelectorAll('#existingImagesRow input[type="checkbox"]:checked, #img-preview-area input[type="checkbox"]:checked, #imgPreviewRow input[type="checkbox"]:checked, .img-select-checkbox:checked, .img-select-checkbox-new:checked')).filter(cb => cb !== masterCb);
+  
+  var selectedSaved = allCheckedCbs.filter(cb => cb.dataset && cb.dataset.imgId);
+  var selectedNew = allCheckedCbs.filter(cb => cb.dataset && cb.dataset.fileIdx !== undefined);
+  var totalSelected = allCheckedCbs.length;
 
   if (totalSelected === 0) {
     alert('Vui lòng chọn ít nhất 1 ảnh để bỏ/xóa.');
