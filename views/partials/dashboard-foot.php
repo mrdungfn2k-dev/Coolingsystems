@@ -364,6 +364,45 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 })();
 </script>
+<script>
+/* 3-Second Auto-dismiss Floating Toast Engine for Admin */
+window.coolToastShow = function(msg, icon) {
+  var stack = document.querySelector('.flash-stack');
+  if (!stack) {
+    stack = document.createElement('div');
+    stack.className = 'flash-stack';
+    stack.style.cssText = 'position:fixed;top:20px;right:20px;z-index:999999;display:flex;flex-direction:column;gap:8px;max-width:360px';
+    document.body.appendChild(stack);
+  }
+  var toast = document.createElement('div');
+  var isErr = /❌|⚠|error|Lỗi/i.test((icon||'') + (msg||''));
+  toast.className = 'flash ' + (isErr ? 'error' : 'success');
+  toast.style.cssText = 'padding:14px 20px;background:' + (isErr ? '#fef2f2' : '#f0fdf4') + ';color:' + (isErr ? '#991b1b' : '#166534') + ';border-left:4px solid ' + (isErr ? '#ef4444' : '#22c55e') + ';border-radius:8px;font-size:13.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.15);animation:slideIn 0.3s ease;display:flex;align-items:center;gap:10px';
+  toast.innerHTML = '<span>' + (icon || (isErr ? '❌' : '✅')) + '</span> <span>' + msg + '</span>';
+  stack.appendChild(toast);
+  setTimeout(function() {
+    toast.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(100%)';
+    setTimeout(function() { toast.remove(); if (!stack.querySelector('.flash')) stack.remove(); }, 400);
+  }, 3000);
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  var stack = document.querySelector('.flash-stack');
+  if (stack) {
+    var flashes = stack.querySelectorAll('.flash');
+    flashes.forEach(function(el) {
+      setTimeout(function() {
+        el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(100%)';
+        setTimeout(function() { el.remove(); if (!stack.querySelector('.flash')) stack.remove(); }, 400);
+      }, 3000);
+    });
+  }
+});
+</script>
 <?php require __DIR__ . '/col-picker.php'; ?>
 </body>
 </html>

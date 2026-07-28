@@ -133,9 +133,12 @@ if ($_canonicalPath === '/admin' || $_canonicalPath === '/admin/') $_canonicalUr
 <body>
 <?php require __DIR__ . '/svg-logo.php'; ?>
 <?php $flash = $flash ?? []; if (!empty($flash)): ?>
-<div class="flash-stack">
+<div class="flash-stack" style="position:fixed;top:20px;right:20px;z-index:999999;display:flex;flex-direction:column;gap:8px;max-width:360px">
   <?php foreach ($flash as $f): ?>
-    <div class="flash <?= e($f['type']) ?>"><?= e($f['message']) ?></div>
+    <div class="flash <?= e($f['type']) ?>" style="padding:14px 20px;background:<?= ($f['type']==='error'||$f['type']==='danger')?'#fef2f2':'#f0fdf4' ?>;color:<?= ($f['type']==='error'||$f['type']==='danger')?'#991b1b':'#166534' ?>;border-left:4px solid <?= ($f['type']==='error'||$f['type']==='danger')?'#ef4444':'#22c55e' ?>;border-radius:8px;font-size:13.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.15);animation:slideIn 0.3s ease;display:flex;align-items:center;gap:10px">
+      <span><?= ($f['type']==='error'||$f['type']==='danger')?'❌':'✅' ?></span>
+      <span><?= e($f['message']) ?></span>
+    </div>
   <?php endforeach; ?>
 </div>
 <?php endif; ?>
