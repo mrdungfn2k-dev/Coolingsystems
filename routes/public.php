@@ -59,6 +59,48 @@ get('/', function() {
     view('public/home', compact('featured','saleProducts','bestSellers','brands','categories','sidebarCategories','productBrands','trustSteps'));
 });
 
+// API Đăng ký Gara trực tuyến (Banner & Modal)
+post('/api/register-garage', function() {
+    header('Content-Type: application/json; charset=utf-8');
+    $phone = preg_replace('/\D+/', '', $_POST['phone'] ?? '');
+    $fullName = trim($_POST['full_name'] ?? '');
+    $garageName = trim($_POST['garage_name'] ?? '');
+    $brandId = intval($_POST['brand_id'] ?? 0);
+    $modelId = intval($_POST['model_id'] ?? 0);
+    $year = intval($_POST['year'] ?? date('Y'));
+    $trim = trim($_POST['trim'] ?? '');
+
+    if (empty($phone) || empty($fullName)) {
+        echo json_encode(['ok'=>false, 'error'=>'Vui lòng điền đầy đủ Họ tên và Số điện thoại']);
+        exit;
+    }
+
+    if (!preg_match('/^0[1-9]\d{8}$/', $phone)) {
+        echo json_encode(['ok'=>false, 'error'=>'Số điện thoại 10 số không hợp lệ']);
+        exit;
+    }
+
+    $existingUser = dbGet("SELECT * FROM users WHERE phone=? OR email=?", [$phone, $phone.'@garage.cooling.vn']);
+    if ($existingUser) {
+        $userId = $existingUser['id'];
+        dbRun("UPDATE users SET is_verified_garage=1, garage_name=? WHERE id=?", [$garageName ?: ($existingUser['garage_name'] ?? 'Gara '.$fullName), $userId]);
+    } else {
+        $userId = dbInsert("INSERT INTO users (full_name, phone, email, role, is_verified_garage, garage_name, created_at) VALUES (?,?,?,'customer',1,?,datetime('now','localtime'))", 
+            [$fullName, $phone, $phone.'@garage.cooling.vn', $garageName ?: ('Gara '.$fullName)]);
+    }
+
+    if ($brandId && $modelId) {
+        dbInsert("INSERT INTO garages (user_id, brand_id, model_id, year, trim, label, is_default, created_at) VALUES (?,?,?,?,?, 1, datetime('now','localtime'))",
+            [$userId, $brandId, $modelId, $year, $trim, 'Đăng ký Gara online']);
+    }
+
+    echo json_encode([
+        'ok'=>true, 
+        'msg'=>'Đăng ký tài khoản Gara thành công! Bảng Giá Sỉ Gốc đã được kích hoạt cho số điện thoại ' . $phone
+    ]);
+    exit;
+});
+
 
 // ── Vouchers Page ────────────────────────────────────────────────────────────
 get('/vouchers', function() {

@@ -165,8 +165,43 @@ get('/customer/cart', function() {
 });
 
 get('/customer/profile', function() {
-    $user = requireRole(['customer','staff'], '/auth/login');
-    view('customer/profile', ['title'=>'Hồ sơ']);
+    $user = requireRole(['customer','staff','admin'], '/auth/login');
+    $userGarages = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$user['id']]);
+    $carBrands = dbAll("SELECT * FROM brands ORDER BY name ASC");
+    $carModels = dbAll("SELECT * FROM car_models ORDER BY name ASC");
+    $title = 'Hồ sơ tài khoản & Quản lý Gara';
+    view('customer/profile', compact('title', 'userGarages', 'carBrands', 'carModels'));
+});
+
+post('/customer/garage/add', function() {
+    $user = currentUser();
+    if (!$user) { echo json_encode(['ok'=>false, 'error'=>'Vui lòng đăng nhập']); exit; }
+    csrfCheck();
+    $brandId = intval($_POST['brand_id'] ?? 0);
+    $modelId = intval($_POST['model_id'] ?? 0);
+    $year = intval($_POST['year'] ?? date('Y'));
+    $trim = trim($_POST['trim'] ?? '');
+    $label = trim($_POST['label'] ?? '');
+    $isDefault = !empty($_POST['is_default']) ? 1 : 0;
+
+    if (!$brandId || !$modelId) {
+        echo json_encode(['ok'=>false, 'error'=>'Vui lòng chọn Hãng xe và Dòng xe']);
+        exit;
+    }
+
+    if ($isDefault) {
+        dbRun("UPDATE garages SET is_default=0 WHERE user_id=?", [$user['id']]);
+    }
+
+    $id = dbInsert("INSERT INTO garages (user_id, brand_id, model_id, year, trim, label, is_default, created_at) VALUES (?,?,?,?,?,?,?,datetime('now','localtime'))", 
+        [$user['id'], $brandId, $modelId, $year, $trim, $label, $isDefault]);
+
+    if (!empty($_POST['garage_name'])) {
+        dbRun("UPDATE users SET is_verified_garage=1, garage_name=? WHERE id=?", [trim($_POST['garage_name']), $user['id']]);
+    }
+
+    echo json_encode(['ok'=>true, 'id'=>$id]);
+    exit;
 });
 
 post('/customer/profile', function() {

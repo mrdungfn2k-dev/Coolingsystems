@@ -132,6 +132,151 @@
       </div>
     </div>
   </div>
+  <!-- Khối Quản lý Thông tin Garage & Xe của tôi -->
+  <div class="sec-card" style="margin-bottom:20px;">
+    <div class="sec-head" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <div class="title"><span class="bar"></span><h2 style="font-size:18px; margin:0;">Thông tin Garage &amp; Danh sách Xe của tôi</h2></div>
+      <button type="button" onclick="openAddCarModal()" class="btn btn-outline-navy" style="font-size:13px; padding:6px 14px;">+ Thêm xe mới</button>
+    </div>
+    <div class="panel-body">
+      <?php if (!empty($user['is_verified_garage']) || !empty($user['garage_name'])): ?>
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-weight:800; color:#1e3a8a; font-size:14.5px;">🏷️ TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
+            <div style="font-size:13px; color:#3b82f6; margin-top:2px;">Tên Gara: <strong><?= e($user['garage_name'] ?? 'Tài khoản Gara') ?></strong> — Áp dụng Bảng Giá Sỉ Gốc (Đơn 10 - 20 triệu VNĐ)</div>
+          </div>
+          <span style="background:#2563eb; color:#fff; font-size:11.5px; font-weight:800; padding:4px 10px; border-radius:20px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ</span>
+        </div>
+      <?php else: ?>
+        <div style="background:#fff8e1; border:1px solid #ffe082; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-weight:700; color:#7a5c00; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng?</div>
+            <div style="font-size:12.5px; color:#8d6e63;">Đăng ký thông tin Gara để nhận ngay Bảng giá chiết khấu sỉ gốc cho đơn từ 10 - 20 triệu.</div>
+          </div>
+          <button type="button" onclick="openGarageRegisterModal()" style="background:#c9a14a; color:#0b1d3a; font-weight:800; font-size:12.5px; padding:6px 14px; border-radius:6px; border:none; cursor:pointer;">Đăng ký Gara giá sỉ</button>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!empty($userGarages)): ?>
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:13.5px; text-align:left;">
+            <thead>
+              <tr style="background:#0b1d3a; color:#fff;">
+                <th style="padding:10px 12px; border-radius:6px 0 0 0;">Hãng xe</th>
+                <th style="padding:10px 12px;">Dòng xe / Model</th>
+                <th style="padding:10px 12px;">Năm SX</th>
+                <th style="padding:10px 12px;">Động cơ / Ghi chú</th>
+                <th style="padding:10px 12px; border-radius:0 6px 0 0; text-align:center;">Xe Mặc định</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($userGarages as $ug): ?>
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                  <td style="padding:10px 12px; font-weight:700; color:#0b1d3a;"><?= e($ug['brand_name'] ?? 'Hãng khác') ?></td>
+                  <td style="padding:10px 12px; color:#1e293b;"><?= e($ug['model_name'] ?? 'Dòng khác') ?></td>
+                  <td style="padding:10px 12px; color:#64748b;"><?= e($ug['year']) ?></td>
+                  <td style="padding:10px 12px; color:#64748b;"><?= e($ug['label'] ?: ($ug['trim'] ?: '—')) ?></td>
+                  <td style="padding:10px 12px; text-align:center;">
+                    <?php if (!empty($ug['is_default'])): ?>
+                      <span style="background:#dcfce7; color:#15803d; font-size:11px; font-weight:800; padding:2px 8px; border-radius:12px;">Mặc định</span>
+                    <?php else: ?>
+                      <span style="color:#94a3b8; font-size:12px;">—</span>
+                    <?php endif; ?>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
+      <?php else: ?>
+        <p style="color:#64748b; font-size:13.5px; font-style:italic; margin:8px 0;">Chưa có xe nào trong danh sách. Hãy nhấn nút "+ Thêm xe mới" để thêm xe ô tô của bạn.</p>
+      <?php endif; ?>
+    </div>
+  </div>
+
+  <!-- Modal Thêm Xe Mới -->
+  <div id="addCarModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.75); backdrop-filter:blur(4px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#fff; border-radius:16px; max-width:460px; width:100%; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,0.3); position:relative;">
+      <button type="button" onclick="closeAddCarModal()" style="position:absolute; top:14px; right:14px; border:none; background:#f1f5f9; width:30px; height:30px; border-radius:50%; font-size:16px; font-weight:bold; cursor:pointer;">&times;</button>
+      <h3 style="font-size:18px; font-weight:800; color:#0b1d3a; margin:0 0 16px 0;">Thêm xe mới vào hồ sơ</h3>
+      
+      <form id="addCarForm" onsubmit="submitAddCar(event)">
+        <?= csrfField() ?>
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Hãng xe <span style="color:#ef4444">*</span></label>
+          <select name="brand_id" required style="width:100%; height:40px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px;">
+            <option value="">-- Chọn Hãng xe --</option>
+            <?php if (!empty($carBrands)): foreach ($carBrands as $cb): ?>
+              <option value="<?= $cb['id'] ?>"><?= e($cb['name']) ?></option>
+            <?php endforeach; endif; ?>
+          </select>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Dòng xe <span style="color:#ef4444">*</span></label>
+          <select name="model_id" required style="width:100%; height:40px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px;">
+            <option value="">-- Chọn Dòng xe --</option>
+            <?php if (!empty($carModels)): foreach ($carModels as $cm): ?>
+              <option value="<?= $cm['id'] ?>"><?= e($cm['name']) ?></option>
+            <?php endforeach; endif; ?>
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div>
+            <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Năm sản xuất</label>
+            <input type="number" name="year" value="<?= date('Y') ?>" min="1990" max="2027" style="width:100%; height:40px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
+          </div>
+          <div>
+            <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Động cơ/Phiên bản</label>
+            <input type="text" name="trim" placeholder="VD: 2.0 / 1.6 Turbo" style="width:100%; height:40px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Tên nhãn / Ghi chú xe</label>
+          <input type="text" name="label" placeholder="VD: Xe khách 1 / Xe đưa đón..." style="width:100%; height:40px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label style="font-size:13px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+            <input type="checkbox" name="is_default" value="1" checked> Chọn làm xe mặc định
+          </label>
+        </div>
+
+        <div id="addCarMsg" style="margin-bottom:12px; font-size:13px; display:none;"></div>
+
+        <button type="submit" id="btnSubmitAddCar" style="width:100%; height:42px; background:#0b1d3a; color:#fff; border:none; border-radius:8px; font-weight:800; font-size:14px; cursor:pointer;">LƯU XE VÀO HỒ SƠ</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  function openAddCarModal(){ var m=document.getElementById('addCarModal'); if(m)m.style.display='flex'; }
+  function closeAddCarModal(){ var m=document.getElementById('addCarModal'); if(m)m.style.display='none'; }
+  function submitAddCar(e){
+    e.preventDefault();
+    var form=document.getElementById('addCarForm');
+    var msg=document.getElementById('addCarMsg');
+    var btn=document.getElementById('btnSubmitAddCar');
+    var fd=new FormData(form);
+    btn.disabled=true; btn.innerText='Đang lưu...';
+    fetch('/customer/garage/add',{method:'POST',body:fd})
+    .then(function(r){return r.json();})
+    .then(function(res){
+      btn.disabled=false; btn.innerText='LƯU XE VÀO HỒ SƠ';
+      msg.style.display='block';
+      if(res.ok){
+        msg.style.color='#15803d'; msg.innerText='✅ Thêm xe thành công!';
+        setTimeout(function(){ location.reload(); },1000);
+      } else {
+        msg.style.color='#b91c1c'; msg.innerText='⚠️ '+(res.error||'Có lỗi xảy ra');
+      }
+    })
+    .catch(function(){ btn.disabled=false; btn.innerText='LƯU XE VÀO HỒ SƠ'; msg.style.display='block'; msg.style.color='#b91c1c'; msg.innerText='⚠️ Lỗi kết nối'; });
+  }
+  </script>
+
   <div class="sec-card">
     <div class="sec-head"><div class="title"><span class="bar"></span><h2 style="font-size:18px">Đổi mật khẩu</h2></div></div>
     <div class="panel-body">
