@@ -270,17 +270,50 @@ foreach ($trustSteps as $step):
 <?php $num++; endforeach; ?>
 </div></div></section>
 
+<?php 
+  $curU = currentUser();
+  $isVerifiedGara = !empty($curU['is_verified_garage']) || !empty($curU['garage_name']);
+?>
+
+<style>
+@media (max-width: 768px) {
+  .gara-home-banner {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 16px !important;
+  }
+  .gara-home-banner a, .gara-home-banner button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .gara-modal-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+
 <!-- Banner Cam Kết Giá Sỉ Gara / Đại Lý -->
 <section class="block" style="padding: 10px 0 0 0;">
   <div class="wrap">
-    <div style="background: #0b1d3a; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(11,29,58,0.15);">
-      <div style="font-size: 16px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px;">
-        Đăng ký tài khoản Gara / Đại lý — Nhận bảng giá chiết khấu sỉ gốc
+    <?php if ($isVerifiedGara): ?>
+      <div class="gara-home-banner" style="background: #0b1d3a; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(11,29,58,0.15);">
+        <div style="font-size: 15px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px;">
+          TÀI KHOẢN CỦA BẠN ĐÃ XÁC THỰC GARA / ĐẠI LÝ — ĐÃ KÍCH HOẠT BẢNG GIÁ SỈ GỐC
+        </div>
+        <a href="/account" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
+          Xem hồ sơ &amp; danh sách xe &rarr;
+        </a>
       </div>
-      <button type="button" onclick="openGarageRegisterModal()" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
-        Đăng ký Gara / Nhận giá sỉ &rarr;
-      </button>
-    </div>
+    <?php else: ?>
+      <div class="gara-home-banner" style="background: #0b1d3a; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(11,29,58,0.15);">
+        <div style="font-size: 16px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px;">
+          Đăng ký tài khoản Gara / Đại lý — Nhận bảng giá chiết khấu sỉ gốc
+        </div>
+        <button type="button" onclick="openGarageRegisterModal()" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
+          Đăng ký Gara / Nhận giá sỉ &rarr;
+        </button>
+      </div>
+    <?php endif; ?>
   </div>
 </section>
 
@@ -289,65 +322,70 @@ foreach ($trustSteps as $step):
   <div style="background:#fff; border-radius:16px; max-width:520px; width:100%; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.3); position:relative; max-height:90vh; overflow-y:auto;">
     <button type="button" onclick="closeGarageRegisterModal()" style="position:absolute; top:16px; right:16px; border:none; background:#f1f5f9; width:32px; height:32px; border-radius:50%; font-size:18px; font-weight:bold; cursor:pointer; color:#64748b;">&times;</button>
     
-    <div style="text-align:center; margin-bottom:20px;">
-      <div style="width:50px; height:50px; border-radius:50%; background:#eff6ff; color:#1e3a8a; display:inline-flex; align-items:center; justify-content:center; margin-bottom:10px;">
-        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0v-5a2 2 0 012-2h2a2 2 0 012 2v5m-4 0h4"/></svg>
+    <?php if ($isVerifiedGara): ?>
+      <div style="text-align:center; padding:20px 10px;">
+        <h2 style="font-size:18px; font-weight:800; color:#0b1d3a; margin:0 0 10px 0;">TÀI KHOẢN CỦA BẠN ĐÃ ĐÃ XÁC THỰC GARA / ĐẠI LÝ</h2>
+        <p style="font-size:14px; color:#475569; margin:0 0 20px 0; line-height:1.6;">Bảng Giá Sỉ Gốc đã được áp dụng tự động cho tài khoản <strong><?= e($curU['garage_name'] ?: $curU['full_name']) ?></strong>.</p>
+        <a href="/account" style="background:#0b1d3a; color:#fff; font-weight:800; font-size:14px; padding:12px 24px; border-radius:8px; text-decoration:none; display:inline-block;">Quản lý Hồ sơ &amp; Danh sách Xe &rarr;</a>
       </div>
-      <h2 style="font-size:20px; font-weight:800; color:#0b1d3a; margin:0 0 6px 0;">ĐĂNG KÝ TÀI KHOẢN GARA / ĐẠI LÝ</h2>
-      <p style="font-size:13.5px; color:#64748b; margin:0;">Nhận ngay bảng giá chiết khấu sỉ gốc cho đơn hàng từ 10 - 20 triệu VNĐ</p>
-    </div>
-
-    <form id="garageRegisterForm" onsubmit="submitGarageRegister(event)">
-      <div style="margin-bottom:14px;">
-        <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Họ tên quản lý / Chủ Gara <span style="color:#ef4444">*</span></label>
-        <input type="text" name="full_name" required placeholder="VD: Nguyễn Văn A" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 14px; font-size:14px; box-sizing:border-box;">
+    <?php else: ?>
+      <div style="text-align:center; margin-bottom:20px;">
+        <h2 style="font-size:20px; font-weight:800; color:#0b1d3a; margin:0 0 6px 0;">ĐĂNG KÝ TÀI KHOẢN GARA / ĐẠI LÝ</h2>
+        <p style="font-size:13.5px; color:#64748b; margin:0;">Nhận ngay bảng giá chiết khấu sỉ gốc cho đơn hàng từ 10 - 20 triệu VNĐ</p>
       </div>
 
-      <div style="margin-bottom:14px;">
-        <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Số điện thoại / Zalo <span style="color:#ef4444">*</span></label>
-        <input type="tel" name="phone" required pattern="0[1-9][0-9]{8}" placeholder="VD: 0947795471" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 14px; font-size:14px; box-sizing:border-box;">
-      </div>
-
-      <div style="margin-bottom:14px;">
-        <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Tên Gara / Trung tâm dịch vụ ô tô</label>
-        <input type="text" name="garage_name" placeholder="VD: Gara Ô Tô Thanh Dũng Auto" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 14px; font-size:14px; box-sizing:border-box;">
-      </div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
-        <div>
-          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Hãng xe chuyên làm</label>
-          <select name="brand_id" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
-            <option value="0">-- Chọn Hãng xe --</option>
-            <?php foreach ($brands as $b): ?>
-              <option value="<?= $b['id'] ?>"><?= e($b['name']) ?></option>
-            <?php endforeach; ?>
-          </select>
+      <form id="garageRegisterForm" onsubmit="submitGarageRegister(event)">
+        <div style="margin-bottom:14px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Họ tên quản lý / Chủ Gara <span style="color:#ef4444">*</span></label>
+          <input type="text" name="full_name" required placeholder="VD: Nguyễn Văn A" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 14px; font-size:14px; box-sizing:border-box;">
         </div>
-        <div>
-          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Dòng xe chính</label>
-          <select name="model_id" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
-            <option value="0">-- Chọn Dòng xe --</option>
-            <option value="1">Santa Fe</option>
-            <option value="2">Tucson</option>
-            <option value="3">Elantra</option>
-            <option value="4">Accent</option>
-            <option value="5">Grand i10</option>
-            <option value="9">Vios</option>
-            <option value="16">K3 / Cerato</option>
-          </select>
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Số điện thoại / Zalo <span style="color:#ef4444">*</span></label>
+          <input type="tel" name="phone" required pattern="0[1-9][0-9]{8}" placeholder="VD: 0947795471" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 14px; font-size:14px; box-sizing:border-box;">
         </div>
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Tên Gara / Trung tâm dịch vụ ô tô</label>
+          <input type="text" name="garage_name" placeholder="VD: Gara Ô Tô Thanh Dũng Auto" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 14px; font-size:14px; box-sizing:border-box;">
+        </div>
+
+        <div class="gara-modal-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+          <div>
+            <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Hãng xe chuyên làm</label>
+            <select name="brand_id" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
+              <option value="0">-- Chọn Hãng xe --</option>
+              <?php foreach ($brands as $b): ?>
+                <option value="<?= $b['id'] ?>"><?= e($b['name']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Dòng xe chính</label>
+            <select name="model_id" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 10px; font-size:13.5px; box-sizing:border-box;">
+              <option value="0">-- Chọn Dòng xe --</option>
+              <option value="1">Santa Fe</option>
+              <option value="2">Tucson</option>
+              <option value="3">Elantra</option>
+              <option value="4">Accent</option>
+              <option value="5">Grand i10</option>
+              <option value="9">Vios</option>
+              <option value="16">K3 / Cerato</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="garageFormMsg" style="margin-bottom:14px; font-size:13.5px; display:none;"></div>
+
+        <button type="submit" id="btnSubmitGarage" style="width:100%; height:44px; background:#0b1d3a; color:#fff; border:none; border-radius:8px; font-weight:800; font-size:14.5px; cursor:pointer; transition:background 0.2s;">
+          XÁC NHẬN ĐĂNG KÝ GARA &amp; NHẬN GIÁ SỈ
+        </button>
+      </form>
+
+      <div style="margin-top:16px; padding-top:14px; border-top:1px dashed #e2e8f0; text-align:center; font-size:13px; color:#64748b;">
+        Cần tư vấn gấp? <a href="https://zalo.me/0703070361" target="_blank" style="color:#2563eb; font-weight:700; text-decoration:none;">Chat Zalo trực tiếp 0703 070 361 &rarr;</a>
       </div>
-
-      <div id="garageFormMsg" style="margin-bottom:14px; font-size:13.5px; display:none;"></div>
-
-      <button type="submit" id="btnSubmitGarage" style="width:100%; height:44px; background:#0b1d3a; color:#fff; border:none; border-radius:8px; font-weight:800; font-size:14.5px; cursor:pointer; transition:background 0.2s;">
-        XÁC NHẬN ĐĂNG KÝ GARA &amp; NHẬN GIÁ SỈ
-      </button>
-    </form>
-
-    <div style="margin-top:16px; padding-top:14px; border-top:1px dashed #e2e8f0; text-align:center; font-size:13px; color:#64748b;">
-      Cần tư vấn gấp? <a href="https://zalo.me/0703070361" target="_blank" style="color:#2563eb; font-weight:700; text-decoration:none;">Chat Zalo trực tiếp 0703 070 361 &rarr;</a>
-    </div>
+    <?php endif; ?>
   </div>
 </div>
 
