@@ -91,7 +91,7 @@ post('/api/register-garage', function() {
     }
 
     if ($brandId && $modelId) {
-        dbInsert("INSERT INTO garages (user_id, brand_id, model_id, year, trim, label, is_default, created_at) VALUES (?,?,?,?,?, 1, datetime('now','localtime'))",
+        dbInsert("INSERT INTO garages (user_id, brand_id, model_id, year, trim, label, is_default, created_at) VALUES (?,?,?,?,?,?,1,datetime('now','localtime'))",
             [$userId, $brandId, $modelId, $year, $trim, 'Đăng ký Gara online']);
     }
 
