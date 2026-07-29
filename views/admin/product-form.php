@@ -69,9 +69,11 @@ $formAction = isset($product)
                    value="<?= e($product['name']??'') ?>" placeholder="Tên đầy đủ sản phẩm">
           </div>
           <div class="form-group">
-            <label>Đường dẫn URL</label>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label style="margin:0">Đường dẫn URL</label>
+              <button type="button" id="btnSyncSlug" onclick="forceSyncSlugLive()" style="background:none;border:none;color:#2563eb;font-size:12px;font-weight:600;cursor:pointer;padding:0">🔄 Tự động tạo theo Tên sản phẩm</button>
+            </div>
             <input type="text" name="slug" id="productSlug" maxlength="180"
-                   data-auto="<?= isset($product) ? '0' : '1' ?>"
                    value="<?= e($product['slug']??'') ?>" placeholder="Tự động tạo từ tên sản phẩm">
           </div>
           <div class="form-row">
@@ -1401,6 +1403,57 @@ setTimeout(function() {
   document.querySelector('select[name="category_id"]')?.addEventListener('change', function(){runSeoAnalysis();});
 }, 1500);
 
+// --- TỰ ĐỘNG CẬP NHẬT ĐƯỜNG DẪN URL TỨC THÌ THEO TÊN SẢN PHẨM ---
+(function() {
+  function toVietnameseSlug(str) {
+    if (!str) return '';
+    return str.toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/Đ/g, 'd')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  window.forceSyncSlugLive = function() {
+    var nameInput = document.getElementById('productName');
+    var slugInput = document.getElementById('productSlug');
+    if (!nameInput || !slugInput) return;
+    slugInput.dataset.userEdited = '0';
+    slugInput.value = toVietnameseSlug(nameInput.value);
+    if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var nameInput = document.getElementById('productName');
+    var slugInput = document.getElementById('productSlug');
+    if (!nameInput || !slugInput) return;
+
+    function syncSlugNow() {
+      // If user hasn't typed custom slug OR if slug input is empty
+      if (slugInput.dataset.userEdited !== '1' || !slugInput.value.trim()) {
+        slugInput.value = toVietnameseSlug(nameInput.value);
+      }
+      if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
+    }
+
+    ['input', 'keyup', 'change', 'paste', 'cut'].forEach(function(evtName) {
+      nameInput.addEventListener(evtName, syncSlugNow);
+    });
+
+    slugInput.addEventListener('input', function() {
+      var autoValue = toVietnameseSlug(nameInput.value);
+      if (this.value.trim() === '' || this.value.trim() === autoValue) {
+        this.dataset.userEdited = '0';
+      } else {
+        this.dataset.userEdited = '1';
+      }
+    });
+  });
+})();
 </script>
 
 <script>
