@@ -29,6 +29,7 @@
   }
   #navScrollWrap.dragging { cursor: grabbing; }
   #navScrollWrap .nav-link, #navScrollWrap .all-cats { flex-shrink: 0; }
+  #navScrollWrap .all-cats-wrap { display: none !important; }
   @media (max-width: 768px) {
     nav.primary { background: #1a3258 !important; padding: 0 !important; overflow: hidden !important; width: 100% !important; }
     nav.primary .wrap, #navScrollWrap {
@@ -48,10 +49,6 @@
     #navScrollWrap::-webkit-scrollbar { display: none !important; }
     #navScrollWrap .all-cats-wrap { display: none !important; }
     #navScrollWrap .nav-link { display: inline-flex !important; padding: 6px 10px !important; font-size: 12px !important; font-weight: 700 !important; color: #fff !important; white-space: nowrap !important; flex: 0 0 auto !important; opacity: 1 !important; visibility: visible !important; margin: 0 !important; }
-  }
-  @media (min-width: 769px) {
-    #navScrollWrap .all-cats span.txt-desktop { display: inline !important; }
-    #navScrollWrap .all-cats span.txt-mobile { display: none !important; }
   }
   </style>
 
