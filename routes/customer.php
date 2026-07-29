@@ -204,6 +204,33 @@ post('/customer/garage/add', function() {
     exit;
 });
 
+post('/customer/garage/delete', function() {
+    $user = currentUser();
+    if (!$user) { echo json_encode(['ok'=>false, 'error'=>'Vui lòng đăng nhập']); exit; }
+    csrfCheck();
+    $id = intval($_POST['id'] ?? 0);
+    if (!$id) { echo json_encode(['ok'=>false, 'error'=>'Mã xe không hợp lệ']); exit; }
+
+    dbRun("DELETE FROM garages WHERE id=? AND user_id=?", [$id, $user['id']]);
+
+    echo json_encode(['ok'=>true, 'msg'=>'Đã xóa xe khỏi danh sách']);
+    exit;
+});
+
+post('/customer/garage/set-default', function() {
+    $user = currentUser();
+    if (!$user) { echo json_encode(['ok'=>false, 'error'=>'Vui lòng đăng nhập']); exit; }
+    csrfCheck();
+    $id = intval($_POST['id'] ?? 0);
+    if (!$id) { echo json_encode(['ok'=>false, 'error'=>'Mã xe không hợp lệ']); exit; }
+
+    dbRun("UPDATE garages SET is_default=0 WHERE user_id=?", [$user['id']]);
+    dbRun("UPDATE garages SET is_default=1 WHERE id=? AND user_id=?", [$id, $user['id']]);
+
+    echo json_encode(['ok'=>true, 'msg'=>'Đã đặt làm xe mặc định']);
+    exit;
+});
+
 post('/customer/profile', function() {
     $user = currentUser();
     if (!$user || $user['role'] !== 'customer') { redirect('/auth/login'); exit; }

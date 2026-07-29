@@ -166,7 +166,8 @@
                 <th style="padding:10px 12px;">Dòng xe / Model</th>
                 <th style="padding:10px 12px;">Năm SX</th>
                 <th style="padding:10px 12px;">Động cơ / Ghi chú</th>
-                <th style="padding:10px 12px; border-radius:0 6px 0 0; text-align:center;">Xe Mặc định</th>
+                <th style="padding:10px 12px; text-align:center;">Trạng thái</th>
+                <th style="padding:10px 12px; border-radius:0 6px 0 0; text-align:center;">Thao tác</th>
               </tr>
             </thead>
             <tbody>
@@ -182,6 +183,14 @@
                     <?php else: ?>
                       <span style="color:#94a3b8; font-size:12px;">—</span>
                     <?php endif; ?>
+                  </td>
+                  <td style="padding:10px 12px; text-align:center;">
+                    <div style="display:flex; align-items:center; justify-content:center; gap:6px;">
+                      <?php if (empty($ug['is_default'])): ?>
+                        <button type="button" onclick="setDefaultCar(<?= $ug['id'] ?>)" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; border-radius:6px; padding:3px 8px; font-size:11.5px; cursor:pointer;" title="Đặt làm xe mặc định">⭐ Mặc định</button>
+                      <?php endif; ?>
+                      <button type="button" onclick="deleteCar(<?= $ug['id'] ?>)" style="background:#fef2f2; color:#ef4444; border:1px solid #fca5a5; border-radius:6px; padding:3px 8px; font-size:11.5px; font-weight:700; cursor:pointer;" title="Hủy / Xóa xe này">🗑️ Hủy / Xóa</button>
+                    </div>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -274,6 +283,41 @@
       }
     })
     .catch(function(){ btn.disabled=false; btn.innerText='LƯU XE VÀO HỒ SƠ'; msg.style.display='block'; msg.style.color='#b91c1c'; msg.innerText='⚠️ Lỗi kết nối'; });
+  }
+
+  function deleteCar(id) {
+    if(!confirm('Bạn có chắc chắn muốn xóa/hủy xe này khỏi hồ sơ không?')) return;
+    var fd = new FormData();
+    fd.append('_csrf', '<?= csrfToken() ?>');
+    fd.append('id', id);
+    fetch('/customer/garage/delete', { method: 'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(res.ok) {
+        if(window.coolToastShow) coolToastShow('Đã xóa xe thành công!', '✅');
+        setTimeout(function(){ location.reload(); }, 600);
+      } else {
+        alert(res.error || 'Không thể xóa xe');
+      }
+    })
+    .catch(function(){ alert('Lỗi kết nối máy chủ'); });
+  }
+
+  function setDefaultCar(id) {
+    var fd = new FormData();
+    fd.append('_csrf', '<?= csrfToken() ?>');
+    fd.append('id', id);
+    fetch('/customer/garage/set-default', { method: 'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(res.ok) {
+        if(window.coolToastShow) coolToastShow('Đã đặt làm xe mặc định!', '✅');
+        setTimeout(function(){ location.reload(); }, 600);
+      } else {
+        alert(res.error || 'Không thể đặt mặc định');
+      }
+    })
+    .catch(function(){ alert('Lỗi kết nối máy chủ'); });
   }
   </script>
 
