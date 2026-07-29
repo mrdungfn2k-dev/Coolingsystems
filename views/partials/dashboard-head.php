@@ -218,7 +218,6 @@ if ($_ap !== '/admin' && !empty($_abcLabel)) {
 // Generate low stock alerts
 $lowStockProducts = dbAll("SELECT id, name, stock, min_stock FROM products WHERE stock <= min_stock AND min_stock > 0");
 foreach($lowStockProducts as $p) {
-    // Check if noti already exists recently
     $exists = dbGet("SELECT 1 FROM admin_notifications WHERE type='stock' AND link LIKE ? AND created_at >= datetime('now', '-1 day')", ['%/admin/products/'.$p['id'].'%']);
     if (!$exists) {
         dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('stock', 'Cảnh báo tồn kho', ?, ?)", [
@@ -227,6 +226,35 @@ foreach($lowStockProducts as $p) {
         ]);
     }
 }
+
+// Sync unread customer chat threads into admin_notifications
+try {
+  $unreadChatThreads = dbAll("SELECT t.id, t.customer_id, t.last_message, t.last_message_at, u.full_name FROM chat_threads t LEFT JOIN users u ON u.id=t.customer_id WHERE EXISTS (SELECT 1 FROM chat_messages m WHERE m.thread_id=t.id AND m.sender_role='customer' AND (m.status='sent' OR m.status IS NULL))");
+  foreach ($unreadChatThreads as $uct) {
+    $cName = !empty($uct['full_name']) ? $uct['full_name'] : 'Khách hàng';
+    $cLink = "/admin/chat?thread=" . $uct['id'];
+    $cMsg = "Khách hàng {$cName} vừa gửi tin nhắn: " . mb_substr($uct['last_message'] ?? 'Xin chào', 0, 50);
+    $cTitle = "Tin nhắn mới từ " . $cName;
+    
+    $cExists = dbGet("SELECT id FROM admin_notifications WHERE type='chat' AND link=?", [$cLink]);
+    if ($cExists) {
+      dbRun("UPDATE admin_notifications SET message=?, is_read=0, created_at=? WHERE id=?", [$cMsg, $uct['last_message_at'] ?: date('Y-m-d H:i:s'), $cExists['id']]);
+    } else {
+      dbRun("INSERT INTO admin_notifications (type, title, message, link, is_read, created_at) VALUES ('chat', ?, ?, ?, 0, ?)", [
+        $cTitle,
+        $cMsg,
+        $cLink,
+        $uct['last_message_at'] ?: date('Y-m-d H:i:s')
+      ]);
+    }
+  }
+} catch(\Exception $e){}
+
+// Automatically mark chat notifications as read if all customer messages in that thread are read
+try {
+  dbRun("UPDATE admin_notifications SET is_read=1 WHERE type='chat' AND link IN (SELECT '/admin/chat?thread=' || id FROM chat_threads WHERE id NOT IN (SELECT DISTINCT thread_id FROM chat_messages WHERE sender_role='customer' AND (status='sent' OR status IS NULL)))");
+} catch(\Exception $e){}
+
 $notis = dbAll("SELECT * FROM admin_notifications ORDER BY created_at DESC LIMIT 10");
 $unreadNotisCount = dbGet("SELECT COUNT(*) as n FROM admin_notifications WHERE is_read=0")['n'] ?? 0;
 ?>

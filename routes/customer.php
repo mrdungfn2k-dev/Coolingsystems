@@ -1153,6 +1153,21 @@ post('/customer/chat/send', function() {
     $content = $msg ?: '[Ảnh]';
     dbRun("INSERT INTO chat_messages (thread_id, sender_user_id, sender_role, content, image_path, attachment_path, status, created_at) VALUES (?, ?, 'customer', ?, ?, ?, 'sent', datetime('now','localtime'))", [$thread['id'], $user['id'], $content, $imagePath, $imagePath]);
     dbRun("UPDATE chat_threads SET last_message=?, last_message_at=datetime('now') WHERE id=?", [$content, $thread['id']]);
+
+    // Insert or update Admin Notification for new chat message
+    try {
+      $cName = !empty($user['full_name']) ? $user['full_name'] : 'Khách hàng';
+      $cLink = "/admin/chat?thread=" . $thread['id'];
+      $cMsg = "Khách hàng {$cName} vừa gửi tin nhắn: " . mb_substr($content, 0, 50);
+      $cTitle = "Tin nhắn mới từ " . $cName;
+      $cExists = dbGet("SELECT id FROM admin_notifications WHERE type='chat' AND link=?", [$cLink]);
+      if ($cExists) {
+        dbRun("UPDATE admin_notifications SET message=?, is_read=0, created_at=datetime('now','localtime') WHERE id=?", [$cMsg, $cExists['id']]);
+      } else {
+        dbRun("INSERT INTO admin_notifications (type, title, message, link, is_read, created_at) VALUES ('chat', ?, ?, ?, 0, datetime('now','localtime'))", [$cTitle, $cMsg, $cLink]);
+      }
+    } catch(\Exception $e){}
+
     redirect('/customer/chat');
 });
 
