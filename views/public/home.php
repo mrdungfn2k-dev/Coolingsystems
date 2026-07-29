@@ -267,27 +267,44 @@ foreach ($trustSteps as $step):
 <?php $num++; endforeach; ?>
 </div></div></section>
 
-<section class="block" id="products"><div class="wrap"><div class="sec-card">
+<!-- Khối 1: Sản phẩm Khuyến mại -->
+<?php if (!empty($saleProducts)): ?>
+<section class="block" id="sale-products"><div class="wrap"><div class="sec-card">
   <div class="sec-head">
-    <div class="title"><span class="bar"></span><h2>Sản phẩm nổi bật</h2></div>
-    <div class="sec-tabs"><button class="active" data-target="featured">Sản phẩm mới</button><button data-target="bestseller">Bán chạy</button></div>
-    <a href="/products" class="btn-link all-link">Xem tất cả</a>
+    <div class="title"><span class="bar"></span><h2>SẢN PHẨM KHUYẾN MẠI</h2></div>
+    <a href="/promotions" class="btn-link all-link">Xem tất cả &rarr;</a>
   </div>
-  <div class="prod-grid" data-tab="featured">
-    <?php foreach ($featured as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
-  </div>
-  <div class="prod-grid" data-tab="bestseller" style="display:none">
-    <?php if (!empty($bestSellers)): ?>
-      <?php foreach ($bestSellers as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
-    <?php else: ?>
-      <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:#888">
-        <svg width="48" height="48" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom:12px"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-        <p style="font-size:15px;font-weight:600;color:#666;margin:0 0 6px">Chưa có sản phẩm bán chạy</p>
-        <p style="font-size:13px;margin:0">Sản phẩm cần bán trên 20 đơn vị mới hiển thị tại đây</p>
-      </div>
-    <?php endif; ?>
+  <div class="prod-grid">
+    <?php foreach ($saleProducts as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
   </div>
 </div></div></section>
+<?php endif; ?>
+
+<!-- Khối 2: Sản phẩm Bán chạy -->
+<?php if (!empty($bestSellers)): ?>
+<section class="block" id="bestseller-products"><div class="wrap"><div class="sec-card">
+  <div class="sec-head">
+    <div class="title"><span class="bar"></span><h2>SẢN PHẨM BÁN CHẠY</h2></div>
+    <a href="/products?sort=bestseller" class="btn-link all-link">Xem tất cả &rarr;</a>
+  </div>
+  <div class="prod-grid">
+    <?php foreach ($bestSellers as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
+  </div>
+</div></div></section>
+<?php endif; ?>
+
+<!-- Khối 3: Sản phẩm Mới -->
+<?php if (!empty($featured)): ?>
+<section class="block" id="new-products"><div class="wrap"><div class="sec-card">
+  <div class="sec-head">
+    <div class="title"><span class="bar"></span><h2>SẢN PHẨM MỚI</h2></div>
+    <a href="/products?sort=newest" class="btn-link all-link">Xem tất cả &rarr;</a>
+  </div>
+  <div class="prod-grid">
+    <?php foreach ($featured as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
+  </div>
+</div></div></section>
+<?php endif; ?>
 
 <!-- Sản phẩm theo danh mục -->
 <?php

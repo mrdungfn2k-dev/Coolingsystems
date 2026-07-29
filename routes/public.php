@@ -19,8 +19,24 @@ get('/', function() {
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
         FROM products p
         WHERE p.status='published'
-        AND p.created_at >= datetime('now', '-" . $newDays . " days', 'localtime')
-        ORDER BY p.created_at DESC LIMIT 40");
+        ORDER BY p.created_at DESC, p.id DESC LIMIT 10");
+
+    $saleProducts = dbAll("SELECT p.*, 'Cooling' AS shop_name,
+        (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
+        COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
+        (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
+        FROM products p
+        WHERE p.status='published' AND (p.is_on_sale=1 OR (p.original_price IS NOT NULL AND p.original_price > p.price))
+        ORDER BY p.id DESC LIMIT 10");
+    if (empty($saleProducts)) {
+        $saleProducts = dbAll("SELECT p.*, 'Cooling' AS shop_name,
+            (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
+            COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
+            (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
+            FROM products p
+            WHERE p.status='published' AND p.original_price > p.price
+            ORDER BY p.created_at DESC LIMIT 10");
+    }
 
     $bestSellers = dbAll("SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
@@ -33,15 +49,14 @@ get('/', function() {
         FROM products p
         WHERE p.status='published' AND p.stock>0
         GROUP BY p.id
-        HAVING total_purchased >= 20
-        ORDER BY total_purchased DESC, avg_rating DESC LIMIT 10");
+        ORDER BY total_purchased DESC, avg_rating DESC, p.created_at DESC LIMIT 10");
 
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
     $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c WHERE (c.is_active=1 OR c.is_active IS NULL) ORDER BY sort_order, id");
     $sidebarCategories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     $trustSteps = dbAll("SELECT * FROM trust_steps WHERE is_active=1 ORDER BY sort_order");
-    view('public/home', compact('featured','bestSellers','brands','categories','sidebarCategories','productBrands','trustSteps'));
+    view('public/home', compact('featured','saleProducts','bestSellers','brands','categories','sidebarCategories','productBrands','trustSteps'));
 });
 
 
