@@ -169,13 +169,13 @@ if (!empty($faqItems)) {
 <script type="application/ld+json"><?= jsonLd($faqSchema) ?></script>
 <?php endif; ?>
 <style>
-.pd-grid{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:start}
+.pd-grid{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:start;padding:0 24px 24px 24px}
 @media(max-width:900px){
-  .pd-grid{grid-template-columns:1fr}
+  .pd-grid{grid-template-columns:1fr;padding:0 16px 16px 16px}
   .pd-gallery{position:relative !important;top:0 !important}
 }
-.pd-gallery{position:sticky;top:100px}
-.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:1/1;min-height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line,#e2e8f0);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.pd-gallery{position:sticky;top:100px;margin-top:0;padding-top:0}
+.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:1/1;width:100%;min-height:400px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #e2e8f0;box-shadow:none;margin-top:0}
 .pd-main-img img{max-width:100%;object-fit:contain!important;object-position:center;border-radius:8px;width:100%;height:100%;background:#fff}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pd-thumb{width:62px;height:62px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
@@ -293,7 +293,7 @@ if (!empty($faqItems)) {
         <?php endif; ?>
 
         <!-- Price -->
-        <div style="margin:12px 0 10px">
+        <div style="margin:0 0 10px">
           <span class="pd-price-big"><?= vnd($displayPrice) ?></span>
           <span class="fs-12 text-muted" style="margin-left:6px;font-weight:500">(Đã bao gồm <?= (int)($product['vat_rate']??0) ?>% VAT)</span>
           <?php if(!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
