@@ -85,8 +85,9 @@ post('/api/register-garage', function() {
         $userId = $existingUser['id'];
         dbRun("UPDATE users SET is_verified_garage=1, garage_name=? WHERE id=?", [$garageName ?: ($existingUser['garage_name'] ?? 'Gara '.$fullName), $userId]);
     } else {
-        $userId = dbInsert("INSERT INTO users (full_name, phone, email, role, is_verified_garage, garage_name, created_at) VALUES (?,?,?,'customer',1,?,datetime('now','localtime'))", 
-            [$fullName, $phone, $phone.'@garage.cooling.vn', $garageName ?: ('Gara '.$fullName)]);
+        $dummyPwd = password_hash($phone, PASSWORD_DEFAULT);
+        $userId = dbInsert("INSERT INTO users (full_name, phone, email, password_hash, role, is_verified_garage, garage_name, created_at) VALUES (?,?,?,?,'customer',1,?,datetime('now','localtime'))", 
+            [$fullName, $phone, $phone.'@garage.cooling.vn', $dummyPwd, $garageName ?: ('Gara '.$fullName)]);
     }
 
     if ($brandId && $modelId) {
