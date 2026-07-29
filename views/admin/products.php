@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
 <?php foreach($products as $p):?><tr>
   <td><input type="checkbox" class="row-check" value="<?=$p['id']?>"></td>
   <td class="fs-12"><?=e($p['sku']??'—')?></td>
-  <td><a href="/admin/products/<?=$p['id']?>/edit?return_to=<?= rawurlencode($listReturnUrl ?? '/admin/products') ?>" class="text-navy"><?=truncate(e($p['name']),40)?></a></td>
+  <td><a href="/admin/products/<?=$p['id']?>/edit?return_to=<?= rawurlencode($listReturnUrl ?? '/admin/products') ?>" class="text-navy" style="font-family:'Times New Roman', Times, serif!important;font-size:15px;font-weight:600"><?=truncate(e($p['name']),40)?></a></td>
   <td><?php if(!empty($p['cat_name'])): ?><span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258;border:1px solid #d3deec;white-space:nowrap"><?=e($p['cat_name'])?></span><?php else: ?><span style="color:#ccc">—</span><?php endif; ?></td>
   <td><?php if(!empty($p['brand_name'])): ?><span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258;border:1px solid #d3deec;white-space:nowrap"><?=e($p['brand_name'])?></span><?php else: ?><span style="color:#ccc">—</span><?php endif; ?></td>
   <td><?php if(!empty($p['part_brand'])): ?><span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258;border:1px solid #d3deec;white-space:nowrap"><?=e($p['part_brand'])?></span><?php else: ?><span style="color:#ccc">—</span><?php endif; ?></td>

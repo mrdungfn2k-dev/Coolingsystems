@@ -65,6 +65,7 @@ $formAction = isset($product)
           <div class="form-group">
             <label>Tên sản phẩm <span class="req">*</span></label>
             <input type="text" name="name" id="productName" required minlength="5" maxlength="200"
+                   style="font-family:'Times New Roman', Times, serif!important;font-size:16px;font-weight:600"
                    value="<?= e($product['name']??'') ?>" placeholder="Tên đầy đủ sản phẩm">
           </div>
           <div class="form-group">

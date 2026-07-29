@@ -237,7 +237,7 @@ if (!empty($faqItems)) {
     <!-- Product Title (moved above grid for image-below-title layout) -->
     <div style="padding:20px 24px 0 24px">
 
-        <h1 class="serif text-navy" style="font-size:22px;margin-bottom:12px;line-height:1.4"><?= e($product['name']) ?></h1>
+        <h1 class="serif text-navy" style="font-family:'Times New Roman', Times, serif!important;font-size:22px;margin-bottom:12px;line-height:1.4;font-weight:700"><?= e($product['name']) ?></h1>
     </div>
     
     <div class="pd-grid">

@@ -1,6 +1,8 @@
 /* Google Fonts loaded via preconnect + async link in head.php for performance */
 
 /* ============ TOKENS ============ */
+#productName, input[name="name"], .pd-grid h1, .prod-title, .product-title, .p-name, .prod-card .title, .prod-name { font-family: 'Times New Roman', Times, serif !important; }
+
 :root {
   --navy: #1a3258;
   --navy-dark: #0f2342;
