@@ -2598,6 +2598,26 @@ post('/admin/inventory/:id/update', function($p) {
         dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$user['id'] ?? null,$user['role'] ?? 'admin','inventory_update','product',$p['id'],json_encode(['before'=>$before,'after'=>$values],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR'] ?? '',$_SERVER['HTTP_USER_AGENT'] ?? '']);
         $pdo->commit();
         inventoryCheckLowStockAlert((int)$p['id'], 'inventory_update');
+
+        $oldPrice = (int)($product['price'] ?? 0);
+        $newPrice = (int)($values['price'] ?? 0);
+        $oldStock = (int)($product['stock'] ?? 0);
+        $newStock = (int)($values['stock'] ?? 0);
+        $pName = $product['name'] ?? '';
+        $actor = $user['full_name'] ?? $user['email'] ?? 'Quản trị viên';
+
+        if ($oldPrice !== $newPrice) {
+            dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('price', 'Thay đổi giá sản phẩm', ?, ?)", [
+                "Sản phẩm '{$pName}' vừa được đổi giá từ " . vnd($oldPrice) . " thành " . vnd($newPrice) . " tại Quản lý kho bởi {$actor}.",
+                "/admin/products/{$p['id']}/edit"
+            ]);
+        }
+        if ($oldStock !== $newStock) {
+            dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('stock', 'Điều chỉnh tồn kho', ?, ?)", [
+                "Số lượng tồn kho sản phẩm '{$pName}' vừa thay đổi từ {$oldStock} thành {$newStock} tại Quản lý kho bởi {$actor}.",
+                "/admin/products/{$p['id']}/edit"
+            ]);
+        }
     } catch(Throwable $e) {
         if ($pdo->inTransaction()) $pdo->rollBack();
         if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Lỗi khi lưu dữ liệu kho: '.$e->getMessage()]); exit; }
@@ -2967,6 +2987,12 @@ post('/admin/products/new', function() {
         }
     }
 
+    $creatorName = $user['full_name'] ?? $user['email'] ?? 'Quản trị viên';
+    dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('product', 'Đăng sản phẩm mới', ?, ?)", [
+        "Sản phẩm mới '{$name}' (SKU: {$sku}) vừa được đăng bởi {$creatorName}.",
+        "/admin/products/{$id}/edit"
+    ]);
+
     $successMessage = 'Sản phẩm đã được đăng thành công!';
     if ($imageUploadErrors) {
         $successMessage .= ' Một số ảnh chưa xử lý được: ' . implode('; ', $imageUploadErrors);
@@ -3095,6 +3121,32 @@ post('/admin/products/:id/edit', function($p) {
         $p['id']
     ]);
     inventoryCheckLowStockAlert((int)$p['id'], 'product_edit');
+
+    $oldPrice = (int)($currentProduct['price'] ?? 0);
+    $newPrice = $price;
+    $oldStock = (int)($currentProduct['stock'] ?? 0);
+    $newStock = $stock;
+    $pName = trim($d['name'] ?? $currentProduct['name']);
+    $updaterName = $user['full_name'] ?? $user['email'] ?? 'Quản trị viên';
+
+    if ($oldPrice !== $newPrice) {
+        dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('price', 'Thay đổi giá sản phẩm', ?, ?)", [
+            "Sản phẩm '{$pName}' vừa được đổi giá từ " . vnd($oldPrice) . " thành " . vnd($newPrice) . " bởi {$updaterName}.",
+            "/admin/products/{$p['id']}/edit"
+        ]);
+    }
+    if ($oldStock !== $newStock) {
+        dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('stock', 'Điều chỉnh tồn kho', ?, ?)", [
+            "Tồn kho sản phẩm '{$pName}' vừa thay đổi từ {$oldStock} thành {$newStock} bởi {$updaterName}.",
+            "/admin/products/{$p['id']}/edit"
+        ]);
+    }
+    if ($oldPrice === $newPrice && $oldStock === $newStock) {
+        dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('product', 'Cập nhật sản phẩm', ?, ?)", [
+            "Thông tin sản phẩm '{$pName}' vừa được cập nhật bởi {$updaterName}.",
+            "/admin/products/{$p['id']}/edit"
+        ]);
+    }
 
     // Handle and normalize newly uploaded product images.
     $imageUploadErrors = [];
