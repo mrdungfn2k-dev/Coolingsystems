@@ -169,16 +169,16 @@ if (!empty($faqItems)) {
 <script type="application/ld+json"><?= jsonLd($faqSchema) ?></script>
 <?php endif; ?>
 <style>
-.pd-grid{display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:start;padding:0 24px 24px 24px}
+.pd-grid{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start;padding:0 24px 24px 24px}
 @media(max-width:900px){
   .pd-grid{grid-template-columns:1fr;padding:0 16px 16px 16px}
   .pd-gallery{position:relative !important;top:0 !important}
 }
 .pd-gallery{position:sticky;top:100px;margin-top:0;padding:0!important;border:none!important;background:transparent!important;box-shadow:none!important}
-.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:1/1;width:100%;min-height:400px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #e2e8f0;box-shadow:none;margin-top:0}
+.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:4/3;width:100%;height:300px;min-height:280px;max-height:310px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #e2e8f0;box-shadow:none;margin-top:0}
 .pd-main-img img{max-width:100%;object-fit:contain!important;object-position:center;border-radius:8px;width:100%;height:100%;background:#fff}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.pd-thumb{width:62px;height:62px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
+.pd-thumb{width:54px;height:54px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
 .pd-thumb img{width:100%;height:100%;object-fit:contain}
 .pd-thumb.active,.pd-thumb:hover{border-color:var(--gold-warm)}
 .pd-gallery{position:relative}
