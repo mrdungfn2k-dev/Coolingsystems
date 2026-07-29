@@ -265,21 +265,7 @@ if (!function_exists('socialAttrs')) { function socialAttrs($url){ return (!empt
 })();
 </script>
 
-<!-- Mobile Bottom Navigation -->
-<?php $user = $user ?? currentUser(); ?>
-<?php $__uri=$_SERVER["REQUEST_URI"]??"";if(strpos($__uri,"/admin")!==0&&strpos($__uri,"/staff")!==0): ?>
-<div class="mobile-bottom-bar">
-  <a href="/" class="mb-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Trang chủ</span></a>
-  <?php if ($user): ?>
-  <a href="/customer/orders" class="mb-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Đơn hàng</span></a>
-  <a href="/customer/chat" class="mb-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Tin nhắn</span></a>
-  <a href="/customer/favorites" class="mb-item pos-rel"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>Yêu thích</span></a>
-  <a href="/customer/cart" class="mb-item pos-rel"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg><span>Giỏ hàng</span></a>
-  <?php else: ?>
-  <a href="/auth/login" class="mb-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Đăng nhập</span></a>
-  <?php endif; ?>
-</div>
-<?php endif; ?>
+<!-- Mobile Bottom Navigation Removed Per User Request -->
 
 <?php
 /* staff-assign popup: notify a newly-assigned staff user once */

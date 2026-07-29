@@ -31,13 +31,26 @@
   #navScrollWrap .nav-link, #navScrollWrap .all-cats { flex-shrink: 0; }
   @media (max-width: 768px) {
     nav.primary { background: #1a3258 !important; padding: 0 !important; overflow: hidden !important; width: 100% !important; }
-    #navScrollWrap { padding: 4px 6px 6px 6px !important; gap: 4px !important; scrollbar-width: none !important; width: 100% !important; box-sizing: border-box !important; }
+    nav.primary .wrap, #navScrollWrap {
+      display: flex !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+      padding: 4px 8px 6px 8px !important;
+      gap: 4px !important;
+      scrollbar-width: none !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
     #navScrollWrap::-webkit-scrollbar { display: none !important; }
-    #navScrollWrap .all-cats-wrap { flex: 0 0 auto !important; width: auto !important; min-width: auto !important; display: inline-block !important; }
+    #navScrollWrap .all-cats-wrap { flex: 0 0 auto !important; width: auto !important; min-width: auto !important; display: inline-block !important; margin: 0 !important; }
     #navScrollWrap .all-cats { min-width: auto !important; width: auto !important; padding: 5px 8px !important; font-size: 11.5px !important; background: #c8a951 !important; color: #1a3258 !important; font-weight: 700 !important; border-radius: 5px !important; white-space: nowrap !important; display: inline-flex !important; }
     #navScrollWrap .all-cats span.txt-desktop { display: none !important; }
     #navScrollWrap .all-cats span.txt-mobile { display: inline !important; }
-    #navScrollWrap .nav-link { display: inline-flex !important; padding: 5px 8px !important; font-size: 12px !important; font-weight: 600 !important; color: #fff !important; white-space: nowrap !important; flex: 0 0 auto !important; opacity: 1 !important; visibility: visible !important; }
+    #navScrollWrap .nav-link { display: inline-flex !important; padding: 5px 8px !important; font-size: 12px !important; font-weight: 600 !important; color: #fff !important; white-space: nowrap !important; flex: 0 0 auto !important; opacity: 1 !important; visibility: visible !important; margin: 0 !important; }
   }
   @media (min-width: 769px) {
     #navScrollWrap .all-cats span.txt-desktop { display: inline !important; }

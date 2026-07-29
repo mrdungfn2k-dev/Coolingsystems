@@ -1229,6 +1229,7 @@ select.frm-input {
   border-color: var(--gold-warm);
 }
 .prod-img { border-radius: 0; }
+.mobile-bottom-bar { display: none !important; }
 
 
 /* Fix v2: Remove ALL borders from Quill editor content in product descriptions */
