@@ -3,12 +3,12 @@ function e(?string $s): string {
     return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
 }
 
-function vnd(int $amount): string {
-    return number_format($amount, 0, ',', '.') . ' ₫';
+function vnd($amount): string {
+    return number_format((float)($amount ?? 0), 0, ',', '.') . ' ₫';
 }
 
-function numFmt(int $n): string {
-    return number_format($n, 0, ',', '.');
+function numFmt($n): string {
+    return number_format((float)($n ?? 0), 0, ',', '.');
 }
 
 // Đọc số tiền thành chữ tiếng Việt (cho hóa đơn)
