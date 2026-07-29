@@ -753,6 +753,10 @@ function initDescEditor() {
   selector: '#tinymceDesc',
   height: 300,
   language: 'vi',
+  forced_root_block: 'p',
+  force_p_newlines: true,
+  force_br_newlines: false,
+  convert_newlines_to_brs: false,
   plugins: 'table lists link image code wordcount fullscreen preview searchreplace autolink visualblocks',
   toolbar: [
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
@@ -848,6 +852,10 @@ function initFeatEditor() {
   selector: '#tinymceFeat',
   height: 250,
   language: 'vi',
+  forced_root_block: 'p',
+  force_p_newlines: true,
+  force_br_newlines: false,
+  convert_newlines_to_brs: false,
   plugins: 'table lists link image code wordcount fullscreen preview searchreplace autolink visualblocks',
   toolbar: [
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
@@ -942,6 +950,10 @@ function initSpecEditor() {
   selector: '#tinymceSpec',
   height: 250,
   language: 'vi',
+  forced_root_block: 'p',
+  force_p_newlines: true,
+  force_br_newlines: false,
+  convert_newlines_to_brs: false,
   plugins: 'table lists link image code wordcount fullscreen preview searchreplace autolink visualblocks',
   toolbar: [
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',

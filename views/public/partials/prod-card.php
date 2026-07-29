@@ -43,7 +43,7 @@ $productPath = productPath($p);
   <?php endif; ?>
 
   <!-- Giá + nút giỏ hàng cùng hàng -->
-  <div class="prod-price-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:4px">
+  <div class="prod-price-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;gap:4px">
     <div>
       <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($displayPrice) ?></span>
       <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
@@ -56,6 +56,11 @@ $productPath = productPath($p);
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       </button>
     <?php endif; ?>
+  </div>
+
+  <!-- Nhãn Giá sỉ Gara -->
+  <div style="margin-bottom:6px">
+    <span class="gara-wholesale-badge" title="Đăng ký Gara/Đại lý để nhận bảng giá chiết khấu đơn từ 10 - 20 triệu - Hotline 0703 070 361" style="font-size:10px;font-weight:700;color:#1d4ed8;background:#eff6ff;border:1px solid #93c5fd;padding:2px 6px;border-radius:4px;display:inline-block">Giá sỉ Gara</span>
   </div>
 
   <!-- Footer: Còn hàng + Xem chi tiết -->

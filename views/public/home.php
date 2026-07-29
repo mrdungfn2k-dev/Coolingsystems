@@ -267,6 +267,30 @@ foreach ($trustSteps as $step):
 <?php $num++; endforeach; ?>
 </div></div></section>
 
+<!-- Banner Cam Kết Giá Sỉ Gara / Đại Lý (Đơn 10 - 20 Triệu) -->
+<section class="block" style="padding: 10px 0 0 0;">
+  <div class="wrap">
+    <div style="background: linear-gradient(135deg, #0b1d3a 0%, #1e3a8a 100%); border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(11,29,58,0.15);">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(201,161,74,0.2); border: 1.5px solid #c9a14a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="22" height="22" fill="none" stroke="#c9a14a" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0v-5a2 2 0 012-2h2a2 2 0 012 2v5m-4 0h4"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 16px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">
+            Đăng ký tài khoản Gara / Đại lý — Nhận bảng giá chiết khấu sỉ gốc
+          </div>
+          <div style="font-size: 13px; color: #cbd5e1;">
+            Dành riêng cho đơn hàng mục tiêu từ <strong style="color: #f59e0b; font-weight: 700;">10 - 20 triệu VNĐ</strong> · Hỗ trợ xuất hóa đơn VAT &amp; Giao hàng hỏa tốc
+          </div>
+        </div>
+      </div>
+      <a href="https://zalo.me/0703070361" target="_blank" rel="noopener" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
+        Đăng ký Gara / Nhận giá sỉ &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- Khối 1: Sản phẩm Khuyến mại -->
 <?php if (!empty($saleProducts)): ?>
 <section class="block" id="sale-products"><div class="wrap"><div class="sec-card">
