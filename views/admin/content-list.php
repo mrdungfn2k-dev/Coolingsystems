@@ -143,8 +143,8 @@
         }
         if (empty($rawList)) {
             $rawList = [
-                ['img' => 'hero_cooling_banner_1.png', 'link' => '/products'],
-                ['img' => 'hero_cooling_banner_2.png', 'link' => '/contact']
+                ['img' => 'hero_cooling_banner_1.webp', 'link' => '/products'],
+                ['img' => 'hero_cooling_banner_2.webp', 'link' => '/contact']
             ];
         }
         $activeImgNames = array_column($rawList, 'img');
@@ -171,15 +171,15 @@
       <div class="form-group" style="margin-top:16px;background:#f8fafc;padding:14px;border-radius:8px;border:1px solid #e2e8f0">
         <label style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:8px;display:block">Tích Chọn Thêm Banner Đồ Họa Mẫu Có Sẵn Vào Slide</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <label class="preset-banner-card" style="border:2px solid <?= in_array('hero_cooling_banner_1.png', $activeImgNames) ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;display:block">
-            <input type="checkbox" name="selected_presets[]" value="hero_cooling_banner_1.png" <?= in_array('hero_cooling_banner_1.png', $activeImgNames) ? 'checked' : '' ?> style="position:absolute;top:8px;left:8px;z-index:2;width:18px;height:18px;accent-color:var(--navy)">
-            <img src="/uploads/banners/hero_cooling_banner_1.png" style="width:100%;height:90px;object-fit:cover;display:block">
-            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 1: Động cơ & Hệ thống làm mát high-tech</div>
+          <label class="preset-banner-card" style="border:2px solid <?= (in_array('hero_cooling_banner_1.webp', $activeImgNames) || in_array('hero_cooling_banner_1.png', $activeImgNames)) ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;display:block">
+            <input type="checkbox" name="selected_presets[]" value="hero_cooling_banner_1.webp" <?= (in_array('hero_cooling_banner_1.webp', $activeImgNames) || in_array('hero_cooling_banner_1.png', $activeImgNames)) ? 'checked' : '' ?> style="position:absolute;top:8px;left:8px;z-index:2;width:18px;height:18px;accent-color:var(--navy)">
+            <img src="/uploads/banners/hero_cooling_banner_1.webp" style="width:100%;height:90px;object-fit:cover;display:block">
+            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 1: Lốc nén điều hòa OEM DENSO chính hãng</div>
           </label>
-          <label class="preset-banner-card" style="border:2px solid <?= in_array('hero_cooling_banner_2.png', $activeImgNames) ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;display:block">
-            <input type="checkbox" name="selected_presets[]" value="hero_cooling_banner_2.png" <?= in_array('hero_cooling_banner_2.png', $activeImgNames) ? 'checked' : '' ?> style="position:absolute;top:8px;left:8px;z-index:2;width:18px;height:18px;accent-color:var(--navy)">
-            <img src="/uploads/banners/hero_cooling_banner_2.png" style="width:100%;height:90px;object-fit:cover;display:block">
-            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 2: Bộ sưu tập phụ tùng làm mát 3D</div>
+          <label class="preset-banner-card" style="border:2px solid <?= (in_array('hero_cooling_banner_2.webp', $activeImgNames) || in_array('hero_cooling_banner_2.png', $activeImgNames)) ? 'var(--navy)' : '#cbd5e1' ?>;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;display:block">
+            <input type="checkbox" name="selected_presets[]" value="hero_cooling_banner_2.webp" <?= (in_array('hero_cooling_banner_2.webp', $activeImgNames) || in_array('hero_cooling_banner_2.png', $activeImgNames)) ? 'checked' : '' ?> style="position:absolute;top:8px;left:8px;z-index:2;width:18px;height:18px;accent-color:var(--navy)">
+            <img src="/uploads/banners/hero_cooling_banner_2.webp" style="width:100%;height:90px;object-fit:cover;display:block">
+            <div style="padding:6px;font-size:11px;font-weight:600;text-align:center;color:#334155;background:#fff">Mẫu 2: Bộ giàn nóng &amp; két nước làm mát MAHLE</div>
           </label>
         </div>
       </div>
