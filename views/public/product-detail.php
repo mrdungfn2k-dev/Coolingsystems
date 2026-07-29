@@ -175,8 +175,8 @@ if (!empty($faqItems)) {
   .pd-gallery{position:relative !important;top:0 !important}
 }
 .pd-gallery{position:sticky;top:100px}
-.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:4/3;min-height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pd-main-img img{max-width:100%;object-fit:cover!important;object-position:center;border-radius:8px;width:100%;height:100%}
+.pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:1/1;min-height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line,#e2e8f0);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.pd-main-img img{max-width:100%;object-fit:contain!important;object-position:center;border-radius:8px;width:100%;height:100%;background:#fff}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pd-thumb{width:62px;height:62px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
 .pd-thumb img{width:100%;height:100%;object-fit:contain}
@@ -254,7 +254,7 @@ if (!empty($faqItems)) {
                  alt="<?= e($product['name']) ?>" id="pdMainImg"
                  fetchpriority="high" loading="eager"
                  width="600" height="600"
-                 style="max-width:100%;width:100%;height:100%;object-fit:cover!important;object-position:center;border-radius:8px">
+                 style="max-width:100%;width:100%;height:100%;object-fit:contain!important;object-position:center;border-radius:8px;background:#fff">
           <?php else: ?>
             <div style="text-align:center;color:#ccc">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">

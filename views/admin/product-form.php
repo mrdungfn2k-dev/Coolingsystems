@@ -689,8 +689,16 @@ async function deleteProductImage(imageId, btn) {
   .then(r => r.json())
   .then(data => {
     if (data.ok) {
-        updateImageSelectionState();
-      }, 300);
+      if (wrap) {
+        wrap.style.transition = 'all 0.3s ease';
+        wrap.style.transform = 'scale(0)';
+        wrap.style.opacity = '0';
+        setTimeout(() => {
+          wrap.remove();
+          updateImageSelectionState();
+        }, 300);
+      }
+      if (typeof window.coolToastShow === 'function') window.coolToastShow('Đã xóa ảnh thành công!', '✅');
     } else {
       alert('Lỗi: ' + (data.msg || 'Không thể xóa'));
       wrap.style.opacity = '1';
