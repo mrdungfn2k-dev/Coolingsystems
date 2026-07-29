@@ -160,6 +160,56 @@ require __DIR__ . '/../partials/head.php';
     <aside class="vs-card">
       <div class="head"><h2>Tìm phụ tùng cho xe của bạn</h2><div class="sub" style="color:#0f172a;font-weight:600;font-size:12.5px;margin-top:2px">Tìm theo Danh mục, Hãng xe & Thương hiệu</div></div>
       <form method="get" action="/products" id="vs-form">
+        <?php
+          $curU = currentUser();
+          $userGaragesList = [];
+          if ($curU) {
+              $userGaragesList = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$curU['id']]);
+          }
+          $isGarageUser = $curU && (!empty($curU['garage_name']) || !empty($curU['garage_tier']) || !empty($userGaragesList));
+        ?>
+        <?php if ($isGarageUser && !empty($userGaragesList)): ?>
+          <div class="vs-field" style="background:#eff6ff; padding:10px; border-radius:8px; border:1.5px solid #3b82f6; margin-bottom:12px;">
+            <label style="color:#1d4ed8; font-weight:800; display:flex; align-items:center; justify-content:space-between;">
+              <span>XE ĐANG SỬA (GARA CỦA TÔI)</span>
+              <a href="/customer/profile" style="font-size:11px; font-weight:600; color:#2563eb; text-decoration:none;">+ Quản lý xe</a>
+            </label>
+            <?php
+              $activeCarId = $_SESSION['active_garage_car_id'] ?? 0;
+              $activeCarLabel = '— Chọn xe đang sửa trong Gara —';
+              foreach ($userGaragesList as $c) {
+                  if ($c['id'] == $activeCarId || (empty($activeCarId) && !empty($c['is_default']))) {
+                      $activeCarLabel = $c['brand_name'] . ' ' . $c['model_name'] . ' (' . $c['year'] . ')';
+                      break;
+                  }
+              }
+            ?>
+            <input type="hidden" name="garage_car_id" id="vsi-garage-car" value="<?= $activeCarId ?>">
+            <div class="cdd" data-target="vsi-garage-car">
+              <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)" style="background:#fff; border-color:#93c5fd; font-weight:700; color:#0b1d3a;"><span class="cdd-label"><?= e($activeCarLabel) ?></span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="cdd-panel">
+                <div class="cdd-opt" data-val="" onclick="setActiveGarageCarForm(0, 0); vsCddPick(this);">— Tất cả xe Gara —</div>
+                <?php foreach ($userGaragesList as $c): ?>
+                  <div class="cdd-opt <?= ($c['id'] == $activeCarId) ? 'sel' : '' ?>" data-val="<?= $c['id'] ?>" onclick="setActiveGarageCarForm(<?= $c['id'] ?>, <?= $c['brand_id'] ?>); vsCddPick(this);">
+                    <?= e($c['brand_name']) ?> <?= e($c['model_name']) ?> (<?= e($c['year']) ?>)
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+          <script>
+          function setActiveGarageCarForm(carId, brandId) {
+            if (brandId > 0) {
+              var brandOpt = document.querySelector('#vs-form .cdd[data-target="vsi-brand"] .cdd-opt[data-val="' + brandId + '"]');
+              if (brandOpt) vsCddPick(brandOpt);
+            }
+            var fd = new FormData();
+            fd.append('_csrf', '<?= csrfToken() ?>');
+            fd.append('car_id', carId);
+            fetch('/api/set-active-garage-car', {method: 'POST', body: fd});
+          }
+          </script>
+        <?php endif; ?>
         <div class="vs-field">
           <label>Từ khóa / Tên sản phẩm</label>
           <input type="text" name="q" placeholder="Nhập tên phụ tùng, mã OEM..." class="vs-input" aria-label="Nhập tên phụ tùng hoặc mã OEM">
