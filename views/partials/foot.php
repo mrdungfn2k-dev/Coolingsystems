@@ -343,16 +343,14 @@ if ($__sapU && ($__sapU['role'] ?? '') === 'staff') {
     var newNav=doc.querySelector('nav.primary'), curNav=document.querySelector('nav.primary');
     if(newNav && curNav){
       curNav.innerHTML=newNav.innerHTML;
-      var activeLink = curNav.querySelector('.nav-link.active');
       var wrap = document.getElementById('navScrollWrap');
-      if(activeLink && wrap){
-        if(window.innerWidth > 768) {
-          var elRect = wrap.getBoundingClientRect();
-          var linkRect = activeLink.getBoundingClientRect();
-          wrap.scrollLeft = Math.max(0, activeLink.offsetLeft - (elRect.width / 2) + (linkRect.width / 2));
-        } else {
-          wrap.scrollLeft = 0;
-        }
+      if(wrap){
+        try {
+          var savedPos = sessionStorage.getItem('navScrollPos');
+          if (savedPos !== null) {
+            wrap.scrollLeft = parseInt(savedPos, 10);
+          }
+        } catch(e){}
       }
     }
     var newMobNav=doc.querySelector('.mobile-nav-links'), curMobNav=document.querySelector('.mobile-nav-links');

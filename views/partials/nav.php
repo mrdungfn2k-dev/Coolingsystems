@@ -46,11 +46,8 @@
       -webkit-overflow-scrolling: touch !important;
     }
     #navScrollWrap::-webkit-scrollbar { display: none !important; }
-    #navScrollWrap .all-cats-wrap { flex: 0 0 auto !important; width: auto !important; min-width: auto !important; display: inline-block !important; margin: 0 !important; }
-    #navScrollWrap .all-cats { min-width: auto !important; width: auto !important; padding: 5px 8px !important; font-size: 11.5px !important; background: #c8a951 !important; color: #1a3258 !important; font-weight: 700 !important; border-radius: 5px !important; white-space: nowrap !important; display: inline-flex !important; }
-    #navScrollWrap .all-cats span.txt-desktop { display: none !important; }
-    #navScrollWrap .all-cats span.txt-mobile { display: inline !important; }
-    #navScrollWrap .nav-link { display: inline-flex !important; padding: 5px 8px !important; font-size: 12px !important; font-weight: 600 !important; color: #fff !important; white-space: nowrap !important; flex: 0 0 auto !important; opacity: 1 !important; visibility: visible !important; margin: 0 !important; }
+    #navScrollWrap .all-cats-wrap { display: none !important; }
+    #navScrollWrap .nav-link { display: inline-flex !important; padding: 6px 10px !important; font-size: 12px !important; font-weight: 700 !important; color: #fff !important; white-space: nowrap !important; flex: 0 0 auto !important; opacity: 1 !important; visibility: visible !important; margin: 0 !important; }
   }
   @media (min-width: 769px) {
     #navScrollWrap .all-cats span.txt-desktop { display: inline !important; }
@@ -105,6 +102,25 @@
 (function(){
   var el = document.getElementById('navScrollWrap');
   if(!el) return;
+
+  // Preserve & restore navbar scroll position across clicks
+  try {
+    var savedPos = sessionStorage.getItem('navScrollPos');
+    if (savedPos !== null) {
+      el.scrollLeft = parseInt(savedPos, 10);
+    }
+  } catch(e){}
+
+  el.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      try { sessionStorage.setItem('navScrollPos', el.scrollLeft); } catch(e){}
+    });
+  });
+
+  el.addEventListener('scroll', function(){
+    try { sessionStorage.setItem('navScrollPos', el.scrollLeft); } catch(e){}
+  }, {passive:true});
+
   var isDragging=false, startX=0, scrollLeft=0;
   el.addEventListener('mousedown',function(e){
     isDragging=true; startX=e.pageX-el.offsetLeft; scrollLeft=el.scrollLeft;
@@ -121,17 +137,5 @@
   el.addEventListener('touchmove',function(e){
     var x=e.touches[0].pageX-el.offsetLeft; el.scrollLeft=scrollLeft-(x-startX);
   },{passive:true});
-  // Auto-scroll to active nav link only on desktop
-  if (window.innerWidth > 768) {
-    var activeLink = el.querySelector('.nav-link.active');
-    if (activeLink) {
-      var elRect = el.getBoundingClientRect();
-      var linkRect = activeLink.getBoundingClientRect();
-      var scrollTarget = activeLink.offsetLeft - (elRect.width / 2) + (linkRect.width / 2);
-      el.scrollLeft = Math.max(0, scrollTarget);
-    }
-  } else {
-    el.scrollLeft = 0;
-  }
 })();
 </script>
