@@ -70,6 +70,8 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <?php if($__isAdmin): ?><a href="/admin/staff" class="<?= (currentPath()==='/admin/staff' || startsWith(currentPath(),'/admin/staff/'))?'active':'' ?>"><?= sbIcon('shield') ?>Phân quyền NV</a><?php endif; ?>
       <?php if($sb('users')): ?><a href="/admin/users" class="<?= currentPath()==='/admin/users' && !startsWith(currentPath(),'/admin/users/')?'active':'' ?>"><?= sbIcon('users') ?>Khách hàng</a>
       <a href="/admin/garages" class="<?= startsWith(currentPath(),'/admin/garages')?'active':'' ?>"><?= sbIcon('truck') ?>Garage khách hàng</a>
+      <a href="/admin/quotations" class="<?= startsWith(currentPath(),'/admin/quotations')?'active':'' ?>"><?= sbIcon('filetext') ?>Yêu cầu Báo Giá</a>
+      <a href="/admin/garage-tiers" class="<?= startsWith(currentPath(),'/admin/garage-tiers')?'active':'' ?>"><?= sbIcon('shield') ?>Cấu hình Hạng Gara</a>
       <?php if($sb('staff')): ?><a href="/admin/staff-accounts" class="<?= startsWith(currentPath(),'/admin/staff-accounts')?'active':'' ?>"><?= sbIcon('user') ?>Nhân viên</a><?php endif; ?>
       <?php if($__isSuperadmin): ?><a href="/admin/admin-accounts" class="<?= startsWith(currentPath(),'/admin/admin-accounts')?'active':'' ?>"><?= sbIcon('shield') ?>Quản trị viên</a><?php endif; ?><?php endif; ?>
       <?php if($sb('content')): ?><a href="/admin/news" class="<?= (startsWith(currentPath(),'/admin/news') && currentPath()!=='/admin/news/new')?'active':'' ?>"><?= sbIcon('filetext') ?>Tin tức</a>

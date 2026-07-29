@@ -167,10 +167,44 @@ get('/customer/cart', function() {
 get('/customer/profile', function() {
     $user = requireRole(['customer','staff','admin'], '/auth/login');
     $userGarages = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$user['id']]);
+    $userQuotations = dbAll("SELECT * FROM garage_quotations WHERE user_id=? ORDER BY id DESC", [$user['id']]);
     $carBrands = dbAll("SELECT * FROM brands ORDER BY name ASC");
     $carModels = dbAll("SELECT * FROM car_models ORDER BY name ASC");
     $title = 'Hồ sơ tài khoản & Quản lý Gara';
-    view('customer/profile', compact('title', 'userGarages', 'carBrands', 'carModels'));
+    view('customer/profile', compact('title', 'userGarages', 'userQuotations', 'carBrands', 'carModels'));
+});
+
+post('/customer/quotation/request', function() {
+    $user = currentUser();
+    if (!$user) { echo json_encode(['ok'=>false, 'error'=>'Vui lòng đăng nhập']); exit; }
+    csrfCheck();
+    
+    $note = trim($_POST['note'] ?? '');
+    $filePath = '';
+
+    if (!empty($_FILES['quote_file']['name'])) {
+        $file = $_FILES['quote_file'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, ['jpg','jpeg','png','webp','pdf','xls','xlsx'])) {
+            $fname = 'quote_' . time() . '_' . rand(1000,9999) . '.' . $ext;
+            $dir = __DIR__ . '/../public/uploads/quotations/';
+            if (!is_dir($dir)) @mkdir($dir, 0777, true);
+            move_uploaded_file($file['tmp_name'], $dir . $fname);
+            $filePath = '/uploads/quotations/' . $fname;
+        }
+    }
+
+    dbInsert("INSERT INTO garage_quotations (user_id, full_name, phone, garage_name, note, file_path, status, created_at) VALUES (?,?,?,?,?,?,'pending',datetime('now','localtime'))", [
+        $user['id'],
+        $user['full_name'],
+        $user['phone'] ?? '',
+        $user['garage_name'] ?? 'Gara Cá Nhân',
+        $note,
+        $filePath
+    ]);
+
+    echo json_encode(['ok'=>true, 'msg'=>'Đã gửi yêu cầu báo giá thành công! Kỹ thuật viên sẽ phản hồi trong ít phút.']);
+    exit;
 });
 
 post('/customer/garage/add', function() {

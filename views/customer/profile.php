@@ -136,12 +136,18 @@
   <div class="sec-card" style="margin-bottom:20px;">
     <div class="sec-head" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
       <div class="title"><span class="bar"></span><h2 style="font-size:18px; margin:0;">Thông tin Garage &amp; Danh sách Xe của tôi</h2></div>
-      <button type="button" onclick="openAddCarModal()" class="btn btn-outline-navy" style="font-size:13px; padding:6px 14px;">+ Thêm xe mới</button>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button type="button" onclick="openRequestQuoteModal()" class="btn btn-navy" style="font-size:13px; padding:6px 14px;">Gửi yêu cầu báo giá VIN / Excel</button>
+        <button type="button" onclick="openAddCarModal()" class="btn btn-outline-navy" style="font-size:13px; padding:6px 14px;">+ Thêm xe mới</button>
+      </div>
     </div>
     <div class="panel-body">
       <?php if (!empty($user['is_verified_garage']) || !empty($user['garage_name'])): ?>
         <div style="background:#fafbfc; border:1px solid #0b1d3a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-          <div style="font-weight:800; color:#0b1d3a; font-size:14.5px; letter-spacing:0.3px;">TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
+          <div>
+            <div style="font-weight:800; color:#0b1d3a; font-size:14.5px; letter-spacing:0.3px;">TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
+            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($user['garage_name'] ?: $user['full_name']) ?></strong> | Tỷ lệ chiết khấu sỉ: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong></div>
+          </div>
           <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ</span>
         </div>
       <?php else: ?>
@@ -194,8 +200,106 @@
       <?php else: ?>
         <p style="color:#64748b; font-size:13.5px; font-style:italic; margin:8px 0;">Chưa có xe nào trong danh sách. Hãy nhấn nút "+ Thêm xe mới" để thêm xe ô tô của bạn.</p>
       <?php endif; ?>
+
+      <?php if (!empty($userQuotations)): ?>
+        <div style="margin-top:24px; padding-top:16px; border-top:1px dashed #cbd5e1;">
+          <h3 style="font-size:15px; font-weight:800; color:#0b1d3a; margin:0 0 12px 0;">Danh Sách Yêu Cầu Báo Giá Đã Gửi</h3>
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:left;">
+              <thead>
+                <tr style="background:#f1f5f9; color:#0b1d3a;">
+                  <th style="padding:8px 12px;">Mã YC</th>
+                  <th style="padding:8px 12px;">Ngày gửi</th>
+                  <th style="padding:8px 12px;">Ghi chú</th>
+                  <th style="padding:8px 12px;">Tệp đính kèm</th>
+                  <th style="padding:8px 12px;">Giá sỉ báo</th>
+                  <th style="padding:8px 12px; text-align:center;">Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($userQuotations as $uq): ?>
+                  <tr style="border-bottom:1px solid #e2e8f0;">
+                    <td style="padding:8px 12px; font-weight:700;">#<?= $uq['id'] ?></td>
+                    <td style="padding:8px 12px; color:#64748b;"><?= e($uq['created_at']) ?></td>
+                    <td style="padding:8px 12px; color:#334155;"><?= e($uq['note'] ?: '—') ?></td>
+                    <td style="padding:8px 12px;">
+                      <?php if (!empty($uq['file_path'])): ?>
+                        <a href="<?= e($uq['file_path']) ?>" target="_blank" style="color:#2563eb; font-weight:700; text-decoration:none;">Xem file</a>
+                      <?php else: ?>
+                        <span style="color:#94a3b8">—</span>
+                      <?php endif; ?>
+                    </td>
+                    <td style="padding:8px 12px; font-weight:800; color:#15803d;"><?= $uq['total_price'] > 0 ? vnd($uq['total_price']) : 'Đang xử lý...' ?></td>
+                    <td style="padding:8px 12px; text-align:center;">
+                      <?php if ($uq['status'] === 'replied'): ?>
+                        <span style="background:#dcfce7; color:#15803d; font-size:11px; font-weight:800; padding:2px 8px; border-radius:10px;">Đã báo giá</span>
+                      <?php else: ?>
+                        <span style="background:#fef3c7; color:#b45309; font-size:11px; font-weight:800; padding:2px 8px; border-radius:10px;">Chờ phản hồi</span>
+                      <?php endif; ?>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
+
+  <!-- Modal Yêu Cầu Báo Giá VIN / Excel -->
+  <div id="requestQuoteModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.75); backdrop-filter:blur(4px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#fff; border-radius:16px; max-width:480px; width:100%; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,0.3); position:relative;">
+      <button type="button" onclick="closeRequestQuoteModal()" style="position:absolute; top:14px; right:14px; border:none; background:#f1f5f9; width:30px; height:30px; border-radius:50%; font-size:16px; font-weight:bold; cursor:pointer;">&times;</button>
+      <h3 style="font-size:18px; font-weight:800; color:#0b1d3a; margin:0 0 6px 0;">YÊU CẦU BÁO GIÁ PHỤ TÙNG THEO MÃ VIN / EXCEL</h3>
+      <p style="font-size:13px; color:#64748b; margin:0 0 16px 0;">Tải lên ảnh chụp sổ đăng kiểm / mã VIN hoặc File danh sách phụ tùng để nhận báo giá sỉ tốt nhất.</p>
+
+      <form id="requestQuoteForm" onsubmit="submitRequestQuote(event)" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+        <div style="margin-bottom:14px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Ghi chú chi tiết yêu cầu</label>
+          <textarea name="note" rows="3" placeholder="VD: Cần báo giá lốc nén và giàn nóng cho xe Hyundai Grand i10 2020..." style="width:100%; border-radius:8px; border:1px solid #cbd5e1; padding:10px; font-size:13.5px; box-sizing:border-box;"></textarea>
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">Tải tệp đính kèm (Ảnh đăng kiểm / Mã VIN / Excel)</label>
+          <input type="file" name="quote_file" accept="image/*,.pdf,.xls,.xlsx" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:8px; font-size:13px; box-sizing:border-box;">
+        </div>
+
+        <div id="requestQuoteMsg" style="margin-bottom:14px; font-size:13.5px; display:none;"></div>
+
+        <button type="submit" id="btnSubmitRequestQuote" style="width:100%; height:44px; background:#0b1d3a; color:#fff; border:none; border-radius:8px; font-weight:800; font-size:14.5px; cursor:pointer;">
+          GỬI YÊU CẦU BÁO GIÁ
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  function openRequestQuoteModal(){ var m=document.getElementById('requestQuoteModal'); if(m)m.style.display='flex'; }
+  function closeRequestQuoteModal(){ var m=document.getElementById('requestQuoteModal'); if(m)m.style.display='none'; }
+  function submitRequestQuote(e){
+    e.preventDefault();
+    var form=document.getElementById('requestQuoteForm');
+    var msg=document.getElementById('requestQuoteMsg');
+    var btn=document.getElementById('btnSubmitRequestQuote');
+    var fd=new FormData(form);
+    btn.disabled=true; btn.innerText='Đang gửi yêu cầu...';
+    fetch('/customer/quotation/request',{method:'POST',body:fd})
+    .then(function(r){return r.json();})
+    .then(function(res){
+      btn.disabled=false; btn.innerText='GỬI YÊU CẦU BÁO GIÁ';
+      msg.style.display='block';
+      if(res.ok){
+        msg.style.color='#15803d'; msg.innerText='✅ ' + res.msg;
+        setTimeout(function(){ location.reload(); },1200);
+      } else {
+        msg.style.color='#b91c1c'; msg.innerText='⚠️ '+(res.error||'Có lỗi xảy ra');
+      }
+    })
+    .catch(function(){ btn.disabled=false; btn.innerText='GỬI YÊU CẦU BÁO GIÁ'; msg.style.display='block'; msg.style.color='#b91c1c'; msg.innerText='⚠️ Lỗi kết nối'; });
+  }
+  </script>
 
   <!-- Modal Thêm Xe Mới -->
   <div id="addCarModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.75); backdrop-filter:blur(4px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
