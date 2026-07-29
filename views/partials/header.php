@@ -15,17 +15,53 @@ header.main .search .submit:hover { background:var(--bg-soft)!important; color:v
 header.main .search input { flex:1; min-width:140px!important; width:100%; padding:10px 14px; color:#1e293b; font-size:14px; }
 header.main .header-actions { display: flex !important; align-items: center !important; gap: 8px !important; flex-shrink: 0 !important; }
 
-@media(min-width: 641px) {
+@media(min-width: 769px) {
   .mobile-search-bar { display: none !important; }
   .mobile-right-actions { display: none !important; }
   .mobile-cart-btn { display: none !important; }
 }
-@media(max-width: 640px) {
+@media(max-width: 768px) {
+  header.main { min-height: auto !important; padding: 8px 0 !important; }
+  header.main .wrap { padding: 0 12px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; }
+  header.main .logo { width: 135px !important; height: 44px !important; max-width: 135px !important; max-height: 44px !important; flex-shrink: 0 !important; margin: 0 !important; display: block !important; }
+  header.main .logo img, header.main .logo svg { width: 135px !important; height: 44px !important; max-width: 135px !important; max-height: 44px !important; object-fit: contain !important; }
   header.main .hotline { display: none !important; }
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
-  .mobile-search-bar { display: flex !important; }
-  .mobile-right-actions { display: flex !important; }
+  
+  .mobile-search-bar { display: flex !important; padding: 6px 12px 6px 12px !important; width: 100% !important; box-sizing: border-box !important; }
+  .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 40px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
+  .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 12px !important; font-size: 13.5px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
+  .mobile-search-bar button { width: 44px !important; height: 40px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+  
+  .mobile-right-actions { display: flex !important; align-items: center !important; gap: 4px !important; margin-left: auto !important; }
+  .mobile-icon-btn, .mobile-cart-btn { padding: 6px !important; color: #1a3258 !important; display: flex !important; align-items: center !important; justify-content: justify !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
+  
+  .mobile-menu-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 8px 6px !important;
+    background: #1a3258 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    margin-left: 4px !important;
+  }
+  .mobile-menu-toggle span {
+    display: block !important;
+    width: 100% !important;
+    height: 2.5px !important;
+    background: #fff !important;
+    border-radius: 2px !important;
+    transition: all 0.25s ease !important;
+  }
+  .mobile-menu-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg) !important; }
+  .mobile-menu-toggle.open span:nth-child(2) { opacity: 0 !important; }
+  .mobile-menu-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg) !important; }
 }
 </style>
 <?php 
@@ -40,7 +76,7 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
 ?>
 <header class="main">
   <div class="wrap">
-    <a href="/" class="logo" aria-label="Trang chủ Cooling - Phụ tùng ô tô chính hãng" style="width:180px;height:76px;display:block">
+    <a href="/" class="logo" aria-label="Trang chủ Cooling - Phụ tùng ô tô chính hãng">
       <?php if ($siteLogo): ?>
         <img src="/uploads/<?= htmlspecialchars($siteLogo) ?>" alt="Cooling - Phụ tùng ô tô chính hãng" style="width:180px;height:76px;max-width:180px;max-height:76px;object-fit:contain;aspect-ratio:180/76" width="180" height="76">
       <?php else: ?>

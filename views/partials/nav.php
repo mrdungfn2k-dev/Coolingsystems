@@ -29,6 +29,13 @@
   }
   #navScrollWrap.dragging { cursor: grabbing; }
   #navScrollWrap .nav-link, #navScrollWrap .all-cats { flex-shrink: 0; }
+  @media (max-width: 768px) {
+    nav.primary { background: #1a3258 !important; padding: 0 !important; }
+    #navScrollWrap { padding: 4px 10px 6px 10px !important; gap: 6px !important; scrollbar-width: none !important; }
+    #navScrollWrap::-webkit-scrollbar { display: none !important; }
+    #navScrollWrap .all-cats { padding: 5px 10px !important; font-size: 12px !important; background: #c8a951 !important; color: #1a3258 !important; font-weight: 700 !important; border-radius: 6px !important; white-space: nowrap !important; }
+    #navScrollWrap .nav-link { padding: 5px 10px !important; font-size: 12.5px !important; font-weight: 600 !important; color: #fff !important; white-space: nowrap !important; }
+  }
   </style>
     <div class="all-cats-wrap" style="position:relative">
     <a href="javascript:void(0)" class="all-cats" style="text-decoration:none;color:#fff" onclick="this.parentElement.classList.toggle('open')">
