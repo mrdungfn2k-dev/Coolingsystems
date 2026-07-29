@@ -275,6 +275,7 @@ $unreadNotisCount = dbGet("SELECT COUNT(*) as n FROM admin_notifications WHERE i
     </div>
   </div>
 </div>
+<?php require_once __DIR__ . '/confirm-modal.php'; ?>
 <script>
 function toggleNoti(e) {
   e.stopPropagation();
@@ -300,29 +301,38 @@ function deleteNoti(id, e) {
   if (e && e.preventDefault) e.preventDefault();
   var btn = (e && e.currentTarget) ? e.currentTarget : (e && e.target ? e.target : null);
   var wrap = btn ? btn.closest('.noti-item-wrap') : null;
-  if (wrap) {
-    wrap.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-    wrap.style.opacity = '0';
-    wrap.style.transform = 'scale(0.95)';
-    setTimeout(function(){
-      if (wrap && wrap.parentNode) wrap.remove();
-      var L = document.getElementById('notiList');
-      if (L && !L.querySelector('.noti-item-wrap')) {
-        L.innerHTML = '<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';
-      }
-    }, 200);
+
+  var doDelete = function() {
+    if (wrap) {
+      wrap.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+      wrap.style.opacity = '0';
+      wrap.style.transform = 'scale(0.95)';
+      setTimeout(function(){
+        if (wrap && wrap.parentNode) wrap.remove();
+        var L = document.getElementById('notiList');
+        if (L && !L.querySelector('.noti-item-wrap')) {
+          L.innerHTML = '<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';
+        }
+      }, 150);
+    }
+    var b = document.getElementById('notiBadge');
+    if (b) {
+      var c = parseInt(b.textContent) - 1;
+      if (c > 0) b.textContent = c;
+      else b.remove();
+    }
+    var csrf = (document.getElementById('globalCsrf') && document.getElementById('globalCsrf').value) || '';
+    fetch('/admin/notifications/' + id + '/delete', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: '_csrf=' + encodeURIComponent(csrf)
+    });
+  };
+
+  if (typeof window.csConfirm === 'function') {
+    window.csConfirm('Bạn có chắc chắn muốn xóa thông báo này không?', doDelete);
+  } else if (confirm('Bạn có chắc chắn muốn xóa thông báo này không?')) {
+    doDelete();
   }
-  var b = document.getElementById('notiBadge');
-  if (b) {
-    var c = parseInt(b.textContent) - 1;
-    if (c > 0) b.textContent = c;
-    else b.remove();
-  }
-  var csrf = (document.getElementById('globalCsrf') && document.getElementById('globalCsrf').value) || '';
-  fetch('/admin/notifications/' + id + '/delete', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: '_csrf=' + encodeURIComponent(csrf)
-  });
 }
 </script>

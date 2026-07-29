@@ -966,6 +966,10 @@ post('/customer/orders/:id/cancel', function($p) {
         }
     }
     dbRun("UPDATE orders SET delivery_status='cancelled', payment_status='unpaid', cancel_reason=?, cancel_images=? WHERE id=?", [$reason, json_encode($cancelImgs), $p['id']]);
+    dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('order', 'Khách hàng hủy đơn hàng', ?, ?)", [
+        "Đơn hàng #" . ($order['code'] ?? $p['id']) . " vừa bị khách hàng hủy. Lý do: " . ($reason ?: 'Không nêu lý do'),
+        "/admin/orders/" . $p['id']
+    ]);
     flash('success','Đã hủy đơn hàng thành công. Số lượng sản phẩm đã được khôi phục.');
     redirect('/customer/orders');
 });
