@@ -91,15 +91,15 @@ body { top: 0 !important; }
 .skiptranslate { display: none !important; }
 @media (max-width: 768px) {
   .top-bar { min-height: 36px !important; height: auto !important; padding: 2px 0 !important; overflow: visible !important; width: 100% !important; box-sizing: border-box !important; }
-  .top-bar .wrap { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 10px !important; width: 100% !important; box-sizing: border-box !important; min-height: 32px !important; }
+  .top-bar .wrap { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 6px !important; width: 100% !important; box-sizing: border-box !important; min-height: 32px !important; }
   .top-bar .left { flex: 0 0 auto !important; display: flex !important; align-items: center !important; }
-  .top-bar .left .badge-live { font-size: 10.5px !important; padding: 2px 6px !important; line-height: 1.2 !important; }
-  .top-bar .right { display: flex !important; align-items: center !important; gap: 6px !important; flex: 0 0 auto !important; margin-left: auto !important; }
+  .top-bar .left .badge-live { font-size: 9.5px !important; padding: 2px 4px !important; line-height: 1.2 !important; }
+  .top-bar .right { display: flex !important; align-items: center !important; gap: 4px !important; flex: 0 0 auto !important; margin-left: auto !important; }
   .top-bar .right a[href="/policies"],
-  .top-bar .right a[href="/stores"],
-  .top-bar .right span { display: none !important; }
-  #langSwitchBtn { padding: 2px 6px !important; font-size: 10px !important; border-radius: 4px !important; line-height: 1.2 !important; }
-  .top-bar .right a[href*="logout"] { padding: 3px 8px !important; font-size: 11px !important; border-radius: 4px !important; white-space: nowrap !important; margin-right: 0 !important; display: inline-block !important; line-height: 1.2 !important; }
+  .top-bar .right a[href="/stores"] { display: inline-block !important; color: rgba(255,255,255,0.85) !important; font-size: 10.5px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
+  .top-bar .right span { display: inline-block !important; width: 1px !important; height: 10px !important; background: rgba(255,255,255,0.2) !important; }
+  #langSwitchBtn { padding: 2px 5px !important; font-size: 10px !important; border-radius: 4px !important; line-height: 1.2 !important; }
+  .top-bar .right a[href*="logout"] { padding: 3px 6px !important; font-size: 10.5px !important; border-radius: 4px !important; white-space: nowrap !important; margin-right: 0 !important; display: inline-block !important; line-height: 1.2 !important; }
 }
 </style>
 

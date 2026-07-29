@@ -136,6 +136,18 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
             </div>
           </div>
         </div>
+        <!-- Popup confirm delete notification modal -->
+        <div id="userNotiConfirmModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;background:rgba(10,25,47,0.5);align-items:center;justify-content:center;padding:16px;box-sizing:border-box">
+          <div style="background:#fff;border-radius:14px;max-width:340px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.3);padding:22px 20px;text-align:center">
+            <div style="font-size:16px;font-weight:700;color:#1a3258;margin-bottom:8px">Xác nhận xóa</div>
+            <p style="font-size:13px;color:#555;margin:0 0 18px;line-height:1.5">Bạn có chắc chắn muốn xóa thông báo này không?</p>
+            <div style="display:flex;gap:10px">
+              <button type="button" onclick="closeUserNotiConfirm()" style="flex:1;padding:10px;background:#eef2f7;color:#1a3258;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px">Hủy</button>
+              <button type="button" onclick="confirmDeleteUserNoti()" style="flex:1;padding:10px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px">Xóa</button>
+            </div>
+          </div>
+        </div>
+
         <script>
         function toggleUserNoti(e) {
           e.stopPropagation();
@@ -147,12 +159,11 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
           if(d && !d.contains(e.target)) d.style.display = 'none';
         });
         function markUserNotiRead(id) {
-          fetch('/customer/notifications/'+id+'/read', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'_csrf='+document.querySelector('input[name="_csrf"]')?.value||''});
+          fetch('/customer/notifications/'+id+'/read', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'_csrf='+(document.querySelector('input[name="_csrf"]')?.value||'')});
         }
         function markAllUserNotiRead() {
           fetch('/customer/notifications/read-all', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'_csrf='+(document.querySelector('input[name="_csrf"]')?.value||'')})
           .then(function(){
-            // Update UI without reload: remove badge, mark all as read visually
             var badge = document.querySelector('button[onclick*="toggleUserNoti"] span');
             if(badge) badge.remove();
             document.querySelectorAll('#userNotiList a').forEach(function(a){
@@ -165,11 +176,48 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
           });
         }
         function goUserNoti(id, link){ try{markUserNotiRead(id);}catch(e){} var d=document.getElementById('userNotiDropdown'); if(d)d.style.display='none'; var href=(link&&link.getAttribute('href'))||'/customer/orders'; if(window.csNav){csNav(href);}else{location.href=href;} return false; }
+        
+        var _pendingNotiDelId = null;
+        var _pendingNotiBtn = null;
+
         function deleteUserNoti(id, e, btn) {
           e.preventDefault(); e.stopPropagation();
-          fetch('/customer/notifications/'+id+'/delete', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'_csrf='+(document.querySelector('input[name="_csrf"]')?.value||'')})
-          .then(function(){ if(btn&&btn.parentNode){btn.parentNode.remove();} var L=document.getElementById('userNotiList'); if(L&&!L.querySelector('a')){L.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';} });
+          _pendingNotiDelId = id;
+          _pendingNotiBtn = btn;
+          var modal = document.getElementById('userNotiConfirmModal');
+          if(modal) modal.style.display = 'flex';
         }
+
+        function closeUserNotiConfirm() {
+          var modal = document.getElementById('userNotiConfirmModal');
+          if(modal) modal.style.display = 'none';
+          _pendingNotiDelId = null;
+          _pendingNotiBtn = null;
+        }
+
+        function confirmDeleteUserNoti() {
+          if(!_pendingNotiDelId) return;
+          var id = _pendingNotiDelId;
+          var btn = _pendingNotiBtn;
+          closeUserNotiConfirm();
+          fetch('/customer/notifications/'+id+'/delete', {
+            method:'POST',
+            headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            body:'_csrf='+(document.querySelector('input[name="_csrf"]')?.value||'')
+          })
+          .then(function(){
+            if(btn && btn.parentNode){ btn.parentNode.remove(); }
+            var L = document.getElementById('userNotiList');
+            if(L && !L.querySelector('a')){
+              L.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';
+            }
+          });
+        }
+
+        document.addEventListener('click', function(e) {
+          var modal = document.getElementById('userNotiConfirmModal');
+          if(modal && e.target === modal) closeUserNotiConfirm();
+        });
         </script>
 
         <a href="/customer/orders" class="h-btn"><span class="label">Đơn hàng</span><span class="value"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg></span></a>
