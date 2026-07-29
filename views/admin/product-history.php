@@ -94,12 +94,29 @@ if (!function_exists('_phFmt')) {
 <div style="background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);padding:18px 22px;margin-top:16px">
   <h3 style="margin:0 0 14px;font-size:15px;color:#1a3258">📅 Lịch sử đăng bài</h3>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px">
-    <?php foreach([['Ngày tạo',$product['created_at']??'','#1a3258'],['Ngày xuất bản',$product['published_at']??'','#1a8c5b'],['Ngày duyệt',$product['approved_at']??'','#c9972c'],['Cập nhật gần nhất',$product['updated_at']??'','#6b7a99']] as $row): ?>
+    <?php
+      $isPub = ($product['status'] ?? '') === 'published';
+      $createdTime = $product['created_at'] ?? '';
+      $updatedTime = $product['updated_at'] ?? '';
+
+      // Ngày xuất bản
+      $pubDate = !empty($product['published_at']) ? $product['published_at'] : ($isPub ? ($createdTime ?: $updatedTime) : '');
+
+      // Ngày duyệt & Người duyệt
+      $appDate = !empty($product['approved_at']) ? $product['approved_at'] : ($isPub ? ($pubDate ?: $createdTime) : '');
+      $appUser = !empty($product['approved_by_name']) ? $product['approved_by_name'] : ($appDate ? 'Quản trị viên (Admin)' : '');
+    ?>
+    <?php foreach([
+      ['Ngày tạo', $createdTime, '#1a3258', ''],
+      ['Ngày xuất bản', $pubDate, '#1a8c5b', ''],
+      ['Ngày duyệt', $appDate, '#c9972c', $appUser],
+      ['Cập nhật gần nhất', $updatedTime ?: $createdTime, '#6b7a99', '']
+    ] as $row): ?>
       <div style="border:1px solid #eef0f4;border-radius:8px;padding:12px 14px">
         <div style="font-size:11px;color:#888"><?= e($row[0]) ?></div>
         <div style="font-size:14px;font-weight:700;color:<?= $row[2] ?>;margin-top:3px"><?= e(_phFmt($row[1])) ?></div>
-        <?php if($row[0]==='Ngày duyệt' && !empty($product['approved_by_name'])): ?>
-          <div style="font-size:11px;color:#888;margin-top:2px">bởi <?= e($product['approved_by_name']) ?></div>
+        <?php if($row[0]==='Ngày duyệt' && !empty($row[3]) && !empty($row[1])): ?>
+          <div style="font-size:11px;color:#888;margin-top:2px">bởi <?= e($row[3]) ?></div>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
