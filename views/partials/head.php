@@ -121,6 +121,15 @@ header.main .wrap, nav.primary .wrap, section.block .wrap, .sec-card .wrap, .her
     margin-left: auto !important;
     margin-right: auto !important;
 }
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden !important; width: 100% !important; }
+  header.main .wrap, nav.primary .wrap, section.block .wrap, .sec-card .wrap, .hero-section .wrap, .trust .wrap, .top-bar .wrap, .site-breadcrumb .wrap {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
 
 /* ZERO CLS Layout Containment & Font Swap (Fix 0.189 Mobile CLS 100%) */
 @font-face { font-display: swap; }

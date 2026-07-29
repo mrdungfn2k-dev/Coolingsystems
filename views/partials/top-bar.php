@@ -90,15 +90,16 @@ body { top: 0 !important; }
 .goog-te-gadget { font-size: 0 !important; }
 .skiptranslate { display: none !important; }
 @media (max-width: 768px) {
-  .top-bar { min-height: 32px !important; height: 32px !important; padding: 0 10px !important; overflow: hidden !important; }
-  .top-bar .wrap { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 !important; width: 100% !important; box-sizing: border-box !important; }
-  .top-bar .left { flex-shrink: 0 !important; }
-  .top-bar .left .badge-live { font-size: 11px !important; }
+  .top-bar { min-height: 32px !important; height: 32px !important; padding: 0 !important; overflow: hidden !important; width: 100% !important; }
+  .top-bar .wrap { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 8px !important; width: 100% !important; box-sizing: border-box !important; }
+  .top-bar .left { flex: 0 0 auto !important; }
+  .top-bar .left .badge-live { font-size: 10.5px !important; padding: 2px 6px !important; }
+  .top-bar .right { display: flex !important; align-items: center !important; gap: 4px !important; flex: 0 0 auto !important; margin-left: auto !important; }
   .top-bar .right a[href="/policies"],
   .top-bar .right a[href="/stores"],
   .top-bar .right span { display: none !important; }
-  .top-bar .right { gap: 6px !important; flex-shrink: 0 !important; }
-  .top-bar .right a[href*="logout"] { padding: 2px 8px !important; font-size: 11px !important; }
+  #langSwitchBtn { padding: 2px 5px !important; font-size: 10px !important; border-radius: 4px !important; }
+  .top-bar .right a[href*="logout"] { padding: 2px 8px !important; font-size: 10.5px !important; border-radius: 4px !important; white-space: nowrap !important; margin-right: 0 !important; }
 }
 </style>
 

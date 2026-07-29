@@ -31,16 +31,25 @@
   #navScrollWrap .nav-link, #navScrollWrap .all-cats { flex-shrink: 0; }
   @media (max-width: 768px) {
     nav.primary { background: #1a3258 !important; padding: 0 !important; }
-    #navScrollWrap { padding: 4px 10px 6px 10px !important; gap: 6px !important; scrollbar-width: none !important; }
+    #navScrollWrap { padding: 4px 6px 6px 6px !important; gap: 4px !important; scrollbar-width: none !important; }
     #navScrollWrap::-webkit-scrollbar { display: none !important; }
-    #navScrollWrap .all-cats { padding: 5px 10px !important; font-size: 12px !important; background: #c8a951 !important; color: #1a3258 !important; font-weight: 700 !important; border-radius: 6px !important; white-space: nowrap !important; }
-    #navScrollWrap .nav-link { padding: 5px 10px !important; font-size: 12.5px !important; font-weight: 600 !important; color: #fff !important; white-space: nowrap !important; }
+    #navScrollWrap .all-cats { padding: 5px 8px !important; font-size: 11.5px !important; background: #c8a951 !important; color: #1a3258 !important; font-weight: 700 !important; border-radius: 5px !important; white-space: nowrap !important; }
+    #navScrollWrap .all-cats span.txt-desktop { display: none !important; }
+    #navScrollWrap .all-cats span.txt-mobile { display: inline !important; }
+    #navScrollWrap .nav-link { padding: 5px 8px !important; font-size: 12px !important; font-weight: 600 !important; color: #fff !important; white-space: nowrap !important; }
+  }
+  @media (min-width: 769px) {
+    #navScrollWrap .all-cats span.txt-desktop { display: inline !important; }
+    #navScrollWrap .all-cats span.txt-mobile { display: none !important; }
   }
   </style>
+
     <div class="all-cats-wrap" style="position:relative">
     <a href="javascript:void(0)" class="all-cats" style="text-decoration:none;color:#fff" onclick="this.parentElement.classList.toggle('open')">
       <span class="lines"><span></span><span></span><span></span></span>
-      <span>Danh mục sản phẩm</span><span class="arrow">▾</span>
+      <span class="txt-desktop">Danh mục sản phẩm</span>
+      <span class="txt-mobile">📁 Danh mục</span>
+      <span class="arrow">▾</span>
     </a>
     <div class="cat-dropdown" style="display:none;position:absolute;top:100%;left:0;min-width:280px;background:#fff;border-radius:0 0 8px 8px;box-shadow:0 8px 24px rgba(0,0,0,0.18);z-index:999;max-height:420px;overflow-y:auto">
       <?php
@@ -98,13 +107,17 @@
   el.addEventListener('touchmove',function(e){
     var x=e.touches[0].pageX-el.offsetLeft; el.scrollLeft=scrollLeft-(x-startX);
   },{passive:true});
-  // Auto-scroll to active nav link so it stays visible on page load
-  var activeLink = el.querySelector('.nav-link.active');
-  if (activeLink) {
-    var elRect = el.getBoundingClientRect();
-    var linkRect = activeLink.getBoundingClientRect();
-    var scrollTarget = activeLink.offsetLeft - (elRect.width / 2) + (linkRect.width / 2);
-    el.scrollLeft = Math.max(0, scrollTarget);
+  // Auto-scroll to active nav link only on desktop
+  if (window.innerWidth > 768) {
+    var activeLink = el.querySelector('.nav-link.active');
+    if (activeLink) {
+      var elRect = el.getBoundingClientRect();
+      var linkRect = activeLink.getBoundingClientRect();
+      var scrollTarget = activeLink.offsetLeft - (elRect.width / 2) + (linkRect.width / 2);
+      el.scrollLeft = Math.max(0, scrollTarget);
+    }
+  } else {
+    el.scrollLeft = 0;
   }
 })();
 </script>
