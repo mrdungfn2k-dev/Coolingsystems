@@ -231,7 +231,9 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
          <?php if ($cart['cnt'] > 0): ?><span style="position:absolute;top:0px;right:0px;background:#c8962b;color:#fff;font-size:9px;font-weight:bold;border-radius:10px;min-width:15px;height:15px;line-height:15px;text-align:center;padding:0 3px;" aria-hidden="true"><?= $cart['cnt'] ?></span><?php endif; ?>
       </a>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu"><span></span><span></span><span></span></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;background:#1a3258;border:none;border-radius:6px;cursor:pointer;color:#fff;flex-shrink:0;margin-left:4px">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
     </div>
   </div>
   <div class="mobile-search-bar">

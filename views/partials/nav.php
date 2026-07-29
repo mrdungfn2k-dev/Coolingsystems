@@ -46,9 +46,18 @@
       <?php
         $navCats = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
         foreach($navCats as $nc):
+          $iconVal = trim($nc['icon'] ?? '');
+          $isImg = !empty($iconVal) && (preg_match('/\.(png|jpg|jpeg|webp|gif|svg)$/i', $iconVal) || str_starts_with($iconVal, 'cat_'));
       ?>
       <a href="/products?cat=<?= e($nc['slug']) ?>" style="display:flex;align-items:center;padding:11px 18px;color:#1a3258;text-decoration:none;font-size:13px;font-weight:600;border-bottom:1px solid #f0f0f0;transition:all 0.15s">
-        <?php if(!empty($nc['icon'])): ?><span style="margin-right:10px;font-size:16px"><?= $nc['icon'] ?></span><?php endif; ?>
+        <?php if(!empty($iconVal)): ?>
+          <?php if($isImg): ?>
+            <?php $imgSrc = str_starts_with($iconVal, '/') ? $iconVal : (str_starts_with($iconVal, 'uploads/') ? '/' . $iconVal : '/uploads/categories/' . $iconVal); ?>
+            <img src="<?= e($imgSrc) ?>" alt="" style="width:20px;height:20px;object-fit:contain;margin-right:10px;flex-shrink:0" onerror="this.style.display='none'">
+          <?php else: ?>
+            <span style="margin-right:10px;font-size:16px"><?= e($iconVal) ?></span>
+          <?php endif; ?>
+        <?php endif; ?>
         <span><?= e($nc['name']) ?></span>
         <span style="margin-left:auto;color:#bbb;font-size:12px">›</span>
       </a>

@@ -58,6 +58,38 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
 <div class="float-stack"><a href="tel:<?= $_hl ?>" class="float-btn gold" aria-label="Gọi ngay hotline tư vấn miễn phí 24/7 <?= $_hl ?>">Gọi ngay</a></div>
 
 <!-- Mobile nav drawer (Bottom of DOM tree) -->
+<style>
+.mobile-nav-drawer {
+  background: #0b1329 !important;
+  color: #f8fafc !important;
+}
+.mobile-nav-drawer .mobile-nav-links a {
+  color: #f1f5f9 !important;
+  display: block !important;
+  padding: 10px 12px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  transition: all 0.2s ease !important;
+}
+.mobile-nav-drawer .mobile-nav-links a:hover,
+.mobile-nav-drawer .mobile-nav-links a:active {
+  background: rgba(200, 169, 81, 0.15) !important;
+  color: #c8a951 !important;
+  padding-left: 16px !important;
+}
+.mobile-nav-drawer .nav-section-label {
+  font-size: 11px !important;
+  color: #c8a951 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+  display: block !important;
+  margin: 16px 0 6px 0 !important;
+  padding-left: 4px !important;
+}
+</style>
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
   <div style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between;background:#0b1329">
@@ -78,19 +110,28 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
         <?php
           $mCats = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
           foreach($mCats as $mc):
+            $mIcon = trim($mc['icon'] ?? '');
+            $mIsImg = !empty($mIcon) && (preg_match('/\.(png|jpg|jpeg|webp|gif|svg)$/i', $mIcon) || str_starts_with($mIcon, 'cat_'));
         ?>
-        <a href="/products?cat=<?= e($mc['slug']) ?>" style="display:flex;align-items:center;padding:8px 10px;color:#cbd5e1;text-decoration:none;font-size:13px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.05)">
-          <?php if(!empty($mc['icon'])): ?><span style="margin-right:8px;font-size:14px"><?= $mc['icon'] ?></span><?php endif; ?>
+        <a href="/products?cat=<?= e($mc['slug']) ?>" style="display:flex;align-items:center;padding:9px 10px;color:#f1f5f9!important;text-decoration:none;font-size:13.5px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.06)">
+          <?php if(!empty($mIcon)): ?>
+            <?php if($mIsImg): ?>
+              <?php $mImgSrc = str_starts_with($mIcon, '/') ? $mIcon : (str_starts_with($mIcon, 'uploads/') ? '/' . $mIcon : '/uploads/categories/' . $mIcon); ?>
+              <img src="<?= e($mImgSrc) ?>" alt="" style="width:18px;height:18px;object-fit:contain;margin-right:8px;flex-shrink:0" onerror="this.style.display='none'">
+            <?php else: ?>
+              <span style="margin-right:8px;font-size:14px"><?= e($mIcon) ?></span>
+            <?php endif; ?>
+          <?php endif; ?>
           <span><?= e($mc['name']) ?></span>
           <span style="margin-left:auto;color:#64748b;font-size:11px">›</span>
         </a>
         <?php endforeach; ?>
-        <a href="/products" style="display:block;padding:8px 10px;color:#c8a951;font-weight:700;font-size:13px;text-decoration:none">Xem tất cả sản phẩm →</a>
+        <a href="/products" style="display:block;padding:9px 10px;color:#c8a951!important;font-weight:700;font-size:13px;text-decoration:none">Xem tất cả sản phẩm →</a>
       </div>
     </div>
 
     <!-- Section 2: Khám phá -->
-    <span class="nav-section-label" style="font-size:11px;color:#c8a951;letter-spacing:0.06em;text-transform:uppercase;font-weight:800;display:block;margin:12px 0 6px">Khám phá</span>
+    <span class="nav-section-label">Khám phá</span>
     <a href="/">Trang chủ</a>
     <a href="/about">Giới thiệu</a>
     <a href="/products">Sản phẩm</a>
@@ -100,30 +141,30 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
     <a href="/news">Tin tức & Kinh nghiệm</a>
 
     <!-- Section 3: Dịch vụ & Tra cứu -->
-    <span class="nav-section-label" style="font-size:11px;color:#c8a951;letter-spacing:0.06em;text-transform:uppercase;font-weight:800;display:block;margin:14px 0 6px">Dịch vụ & Tra cứu</span>
+    <span class="nav-section-label">Dịch vụ & Tra cứu</span>
     <a href="/stores">Hệ thống cửa hàng</a>
     <a href="/policies">Chính sách & Quy định</a>
 
     <!-- Section 4: Tài khoản của tôi -->
     <?php if ($user && in_array($user['role'], ['customer','staff'])): ?>
-      <span class="nav-section-label" style="font-size:11px;color:#c8a951;letter-spacing:0.06em;text-transform:uppercase;font-weight:800;display:block;margin:14px 0 6px">Tài khoản của tôi</span>
+      <span class="nav-section-label">Tài khoản của tôi</span>
       <a href="/customer/orders">Đơn hàng của tôi</a>
       <a href="/customer/favorites">Sản phẩm yêu thích</a>
       <a href="/customer/chat">Tin nhắn tư vấn</a>
       <a href="/customer/profile">Hồ sơ cá nhân</a>
-      <a href="/auth/logout" style="color:#ef4444">Đăng xuất</a>
+      <a href="/auth/logout" style="color:#ef4444!important">Đăng xuất</a>
     <?php elseif ($user && $user['role'] === 'partner'): ?>
-      <span class="nav-section-label" style="font-size:11px;color:#c8a951;letter-spacing:0.06em;text-transform:uppercase;font-weight:800;display:block;margin:14px 0 6px">Quản lý đối tác</span>
+      <span class="nav-section-label">Quản lý đối tác</span>
       <a href="/partner/dashboard">Bảng điều khiển Partner</a>
-      <a href="/partner/logout" style="color:#ef4444">Đăng xuất</a>
+      <a href="/partner/logout" style="color:#ef4444!important">Đăng xuất</a>
     <?php elseif ($user && $user['role'] === 'admin'): ?>
-      <span class="nav-section-label" style="font-size:11px;color:#c8a951;letter-spacing:0.06em;text-transform:uppercase;font-weight:800;display:block;margin:14px 0 6px">Quản trị viên</span>
+      <span class="nav-section-label">Quản trị viên</span>
       <a href="/admin">Quản trị Admin Panel</a>
-      <a href="/admin/logout" style="color:#ef4444">Đăng xuất</a>
+      <a href="/admin/logout" style="color:#ef4444!important">Đăng xuất</a>
     <?php else: ?>
       <div style="display:flex;gap:10px;margin-top:16px">
-        <a href="/auth/login" style="flex:1;padding:10px;background:rgba(255,255,255,0.1);color:#fff;text-align:center;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">Đăng nhập</a>
-        <a href="/auth/register" style="flex:1;padding:10px;background:#c8a951;color:#1a3258;text-align:center;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">Đăng ký</a>
+        <a href="/auth/login" style="flex:1;padding:10px;background:rgba(255,255,255,0.1);color:#fff!important;text-align:center;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">Đăng nhập</a>
+        <a href="/auth/register" style="flex:1;padding:10px;background:#c8a951;color:#1a3258!important;text-align:center;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">Đăng ký</a>
       </div>
     <?php endif; ?>
   </div>
