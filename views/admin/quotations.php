@@ -1,103 +1,115 @@
-<?php require __DIR__.'/../partials/dashboard-head.php'; ?>
+<?php require __DIR__ . '/../partials/dashboard-head.php'; ?>
+
 <div class="dash-head">
   <div>
-    <h1>Báo giá độc lập</h1>
-    <p style="margin:4px 0 0;color:#718096;font-size:13px">Tạo và gửi báo giá cho khách hàng trước khi chuyển đổi thành đơn hàng chính thức.</p>
-  </div>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a href="/admin/quotations/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
-    <a href="/admin/quotations/new" class="btn btn-navy">+ Tạo báo giá mới</a>
+    <h1>Quản Lý Yêu Cầu Báo Giá Gara (VIN / Excel)</h1>
+    <p style="margin:4px 0 0;color:#718096;font-size:13px">Tiếp nhận yêu cầu báo giá từ Gara, xem ảnh đăng kiểm/mã OEM/File Excel đính kèm và phản hồi báo giá sỉ.</p>
   </div>
 </div>
 
-<?php foreach(getFlash() as $x): ?>
-<div class="alert alert-<?= e($x['type']) ?>"><?= e($x['message']) ?></div>
-<?php endforeach; ?>
-
-<style>
-.q-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.q-filter input,.q-filter select{height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 10px;background:#fff;font-size:13px}
-.q-table{width:100%;border-collapse:collapse;background:#fff}
-.q-table th{font-size:11px;text-transform:uppercase;color:#64748b;background:#f7f9fc;padding:11px 10px;text-align:left;white-space:nowrap;border-bottom:2px solid #e6ebf1}
-.q-table td{padding:11px 10px;border-top:1px solid #edf1f5;vertical-align:middle;font-size:13px}
-.q-table tr:hover td{background:#f9fbff}
-.q-status{padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
-.q-status-pending{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
-.q-status-sent{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
-.q-status-converted{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
-.q-status-expired{background:#f3f4f6;color:#374151;border:1px solid #d1d5db}
-.q-status-cancelled{background:#fee2e2;color:#b91c1c;border:1px solid #fecaca}
-</style>
-
-<form class="q-filter" method="get" action="/admin/quotations">
-  <input type="search" name="q" value="<?= e($q) ?>" placeholder="Mã báo giá, tên khách hàng..." style="min-width:250px">
-  <select name="status">
-    <option value="">Tất cả trạng thái</option>
-    <option value="pending" <?= $statusFilter==='pending'?'selected':'' ?>>Chờ duyệt / Nháp</option>
-    <option value="sent" <?= $statusFilter==='sent'?'selected':'' ?>>Đã gửi KH</option>
-    <option value="converted" <?= $statusFilter==='converted'?'selected':'' ?>>Đã chuyển đơn hàng</option>
-    <option value="expired" <?= $statusFilter==='expired'?'selected':'' ?>>Đã hết hạn</option>
-    <option value="cancelled" <?= $statusFilter==='cancelled'?'selected':'' ?>>Đã hủy</option>
-  </select>
-  <button class="btn btn-navy" type="submit">Lọc</button>
-  <?php if($q||$statusFilter): ?>
-  <a href="/admin/quotations" class="btn btn-outline">Xóa lọc</a>
-  <?php endif; ?>
-</form>
-
-<div style="overflow:auto;border:1px solid #e6ebf1;border-radius:8px">
-<table class="q-table">
-  <thead>
-    <tr>
-      <th>Mã báo giá</th>
-      <th>Khách hàng</th>
-      <th style="text-align:right">Tổng giá trị</th>
-      <th>Trạng thái</th>
-      <th>Ngày hết hạn</th>
-      <th>Ghi chú</th>
-      <th>Người tạo</th>
-      <th>Ngày tạo</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($quotations as $qt): ?>
-    <tr>
-      <td style="font-family:monospace;font-weight:700">#<?= e($qt['code'] ?? '') ?></td>
-      <td>
-        <strong style="color:#1f365b"><?= e($qt['customer_name'] ?? '—') ?></strong>
-        <div style="font-size:11px;color:#718096;margin-top:2px"><?= e($qt['customer_phone'] ?? '') ?></div>
-      </td>
-      <td style="text-align:right;font-weight:700;color:#1e3a8a"><?= number_format((int)($qt['grand_total'] ?? 0)) ?> đ</td>
-      <td>
-        <span class="q-status q-status-<?= e($qt['status'] ?? 'pending') ?>">
-          <?= ['pending'=>'Chờ duyệt','sent'=>'Đã gửi KH','converted'=>'Đã xuất đơn','expired'=>'Hết hạn','cancelled'=>'Đã hủy'][$qt['status'] ?? 'pending'] ?? e($qt['status'] ?? '') ?>
-        </span>
-      </td>
-      <td style="color:#e11d48;font-weight:500"><?= e(substr((string)($qt['expires_at'] ?? ''),0,10)) ?></td>
-      <td style="font-size:12px;color:#6b7280;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="<?= e($qt['note'] ?? '') ?>"><?= e(!empty($qt['note']) ? $qt['note'] : '—') ?></td>
-      <td style="font-size:12px;color:#6b7280"><?= e($qt['creator_name'] ?? 'System') ?></td>
-      <td style="font-size:12px;color:#9ca3af"><?= !empty($qt['created_at']) ? date('d/m/Y H:i', strtotime($qt['created_at'])) : '—' ?></td>
-      <td>
-        <div style="display:flex;gap:5px">
-          <a href="/admin/quotations/<?= (int)$qt['id'] ?>" class="btn btn-outline" style="padding:4px 8px;font-size:12px">Chi tiết</a>
-        </div>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-    <?php if(!$quotations): ?>
-    <tr><td colspan="9" style="padding:30px;text-align:center;color:#9ca3af">Chưa có bản báo giá nào.</td></tr>
+    <?php if (hasFlash('success')): ?>
+      <div style="background:#dcfce7;color:#15803d;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-weight:700;font-size:14px">
+        <?= getFlash('success') ?>
+      </div>
     <?php endif; ?>
-  </tbody>
-</table>
+
+    <div style="background:#fff;border-radius:12px;border:1px solid #cbd5e1;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.03)">
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13.5px;text-align:left">
+          <thead>
+            <tr style="background:#0b1d3a;color:#fff">
+              <th style="padding:12px 16px">Mã YC</th>
+              <th style="padding:12px 16px">Khách Hàng / Gara</th>
+              <th style="padding:12px 16px">Số Điện Thoại</th>
+              <th style="padding:12px 16px">Ghi Chú Yêu Cầu</th>
+              <th style="padding:12px 16px">Tệp Đính Kèm</th>
+              <th style="padding:12px 16px">Giá Báo (VNĐ)</th>
+              <th style="padding:12px 16px;text-align:center">Trạng Thái</th>
+              <th style="padding:12px 16px;text-align:center">Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($quotations)): ?>
+              <?php foreach ($quotations as $q): ?>
+                <tr style="border-bottom:1px solid #e2e8f0">
+                  <td style="padding:12px 16px;font-weight:700;color:#0b1d3a">#<?= $q['id'] ?></td>
+                  <td style="padding:12px 16px">
+                    <div style="font-weight:700;color:#1e293b"><?= e($q['full_name']) ?></div>
+                    <div style="font-size:12px;color:#64748b"><?= e($q['garage_name'] ?: 'Gara Cá Nhân') ?></div>
+                  </td>
+                  <td style="padding:12px 16px;font-weight:700;color:#0b1d3a"><?= e($q['phone']) ?></td>
+                  <td style="padding:12px 16px;color:#334155;max-width:220px"><?= e($q['note'] ?: '—') ?></td>
+                  <td style="padding:12px 16px">
+                    <?php if (!empty($q['file_path'])): ?>
+                      <a href="<?= e($q['file_path']) ?>" target="_blank" style="color:#2563eb;font-weight:700;text-decoration:none">Xem Tệp Đính Kèm</a>
+                    <?php else: ?>
+                      <span style="color:#94a3b8">—</span>
+                    <?php endif; ?>
+                  </td>
+                  <td style="padding:12px 16px;font-weight:800;color:#15803d">
+                    <?= $q['total_price'] > 0 ? vnd($q['total_price']) : 'Chưa báo giá' ?>
+                  </td>
+                  <td style="padding:12px 16px;text-align:center">
+                    <?php if ($q['status'] === 'replied'): ?>
+                      <span style="background:#dcfce7;color:#15803d;font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px">Đã Phản Hồi</span>
+                    <?php else: ?>
+                      <span style="background:#fef3c7;color:#b45309;font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px">Chờ Báo Giá</span>
+                    <?php endif; ?>
+                  </td>
+                  <td style="padding:12px 16px;text-align:center">
+                    <button type="button" onclick="openReplyModal(<?= htmlspecialchars(json_encode($q), ENT_QUOTES) ?>)" style="background:#0b1d3a;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer">
+                      <?= $q['status'] === 'replied' ? 'Sửa Báo Giá' : 'Báo Giá Ngay' ?>
+                    </button>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="8" style="padding:30px;text-align:center;color:#64748b;font-style:italic">Chưa có yêu cầu báo giá nào từ Gara.</td>
+              </tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+<!-- Modal Phản Hồi Báo Giá -->
+<div id="replyQuoteModal" style="display:none;position:fixed;inset:0;background:rgba(11,29,58,0.75);backdrop-filter:blur(4px);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:16px;max-width:500px;width:100%;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative">
+    <button type="button" onclick="closeReplyModal()" style="position:absolute;top:16px;right:16px;border:none;background:#f1f5f9;width:32px;height:32px;border-radius:50%;font-size:18px;font-weight:bold;cursor:pointer;color:#64748b">&times;</button>
+    <h3 style="font-size:18px;font-weight:800;color:#0b1d3a;margin:0 0 16px 0">Phản Hồi Báo Giá Phụ Tùng</h3>
+    
+    <form method="post" action="/admin/quotations/reply">
+      <?= csrfField() ?>
+      <input type="hidden" name="id" id="replyQuoteId">
+
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Tổng Giá Sỉ Phản Hồi (VNĐ) <span style="color:#ef4444">*</span></label>
+        <input type="number" step="1000" name="total_price" id="replyTotalPrice" required style="width:100%;height:42px;border-radius:8px;border:1px solid #cbd5e1;padding:0 14px;font-size:15px;font-weight:700;color:#15803d;box-sizing:border-box">
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Ghi Chú Phản Hồi / Chi Tiết Báo Giá</label>
+        <textarea name="admin_reply_note" id="replyNote" rows="4" placeholder="VD: Đã bao gồm lốc nén DENSO chính hãng và giàn nóng MAHLE. Bảo hành 12 tháng." style="width:100%;border-radius:8px;border:1px solid #cbd5e1;padding:10px 14px;font-size:13.5px;box-sizing:border-box"></textarea>
+      </div>
+
+      <button type="submit" style="width:100%;height:44px;background:#0b1d3a;color:#fff;border:none;border-radius:8px;font-weight:800;font-size:14.5px;cursor:pointer">
+        GỬI BÁO GIÁ VỀ CHO GARA
+      </button>
+    </form>
+  </div>
 </div>
 
-<?php if($totalPages > 1): $base = ['q'=>$q,'status'=>$statusFilter?:null]; ?>
-<div class="pagination" style="margin-top:16px">
-  <?php if($page>1): ?><a href="/admin/quotations?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?>
-  <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>
-  <?php if($page<$totalPages): ?><a href="/admin/quotations?<?= e(http_build_query(array_filter($base+['page'=>$page+1]))) ?>">›</a><?php endif; ?>
-</div>
-<?php endif; ?>
+<script>
+function openReplyModal(q) {
+  document.getElementById('replyQuoteId').value = q.id;
+  document.getElementById('replyTotalPrice').value = q.total_price || '';
+  document.getElementById('replyNote').value = q.admin_reply_note || '';
+  document.getElementById('replyQuoteModal').style.display = 'flex';
+}
+function closeReplyModal() {
+  document.getElementById('replyQuoteModal').style.display = 'none';
+}
+</script>
 
-<?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
+<?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

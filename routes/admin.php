@@ -2546,7 +2546,7 @@ post('/admin/inventory/:id/update', function($p) {
         flash('error','Không tìm thấy sản phẩm.'); redirect($targetUrl); return;
     }
 
-    $fields=['cost_price','price','original_price','stock','min_stock','max_stock','warranty_months']; $values=[];
+    $fields=['cost_price','price','wholesale_price','original_price','stock','min_stock','max_stock','warranty_months']; $values=[];
     foreach($fields as $field){
         $raw=trim((string)($_POST[$field]??'')); 
         if($raw===''||!ctype_digit($raw)){
@@ -2559,7 +2559,7 @@ post('/admin/inventory/:id/update', function($p) {
     $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
     if ($detailedRbac) {
         $fieldCapabilities = [
-          'cost_price'=>'catalog.cost.edit','price'=>'catalog.pricing.edit','original_price'=>'catalog.pricing.edit',
+          'cost_price'=>'catalog.cost.edit','price'=>'catalog.pricing.edit','wholesale_price'=>'catalog.pricing.edit','original_price'=>'catalog.pricing.edit',
           'stock'=>'inventory.update','min_stock'=>'inventory.thresholds.edit','max_stock'=>'inventory.thresholds.edit',
           'warranty_months'=>'catalog.products.edit'
         ];
@@ -3400,6 +3400,63 @@ get('/admin/content', function() {
     $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image','hero_show_text','hero_banner_link','home_banners_list']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
     $footerSettings = []; $fkeys = ['footer_logo_text','footer_desc','footer_copyright']; foreach($fkeys as $fk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$fk]); $footerSettings[$fk]=$r['value']??'';}
     view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages], ['bannerSettings'=>$bannerSettings, 'footerSettings'=>$footerSettings]));
+});
+
+get('/admin/garage-tiers', function() {
+    $user = requireStaffPermission('customers', '/auth/login');
+    $tiers = dbAll("SELECT * FROM garage_tiers ORDER BY min_monthly_spend ASC");
+    view('admin/garage-tiers', ['title'=>'Cấu Hình Hạng Gara', 'user'=>$user, 'tiers'=>$tiers]);
+});
+
+post('/admin/garage-tiers/update', function() {
+    $user = requireStaffPermission('customers', '/auth/login');
+    csrfCheck();
+    $ids = $_POST['tier_id'] ?? [];
+    $names = $_POST['tier_name'] ?? [];
+    $percents = $_POST['discount_percent'] ?? [];
+    $spends = $_POST['min_monthly_spend'] ?? [];
+
+    foreach ($ids as $i => $id) {
+        dbRun("UPDATE garage_tiers SET tier_name=?, discount_percent=?, min_monthly_spend=? WHERE id=?", [
+            $names[$i] ?? '',
+            floatval($percents[$i] ?? 10),
+            floatval($spends[$i] ?? 0),
+            intval($id)
+        ]);
+    }
+    flash('success', 'Đã lưu cấu hình Hạng Gara thành công!');
+    redirect('/admin/garage-tiers');
+});
+
+get('/admin/quotations', function() {
+    $user = requireStaffPermission('customers', '/auth/login');
+    $quotations = dbAll("SELECT * FROM garage_quotations ORDER BY id DESC");
+    view('admin/quotations', ['title'=>'Quản Lý Yêu Cầu Báo Giá', 'user'=>$user, 'quotations'=>$quotations]);
+});
+
+post('/admin/quotations/reply', function() {
+    $user = requireStaffPermission('customers', '/auth/login');
+    csrfCheck();
+    $id = intval($_POST['id'] ?? 0);
+    $totalPrice = floatval($_POST['total_price'] ?? 0);
+    $replyNote = trim($_POST['admin_reply_note'] ?? '');
+
+    if ($id && $totalPrice > 0) {
+        dbRun("UPDATE garage_quotations SET total_price=?, admin_reply_note=?, status='replied', updated_at=datetime('now','localtime') WHERE id=?", [
+            $totalPrice, $replyNote, $id
+        ]);
+        
+        $q = dbGet("SELECT * FROM garage_quotations WHERE id=?", [$id]);
+        if ($q && !empty($q['user_id'])) {
+            dbInsert("INSERT INTO notifications (user_id, title, content, type, is_read, created_at) VALUES (?, ?, ?, 'system', 0, datetime('now','localtime'))", [
+                $q['user_id'],
+                'Báo giá phụ tùng Gara #' . $id,
+                'Phụ tùng của bạn đã được báo giá sỉ thành công với tổng số tiền ' . vnd($totalPrice) . '. Vui lòng xem chi tiết trong Hồ sơ cá nhân.'
+            ]);
+        }
+        flash('success', 'Đã gửi báo giá thành công về cho Gara!');
+    }
+    redirect('/admin/quotations');
 });
 
 get('/admin/content/:slug', function($p) {
