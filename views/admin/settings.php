@@ -45,6 +45,10 @@
           <label>Hotline tư vấn</label>
           <input type="text" name="site_phone" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='site_phone'")['value'] ?? '') ?>" placeholder="0987654321" pattern="0[1-9][0-9]{8}" title="Hotline phải là 10 chữ số, bắt đầu bằng số 0, tiếp theo là số từ 1-9" required oninput="let v = this.value.replace(/[^0-9]/g, ''); if(v.length > 0 && v[0] !== '0') v = ''; if(v.length > 1 && v[1] === '0') v = '0'; this.value = v;" maxlength="10">
         </div>
+        <div class="form-group">
+          <label>Tiêu đề Website Trang Chủ <small>(Thẻ trình duyệt Browser Tab)</small></label>
+          <input type="text" name="site_meta_title" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='site_meta_title'")['value'] ?? 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng | Hệ Thống Làm Mát Ô Tô') ?>" placeholder="VD: Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng">
+        </div>
         <button type="submit" class="btn-save">Lưu cài đặt chung</button>
       </div>
       <div>

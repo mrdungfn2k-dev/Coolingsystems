@@ -3773,6 +3773,11 @@ post('/admin/settings/general', function() {
 
     $companyName = trim($_POST['company_name'] ?? '');
     dbRun("INSERT INTO system_config (key, value) VALUES ('company_name',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$companyName]);
+
+    $siteMetaTitle = trim($_POST['site_meta_title'] ?? '');
+    if ($siteMetaTitle !== '') {
+        dbRun("INSERT INTO system_config (key, value) VALUES ('site_meta_title',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$siteMetaTitle]);
+    }
     
     if (!empty($_FILES['site_logo']['name']) && $_FILES['site_logo']['error'] === UPLOAD_ERR_OK) {
         $allowed = ['image/jpeg','image/png','image/gif','image/svg+xml','image/webp'];

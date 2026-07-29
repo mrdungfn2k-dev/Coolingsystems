@@ -49,10 +49,11 @@ $sysTiktok = $_sysConf['social_tiktok'] ?? '';
 $sysFacebook = $_sysConf['social_facebook'] ?? '';
 // === PER-PAGE SEO (consume $seo array if a view set it; safe fallbacks otherwise) ===
 $seo = (isset($seo) && is_array($seo)) ? $seo : [];
+$_siteTitleDefault = $_sysConf['site_meta_title'] ?? 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng | Hệ Thống Làm Mát Ô Tô';
 $_defaultDesc = 'Sàn TMĐT phụ tùng ô tô chính hãng. Tra cứu phụ tùng theo dòng xe, mua hàng nhiều shop, bảo hành chính hãng.';
 $_metaDesc = seoTruncateText(!empty($seo['meta_description']) ? $seo['meta_description'] : $_defaultDesc, 160);
 ?>
-<title><?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (($title ?? '') . ' — Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng')) ?></title>
+<title><?= e(!empty($seo['meta_title']) ? $seo['meta_title'] : (!empty($title) ? ($title . ' — ' . $_siteTitleDefault) : $_siteTitleDefault)) ?></title>
 <meta name="description" content="<?= e($_metaDesc) ?>">
 <?php if (!empty($seo['meta_keywords'])): ?>
 <meta name="keywords" content="<?= e($seo['meta_keywords']) ?>">

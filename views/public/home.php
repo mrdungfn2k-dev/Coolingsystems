@@ -27,8 +27,9 @@ foreach ($rawBannersList as &$bnItem) {
 unset($bnItem);
 
 $firstBannerImg = $rawBannersList[0]['img'] ?? '';
+$_customMetaTitle = (dbGet("SELECT value FROM system_config WHERE key='site_meta_title'") ?: [])['value'] ?? 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng | Hệ Thống Làm Mát Ô Tô';
 $seo = [
-    'meta_title' => 'Cooling — Phụ Tùng & Dịch Vụ Ô Tô Chính Hãng | Hệ Thống Làm Mát Ô Tô',
+    'meta_title' => $_customMetaTitle,
     'meta_description' => 'Cooling Systems - Chuyên cung cấp phụ tùng hệ thống điện lạnh và làm mát xe ô tô chính hãng toàn quốc: Dàn lạnh, dàn nóng, lốc điều hòa, quạt gió ô tô. Bảo hành uy tín.',
     'preload_image' => !empty($firstBannerImg) ? '/uploads/banners/' . $firstBannerImg : ''
 ];
