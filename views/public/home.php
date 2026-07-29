@@ -169,10 +169,10 @@ require __DIR__ . '/../partials/head.php';
           $isGarageUser = $curU && (!empty($curU['garage_name']) || !empty($curU['garage_tier']) || !empty($userGaragesList));
         ?>
         <?php if ($isGarageUser && !empty($userGaragesList)): ?>
-          <div class="vs-field" style="background:#eff6ff; padding:10px; border-radius:8px; border:1.5px solid #3b82f6; margin-bottom:12px;">
-            <label style="color:#1d4ed8; font-weight:800; display:flex; align-items:center; justify-content:space-between;">
+          <div class="vs-field">
+            <label style="display:flex; align-items:center; justify-content:space-between; width:100%;">
               <span>XE ĐANG SỬA (GARA CỦA TÔI)</span>
-              <a href="/customer/profile" style="font-size:11px; font-weight:600; color:#2563eb; text-decoration:none;">+ Quản lý xe</a>
+              <a href="/customer/profile" style="font-size:11px; font-weight:600; color:#2563eb; text-decoration:none; text-transform:none;">+ Quản lý xe</a>
             </label>
             <?php
               $activeCarId = $_SESSION['active_garage_car_id'] ?? 0;
@@ -186,7 +186,7 @@ require __DIR__ . '/../partials/head.php';
             ?>
             <input type="hidden" name="garage_car_id" id="vsi-garage-car" value="<?= $activeCarId ?>">
             <div class="cdd" data-target="vsi-garage-car">
-              <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)" style="background:#fff; border-color:#93c5fd; font-weight:700; color:#0b1d3a;"><span class="cdd-label"><?= e($activeCarLabel) ?></span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button type="button" class="cdd-trigger" onclick="vsCddToggle(this)" aria-label="Chọn xe đang sửa trong Gara"><span class="cdd-label"><?= e($activeCarLabel) ?></span><svg class="cdd-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
               <div class="cdd-panel">
                 <div class="cdd-opt" data-val="" onclick="setActiveGarageCarForm(0, 0); vsCddPick(this);">— Tất cả xe Gara —</div>
                 <?php foreach ($userGaragesList as $c): ?>
