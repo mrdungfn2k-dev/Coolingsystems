@@ -5,6 +5,68 @@ if (!function_exists('_phFmt')) {
   function _phBrowser($ua){ $ua=(string)$ua; $m=['Edg'=>'Edge','OPR'=>'Opera','Chrome'=>'Chrome','Firefox'=>'Firefox','Safari'=>'Safari']; foreach($m as $k=>$v){ if(stripos($ua,$k)!==false) return $v; } return $ua!=='' ? mb_substr($ua,0,22) : '—'; }
   function _phDevice($ua){ return preg_match('/Mobile|Android|iPhone|iPad/i',(string)$ua) ? 'Mobile' : 'Desktop'; }
   function _phStatus($s){ $m=['draft'=>'Bản nháp','pending'=>'Chờ duyệt','published'=>'Xuất bản','hidden'=>'Ẩn / Ngừng KD','out_of_stock'=>'Hết hàng','rejected'=>'Từ chối','blocked'=>'Khóa']; return $m[$s] ?? ($s ?: '—'); }
+  function _phParseMeta($ch) {
+    $action = $ch['action'] ?? '';
+    $rawMeta = $ch['meta'] ?? '';
+    $actionMap = [
+      'create' => 'Tạo mới sản phẩm',
+      'update' => 'Cập nhật sản phẩm',
+      'quick_edit' => 'Sửa nhanh sản phẩm',
+      'update_price' => 'Cập nhật giá bán',
+      'update_stock' => 'Cập nhật tồn kho',
+      'change_status' => 'Thay đổi trạng thái',
+      'publish' => 'Xuất bản sản phẩm',
+      'unpublish' => 'Chuyển về bản nháp',
+      'delete' => 'Xóa sản phẩm',
+      'archive' => 'Lưu trữ sản phẩm',
+      'restore' => 'Khôi phục sản phẩm',
+    ];
+    $actionTitle = $actionMap[$action] ?? ($action ? ucfirst(str_replace('_', ' ', $action)) : 'Thay đổi sản phẩm');
+
+    if (empty($rawMeta)) return $actionTitle;
+
+    $meta = is_string($rawMeta) ? json_decode($rawMeta, true) : $rawMeta;
+    if (!is_array($meta)) {
+      return $actionTitle . (!empty($rawMeta) ? ': ' . e($rawMeta) : '');
+    }
+
+    if (!empty($meta['message'])) return e($meta['message']);
+    if (!empty($meta['note'])) return e($meta['note']);
+    if (!empty($meta['action_name'])) return e($meta['action_name']);
+
+    if (isset($meta['before']) || isset($meta['after'])) {
+      $before = is_array($meta['before'] ?? null) ? $meta['before'] : [];
+      $after = is_array($meta['after'] ?? null) ? $meta['after'] : [];
+      $diffs = [];
+
+      if (array_key_exists('price', $before) && array_key_exists('price', $after) && $before['price'] != $after['price']) {
+        $diffs[] = "Giá bán: " . number_format((float)$before['price']) . "đ ➔ " . number_format((float)$after['price']) . "đ";
+      }
+      if (array_key_exists('original_price', $before) && array_key_exists('original_price', $after) && $before['original_price'] != $after['original_price']) {
+        $diffs[] = "Giá niêm yết: " . number_format((float)$before['original_price']) . "đ ➔ " . number_format((float)$after['original_price']) . "đ";
+      }
+      if (array_key_exists('stock', $before) && array_key_exists('stock', $after) && $before['stock'] != $after['stock']) {
+        $diffs[] = "Tồn kho: " . number_format((float)$before['stock']) . " ➔ " . number_format((float)$after['stock']);
+      }
+      if (array_key_exists('status', $before) && array_key_exists('status', $after) && $before['status'] != $after['status']) {
+        $diffs[] = "Trạng thái: " . _phStatus($before['status']) . " ➔ " . _phStatus($after['status']);
+      }
+      if (array_key_exists('warranty_months', $before) && array_key_exists('warranty_months', $after) && $before['warranty_months'] != $after['warranty_months']) {
+        $diffs[] = "Bảo hành: " . $before['warranty_months'] . " tháng ➔ " . $after['warranty_months'] . " tháng";
+      }
+      if (array_key_exists('cost_price', $before) && array_key_exists('cost_price', $after) && $before['cost_price'] != $after['cost_price']) {
+        $diffs[] = "Giá nhập: " . number_format((float)$before['cost_price']) . "đ ➔ " . number_format((float)$after['cost_price']) . "đ";
+      }
+
+      if (!empty($diffs)) {
+        return '<strong style="color:#1a3258">' . e($actionTitle) . ':</strong> ' . implode(' · ', $diffs);
+      }
+
+      return '<strong style="color:#1a3258">' . e($actionTitle) . '</strong> <span style="color:#888">(Cập nhật lưu thông tin sản phẩm)</span>';
+    }
+
+    return e($actionTitle);
+  }
 }
 ?>
 <div class="dash-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
@@ -48,7 +110,7 @@ if (!function_exists('_phFmt')) {
     <?php foreach($changes as $ch): ?>
       <div style="display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid #f3f4f7;font-size:13px;flex-wrap:wrap">
         <span style="color:#888;min-width:120px"><?= e(_phFmt($ch['created_at'])) ?></span>
-        <span style="flex:1;min-width:160px"><?= e($ch['meta'] ?? '') ?: e($ch['action'] ?? '') ?></span>
+        <span style="flex:1;min-width:160px"><?= _phParseMeta($ch) ?></span>
         <span style="color:#1a3258;font-weight:600"><?= e($ch['full_name'] ?? $ch['email'] ?? ('User #'.($ch['user_id']??'?'))) ?></span>
       </div>
     <?php endforeach; ?>
