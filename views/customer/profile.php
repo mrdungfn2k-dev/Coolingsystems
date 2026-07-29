@@ -140,19 +140,13 @@
     </div>
     <div class="panel-body">
       <?php if (!empty($user['is_verified_garage']) || !empty($user['garage_name'])): ?>
-        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-          <div>
-            <div style="font-weight:800; color:#1e3a8a; font-size:14.5px;">🏷️ TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
-            <div style="font-size:13px; color:#3b82f6; margin-top:2px;">Tên Gara: <strong><?= e($user['garage_name'] ?? 'Tài khoản Gara') ?></strong> — Áp dụng Bảng Giá Sỉ Gốc (Đơn 10 - 20 triệu VNĐ)</div>
-          </div>
-          <span style="background:#2563eb; color:#fff; font-size:11.5px; font-weight:800; padding:4px 10px; border-radius:20px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ</span>
+        <div style="background:#fafbfc; border:1px solid #0b1d3a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div style="font-weight:800; color:#0b1d3a; font-size:14.5px; letter-spacing:0.3px;">TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
+          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ</span>
         </div>
       <?php else: ?>
-        <div style="background:#fff8e1; border:1px solid #ffe082; border-radius:8px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-          <div>
-            <div style="font-weight:700; color:#7a5c00; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng?</div>
-            <div style="font-size:12.5px; color:#8d6e63;">Đăng ký thông tin Gara để nhận ngay Bảng giá chiết khấu sỉ gốc cho đơn từ 10 - 20 triệu.</div>
-          </div>
+        <div style="background:#fafbfc; border:1px solid #c9a14a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div style="font-weight:700; color:#0b1d3a; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng? Đăng ký ngay để nhận Bảng giá chiết khấu sỉ gốc.</div>
           <button type="button" onclick="openGarageRegisterModal()" style="background:#c9a14a; color:#0b1d3a; font-weight:800; font-size:12.5px; padding:6px 14px; border-radius:6px; border:none; cursor:pointer;">Đăng ký Gara giá sỉ</button>
         </div>
       <?php endif; ?>
@@ -187,9 +181,9 @@
                   <td style="padding:10px 12px; text-align:center;">
                     <div style="display:flex; align-items:center; justify-content:center; gap:6px;">
                       <?php if (empty($ug['is_default'])): ?>
-                        <button type="button" onclick="setDefaultCar(<?= $ug['id'] ?>)" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; border-radius:6px; padding:3px 8px; font-size:11.5px; cursor:pointer;" title="Đặt làm xe mặc định">⭐ Mặc định</button>
+                        <button type="button" onclick="setDefaultCar(<?= $ug['id'] ?>)" style="background:#f1f5f9; color:#0b1d3a; border:1px solid #cbd5e1; border-radius:6px; padding:4px 10px; font-size:12px; font-weight:600; cursor:pointer;" title="Đặt làm xe mặc định">Mặc định</button>
                       <?php endif; ?>
-                      <button type="button" onclick="deleteCar(<?= $ug['id'] ?>)" style="background:#fef2f2; color:#ef4444; border:1px solid #fca5a5; border-radius:6px; padding:3px 8px; font-size:11.5px; font-weight:700; cursor:pointer;" title="Hủy / Xóa xe này">🗑️ Hủy / Xóa</button>
+                      <button type="button" onclick="deleteCar(<?= $ug['id'] ?>)" style="background:#fef2f2; color:#b91c1c; border:1px solid #fca5a5; border-radius:6px; padding:4px 10px; font-size:12px; font-weight:700; cursor:pointer;" title="Hủy / Xóa xe này">Hủy / Xóa</button>
                     </div>
                   </td>
                 </tr>
