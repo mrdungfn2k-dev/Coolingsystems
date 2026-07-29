@@ -83,8 +83,55 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         <svg class="logo-svg" width="180" height="76" style="width:180px;height:76px;aspect-ratio:180/76" viewBox="0 0 480 200" aria-label="Cooling logo" role="img"><use href="#cooling-logo"/></svg>
       <?php endif; ?>
     </a>
-    <form class="search" method="get" action="/products" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (SKU, mã OEM, tên phụ tùng...)','🔍');return false;}">
+    <form class="search" method="get" action="/products" style="max-width:680px!important;" onsubmit="if(!this.q.value.trim()){coolToastShow('Vui lòng nhập từ khóa tìm kiếm (SKU, mã OEM, tên phụ tùng...)','🔍');return false;}">
       <input type="text" name="q" value="<?= e($_GET['q'] ?? '') ?>" placeholder="Tìm theo SKU, mã OEM, tên phụ tùng..." aria-label="Tìm kiếm phụ tùng theo SKU, mã OEM, tên sản phẩm">
+      
+      <?php
+        $curU = currentUser();
+        $userGaragesList = [];
+        if ($curU) {
+            $userGaragesList = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$curU['id']]);
+        }
+        $activeCarId = $_SESSION['active_garage_car_id'] ?? 0;
+        $activeCarLabel = 'Chọn xe Gara...';
+        if (!empty($userGaragesList)) {
+            foreach ($userGaragesList as $c) {
+                if ($c['id'] == $activeCarId || (empty($activeCarId) && !empty($c['is_default']))) {
+                    $activeCarLabel = $c['brand_name'] . ' ' . $c['model_name'];
+                    break;
+                }
+            }
+            if ($activeCarLabel === 'Chọn xe Gara...' && !empty($userGaragesList[0])) {
+                $activeCarLabel = $userGaragesList[0]['brand_name'] . ' ' . $userGaragesList[0]['model_name'];
+            }
+        }
+      ?>
+
+      <div style="position:relative; display:flex; align-items:center; border-left:1px solid #cbd5e1; flex-shrink:0; background:#f8fafc;" class="quick-car-select-wrap">
+        <button type="button" onclick="toggleQuickCarDropdown()" style="background:transparent; border:none; padding:0 12px; font-size:12.5px; font-weight:700; color:#0b1d3a; cursor:pointer; display:flex; align-items:center; gap:4px; height:100%; white-space:nowrap;">
+          <span>Xe đang sửa: <strong><?= e($activeCarLabel) ?></strong></span>
+          <span style="font-size:10px; color:#64748b;">▼</span>
+        </button>
+        <div id="quickCarDropdownMenu" style="display:none; position:absolute; top:calc(100% + 6px); right:0; background:#fff; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.15); width:230px; z-index:99999; padding:6px 0;">
+          <?php if (!empty($userGaragesList)): ?>
+            <div style="padding:6px 12px; font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase; border-bottom:1px solid #f1f5f9;">Xe trong Gara của tôi</div>
+            <?php foreach ($userGaragesList as $c): ?>
+              <a href="javascript:void(0)" onclick="setActiveGarageCar(<?= $c['id'] ?>)" style="display:block; padding:8px 12px; font-size:13px; color:#0b1d3a; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">
+                <strong><?= e($c['brand_name']) ?> <?= e($c['model_name']) ?></strong> (<?= e($c['year']) ?>)
+              </a>
+            <?php endforeach; ?>
+            <div style="border-top:1px solid #f1f5f9; margin-top:4px; padding-top:4px;">
+              <a href="/customer/profile" style="display:block; padding:6px 12px; font-size:12px; color:#2563eb; font-weight:700; text-decoration:none;">+ Quản lý danh sách xe</a>
+            </div>
+          <?php else: ?>
+            <div style="padding:12px; text-align:center; font-size:12.5px; color:#64748b;">
+              Chưa có xe nào trong danh sách.
+              <a href="/customer/profile" style="display:block; margin-top:6px; color:#0b1d3a; font-weight:700; text-decoration:underline;">Thêm xe Gara ngay →</a>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+
       <button class="submit" type="submit" aria-label="Tìm kiếm">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
@@ -92,52 +139,6 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         </svg>
       </button>
     </form>
-
-    <?php
-      $curU = currentUser();
-      $userGaragesList = [];
-      if ($curU) {
-          $userGaragesList = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$curU['id']]);
-      }
-      $activeCarId = $_SESSION['active_garage_car_id'] ?? 0;
-      $activeCarLabel = 'Chọn xe Gara...';
-      if (!empty($userGaragesList)) {
-          foreach ($userGaragesList as $c) {
-              if ($c['id'] == $activeCarId || (empty($activeCarId) && !empty($c['is_default']))) {
-                  $activeCarLabel = $c['brand_name'] . ' ' . $c['model_name'];
-                  break;
-              }
-          }
-          if ($activeCarLabel === 'Chọn xe Gara...' && !empty($userGaragesList[0])) {
-              $activeCarLabel = $userGaragesList[0]['brand_name'] . ' ' . $userGaragesList[0]['model_name'];
-          }
-      }
-    ?>
-
-    <div style="position:relative; display:inline-block;" class="quick-car-select-wrap">
-      <button type="button" onclick="toggleQuickCarDropdown()" style="background:#fafbfc; border:1.5px solid #0b1d3a; border-radius:8px; padding:0 14px; font-size:12.5px; font-weight:700; color:#0b1d3a; cursor:pointer; display:flex; align-items:center; gap:6px; height:40px; box-sizing:border-box;">
-        <span>Xe đang sửa: <strong><?= e($activeCarLabel) ?></strong></span>
-        <span style="font-size:10px; color:#64748b;">▼</span>
-      </button>
-      <div id="quickCarDropdownMenu" style="display:none; position:absolute; top:100%; left:0; margin-top:4px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.15); width:230px; z-index:99999; padding:6px 0;">
-        <?php if (!empty($userGaragesList)): ?>
-          <div style="padding:6px 12px; font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase; border-bottom:1px solid #f1f5f9;">Xe trong Gara của tôi</div>
-          <?php foreach ($userGaragesList as $c): ?>
-            <a href="javascript:void(0)" onclick="setActiveGarageCar(<?= $c['id'] ?>)" style="display:block; padding:8px 12px; font-size:13px; color:#0b1d3a; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">
-              <strong><?= e($c['brand_name']) ?> <?= e($c['model_name']) ?></strong> (<?= e($c['year']) ?>)
-            </a>
-          <?php endforeach; ?>
-          <div style="border-top:1px solid #f1f5f9; margin-top:4px; padding-top:4px;">
-            <a href="/customer/profile" style="display:block; padding:6px 12px; font-size:12px; color:#2563eb; font-weight:700; text-decoration:none;">+ Quản lý danh sách xe</a>
-          </div>
-        <?php else: ?>
-          <div style="padding:12px; text-align:center; font-size:12.5px; color:#64748b;">
-            Chưa có xe nào trong danh sách.
-            <a href="/customer/profile" style="display:block; margin-top:6px; color:#0b1d3a; font-weight:700; text-decoration:underline;">Thêm xe Gara ngay →</a>
-          </div>
-        <?php endif; ?>
-      </div>
-    </div>
     <script>
     function toggleQuickCarDropdown(){ var m=document.getElementById('quickCarDropdownMenu'); if(m) m.style.display=(m.style.display==='block'?'none':'block'); }
     function setActiveGarageCar(carId){

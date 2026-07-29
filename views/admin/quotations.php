@@ -7,11 +7,11 @@
   </div>
 </div>
 
-    <?php if (hasFlash('success')): ?>
-      <div style="background:#dcfce7;color:#15803d;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-weight:700;font-size:14px">
-        <?= getFlash('success') ?>
+    <?php $fl = getFlash(); if (!empty($fl)): foreach($fl as $f): ?>
+      <div style="background:<?= $f['type']==='error'?'#fef2f2':'#dcfce7' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-weight:700;font-size:14px">
+        <?= e($f['message']) ?>
       </div>
-    <?php endif; ?>
+    <?php endforeach; endif; ?>
 
     <div style="background:#fff;border-radius:12px;border:1px solid #cbd5e1;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.03)">
       <div style="overflow-x:auto">
