@@ -925,8 +925,7 @@ img { max-width: 100%; height: auto; }
   .all-cats { padding: 0 12px; font-size: 11px; min-width: auto; }
   .all-cats .arrow { display: none; }
   .all-cats .lines span { width: 14px; }
-  nav.primary .nav-link, nav.primary .nav-item { padding: 0 10px; font-size: 11px; flex-shrink: 0; height: 42px; }
-  nav.primary .nav-link:nth-child(n+5), nav.primary .nav-item:nth-child(n+5) { display: none; }
+  nav.primary .nav-link, nav.primary .nav-item { padding: 0 10px; font-size: 11px; flex-shrink: 0; height: 42px; display: inline-flex !important; }
   .site-shell { box-shadow: 0 2px 6px rgba(15,35,66,0.08); }
 
   .banner { padding: 28px 20px; min-height: 240px; }
