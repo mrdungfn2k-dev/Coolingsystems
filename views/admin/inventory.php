@@ -132,6 +132,23 @@ document.addEventListener('DOMContentLoaded', function() {
               btn.style.background = '#1a3258';
             }, 2000);
           }
+          // Hiển thị Popup Toast thông báo ở góc phải màn hình
+          var toast = document.createElement('div');
+          toast.className = 'flash success';
+          toast.style.cssText = 'position:fixed;top:24px;right:24px;z-index:999999;background:#16a34a;color:#fff;padding:14px 22px;border-radius:10px;font-size:14px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,0.2);display:flex;align-items:center;gap:10px;animation:ftSlide 0.3s ease';
+          toast.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> <span>' + (res.message || 'Đã lưu giá và tồn kho thành công!') + '</span>';
+          document.body.appendChild(toast);
+          setTimeout(function(){
+            toast.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-10px)';
+            setTimeout(function(){ toast.remove(); }, 400);
+          }, 3000);
+
+          // Cập nhật ngay danh sách & số lượng trên Chuông thông báo
+          if (typeof window.refreshAdminNotis === 'function') {
+            window.refreshAdminNotis();
+          }
           if (tr && res.isLow !== undefined) {
             var flagTd = tr.querySelector('.stock-flag');
             if (flagTd) {

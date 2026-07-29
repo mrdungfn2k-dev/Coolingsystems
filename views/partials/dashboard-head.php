@@ -277,6 +277,28 @@ $unreadNotisCount = dbGet("SELECT COUNT(*) as n FROM admin_notifications WHERE i
 </div>
 <?php require_once __DIR__ . '/confirm-modal.php'; ?>
 <script>
+window.refreshAdminNotis = function() {
+  fetch('/admin')
+    .then(function(r) { return r.text(); })
+    .then(function(html) {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(html, 'text/html');
+      var newList = doc.getElementById('notiList');
+      var newBadge = doc.getElementById('notiBadge');
+      var curList = document.getElementById('notiList');
+      if (newList && curList) curList.innerHTML = newList.innerHTML;
+      var curBadge = document.getElementById('notiBadge');
+      if (newBadge) {
+        if (curBadge) curBadge.textContent = newBadge.textContent;
+        else {
+          var btn = document.querySelector('.noti-btn');
+          if (btn) btn.insertAdjacentHTML('beforeend', '<span class="noti-badge" id="notiBadge">' + newBadge.textContent + '</span>');
+        }
+      } else if (curBadge) {
+        curBadge.remove();
+      }
+    }).catch(function(){});
+};
 function toggleNoti(e) {
   e.stopPropagation();
   document.getElementById('notiDropdown').classList.toggle('show');

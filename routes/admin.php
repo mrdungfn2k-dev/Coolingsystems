@@ -2611,10 +2611,14 @@ post('/admin/inventory/:id/update', function($p) {
                 "Sản phẩm '{$pName}' vừa được đổi giá từ " . vnd($oldPrice) . " thành " . vnd($newPrice) . " tại Quản lý kho bởi {$actor}.",
                 "/admin/products/{$p['id']}/edit"
             ]);
-        }
-        if ($oldStock !== $newStock) {
+        } elseif ($oldStock !== $newStock) {
             dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('stock', 'Điều chỉnh tồn kho', ?, ?)", [
                 "Số lượng tồn kho sản phẩm '{$pName}' vừa thay đổi từ {$oldStock} thành {$newStock} tại Quản lý kho bởi {$actor}.",
+                "/admin/products/{$p['id']}/edit"
+            ]);
+        } else {
+            dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('product', 'Cập nhật kho sản phẩm', ?, ?)", [
+                "Đã lưu cập nhật dữ liệu kho cho sản phẩm '{$pName}' bởi {$actor}.",
                 "/admin/products/{$p['id']}/edit"
             ]);
         }
