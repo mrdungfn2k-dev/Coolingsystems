@@ -295,12 +295,34 @@ function markRead(id) {
   let csrf = document.getElementById('globalCsrf').value;
   fetch('/admin/notifications/' + id + '/read', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: '_csrf=' + csrf });
 }
-async function deleteNoti(id, e) {
-  e.stopPropagation(); var __b=e.currentTarget;
-  let csrf = document.getElementById('globalCsrf').value;
-  if(await csConfirmAsync('Bạn có chắc muốn xóa thông báo này?')) {
-    fetch('/admin/notifications/' + id + '/delete', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: '_csrf=' + csrf })
-    .then(function(){ var w=(__b&&__b.closest)?__b.closest('.noti-item-wrap'):null; if(w)w.remove(); var L=document.getElementById('notiList'); if(L&&!L.querySelector('.noti-item')){L.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';} });
+function deleteNoti(id, e) {
+  if (e && e.stopPropagation) e.stopPropagation();
+  if (e && e.preventDefault) e.preventDefault();
+  var btn = (e && e.currentTarget) ? e.currentTarget : (e && e.target ? e.target : null);
+  var wrap = btn ? btn.closest('.noti-item-wrap') : null;
+  if (wrap) {
+    wrap.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    wrap.style.opacity = '0';
+    wrap.style.transform = 'scale(0.95)';
+    setTimeout(function(){
+      if (wrap && wrap.parentNode) wrap.remove();
+      var L = document.getElementById('notiList');
+      if (L && !L.querySelector('.noti-item-wrap')) {
+        L.innerHTML = '<div style="padding:24px;text-align:center;font-size:13px;color:#888">Chưa có thông báo nào</div>';
+      }
+    }, 200);
   }
+  var b = document.getElementById('notiBadge');
+  if (b) {
+    var c = parseInt(b.textContent) - 1;
+    if (c > 0) b.textContent = c;
+    else b.remove();
+  }
+  var csrf = (document.getElementById('globalCsrf') && document.getElementById('globalCsrf').value) || '';
+  fetch('/admin/notifications/' + id + '/delete', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: '_csrf=' + encodeURIComponent(csrf)
+  });
 }
 </script>
