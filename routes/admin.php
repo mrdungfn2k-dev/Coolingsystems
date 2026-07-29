@@ -2301,6 +2301,27 @@ get('/admin/reviews', function() {
     view('admin/reviews', ['title'=>'Kiểm duyệt đánh giá','role'=>'admin','reviews'=>$reviews,'rating'=>$rating,'categoryId'=>$categoryId,'categories'=>$categories,'total'=>$rvTotal,'page'=>$page,'totalPages'=>$rvTotalPages]);
 });
 
+post('/admin/reviews/:id/status', function($p) {
+    requireRbacOrLegacyStaffPermission('crm.complaints.manage', '/admin/login');
+    csrfCheck();
+    $id = intval($p['id'] ?? 0);
+    $status = $_POST['status'] ?? 'published';
+    if (!in_array($status, ['published', 'hidden', 'pending'], true)) $status = 'published';
+    dbRun("UPDATE reviews SET status=? WHERE id=?", [$status, $id]);
+    flash('success', 'Đã cập nhật trạng thái đánh giá thành công.');
+    redirect('/admin/reviews');
+});
+
+post('/admin/reviews/:id/delete', function($p) {
+    requireRbacOrLegacyStaffPermission('crm.complaints.manage', '/admin/login');
+    csrfCheck();
+    $id = intval($p['id'] ?? 0);
+    dbRun("DELETE FROM reviews WHERE id=?", [$id]);
+    dbRun("DELETE FROM review_images WHERE review_id=?", [$id]);
+    flash('success', 'Đã xóa đánh giá thành công.');
+    redirect('/admin/reviews');
+});
+
 get('/admin/catalog', function() {
     $user = requireRole('admin', '/admin/login');
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
