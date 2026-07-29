@@ -9,6 +9,11 @@ get('/cart', function() {
     exit;
 });
 
+get('/account', function() {
+    header('Location: /customer/profile', true, 301);
+    exit;
+});
+
 get('/', function() {
     $newDaysRow = dbGet("SELECT value FROM site_config WHERE key='new_product_days'");
     $newDays = intval($newDaysRow['value'] ?? 30);

@@ -300,7 +300,7 @@ foreach ($trustSteps as $step):
         <div style="font-size: 15px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px;">
           TÀI KHOẢN CỦA BẠN ĐÃ XÁC THỰC GARA / ĐẠI LÝ — ĐÃ KÍCH HOẠT BẢNG GIÁ SỈ GỐC
         </div>
-        <a href="/account" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
+        <a href="/customer/profile" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
           Xem hồ sơ &amp; danh sách xe &rarr;
         </a>
       </div>
@@ -324,9 +324,9 @@ foreach ($trustSteps as $step):
     
     <?php if ($isVerifiedGara): ?>
       <div style="text-align:center; padding:20px 10px;">
-        <h2 style="font-size:18px; font-weight:800; color:#0b1d3a; margin:0 0 10px 0;">TÀI KHOẢN CỦA BẠN ĐÃ ĐÃ XÁC THỰC GARA / ĐẠI LÝ</h2>
+        <h2 style="font-size:18px; font-weight:800; color:#0b1d3a; margin:0 0 10px 0;">TÀI KHOẢN CỦA BẠN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</h2>
         <p style="font-size:14px; color:#475569; margin:0 0 20px 0; line-height:1.6;">Bảng Giá Sỉ Gốc đã được áp dụng tự động cho tài khoản <strong><?= e($curU['garage_name'] ?: $curU['full_name']) ?></strong>.</p>
-        <a href="/account" style="background:#0b1d3a; color:#fff; font-weight:800; font-size:14px; padding:12px 24px; border-radius:8px; text-decoration:none; display:inline-block;">Quản lý Hồ sơ &amp; Danh sách Xe &rarr;</a>
+        <a href="/customer/profile" style="background:#0b1d3a; color:#fff; font-weight:800; font-size:14px; padding:12px 24px; border-radius:8px; text-decoration:none; display:inline-block;">Quản lý Hồ sơ &amp; Danh sách Xe &rarr;</a>
       </div>
     <?php else: ?>
       <div style="text-align:center; margin-bottom:20px;">
