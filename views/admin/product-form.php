@@ -823,6 +823,35 @@ function initDescEditor() {
     args.content = args.content.replace(/\s*face="[^"]*"/gi, '');
   },
   setup: function(editor) {
+    editor.on('BeforeExecCommand', function(e) {
+      if (['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'].indexOf(e.command) !== -1) {
+        var node = editor.selection.getNode();
+        if (node && (node.nodeName === 'P' || node.nodeName === 'DIV')) {
+          if (node.innerHTML.search(/<br\s*\/?>/i) !== -1) {
+            var parts = node.innerHTML.split(/<br\s*\/?>/i).filter(function(l){ return l.trim() !== ''; });
+            if (parts.length > 1) {
+              var replacement = parts.map(function(l){ return '<p>' + l + '</p>'; }).join('');
+              node.outerHTML = replacement;
+            }
+          }
+        }
+      }
+    });
+
+    editor.on('SetContent', function(e) {
+      var body = editor.getBody();
+      if (!body) return;
+      var blocks = body.querySelectorAll('p, div');
+      blocks.forEach(function(b) {
+        if (b.querySelectorAll('table, ul, ol, img').length === 0 && b.innerHTML.search(/<br\s*\/?>/i) !== -1) {
+          var parts = b.innerHTML.split(/<br\s*\/?>/i).filter(function(p){ return p.trim() !== ''; });
+          if (parts.length > 1) {
+            b.outerHTML = parts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
+          }
+        }
+      });
+    });
+
     editor.on('change keyup setcontent paste execCommand nodechange input', function() {
       editor.save();
       if (typeof runSeoAnalysis === 'function') {
@@ -922,6 +951,35 @@ function initFeatEditor() {
     args.content = args.content.replace(/\s*face="[^"]*"/gi, '');
   },
   setup: function(editor) {
+    editor.on('BeforeExecCommand', function(e) {
+      if (['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'].indexOf(e.command) !== -1) {
+        var node = editor.selection.getNode();
+        if (node && (node.nodeName === 'P' || node.nodeName === 'DIV')) {
+          if (node.innerHTML.search(/<br\s*\/?>/i) !== -1) {
+            var parts = node.innerHTML.split(/<br\s*\/?>/i).filter(function(l){ return l.trim() !== ''; });
+            if (parts.length > 1) {
+              var replacement = parts.map(function(l){ return '<p>' + l + '</p>'; }).join('');
+              node.outerHTML = replacement;
+            }
+          }
+        }
+      }
+    });
+
+    editor.on('SetContent', function(e) {
+      var body = editor.getBody();
+      if (!body) return;
+      var blocks = body.querySelectorAll('p, div');
+      blocks.forEach(function(b) {
+        if (b.querySelectorAll('table, ul, ol, img').length === 0 && b.innerHTML.search(/<br\s*\/?>/i) !== -1) {
+          var parts = b.innerHTML.split(/<br\s*\/?>/i).filter(function(p){ return p.trim() !== ''; });
+          if (parts.length > 1) {
+            b.outerHTML = parts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
+          }
+        }
+      });
+    });
+
     editor.on('change keyup setcontent paste execCommand nodechange input', function() {
       editor.save();
       if (typeof runSeoAnalysis === 'function') {
@@ -1020,6 +1078,35 @@ function initSpecEditor() {
     args.content = args.content.replace(/\s*face="[^"]*"/gi, '');
   },
   setup: function(editor) {
+    editor.on('BeforeExecCommand', function(e) {
+      if (['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'].indexOf(e.command) !== -1) {
+        var node = editor.selection.getNode();
+        if (node && (node.nodeName === 'P' || node.nodeName === 'DIV')) {
+          if (node.innerHTML.search(/<br\s*\/?>/i) !== -1) {
+            var parts = node.innerHTML.split(/<br\s*\/?>/i).filter(function(l){ return l.trim() !== ''; });
+            if (parts.length > 1) {
+              var replacement = parts.map(function(l){ return '<p>' + l + '</p>'; }).join('');
+              node.outerHTML = replacement;
+            }
+          }
+        }
+      }
+    });
+
+    editor.on('SetContent', function(e) {
+      var body = editor.getBody();
+      if (!body) return;
+      var blocks = body.querySelectorAll('p, div');
+      blocks.forEach(function(b) {
+        if (b.querySelectorAll('table, ul, ol, img').length === 0 && b.innerHTML.search(/<br\s*\/?>/i) !== -1) {
+          var parts = b.innerHTML.split(/<br\s*\/?>/i).filter(function(p){ return p.trim() !== ''; });
+          if (parts.length > 1) {
+            b.outerHTML = parts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
+          }
+        }
+      });
+    });
+
     editor.on('change keyup setcontent paste execCommand nodechange input', function() {
       editor.save();
       if (typeof runSeoAnalysis === 'function') {
