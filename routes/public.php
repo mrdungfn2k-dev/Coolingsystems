@@ -18,21 +18,34 @@ get('/', function() {
     $newDaysRow = dbGet("SELECT value FROM site_config WHERE key='new_product_days'");
     $newDays = intval($newDaysRow['value'] ?? 30);
 
+    // 1. Sản phẩm Mới xuất bản (ưu tiên xuất bản trong 1 tiếng)
     $featured = dbAll("SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
         COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
         FROM products p
         WHERE p.status='published'
-        ORDER BY p.created_at DESC, p.id DESC LIMIT 10");
+        AND (p.published_at >= datetime('now', '-1 hour') OR p.created_at >= datetime('now', '-1 hour') OR p.is_new = 1)
+        ORDER BY COALESCE(p.published_at, p.created_at) DESC, p.id DESC LIMIT 5");
 
+    if (empty($featured)) {
+        $featured = dbAll("SELECT p.*, 'Cooling' AS shop_name,
+            (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
+            COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
+            (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
+            FROM products p
+            WHERE p.status='published'
+            ORDER BY COALESCE(p.published_at, p.created_at) DESC, p.id DESC LIMIT 5");
+    }
+
+    // 2. Sản phẩm Khuyến mại (5 sản phẩm 1 hàng)
     $saleProducts = dbAll("SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
         COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
         FROM products p
         WHERE p.status='published' AND (p.is_on_sale=1 OR (p.original_price IS NOT NULL AND p.original_price > p.price))
-        ORDER BY p.id DESC LIMIT 10");
+        ORDER BY p.id DESC LIMIT 5");
     if (empty($saleProducts)) {
         $saleProducts = dbAll("SELECT p.*, 'Cooling' AS shop_name,
             (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
@@ -40,21 +53,22 @@ get('/', function() {
             (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
             FROM products p
             WHERE p.status='published' AND p.original_price > p.price
-            ORDER BY p.created_at DESC LIMIT 10");
+            ORDER BY p.created_at DESC LIMIT 5");
     }
 
+    // 3. Sản phẩm Bán chạy (xếp theo tổng số lượng đã bán sold_count + order_items, 5 sản phẩm 1 hàng)
     $bestSellers = dbAll("SELECT p.*, 'Cooling' AS shop_name,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
         COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
         (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count,
-        COALESCE((SELECT SUM(oi.quantity) FROM order_items oi
+        (COALESCE(p.sold_count, 0) + COALESCE((SELECT SUM(oi.quantity) FROM order_items oi
             INNER JOIN sub_orders so ON so.id=oi.sub_order_id
             INNER JOIN orders o ON o.id=so.order_id
-            WHERE oi.product_id=p.id AND o.payment_status != 'cancelled'), 0) AS total_purchased
+            WHERE oi.product_id=p.id AND o.payment_status != 'cancelled'), 0)) AS total_purchased
         FROM products p
         WHERE p.status='published' AND p.stock>0
         GROUP BY p.id
-        ORDER BY total_purchased DESC, avg_rating DESC, p.created_at DESC LIMIT 10");
+        ORDER BY total_purchased DESC, p.sold_count DESC, p.view_count DESC, p.id DESC LIMIT 5");
 
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
     $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c WHERE (c.is_active=1 OR c.is_active IS NULL) ORDER BY sort_order, id");
