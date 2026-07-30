@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1a3258">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-cooling-round-48x48.png?v=20260717-favicon-sync">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-cooling-round-32x32.png?v=20260717-favicon-sync">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-cooling-round-16x16.png?v=20260717-favicon-sync">
-<link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260717-favicon-sync">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260717-favicon-sync">
-<link rel="manifest" href="/site.webmanifest?v=20260717-favicon-sync">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-cooling-round-48x48.png?v=20260730-logo-sync">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-cooling-round-32x32.png?v=20260730-logo-sync">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-cooling-round-16x16.png?v=20260730-logo-sync">
+<link rel="shortcut icon" href="/favicon-cooling-round.ico?v=20260730-logo-sync">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-cooling-round.png?v=20260730-logo-sync">
+<link rel="manifest" href="/site.webmanifest?v=20260730-logo-sync">
 <!-- Google tag (gtag.js) - Lazy load on interaction to eliminate TBT -->
 <script>
 (function() {
