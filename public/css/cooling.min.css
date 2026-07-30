@@ -406,25 +406,26 @@ section.block .wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
 
 .brand-card .brand-img-wrap {
   width: 100% !important;
-  height: 100px !important;
+  height: 90px !important;
   background: #ffffff !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 6px 10px !important;
+  padding: 10px 14px !important;
   overflow: hidden !important;
   position: relative !important;
   inset: auto !important;
 }
 
 .brand-card .brand-img-wrap img {
-  max-width: 98% !important;
-  max-height: 88px !important;
+  max-width: 88% !important;
+  max-height: 68px !important;
   width: auto !important;
   height: auto !important;
   object-fit: contain !important;
-  filter: contrast(1.03) !important;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  margin: auto !important;
+  display: block !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .brand-card:hover .brand-img-wrap img {
