@@ -3985,10 +3985,6 @@ post('/admin/products/delete-images-bulk', function() {
     echo json_encode(['ok' => true, 'msg' => 'Đã xóa ảnh thành công', 'deleted' => $deletedCount]);
 });
 
-    header('Content-Type: application/json');
-    echo json_encode(['ok' => true, 'msg' => "Đã xóa {$deletedCount} ảnh", 'deleted_count' => $deletedCount]);
-});
-
 post('/admin/settings/social', function() {
     requireStaffPermission('rbac:system.social.manage|tax_config', '/auth/login'); csrfCheck();
     $fields = ['social_whatsapp','social_tiktok','social_facebook'];
