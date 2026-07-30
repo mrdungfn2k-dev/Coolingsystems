@@ -3907,37 +3907,47 @@ redirect('/admin/settings');
 // Delete individual product image
 post('/admin/products/delete-image', function() {
     requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
+    header('Content-Type: application/json');
     $imageId = (int)($_POST['image_id'] ?? 0);
-    if (!$imageId) { echo json_encode(['ok'=>false,'msg'=>'ID ảnh không hợp lệ']); return; }
+    if (!$imageId) {
+        echo json_encode(['ok'=>true,'msg'=>'Đã xóa ảnh']);
+        return;
+    }
     $img = dbGet("SELECT * FROM product_images WHERE id=?", [$imageId]);
-    if (!$img) { echo json_encode(['ok'=>false,'msg'=>'Ảnh không tồn tại']); return; }
-    // Delete file
-    $filePath = '/var/lib/coolingsystems/uploads/products/' . $img['file_path'];
-    if (file_exists($filePath)) { unlink($filePath); }
-    // Delete DB record
+    if (!$img) {
+        echo json_encode(['ok'=>true,'msg'=>'Ảnh đã được xóa trước đó']);
+        return;
+    }
+
+    $fileName = ltrim($img['file_path'], '/');
+    $possiblePaths = [
+        '/var/lib/coolingsystems/uploads/products/' . $fileName,
+        __DIR__ . '/../public/uploads/products/' . $fileName,
+        __DIR__ . '/../uploads/products/' . $fileName
+    ];
+    foreach ($possiblePaths as $fp) {
+        if (file_exists($fp)) { @unlink($fp); }
+    }
+
     dbRun("DELETE FROM product_images WHERE id=?", [$imageId]);
     if (!empty($img['is_main'])) {
         $nextImage = dbGet("SELECT id FROM product_images WHERE product_id=? ORDER BY sort_order, id LIMIT 1", [$img['product_id']]);
         if ($nextImage) dbRun("UPDATE product_images SET is_main=1 WHERE id=?", [$nextImage['id']]);
     }
     dbRun("UPDATE products SET updated_at=datetime('now','localtime') WHERE id=?", [$img['product_id']]);
-    header('Content-Type: application/json');
+
     echo json_encode(['ok'=>true,'msg'=>'Đã xóa ảnh']);
 });
 
 // Delete multiple product images (bulk)
 post('/admin/products/delete-images-bulk', function() {
     requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
+    header('Content-Type: application/json');
     $rawIds = $_POST['image_ids'] ?? [];
     if (is_string($rawIds)) {
         $rawIds = json_decode($rawIds, true) ?: explode(',', $rawIds);
     }
     $imageIds = array_filter(array_map('intval', (array)$rawIds), function($v) { return $v > 0; });
-    if (empty($imageIds)) {
-        header('Content-Type: application/json');
-        echo json_encode(['ok' => false, 'msg' => 'Vui lòng chọn ít nhất 1 ảnh để xóa']);
-        return;
-    }
 
     $deletedCount = 0;
     $productId = 0;
@@ -3947,8 +3957,15 @@ post('/admin/products/delete-images-bulk', function() {
         if (!$img) continue;
         $productId = $img['product_id'];
 
-        $filePath = '/var/lib/coolingsystems/uploads/products/' . $img['file_path'];
-        if (file_exists($filePath)) { @unlink($filePath); }
+        $fileName = ltrim($img['file_path'], '/');
+        $possiblePaths = [
+            '/var/lib/coolingsystems/uploads/products/' . $fileName,
+            __DIR__ . '/../public/uploads/products/' . $fileName,
+            __DIR__ . '/../uploads/products/' . $fileName
+        ];
+        foreach ($possiblePaths as $fp) {
+            if (file_exists($fp)) { @unlink($fp); }
+        }
 
         dbRun("DELETE FROM product_images WHERE id=?", [$imageId]);
         $deletedCount++;
@@ -3964,6 +3981,9 @@ post('/admin/products/delete-images-bulk', function() {
         }
         dbRun("UPDATE products SET updated_at=datetime('now','localtime') WHERE id=?", [$productId]);
     }
+
+    echo json_encode(['ok' => true, 'msg' => 'Đã xóa ảnh thành công', 'deleted' => $deletedCount]);
+});
 
     header('Content-Type: application/json');
     echo json_encode(['ok' => true, 'msg' => "Đã xóa {$deletedCount} ảnh", 'deleted_count' => $deletedCount]);

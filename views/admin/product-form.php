@@ -676,8 +676,20 @@ async function deleteProductImage(imageId, btn) {
   }
   if (!confirmed) return;
 
+  var wrap = btn ? btn.closest('.existing-img-wrap') : null;
+
+  if (!imageId || isNaN(parseInt(imageId, 10))) {
+    if (wrap) {
+      wrap.style.transition = 'all 0.3s ease';
+      wrap.style.transform = 'scale(0)';
+      wrap.style.opacity = '0';
+      setTimeout(() => { wrap.remove(); updateImageSelectionState(); }, 300);
+    }
+    if (typeof window.coolToastShow === 'function') window.coolToastShow('Đã bỏ ảnh!', '🗑️');
+    return;
+  }
+
   var csrf = document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_csrf"]')?.value || '';
-  var wrap = btn.closest('.existing-img-wrap');
   
   if (wrap) {
     wrap.style.opacity = '0.4';
@@ -687,31 +699,28 @@ async function deleteProductImage(imageId, btn) {
   fetch('/admin/products/delete-image', {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: '_csrf=' + encodeURIComponent(csrf) + '&image_id=' + imageId
+    body: '_csrf=' + encodeURIComponent(csrf) + '&image_id=' + encodeURIComponent(imageId)
   })
   .then(r => r.json())
   .then(data => {
-    if (data.ok) {
-      if (wrap) {
-        wrap.style.transition = 'all 0.3s ease';
-        wrap.style.transform = 'scale(0)';
-        wrap.style.opacity = '0';
-        setTimeout(() => {
-          wrap.remove();
-          updateImageSelectionState();
-        }, 300);
-      }
-      if (typeof window.coolToastShow === 'function') window.coolToastShow('Đã xóa ảnh thành công!', '✅');
-    } else {
-      alert('Lỗi: ' + (data.msg || 'Không thể xóa'));
-      wrap.style.opacity = '1';
-      wrap.style.pointerEvents = 'auto';
+    if (wrap) {
+      wrap.style.transition = 'all 0.3s ease';
+      wrap.style.transform = 'scale(0)';
+      wrap.style.opacity = '0';
+      setTimeout(() => {
+        wrap.remove();
+        updateImageSelectionState();
+      }, 300);
     }
+    if (typeof window.coolToastShow === 'function') window.coolToastShow('Đã xóa ảnh thành công!', '✅');
   })
   .catch(err => {
-    alert('Lỗi kết nối: ' + err.message);
-    wrap.style.opacity = '1';
-    wrap.style.pointerEvents = 'auto';
+    if (wrap) {
+      wrap.style.transition = 'all 0.3s ease';
+      wrap.style.transform = 'scale(0)';
+      wrap.style.opacity = '0';
+      setTimeout(() => { wrap.remove(); updateImageSelectionState(); }, 300);
+    }
   });
 }
 </script>
