@@ -409,5 +409,80 @@ if ($__sapU && ($__sapU['role'] ?? '') === 'staff') {
   window.addEventListener('popstate', function(){ if(pjaxable(location.href)) load(location.href,'replace'); });
 })();
 </script>
+
+<!-- Global Favorite Login Prompt Modal -->
+<div id="favLoginModal" style="display:none;position:fixed;inset:0;background:rgba(15,35,66,.55);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:14px;max-width:380px;width:100%;padding:26px 24px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center">
+    <div style="width:54px;height:54px;margin:0 auto 14px;border-radius:50%;background:#eef2f9;display:flex;align-items:center;justify-content:center">
+      <svg width="26" height="26" fill="none" stroke="#1a3258" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h3 style="margin:0 0 8px;font-size:18px;color:#1a3258;font-weight:800">Cần đăng nhập</h3>
+    <p style="margin:0 0 20px;font-size:14px;color:#666;line-height:1.55">Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button type="button" onclick="document.getElementById('favLoginModal').style.display='none'" style="flex:1;height:42px;border-radius:10px;border:1.5px solid #d6deea;background:#fff;color:#1a3258;font-weight:700;font-size:14px;cursor:pointer;transition:all .15s">Để sau</button>
+      <a id="favLoginGo" href="/auth/login" style="flex:1;height:42px;border-radius:10px;background:#1a3258;color:#fff;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;transition:all .15s">Đăng nhập</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function showFavLoginPopup(url) {
+  var m = document.getElementById("favLoginModal");
+  if (!m) return;
+  var go = document.getElementById("favLoginGo");
+  if (go && url) go.href = url;
+  m.style.display = "flex";
+}
+
+(function(){
+  var m = document.getElementById("favLoginModal");
+  if (m) {
+    m.addEventListener("click", function(e) {
+      if (e.target === m) m.style.display = "none";
+    });
+  }
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && m) m.style.display = "none";
+  });
+})();
+
+window.toggleFav = function toggleFav(btn, productId) {
+  var isFav = btn.getAttribute('data-fav') === '1';
+  var newFav = !isFav;
+  var svg = btn.querySelector('svg');
+  if (svg) svg.setAttribute('fill', newFav ? '#e74c3c' : 'none');
+  btn.setAttribute('data-fav', newFav ? '1' : '0');
+  btn.title = newFav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích';
+  
+  var csrf = (typeof _csrf !== 'undefined') ? _csrf : ((typeof window._CSRF !== 'undefined') ? window._CSRF : '');
+  
+  fetch('/customer/favorites/toggle', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    credentials: 'same-origin',
+    body: '_csrf=' + encodeURIComponent(csrf) + '&product_id=' + encodeURIComponent(productId)
+  }).then(function(r){ return r.json(); }).then(function(data){
+    if (!data.ok) {
+      if (svg) svg.setAttribute('fill', isFav ? '#e74c3c' : 'none');
+      btn.setAttribute('data-fav', isFav ? '1' : '0');
+      btn.title = isFav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích';
+      if (data.redirect || data.login) {
+        showFavLoginPopup(data.redirect || '/auth/login');
+      }
+    } else {
+      if (svg) svg.setAttribute('fill', data.fav ? '#e74c3c' : 'none');
+      btn.setAttribute('data-fav', data.fav ? '1' : '0');
+      btn.title = data.fav ? 'Bỏ yêu thích' : 'Thêm vào yêu thích';
+      if (typeof updateFavBadge === 'function') {
+        updateFavBadge(data.count !== undefined ? data.count : (data.fav ? 1 : 0));
+      }
+    }
+  }).catch(function(){
+    showFavLoginPopup('/auth/login');
+    if (svg) svg.setAttribute('fill', isFav ? '#e74c3c' : 'none');
+    btn.setAttribute('data-fav', isFav ? '1' : '0');
+  });
+};
+</script>
 </body>
 </html>
