@@ -439,14 +439,20 @@ get('/policies/:slug', function($p) {
 
 // ── Promotions page ───────────────────────────────────────────────────────────
 get('/promotions', function() {
-    $limit = 12; $page = max(1, intval($_GET['page'] ?? 1)); $offset = ($page-1)*$limit;
+    $limit = 10;
+    $page = max(1, intval($_GET['page'] ?? 1));
+    $offset = ($page-1)*$limit;
+    $where = "p.status='published' AND (p.is_on_sale=1 OR (p.original_price IS NOT NULL AND p.original_price > p.price))";
+
     $products = dbAll("SELECT p.*, 'Cooling' AS shop_name,
-        (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image
+        (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
+        COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
+        (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
         FROM products p
-        LEFT JOIN partners pt ON pt.id=p.partner_id
-        WHERE p.status='published' AND p.original_price IS NOT NULL AND p.original_price > p.price
-        ORDER BY p.updated_at DESC LIMIT $limit OFFSET $offset");
-    $total = dbGet("SELECT COUNT(*) as n FROM products p WHERE p.status='published' AND p.original_price IS NOT NULL AND p.original_price > p.price")['n'];
+        WHERE $where
+        ORDER BY p.id DESC LIMIT $limit OFFSET $offset");
+
+    $total = (int)(dbGet("SELECT COUNT(*) as n FROM products p WHERE $where")['n'] ?? 0);
     $totalPages = max(1, ceil($total/$limit));
     $categories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY sort_order");
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");

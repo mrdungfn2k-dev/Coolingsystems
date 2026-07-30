@@ -15,10 +15,18 @@ get('/api/homepage-products', function() {
 
     if ($type === 'sale') {
         $where = "p.status='published' AND (p.is_on_sale=1 OR (p.original_price IS NOT NULL AND p.original_price > p.price))";
-        $products = dbAll("SELECT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE $where ORDER BY p.id DESC LIMIT ? OFFSET ?", [$limit, $offset]);
+        $products = dbAll("SELECT p.*, 'Cooling' AS shop_name,
+            (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
+            COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
+            (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
+            FROM products p WHERE $where ORDER BY p.id DESC LIMIT ? OFFSET ?", [$limit, $offset]);
     } else {
         if (!$catId) { jsonResponse(['ok'=>false, 'msg'=>'Invalid category']); }
-        $products = dbAll("SELECT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT ? OFFSET ?", [$catId, $limit, $offset]);
+        $products = dbAll("SELECT p.*, 'Cooling' AS shop_name,
+            (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image,
+            COALESCE((SELECT AVG(rating_overall) FROM reviews WHERE product_id=p.id ),0) AS avg_rating,
+            (SELECT COUNT(*) FROM reviews WHERE product_id=p.id ) AS review_count
+            FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT ? OFFSET ?", [$catId, $limit, $offset]);
     }
 
     global $user;
