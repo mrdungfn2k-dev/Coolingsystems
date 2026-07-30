@@ -11,12 +11,9 @@ $productPath = productPath($p);
   <!-- Ảnh sản phẩm — bấm vào xem chi tiết -->
   <a href="<?= e($productPath) ?>" class="prod-img-wrap" style="display:block;background:#fff;aspect-ratio:4/3;border-radius:6px;overflow:hidden;position:relative;margin-bottom:10px<?= !empty($p['main_image']) ? ';--pcbg:url(\'/uploads/products/'.e($p['main_image']).'\')' : '' ?>">
     <?php if ($p['main_image']): ?>
-      <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" width="280" height="210" loading="lazy" decoding="async" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover!important;padding:0">
+      <img src="/uploads/products/<?= e($p['main_image']) ?>" alt="<?= e($p['name']) ?>" width="280" height="210" loading="lazy" decoding="async" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover!important;padding:0" onerror="this.onerror=null;this.src='/uploads/products/cooling-logo-placeholder.jpg'">
     <?php else: ?>
-      <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ccc">
-        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        <div style="font-size:10px;margin-top:4px"><?= e($p['oem_code']??$p['sku']??'') ?></div>
-      </div>
+      <img src="/uploads/products/cooling-logo-placeholder.jpg" alt="<?= e($p['name']) ?>" width="280" height="210" loading="lazy" decoding="async" style="position:relative;z-index:1;width:100%;height:100%;object-fit:contain!important;padding:12px;background:#fff">
     <?php endif; ?>
     <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
       <span style="position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700">-<?= round(100-$displayPrice/$displayOriginalPrice*100) ?>%</span>
