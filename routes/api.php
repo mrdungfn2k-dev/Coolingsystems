@@ -8,13 +8,18 @@ get('/api/models', function() {
 
 get('/api/homepage-products', function() {
     $catId = intval($_GET['cat_id'] ?? 0);
+    $type = trim($_GET['type'] ?? '');
     $page = max(1, intval($_GET['page'] ?? 1));
-    $limit = intval($_GET['limit'] ?? 4);
+    $limit = max(1, min(20, intval($_GET['limit'] ?? 10)));
     $offset = ($page-1)*$limit;
 
-    if (!$catId) { jsonResponse(['ok'=>false, 'msg'=>'Invalid category']); }
-
-    $products = dbAll("SELECT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT ? OFFSET ?", [$catId, $limit, $offset]);
+    if ($type === 'sale') {
+        $where = "p.status='published' AND (p.is_on_sale=1 OR (p.original_price IS NOT NULL AND p.original_price > p.price))";
+        $products = dbAll("SELECT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE $where ORDER BY p.id DESC LIMIT ? OFFSET ?", [$limit, $offset]);
+    } else {
+        if (!$catId) { jsonResponse(['ok'=>false, 'msg'=>'Invalid category']); }
+        $products = dbAll("SELECT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT ? OFFSET ?", [$catId, $limit, $offset]);
+    }
 
     global $user;
     $user = currentUser();

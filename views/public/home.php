@@ -495,9 +495,10 @@ function submitGarageRegister(e) {
     <div class="title"><span class="bar"></span><h2>SẢN PHẨM KHUYẾN MẠI</h2></div>
     <a href="/promotions" class="btn-link all-link">Xem tất cả &rarr;</a>
   </div>
-  <div class="prod-grid">
+  <div class="prod-grid" id="saleProdGrid">
     <?php foreach ($saleProducts as $p): ?><?php require __DIR__ . '/partials/prod-card.php'; ?><?php endforeach; ?>
   </div>
+  <div class="sale-paging" id="salePaging" data-grid="saleProdGrid" data-total="<?= $saleTotal ?? 0 ?>" style="text-align:center;margin-top:16px"></div>
 </div></div></section>
 <?php endif; ?>
 
@@ -784,6 +785,40 @@ document.addEventListener('DOMContentLoaded', function() {
       }).catch(function() { grid.style.opacity = ''; });
   }
 
+  /* === C2. Sale products AJAX pagination === */
+  function initSalePagination() {
+    var perPage = isMobile() ? 6 : 10;
+    document.querySelectorAll('.sale-paging').forEach(function(pagingEl) {
+      var gridId = pagingEl.getAttribute('data-grid');
+      var grid = document.getElementById(gridId);
+      if (!grid) return;
+      var total = parseInt(pagingEl.getAttribute('data-total')) || 0;
+      var totalPages = Math.ceil(total / perPage);
+      if (totalPages <= 1) {
+        pagingEl.innerHTML = '';
+        return;
+      }
+      renderPager(pagingEl, 1, totalPages, function(page) {
+        fetchSalePage(grid, page, perPage, pagingEl, totalPages);
+      });
+    });
+  }
+
+  function fetchSalePage(grid, page, limit, pagingEl, totalPages) {
+    grid.style.opacity = '0.5';
+    fetch('/api/homepage-products?type=sale&page=' + page + '&limit=' + limit)
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        grid.style.opacity = '';
+        if (res.ok) {
+          grid.innerHTML = res.html;
+          renderPager(pagingEl, page, totalPages, function(p) {
+            fetchSalePage(grid, p, limit, pagingEl, totalPages);
+          });
+        }
+      }).catch(function() { grid.style.opacity = ''; });
+  }
+
   /* === D. Shared pager === */
   function renderPager(el, active, total, onClick) {
     el.innerHTML = '';
@@ -812,6 +847,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var _runInit = function() {
     initFeaturedPagination();
     initCatPagination();
+    initSalePagination();
   };
   if (typeof window.requestIdleCallback === 'function') {
     window.requestIdleCallback(_runInit, { timeout: 1000 });
@@ -821,7 +857,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var lastM = isMobile();
   window.addEventListener('resize', function() {
     var now = isMobile();
-    if (now !== lastM) { lastM = now; initFeaturedPagination(); initCatPagination(); }
+    if (now !== lastM) { lastM = now; initFeaturedPagination(); initCatPagination(); initSalePagination(); }
   }, { passive: true });
 });
 </script>
