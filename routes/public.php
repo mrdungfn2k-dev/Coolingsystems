@@ -62,7 +62,13 @@ get('/', function() {
 
     $saleTotal = (int)(dbGet("SELECT COUNT(*) AS n FROM products WHERE status='published' AND (is_on_sale=1 OR (original_price IS NOT NULL AND original_price > price))")['n'] ?? 0);
 
-    $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
+    $brands = dbAll("SELECT b.*, (
+        SELECT COUNT(DISTINCT p2.id) FROM products p2
+        LEFT JOIN product_fitments pf2 ON pf2.product_id=p2.id
+        LEFT JOIN product_brand_map pbm2 ON pbm2.product_id=p2.id
+        WHERE p2.status='published'
+        AND (pf2.brand_id=b.id OR pbm2.brand_id=b.id OR p2.car_brand_id=b.id OR p2.name LIKE '%' || b.name || '%')
+    ) AS real_count FROM brands b ORDER BY b.sort_order, b.name");
     $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c WHERE (c.is_active=1 OR c.is_active IS NULL) ORDER BY sort_order, id");
     $sidebarCategories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");

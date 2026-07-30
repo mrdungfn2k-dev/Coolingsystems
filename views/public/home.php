@@ -560,7 +560,7 @@ foreach ($cats as $cat):
   
   <div class="brands-grid">
     <?php foreach ($brands as $b):
-      $bCount = dbGet("SELECT COUNT(*) as n FROM products WHERE car_brand_id=? AND status='published'", [$b['id']])['n'] ?? 0;
+      $bCount = $b['real_count'] ?? $b['product_count'] ?? 0;
     ?>
     <a href="/products?brand_id=<?= $b['id'] ?>" class="brand-card <?= !empty($b['image']) ? 'has-image' : '' ?>">
       <div class="brand-img-wrap">
