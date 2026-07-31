@@ -263,9 +263,9 @@
 <!-- MODAL CHI TIẾT ĐỒNG THỜI XEM ẢNH XÁC THỰC -->
 <div id="detailRegModal" style="display:none;position:fixed;inset:0;background:rgba(11,29,58,0.75);z-index:99999;align-items:center;justify-content:center;padding:16px">
   <div style="background:#fff;border-radius:12px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,0.3);margin:auto">
-    <div style="background:#0b1d3a;color:#fff;padding:16px 24px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between">
-      <h3 style="margin:0;font-size:17px;color:#fff;font-weight:800">CHI TIẾT HỒ SƠ ĐĂNG KÝ GARA #<span id="dt_id"></span></h3>
-      <button type="button" onclick="document.getElementById('detailRegModal').style.display='none'" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">&times;</button>
+    <div style="background:#0b1d3a;color:#ffffff;padding:16px 24px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between">
+      <h3 style="margin:0;font-size:17px;color:#ffffff !important;font-weight:800">CHI TIẾT HỒ SƠ ĐĂNG KÝ GARA #<span id="dt_id" style="color:#ffffff !important"></span></h3>
+      <button type="button" onclick="document.getElementById('detailRegModal').style.display='none'" style="background:none;border:none;color:#ffffff !important;font-size:24px;cursor:pointer">&times;</button>
     </div>
     
     <div style="padding:24px">
