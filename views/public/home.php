@@ -566,46 +566,6 @@ function validateHomeGarageForm(form) {
   return true;
 }
 </script>
-function submitGarageRegister(e) {
-  e.preventDefault();
-  var form = document.getElementById('garageRegisterForm');
-  var msg = document.getElementById('garageFormMsg');
-  var btn = document.getElementById('btnSubmitGarage');
-  var fd = new FormData(form);
-  
-  btn.disabled = true;
-  btn.innerText = 'Đang đăng ký...';
-  msg.style.display = 'none';
-
-  fetch('/api/register-garage', {
-    method: 'POST',
-    body: fd
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(res){
-    btn.disabled = false;
-    btn.innerText = 'XÁC NHẬN ĐĂNG KÝ GARA & NHẬN GIÁ SỈ';
-    msg.style.display = 'block';
-    if(res.ok) {
-      msg.style.color = '#15803d';
-      msg.innerHTML = '✅ ' + res.msg;
-      form.reset();
-      setTimeout(function(){ closeGarageRegisterModal(); }, 2500);
-    } else {
-      msg.style.color = '#b91c1c';
-      msg.innerHTML = '⚠️ ' + (res.error || 'Có lỗi xảy ra');
-    }
-  })
-
-  .catch(function(){
-    btn.disabled = false;
-    btn.innerText = 'XÁC NHẬN ĐĂNG KÝ GARA & NHẬN GIÁ SỈ';
-    msg.style.display = 'block';
-    msg.style.color = '#b91c1c';
-    msg.innerHTML = '⚠️ Lỗi kết nối máy chủ, vui lòng thử lại';
-  });
-}
-</script>
 
 <!-- Khối 1: Sản phẩm Khuyến mại -->
 <?php if (!empty($saleProducts)): ?>
