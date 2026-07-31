@@ -6,6 +6,17 @@ if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $
     $displayOriginalPrice = $p['price'];
 }
 $productPath = productPath($p);
+
+$rawOem = trim((string)($p['oem_code'] ?? ''));
+$displayOem = '';
+if ($rawOem !== '') {
+    $oemParts = array_values(array_filter(array_map('trim', preg_split('/[,;\s]+/', $rawOem))));
+    if (count($oemParts) > 2) {
+        $displayOem = $oemParts[0] . ' ... ' . $oemParts[count($oemParts) - 1];
+    } elseif (!empty($oemParts)) {
+        $displayOem = implode(', ', $oemParts);
+    }
+}
 ?>
 <div class="prod-card">
   <!-- Ảnh sản phẩm — bấm vào xem chi tiết -->
@@ -32,7 +43,7 @@ $productPath = productPath($p);
   </a>
 
   <!-- Mã & tên -->
-  <div style="font-size:10px;color:var(--ink-4);margin-bottom:3px">Cooling · <?= e($p['oem_code']??'') ?></div>
+  <div style="font-size:10px;color:var(--ink-4);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:16px;line-height:16px" title="OEM: <?= e($rawOem) ?>">Cooling<?= $displayOem !== '' ? ' · ' . e($displayOem) : '' ?></div>
   <a href="<?= e($productPath) ?>" style="display:block;font-weight:600;font-size:13px;line-height:1.4;color:var(--navy-dark);text-decoration:none;margin-bottom:6px;min-height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical"><?= e($p['name']) ?></a>
 
   <?php $displayRating = floatval($p['rating_avg'] ?? $p['avg_rating'] ?? 0); $displayCount = intval($p['rating_count'] ?? $p['review_count'] ?? $p['rating_count'] ?? 0); if ($displayRating > 0): ?>
