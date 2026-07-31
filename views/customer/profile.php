@@ -142,13 +142,18 @@
       </div>
     </div>
     <div class="panel-body">
-      <?php if (!empty($user['is_verified_garage']) || !empty($user['garage_name'])): ?>
+      <?php
+        $isGarageVerified = !empty($user['is_verified_garage']) || $user['role'] === 'garage';
+        $isGarageApproved = !empty($garageRegistration) && $garageRegistration['status'] === 'approved';
+        $garageName = $user['garage_name'] ?? ($garageRegistration['garage_name'] ?? $user['full_name'] ?? '');
+      ?>
+      <?php if ($isGarageVerified || $isGarageApproved): ?>
         <div style="background:#fafbfc; border:1px solid #0b1d3a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
           <div>
             <div style="font-weight:800; color:#0b1d3a; font-size:14.5px; letter-spacing:0.3px;">TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
-            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($user['garage_name'] ?: $user['full_name']) ?></strong> | Tỷ lệ chiết khấu buôn: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong> | Công nợ: <strong>Đã kích hoạt</strong></div>
+            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($garageName) ?></strong> | Tỷ lệ chiết khấu buôn: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong> | Công nợ: <strong>Đã kích hoạt</strong></div>
           </div>
-          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ BUÔN & CÔNG NỢ</span>
+          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ BUÔN &amp; CÔNG NỢ</span>
         </div>
       <?php elseif (!empty($garageRegistration) && $garageRegistration['status'] === 'pending'): ?>
         <div style="background:#fffbe6; border:1px solid #ffe58f; border-radius:8px; padding:14px 18px; margin-bottom:16px;">

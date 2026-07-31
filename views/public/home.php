@@ -322,7 +322,11 @@ foreach ($trustSteps as $step):
 
 <?php 
   $curU = currentUser();
-  $isVerifiedGara = !empty($curU['is_verified_garage']) || !empty($curU['garage_name']);
+  $isVerifiedGara = !empty($curU['is_verified_garage']) || !empty($curU['garage_name']) || $curU['role'] === 'garage';
+  if (!$isVerifiedGara && !empty($curU['id'])) {
+    $approvedReg = dbGet("SELECT id FROM garage_registrations WHERE user_id=? AND status='approved' LIMIT 1", [$curU['id']]);
+    if (!empty($approvedReg)) $isVerifiedGara = true;
+  }
 ?>
 
 <style>
