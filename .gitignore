@@ -8,6 +8,7 @@ database.sqlite
 
 # Uploads (user-generated content)
 public/uploads/
+uploads/
 
 # Backup files
 backups/
@@ -21,12 +22,9 @@ Thumbs.db
 
 # Environment
 .env.local
+.env
 
 # Symlinks (Linux)
-uploads
-
-# Test files
-test_*.php
 
 # IDE
 .idea/
@@ -36,10 +34,23 @@ test_*.php
 sync_vps_to_git.py
 __pycache__/
 *.pyc
+*.pyo
 
-# Image folders (large binary files - served from VPS /uploads)
+# Python scripts (data import/scraping tools - not part of core source)
+*.py
+*.ipynb
+
+# Excel & data files (not source code)
+*.xlsx
+*.xls
+*.csv
+*.json
+*.onnx
+
+# Image folders (large binary - served from VPS /uploads)
 ảnh partvietnam/
 ảnh thành dũng auto/
+ảnh denso việt nam/
 *.jpg
 *.jpeg
 *.png
@@ -47,3 +58,6 @@ __pycache__/
 *.gif
 *.JPG
 *.PNG
+*.JPEG
+*.WEBP
+
