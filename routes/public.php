@@ -438,6 +438,12 @@ post('/contact', function() {
     dbRun("INSERT INTO contact_messages (name, email, phone, subject, message, status, created_at) VALUES (?,?,?,?,?,?,datetime('now','localtime'))",
         [$name, $email, $phone, $subjectLabel, $message, 'new']);
 
+    // Tự động gửi email thông báo về hotrokhachhang@autopartsvietnam.com
+    require_once __DIR__ . '/../includes/mailer.php';
+    if (function_exists('sendContactFormNotificationEmail')) {
+        @sendContactFormNotificationEmail($name, $email, $phone, $subjectLabel, $message);
+    }
+
     // Notify admin (chuông thông báo) về tin nhắn liên hệ mới
     dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('contact', ?, ?, '/admin/contacts')",
         ['Tin nhắn liên hệ mới', 'Khách "' . $name . '" vừa gửi tin nhắn (' . $subjectLabel . '): ' . mb_substr($message, 0, 60)]);

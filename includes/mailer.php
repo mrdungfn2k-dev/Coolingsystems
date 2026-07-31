@@ -36,7 +36,7 @@ function smtpCommand($socket, string $command, array $expected): void {
     if (!in_array($code, $expected, true)) throw new RuntimeException('SMTP ' . $code . ': ' . $response);
 }
 
-function sendSmtpEmail(string $to, string $subject, string $htmlBody, array $cfg): bool {
+function sendSmtpEmail(string $to, string $subject, string $htmlBody, array $cfg, string $replyTo = ''): bool {
     if (!filter_var($to, FILTER_VALIDATE_EMAIL)) { smtpSetLastError('Email người nhận không hợp lệ.'); return false; }
     if (!preg_match('/^[a-z0-9.-]+$/i', $cfg['host']) || !filter_var($cfg['from_email'], FILTER_VALIDATE_EMAIL)) { smtpSetLastError('Máy chủ hoặc email gửi SMTP không hợp lệ.'); return false; }
     if ($cfg['username'] === '' || $cfg['password'] === '') { smtpSetLastError('Thiếu tài khoản hoặc mật khẩu ứng dụng SMTP.'); return false; }
@@ -62,7 +62,8 @@ function sendSmtpEmail(string $to, string $subject, string $htmlBody, array $cfg
         smtpCommand($socket, 'DATA', [354]);
         $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
         $encodedFromName = '=?UTF-8?B?' . base64_encode($cfg['from_name']) . '?=';
-        $headers = "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nFrom: {$encodedFromName} <{$cfg['from_email']}>\r\nReply-To: {$cfg['from_email']}\r\nTo: <{$to}>\r\nSubject: {$encodedSubject}\r\nX-Mailer: CoolingSystem/SMTP\r\n";
+        $replyHeader = filter_var($replyTo, FILTER_VALIDATE_EMAIL) ? $replyTo : $cfg['from_email'];
+        $headers = "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nFrom: {$encodedFromName} <{$cfg['from_email']}>\r\nReply-To: {$replyHeader}\r\nTo: <{$to}>\r\nSubject: {$encodedSubject}\r\nX-Mailer: CoolingSystem/SMTP\r\n";
         $payload = preg_replace('/(?m)^\./', '..', $headers . "\r\n" . $htmlBody);
         if (fwrite($socket, $payload . "\r\n.\r\n") === false) throw new RuntimeException('Không gửi được nội dung email tới SMTP.');
         [$code, $response] = smtpReadResponse($socket);
@@ -79,15 +80,16 @@ function sendSmtpEmail(string $to, string $subject, string $htmlBody, array $cfg
     }
 }
 
-function sendEmail(string $to, string $subject, string $htmlBody): bool {
+function sendEmail(string $to, string $subject, string $htmlBody, string $replyTo = ''): bool {
     $smtp = smtpConfig();
-    if ($smtp['enabled']) return sendSmtpEmail($to, $subject, $htmlBody, $smtp);
+    if ($smtp['enabled']) return sendSmtpEmail($to, $subject, $htmlBody, $smtp, $replyTo);
     $from = MAIL_FROM;
     $fromName = MAIL_FROM_NAME;
+    $replyHeader = filter_var($replyTo, FILTER_VALIDATE_EMAIL) ? $replyTo : $from;
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
     $headers .= "From: {$fromName} <{$from}>\r\n";
-    $headers .= "Reply-To: {$from}\r\n";
+    $headers .= "Reply-To: {$replyHeader}\r\n";
     $headers .= "X-Mailer: CoolingSystem/1.0\r\n";
     $result = mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $htmlBody, $headers, "-f{$from}");
     if (!$result) smtpSetLastError('SMTP chưa được bật hoặc máy chủ gửi mail mặc định không phản hồi.');
@@ -223,5 +225,43 @@ function sendGarageRejectedEmail(string $email, string $name, string $garageName
 
 function _emailLayout(string $title, string $body): string {
     return '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="margin:0;padding:0;background:#f5f7fa;font-family:Arial,sans-serif"><table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fa;padding:40px 0"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%"><tr><td style="background:#1a3258;padding:24px 32px;border-radius:10px 10px 0 0;text-align:center"><div style="color:#f0c040;font-size:28px;font-weight:900;letter-spacing:2px">COOLING</div><div style="color:rgba(255,255,255,0.7);font-size:12px;margin-top:2px">PARTS &amp; SERVICE</div></td></tr><tr><td style="background:#ffffff;padding:32px 36px;border-radius:0 0 10px 10px">' . $body . '</td></tr><tr><td style="padding:16px;text-align:center;color:#aaa;font-size:11px">© ' . date('Y') . ' Cooling System · <a href="https://coolingsystems.vn" style="color:#1a3258">coolingsystems.vn</a></td></tr></table></td></tr></table></body></html>';
+}
+
+function sendContactFormNotificationEmail(string $name, string $email, string $phone, string $subjectLabel, string $message): bool {
+    $recipient = 'hotrokhachhang@autopartsvietnam.com';
+    $subject = '[Liên hệ mới] ' . $subjectLabel . ' - ' . $name;
+
+    $html = _emailLayout('Tin nhắn liên hệ mới', "
+        <h2 style='color:#1a3258;margin:0 0 16px;font-size:20px;font-weight:700;'>Thông tin liên hệ từ khách hàng</h2>
+        <table cellpadding='10' cellspacing='0' style='border-collapse:collapse;width:100%;border:1px solid #e2e8f0;font-size:14px;'>
+            <tr style='background:#f8fafc;'>
+                <td style='width:30%;border:1px solid #e2e8f0;font-weight:700;color:#334155;'>Họ và tên</td>
+                <td style='border:1px solid #e2e8f0;color:#0f172a;'>" . htmlspecialchars($name) . "</td>
+            </tr>
+            <tr>
+                <td style='border:1px solid #e2e8f0;font-weight:700;color:#334155;'>Email liên hệ</td>
+                <td style='border:1px solid #e2e8f0;color:#0f172a;'><a href='mailto:" . htmlspecialchars($email) . "' style='color:#1d4ed8;text-decoration:underline;'>" . htmlspecialchars($email) . "</a></td>
+            </tr>
+            <tr style='background:#f8fafc;'>
+                <td style='border:1px solid #e2e8f0;font-weight:700;color:#334155;'>Số điện thoại</td>
+                <td style='border:1px solid #e2e8f0;color:#0f172a;'><a href='tel:" . htmlspecialchars($phone) . "' style='color:#1d4ed8;font-weight:700;text-decoration:none;'>" . htmlspecialchars($phone) . "</a></td>
+            </tr>
+            <tr>
+                <td style='border:1px solid #e2e8f0;font-weight:700;color:#334155;'>Chủ đề yêu cầu</td>
+                <td style='border:1px solid #e2e8f0;color:#0f172a;font-weight:700;'>" . htmlspecialchars($subjectLabel) . "</td>
+            </tr>
+            <tr style='background:#f8fafc;'>
+                <td style='border:1px solid #e2e8f0;font-weight:700;color:#334155;'>Thời gian gửi</td>
+                <td style='border:1px solid #e2e8f0;color:#0f172a;'>" . date('d/m/Y H:i:s') . "</td>
+            </tr>
+            <tr>
+                <td style='border:1px solid #e2e8f0;font-weight:700;color:#334155;vertical-align:top;'>Nội dung chi tiết</td>
+                <td style='border:1px solid #e2e8f0;color:#0f172a;line-height:1.6;'>" . nl2br(htmlspecialchars($message)) . "</td>
+            </tr>
+        </table>
+        <p style='margin-top:20px;font-size:13px;color:#64748b;'>Ghi chú: Bạn có thể bấm <strong>Reply (Trả lời)</strong> trực tiếp email này để gửi phản hồi tới email của khách hàng (" . htmlspecialchars($email) . ").</p>
+    ");
+
+    return sendEmail($recipient, $subject, $html, $email);
 }
 
