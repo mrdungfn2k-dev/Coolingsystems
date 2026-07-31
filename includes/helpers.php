@@ -626,3 +626,58 @@ function csvHeadSel($out, $section) {
 function csvRowSel($out, $keys, $row) {
     fputcsv($out, array_map(function($k) use($row){ return $row[$k] ?? ''; }, $keys));
 }
+
+/**
+ * Lưu lịch sử sản phẩm vào bảng product_history.
+ * Gọi trước khi UPDATE hoặc sau khi INSERT sản phẩm.
+ *
+ * @param array  $product   Dữ liệu sản phẩm (mảng từ DB)
+ * @param string $action    'create' | 'update' | 'inventory' | 'status'
+ * @param int|null $changedBy  User ID của người thực hiện
+ */
+function saveProductHistory(array $product, string $action = 'update', ?int $changedBy = null): void {
+    if (empty($product['id'])) return;
+    try {
+        dbRun(
+            "INSERT INTO product_history
+                (product_id, changed_by, action,
+                 name, sku, description, features, specifications, short_specs,
+                 price, original_price, stock, status,
+                 part_brand, car_brand_id, og_image,
+                 seo_title, seo_description, seo_keyword,
+                 snapshot_json)
+             VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            [
+                (int)$product['id'],
+                $changedBy,
+                $action,
+                $product['name']           ?? null,
+                $product['sku']            ?? null,
+                $product['description']    ?? null,
+                $product['features']       ?? null,
+                $product['specifications'] ?? null,
+                $product['short_specs']    ?? null,
+                (int)($product['price']          ?? 0),
+                (int)($product['original_price'] ?? 0),
+                (int)($product['stock']          ?? 0),
+                $product['status']         ?? null,
+                $product['part_brand']     ?? null,
+                isset($product['car_brand_id']) ? (int)$product['car_brand_id'] : null,
+                $product['og_image']       ?? null,
+                $product['seo_title']      ?? null,
+                $product['seo_description']?? null,
+                $product['seo_keyword']    ?? null,
+                json_encode($product, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            ]
+        );
+        // Tự động xóa lịch sử cũ quá 100 bản / sản phẩm để tránh DB phình
+        dbRun(
+            "DELETE FROM product_history WHERE product_id=? AND id NOT IN
+             (SELECT id FROM product_history WHERE product_id=? ORDER BY changed_at DESC LIMIT 100)",
+            [(int)$product['id'], (int)$product['id']]
+        );
+    } catch (\Throwable $e) {
+        // Không để lỗi history ảnh hưởng tới luồng chính
+        error_log('[saveProductHistory] ' . $e->getMessage());
+    }
+}

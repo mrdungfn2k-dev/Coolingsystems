@@ -2615,6 +2615,8 @@ post('/admin/inventory/:id/update', function($p) {
     $pdo = db();
     try {
         $pdo->beginTransaction();
+        // === LƯU LỊCH SỬ KHO/GIÁ TRƯỚC KHI CẬP NHẬT ===
+        saveProductHistory($product, 'inventory', (int)($user['id'] ?? 0));
         dbRun("UPDATE products SET cost_price=?,price=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?",[$values['cost_price'],$values['price'],$values['original_price']?:null,$values['stock'],$values['min_stock'],$values['max_stock'],$values['warranty_months'],$values['cost_price']*$values['stock'],$p['id']]);
         if ($stockDiff !== 0) {
             $mvDir = $stockDiff > 0 ? 'in' : 'out';
@@ -3025,6 +3027,12 @@ post('/admin/products/new', function() {
         "/admin/products/{$id}/edit"
     ]);
 
+    // === LƯU LỊCH SỬ KHI TẠO SẢN PHẨM MỚI ===
+    $newProduct = dbGet('SELECT * FROM products WHERE id=?', [$id]);
+    if ($newProduct) {
+        saveProductHistory($newProduct, 'create', (int)($user['id'] ?? 0));
+    }
+
     $successMessage = 'Sản phẩm đã được đăng thành công!';
     if ($imageUploadErrors) {
         $successMessage .= ' Một số ảnh chưa xử lý được: ' . implode('; ', $imageUploadErrors);
@@ -3118,6 +3126,9 @@ post('/admin/products/:id/edit', function($p) {
     if ($carBrandId && !dbGet("SELECT id FROM car_brands WHERE id=?", [$carBrandId])) {
         $carBrandId = null;
     }
+
+    // === LƯU LỊCH SỬ TRƯỚC KHI CẬP NHẬT ===
+    saveProductHistory($currentProduct, 'update', (int)($user['id'] ?? 0));
 
     dbRun("UPDATE products SET name=?,sku=?,oem_code=?,oem_code2=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
         trim($d['name']??''),
