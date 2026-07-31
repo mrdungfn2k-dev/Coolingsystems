@@ -10,7 +10,7 @@ $_nlBtn = $_nlCfg['newsletter_btn_text'] ?: 'Đăng ký nhận tin';
 $_nlCode = $_nlCfg['newsletter_voucher_code'] ?: 'UUDAI100K';
 $_nlAmount = intval($_nlCfg['newsletter_voucher_amount'] ?: 100000);
 $_footArticles = dbAll("SELECT title, slug FROM articles ORDER BY created_at DESC LIMIT 3");
-$_hl = $sysHotline ?? '0947796471';
+$_hl = $sysHotline ?? '0705070526';
 
 $_tLogo = dbGet("SELECT value FROM settings WHERE key='footer_logo_text'")['value'] ?? ''; $_footerLogo = !empty($_tLogo) ? $_tLogo : 'COOLING';
 $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?? ''; $_footerDesc = !empty($_tDesc) ? $_tDesc : 'Sàn TMĐT phụ tùng ô tô chính hãng — chuyên sâu hệ thống làm mát. Cung cấp phụ tùng uy tín cho hàng triệu khách hàng trên toàn quốc.';

@@ -36,7 +36,7 @@
         <?= $staticRow['content'] ?>
     <?php else: ?>
       <p>Nội dung trang <strong><?= e($title) ?></strong> đang được cập nhật. Vui lòng quay lại sau.</p>
-      <p>Mọi thắc mắc xin liên hệ hotline: <strong><?= $sysHotline ?? '0947796471' ?></strong></p>
+      <p>Mọi thắc mắc xin liên hệ hotline: <strong><?= $sysHotline ?? '0705070526' ?></strong></p>
     <?php endif; ?>
   </div>
 </div></section>
