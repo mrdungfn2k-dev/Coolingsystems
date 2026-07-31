@@ -465,54 +465,111 @@ get('/promotions', function() {
     view('public/promotions', compact('products','total','page','totalPages','limit','categories','brands'));
 });
 
-// ── Sitemap XML ──────────────────────────────────────────────────────────────
+// ── Dynamic Sitemap XML Generator for 100% Google Search Console Indexing ──
 get('/sitemap.xml', function() {
     http_response_code(200);
     header('Content-Type: application/xml; charset=UTF-8');
-    $products = dbAll("SELECT p.id, p.slug, p.name, p.updated_at,
+    
+    $baseUrl = 'https://coolingsystems.vn';
+    $xml = [];
+    $xml[] = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
+
+    // 1. Trang tĩnh chính
+    $statics = [
+        '/' => ['1.0', 'daily'],
+        '/products' => ['0.9', 'daily'],
+        '/brands' => ['0.8', 'weekly'],
+        '/product-brands' => ['0.8', 'weekly'],
+        '/about' => ['0.7', 'monthly'],
+        '/contact' => ['0.7', 'monthly'],
+        '/news' => ['0.8', 'daily'],
+        '/stores' => ['0.7', 'monthly'],
+        '/vouchers' => ['0.7', 'weekly'],
+        '/policies/huong-dan-mua-hang' => ['0.6', 'monthly'],
+        '/policies/chinh-sach-doi-tra' => ['0.6', 'monthly'],
+        '/policies/chinh-sach-bao-hanh' => ['0.6', 'monthly'],
+        '/policies/dieu-khoan-bao-mat' => ['0.6', 'monthly'],
+    ];
+    foreach ($statics as $path => $conf) {
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . $path . '</loc>';
+        $xml[] = '    <changefreq>' . $conf[1] . '</changefreq>';
+        $xml[] = '    <priority>' . $conf[0] . '</priority>';
+        $xml[] = '  </url>';
+    }
+
+    // 2. Danh mục sản phẩm
+    $cats = dbAll("SELECT slug FROM categories WHERE (is_active=1 OR is_active IS NULL)");
+    foreach ($cats as $c) {
+        if (empty($c['slug'])) continue;
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/products?cat=' . htmlspecialchars($c['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <changefreq>weekly</changefreq>';
+        $xml[] = '    <priority>0.8</priority>';
+        $xml[] = '  </url>';
+    }
+
+    // 3. Hãng xe ô tô
+    $brands = dbAll("SELECT slug FROM brands");
+    foreach ($brands as $b) {
+        if (empty($b['slug'])) continue;
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/products?brand=' . htmlspecialchars($b['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <changefreq>weekly</changefreq>';
+        $xml[] = '    <priority>0.8</priority>';
+        $xml[] = '  </url>';
+    }
+
+    // 4. Bài viết tin tức
+    $articles = dbAll("SELECT slug, updated_at, published_at, created_at FROM articles WHERE status='published'");
+    foreach ($articles as $a) {
+        if (empty($a['slug'])) continue;
+        $date = !empty($a['updated_at']) ? date('Y-m-d', strtotime($a['updated_at'])) : (!empty($a['published_at']) ? date('Y-m-d', strtotime($a['published_at'])) : date('Y-m-d'));
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/news/' . htmlspecialchars($a['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <lastmod>' . $date . '</lastmod>';
+        $xml[] = '    <changefreq>weekly</changefreq>';
+        $xml[] = '    <priority>0.8</priority>';
+        $xml[] = '  </url>';
+    }
+
+    // 5. Trang tĩnh CMS
+    $pages = dbAll("SELECT slug, updated_at FROM static_pages");
+    foreach ($pages as $pg) {
+        if (empty($pg['slug'])) continue;
+        $date = !empty($pg['updated_at']) ? date('Y-m-d', strtotime($pg['updated_at'])) : date('Y-m-d');
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/page/' . htmlspecialchars($pg['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <lastmod>' . $date . '</lastmod>';
+        $xml[] = '    <changefreq>monthly</changefreq>';
+        $xml[] = '    <priority>0.6</priority>';
+        $xml[] = '  </url>';
+    }
+
+    // 6. Tất cả sản phẩm xuất bản (Published) kèm Ảnh Google Images namespace
+    $products = dbAll("SELECT p.id, p.slug, p.name, p.updated_at, p.created_at,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC, sort_order ASC LIMIT 1) AS main_image
         FROM products p
         WHERE p.status='published' AND COALESCE(p.is_indexed,1)=1
-        ORDER BY p.updated_at DESC LIMIT 50000");
-    echo '<?xml version="1.0" encoding="UTF-8"?>';
-    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
-
-    // Static pages
-    $statics = [
-        '/',
-        '/products',
-        '/brands',
-        '/about',
-        '/contact',
-        '/news',
-        '/stores',
-        '/policies/huong-dan-mua-hang',
-        '/policies/chinh-sach-doi-tra',
-        '/policies/chinh-sach-bao-hanh',
-        '/policies/dieu-khoan-bao-mat',
-    ];
-    foreach ($statics as $s) {
-        echo '<url><loc>https://coolingsystems.vn'.e($s).'</loc>';
-        echo '<changefreq>weekly</changefreq><priority>'.($s==='/'?'1.0':'0.8').'</priority>';
-        echo '</url>';
-    }
-
-    // Products
+        ORDER BY p.id DESC");
     foreach ($products as $p) {
-        $mod = substr($p['updated_at'] ?? '', 0, 10);
-        echo '<url>';
-        echo '<loc>'.e(productCanonicalUrl($p)).'</loc>';
-        echo '<changefreq>weekly</changefreq><priority>0.9</priority>';
-        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $mod)) echo '<lastmod>'.$mod.'</lastmod>';
+        if (empty($p['slug'])) continue;
+        $date = !empty($p['updated_at']) ? date('Y-m-d', strtotime($p['updated_at'])) : date('Y-m-d', strtotime($p['created_at']));
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>' . $baseUrl . '/products/' . htmlspecialchars($p['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
+        $xml[] = '    <lastmod>' . $date . '</lastmod>';
+        $xml[] = '    <changefreq>daily</changefreq>';
+        $xml[] = '    <priority>0.9</priority>';
         if (!empty($p['main_image'])) {
-            $imageUrl = 'https://coolingsystems.vn/uploads/products/' . str_replace('%2F', '/', rawurlencode($p['main_image']));
-            echo '<image:image><image:loc>'.e($imageUrl).'</image:loc><image:title>'.e(seoPlainText($p['name'])).'</image:title></image:image>';
+            $imageUrl = $baseUrl . '/uploads/products/' . str_replace('%2F', '/', rawurlencode($p['main_image']));
+            $xml[] = '    <image:image><image:loc>' . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . '</image:loc><image:title>' . htmlspecialchars(seoPlainText($p['name']), ENT_QUOTES, 'UTF-8') . '</image:title></image:image>';
         }
-        echo '</url>';
+        $xml[] = '  </url>';
     }
 
-    echo '</urlset>';
+    $xml[] = '</urlset>';
+    echo implode("\n", $xml);
     exit;
 });
 
@@ -684,68 +741,5 @@ get('/page/:slug', function($params) {
 
 get('/chat', function() {
     redirect('/customer/chat');
-});
-
-// ── Dynamic Sitemap.xml Generator for 100% Google Indexing ──
-get('/sitemap.xml', function() {
-    header('Content-Type: application/xml; charset=utf-8');
-    
-    $baseUrl = 'https://coolingsystems.vn';
-    $xml = [];
-    $xml[] = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    
-    // Trang chủ
-    $xml[] = '  <url>';
-    $xml[] = '    <loc>' . $baseUrl . '/</loc>';
-    $xml[] = '    <changefreq>daily</changefreq>';
-    $xml[] = '    <priority>1.0</priority>';
-    $xml[] = '  </url>';
-    
-    // Trang sản phẩm tổng hợp
-    $xml[] = '  <url>';
-    $xml[] = '    <loc>' . $baseUrl . '/products</loc>';
-    $xml[] = '    <changefreq>daily</changefreq>';
-    $xml[] = '    <priority>0.9</priority>';
-    $xml[] = '  </url>';
-    
-    // Các trang tĩnh
-    $staticPages = ['/contact', '/vouchers', '/blogs'];
-    foreach ($staticPages as $sp) {
-        $xml[] = '  <url>';
-        $xml[] = '    <loc>' . $baseUrl . $sp . '</loc>';
-        $xml[] = '    <changefreq>monthly</changefreq>';
-        $xml[] = '    <priority>0.7</priority>';
-        $xml[] = '  </url>';
-    }
-    
-    // Tất cả sản phẩm đã xuất bản (Published)
-    $prods = dbAll("SELECT slug, updated_at, created_at FROM products WHERE status='published' ORDER BY id DESC");
-    foreach ($prods as $p) {
-        if (empty($p['slug'])) continue;
-        $date = !empty($p['updated_at']) ? date('Y-m-d', strtotime($p['updated_at'])) : (!empty($p['created_at']) ? date('Y-m-d', strtotime($p['created_at'])) : date('Y-m-d'));
-        $xml[] = '  <url>';
-        $xml[] = '    <loc>' . $baseUrl . '/products/' . htmlspecialchars($p['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
-        $xml[] = '    <lastmod>' . $date . '</lastmod>';
-        $xml[] = '    <changefreq>weekly</changefreq>';
-        $xml[] = '    <priority>0.8</priority>';
-        $xml[] = '  </url>';
-    }
-    
-    // Tất cả danh mục
-    $cats = dbAll("SELECT slug FROM categories");
-    foreach ($cats as $c) {
-        if (empty($c['slug'])) continue;
-        $xml[] = '  <url>';
-        $xml[] = '    <loc>' . $baseUrl . '/products?cat=' . htmlspecialchars($c['slug'], ENT_QUOTES, 'UTF-8') . '</loc>';
-        $xml[] = '    <changefreq>weekly</changefreq>';
-        $xml[] = '    <priority>0.7</priority>';
-        $xml[] = '  </url>';
-    }
-    
-    $xml[] = '</urlset>';
-    
-    echo implode("\n", $xml);
-    exit;
 });
 
