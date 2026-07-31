@@ -598,6 +598,7 @@ function saveCustInvoice(e){
   }).catch(function(){$('custInvBtn').disabled=false;$('custInvStatus').innerHTML="<span style='color:#e74c3c'>Lỗi kết nối</span>"; if(window.coolToastShow)coolToastShow('Lỗi kết nối, vui lòng thử lại','⚠️');});
   return false;
 }
+</script>
 
 <!-- Modal Đăng ký Gara -->
 <div id="garageRegisterModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.75); z-index:99999; align-items:center; justify-content:center; padding:16px; overflow-y:auto;">
