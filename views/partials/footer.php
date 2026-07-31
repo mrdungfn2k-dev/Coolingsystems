@@ -161,21 +161,21 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
     <!-- Section 4: Tài khoản của tôi -->
     <?php if ($mobileUser && in_array($mobileUser['role'], ['customer','garage','staff'])): ?>
       <span class="nav-section-label">Tài khoản của tôi</span>
-      <a href="/customer/profile">👤 Hồ sơ cá nhân</a>
-      <a href="/customer/orders">📦 Đơn hàng của tôi</a>
-      <a href="/customer/favorites">❤️ Sản phẩm yêu thích</a>
-      <a href="/customer/chat">💬 Tin nhắn tư vấn</a>
-      <a href="/auth/logout" style="color:#ef4444!important">🚪 Đăng xuất</a>
+      <a href="/customer/profile">Hồ sơ cá nhân</a>
+      <a href="/customer/orders">Đơn hàng của tôi</a>
+      <a href="/customer/favorites">Sản phẩm yêu thích</a>
+      <a href="/customer/chat">Tin nhắn tư vấn</a>
+      <a href="/auth/logout" style="color:#ef4444!important">Đăng xuất</a>
     <?php elseif ($mobileUser && $mobileUser['role'] === 'partner'): ?>
       <span class="nav-section-label">Quản lý đối tác</span>
       <a href="/partner/dashboard">Bảng điều khiển Partner</a>
-      <a href="/customer/profile">👤 Hồ sơ cá nhân</a>
-      <a href="/partner/logout" style="color:#ef4444!important">🚪 Đăng xuất</a>
+      <a href="/customer/profile">Hồ sơ cá nhân</a>
+      <a href="/partner/logout" style="color:#ef4444!important">Đăng xuất</a>
     <?php elseif ($mobileUser && $mobileUser['role'] === 'admin'): ?>
       <span class="nav-section-label">Quản trị viên</span>
       <a href="/admin">Quản trị Admin Panel</a>
-      <a href="/customer/profile">👤 Hồ sơ cá nhân</a>
-      <a href="/admin/logout" style="color:#ef4444!important">🚪 Đăng xuất</a>
+      <a href="/customer/profile">Hồ sơ cá nhân</a>
+      <a href="/admin/logout" style="color:#ef4444!important">Đăng xuất</a>
     <?php else: ?>
       <div style="display:flex;gap:10px;margin-top:16px">
         <a href="/auth/login" style="flex:1;padding:10px;background:rgba(255,255,255,0.1);color:#fff!important;text-align:center;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">Đăng nhập</a>
