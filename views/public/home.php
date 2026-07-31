@@ -617,7 +617,7 @@ function validateHomeGarageForm(form) {
 
 <!-- Sản phẩm theo danh mục -->
 <?php
-$cats = dbAll("SELECT c.*, COUNT(p.id) AS cnt FROM categories c LEFT JOIN products p ON p.category_id=c.id AND p.status='published' GROUP BY c.id HAVING cnt > 0 ORDER BY cnt DESC LIMIT 4");
+$cats = dbAll("SELECT c.*, COUNT(p.id) AS cnt FROM categories c LEFT JOIN products p ON p.category_id=c.id AND p.status='published' WHERE (c.is_active=1 OR c.is_active IS NULL) GROUP BY c.id HAVING cnt > 0 ORDER BY cnt DESC LIMIT 6");
 foreach ($cats as $cat):
   if (!isset($cat['cnt'])) {
     $cat['cnt'] = dbGet("SELECT COUNT(*) as n FROM products WHERE category_id=? AND status='published'", [$cat['id']])['n'] ?? 0;
