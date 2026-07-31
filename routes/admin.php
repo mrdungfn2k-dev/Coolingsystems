@@ -4861,6 +4861,10 @@ get('/admin/garages', function() {
     view('admin/garages', compact('title', 'tab', 'requests', 'q', 'statusFilter', 'page', 'totalPages', 'pendingRequestsCount', 'approvedRequestsCount', 'rejectedRequestsCount'));
 });
 
+get('/admin/garages/requests/:id/approve', function($p) {
+    redirect('/admin/garages?tab=requests');
+});
+
 post('/admin/garages/requests/:id/approve', function($p) {
     $admin = requireStaffPermission('rbac:users|products', '/admin/login');
     csrfCheck();
@@ -4881,14 +4885,22 @@ post('/admin/garages/requests/:id/approve', function($p) {
         "Đơn đăng ký Gara '{$reg['garage_name']}' của bạn đã được Ban quản trị phê duyệt. Bạn đã được áp dụng bảng giá buôn & ưu đãi công nợ."
     ]);
 
-    // Send SMTP Email
-    $email = $reg['email'] ?: $reg['user_email'];
-    $name = $reg['owner_name'] ?: $reg['full_name'];
-    if (!empty($email) && function_exists('sendGarageApprovedEmail')) {
-        sendGarageApprovedEmail($email, $name, $reg['garage_name']);
+    // Send SMTP Email safely
+    try {
+        $email = $reg['email'] ?: $reg['user_email'];
+        $name = $reg['owner_name'] ?: $reg['full_name'];
+        if (!empty($email) && function_exists('sendGarageApprovedEmail')) {
+            @sendGarageApprovedEmail($email, $name, $reg['garage_name']);
+        }
+    } catch (\Throwable $e) {
+        error_log('[GARAGE_APPROVE_EMAIL] ' . $e->getMessage());
     }
 
     flash('success', "Đã phê duyệt Gara '{$reg['garage_name']}' thành công! Tài khoản đã chuyển sang quyền Gara & email thông báo đã được gửi.");
+    redirect('/admin/garages?tab=requests');
+});
+
+get('/admin/garages/requests/:id/reject', function($p) {
     redirect('/admin/garages?tab=requests');
 });
 
@@ -4914,11 +4926,15 @@ post('/admin/garages/requests/:id/reject', function($p) {
         "Lý do từ chối: {$reason}. Vui lòng nộp lại chứng từ chính xác tại trang Hồ sơ."
     ]);
 
-    // Send SMTP Email
-    $email = $reg['email'] ?: $reg['user_email'];
-    $name = $reg['owner_name'] ?: $reg['full_name'];
-    if (!empty($email) && function_exists('sendGarageRejectedEmail')) {
-        sendGarageRejectedEmail($email, $name, $reg['garage_name'], $reason);
+    // Send SMTP Email safely
+    try {
+        $email = $reg['email'] ?: $reg['user_email'];
+        $name = $reg['owner_name'] ?: $reg['full_name'];
+        if (!empty($email) && function_exists('sendGarageRejectedEmail')) {
+            @sendGarageRejectedEmail($email, $name, $reg['garage_name'], $reason);
+        }
+    } catch (\Throwable $e) {
+        error_log('[GARAGE_REJECT_EMAIL] ' . $e->getMessage());
     }
 
     flash('success', "Đã từ chối đơn đăng ký của Gara '{$reg['garage_name']}'. Email & Thông báo kèm lý do đã được gửi tới khách hàng.");
