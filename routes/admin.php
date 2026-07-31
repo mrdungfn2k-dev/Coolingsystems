@@ -3051,7 +3051,36 @@ get('/admin/products/:id/edit', function($p) {
     $brands = dbAll('SELECT * FROM brands ORDER BY name ASC');
     $images = dbAll('SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC', [$p['id']]);
     $canEditProductCodes = !(($user['role'] ?? '') === 'staff' && rbacUsesDetailedMode((int)$user['id'])) || rbacCan((int)$user['id'], 'catalog.codes.manage');
-    view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images,'returnTo'=>$returnTo,'canEditProductCodes'=>$canEditProductCodes]);
+    $historyCount = dbGet('SELECT COUNT(*) AS n FROM product_history WHERE product_id=?', [$p['id']])['n'] ?? 0;
+    view('admin/product-form', ['title'=>'Sửa SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'categories'=>$categories,'brands'=>$brands,'images'=>$images,'returnTo'=>$returnTo,'canEditProductCodes'=>$canEditProductCodes,'historyCount'=>(int)$historyCount]);
+});
+
+// === Lịch sử sản phẩm ===
+get('/admin/products/:id/history', function($p) {
+    $user = requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login');
+    $product = dbGet('SELECT * FROM products WHERE id=?', [$p['id']]);
+    if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); return; }
+    $history = dbAll(
+        "SELECT ph.*, u.full_name AS changer_name FROM product_history ph LEFT JOIN users u ON u.id = ph.changed_by WHERE ph.product_id = ? ORDER BY ph.changed_at DESC LIMIT 100",
+        [$p['id']]
+    );
+    view('admin/product-history', ['title'=>'Lịch sử SP: '.truncate($product['name'],30),'role'=>'admin','product'=>$product,'history'=>$history]);
+});
+
+// === Khôi phục sản phẩm từ lịch sử ===
+post('/admin/products/:id/restore/:hid', function($p) {
+    $user = requireStaffPermission('rbac:catalog.products.edit|products', '/admin/login'); csrfCheck();
+    $product = dbGet('SELECT * FROM products WHERE id=?', [$p['id']]);
+    if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); return; }
+    $snap = dbGet('SELECT * FROM product_history WHERE id=? AND product_id=?', [$p['hid'], $p['id']]);
+    if (!$snap) { flash('error','Không tìm thấy bản lịch sử này.'); redirect('/admin/products/'.$p['id'].'/history'); return; }
+    saveProductHistory($product, 'update', (int)($user['id'] ?? 0));
+    dbRun(
+        "UPDATE products SET name=?,sku=?,description=?,features=?,specifications=?,short_specs=?,price=?,original_price=?,stock=?,status=?,part_brand=?,car_brand_id=?,seo_title=?,seo_description=?,seo_keyword=?,updated_at=datetime('now','localtime') WHERE id=?",
+        [$snap['name'],$snap['sku'],$snap['description'],$snap['features'],$snap['specifications'],$snap['short_specs'],$snap['price'],$snap['original_price'],$snap['stock'],$snap['status'],$snap['part_brand'],$snap['car_brand_id'],$snap['seo_title'],$snap['seo_description'],$snap['seo_keyword'],$p['id']]
+    );
+    flash('success', 'Đã khôi phục sản phẩm về bản lúc ' . $snap['changed_at'] . ' thành công!');
+    redirect('/admin/products/' . $p['id'] . '/edit');
 });
 
 post('/admin/products/:id/edit', function($p) {

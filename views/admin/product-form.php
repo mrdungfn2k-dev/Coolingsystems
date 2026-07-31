@@ -440,6 +440,9 @@ function swTab(t){
           </button>
           <?php if(isset($product)):?>
             <a href="<?= e(productPath($product)) ?>" target="_blank" class="btn btn-outline-navy btn-block btn-sm" style="margin-top:8px;text-align:center"> Xem trang SP</a>
+            <a href="/admin/products/<?= e($product['id']) ?>/history" class="btn btn-block btn-sm" style="margin-top:6px;text-align:center;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;border-radius:6px;padding:6px 12px;display:block;font-size:.8rem;">
+              Lịch sử thay đổi<?= isset($historyCount) && $historyCount > 0 ? ' ('.$historyCount.' bản)' : '' ?>
+            </a>
           <?php endif;?>
         </div>
       </div>
