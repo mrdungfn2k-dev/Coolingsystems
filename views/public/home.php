@@ -535,7 +535,7 @@ foreach ($cats as $cat):
   if (!isset($cat['cnt'])) {
     $cat['cnt'] = dbGet("SELECT COUNT(*) as n FROM products WHERE category_id=? AND status='published'", [$cat['id']])['n'] ?? 0;
   }
-  $catProds = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT 6", [$cat['id']]);
+  $catProds = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.status='published' ORDER BY p.created_at DESC LIMIT 10", [$cat['id']]);
   if (empty($catProds)) continue;
 ?>
 <section class="block"><div class="wrap"><div class="sec-card">

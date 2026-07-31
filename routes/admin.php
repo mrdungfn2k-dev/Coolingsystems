@@ -429,50 +429,54 @@ post('/admin/products/import-csv', function() {
                 $params[] = $existing['id'];
                 dbRun("UPDATE products SET " . implode(',', $updates) . " WHERE id=?", $params);
                 $imported++;
+                $newPid = ['id' => $existing['id']];
             } elseif ($existing && $dupSku === 'skip') {
                 $skipped++; $errors[] = "Dòng $lineNum: SKU \"{$sku}\" đã tồn tại";
+                $newPid = null;
             } else {
                 if (!$sku) { $sku = 'CSV-' . strtoupper(substr(md5($name . microtime()), 0, 8)); }
                 dbInsert("INSERT INTO products (name, sku, slug, oem_code, part_brand, car_brand_id, category_id, price, price_before_tax, tax_amount, original_price, vat_rate, stock, weight_g, cost_price, width_cm, depth_cm, height_cm, warranty_months, short_specs, description, features, specifications, is_featured, status, partner_id, video_url, published_at, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,datetime('now','localtime'),datetime('now','localtime'))",
                     [$name, $sku, $slug, $oem, $brand, $carBrandId, $catId, $price, $priceBefore, $taxAmount, $originalPrice ?: null, $vat, $stock, $weight, $cost, $width, $depth, $height, $warranty, $shortSpecs, $desc, $features, $specs, $isFeatured, $finalStatus, trim($_POST['video_url'] ?? '')]);
-                if ($imageUrl) {
-                    $newPid = dbGet("SELECT id FROM products WHERE sku=?", [$sku]);
-                    if ($newPid) {
-                        $imgName = null;
-                        if (str_starts_with($imageUrl, 'http')) {
-                            $ctx = stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0\r\n", 'timeout' => 10]]);
-                            $imgData = @file_get_contents($imageUrl, false, $ctx);
-                            if ($imgData && strlen($imgData) > 1000) {
-                                $imgExt = 'jpg'; if (str_contains($imageUrl, '.webp')) $imgExt = 'webp'; elseif (str_contains($imageUrl, '.png')) $imgExt = 'png';
-                                $imgName = 'p_' . uniqid() . '.' . $imgExt;
-                                file_put_contents('/opt/cooling-php/uploads/products/' . $imgName, $imgData);
+                $newPid = dbGet("SELECT id FROM products WHERE sku=?", [$sku]);
+            }
+            if ($newPid) {
+                $imgName = null;
+                if (str_starts_with($imageUrl, 'http')) {
+                    $ctx = stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0\r\n", 'timeout' => 10]]);
+                    $imgData = @file_get_contents($imageUrl, false, $ctx);
+                    if ($imgData && strlen($imgData) > 1000) {
+                        $imgExt = 'jpg'; if (str_contains($imageUrl, '.webp')) $imgExt = 'webp'; elseif (str_contains($imageUrl, '.png')) $imgExt = 'png';
+                        $imgName = 'p_' . uniqid() . '.' . $imgExt;
+                        file_put_contents('/var/lib/coolingsystems/uploads/products/' . $imgName, $imgData);
+                    }
+                } else {
+                    if ($imageUrl) $imgName = $imageUrl;
+                }
+                if ($imgName) {
+                    dbRun("DELETE FROM product_images WHERE product_id=?", [$newPid['id']]);
+                    dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 1, 0)", [$newPid['id'], $imgName]);
+                }
+                if (!empty($additionalImages)) {
+                    $extraImgs = array_filter(array_map('trim', explode(';', $additionalImages)));
+                    $sortIdx = 1;
+                    foreach ($extraImgs as $extraImg) {
+                        $extraName = null;
+                        if (str_starts_with($extraImg, 'http')) {
+                            $ctx2 = stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0\r\n", 'timeout' => 10]]);
+                            $imgData2 = @file_get_contents($extraImg, false, $ctx2);
+                            if ($imgData2 && strlen($imgData2) > 1000) {
+                                $eExt = 'jpg'; if (str_contains($extraImg, '.webp')) $eExt = 'webp'; elseif (str_contains($extraImg, '.png')) $eExt = 'png';
+                                $extraName = 'p_' . uniqid() . '_' . $sortIdx . '.' . $eExt;
+                                file_put_contents('/var/lib/coolingsystems/uploads/products/' . $extraName, $imgData2);
                             }
                         } else {
-                            if (file_exists('/opt/cooling-php/uploads/products/' . $imageUrl)) $imgName = $imageUrl;
+                            if ($extraImg) $extraName = $extraImg;
                         }
-                        if ($imgName) dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 1, 0)", [$newPid['id'], $imgName]);
-                        if (!empty($additionalImages)) {
-                            $extraImgs = array_filter(array_map('trim', explode(';', $additionalImages)));
-                            $sortIdx = 1;
-                            foreach ($extraImgs as $extraImg) {
-                                $extraName = null;
-                                if (str_starts_with($extraImg, 'http')) {
-                                    $ctx2 = stream_context_create(['http' => ['header' => "User-Agent: Mozilla/5.0\r\n", 'timeout' => 10]]);
-                                    $imgData2 = @file_get_contents($extraImg, false, $ctx2);
-                                    if ($imgData2 && strlen($imgData2) > 1000) {
-                                        $eExt = 'jpg'; if (str_contains($extraImg, '.webp')) $eExt = 'webp'; elseif (str_contains($extraImg, '.png')) $eExt = 'png';
-                                        $extraName = 'p_' . uniqid() . '_' . $sortIdx . '.' . $eExt;
-                                        file_put_contents('/opt/cooling-php/uploads/products/' . $extraName, $imgData2);
-                                    }
-                                } else {
-                                    if (file_exists('/opt/cooling-php/uploads/products/' . $extraImg)) $extraName = $extraImg;
-                                }
-                                if ($extraName) { dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 0, ?)", [$newPid['id'], $extraName, $sortIdx]); $sortIdx++; }
-                            }
-                        }
+                        if ($extraName) { dbRun("INSERT INTO product_images (product_id, file_path, is_main, sort_order) VALUES (?, ?, 0, ?)", [$newPid['id'], $extraName, $sortIdx]); $sortIdx++; }
                     }
                 }
-                $newProduct = dbGet("SELECT id FROM products WHERE partner_id=1 AND sku=?", [$sku]);
+            }
+                $newProduct = dbGet("SELECT id FROM products WHERE sku=?", [$sku]);
                 if ($newProduct) {
                     dbRun("UPDATE products SET seo_title=?, seo_description=?, is_indexed=?, updated_at=datetime('now','localtime') WHERE id=?", [
                         $autoSeoTitle,
@@ -482,7 +486,6 @@ post('/admin/products/import-csv', function() {
                     ]);
                 }
                 $imported++;
-            }
         } catch (\Exception $e) { $errors[] = "Dòng $lineNum: " . $e->getMessage(); }
     }
     fclose($file);
@@ -723,7 +726,7 @@ post('/admin/chat/send-image', function() {
     $file = $_FILES['image'];
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     if (!in_array($ext, ['jpg','jpeg','png','gif','webp'])) { echo json_encode(['error'=>'invalid']); exit; }
-    $uploadDir = '/opt/cooling-php/uploads/chat/';
+    $uploadDir = '/var/lib/coolingsystems/uploads/chat/';
     if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
     $filename = time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
     move_uploaded_file($file['tmp_name'], $uploadDir . $filename);
@@ -3365,19 +3368,22 @@ post('/admin/banner/update', function() {
 
     // Multiple file uploads
     if (!empty($_FILES['hero_banner_files']['tmp_name']) && is_array($_FILES['hero_banner_files']['tmp_name'])) {
-        @mkdir('/opt/cooling-php/uploads/banners', 0755, true);
-        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
         @mkdir(__DIR__ . '/../public/uploads/banners', 0755, true);
+        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
+        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
         
         foreach ($_FILES['hero_banner_files']['tmp_name'] as $idx => $tmpName) {
             if (!empty($tmpName) && is_uploaded_file($tmpName)) {
-                $ext = strtolower(pathinfo($_FILES['hero_banner_files']['name'][$idx], PATHINFO_EXTENSION));
+                $ext = strtolower(pathinfo($_FILES['hero_banner_files']['name'][$idx] ?? '', PATHINFO_EXTENSION));
                 if (in_array($ext, ['jpg','jpeg','png','webp'])) {
                     $fname = 'hero_' . time() . '_' . $idx . '.' . $ext;
-                    move_uploaded_file($tmpName, '/opt/cooling-php/uploads/banners/' . $fname);
-                    @copy('/opt/cooling-php/uploads/banners/' . $fname, '/var/lib/coolingsystems/uploads/banners/' . $fname);
-                    @copy('/opt/cooling-php/uploads/banners/' . $fname, __DIR__ . '/../public/uploads/banners/' . $fname);
-                    $bannersList[] = ['img' => $fname, 'link' => ''];
+                    $targetPublic = __DIR__ . '/../public/uploads/banners/' . $fname;
+                    if (move_uploaded_file($tmpName, $targetPublic)) {
+                        @copy($targetPublic, '/var/lib/coolingsystems/uploads/banners/' . $fname);
+                        @copy($targetPublic, '/var/lib/coolingsystems/uploads/banners/' . $fname);
+                        @copy($targetPublic, __DIR__ . '/../uploads/banners/' . $fname);
+                        $bannersList[] = ['img' => $fname, 'link' => ''];
+                    }
                 }
             }
         }
@@ -3385,16 +3391,19 @@ post('/admin/banner/update', function() {
 
     // Single file upload backwards compatibility
     if (!empty($_FILES['hero_bg_image']['tmp_name']) && is_uploaded_file($_FILES['hero_bg_image']['tmp_name'])) {
-        @mkdir('/opt/cooling-php/uploads/banners', 0755, true);
-        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
         @mkdir(__DIR__ . '/../public/uploads/banners', 0755, true);
+        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
+        @mkdir('/var/lib/coolingsystems/uploads/banners', 0755, true);
         $ext = strtolower(pathinfo($_FILES['hero_bg_image']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp'])) {
             $fname = 'hero_' . time() . '.' . $ext;
-            move_uploaded_file($_FILES['hero_bg_image']['tmp_name'], '/opt/cooling-php/uploads/banners/' . $fname);
-            @copy('/opt/cooling-php/uploads/banners/' . $fname, '/var/lib/coolingsystems/uploads/banners/' . $fname);
-            @copy('/opt/cooling-php/uploads/banners/' . $fname, __DIR__ . '/../public/uploads/banners/' . $fname);
-            $bannersList[] = ['img' => $fname, 'link' => ''];
+            $targetPublic = __DIR__ . '/../public/uploads/banners/' . $fname;
+            if (move_uploaded_file($_FILES['hero_bg_image']['tmp_name'], $targetPublic)) {
+                @copy($targetPublic, '/var/lib/coolingsystems/uploads/banners/' . $fname);
+                @copy($targetPublic, '/var/lib/coolingsystems/uploads/banners/' . $fname);
+                @copy($targetPublic, __DIR__ . '/../uploads/banners/' . $fname);
+                $bannersList[] = ['img' => $fname, 'link' => ''];
+            }
         }
     }
 
@@ -3543,7 +3552,7 @@ post('/admin/news/new', function() {
     $thumb=null;
     if (!empty($_FILES['thumbnail']['tmp_name'])&&is_uploaded_file($_FILES['thumbnail']['tmp_name'])) {
         $ext=strtolower(pathinfo($_FILES['thumbnail']['name'],PATHINFO_EXTENSION));
-        if (in_array($ext,['jpg','jpeg','png','webp'])) { $fname=uniqid('news_').'.'.$ext; if (move_uploaded_file($_FILES['thumbnail']['tmp_name'],'/opt/cooling-php/uploads/news/'.$fname)) $thumb=$fname; }
+        if (in_array($ext,['jpg','jpeg','png','webp'])) { $fname=uniqid('news_').'.'.$ext; if (move_uploaded_file($_FILES['thumbnail']['tmp_name'],'/var/lib/coolingsystems/uploads/news/'.$fname)) $thumb=$fname; }
     }
     $pub=$status==='published'?date('Y-m-d H:i:s'):null;
     dbInsert("INSERT INTO articles (title,slug,excerpt,content,thumbnail,author_id,status,published_at) VALUES (?,?,?,?,?,?,?,?)",[$title,$slug,$excerpt,$content,$thumb,$user['id'],$status,$pub]);
@@ -3564,7 +3573,7 @@ post('/admin/news/:id/edit', function($p) {
     $thumb=$article['thumbnail'];
     if (!empty($_FILES['thumbnail']['tmp_name'])&&is_uploaded_file($_FILES['thumbnail']['tmp_name'])) {
         $ext=strtolower(pathinfo($_FILES['thumbnail']['name'],PATHINFO_EXTENSION));
-        if (in_array($ext,['jpg','jpeg','png','webp'])) { $fname=uniqid('news_').'.'.$ext; if (move_uploaded_file($_FILES['thumbnail']['tmp_name'],'/opt/cooling-php/uploads/news/'.$fname)) $thumb=$fname; }
+        if (in_array($ext,['jpg','jpeg','png','webp'])) { $fname=uniqid('news_').'.'.$ext; if (move_uploaded_file($_FILES['thumbnail']['tmp_name'],'/var/lib/coolingsystems/uploads/news/'.$fname)) $thumb=$fname; }
     }
     $pub=($status==='published'&&!$article['published_at'])?date('Y-m-d H:i:s'):$article['published_at'];
     dbRun("UPDATE articles SET title=?,slug=?,excerpt=?,content=?,thumbnail=?,status=?,published_at=?,updated_at=datetime('now') WHERE id=?",[$title,$slug,$excerpt,$content,$thumb,$status,$pub,$p['id']]);
@@ -4019,7 +4028,7 @@ post('/admin/settings/payment', function() {
         if (in_array($mime, $allowed)) {
             $ext = pathinfo($_FILES['qr_image']['name'], PATHINFO_EXTENSION);
             $fname = 'qr_' . time() . '.' . strtolower($ext);
-            $dest = '/opt/cooling-php/uploads/qr/' . $fname;
+            $dest = '/var/lib/coolingsystems/uploads/qr/' . $fname;
             if (move_uploaded_file($_FILES['qr_image']['tmp_name'], $dest)) {
                 dbRun("INSERT INTO system_config (key, value) VALUES ('payment_qr_image',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')", [$fname]);
             }
@@ -4340,7 +4349,7 @@ post('/admin/banners/add', function() { requireRole(['admin'], '/admin/login'); 
   $link = trim($_POST['link'] ?? ''); $btitle = trim($_POST['btitle'] ?? ''); $img = '';
   if (!empty($_FILES['image']['name']) && ($_FILES['image']['error'] ?? 1) === UPLOAD_ERR_OK) {
     $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-    if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) { $dir = '/opt/cooling-php/uploads/banners/'; if (!is_dir($dir)) @mkdir($dir, 0775, true); $fname = 'hb_'.uniqid().'.'.$ext; if (move_uploaded_file($_FILES['image']['tmp_name'], $dir.$fname)) $img = $fname; }
+    if (in_array($ext, ['jpg','jpeg','png','webp','gif'])) { $dir = '/var/lib/coolingsystems/uploads/banners/'; if (!is_dir($dir)) @mkdir($dir, 0775, true); $fname = 'hb_'.uniqid().'.'.$ext; if (move_uploaded_file($_FILES['image']['tmp_name'], $dir.$fname)) $img = $fname; }
   }
   if ($img === '') { flash('error', 'Vui long chon anh banner hop le (jpg/png/webp/gif).'); redirect('/admin/banners'); return; }
   $banners = getHomeBanners(); $banners[] = ['img'=>$img, 'link'=>$link, 'title'=>$btitle, 'active'=>1]; saveHomeBanners($banners);
@@ -4356,7 +4365,7 @@ post('/admin/banners/:idx/toggle', function($p) { requireRole(['admin'], '/admin
 });
 post('/admin/banners/:idx/delete', function($p) { requireRole(['admin'], '/admin/login'); csrfCheck();
   $idx = (int)$p['idx']; $banners = getHomeBanners();
-  if (isset($banners[$idx])) { $f = '/opt/cooling-php/uploads/banners/'.($banners[$idx]['img'] ?? ''); if (!empty($banners[$idx]['img']) && is_file($f)) @unlink($f); array_splice($banners, $idx, 1); saveHomeBanners($banners); flash('success', 'Da xoa banner.'); }
+  if (isset($banners[$idx])) { $f = '/var/lib/coolingsystems/uploads/banners/'.($banners[$idx]['img'] ?? ''); if (!empty($banners[$idx]['img']) && is_file($f)) @unlink($f); array_splice($banners, $idx, 1); saveHomeBanners($banners); flash('success', 'Da xoa banner.'); }
   redirect('/admin/banners');
 });
 

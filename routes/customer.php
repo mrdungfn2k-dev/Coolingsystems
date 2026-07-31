@@ -957,7 +957,7 @@ post('/products/:id/reviews', function($p) {
                 $ext = strtolower(pathinfo($files['name'][$i], PATHINFO_EXTENSION));
                 if (in_array($ext, ['jpg','jpeg','png','webp'])) {
                     $fname = uniqid('rev_') . '.' . $ext;
-                    if (move_uploaded_file($files['tmp_name'][$i], '/opt/cooling-php/uploads/reviews/' . $fname)) {
+                    if (move_uploaded_file($files['tmp_name'][$i], '/var/lib/coolingsystems/uploads/reviews/' . $fname)) {
                         $uploadedImages[] = $fname;
                     }
                 }
@@ -969,7 +969,7 @@ post('/products/:id/reviews', function($p) {
         $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
         if (in_array($ext, ['jpg','jpeg','png','webp'])) {
             $fname = uniqid('rev_') . '.' . $ext;
-            if (move_uploaded_file($_FILES['image']['tmp_name'], '/opt/cooling-php/uploads/reviews/' . $fname)) {
+            if (move_uploaded_file($_FILES['image']['tmp_name'], '/var/lib/coolingsystems/uploads/reviews/' . $fname)) {
                 $uploadedImages[] = $fname;
             }
         }

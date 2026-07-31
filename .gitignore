@@ -36,3 +36,14 @@ test_*.php
 sync_vps_to_git.py
 __pycache__/
 *.pyc
+
+# Image folders (large binary files - served from VPS /uploads)
+ảnh partvietnam/
+ảnh thành dũng auto/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.JPG
+*.PNG

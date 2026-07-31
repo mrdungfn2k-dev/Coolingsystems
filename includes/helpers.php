@@ -428,12 +428,18 @@ function storeNormalizedProductUpload(array $file, string $seoBase, string $uplo
         return null;
     }
 
-    $uploadDir = rtrim($uploadDir, '/') . '/';
+    $targetDir = $uploadDir;
+    if (!is_dir($targetDir) && !@mkdir($targetDir, 0777, true)) {
+        $targetDir = __DIR__ . '/../public/uploads/products/';
+        if (!is_dir($targetDir)) @mkdir($targetDir, 0777, true);
+    }
+    $uploadDir = rtrim($targetDir, '/') . '/';
+
     $seoBase = mb_substr(trim($seoBase), 0, 120, 'UTF-8');
     $originalDir = '/var/lib/coolingsystems/product-originals/';
-    if (!is_dir($originalDir) && !@mkdir($originalDir, 0770, true)) {
-        $error = 'Không tạo được thư mục lưu ảnh gốc.';
-        return null;
+    if (!is_dir($originalDir) && !@mkdir($originalDir, 0777, true)) {
+        $originalDir = __DIR__ . '/../public/uploads/product-originals/';
+        if (!is_dir($originalDir)) @mkdir($originalDir, 0777, true);
     }
 
     // A unique suffix prevents browsers/CDNs from reusing an older product
@@ -445,10 +451,12 @@ function storeNormalizedProductUpload(array $file, string $seoBase, string $uplo
     $originalPath = $originalDir . $originalName;
 
     if (!move_uploaded_file($tmpPath, $originalPath)) {
-        $error = 'Không thể lưu ảnh gốc.';
-        return null;
+        if (!copy($tmpPath, $originalPath)) {
+            $error = 'Không thể lưu ảnh gốc.';
+            return null;
+        }
     }
-    @chmod($originalPath, 0660);
+    @chmod($originalPath, 0666);
 
     if (!normalizeProductImageFile($originalPath, $uploadDir . $outputName, $error)) {
         return null;
