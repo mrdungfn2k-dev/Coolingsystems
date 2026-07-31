@@ -35,20 +35,20 @@
 .tab-nav{display:flex;gap:8px;border-bottom:2px solid #e2e8f0;margin-bottom:20px}
 .tab-nav a{padding:10px 20px;font-weight:700;font-size:14px;color:#64748b;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px}
 .tab-nav a.active{color:#0b1d3a;border-bottom-color:#0b1d3a}
-.tab-badge{background:#ef4444;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:12px}
-.tab-badge.gold{background:#d97706}
+.tab-badge{background:#0b1d3a;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:12px}
+.tab-badge.gold{background:#0b1d3a}
 .garage-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
 .garage-kpi{border:1px solid #e3e9f1;background:#fff;padding:16px;border-radius:8px}
-.garage-kpi b{display:block;font-size:22px;font-weight:800;color:#17325c}
+.garage-kpi b{display:block;font-size:22px;font-weight:800;color:#0b1d3a}
 .garage-kpi span{font-size:12.5px;color:#64748b;font-weight:600}
 .garage-table{width:100%;border-collapse:collapse;background:#fff}
 .garage-table th{font-size:11px;text-transform:uppercase;color:#64748b;background:#f7f9fc;padding:11px 10px;text-align:left;white-space:nowrap;border-bottom:2px solid #e6ebf1}
 .garage-table td{padding:11px 10px;border-top:1px solid #edf1f5;vertical-align:middle;font-size:13px}
 .garage-table tr:hover td{background:#f9fbff}
 .badge-status{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11.5px;font-weight:700;text-transform:uppercase}
-.badge-pending{background:#fef3c7;color:#b45309;border:1px solid #fde68a}
-.badge-approved{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
-.badge-rejected{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.badge-pending{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}
+.badge-approved{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.badge-rejected{background:#fef2f2;color:#b91c1c;border:1px solid #fca5a5}
 .thumb-box{width:60px;height:45px;border-radius:4px;overflow:hidden;border:1px solid #cbd5e1;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .thumb-box img{width:100%;height:100%;object-fit:cover}
 .btn-action-detail{background:#0b1d3a;color:#fff;border:none;border-radius:6px;font-weight:700;font-size:12px;padding:6px 14px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
@@ -76,16 +76,16 @@
 
   <!-- KPI SUMMARY -->
   <div class="garage-kpis">
-    <div class="garage-kpi" style="border-left:4px solid #d97706">
-      <b style="color:#d97706"><?= number_format($pendingRequestsCount) ?></b>
+    <div class="garage-kpi" style="border-left:4px solid #0b1d3a">
+      <b style="color:#0b1d3a"><?= number_format($pendingRequestsCount) ?></b>
       <span>Đơn đang chờ duyệt</span>
     </div>
-    <div class="garage-kpi" style="border-left:4px solid #16a34a">
-      <b style="color:#16a34a"><?= number_format($approvedRequestsCount) ?></b>
+    <div class="garage-kpi" style="border-left:4px solid #1a3258">
+      <b style="color:#1a3258"><?= number_format($approvedRequestsCount) ?></b>
       <span>Đã xác thực Gara (Giá sỉ)</span>
     </div>
-    <div class="garage-kpi" style="border-left:4px solid #dc2626">
-      <b style="color:#dc2626"><?= number_format($rejectedRequestsCount) ?></b>
+    <div class="garage-kpi" style="border-left:4px solid #475569">
+      <b style="color:#475569"><?= number_format($rejectedRequestsCount) ?></b>
       <span>Hồ sơ bị từ chối</span>
     </div>
   </div>
@@ -96,10 +96,10 @@
     <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên Gara, chủ Gara, SĐT, MST..." style="min-width:280px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:13px">
     
     <div style="display:flex;gap:6px">
-      <a href="/admin/garages?tab=requests" class="btn <?= ($statusFilter ?? '') === '' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:7px 14px;border-radius:6px;font-weight:700">Tất cả</a>
-      <a href="/admin/garages?tab=requests&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#d97706;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#b45309;border:1px solid #fde68a' ?>">Chờ duyệt</a>
-      <a href="/admin/garages?tab=requests&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#16a34a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#15803d;border:1px solid #bbf7d0' ?>">Đã duyệt</a>
-      <a href="/admin/garages?tab=requests&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#dc2626;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#b91c1c;border:1px solid #fca5a5' ?>">Từ chối</a>
+      <a href="/admin/garages?tab=requests" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;font-weight:700;<?= ($statusFilter ?? '') === '' ? 'background:#0b1d3a;color:#fff;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Tất cả</a>
+      <a href="/admin/garages?tab=requests&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Chờ duyệt</a>
+      <a href="/admin/garages?tab=requests&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Đã duyệt</a>
+      <a href="/admin/garages?tab=requests&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Từ chối</a>
     </div>
 
     <button class="btn btn-navy" type="submit" style="margin-left:auto;height:38px;padding:0 18px;border-radius:6px;font-weight:700;background:#0b1d3a;color:#fff">Lọc kết quả</button>
@@ -130,7 +130,7 @@
           <td>
             <strong style="color:#0b1d3a;font-size:14px"><?= e($r['garage_name']) ?></strong>
             <?php if (!empty($r['is_verified_garage'])): ?>
-              <span style="display:inline-block;background:#dcfce7;color:#15803d;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:4px">GARA CHÍNH THỨC</span>
+              <span style="display:inline-block;background:#e0f2fe;color:#0369a1;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:4px">GARA CHÍNH THỨC</span>
             <?php endif; ?>
           </td>
           <td style="font-weight:600;color:#334155"><?= e($r['owner_name']) ?></td>
@@ -243,7 +243,7 @@
         <td style="color:#4b5563"><?= e($g['label'] ?: '—') ?></td>
         <td style="text-align:center">
           <?php if($g['is_default']): ?>
-          <span style="background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700">Mặc định</span>
+          <span style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700">Mặc định</span>
           <?php else: ?>
           <span style="color:#9ca3af;font-size:11px">—</span>
           <?php endif; ?>
