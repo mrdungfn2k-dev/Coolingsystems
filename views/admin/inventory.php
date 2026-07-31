@@ -27,7 +27,7 @@ $canSaveInventory = $canEditCost || $canEditPrice || $canEditStock || $canEditTh
   <select name="category"><option value="0">Tất cả danh mục</option><?php foreach($categories as $category): ?><option value="<?= (int)$category['id'] ?>" <?= $categoryId===(int)$category['id']?'selected':'' ?>><?= e($category['name']) ?></option><?php endforeach; ?></select>
   <button class="btn btn-navy" type="submit">Lọc</button>
 </form>
-<div class="table-wrap"><table class="inventory-table"><thead><tr><th>Sản phẩm</th><th>Danh mục</th><?php if($canViewCost): ?><th>Giá nhập</th><?php endif; ?><th>Giá bán</th><th>Giá sỉ Gara</th><th>Giá gốc</th><th>Tồn hiện tại</th><th>Trạng thái</th><th>Tồn tối thiểu</th><th>Tồn tối đa</th><th>Bảo hành</th><th></th></tr></thead><tbody>
+<div class="table-wrap"><table class="inventory-table"><thead><tr><th>Sản phẩm</th><th>Danh mục</th><?php if($canViewCost): ?><th>Giá nhập</th><?php endif; ?><th>Giá bán</th><th>Giá buôn Gara</th><th>Giá gốc</th><th>Tồn hiện tại</th><th>Trạng thái</th><th>Tồn tối thiểu</th><th>Tồn tối đa</th><th>Bảo hành</th><th></th></tr></thead><tbody>
 <?php foreach($products as $product): $isLow=(int)$product['min_stock']>0 && (int)$product['stock']<=(int)$product['min_stock']; $formId='inventory-'.$product['id']; ?>
   <tr class="<?= $isLow?'low':'' ?>">
     <td><form id="<?= $formId ?>" method="post" action="/admin/inventory/<?= (int)$product['id'] ?>/update"><?= csrfField() ?><div class="inventory-product"><?php if(!empty($product['image'])): ?><img src="/uploads/products/<?= e($product['image']) ?>" alt=""><?php endif; ?><div><strong><?= e($product['name']) ?></strong><small>SKU: <?= e($product['sku']) ?><?= $product['oem_code']?' · OEM: '.e($product['oem_code']):'' ?></small></div></div></form></td>

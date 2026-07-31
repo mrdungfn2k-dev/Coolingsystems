@@ -2,8 +2,8 @@
 
 <div class="dash-head">
   <div>
-    <h1>Cấu Hình Hạng Gara &amp; Mức Chiết Khấu Sỉ</h1>
-    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thiết lập các cấp độ Hạng Gara và mức tỷ lệ % chiết khấu sỉ tự động cho từng hạng khách hàng B2B.</p>
+    <h1>Cấu Hình Hạng Gara &amp; Mức Chiết Khấu Buôn</h1>
+    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thiết lập các cấp độ Hạng Gara và mức tỷ lệ % chiết khấu buôn tự động cho từng hạng khách hàng B2B.</p>
   </div>
 </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div style="margin-bottom:14px">
-              <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Tỷ Lệ Chiết Khấu Sỉ (%)</label>
+              <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Tỷ Lệ Chiết Khấu Buôn (%)</label>
               <input type="number" step="0.5" min="0" max="50" name="discount_percent[]" value="<?= e($t['discount_percent']) ?>" required style="width:100%;height:38px;border-radius:6px;border:1px solid #cbd5e1;padding:0 10px;font-size:13.5px;box-sizing:border-box">
             </div>
 

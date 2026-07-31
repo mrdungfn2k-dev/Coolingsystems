@@ -178,7 +178,7 @@ function sendGarageApprovedEmail(string $email, string $name, string $garageName
     <div style='background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;margin:20px 0;'>
         <h4 style='color:#1a3258;margin:0 0 10px;font-size:15px;'>🎁 QUYỀN LỢI & ĐẶC QUYỀN GARA CỦA BẠN:</h4>
         <ul style='margin:0;padding-left:20px;color:#334155;font-size:14px;line-height:1.7;'>
-            <li><strong>Áp dụng Bảng giá sỉ Gara gốc</strong> (Chiết khấu ưu đãi trực tiếp trên từng sản phẩm).</li>
+            <li><strong>Áp dụng Bảng giá buôn Gara gốc</strong> (Chiết khấu ưu đãi trực tiếp trên từng sản phẩm).</li>
             <li><strong>Được áp dụng Chính sách công nợ gối đầu</strong> (Gối đầu đơn hàng sau hoặc thanh toán định kỳ cuối mỗi tháng).</li>
             <li>Đội ngũ hỗ trợ kỹ thuật và tra mã OEM ưu tiên 24/7.</li>
         </ul>

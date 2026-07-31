@@ -114,7 +114,7 @@ post('/api/register-garage', function() {
 
     echo json_encode([
         'ok'=>true, 
-        'msg'=>'Đăng ký tài khoản Gara thành công! Bảng Giá Sỉ Gốc đã được kích hoạt cho số điện thoại ' . $phone
+        'msg'=>'Đăng ký tài khoản Gara thành công! Bảng Giá Buôn Gốc đã được kích hoạt cho số điện thoại ' . $phone
     ]);
     exit;
 });

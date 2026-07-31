@@ -342,13 +342,13 @@ foreach ($trustSteps as $step):
 }
 </style>
 
-<!-- Banner Cam Kết Giá Sỉ Gara / Đại Lý -->
+<!-- Banner Cam Kết Giá Buôn Gara / Đại Lý -->
 <section class="block" style="padding: 10px 0 0 0;">
   <div class="wrap">
     <?php if ($isVerifiedGara): ?>
       <div class="gara-home-banner" style="background: #0b1d3a; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(11,29,58,0.15);">
         <div style="font-size: 15px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px;">
-          TÀI KHOẢN CỦA BẠN ĐÃ XÁC THỰC GARA / ĐẠI LÝ — ĐÃ KÍCH HOẠT BẢNG GIÁ SỈ GỐC
+          TÀI KHOẢN CỦA BẠN ĐÃ XÁC THỰC GARA / ĐẠI LÝ — ĐÃ KÍCH HOẠT BẢNG GIÁ BUÔN GỐC
         </div>
         <a href="/customer/profile" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
           Xem hồ sơ &amp; danh sách xe &rarr;
@@ -357,10 +357,10 @@ foreach ($trustSteps as $step):
     <?php else: ?>
       <div class="gara-home-banner" style="background: #0b1d3a; border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(11,29,58,0.15);">
         <div style="font-size: 16px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.5px;">
-          Đăng ký tài khoản Gara / Đại lý — Nhận bảng giá chiết khấu sỉ gốc
+          Đăng ký tài khoản Gara / Đại lý — Nhận bảng giá chiết khấu buôn gốc
         </div>
         <button type="button" onclick="openGarageRegisterModal()" style="background: #c9a14a; color: #0b1d3a; font-weight: 800; font-size: 13.5px; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: transform 0.2s, background 0.2s;" onmouseover="this.style.background='#d4af5f';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#c9a14a';this.style.transform='translateY(0)'">
-          Đăng ký Gara / Nhận giá sỉ &rarr;
+          Đăng ký Gara / Nhận giá buôn &rarr;
         </button>
       </div>
     <?php endif; ?>
@@ -375,7 +375,7 @@ foreach ($trustSteps as $step):
     <div style="background:#0b1d3a; color:#fff; padding:18px 24px; border-radius:16px 16px 0 0; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10;">
       <div>
         <h3 style="margin:0; font-size:18px; color:#fff; font-weight:800;">ĐĂNG KÝ TÀI KHOẢN GARA / ĐẠI LÝ</h3>
-        <p style="margin:4px 0 0; font-size:12.5px; color:#c9a14a;">Áp dụng Bảng giá sỉ gốc &amp; Chính sách công nợ gối đầu</p>
+        <p style="margin:4px 0 0; font-size:12.5px; color:#c9a14a;">Áp dụng Bảng giá buôn gốc &amp; Chính sách công nợ gối đầu</p>
       </div>
       <button type="button" onclick="closeGarageRegisterModal()" style="background:none; border:none; color:#fff; font-size:24px; cursor:pointer; line-height:1;">&times;</button>
     </div>

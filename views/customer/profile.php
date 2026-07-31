@@ -146,9 +146,9 @@
         <div style="background:#fafbfc; border:1px solid #0b1d3a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
           <div>
             <div style="font-weight:800; color:#0b1d3a; font-size:14.5px; letter-spacing:0.3px;">TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
-            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($user['garage_name'] ?: $user['full_name']) ?></strong> | Tỷ lệ chiết khấu sỉ: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong> | Công nợ: <strong>Đã kích hoạt</strong></div>
+            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($user['garage_name'] ?: $user['full_name']) ?></strong> | Tỷ lệ chiết khấu buôn: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong> | Công nợ: <strong>Đã kích hoạt</strong></div>
           </div>
-          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ & CÔNG NỢ</span>
+          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ BUÔN & CÔNG NỢ</span>
         </div>
       <?php elseif (!empty($garageRegistration) && $garageRegistration['status'] === 'pending'): ?>
         <div style="background:#fffbe6; border:1px solid #ffe58f; border-radius:8px; padding:14px 18px; margin-bottom:16px;">
@@ -180,8 +180,8 @@
         </div>
       <?php else: ?>
         <div style="background:#fafbfc; border:1px solid #c9a14a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-          <div style="font-weight:700; color:#0b1d3a; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng? Đăng ký ngay để nhận Bảng giá chiết khấu sỉ gốc &amp; Chính sách công nợ.</div>
-          <button type="button" onclick="openGarageRegisterModal()" style="background:#c9a14a; color:#0b1d3a; font-weight:800; font-size:12.5px; padding:8px 16px; border-radius:6px; border:none; cursor:pointer;">Đăng ký Gara giá sỉ</button>
+          <div style="font-weight:700; color:#0b1d3a; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng? Đăng ký ngay để nhận Bảng giá chiết khấu buôn gốc &amp; Chính sách công nợ.</div>
+          <button type="button" onclick="openGarageRegisterModal()" style="background:#c9a14a; color:#0b1d3a; font-weight:800; font-size:12.5px; padding:8px 16px; border-radius:6px; border:none; cursor:pointer;">Đăng ký Gara giá buôn</button>
         </div>
       <?php endif; ?>
 
@@ -241,7 +241,7 @@
                   <th style="padding:8px 12px;">Ngày gửi</th>
                   <th style="padding:8px 12px;">Ghi chú</th>
                   <th style="padding:8px 12px;">Tệp đính kèm</th>
-                  <th style="padding:8px 12px;">Giá sỉ báo</th>
+                  <th style="padding:8px 12px;">Giá buôn báo</th>
                   <th style="padding:8px 12px; text-align:center;">Trạng thái</th>
                 </tr>
               </thead>
@@ -281,7 +281,7 @@
     <div style="background:#fff; border-radius:16px; max-width:480px; width:100%; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,0.3); position:relative;">
       <button type="button" onclick="closeRequestQuoteModal()" style="position:absolute; top:14px; right:14px; border:none; background:#f1f5f9; width:30px; height:30px; border-radius:50%; font-size:16px; font-weight:bold; cursor:pointer;">&times;</button>
       <h3 style="font-size:18px; font-weight:800; color:#0b1d3a; margin:0 0 6px 0;">YÊU CẦU BÁO GIÁ PHỤ TÙNG THEO MÃ VIN / EXCEL</h3>
-      <p style="font-size:13px; color:#64748b; margin:0 0 16px 0;">Tải lên ảnh chụp sổ đăng kiểm / mã VIN hoặc File danh sách phụ tùng để nhận báo giá sỉ tốt nhất.</p>
+      <p style="font-size:13px; color:#64748b; margin:0 0 16px 0;">Tải lên ảnh chụp sổ đăng kiểm / mã VIN hoặc File danh sách phụ tùng để nhận báo giá buôn tốt nhất.</p>
 
       <form id="requestQuoteForm" onsubmit="submitRequestQuote(event)" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
@@ -608,7 +608,7 @@ function saveCustInvoice(e){
     <div style="background:#0b1d3a; color:#fff; padding:18px 24px; border-radius:12px 12px 0 0; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10;">
       <div>
         <h3 style="margin:0; font-size:18px; color:#fff; font-weight:800;">ĐĂNG KÝ TÀI KHOẢN GARA / ĐẠI LÝ</h3>
-        <p style="margin:4px 0 0; font-size:12.5px; color:#c9a14a;">Áp dụng Bảng giá sỉ gốc &amp; Chính sách công nợ gối đầu</p>
+        <p style="margin:4px 0 0; font-size:12.5px; color:#c9a14a;">Áp dụng Bảng giá buôn gốc &amp; Chính sách công nợ gối đầu</p>
       </div>
       <button type="button" onclick="closeGarageRegisterModal()" style="background:none; border:none; color:#fff; font-size:24px; cursor:pointer; line-height:1;">&times;</button>
     </div>

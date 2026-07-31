@@ -3,7 +3,7 @@
 <div class="dash-head">
   <div>
     <h1>Quản Lý Yêu Cầu Báo Giá Gara (VIN / Excel)</h1>
-    <p style="margin:4px 0 0;color:#718096;font-size:13px">Tiếp nhận yêu cầu báo giá từ Gara, xem ảnh đăng kiểm/mã OEM/File Excel đính kèm và phản hồi báo giá sỉ.</p>
+    <p style="margin:4px 0 0;color:#718096;font-size:13px">Tiếp nhận yêu cầu báo giá từ Gara, xem ảnh đăng kiểm/mã OEM/File Excel đính kèm và phản hồi báo giá buôn.</p>
   </div>
 </div>
 
@@ -84,7 +84,7 @@
       <input type="hidden" name="id" id="replyQuoteId">
 
       <div style="margin-bottom:14px">
-        <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Tổng Giá Sỉ Phản Hồi (VNĐ) <span style="color:#ef4444">*</span></label>
+        <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Tổng Giá Buôn Phản Hồi (VNĐ) <span style="color:#ef4444">*</span></label>
         <input type="number" step="1000" name="total_price" id="replyTotalPrice" required style="width:100%;height:42px;border-radius:8px;border:1px solid #cbd5e1;padding:0 14px;font-size:15px;font-weight:700;color:#15803d;box-sizing:border-box">
       </div>
 

@@ -3481,7 +3481,7 @@ post('/admin/quotations/reply', function() {
             dbInsert("INSERT INTO notifications (user_id, title, content, type, is_read, created_at) VALUES (?, ?, ?, 'system', 0, datetime('now','localtime'))", [
                 $q['user_id'],
                 'Báo giá phụ tùng Gara #' . $id,
-                'Phụ tùng của bạn đã được báo giá sỉ thành công với tổng số tiền ' . vnd($totalPrice) . '. Vui lòng xem chi tiết trong Hồ sơ cá nhân.'
+                'Phụ tùng của bạn đã được báo giá buôn thành công với tổng số tiền ' . vnd($totalPrice) . '. Vui lòng xem chi tiết trong Hồ sơ cá nhân.'
             ]);
         }
         flash('success', 'Đã gửi báo giá thành công về cho Gara!');
@@ -4878,7 +4878,7 @@ post('/admin/garages/requests/:id/approve', function($p) {
     // Insert user notification (bell)
     dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_approved', 'Đăng ký Gara thành công 🎉', ?, '/customer/profile', datetime('now','localtime'))", [
         $reg['user_id'],
-        "Đơn đăng ký Gara '{$reg['garage_name']}' của bạn đã được Ban quản trị phê duyệt. Bạn đã được áp dụng bảng giá sỉ & ưu đãi công nợ."
+        "Đơn đăng ký Gara '{$reg['garage_name']}' của bạn đã được Ban quản trị phê duyệt. Bạn đã được áp dụng bảng giá buôn & ưu đãi công nợ."
     ]);
 
     // Send SMTP Email

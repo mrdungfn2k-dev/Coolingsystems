@@ -2,7 +2,7 @@
 <div class="dash-head">
   <div>
     <h1>Garage khách hàng &amp; Xét duyệt Đăng ký Gara</h1>
-    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý Gara (Bảng hiệu, GPKD, 3+ ảnh thực tế) &amp; Quản lý quyền giá sỉ, công nợ.</p>
+    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý Gara (Bảng hiệu, GPKD, 3+ ảnh thực tế) &amp; Quản lý quyền giá buôn, công nợ.</p>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-navy btn-sm" style="background:#0b1d3a;color:#fff;font-weight:700">Nhập CSV</button>
@@ -82,7 +82,7 @@
     </div>
     <div class="garage-kpi" style="border-left:4px solid #1a3258">
       <b style="color:#1a3258"><?= number_format($approvedRequestsCount) ?></b>
-      <span>Đã xác thực Gara (Giá sỉ)</span>
+      <span>Đã xác thực Gara (Giá buôn)</span>
     </div>
     <div class="garage-kpi" style="border-left:4px solid #475569">
       <b style="color:#475569"><?= number_format($rejectedRequestsCount) ?></b>
@@ -160,7 +160,7 @@
               <button type="button" onclick="showRegistrationDetail(<?= e(json_encode($r)) ?>)" class="btn-action-detail">Chi tiết</button>
               
               <?php if ($r['status'] === 'pending' || $r['status'] === 'rejected'): ?>
-                <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT Gara <?= e($r['garage_name']) ?> và kích hoạt giá sỉ?')">
+                <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT Gara <?= e($r['garage_name']) ?> và kích hoạt giá buôn?')">
                   <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
                   <button type="submit" class="btn-action-approve">Duyệt</button>
                 </form>
