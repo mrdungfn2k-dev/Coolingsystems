@@ -159,7 +159,7 @@ function sendQuotationEmail(array $quotation, array $customer, array $items): bo
         {$noteBlock}
     </div>
     
-    <p style='font-size:14px;color:#475569;'>Nếu bạn đồng ý với báo giá này hoặc có câu hỏi, vui lòng liên hệ hotline <strong>0947.795.471</strong> hoặc phản hồi email này.</p>";
+    <p style='font-size:14px;color:#475569;'>Nếu bạn đồng ý với báo giá này hoặc có câu hỏi, vui lòng liên hệ hotline <strong>0705 070 526</strong> hoặc phản hồi email này.</p>";
 
     return sendEmail($email, "Báo giá #{$code} — Cooling System", _emailLayout("Báo giá #{$code}", $body));
 }
@@ -189,7 +189,7 @@ function sendGarageApprovedEmail(string $email, string $name, string $garageName
     <p style='text-align:center;margin:28px 0;'>
         <a href='https://coolingsystems.vn/customer/profile' style='background:#1a3258;color:#ffffff;padding:14px 32px;text-decoration:none;border-radius:8px;font-weight:700;display:inline-block;'>TRUY CẬP TÀI KHOẢN GARA</a>
     </p>
-    <p style='font-size:13px;color:#64748b;'>Nếu cần hỗ trợ thêm thông tin về đơn hàng hoặc công nợ, vui lòng liên hệ Hotline: <strong>0947.795.471</strong>.</p>
+    <p style='font-size:13px;color:#64748b;'>Nếu cần hỗ trợ thêm thông tin về đơn hàng hoặc công nợ, vui lòng liên hệ Hotline: <strong>0705 070 526</strong>.</p>
     ";
     return sendEmail($email, $subject, _emailLayout("Xác thực Gara thành công", $body));
 }
@@ -218,7 +218,7 @@ function sendGarageRejectedEmail(string $email, string $name, string $garageName
     <p style='text-align:center;margin:28px 0;'>
         <a href='https://coolingsystems.vn/customer/profile' style='background:#c9a14a;color:#0b1d3a;padding:14px 32px;text-decoration:none;border-radius:8px;font-weight:800;display:inline-block;'>NỘP LẠI HỒ SƠ ĐĂNG KÝ</a>
     </p>
-    <p style='font-size:13px;color:#64748b;'>Nếu bạn có thắc mắc cần làm rõ, vui lòng liên hệ Hotline: <strong>0947.795.471</strong>.</p>
+    <p style='font-size:13px;color:#64748b;'>Nếu bạn có thắc mắc cần làm rõ, vui lòng liên hệ Hotline: <strong>0705 070 526</strong>.</p>
     ";
     return sendEmail($email, $subject, _emailLayout("Thông báo đăng ký Gara", $body));
 }
