@@ -167,8 +167,17 @@ get('/customer/cart', function() {
 get('/customer/profile', function() {
     $user = requireRole(['customer','staff','admin'], '/auth/login');
     $userGarages = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$user['id']]);
-    $userQuotations = dbAll("SELECT * FROM garage_quotations WHERE user_id=? ORDER BY id DESC", [$user['id']]);
-    $garageRegistration = dbGet("SELECT * FROM garage_registrations WHERE user_id=? ORDER BY id DESC LIMIT 1", [$user['id']]);
+    // Graceful fallback nếu bảng chưa được tạo
+    try {
+        $userQuotations = dbAll("SELECT * FROM garage_quotations WHERE user_id=? ORDER BY id DESC", [$user['id']]);
+    } catch (\Throwable $e) {
+        $userQuotations = [];
+    }
+    try {
+        $garageRegistration = dbGet("SELECT * FROM garage_registrations WHERE user_id=? ORDER BY id DESC LIMIT 1", [$user['id']]);
+    } catch (\Throwable $e) {
+        $garageRegistration = null;
+    }
     $carBrands = dbAll("SELECT * FROM brands ORDER BY name ASC");
     $carModels = dbAll("SELECT * FROM car_models ORDER BY name ASC");
     $title = 'Hồ sơ tài khoản & Quản lý Gara';
