@@ -2046,7 +2046,7 @@ post('/admin/users/bulk-delete', function() {
             // Check if user has orders - if so, don't delete, just deactivate
             $hasOrders = dbGet("SELECT COUNT(*) as c FROM orders WHERE user_id=?", [$id])['c'];
             if ($hasOrders > 0) {
-                dbRun("UPDATE users SET status='locked', email=email||'_deleted_'||? WHERE id=?", [time(), $id]);
+                dbRun("UPDATE users SET status='locked', email=email||'_deleted_'||?, phone=phone||'_deleted_'||? WHERE id=?", [time(), time(), $id]);
                 $deleted++;
             } else {
                 dbRun("DELETE FROM users WHERE id=?", [$id]);

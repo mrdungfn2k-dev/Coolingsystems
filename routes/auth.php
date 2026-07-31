@@ -7,11 +7,11 @@ post('/auth/login', function() {
     $input = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     if (!$input || !$password) { flash('error','Vui lòng nhập email/SĐT và mật khẩu.'); redirect('/auth/login'); }
-    // Support login by phone or email
+    // Support login by phone or email (exclude deleted user records)
     if (preg_match('/^0[0-9]{9}$/', $input)) {
-        $user = dbGet('SELECT * FROM users WHERE phone=?', [$input]);
+        $user = dbGet("SELECT * FROM users WHERE phone=? AND email NOT LIKE '%_deleted_%' AND status != 'deleted' ORDER BY id DESC LIMIT 1", [$input]);
     } else {
-        $user = dbGet('SELECT * FROM users WHERE email=?', [strtolower($input)]);
+        $user = dbGet("SELECT * FROM users WHERE email=? AND email NOT LIKE '%_deleted_%' AND status != 'deleted' ORDER BY id DESC LIMIT 1", [strtolower($input)]);
     }
     if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email/SĐT hoặc mật khẩu không đúng.'); redirect('/auth/login'); }
     if ($user['status'] !== 'active') { flash('error','Tài khoản bị khóa.'); redirect('/auth/login'); }
