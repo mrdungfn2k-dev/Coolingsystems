@@ -168,11 +168,131 @@ get('/customer/profile', function() {
     $user = requireRole(['customer','staff','admin'], '/auth/login');
     $userGarages = dbAll("SELECT g.*, b.name AS brand_name, m.name AS model_name FROM garages g LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models m ON m.id=g.model_id WHERE g.user_id=? ORDER BY g.is_default DESC, g.id DESC", [$user['id']]);
     $userQuotations = dbAll("SELECT * FROM garage_quotations WHERE user_id=? ORDER BY id DESC", [$user['id']]);
+    $garageRegistration = dbGet("SELECT * FROM garage_registrations WHERE user_id=? ORDER BY id DESC LIMIT 1", [$user['id']]);
     $carBrands = dbAll("SELECT * FROM brands ORDER BY name ASC");
     $carModels = dbAll("SELECT * FROM car_models ORDER BY name ASC");
     $title = 'Hồ sơ tài khoản & Quản lý Gara';
-    view('customer/profile', compact('title', 'userGarages', 'userQuotations', 'carBrands', 'carModels'));
+    view('customer/profile', compact('title', 'userGarages', 'userQuotations', 'carBrands', 'carModels', 'garageRegistration'));
 });
+
+get('/customer/garage-register', function() {
+    redirect('/customer/profile?action=garage-register');
+});
+
+post('/customer/garage-register', function() {
+    $user = currentUser();
+    if (!$user) {
+        flash('error', 'Vui lòng đăng nhập tài khoản trước khi gửi đăng ký Gara.');
+        redirect('/login');
+        return;
+    }
+    csrfCheck();
+
+    $garageName = trim((string)($_POST['garage_name'] ?? ''));
+    $ownerName = trim((string)($_POST['owner_name'] ?? ''));
+    $phone = trim((string)($_POST['phone'] ?? ''));
+    $email = trim((string)($_POST['email'] ?? $user['email']));
+    $taxCode = trim((string)($_POST['tax_code'] ?? ''));
+    $address = trim((string)($_POST['address'] ?? ''));
+
+    if ($garageName === '' || $ownerName === '' || $phone === '' || $taxCode === '' || $address === '') {
+        flash('error', 'Vui lòng điền đầy đủ các thông tin bắt buộc (Tên Gara, Chủ Gara, SĐT, Mã số thuế/HKD, Địa chỉ).');
+        redirect('/customer/profile');
+        return;
+    }
+
+    $uploadSingleFile = function(array $file): string {
+        if (empty($file['tmp_name']) || $file['error'] !== UPLOAD_ERR_OK) return '';
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, ['jpg','jpeg','png','webp','pdf'], true)) return '';
+        $dir = '/var/lib/coolingsystems/uploads/garages/';
+        if (!is_dir($dir)) @mkdir($dir, 0777, true);
+        $filename = 'garage_' . time() . '_' . rand(1000,9999) . '.' . $ext;
+        if (move_uploaded_file($file['tmp_name'], $dir . $filename)) {
+            return '/uploads/garages/' . $filename;
+        }
+        return '';
+    };
+
+    // Upload Signboard (Mandatory 1 file)
+    if (empty($_FILES['signboard_image']['name'])) {
+        flash('error', 'Vui lòng tải lên Ảnh bảng hiệu Cửa hàng / Gara.');
+        redirect('/customer/profile');
+        return;
+    }
+    $signboardPath = $uploadSingleFile($_FILES['signboard_image']);
+    if (!$signboardPath) {
+        flash('error', 'Tải lên Ảnh bảng hiệu thất bại. Định dạng hỗ trợ: JPG, PNG, WEBP, PDF.');
+        redirect('/customer/profile');
+        return;
+    }
+
+    // Upload License (Mandatory 1 file)
+    if (empty($_FILES['license_image']['name'])) {
+        flash('error', 'Vui lòng tải lên Giấy phép kinh doanh / Đăng ký HKD.');
+        redirect('/customer/profile');
+        return;
+    }
+    $licensePath = $uploadSingleFile($_FILES['license_image']);
+    if (!$licensePath) {
+        flash('error', 'Tải lên Giấy phép kinh doanh thất bại.');
+        redirect('/customer/profile');
+        return;
+    }
+
+    // Upload Real Images (Mandatory >= 3 files)
+    $realImages = [];
+    if (!empty($_FILES['real_images']['name']) && is_array($_FILES['real_images']['name'])) {
+        $countFiles = count(array_filter($_FILES['real_images']['name']));
+        if ($countFiles < 3) {
+            flash('error', 'Yêu cầu tải lên tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara.');
+            redirect('/customer/profile');
+            return;
+        }
+        for ($i = 0; $i < count($_FILES['real_images']['name']); $i++) {
+            if (!empty($_FILES['real_images']['name'][$i])) {
+                $f = [
+                    'name' => $_FILES['real_images']['name'][$i],
+                    'type' => $_FILES['real_images']['type'][$i],
+                    'tmp_name' => $_FILES['real_images']['tmp_name'][$i],
+                    'error' => $_FILES['real_images']['error'][$i],
+                    'size' => $_FILES['real_images']['size'][$i]
+                ];
+                $p = $uploadSingleFile($f);
+                if ($p !== '') $realImages[] = $p;
+            }
+        }
+    }
+
+    if (count($realImages) < 3) {
+        flash('error', 'Yêu cầu tải lên tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara.');
+        redirect('/customer/profile');
+        return;
+    }
+
+    // Check existing pending request
+    $pending = dbGet("SELECT id FROM garage_registrations WHERE user_id=? AND status='pending'", [$user['id']]);
+    if ($pending) {
+        flash('warning', 'Đơn đăng ký Gara của bạn đã được gửi và đang chờ Admin duyệt.');
+        redirect('/customer/profile');
+        return;
+    }
+
+    // Insert
+    dbInsert("INSERT INTO garage_registrations (user_id, garage_name, owner_name, phone, email, tax_code, address, signboard_image, license_image, real_images, status, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,'pending',datetime('now','localtime'),datetime('now','localtime'))", [
+        $user['id'], $garageName, $ownerName, $phone, $email, $taxCode, $address,
+        $signboardPath, $licensePath, json_encode($realImages, JSON_UNESCAPED_UNICODE)
+    ]);
+
+    // Admin Notification
+    dbRun("INSERT INTO admin_notifications (type, title, message, link, created_at) VALUES ('garage_request', 'Yêu cầu Đăng ký Gara mới', ?, '/admin/garages', datetime('now','localtime'))", [
+        "Gara '{$garageName}' (Chủ: {$ownerName}, MST: {$taxCode}) vừa gửi hồ sơ xác thực."
+    ]);
+
+    flash('success', 'Gửi hồ sơ Đăng ký Gara thành công! Ban quản trị sẽ thẩm định thông tin và gửi thông báo qua Email & Chuông thông báo.');
+    redirect('/customer/profile');
+});
+
 
 post('/customer/quotation/request', function() {
     $user = currentUser();

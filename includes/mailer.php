@@ -162,6 +162,66 @@ function sendQuotationEmail(array $quotation, array $customer, array $items): bo
     return sendEmail($email, "Báo giá #{$code} — Cooling System", _emailLayout("Báo giá #{$code}", $body));
 }
 
+
+function sendGarageApprovedEmail(string $email, string $name, string $garageName): bool {
+    $subject = "Chúc mừng! Đơn đăng ký Gara của bạn đã được duyệt — Cooling System";
+    $body = "
+    <div style='text-align:center;margin-bottom:24px;'>
+        <div style='display:inline-block;background:#dcfce7;color:#15803d;padding:10px 20px;border-radius:50px;font-weight:800;font-size:14px;'>
+            ✓ XÁC THỰC GARA THÀNH CÔNG
+        </div>
+    </div>
+    <h2 style='color:#1a3258;margin:0 0 12px;text-align:center;'>Đơn đăng ký Gara đã được chấp thuận!</h2>
+    <p>Xin chào <strong>" . htmlspecialchars($name) . "</strong>,</p>
+    <p>Cooling System xin thông báo: Đơn đăng ký Gara <strong>" . htmlspecialchars($garageName) . "</strong> của bạn đã được Ban quản trị thẩm định và phê duyệt thành công.</p>
+    
+    <div style='background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;margin:20px 0;'>
+        <h4 style='color:#1a3258;margin:0 0 10px;font-size:15px;'>🎁 QUYỀN LỢI & ĐẶC QUYỀN GARA CỦA BẠN:</h4>
+        <ul style='margin:0;padding-left:20px;color:#334155;font-size:14px;line-height:1.7;'>
+            <li><strong>Áp dụng Bảng giá sỉ Gara gốc</strong> (Chiết khấu ưu đãi trực tiếp trên từng sản phẩm).</li>
+            <li><strong>Được áp dụng Chính sách công nợ gối đầu</strong> (Gối đầu đơn hàng sau hoặc thanh toán định kỳ cuối mỗi tháng).</li>
+            <li>Đội ngũ hỗ trợ kỹ thuật và tra mã OEM ưu tiên 24/7.</li>
+        </ul>
+    </div>
+    
+    <p style='text-align:center;margin:28px 0;'>
+        <a href='https://coolingsystems.vn/customer/profile' style='background:#1a3258;color:#ffffff;padding:14px 32px;text-decoration:none;border-radius:8px;font-weight:700;display:inline-block;'>TRUY CẬP TÀI KHOẢN GARA</a>
+    </p>
+    <p style='font-size:13px;color:#64748b;'>Nếu cần hỗ trợ thêm thông tin về đơn hàng hoặc công nợ, vui lòng liên hệ Hotline: <strong>0947.795.471</strong>.</p>
+    ";
+    return sendEmail($email, $subject, _emailLayout("Xác thực Gara thành công", $body));
+}
+
+function sendGarageRejectedEmail(string $email, string $name, string $garageName, string $reason): bool {
+    $subject = "Thông báo về đơn đăng ký Gara — Cooling System";
+    $reasonClean = htmlspecialchars($reason);
+    $body = "
+    <div style='text-align:center;margin-bottom:24px;'>
+        <div style='display:inline-block;background:#fef2f2;color:#b91c1c;padding:10px 20px;border-radius:50px;font-weight:800;font-size:14px;'>
+            ✕ ĐƠN ĐĂNG KÝ CHƯA ĐƯỢC PHÊ DUYỆT
+        </div>
+    </div>
+    <h2 style='color:#1a3258;margin:0 0 12px;text-align:center;'>Thông báo kết quả xét duyệt Gara</h2>
+    <p>Xin chào <strong>" . htmlspecialchars($name) . "</strong>,</p>
+    <p>Cooling System xin cảm ơn bạn đã gửi thông tin đăng ký Gara <strong>" . htmlspecialchars($garageName) . "</strong>.</p>
+    <p>Rất tiếc, sau khi kiểm tra hồ sơ, Ban quản trị chưa thể duyệt hồ sơ của bạn do lý do sau:</p>
+    
+    <div style='background:#fff5f5;border-left:4px solid #ef4444;padding:16px;margin:20px 0;border-radius:0 8px 8px 0;'>
+        <strong style='color:#991b1b;display:block;margin-bottom:4px;'>📌 Lý do từ chối:</strong>
+        <span style='color:#7f1d1d;font-size:14px;'>{$reasonClean}</span>
+    </div>
+    
+    <p>Vui lòng kiểm tra và chuẩn bị lại ảnh chứng từ hợp lệ (Ảnh bảng hiệu Gara, GPKD/MS HKD, và tối thiểu 3 ảnh chụp thực tế Gara/Cửa hàng) để gửi lại đơn đăng ký mới.</p>
+    
+    <p style='text-align:center;margin:28px 0;'>
+        <a href='https://coolingsystems.vn/customer/profile' style='background:#c9a14a;color:#0b1d3a;padding:14px 32px;text-decoration:none;border-radius:8px;font-weight:800;display:inline-block;'>NỘP LẠI HỒ SƠ ĐĂNG KÝ</a>
+    </p>
+    <p style='font-size:13px;color:#64748b;'>Nếu bạn có thắc mắc cần làm rõ, vui lòng liên hệ Hotline: <strong>0947.795.471</strong>.</p>
+    ";
+    return sendEmail($email, $subject, _emailLayout("Thông báo đăng ký Gara", $body));
+}
+
 function _emailLayout(string $title, string $body): string {
     return '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="margin:0;padding:0;background:#f5f7fa;font-family:Arial,sans-serif"><table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fa;padding:40px 0"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%"><tr><td style="background:#1a3258;padding:24px 32px;border-radius:10px 10px 0 0;text-align:center"><div style="color:#f0c040;font-size:28px;font-weight:900;letter-spacing:2px">COOLING</div><div style="color:rgba(255,255,255,0.7);font-size:12px;margin-top:2px">PARTS &amp; SERVICE</div></td></tr><tr><td style="background:#ffffff;padding:32px 36px;border-radius:0 0 10px 10px">' . $body . '</td></tr><tr><td style="padding:16px;text-align:center;color:#aaa;font-size:11px">© ' . date('Y') . ' Cooling System · <a href="https://coolingsystems.vn" style="color:#1a3258">coolingsystems.vn</a></td></tr></table></td></tr></table></body></html>';
 }
+

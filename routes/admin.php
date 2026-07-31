@@ -4792,50 +4792,139 @@ post('/admin/orders/:id/cancel', function($p) {
 
 // ─── GIAI ĐOẠN C: BÁN HÀNG NÂNG CAO & KHÁCH HÀNG ──────────────────────────────
 
-// C1: Danh sách xe khách hàng (Garages)
+// C1: Danh sách xe & Đơn đăng ký Garage khách hàng
 get('/admin/garages', function() {
     $user = requireStaffPermission('rbac:users|products', '/admin/login');
+    $tab = trim((string)($_GET['tab'] ?? 'requests'));
     $page = max(1, (int)($_GET['page'] ?? 1));
     $perPage = 30;
     $q = trim((string)($_GET['q'] ?? ''));
-    $brandId = max(0, (int)($_GET['brand_id'] ?? 0));
 
+    // Shared counts for KPI & badge
+    $pendingRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations WHERE status='pending'")['c'] ?? 0);
+    $approvedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations WHERE status='approved'")['c'] ?? 0);
+    $rejectedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations WHERE status='rejected'")['c'] ?? 0);
+
+    if ($tab === 'vehicles') {
+        $brandId = max(0, (int)($_GET['brand_id'] ?? 0));
+        $where = 'WHERE 1=1'; $params = [];
+        if ($q !== '') {
+            $where .= ' AND (u.full_name LIKE ? OR u.email LIKE ? OR u.phone LIKE ? OR b.name LIKE ? OR cm.name LIKE ?)';
+            $like = '%'.$q.'%';
+            array_push($params, $like, $like, $like, $like, $like);
+        }
+        if ($brandId) {
+            $where .= ' AND g.brand_id=?';
+            $params[] = $brandId;
+        }
+
+        $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where", $params)['c'] ?? 0);
+        $totalPages = max(1, (int)ceil($total/$perPage));
+        $page = min($page, $totalPages);
+
+        $listParams = array_merge($params, [$perPage, max(0, ($page-1)*$perPage)]);
+        $garages = dbAll("SELECT g.*, u.full_name, u.email, u.phone, b.name AS brand_name, cm.name AS model_name FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where ORDER BY g.created_at DESC LIMIT ? OFFSET ?", $listParams);
+
+        $summary = [
+            'total_garages' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages")['c'] ?? 0),
+            'total_owners' => (int)(dbGet("SELECT COUNT(DISTINCT user_id) AS c FROM garages")['c'] ?? 0),
+            'default_count' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages WHERE is_default=1")['c'] ?? 0),
+        ];
+        $brands = dbAll("SELECT id, name FROM brands ORDER BY name");
+
+        $title = 'Garage khách hàng & Xe lưu sẵn';
+        view('admin/garages', compact('title', 'tab', 'garages', 'summary', 'brands', 'q', 'brandId', 'page', 'totalPages', 'pendingRequestsCount', 'approvedRequestsCount', 'rejectedRequestsCount'));
+        return;
+    }
+
+    // Default Tab: requests (Đơn đăng ký Gara)
+    $statusFilter = trim((string)($_GET['status'] ?? ''));
     $where = 'WHERE 1=1'; $params = [];
     if ($q !== '') {
-        $where .= ' AND (u.full_name LIKE ? OR u.email LIKE ? OR u.phone LIKE ? OR b.name LIKE ? OR cm.name LIKE ?)';
+        $where .= ' AND (gr.garage_name LIKE ? OR gr.owner_name LIKE ? OR gr.phone LIKE ? OR gr.tax_code LIKE ? OR gr.email LIKE ?)';
         $like = '%'.$q.'%';
         array_push($params, $like, $like, $like, $like, $like);
     }
-    if ($brandId) {
-        $where .= ' AND g.brand_id=?';
-        $params[] = $brandId;
+    if ($statusFilter !== '') {
+        $where .= ' AND gr.status=?';
+        $params[] = $statusFilter;
     }
 
-    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where", $params)['c'] ?? 0);
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id $where", $params)['c'] ?? 0);
     $totalPages = max(1, (int)ceil($total/$perPage));
     $page = min($page, $totalPages);
 
-    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
-    $garages = dbAll("SELECT g.*, u.full_name, u.email, u.phone, b.name AS brand_name, cm.name AS model_name FROM garages g LEFT JOIN users u ON u.id=g.user_id LEFT JOIN brands b ON b.id=g.brand_id LEFT JOIN car_models cm ON cm.id=g.model_id $where ORDER BY g.created_at DESC LIMIT ? OFFSET ?", $listParams);
+    $listParams = array_merge($params, [$perPage, max(0, ($page-1)*$perPage)]);
+    $requests = dbAll("SELECT gr.*, u.full_name AS user_name, u.email AS user_email, u.phone AS user_phone, u.role AS user_role, u.is_verified_garage FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id $where ORDER BY gr.created_at DESC LIMIT ? OFFSET ?", $listParams);
 
-    $summary = [
-        'total_garages' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages")['c'] ?? 0),
-        'total_owners' => (int)(dbGet("SELECT COUNT(DISTINCT user_id) AS c FROM garages")['c'] ?? 0),
-        'default_count' => (int)(dbGet("SELECT COUNT(*) AS c FROM garages WHERE is_default=1")['c'] ?? 0),
-    ];
-    $brands = dbAll("SELECT id, name FROM brands ORDER BY name");
-
-    view('admin/garages', [
-        'title' => 'Garage khách hàng',
-        'garages' => $garages,
-        'summary' => $summary,
-        'brands' => $brands,
-        'q' => $q,
-        'brandId' => $brandId,
-        'page' => $page,
-        'totalPages' => $totalPages
-    ]);
+    $title = 'Garage khách hàng & Xét duyệt Đăng ký Gara';
+    view('admin/garages', compact('title', 'tab', 'requests', 'q', 'statusFilter', 'page', 'totalPages', 'pendingRequestsCount', 'approvedRequestsCount', 'rejectedRequestsCount'));
 });
+
+post('/admin/garages/requests/:id/approve', function($p) {
+    $admin = requireStaffPermission('rbac:users|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+    $reg = dbGet("SELECT gr.*, u.full_name, u.email AS user_email FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id WHERE gr.id=?", [$id]);
+    if (!$reg) {
+        flash('error', 'Đơn đăng ký không tồn tại.');
+        redirect('/admin/garages?tab=requests');
+        return;
+    }
+
+    dbRun("UPDATE garage_registrations SET status='approved', reviewed_at=datetime('now','localtime'), reviewed_by=? WHERE id=?", [$admin['id'], $id]);
+    dbRun("UPDATE users SET is_verified_garage=1, role='garage', garage_name=? WHERE id=?", [$reg['garage_name'], $reg['user_id']]);
+
+    // Insert user notification (bell)
+    dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_approved', 'Đăng ký Gara thành công 🎉', ?, '/customer/profile', datetime('now','localtime'))", [
+        $reg['user_id'],
+        "Đơn đăng ký Gara '{$reg['garage_name']}' của bạn đã được Ban quản trị phê duyệt. Bạn đã được áp dụng bảng giá sỉ & ưu đãi công nợ."
+    ]);
+
+    // Send SMTP Email
+    $email = $reg['email'] ?: $reg['user_email'];
+    $name = $reg['owner_name'] ?: $reg['full_name'];
+    if (!empty($email) && function_exists('sendGarageApprovedEmail')) {
+        sendGarageApprovedEmail($email, $name, $reg['garage_name']);
+    }
+
+    flash('success', "Đã phê duyệt Gara '{$reg['garage_name']}' thành công! Tài khoản đã chuyển sang quyền Gara & email thông báo đã được gửi.");
+    redirect('/admin/garages?tab=requests');
+});
+
+post('/admin/garages/requests/:id/reject', function($p) {
+    $admin = requireStaffPermission('rbac:users|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+    $reason = trim((string)($_POST['reject_reason'] ?? 'Hồ sơ chứng từ chưa đạt yêu cầu.'));
+    if ($reason === '') $reason = 'Hồ sơ chứng từ chưa đạt yêu cầu.';
+
+    $reg = dbGet("SELECT gr.*, u.full_name, u.email AS user_email FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id WHERE gr.id=?", [$id]);
+    if (!$reg) {
+        flash('error', 'Đơn đăng ký không tồn tại.');
+        redirect('/admin/garages?tab=requests');
+        return;
+    }
+
+    dbRun("UPDATE garage_registrations SET status='rejected', reject_reason=?, reviewed_at=datetime('now','localtime'), reviewed_by=? WHERE id=?", [$reason, $admin['id'], $id]);
+
+    // Insert user notification (bell)
+    dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_rejected', 'Đơn đăng ký Gara chưa được duyệt', ?, '/customer/profile', datetime('now','localtime'))", [
+        $reg['user_id'],
+        "Lý do từ chối: {$reason}. Vui lòng nộp lại chứng từ chính xác tại trang Hồ sơ."
+    ]);
+
+    // Send SMTP Email
+    $email = $reg['email'] ?: $reg['user_email'];
+    $name = $reg['owner_name'] ?: $reg['full_name'];
+    if (!empty($email) && function_exists('sendGarageRejectedEmail')) {
+        sendGarageRejectedEmail($email, $name, $reg['garage_name'], $reason);
+    }
+
+    flash('success', "Đã từ chối đơn đăng ký của Gara '{$reg['garage_name']}'. Email & Thông báo kèm lý do đã được gửi tới khách hàng.");
+    redirect('/admin/garages?tab=requests');
+});
+
 
 // C4: Danh sách hoa hồng (Commissions)
 get('/admin/commissions', function() {

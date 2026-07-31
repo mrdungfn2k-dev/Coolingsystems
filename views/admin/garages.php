@@ -1,8 +1,8 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
 <div class="dash-head">
   <div>
-    <h1>Garage khách hàng</h1>
-    <p style="margin:4px 0 0;color:#718096;font-size:13px">Danh sách xe của khách hàng đã đăng ký trên hệ thống.</p>
+    <h1>Garage khách hàng &amp; Xét duyệt Đăng ký Gara</h1>
+    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý Gara (Bảng hiệu, GPKD, 3+ ảnh thực tế) &amp; Quản lý quyền giá sỉ, công nợ.</p>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↑ Nhập CSV</button>
@@ -22,7 +22,7 @@
     </div>
     <div style="display:flex;gap:10px;justify-content:flex-end">
       <button type="button" onclick="document.getElementById('importGaragesModal').style.display='none'" class="btn btn-outline">Hủy</button>
-      <button type="submit" class="btn btn-navy">Tải lên & Nhập</button>
+      <button type="submit" class="btn btn-navy">Tải lên &amp; Nhập</button>
     </div>
   </form>
 </div>
@@ -32,97 +32,372 @@
 <?php endforeach; ?>
 
 <style>
-.garage-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.garage-filter input,.garage-filter select{height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 10px;background:#fff;font-size:13px}
+.tab-nav{display:flex;gap:8px;border-bottom:2px solid #e2e8f0;margin-bottom:20px}
+.tab-nav a{padding:10px 20px;font-weight:700;font-size:14px;color:#64748b;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px}
+.tab-nav a.active{color:#0b1d3a;border-bottom-color:#0b1d3a}
+.tab-badge{background:#ef4444;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:12px}
+.tab-badge.gold{background:#d97706}
+.garage-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.garage-kpi{border:1px solid #e3e9f1;background:#fff;padding:16px;border-radius:8px}
+.garage-kpi b{display:block;font-size:22px;font-weight:800;color:#17325c}
+.garage-kpi span{font-size:12px;color:#718096}
 .garage-table{width:100%;border-collapse:collapse;background:#fff}
 .garage-table th{font-size:11px;text-transform:uppercase;color:#64748b;background:#f7f9fc;padding:11px 10px;text-align:left;white-space:nowrap;border-bottom:2px solid #e6ebf1}
 .garage-table td{padding:11px 10px;border-top:1px solid #edf1f5;vertical-align:middle;font-size:13px}
 .garage-table tr:hover td{background:#f9fbff}
-.garage-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}
-.garage-kpi{border:1px solid #e3e9f1;background:#fff;padding:16px;border-radius:8px}
-.garage-kpi b{display:block;font-size:22px;font-weight:800;color:#17325c}
-.garage-kpi span{font-size:12px;color:#718096}
-.car-badge{display:inline-flex;align-items:center;gap:5px;background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;border-radius:4px;padding:3px 8px;font-size:12px;font-weight:600}
+.badge-status{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11.5px;font-weight:700;text-transform:uppercase}
+.badge-pending{background:#fef3c7;color:#b45309;border:1px solid #fde68a}
+.badge-approved{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+.badge-rejected{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.thumb-box{width:60px;height:45px;border-radius:4px;overflow:hidden;border:1px solid #cbd5e1;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.thumb-box img{width:100%;height:100%;object-fit:cover}
 </style>
 
-<div class="garage-kpis">
-  <div class="garage-kpi"><b><?= number_format($summary['total_garages']) ?></b><span>Tổng số xe đã đăng ký</span></div>
-  <div class="garage-kpi"><b><?= number_format($summary['total_owners']) ?></b><span>Khách hàng có xe</span></div>
-  <div class="garage-kpi"><b><?= number_format($summary['default_count']) ?></b><span>Xe mặc định</span></div>
-</div>
-
-<form class="garage-filter" method="get" action="/admin/garages">
-  <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên KH, email, hãng xe..." style="min-width:260px">
-  <select name="brand_id">
-    <option value="0">Tất cả hãng xe</option>
-    <?php foreach($brands as $b): ?>
-    <option value="<?= (int)$b['id'] ?>" <?= $brandId===(int)$b['id']?'selected':'' ?>><?= e($b['name']) ?></option>
-    <?php endforeach; ?>
-  </select>
-  <button class="btn btn-navy" type="submit">Lọc</button>
-  <?php if($q||$brandId): ?>
-  <a href="/admin/garages" class="btn btn-outline">Xóa lọc</a>
-  <?php endif; ?>
-</form>
-
-<div style="overflow:auto;border:1px solid #e6ebf1;border-radius:8px">
-<table class="garage-table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Khách hàng</th>
-      <th>Xe</th>
-      <th>Năm SX</th>
-      <th>Nhãn xe</th>
-      <th>Mặc định</th>
-      <th>Ngày đăng ký</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($garages as $g): ?>
-    <tr>
-      <td style="color:#9ca3af;font-size:12px">#<?= (int)$g['id'] ?></td>
-      <td>
-        <strong style="color:#1f365b"><?= e($g['full_name'] ?: '—') ?></strong>
-        <div style="font-size:11px;color:#718096;margin-top:2px"><?= e($g['email'] ?: '') ?></div>
-        <?php if($g['phone']): ?>
-        <div style="font-size:11px;color:#718096"><?= e($g['phone']) ?></div>
-        <?php endif; ?>
-      </td>
-      <td>
-        <span class="car-badge"><?= e($g['brand_name'] ?: '?') ?></span>
-        <span style="margin-left:5px;color:#374151;font-weight:500"><?= e($g['model_name'] ?: '?') ?></span>
-        <?php if($g['trim']): ?><div style="font-size:11px;color:#9ca3af;margin-top:2px"><?= e($g['trim']) ?></div><?php endif; ?>
-      </td>
-      <td style="font-weight:600;color:#374151"><?= (int)$g['year'] ?></td>
-      <td style="color:#4b5563"><?= e($g['label'] ?: '—') ?></td>
-      <td style="text-align:center">
-        <?php if($g['is_default']): ?>
-        <span style="background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700">Mặc định</span>
-        <?php else: ?>
-        <span style="color:#9ca3af;font-size:11px">—</span>
-        <?php endif; ?>
-      </td>
-      <td style="color:#9ca3af;font-size:12px;white-space:nowrap"><?= e(substr($g['created_at'],0,10)) ?></td>
-      <td>
-        <a href="/admin/users/<?= (int)$g['user_id'] ?>" style="font-size:12px;color:#1a3258;text-decoration:none;border:1px solid #1a3258;border-radius:4px;padding:4px 10px;white-space:nowrap;font-weight:600">Hồ sơ KH</a>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-    <?php if(!$garages): ?>
-    <tr><td colspan="8" style="padding:30px;text-align:center;color:#9ca3af">Không tìm thấy xe nào phù hợp.</td></tr>
+<!-- MAIN NAVIGATION TABS -->
+<div class="tab-nav">
+  <a href="/admin/garages?tab=requests" class="<?= ($tab ?? 'requests') === 'requests' ? 'active' : '' ?>">
+    📋 Yêu cầu Đăng ký Gara
+    <?php if ($pendingRequestsCount > 0): ?>
+      <span class="tab-badge gold"><?= $pendingRequestsCount ?> chờ duyệt</span>
     <?php endif; ?>
-  </tbody>
-</table>
+  </a>
+  <a href="/admin/garages?tab=vehicles" class="<?= ($tab ?? '') === 'vehicles' ? 'active' : '' ?>">
+    🚗 Xe khách hàng lưu sẵn
+  </a>
 </div>
 
-<?php if($totalPages > 1): $base = ['q'=>$q,'brand_id'=>$brandId?:null]; ?>
-<div class="pagination" style="margin-top:16px">
-  <?php if($page>1): ?><a href="/admin/garages?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?>
-  <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>
-  <?php if($page<$totalPages): ?><a href="/admin/garages?<?= e(http_build_query(array_filter($base+['page'=>$page+1]))) ?>">›</a><?php endif; ?>
-</div>
+<?php if (($tab ?? 'requests') === 'requests'): ?>
+
+  <!-- KPI SUMMARY -->
+  <div class="garage-kpis">
+    <div class="garage-kpi" style="border-left:4px solid #d97706">
+      <b style="color:#d97706"><?= number_format($pendingRequestsCount) ?></b>
+      <span>⏳ Đơn đang chờ duyệt</span>
+    </div>
+    <div class="garage-kpi" style="border-left:4px solid #16a34a">
+      <b style="color:#16a34a"><?= number_format($approvedRequestsCount) ?></b>
+      <span>✅ Đã xác thực Gara (Giá sỉ)</span>
+    </div>
+    <div class="garage-kpi" style="border-left:4px solid #dc2626">
+      <b style="color:#dc2626"><?= number_format($rejectedRequestsCount) ?></b>
+      <span>❌ Hồ sơ bị từ chối</span>
+    </div>
+  </div>
+
+  <!-- SEARCH & STATUS FILTER -->
+  <form class="garage-filter" method="get" action="/admin/garages" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+    <input type="hidden" name="tab" value="requests">
+    <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên Gara, chủ Gara, SĐT, MST..." style="min-width:280px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:13px">
+    
+    <div style="display:flex;gap:6px">
+      <a href="/admin/garages?tab=requests" class="btn <?= ($statusFilter ?? '') === '' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px">Tất cả</a>
+      <a href="/admin/garages?tab=requests&status=pending" class="btn <?= ($statusFilter ?? '') === 'pending' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px;color:#d97706;border-color:#fde68a">⏳ Chờ duyệt</a>
+      <a href="/admin/garages?tab=requests&status=approved" class="btn <?= ($statusFilter ?? '') === 'approved' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px;color:#16a34a;border-color:#bbf7d0">✅ Đã duyệt</a>
+      <a href="/admin/garages?tab=requests&status=rejected" class="btn <?= ($statusFilter ?? '') === 'rejected' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px;color:#dc2626;border-color:#fca5a5">❌ Từ chối</a>
+    </div>
+
+    <button class="btn btn-navy" type="submit" style="margin-left:auto">Lọc kết quả</button>
+  </form>
+
+  <!-- REGISTRATIONS TABLE -->
+  <div style="overflow:auto;border:1px solid #e6ebf1;border-radius:8px">
+    <table class="garage-table">
+      <thead>
+        <tr>
+          <th>#Mã</th>
+          <th>Tên Gara / Cửa hàng</th>
+          <th>Chủ Gara / Đại diện</th>
+          <th>SĐT &amp; Email</th>
+          <th>Mã số thuế / HKD</th>
+          <th>Địa chỉ thực tế</th>
+          <th>Ngày gửi</th>
+          <th>Trạng thái</th>
+          <th style="text-align:center">Thao tác xét duyệt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($requests as $r): 
+          $realImgs = json_decode($r['real_images'] ?? '[]', true) ?: [];
+        ?>
+        <tr>
+          <td style="color:#9ca3af;font-size:12px">#<?= (int)$r['id'] ?></td>
+          <td>
+            <strong style="color:#0b1d3a;font-size:14px"><?= e($r['garage_name']) ?></strong>
+            <?php if (!empty($r['is_verified_garage'])): ?>
+              <span style="display:inline-block;background:#dcfce7;color:#15803d;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:4px">GARA CHÍNH THỨC</span>
+            <?php endif; ?>
+          </td>
+          <td style="font-weight:600;color:#334155"><?= e($r['owner_name']) ?></td>
+          <td>
+            <div style="font-weight:700;color:#0b1d3a"><?= e($r['phone']) ?></div>
+            <div style="font-size:11px;color:#64748b"><?= e($r['email'] ?: $r['user_email']) ?></div>
+          </td>
+          <td>
+            <span style="background:#f1f5f9;color:#0f172a;font-family:monospace;font-weight:700;padding:3px 8px;border-radius:4px;border:1px solid #cbd5e1;font-size:12px"><?= e($r['tax_code']) ?></span>
+          </td>
+          <td style="color:#475569;max-width:200px;font-size:12.5px"><?= e($r['address']) ?></td>
+          <td style="color:#64748b;font-size:12px;white-space:nowrap"><?= e(date('d/m/Y H:i', strtotime($r['created_at']))) ?></td>
+          <td>
+            <?php if ($r['status'] === 'pending'): ?>
+              <span class="badge-status badge-pending">⏳ Chờ duyệt</span>
+            <?php elseif ($r['status'] === 'approved'): ?>
+              <span class="badge-status badge-approved">✅ Đã duyệt</span>
+            <?php else: ?>
+              <span class="badge-status badge-rejected" title="<?= e($r['reject_reason']) ?>">❌ Từ chối</span>
+              <?php if ($r['reject_reason']): ?>
+                <div style="font-size:11px;color:#dc2626;margin-top:2px;max-width:140px"><?= e($r['reject_reason']) ?></div>
+              <?php endif; ?>
+            <?php endif; ?>
+          </td>
+          <td style="text-align:center;white-space:nowrap">
+            <div style="display:flex;gap:6px;justify-content:center">
+              <button type="button" onclick="showRegistrationDetail(<?= e(json_encode($r)) ?>)" class="btn btn-outline-navy btn-sm" style="font-weight:700;font-size:12px">👁️ Chi tiết</button>
+              
+              <?php if ($r['status'] === 'pending' || $r['status'] === 'rejected'): ?>
+                <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT Gara <?= e($r['garage_name']) ?> và kích hoạt giá sỉ?')">
+                  <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+                  <button type="submit" class="btn btn-sm" style="background:#16a34a;color:#fff;font-weight:800;font-size:12px;border:none">✅ Duyệt</button>
+                </form>
+              <?php endif; ?>
+
+              <?php if ($r['status'] === 'pending' || $r['status'] === 'approved'): ?>
+                <button type="button" onclick="openRejectModal(<?= $r['id'] ?>, '<?= e($r['garage_name']) ?>')" class="btn btn-sm" style="background:#dc2626;color:#fff;font-weight:800;font-size:12px;border:none">❌ Từ chối</button>
+              <?php endif; ?>
+            </div>
+          </td>
+        </tr>
+        <?php endforeach; ?>
+        <?php if(!$requests): ?>
+        <tr><td colspan="9" style="padding:40px;text-align:center;color:#94a3b8;font-size:14px">Không tìm thấy yêu cầu đăng ký Gara nào.</td></tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
+
+  <?php if($totalPages > 1): $base = ['tab'=>'requests','q'=>$q,'status'=>$statusFilter?:null]; ?>
+  <div class="pagination" style="margin-top:16px">
+    <?php if($page>1): ?><a href="/admin/garages?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?>
+    <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>
+    <?php if($page<$totalPages): ?><a href="/admin/garages?<?= e(http_build_query(array_filter($base+['page'=>$page+1]))) ?>">›</a><?php endif; ?>
+  </div>
+  <?php endif; ?>
+
+<?php else: ?>
+
+  <!-- TAB 2: XE KHÁCH HÀNG LƯU SẴN -->
+  <div class="garage-kpis">
+    <div class="garage-kpi"><b><?= number_format($summary['total_garages']) ?></b><span>Tổng số xe đã đăng ký</span></div>
+    <div class="garage-kpi"><b><?= number_format($summary['total_owners']) ?></b><span>Khách hàng có xe</span></div>
+    <div class="garage-kpi"><b><?= number_format($summary['default_count']) ?></b><span>Xe mặc định</span></div>
+  </div>
+
+  <form class="garage-filter" method="get" action="/admin/garages" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+    <input type="hidden" name="tab" value="vehicles">
+    <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên KH, email, hãng xe..." style="min-width:260px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 10px;font-size:13px">
+    <select name="brand_id" style="height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 10px;font-size:13px">
+      <option value="0">Tất cả hãng xe</option>
+      <?php foreach($brands as $b): ?>
+      <option value="<?= (int)$b['id'] ?>" <?= ($brandId ?? 0)===(int)$b['id']?'selected':'' ?>><?= e($b['name']) ?></option>
+      <?php endforeach; ?>
+    </select>
+    <button class="btn btn-navy" type="submit">Lọc</button>
+  </form>
+
+  <div style="overflow:auto;border:1px solid #e6ebf1;border-radius:8px">
+  <table class="garage-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Khách hàng</th>
+        <th>Xe</th>
+        <th>Năm SX</th>
+        <th>Nhãn xe</th>
+        <th>Mặc định</th>
+        <th>Ngày đăng ký</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($garages as $g): ?>
+      <tr>
+        <td style="color:#9ca3af;font-size:12px">#<?= (int)$g['id'] ?></td>
+        <td>
+          <strong style="color:#1f365b"><?= e($g['full_name'] ?: '—') ?></strong>
+          <div style="font-size:11px;color:#718096;margin-top:2px"><?= e($g['email'] ?: '') ?></div>
+          <?php if($g['phone']): ?>
+          <div style="font-size:11px;color:#718096"><?= e($g['phone']) ?></div>
+          <?php endif; ?>
+        </td>
+        <td>
+          <span class="car-badge"><?= e($g['brand_name'] ?: '?') ?></span>
+          <span style="margin-left:5px;color:#374151;font-weight:500"><?= e($g['model_name'] ?: '?') ?></span>
+          <?php if($g['trim']): ?><div style="font-size:11px;color:#9ca3af;margin-top:2px"><?= e($g['trim']) ?></div><?php endif; ?>
+        </td>
+        <td style="font-weight:600;color:#374151"><?= (int)$g['year'] ?></td>
+        <td style="color:#4b5563"><?= e($g['label'] ?: '—') ?></td>
+        <td style="text-align:center">
+          <?php if($g['is_default']): ?>
+          <span style="background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700">Mặc định</span>
+          <?php else: ?>
+          <span style="color:#9ca3af;font-size:11px">—</span>
+          <?php endif; ?>
+        </td>
+        <td style="color:#9ca3af;font-size:12px;white-space:nowrap"><?= e(substr($g['created_at'],0,10)) ?></td>
+        <td>
+          <a href="/admin/users/<?= (int)$g['user_id'] ?>" style="font-size:12px;color:#1a3258;text-decoration:none;border:1px solid #1a3258;border-radius:4px;padding:4px 10px;white-space:nowrap;font-weight:600">Hồ sơ KH</a>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  </div>
+
 <?php endif; ?>
+
+<!-- MODAL CHI TIẾT ĐỒNG THỜI XEM ẢNH XÁC THỰC -->
+<div id="detailRegModal" style="display:none;position:fixed;inset:0;background:rgba(11,29,58,0.75);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:12px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,0.3);margin:auto">
+    <div style="background:#0b1d3a;color:#fff;padding:16px 24px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between">
+      <h3 style="margin:0;font-size:17px;color:#fff;font-weight:800">CHI TIẾT HỒ SƠ ĐĂNG KÝ GARA #<span id="dt_id"></span></h3>
+      <button type="button" onclick="document.getElementById('detailRegModal').style.display='none'" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">&times;</button>
+    </div>
+    
+    <div style="padding:24px">
+      <!-- Thông tin chung -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#f8fafc;padding:16px;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:20px;font-size:13.5px">
+        <div><strong>Tên Gara:</strong> <span id="dt_garage_name" style="color:#0b1d3a;font-weight:700"></span></div>
+        <div><strong>Chủ Gara / Đại diện:</strong> <span id="dt_owner_name"></span></div>
+        <div><strong>Số điện thoại:</strong> <span id="dt_phone" style="font-weight:700"></span></div>
+        <div><strong>Mã số thuế / HKD:</strong> <span id="dt_tax_code" style="background:#e2e8f0;padding:2px 6px;border-radius:4px;font-weight:700"></span></div>
+        <div><strong>Email:</strong> <span id="dt_email"></span></div>
+        <div><strong>Ngày nộp đơn:</strong> <span id="dt_created_at"></span></div>
+        <div style="grid-column:1 / -1"><strong>Địa chỉ thực tế:</strong> <span id="dt_address" style="color:#1e293b"></span></div>
+      </div>
+
+      <!-- Bộ ảnh chứng từ -->
+      <h4 style="margin:0 0 12px;color:#0b1d3a;font-size:15px;display:flex;align-items:center;gap:6px">
+        <span>📸</span> BỘ ẢNH XÁC THỰC PHÁP LÝ &amp; THỰC TẾ GARA
+      </h4>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <!-- 1. Bảng hiệu -->
+        <div style="border:1px solid #cbd5e1;padding:12px;border-radius:8px;background:#fff">
+          <div style="font-weight:700;font-size:13px;margin-bottom:8px;color:#0b1d3a">1. Ảnh bảng hiệu Gara</div>
+          <div id="box_signboard" style="height:160px;background:#f1f5f9;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+          </div>
+        </div>
+
+        <!-- 2. GPKD -->
+        <div style="border:1px solid #cbd5e1;padding:12px;border-radius:8px;background:#fff">
+          <div style="font-weight:700;font-size:13px;margin-bottom:8px;color:#0b1d3a">2. Giấy phép kinh doanh / HKD</div>
+          <div id="box_license" style="height:160px;background:#f1f5f9;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Bộ ảnh thực tế (≥ 3 ảnh) -->
+      <div style="border:1px solid #cbd5e1;padding:14px;border-radius:8px;background:#fff;margin-bottom:20px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:8px;color:#0b1d3a">3. Bộ ảnh thực tế Cửa hàng / Xưởng Gara (≥ 3 ảnh)</div>
+        <div id="box_real_images" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;border-top:1px solid #e2e8f0;padding-top:16px">
+        <button type="button" onclick="document.getElementById('detailRegModal').style.display='none'" class="btn btn-outline">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KHỞI TẠO TỪ CHỐI ĐƠN -->
+<div id="rejectRegModal" style="display:none;position:fixed;inset:0;background:rgba(11,29,58,0.75);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <form id="rejectForm" method="post" action="" style="background:#fff;border-radius:10px;max-width:480px;width:100%;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,0.3)">
+    <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+    <h3 style="margin:0 0 10px;color:#dc2626">Từ chối Đơn đăng ký Gara</h3>
+    <p style="margin:0 0 14px;font-size:13px;color:#475569">Gara: <strong id="reject_garage_name"></strong></p>
+    
+    <div style="margin-bottom:18px">
+      <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:6px">Lý do từ chối (Sẽ gửi trực tiếp qua Email &amp; Chuông thông báo cho khách):</label>
+      <textarea name="reject_reason" required rows="4" placeholder="VD: Ảnh bảng hiệu không rõ địa chỉ, Giấy phép kinh doanh không đúng MST, Thiếu ảnh thực tế xưởng..." style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px"></textarea>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" onclick="document.getElementById('rejectRegModal').style.display='none'" class="btn btn-outline">Hủy</button>
+      <button type="submit" class="btn" style="background:#dc2626;color:#fff;font-weight:800;padding:8px 18px">XÁC NHẬN TỪ CHỐI</button>
+    </div>
+  </form>
+</div>
+
+<!-- LIGHTBOX VIEW IMAGE -->
+<div id="imgLightboxModal" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999999;align-items:center;justify-content:center;padding:20px;cursor:zoom-out">
+  <img id="lightboxImg" src="" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.5)">
+</div>
+
+<script>
+function showRegistrationDetail(r) {
+  document.getElementById('dt_id').textContent = r.id;
+  document.getElementById('dt_garage_name').textContent = r.garage_name || '';
+  document.getElementById('dt_owner_name').textContent = r.owner_name || '';
+  document.getElementById('dt_phone').textContent = r.phone || '';
+  document.getElementById('dt_tax_code').textContent = r.tax_code || '';
+  document.getElementById('dt_email').textContent = r.email || r.user_email || '—';
+  document.getElementById('dt_address').textContent = r.address || '';
+  document.getElementById('dt_created_at').textContent = r.created_at || '';
+
+  // Render Signboard
+  var boxSign = document.getElementById('box_signboard');
+  if (r.signboard_image) {
+    if (r.signboard_image.toLowerCase().endsWith('.pdf')) {
+      boxSign.innerHTML = '<a href="' + r.signboard_image + '" target="_blank" style="color:#0b1d3a;font-weight:700;text-decoration:underline">📄 Xem File PDF Bảng hiệu</a>';
+    } else {
+      boxSign.innerHTML = '<img src="' + r.signboard_image + '" onclick="zoomImg(\'' + r.signboard_image + '\')" style="width:100%;height:100%;object-fit:cover;cursor:zoom-in" title="Click để phóng to">';
+    }
+  } else {
+    boxSign.innerHTML = '<span style="color:#94a3b8;font-size:12px">Chưa có ảnh</span>';
+  }
+
+  // Render License
+  var boxLic = document.getElementById('box_license');
+  if (r.license_image) {
+    if (r.license_image.toLowerCase().endsWith('.pdf')) {
+      boxLic.innerHTML = '<a href="' + r.license_image + '" target="_blank" style="color:#0b1d3a;font-weight:700;text-decoration:underline">📄 Xem File PDF GPKD</a>';
+    } else {
+      boxLic.innerHTML = '<img src="' + r.license_image + '" onclick="zoomImg(\'' + r.license_image + '\')" style="width:100%;height:100%;object-fit:cover;cursor:zoom-in" title="Click để phóng to">';
+    }
+  } else {
+    boxLic.innerHTML = '<span style="color:#94a3b8;font-size:12px">Chưa có ảnh</span>';
+  }
+
+  // Render Real Images
+  var boxReal = document.getElementById('box_real_images');
+  boxReal.innerHTML = '';
+  var imgs = [];
+  try { imgs = JSON.parse(r.real_images || '[]'); } catch(e) {}
+  if (Array.isArray(imgs) && imgs.length > 0) {
+    imgs.forEach(function(src, idx) {
+      var d = document.createElement('div');
+      d.className = 'thumb-box';
+      d.style.height = '90px';
+      d.innerHTML = '<img src="' + src + '" onclick="zoomImg(\'' + src + '\')" title="Ảnh thực tế ' + (idx+1) + '">';
+      boxReal.appendChild(d);
+    });
+  } else {
+    boxReal.innerHTML = '<span style="color:#94a3b8;font-size:12px">Chưa có ảnh thực tế</span>';
+  }
+
+  document.getElementById('detailRegModal').style.display = 'flex';
+}
+
+function openRejectModal(id, garageName) {
+  document.getElementById('reject_garage_name').textContent = garageName;
+  document.getElementById('rejectForm').action = '/admin/garages/requests/' + id + '/reject';
+  document.getElementById('rejectRegModal').style.display = 'flex';
+}
+
+function zoomImg(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('imgLightboxModal').style.display = 'flex';
+}
+</script>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

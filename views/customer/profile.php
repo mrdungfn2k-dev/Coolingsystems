@@ -146,16 +146,45 @@
         <div style="background:#fafbfc; border:1px solid #0b1d3a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
           <div>
             <div style="font-weight:800; color:#0b1d3a; font-size:14.5px; letter-spacing:0.3px;">TÀI KHOẢN ĐÃ XÁC THỰC GARA / ĐẠI LÝ</div>
-            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($user['garage_name'] ?: $user['full_name']) ?></strong> | Tỷ lệ chiết khấu sỉ: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong></div>
+            <div style="font-size:12.5px; color:#475569; margin-top:2px;">Gara: <strong><?= e($user['garage_name'] ?: $user['full_name']) ?></strong> | Tỷ lệ chiết khấu sỉ: <strong><?= floatval($user['garage_discount_percent'] ?? 10) ?>%</strong> | Công nợ: <strong>Đã kích hoạt</strong></div>
           </div>
-          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ</span>
+          <span style="background:#0b1d3a; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px; text-transform:uppercase;">ĐÃ DUYỆT GIÁ SỈ & CÔNG NỢ</span>
+        </div>
+      <?php elseif (!empty($garageRegistration) && $garageRegistration['status'] === 'pending'): ?>
+        <div style="background:#fffbe6; border:1px solid #ffe58f; border-radius:8px; padding:14px 18px; margin-bottom:16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+            <div>
+              <div style="font-weight:800; color:#b78103; font-size:14.5px; display:flex; align-items:center; gap:6px;">
+                <span>⏳</span> ĐƠN ĐĂNG KÝ GARA ĐANG ĐƯỢC XÉT DUYỆT
+              </div>
+              <div style="font-size:12.5px; color:#595959; margin-top:4px;">
+                Gara: <strong><?= e($garageRegistration['garage_name']) ?></strong> (MST: <?= e($garageRegistration['tax_code']) ?>) — Ngày gửi: <strong><?= e(date('d/m/Y H:i', strtotime($garageRegistration['created_at']))) ?></strong>
+              </div>
+            </div>
+            <span style="background:#faad14; color:#fff; font-size:11.5px; font-weight:800; padding:5px 12px; border-radius:6px;">CHỜ ADMIN DUYỆT</span>
+          </div>
+        </div>
+      <?php elseif (!empty($garageRegistration) && $garageRegistration['status'] === 'rejected'): ?>
+        <div style="background:#fff2f0; border:1px solid #ffccc7; border-radius:8px; padding:14px 18px; margin-bottom:16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+            <div>
+              <div style="font-weight:800; color:#cf1322; font-size:14.5px; display:flex; align-items:center; gap:6px;">
+                <span>❌</span> ĐƠN ĐĂNG KÝ GARA CHƯA ĐƯỢC PHÊ DUYỆT
+              </div>
+              <div style="font-size:13px; color:#434343; margin-top:4px;">
+                Lý do từ chối: <strong style="color:#cf1322;"><?= e($garageRegistration['reject_reason'] ?: 'Hồ sơ chưa đạt yêu cầu') ?></strong>
+              </div>
+            </div>
+            <button type="button" onclick="openGarageRegisterModal()" style="background:#cf1322; color:#fff; font-weight:800; font-size:12.5px; padding:8px 16px; border-radius:6px; border:none; cursor:pointer;">Nộp lại hồ sơ Đăng ký Gara</button>
+          </div>
         </div>
       <?php else: ?>
         <div style="background:#fafbfc; border:1px solid #c9a14a; border-radius:8px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-          <div style="font-weight:700; color:#0b1d3a; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng? Đăng ký ngay để nhận Bảng giá chiết khấu sỉ gốc.</div>
-          <button type="button" onclick="openGarageRegisterModal()" style="background:#c9a14a; color:#0b1d3a; font-weight:800; font-size:12.5px; padding:6px 14px; border-radius:6px; border:none; cursor:pointer;">Đăng ký Gara giá sỉ</button>
+          <div style="font-weight:700; color:#0b1d3a; font-size:13.5px;">Bạn là Gara ô tô / Đại lý phụ tùng? Đăng ký ngay để nhận Bảng giá chiết khấu sỉ gốc &amp; Chính sách công nợ.</div>
+          <button type="button" onclick="openGarageRegisterModal()" style="background:#c9a14a; color:#0b1d3a; font-weight:800; font-size:12.5px; padding:8px 16px; border-radius:6px; border:none; cursor:pointer;">Đăng ký Gara giá sỉ</button>
         </div>
       <?php endif; ?>
+
 
       <?php if (!empty($userGarages)): ?>
         <div style="overflow-x:auto;">
@@ -569,5 +598,135 @@ function saveCustInvoice(e){
   }).catch(function(){$('custInvBtn').disabled=false;$('custInvStatus').innerHTML="<span style='color:#e74c3c'>Lỗi kết nối</span>"; if(window.coolToastShow)coolToastShow('Lỗi kết nối, vui lòng thử lại','⚠️');});
   return false;
 }
+
+<!-- Modal Đăng ký Gara -->
+<div id="garageRegisterModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.75); z-index:99999; align-items:center; justify-content:center; padding:16px; overflow-y:auto;">
+  <div style="background:#fff; border-radius:12px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 20px 40px rgba(0,0,0,0.3); border:1px solid #e2e8f0; margin:auto;">
+    
+    <!-- Modal Header -->
+    <div style="background:#0b1d3a; color:#fff; padding:18px 24px; border-radius:12px 12px 0 0; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10;">
+      <div>
+        <h3 style="margin:0; font-size:18px; color:#fff; font-weight:800;">ĐĂNG KÝ TÀI KHOẢN GARA / ĐẠI LÝ</h3>
+        <p style="margin:4px 0 0; font-size:12.5px; color:#c9a14a;">Áp dụng Bảng giá sỉ gốc &amp; Chính sách công nợ gối đầu</p>
+      </div>
+      <button type="button" onclick="closeGarageRegisterModal()" style="background:none; border:none; color:#fff; font-size:24px; cursor:pointer; line-height:1;">&times;</button>
+    </div>
+
+    <form method="post" action="/customer/garage-register" enctype="multipart/form-data" style="padding:24px;" onsubmit="return validateGarageForm(this)">
+      <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+
+      <!-- Khối Điều kiện & Đặc quyền -->
+      <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:16px; margin-bottom:20px; font-size:13px; color:#334155; line-height:1.6;">
+        <div style="font-weight:800; color:#0b1d3a; font-size:14px; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">
+          📋 Điều kiện xét duyệt &amp; Ưu đãi đặc quyền
+        </div>
+        <div style="margin-bottom:6px;">
+          <strong style="color:#0b1d3a;">01. Điều kiện xét duyệt:</strong> Có địa chỉ Gara/Cửa hàng thực tế và cung cấp Mã số thuế / MS HKD (<span style="color:#dc2626; font-weight:700;">Bắt buộc</span>).
+        </div>
+        <div style="margin-bottom:6px;">
+          <strong style="color:#0b1d3a;">03. Điều kiện duy trì:</strong> Doanh số đạt từ <strong>100 triệu đồng/tháng</strong>.
+        </div>
+        <div style="background:#eff6ff; border-left:3px solid #2563eb; padding:8px 12px; margin-top:8px; border-radius:0 4px 4px 0; color:#1e40af; font-size:12.5px;">
+          🎁 <strong>Ưu đãi đặc quyền:</strong> Được áp dụng chính sách công nợ (gối đầu đơn hàng sau hoặc thanh toán định kỳ cuối mỗi tháng).
+        </div>
+      </div>
+
+      <!-- Form Fields -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+        <div>
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:5px;">Tên Gara / Cửa hàng <span style="color:#dc2626;">*</span></label>
+          <input type="text" name="garage_name" required placeholder="VD: Gara Ô Tô Minh Phát" value="<?= e($user['garage_name'] ?? '') ?>" style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px;">
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:5px;">Họ tên Chủ Gara / Đại diện <span style="color:#dc2626;">*</span></label>
+          <input type="text" name="owner_name" required placeholder="VD: Nguyễn Văn Minh" value="<?= e($user['full_name'] ?? '') ?>" style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px;">
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+        <div>
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:5px;">Số điện thoại liên hệ <span style="color:#dc2626;">*</span></label>
+          <input type="tel" name="phone" required placeholder="VD: 0987654321" value="<?= e($user['phone'] ?? '') ?>" style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px;">
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:5px;">Mã số thuế / MS HKD <span style="color:#dc2626;">* (Bắt buộc)</span></label>
+          <input type="text" name="tax_code" required placeholder="VD: 0101234567 hoặc MS HKD..." style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px;">
+        </div>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:5px;">Địa chỉ Gara / Cửa hàng thực tế <span style="color:#dc2626;">*</span></label>
+        <input type="text" name="address" required placeholder="Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành..." value="<?= e($user['address'] ?? '') ?>" style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px;">
+      </div>
+
+      <!-- Uploads Section -->
+      <div style="border-top:1px solid #e2e8f0; padding-top:16px; margin-top:16px;">
+        <div style="font-weight:800; color:#0b1d3a; font-size:14px; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+          <span>📸</span> TẢI LÊN HỒ SƠ XÁC THỰC PHÁP LÝ
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">1. Ảnh bảng hiệu Cửa hàng / Gara <span style="color:#dc2626;">* (Bắt buộc)</span></label>
+          <div style="font-size:11.5px; color:#64748b; margin-bottom:6px;">Chụp rõ tên Gara, địa chỉ &amp; SĐT trên bảng hiệu mặt tiền.</div>
+          <input type="file" name="signboard_image" accept="image/*,.pdf" required style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">2. Giấy phép kinh doanh / Đăng ký HKD <span style="color:#dc2626;">* (Bắt buộc)</span></label>
+          <div style="font-size:11.5px; color:#64748b; margin-bottom:6px;">Ảnh chụp hoặc file PDF Đăng ký kinh doanh / Mã số thuế HKD.</div>
+          <input type="file" name="license_image" accept="image/*,.pdf" required style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">3. Tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara <span style="color:#dc2626;">* (Bắt buộc ≥ 3 ảnh)</span></label>
+          <div style="font-size:11.5px; color:#64748b; margin-bottom:6px;">Chụp các góc: Toàn cảnh xưởng, khu vực sửa chữa, kho hàng/kệ phụ tùng... (Để loại bỏ khách lẻ).</div>
+          <input type="file" name="real_images[]" accept="image/*" multiple required id="realImagesInput" onchange="checkRealImagesCount(this)" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+          <div id="realImagesHint" style="font-size:12px; color:#dc2626; margin-top:4px; font-weight:600;"></div>
+        </div>
+      </div>
+
+      <!-- Submit Footer -->
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px; border-top:1px solid #e2e8f0; padding-top:16px;">
+        <button type="button" onclick="closeGarageRegisterModal()" class="btn btn-outline" style="padding:10px 20px;">Hủy</button>
+        <button type="submit" class="btn btn-navy" style="padding:10px 24px; background:#0b1d3a; color:#fff; font-weight:800;">GỬI HỒ SƠ ĐĂNG KÝ GARA</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+function openGarageRegisterModal() {
+  var m = document.getElementById('garageRegisterModal');
+  if (m) m.style.display = 'flex';
+}
+function closeGarageRegisterModal() {
+  var m = document.getElementById('garageRegisterModal');
+  if (m) m.style.display = 'none';
+}
+function checkRealImagesCount(input) {
+  var count = input.files ? input.files.length : 0;
+  var hint = document.getElementById('realImagesHint');
+  if (!hint) return;
+  if (count < 3) {
+    hint.style.color = '#dc2626';
+    hint.textContent = '❌ Bạn mới chọn ' + count + ' ảnh. Yêu cầu chọn tối thiểu 3 tấm ảnh thực tế!';
+  } else {
+    hint.style.color = '#15803d';
+    hint.textContent = '✓ Đã chọn ' + count + ' tấm ảnh thực tế hợp lệ.';
+  }
+}
+function validateGarageForm(form) {
+  var realInput = document.getElementById('realImagesInput');
+  if (realInput && realInput.files && realInput.files.length < 3) {
+    alert('Vui lòng chọn tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara!');
+    realInput.focus();
+    return false;
+  }
+  return true;
+}
+if (window.location.search.indexOf('action=garage-register') !== -1) {
+  openGarageRegisterModal();
+}
 </script>
-<?php require __DIR__.'/../partials/foot.php'; ?>
+<?php require __DIR__.'/../partials/foot.php'; ?>
