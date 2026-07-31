@@ -669,20 +669,23 @@ function saveCustInvoice(e){
         <div style="margin-bottom:14px;">
           <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">1. Ảnh bảng hiệu Cửa hàng / Gara <span style="color:#dc2626;">* (Bắt buộc)</span></label>
           <div style="font-size:11.5px; color:#64748b; margin-bottom:6px;">Chụp rõ tên Gara, địa chỉ &amp; SĐT trên bảng hiệu mặt tiền.</div>
-          <input type="file" name="signboard_image" accept="image/*,.pdf" required style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+          <input type="file" name="signboard_image" accept="image/*,.pdf" required onchange="previewSingleFile(this, 'profSignboardPreview')" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+          <div id="profSignboardPreview" style="margin-top:8px; display:none;"></div>
         </div>
 
         <div style="margin-bottom:14px;">
           <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">2. Giấy phép kinh doanh / Đăng ký HKD <span style="color:#dc2626;">* (Bắt buộc)</span></label>
           <div style="font-size:11.5px; color:#64748b; margin-bottom:6px;">Ảnh chụp hoặc file PDF Đăng ký kinh doanh / Mã số thuế HKD.</div>
-          <input type="file" name="license_image" accept="image/*,.pdf" required style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+          <input type="file" name="license_image" accept="image/*,.pdf" required onchange="previewSingleFile(this, 'profLicensePreview')" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+          <div id="profLicensePreview" style="margin-top:8px; display:none;"></div>
         </div>
 
         <div style="margin-bottom:18px;">
           <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:4px;">3. Tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara <span style="color:#dc2626;">* (Bắt buộc ≥ 3 ảnh)</span></label>
           <div style="font-size:11.5px; color:#64748b; margin-bottom:6px;">Chụp các góc: Toàn cảnh xưởng, khu vực sửa chữa, kho hàng/kệ phụ tùng... (Để loại bỏ khách lẻ).</div>
-          <input type="file" name="real_images[]" accept="image/*" multiple required id="realImagesInput" onchange="checkRealImagesCount(this)" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
+          <input type="file" name="real_images[]" accept="image/*" multiple required id="realImagesInput" onchange="previewMultiFiles(this, 'profRealImagesPreview', 'realImagesHint')" style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px; background:#f8fafc;">
           <div id="realImagesHint" style="font-size:12px; color:#dc2626; margin-top:4px; font-weight:600;"></div>
+          <div id="profRealImagesPreview" style="margin-top:10px; display:none; grid-template-columns:repeat(auto-fill, minmax(90px, 1fr)); gap:10px;"></div>
         </div>
       </div>
 
@@ -705,25 +708,136 @@ function closeGarageRegisterModal() {
   var m = document.getElementById('garageRegisterModal');
   if (m) m.style.display = 'none';
 }
-function checkRealImagesCount(input) {
-  var count = input.files ? input.files.length : 0;
-  var hint = document.getElementById('realImagesHint');
-  if (!hint) return;
-  if (count < 3) {
-    hint.style.color = '#dc2626';
-    hint.textContent = '❌ Bạn mới chọn ' + count + ' ảnh. Yêu cầu chọn tối thiểu 3 tấm ảnh thực tế!';
-  } else {
-    hint.style.color = '#15803d';
-    hint.textContent = '✓ Đã chọn ' + count + ' tấm ảnh thực tế hợp lệ.';
+function previewSingleFile(input, containerId) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  var file = input.files ? input.files[0] : null;
+  if (!file) {
+    container.style.display = 'none';
+    return;
   }
+  container.style.display = 'block';
+  var wrap = document.createElement('div');
+  wrap.style.cssText = 'display:inline-flex; align-items:center; gap:10px; background:#f8fafc; padding:8px 12px; border:1px solid #cbd5e1; border-radius:8px; margin-top:6px;';
+  
+  if (file.type.startsWith('image/')) {
+    var img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.style.cssText = 'width:64px; height:64px; object-fit:cover; border-radius:6px; border:1px solid #e2e8f0;';
+    wrap.appendChild(img);
+  } else {
+    var icon = document.createElement('div');
+    icon.style.cssText = 'width:44px; height:44px; background:#ef4444; color:#fff; font-weight:800; font-size:11px; border-radius:6px; display:flex; align-items:center; justify-content:center;';
+    icon.textContent = 'PDF';
+    wrap.appendChild(icon);
+  }
+
+  var info = document.createElement('div');
+  info.style.cssText = 'font-size:12.5px; color:#1e293b; line-height:1.4;';
+  info.innerHTML = '<strong>' + file.name + '</strong><br><span style="color:#64748b; font-size:11px;">' + (file.size / 1024).toFixed(1) + ' KB</span>';
+  wrap.appendChild(info);
+
+  container.appendChild(wrap);
+}
+function previewMultiFiles(input, containerId, hintId) {
+  var container = document.getElementById(containerId);
+  var hint = document.getElementById(hintId);
+  if (!container) return;
+  container.innerHTML = '';
+  var files = input.files ? Array.from(input.files) : [];
+  
+  if (hint) {
+    if (files.length < 3) {
+      hint.style.color = '#dc2626';
+      hint.innerHTML = '❌ Bạn mới chọn <strong>' + files.length + '</strong> ảnh. Yêu cầu chọn tối thiểu 3 tấm ảnh thực tế!';
+    } else {
+      hint.style.color = '#15803d';
+      hint.innerHTML = '✓ Đã chọn <strong>' + files.length + '</strong> tấm ảnh thực tế hợp lệ (Xem ảnh bên dưới).';
+    }
+  }
+
+  if (files.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'grid';
+  files.forEach(function(file, idx) {
+    var card = document.createElement('div');
+    card.style.cssText = 'position:relative; width:90px; height:90px; border-radius:8px; overflow:hidden; border:1px solid #cbd5e1; background:#f8fafc; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 4px rgba(0,0,0,0.05);';
+    
+    if (file.type.startsWith('image/')) {
+      var img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.style.cssText = 'width:100%; height:100%; object-fit:cover;';
+      card.appendChild(img);
+    } else {
+      var txt = document.createElement('span');
+      txt.style.cssText = 'font-size:10px; color:#475569; padding:4px; text-align:center; word-break:break-all;';
+      txt.textContent = file.name;
+      card.appendChild(txt);
+    }
+
+    var badge = document.createElement('span');
+    badge.style.cssText = 'position:absolute; top:3px; left:3px; background:rgba(11,29,58,0.85); color:#fff; font-size:10px; font-weight:800; padding:1px 5px; border-radius:4px;';
+    badge.textContent = '#' + (idx + 1);
+    card.appendChild(badge);
+
+    container.appendChild(card);
+  });
 }
 function validateGarageForm(form) {
-  var realInput = document.getElementById('realImagesInput');
-  if (realInput && realInput.files && realInput.files.length < 3) {
-    alert('Vui lòng chọn tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara!');
-    realInput.focus();
+  var garageName = form.querySelector('[name="garage_name"]');
+  var ownerName = form.querySelector('[name="owner_name"]');
+  var phone = form.querySelector('[name="phone"]');
+  var taxCode = form.querySelector('[name="tax_code"]');
+  var address = form.querySelector('[name="address"]');
+  var signboard = form.querySelector('[name="signboard_image"]');
+  var license = form.querySelector('[name="license_image"]');
+  var realImages = form.querySelector('[name="real_images[]"]');
+
+  if (!garageName || !garageName.value.trim()) {
+    alert('⚠️ Vui lòng nhập Tên Gara / Cửa hàng!');
+    if(garageName) garageName.focus();
     return false;
   }
+  if (!ownerName || !ownerName.value.trim()) {
+    alert('⚠️ Vui lòng nhập Họ tên Chủ Gara / Đại diện!');
+    if(ownerName) ownerName.focus();
+    return false;
+  }
+  if (!phone || !phone.value.trim()) {
+    alert('⚠️ Vui lòng nhập Số điện thoại liên hệ!');
+    if(phone) phone.focus();
+    return false;
+  }
+  if (!taxCode || !taxCode.value.trim()) {
+    alert('⚠️ Vui lòng nhập Mã số thuế / MS HKD (Trường bắt buộc)!');
+    if(taxCode) taxCode.focus();
+    return false;
+  }
+  if (!address || !address.value.trim()) {
+    alert('⚠️ Vui lòng nhập Địa chỉ Gara / Cửa hàng thực tế!');
+    if(address) address.focus();
+    return false;
+  }
+  if (!signboard || !signboard.files || signboard.files.length === 0) {
+    alert('⚠️ Vui lòng chọn Tải lên Ảnh bảng hiệu Cửa hàng / Gara!');
+    if(signboard) signboard.focus();
+    return false;
+  }
+  if (!license || !license.files || license.files.length === 0) {
+    alert('⚠️ Vui lòng chọn Tải lên Giấy phép kinh doanh / Đăng ký HKD!');
+    if(license) license.focus();
+    return false;
+  }
+  if (!realImages || !realImages.files || realImages.files.length < 3) {
+    alert('⚠️ Vui lòng tải lên tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara!');
+    if(realImages) realImages.focus();
+    return false;
+  }
+
   return true;
 }
 if (window.location.search.indexOf('action=garage-register') !== -1) {
