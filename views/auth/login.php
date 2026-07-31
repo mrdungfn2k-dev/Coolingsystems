@@ -50,6 +50,7 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
 
   <form method="post" action="/auth/login">
     <?= csrfField() ?>
+    <input type="hidden" name="next" value="<?= e($_GET['next'] ?? $_GET['redirect'] ?? '/') ?>">
     <div class="form-group"><label>Email hoặc Số điện thoại <span class="req">*</span></label><input type="text" name="email" required autofocus placeholder="Email hoặc số điện thoại" value="<?= e($_POST['email'] ?? '') ?>"></div>
     <div class="form-group"><label>Mật khẩu <span class="req">*</span></label><input type="password" name="password" required minlength="6"></div>
     <div class="forgot-link"><a href="/auth/forgot">Quên mật khẩu?</a></div>

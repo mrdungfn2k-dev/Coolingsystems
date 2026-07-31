@@ -439,10 +439,47 @@ foreach ($trustSteps as $step):
   </div>
 </div>
 
+<!-- Modal Popup: Cần Đăng Nhập (Design khớp 100% Ảnh 3 từ User) -->
+<div id="requireLoginModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.65); backdrop-filter:blur(4px); z-index:999999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:20px; max-width:420px; width:100%; padding:36px 28px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.25); margin:auto; position:relative;">
+    
+    <!-- User Icon Circle -->
+    <div style="width:72px; height:72px; background:#e0f2fe; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1a3258" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
+
+    <!-- Heading & Text -->
+    <h2 style="font-size:22px; font-weight:800; color:#1a2b4c; margin:0 0 10px 0;">Cần đăng nhập</h2>
+    <p style="color:#64748b; font-size:14.5px; margin:0 0 26px 0; line-height:1.5;">Bạn cần đăng nhập để đăng ký tài khoản Gara / Đại lý.</p>
+
+    <!-- Action Buttons -->
+    <div style="display:flex; gap:12px; justify-content:center;">
+      <button type="button" onclick="closeRequireLoginModal()" style="flex:1; height:46px; border:1px solid #cbd5e1; background:#fff; color:#334155; font-weight:700; font-size:14.5px; border-radius:10px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">
+        Để sau
+      </button>
+      <a href="/auth/login?redirect=/customer/profile?action=garage-register" style="flex:1; height:46px; background:#1a3258; color:#fff; font-weight:800; font-size:14.5px; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; transition:background 0.2s;" onmouseover="this.style.background='#0b1d3a'" onmouseout="this.style.background='#1a3258'">
+        Đăng nhập
+      </a>
+    </div>
+
+  </div>
+</div>
+
 <script>
 function openGarageRegisterModal() {
-  var modal = document.getElementById('garageRegisterModal');
-  if(modal) modal.style.display = 'flex';
+  <?php if (!empty($curU)): ?>
+    window.location.href = '/customer/profile?action=garage-register';
+  <?php else: ?>
+    var loginModal = document.getElementById('requireLoginModal');
+    if (loginModal) loginModal.style.display = 'flex';
+  <?php endif; ?>
+}
+function closeRequireLoginModal() {
+  var modal = document.getElementById('requireLoginModal');
+  if(modal) modal.style.display = 'none';
 }
 function closeGarageRegisterModal() {
   var modal = document.getElementById('garageRegisterModal');
@@ -478,6 +515,7 @@ function submitGarageRegister(e) {
       msg.innerHTML = '⚠️ ' + (res.error || 'Có lỗi xảy ra');
     }
   })
+
   .catch(function(){
     btn.disabled = false;
     btn.innerText = 'XÁC NHẬN ĐĂNG KÝ GARA & NHẬN GIÁ SỈ';

@@ -287,7 +287,7 @@ function swTab(t){
             <input type="file" name="images[]" id="img-hidden-input" multiple accept="image/*" style="display:none">
             <?php if (isset($product) && !empty($images)): ?>
               <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;cursor:pointer;width:max-content;max-width:100%">
-                <input type="checkbox" name="replace_images" id="replaceImages" value="1"
+                <input type="checkbox" name="replace_images" id="replaceImages" value="1" checked
                        style="width:15px;height:15px;accent-color:var(--navy);flex:0 0 auto">
                 <span>Khi tải ảnh mới, thay toàn bộ bộ ảnh hiện tại</span>
               </label>
