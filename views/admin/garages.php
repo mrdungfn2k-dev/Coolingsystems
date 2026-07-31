@@ -5,8 +5,8 @@
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý Gara (Bảng hiệu, GPKD, 3+ ảnh thực tế) &amp; Quản lý quyền giá sỉ, công nợ.</p>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
-    <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-outline-navy btn-sm">Nhập CSV</button>
-    <a href="/admin/garages/export-csv" class="btn btn-outline-navy btn-sm">Xuất CSV</a>
+    <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-navy btn-sm" style="background:#0b1d3a;color:#fff;font-weight:700">Nhập CSV</button>
+    <a href="/admin/garages/export-csv" class="btn btn-navy btn-sm" style="background:#0b1d3a;color:#fff;font-weight:700">Xuất CSV</a>
   </div>
 </div>
 
@@ -51,8 +51,8 @@
 .badge-rejected{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
 .thumb-box{width:60px;height:45px;border-radius:4px;overflow:hidden;border:1px solid #cbd5e1;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .thumb-box img{width:100%;height:100%;object-fit:cover}
-.btn-action-detail{background:#fff;color:#0b1d3a;border:1px solid #0b1d3a;border-radius:6px;font-weight:700;font-size:12px;padding:6px 14px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.btn-action-detail:hover{background:#0b1d3a;color:#fff}
+.btn-action-detail{background:#0b1d3a;color:#fff;border:none;border-radius:6px;font-weight:700;font-size:12px;padding:6px 14px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn-action-detail:hover{background:#1a3258;transform:translateY(-1px)}
 .btn-action-approve{background:#16a34a;color:#fff;border-radius:6px;font-weight:700;font-size:12px;padding:6px 16px;border:none;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 4px rgba(22,163,74,0.15)}
 .btn-action-approve:hover{background:#15803d;transform:translateY(-1px)}
 .btn-action-reject{background:#dc2626;color:#fff;border-radius:6px;font-weight:700;font-size:12px;padding:6px 16px;border:none;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 4px rgba(220,38,38,0.15)}
@@ -96,13 +96,13 @@
     <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên Gara, chủ Gara, SĐT, MST..." style="min-width:280px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:13px">
     
     <div style="display:flex;gap:6px">
-      <a href="/admin/garages?tab=requests" class="btn <?= ($statusFilter ?? '') === '' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:7px 14px;border-radius:6px">Tất cả</a>
-      <a href="/admin/garages?tab=requests&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-weight:700' : 'background:#fff;color:#b45309;border:1px solid #fde68a' ?>">Chờ duyệt</a>
-      <a href="/admin/garages?tab=requests&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;font-weight:700' : 'background:#fff;color:#15803d;border:1px solid #bbf7d0' ?>">Đã duyệt</a>
-      <a href="/admin/garages?tab=requests&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;font-weight:700' : 'background:#fff;color:#b91c1c;border:1px solid #fca5a5' ?>">Từ chối</a>
+      <a href="/admin/garages?tab=requests" class="btn <?= ($statusFilter ?? '') === '' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:7px 14px;border-radius:6px;font-weight:700">Tất cả</a>
+      <a href="/admin/garages?tab=requests&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#d97706;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#b45309;border:1px solid #fde68a' ?>">Chờ duyệt</a>
+      <a href="/admin/garages?tab=requests&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#16a34a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#15803d;border:1px solid #bbf7d0' ?>">Đã duyệt</a>
+      <a href="/admin/garages?tab=requests&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#dc2626;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#b91c1c;border:1px solid #fca5a5' ?>">Từ chối</a>
     </div>
 
-    <button class="btn btn-navy" type="submit" style="margin-left:auto;height:38px;padding:0 18px;border-radius:6px;font-weight:700">Lọc kết quả</button>
+    <button class="btn btn-navy" type="submit" style="margin-left:auto;height:38px;padding:0 18px;border-radius:6px;font-weight:700;background:#0b1d3a;color:#fff">Lọc kết quả</button>
   </form>
 
   <!-- REGISTRATIONS TABLE -->
@@ -206,7 +206,7 @@
       <option value="<?= (int)$b['id'] ?>" <?= ($brandId ?? 0)===(int)$b['id']?'selected':'' ?>><?= e($b['name']) ?></option>
       <?php endforeach; ?>
     </select>
-    <button class="btn btn-navy" type="submit">Lọc</button>
+    <button class="btn btn-navy" type="submit" style="background:#0b1d3a;color:#fff">Lọc</button>
   </form>
 
   <div style="overflow:auto;border:1px solid #e6ebf1;border-radius:8px">
@@ -250,7 +250,7 @@
         </td>
         <td style="color:#9ca3af;font-size:12px;white-space:nowrap"><?= e(substr($g['created_at'],0,10)) ?></td>
         <td>
-          <a href="/admin/users/<?= (int)$g['user_id'] ?>" style="font-size:12px;color:#1a3258;text-decoration:none;border:1px solid #1a3258;border-radius:4px;padding:4px 10px;white-space:nowrap;font-weight:600">Hồ sơ KH</a>
+          <a href="/admin/users/<?= (int)$g['user_id'] ?>" class="btn-action-detail" style="font-size:11px;padding:4px 10px">Hồ sơ KH</a>
         </td>
       </tr>
       <?php endforeach; ?>
