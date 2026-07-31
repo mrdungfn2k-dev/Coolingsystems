@@ -69,7 +69,7 @@ if ($rawOem !== '') {
   <!-- Nhãn Giá buôn Gara -->
   <?php if (!empty($isVerifiedGara)): ?>
     <div style="margin-bottom:6px">
-      <span class="gara-wholesale-badge" title="Đăng ký Gara/Đại lý để nhận bảng giá chiết khấu đơn từ 10 - 20 triệu - Hotline 0703 070 361" style="font-size:10px;font-weight:700;color:#1d4ed8;background:#eff6ff;border:1px solid #93c5fd;padding:2px 6px;border-radius:4px;display:inline-block">Giá buôn Gara</span>
+      <span class="gara-wholesale-badge" title="Đăng ký Gara/Đại lý để nhận bảng giá chiết khấu đơn từ 10 - 20 triệu - Hotline 0705 070 526" style="font-size:10px;font-weight:700;color:#1d4ed8;background:#eff6ff;border:1px solid #93c5fd;padding:2px 6px;border-radius:4px;display:inline-block">Giá buôn Gara</span>
     </div>
   <?php endif; ?>
 

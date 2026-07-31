@@ -42,7 +42,7 @@
 $_sysConf = [];
 $_sysRows = dbAll("SELECT key, value FROM system_config");
 foreach ($_sysRows as $_sr) $_sysConf[$_sr['key']] = $_sr['value'];
-$sysHotline = $_sysConf['site_phone'] ?? $_sysConf['contact_hotline'] ?? '0947796471';
+$sysHotline = $_sysConf['site_phone'] ?? $_sysConf['contact_hotline'] ?? '0705070526';
 $sysEmail = $_sysConf['contact_email'] ?? 'support@coolingsystems.vn';
 $sysWhatsapp = $_sysConf['social_whatsapp'] ?? '';
 $sysTiktok = $_sysConf['social_tiktok'] ?? '';

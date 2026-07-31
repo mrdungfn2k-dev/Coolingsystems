@@ -1007,17 +1007,25 @@ post('/customer/checkout', function() {
         }
     }
 
+    $appliedVoucherCode = $_SESSION['cart_voucher']['code'] ?? ($newsletterDiscount > 0 ? 'UUDAI100K' : null);
+
     $orderId = dbInsert("INSERT INTO orders (code, user_id, total_items, subtotal, discount_total, tax_amount, shipping_total, grand_total,
         payment_method, payment_status, delivery_status, paid_amount, remaining_amount, payment_type,
-        shipping_full_name, shipping_phone, shipping_province, shipping_district, shipping_ward, shipping_detail, customer_note, payment_receipt, created_at)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))", [
+        shipping_full_name, shipping_phone, shipping_province, shipping_district, shipping_ward, shipping_detail, customer_note, payment_receipt, voucher_code, created_at)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))", [
         $code, $user['id'], count($items), $subtotal, $discountTotal, $taxAmount, $shipping, $grand,
         $dbPayMethod, $initPayStatus, 'pending', $paidAmount, $remainingAmount, $paymentType,
         trim($_POST['shipping_full_name']), trim($_POST['shipping_phone']),
         trim($_POST['shipping_province']), trim($_POST['shipping_district']),
         trim($_POST['shipping_ward']), trim($_POST['shipping_detail']),
-        trim($_POST['customer_note']??''), $paymentReceipt
+        trim($_POST['customer_note']??''), $paymentReceipt, $appliedVoucherCode
     ]);
+
+    if (!empty($appliedVoucherCode)) {
+        dbRun("UPDATE user_saved_vouchers SET used=1 WHERE user_id=? AND code=? AND used=0", [$user['id'], $appliedVoucherCode]);
+        dbRun("UPDATE vouchers SET used_quantity = used_quantity + 1 WHERE code=?", [$appliedVoucherCode]);
+        unset($_SESSION['cart_voucher']);
+    }
     // Create notification for admin
     dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('order', 'Đơn hàng mới', ?, ?)", [
         "Có đơn hàng mới #".$code." trị giá ".vnd($grand),
@@ -1189,6 +1197,10 @@ post('/customer/orders/:id/cancel', function($p) {
         }
     }
     dbRun("UPDATE orders SET delivery_status='cancelled', payment_status='unpaid', cancel_reason=?, cancel_images=? WHERE id=?", [$reason, json_encode($cancelImgs), $p['id']]);
+    if (!empty($order['voucher_code']) && !empty($order['user_id'])) {
+        dbRun("UPDATE user_saved_vouchers SET used=0 WHERE user_id=? AND code=?", [$order['user_id'], $order['voucher_code']]);
+        dbRun("UPDATE vouchers SET used_quantity = MAX(0, used_quantity - 1) WHERE code=?", [$order['voucher_code']]);
+    }
     dbRun("INSERT INTO admin_notifications (type, title, message, link) VALUES ('order', 'Khách hàng hủy đơn hàng', ?, ?)", [
         "Đơn hàng #" . ($order['code'] ?? $p['id']) . " vừa bị khách hàng hủy. Lý do: " . ($reason ?: 'Không nêu lý do'),
         "/admin/orders/" . $p['id']

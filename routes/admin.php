@@ -1405,7 +1405,7 @@ post('/admin/orders/:id/delivery-status', function($p) {
         dbRun("UPDATE orders SET delivery_status=? WHERE id=?", [$newStatus, $p['id']]);
     }
 
-    // Restore stock on cancel
+    // Restore stock and voucher on cancel
     if ($newStatus === 'cancelled' && $order['delivery_status'] !== 'cancelled') {
         $orderItems = dbAll("SELECT oi.product_id, oi.quantity FROM order_items oi INNER JOIN sub_orders so ON so.id=oi.sub_order_id WHERE so.order_id=?", [$p['id']]);
         foreach ($orderItems as $oi) {
@@ -1413,6 +1413,10 @@ post('/admin/orders/:id/delivery-status', function($p) {
                 dbRun("UPDATE products SET stock = stock + ? WHERE id=?", [$oi['quantity'], $oi['product_id']]);
                 inventoryCheckLowStockAlert((int)$oi['product_id'], 'admin_order_cancel');
             }
+        }
+        if (!empty($order['voucher_code']) && !empty($order['user_id'])) {
+            dbRun("UPDATE user_saved_vouchers SET used=0 WHERE user_id=? AND code=?", [$order['user_id'], $order['voucher_code']]);
+            dbRun("UPDATE vouchers SET used_quantity = MAX(0, used_quantity - 1) WHERE code=?", [$order['voucher_code']]);
         }
         dbRun("UPDATE orders SET payment_status='refunded' WHERE id=? AND payment_status='paid'", [$p['id']]);
     }

@@ -122,14 +122,30 @@ post('/api/register-garage', function() {
 
 // ── Vouchers Page ────────────────────────────────────────────────────────────
 get('/vouchers', function() {
+    $user = currentUser();
+    $userId = ($user && !empty($user['id']) && strpos($user['email'] ?? '', '@guest.local') === false) ? $user['id'] : null;
+
     $vWhere = "(status='active' OR status='1' OR status='published') AND (valid_to IS NULL OR date(valid_to) >= date('now','localtime'))";
-    $vPerPage = 4;
-    $vTotal = (int)(dbGet("SELECT COUNT(*) AS n FROM vouchers WHERE $vWhere")['n'] ?? 0);
+    $vouchers = dbAll("SELECT * FROM vouchers WHERE $vWhere ORDER BY id DESC");
+
+    if ($userId) {
+        $usedVouchers = dbAll("SELECT code FROM user_saved_vouchers WHERE user_id=? AND used=1", [$userId]);
+        $usedCodes = array_column($usedVouchers, 'code');
+        if (!empty($usedCodes)) {
+            $vouchers = array_values(array_filter($vouchers, function($v) use ($usedCodes) {
+                return !in_array($v['code'] ?? '', $usedCodes);
+            }));
+        }
+    }
+
+    $vPerPage = 8;
+    $vTotal = count($vouchers);
     $vTotalPages = max(1, (int)ceil($vTotal / $vPerPage));
     $vPage = max(1, min((int)($_GET['vpage'] ?? 1), $vTotalPages));
-    $vouchers = dbAll("SELECT * FROM vouchers WHERE $vWhere ORDER BY created_at DESC LIMIT $vPerPage OFFSET " . (($vPage-1)*$vPerPage));
+    $vouchersPaged = array_slice($vouchers, ($vPage-1)*$vPerPage, $vPerPage);
+
     $saleProducts = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.status='published' AND p.original_price IS NOT NULL AND p.original_price > p.price ORDER BY p.updated_at DESC LIMIT 8");
-    view('public/vouchers', ['title'=>'Khuyến mãi & Mã giảm giá', 'vouchers'=>$vouchers, 'saleProducts'=>$saleProducts, 'vPage'=>$vPage, 'vTotalPages'=>$vTotalPages]);
+    view('public/vouchers', ['title'=>'Khuyến mãi & Mã giảm giá', 'vouchers'=>$vouchersPaged, 'saleProducts'=>$saleProducts, 'vPage'=>$vPage, 'vTotalPages'=>$vTotalPages]);
 });
 
 get('/products', function() {
