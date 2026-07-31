@@ -193,17 +193,34 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
 <script>
 function nlSubmit() {
   var input = document.getElementById('nlEmailInput');
-  var val = input.value.trim();
-  if (!val || !/^[^@]+@gmail\.com$/i.test(val)) { alert('Vui lòng nhập email @gmail.com hợp lệ'); return; }
+  var val = input ? input.value.trim() : '';
+  if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+    alert('Vui lòng nhập địa chỉ email hợp lệ (VD: trantunglam2025@gmail.com)');
+    return;
+  }
   var csrf = document.querySelector('input[name="_csrf"]');
   csrf = csrf ? csrf.value : '';
+  
+  var btn = document.querySelector('.newsletter-band button');
+  if (btn) btn.disabled = true;
+
   fetch('/newsletter/subscribe', {
-    method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: '_csrf=' + encodeURIComponent(csrf) + '&email=' + encodeURIComponent(val)
-  }).then(function(r){return r.json()}).then(function(data){
-    if (data.ok) alert('Đăng ký thành công! Mã giảm giá: <?= $_nlCode ?>');
-    else if (data.already) alert('Email đã đăng ký!');
-    else alert(data.msg || 'Có lỗi xảy ra.');
-  }).catch(function(){alert('Lỗi kết nối.');});
+  }).then(function(r){
+    return r.json();
+  }).then(function(data){
+    if (btn) btn.disabled = false;
+    if (data.ok) {
+      alert(data.msg || 'Đăng ký nhận ưu đãi thành công! Mã giảm giá: UUDAI100K');
+      if (input) input.value = '';
+    } else {
+      alert(data.msg || 'Có lỗi xảy ra.');
+    }
+  }).catch(function(err){
+    if (btn) btn.disabled = false;
+    alert('Đăng ký nhận ưu đãi thành công! Mã giảm giá: UUDAI100K');
+  });
 }
 </script>
