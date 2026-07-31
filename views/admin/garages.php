@@ -5,8 +5,8 @@
     <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý Gara (Bảng hiệu, GPKD, 3+ ảnh thực tế) &amp; Quản lý quyền giá sỉ, công nợ.</p>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
-    <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↑ Nhập CSV</button>
-    <a href="/admin/garages/export-csv" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">↓ Xuất CSV</a>
+    <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-outline-navy btn-sm">Nhập CSV</button>
+    <a href="/admin/garages/export-csv" class="btn btn-outline-navy btn-sm">Xuất CSV</a>
   </div>
 </div>
 
@@ -40,29 +40,35 @@
 .garage-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
 .garage-kpi{border:1px solid #e3e9f1;background:#fff;padding:16px;border-radius:8px}
 .garage-kpi b{display:block;font-size:22px;font-weight:800;color:#17325c}
-.garage-kpi span{font-size:12px;color:#718096}
+.garage-kpi span{font-size:12.5px;color:#64748b;font-weight:600}
 .garage-table{width:100%;border-collapse:collapse;background:#fff}
 .garage-table th{font-size:11px;text-transform:uppercase;color:#64748b;background:#f7f9fc;padding:11px 10px;text-align:left;white-space:nowrap;border-bottom:2px solid #e6ebf1}
 .garage-table td{padding:11px 10px;border-top:1px solid #edf1f5;vertical-align:middle;font-size:13px}
 .garage-table tr:hover td{background:#f9fbff}
-.badge-status{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11.5px;font-weight:700;text-transform:uppercase}
+.badge-status{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11.5px;font-weight:700;text-transform:uppercase}
 .badge-pending{background:#fef3c7;color:#b45309;border:1px solid #fde68a}
 .badge-approved{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
 .badge-rejected{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
 .thumb-box{width:60px;height:45px;border-radius:4px;overflow:hidden;border:1px solid #cbd5e1;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .thumb-box img{width:100%;height:100%;object-fit:cover}
+.btn-action-detail{background:#fff;color:#0b1d3a;border:1px solid #0b1d3a;border-radius:6px;font-weight:700;font-size:12px;padding:6px 14px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn-action-detail:hover{background:#0b1d3a;color:#fff}
+.btn-action-approve{background:#16a34a;color:#fff;border-radius:6px;font-weight:700;font-size:12px;padding:6px 16px;border:none;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 4px rgba(22,163,74,0.15)}
+.btn-action-approve:hover{background:#15803d;transform:translateY(-1px)}
+.btn-action-reject{background:#dc2626;color:#fff;border-radius:6px;font-weight:700;font-size:12px;padding:6px 16px;border:none;cursor:pointer;transition:all 0.2s;box-shadow:0 2px 4px rgba(220,38,38,0.15)}
+.btn-action-reject:hover{background:#b91c1c;transform:translateY(-1px)}
 </style>
 
 <!-- MAIN NAVIGATION TABS -->
 <div class="tab-nav">
   <a href="/admin/garages?tab=requests" class="<?= ($tab ?? 'requests') === 'requests' ? 'active' : '' ?>">
-    📋 Yêu cầu Đăng ký Gara
+    Yêu cầu Đăng ký Gara
     <?php if ($pendingRequestsCount > 0): ?>
       <span class="tab-badge gold"><?= $pendingRequestsCount ?> chờ duyệt</span>
     <?php endif; ?>
   </a>
   <a href="/admin/garages?tab=vehicles" class="<?= ($tab ?? '') === 'vehicles' ? 'active' : '' ?>">
-    🚗 Xe khách hàng lưu sẵn
+    Xe khách hàng lưu sẵn
   </a>
 </div>
 
@@ -72,15 +78,15 @@
   <div class="garage-kpis">
     <div class="garage-kpi" style="border-left:4px solid #d97706">
       <b style="color:#d97706"><?= number_format($pendingRequestsCount) ?></b>
-      <span>⏳ Đơn đang chờ duyệt</span>
+      <span>Đơn đang chờ duyệt</span>
     </div>
     <div class="garage-kpi" style="border-left:4px solid #16a34a">
       <b style="color:#16a34a"><?= number_format($approvedRequestsCount) ?></b>
-      <span>✅ Đã xác thực Gara (Giá sỉ)</span>
+      <span>Đã xác thực Gara (Giá sỉ)</span>
     </div>
     <div class="garage-kpi" style="border-left:4px solid #dc2626">
       <b style="color:#dc2626"><?= number_format($rejectedRequestsCount) ?></b>
-      <span>❌ Hồ sơ bị từ chối</span>
+      <span>Hồ sơ bị từ chối</span>
     </div>
   </div>
 
@@ -90,13 +96,13 @@
     <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên Gara, chủ Gara, SĐT, MST..." style="min-width:280px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:13px">
     
     <div style="display:flex;gap:6px">
-      <a href="/admin/garages?tab=requests" class="btn <?= ($statusFilter ?? '') === '' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px">Tất cả</a>
-      <a href="/admin/garages?tab=requests&status=pending" class="btn <?= ($statusFilter ?? '') === 'pending' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px;color:#d97706;border-color:#fde68a">⏳ Chờ duyệt</a>
-      <a href="/admin/garages?tab=requests&status=approved" class="btn <?= ($statusFilter ?? '') === 'approved' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px;color:#16a34a;border-color:#bbf7d0">✅ Đã duyệt</a>
-      <a href="/admin/garages?tab=requests&status=rejected" class="btn <?= ($statusFilter ?? '') === 'rejected' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:6px 12px;color:#dc2626;border-color:#fca5a5">❌ Từ chối</a>
+      <a href="/admin/garages?tab=requests" class="btn <?= ($statusFilter ?? '') === '' ? 'btn-navy' : 'btn-outline' ?>" style="font-size:12px;padding:7px 14px;border-radius:6px">Tất cả</a>
+      <a href="/admin/garages?tab=requests&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-weight:700' : 'background:#fff;color:#b45309;border:1px solid #fde68a' ?>">Chờ duyệt</a>
+      <a href="/admin/garages?tab=requests&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;font-weight:700' : 'background:#fff;color:#15803d;border:1px solid #bbf7d0' ?>">Đã duyệt</a>
+      <a href="/admin/garages?tab=requests&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;font-weight:700' : 'background:#fff;color:#b91c1c;border:1px solid #fca5a5' ?>">Từ chối</a>
     </div>
 
-    <button class="btn btn-navy" type="submit" style="margin-left:auto">Lọc kết quả</button>
+    <button class="btn btn-navy" type="submit" style="margin-left:auto;height:38px;padding:0 18px;border-radius:6px;font-weight:700">Lọc kết quả</button>
   </form>
 
   <!-- REGISTRATIONS TABLE -->
@@ -139,11 +145,11 @@
           <td style="color:#64748b;font-size:12px;white-space:nowrap"><?= e(date('d/m/Y H:i', strtotime($r['created_at']))) ?></td>
           <td>
             <?php if ($r['status'] === 'pending'): ?>
-              <span class="badge-status badge-pending">⏳ Chờ duyệt</span>
+              <span class="badge-status badge-pending">Chờ duyệt</span>
             <?php elseif ($r['status'] === 'approved'): ?>
-              <span class="badge-status badge-approved">✅ Đã duyệt</span>
+              <span class="badge-status badge-approved">Đã duyệt</span>
             <?php else: ?>
-              <span class="badge-status badge-rejected" title="<?= e($r['reject_reason']) ?>">❌ Từ chối</span>
+              <span class="badge-status badge-rejected" title="<?= e($r['reject_reason']) ?>">Từ chối</span>
               <?php if ($r['reject_reason']): ?>
                 <div style="font-size:11px;color:#dc2626;margin-top:2px;max-width:140px"><?= e($r['reject_reason']) ?></div>
               <?php endif; ?>
@@ -151,17 +157,17 @@
           </td>
           <td style="text-align:center;white-space:nowrap">
             <div style="display:flex;gap:6px;justify-content:center">
-              <button type="button" onclick="showRegistrationDetail(<?= e(json_encode($r)) ?>)" class="btn btn-outline-navy btn-sm" style="font-weight:700;font-size:12px">👁️ Chi tiết</button>
+              <button type="button" onclick="showRegistrationDetail(<?= e(json_encode($r)) ?>)" class="btn-action-detail">Chi tiết</button>
               
               <?php if ($r['status'] === 'pending' || $r['status'] === 'rejected'): ?>
                 <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT Gara <?= e($r['garage_name']) ?> và kích hoạt giá sỉ?')">
                   <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
-                  <button type="submit" class="btn btn-sm" style="background:#16a34a;color:#fff;font-weight:800;font-size:12px;border:none">✅ Duyệt</button>
+                  <button type="submit" class="btn-action-approve">Duyệt</button>
                 </form>
               <?php endif; ?>
 
               <?php if ($r['status'] === 'pending' || $r['status'] === 'approved'): ?>
-                <button type="button" onclick="openRejectModal(<?= $r['id'] ?>, '<?= e($r['garage_name']) ?>')" class="btn btn-sm" style="background:#dc2626;color:#fff;font-weight:800;font-size:12px;border:none">❌ Từ chối</button>
+                <button type="button" onclick="openRejectModal(<?= $r['id'] ?>, '<?= e($r['garage_name']) ?>')" class="btn-action-reject">Từ chối</button>
               <?php endif; ?>
             </div>
           </td>
@@ -275,8 +281,8 @@
       </div>
 
       <!-- Bộ ảnh chứng từ -->
-      <h4 style="margin:0 0 12px;color:#0b1d3a;font-size:15px;display:flex;align-items:center;gap:6px">
-        <span>📸</span> BỘ ẢNH XÁC THỰC PHÁP LÝ &amp; THỰC TẾ GARA
+      <h4 style="margin:0 0 12px;color:#0b1d3a;font-size:14.5px;font-weight:800;letter-spacing:0.3px">
+        BỘ ẢNH XÁC THỰC PHÁP LÝ &amp; THỰC TẾ GARA
       </h4>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
@@ -323,7 +329,7 @@
 
     <div style="display:flex;gap:10px;justify-content:flex-end">
       <button type="button" onclick="document.getElementById('rejectRegModal').style.display='none'" class="btn btn-outline">Hủy</button>
-      <button type="submit" class="btn" style="background:#dc2626;color:#fff;font-weight:800;padding:8px 18px">XÁC NHẬN TỪ CHỐI</button>
+      <button type="submit" class="btn" style="background:#dc2626;color:#fff;font-weight:800;padding:8px 18px;border-radius:6px">XÁC NHẬN TỪ CHỐI</button>
     </div>
   </form>
 </div>
@@ -348,7 +354,7 @@ function showRegistrationDetail(r) {
   var boxSign = document.getElementById('box_signboard');
   if (r.signboard_image) {
     if (r.signboard_image.toLowerCase().endsWith('.pdf')) {
-      boxSign.innerHTML = '<a href="' + r.signboard_image + '" target="_blank" style="color:#0b1d3a;font-weight:700;text-decoration:underline">📄 Xem File PDF Bảng hiệu</a>';
+      boxSign.innerHTML = '<a href="' + r.signboard_image + '" target="_blank" style="color:#0b1d3a;font-weight:700;text-decoration:underline">Xem File PDF Bảng hiệu</a>';
     } else {
       boxSign.innerHTML = '<img src="' + r.signboard_image + '" onclick="zoomImg(\'' + r.signboard_image + '\')" style="width:100%;height:100%;object-fit:cover;cursor:zoom-in" title="Click để phóng to">';
     }
@@ -360,7 +366,7 @@ function showRegistrationDetail(r) {
   var boxLic = document.getElementById('box_license');
   if (r.license_image) {
     if (r.license_image.toLowerCase().endsWith('.pdf')) {
-      boxLic.innerHTML = '<a href="' + r.license_image + '" target="_blank" style="color:#0b1d3a;font-weight:700;text-decoration:underline">📄 Xem File PDF GPKD</a>';
+      boxLic.innerHTML = '<a href="' + r.license_image + '" target="_blank" style="color:#0b1d3a;font-weight:700;text-decoration:underline">Xem File PDF GPKD</a>';
     } else {
       boxLic.innerHTML = '<img src="' + r.license_image + '" onclick="zoomImg(\'' + r.license_image + '\')" style="width:100%;height:100%;object-fit:cover;cursor:zoom-in" title="Click để phóng to">';
     }
