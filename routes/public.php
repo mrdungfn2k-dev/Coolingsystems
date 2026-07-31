@@ -623,37 +623,79 @@ get('/news/:slug', function($p) {
 // ── NEWSLETTER ──────────────────────────────────────────────────────────────
 post('/newsletter/subscribe', function() {
     header('Content-Type: application/json; charset=utf-8');
-    global $user;
     $user = currentUser();
     
     $email = strtolower(trim($_POST['email'] ?? ''));
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(['ok' => false, 'msg' => 'Vui lòng nhập địa chỉ email hợp lệ.']);
+        echo json_encode(['ok' => false, 'msg' => 'Vui lòng nhập địa chỉ email hợp lệ (Ví dụ: tenban@gmail.com).']);
         exit;
+    }
+
+    $isLoggedIn = $user && !empty($user['id']) && strpos($user['email'] ?? '', '@guest.local') === false;
+    $userId = $isLoggedIn ? (int)$user['id'] : null;
+    $userEmail = $isLoggedIn ? strtolower(trim($user['email'] ?? '')) : null;
+
+    // Rule 1 & Rule 2: Validation khi người dùng ĐÃ ĐĂNG NHẬP
+    if ($isLoggedIn) {
+        if ($email !== $userEmail) {
+            echo json_encode([
+                'ok' => false,
+                'msg' => 'Email bạn nhập (' . $email . ') không khớp với email tài khoản đăng nhập (' . $userEmail . '). Vui lòng nhập đúng email tài khoản.'
+            ]);
+            exit;
+        }
+
+        $alreadySaved = dbGet("SELECT 1 FROM user_saved_vouchers WHERE user_id=? AND code='UUDAI100K'", [$userId]);
+        $alreadySubscribed = dbGet("SELECT 1 FROM newsletter_subscribers WHERE user_id=? OR LOWER(email)=?", [$userId, $email]);
+
+        if ($alreadySaved || $alreadySubscribed) {
+            echo json_encode([
+                'ok' => false,
+                'msg' => 'Tài khoản/Email của bạn (' . $email . ') đã nhận mã ưu đãi UUDAI100K trước đó rồi. Mã chỉ áp dụng 1 lần duy nhất.'
+            ]);
+            exit;
+        }
+    } else {
+        // Rule 3: Validation khi người dùng CHƯA ĐĂNG NHẬP (Khách vãng lai)
+        $existingUser = dbGet("SELECT id, email FROM users WHERE LOWER(email)=?", [$email]);
+        if ($existingUser) {
+            echo json_encode([
+                'ok' => false,
+                'msg' => 'Email ' . $email . ' đã thuộc về một tài khoản người dùng trên hệ thống. Vui lòng Đăng nhập tài khoản của bạn để nhận mã ưu đãi.'
+            ]);
+            exit;
+        }
+
+        $alreadySubscribed = dbGet("SELECT 1 FROM newsletter_subscribers WHERE LOWER(email)=?", [$email]);
+        if ($alreadySubscribed) {
+            echo json_encode([
+                'ok' => false,
+                'msg' => 'Email ' . $email . ' đã đăng ký nhận mã ưu đãi UUDAI100K trước đó rồi. Mã chỉ áp dụng 1 lần duy nhất.'
+            ]);
+            exit;
+        }
     }
 
     try {
         dbRun("CREATE TABLE IF NOT EXISTS newsletter_subscribers (id INTEGER PRIMARY KEY, email TEXT UNIQUE, user_id INTEGER, created_at DATETIME)");
-        
-        $userId = ($user && !empty($user['id']) && strpos($user['email'] ?? '', '@guest.local') === false) ? $user['id'] : null;
         dbRun("INSERT OR IGNORE INTO newsletter_subscribers (email, user_id, created_at) VALUES (?,?,datetime('now','localtime'))", [$email, $userId]);
         
-        // Ensure UUDAI100K voucher exists in vouchers table
+        // Ensure UUDAI100K voucher exists in vouchers table with valid schema
         $v = dbGet("SELECT id FROM vouchers WHERE code='UUDAI100K'");
         if (!$v) {
-            dbRun("INSERT OR IGNORE INTO vouchers (code, name, scope, discount_type, discount_value, min_order_amount, funded_by, total_quantity, valid_from, valid_to, status, created_at) VALUES ('UUDAI100K', 'Ưu đãi đăng ký tin 100K', 'system', 'fixed', 100000, 0, 'system', 999999, datetime('now','localtime'), '2030-12-31 23:59:59', 'active', datetime('now','localtime'))");
+            dbRun("INSERT OR IGNORE INTO vouchers (code, name, scope, discount_type, discount_value, min_order_amount, funded_by, total_quantity, valid_from, valid_to, status, created_at) VALUES ('UUDAI100K', 'Ưu đãi đăng ký tin 100K', 'new_customer', 'amount', 100000, 0, 'platform', 999999, '2026-01-01 00:00:00', '2030-12-31 23:59:59', 'active', datetime('now','localtime'))");
         }
 
         // If user is logged in, save to user_saved_vouchers
         if ($userId) {
-            dbRun("CREATE TABLE IF NOT EXISTS user_saved_vouchers (id INTEGER PRIMARY KEY, user_id INTEGER, code TEXT, discount_amount INTEGER, description TEXT, expires_after_first_order INTEGER DEFAULT 1, used INTEGER DEFAULT 0, created_at DATETIME)");
-            dbRun("INSERT OR IGNORE INTO user_saved_vouchers (user_id, code, discount_amount, description, created_at) VALUES (?,?,100000,'Ưu đãi đơn hàng đầu tiên - Chiết khấu 100K',datetime('now','localtime'))", [$userId, 'UUDAI100K']);
+            dbRun("CREATE TABLE IF NOT EXISTS user_saved_vouchers (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, code TEXT, discount_amount INTEGER, description TEXT, expires_after_first_order INTEGER DEFAULT 1, used INTEGER DEFAULT 0, created_at DATETIME)");
+            dbRun("INSERT OR IGNORE INTO user_saved_vouchers (user_id, code, discount_amount, description, used, created_at) VALUES (?,?,100000,'Ưu đãi đơn hàng đầu tiên - Chiết khấu 100K', 0, datetime('now','localtime'))", [$userId, 'UUDAI100K']);
         }
 
         echo json_encode([
             'ok' => true,
             'voucher_code' => 'UUDAI100K',
-            'msg' => 'Đăng ký thành công! Mã ưu đãi của bạn: UUDAI100K (Giảm 100.000đ cho đơn hàng đầu tiên).'
+            'msg' => 'Đăng ký thành công! Mã UUDAI100K (Giảm 100.000đ) đã được lưu vào mục Mã giảm giá đang có trong tài khoản của bạn.'
         ]);
         exit;
     } catch (\Exception $e) {
