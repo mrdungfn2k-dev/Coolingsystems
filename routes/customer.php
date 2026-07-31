@@ -201,6 +201,13 @@ post('/customer/garage-register', function() {
         return;
     }
 
+    $taxClean = str_replace('-', '', $taxCode);
+    if (!preg_match('/^\d{10}$|^\d{13}$/', $taxClean)) {
+        flash('error', 'Mã số thuế / MS HKD không hợp lệ. Mã số thuế do Cơ quan Thuế cấp phải gồm đúng 10 hoặc 13 chữ số (VD: 0101234567 hoặc 0101234567-001).');
+        redirect('/customer/profile');
+        return;
+    }
+
     $uploadSingleFile = function(array $file): string {
         if (empty($file['tmp_name']) || $file['error'] !== UPLOAD_ERR_OK) return '';
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));

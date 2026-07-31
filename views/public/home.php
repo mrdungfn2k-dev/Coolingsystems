@@ -418,7 +418,8 @@ foreach ($trustSteps as $step):
         </div>
         <div>
           <label style="display:block; font-size:13px; font-weight:700; color:#1e293b; margin-bottom:5px;">Mã số thuế / MS HKD <span style="color:#dc2626;">* (Bắt buộc)</span></label>
-          <input type="text" name="tax_code" required placeholder="VD: 0101234567 hoặc MS HKD..." style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px; box-sizing:border-box;">
+          <input type="text" name="tax_code" required maxlength="14" placeholder="VD: 0101234567 hoặc 0101234567-001" style="width:100%; height:40px; border:1px solid #cbd5e1; border-radius:6px; padding:0 12px; font-size:13.5px; box-sizing:border-box;">
+          <div style="font-size:11px; color:#64748b; margin-top:3px;">Cấu trúc 10 hoặc 13 chữ số (VD: 0101234567 hoặc 0101234567-001)</div>
         </div>
       </div>
 
@@ -537,8 +538,15 @@ function validateHomeGarageForm(form) {
     if(phone) phone.focus();
     return false;
   }
-  if (!taxCode || !taxCode.value.trim()) {
+  var taxCodeVal = taxCode ? taxCode.value.trim() : '';
+  if (!taxCodeVal) {
     alert('⚠️ Vui lòng nhập Mã số thuế / MS HKD (Trường bắt buộc)!');
+    if(taxCode) taxCode.focus();
+    return false;
+  }
+  var taxClean = taxCodeVal.replace(/-/g, '');
+  if (!/^\d{10}$|^\d{13}$/.test(taxClean)) {
+    alert('⚠️ Mã số thuế / MS HKD không hợp lệ!\nMã số thuế do Cơ quan Thuế cấp phải gồm đúng 10 hoặc 13 chữ số.\nVí dụ hợp lệ: 0101234567 hoặc 0101234567-001');
     if(taxCode) taxCode.focus();
     return false;
   }
