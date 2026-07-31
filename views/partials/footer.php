@@ -92,12 +92,25 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
 </style>
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <?php $mobileUser = $user ?? (function_exists('currentUser') ? currentUser() : null); ?>
   <div style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between;background:#0b1329">
     <div style="font-weight:800;font-size:15px;color:#fff;display:flex;align-items:center;gap:8px">
       <span style="color:#c8a951">⚡</span> MENU COOLING
     </div>
     <button class="mobile-nav-close" id="mobileNavClose" aria-label="Đóng menu" style="background:rgba(255,255,255,0.12);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
   </div>
+
+  <?php if ($mobileUser): ?>
+    <div style="padding:14px 18px 0 18px">
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:10px;color:#c8a951;font-weight:800;text-transform:uppercase;letter-spacing:0.5px">TÀI KHOẢN CỦA BẠN</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;margin-top:2px"><?= e($mobileUser['full_name'] ?: ($mobileUser['garage_name'] ?? 'Khách hàng')) ?></div>
+        </div>
+        <a href="/customer/profile" style="background:#c9a14a;color:#0b1d3a;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:800;text-decoration:none">Hồ sơ ›</a>
+      </div>
+    </div>
+  <?php endif; ?>
 
   <div class="mobile-nav-links" style="padding:12px 18px">
     <!-- Section 1: Danh mục sản phẩm (Category Accordion) -->
@@ -146,21 +159,23 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
     <a href="/policies">Chính sách & Quy định</a>
 
     <!-- Section 4: Tài khoản của tôi -->
-    <?php if ($user && in_array($user['role'], ['customer','staff'])): ?>
+    <?php if ($mobileUser && in_array($mobileUser['role'], ['customer','garage','staff'])): ?>
       <span class="nav-section-label">Tài khoản của tôi</span>
-      <a href="/customer/orders">Đơn hàng của tôi</a>
-      <a href="/customer/favorites">Sản phẩm yêu thích</a>
-      <a href="/customer/chat">Tin nhắn tư vấn</a>
-      <a href="/customer/profile">Hồ sơ cá nhân</a>
-      <a href="/auth/logout" style="color:#ef4444!important">Đăng xuất</a>
-    <?php elseif ($user && $user['role'] === 'partner'): ?>
+      <a href="/customer/profile">👤 Hồ sơ cá nhân</a>
+      <a href="/customer/orders">📦 Đơn hàng của tôi</a>
+      <a href="/customer/favorites">❤️ Sản phẩm yêu thích</a>
+      <a href="/customer/chat">💬 Tin nhắn tư vấn</a>
+      <a href="/auth/logout" style="color:#ef4444!important">🚪 Đăng xuất</a>
+    <?php elseif ($mobileUser && $mobileUser['role'] === 'partner'): ?>
       <span class="nav-section-label">Quản lý đối tác</span>
       <a href="/partner/dashboard">Bảng điều khiển Partner</a>
-      <a href="/partner/logout" style="color:#ef4444!important">Đăng xuất</a>
-    <?php elseif ($user && $user['role'] === 'admin'): ?>
+      <a href="/customer/profile">👤 Hồ sơ cá nhân</a>
+      <a href="/partner/logout" style="color:#ef4444!important">🚪 Đăng xuất</a>
+    <?php elseif ($mobileUser && $mobileUser['role'] === 'admin'): ?>
       <span class="nav-section-label">Quản trị viên</span>
       <a href="/admin">Quản trị Admin Panel</a>
-      <a href="/admin/logout" style="color:#ef4444!important">Đăng xuất</a>
+      <a href="/customer/profile">👤 Hồ sơ cá nhân</a>
+      <a href="/admin/logout" style="color:#ef4444!important">🚪 Đăng xuất</a>
     <?php else: ?>
       <div style="display:flex;gap:10px;margin-top:16px">
         <a href="/auth/login" style="flex:1;padding:10px;background:rgba(255,255,255,0.1);color:#fff!important;text-align:center;border-radius:8px;font-weight:700;text-decoration:none;font-size:13px">Đăng nhập</a>

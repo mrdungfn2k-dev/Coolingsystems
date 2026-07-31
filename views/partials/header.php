@@ -1,3 +1,4 @@
+<?php $user = $user ?? (function_exists('currentUser') ? currentUser() : null); ?>
 <style>
 .all-cats-wrap:hover .cat-dropdown,.all-cats-wrap.open .cat-dropdown{display:block!important}
 .cat-dropdown a:hover{background:#f5f7fb!important;color:#c8a951!important}
@@ -254,7 +255,7 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
     </div>
     </div>
     <div class="mobile-right-actions" style="display:flex;align-items:center;gap:8px;margin-left:auto;">
-      <?php if ($user && in_array($user['role'], ['customer','staff'])): ?>
+      <?php if ($user && in_array($user['role'], ['customer','garage','staff'])): ?>
         <!-- Thông báo -->
         <a href="/customer/notifications" class="mobile-icon-btn" aria-label="Thông báo" style="position:relative;color:var(--navy);align-items:center;padding:6px;" title="Thông báo">
           <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
