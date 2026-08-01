@@ -3637,14 +3637,18 @@ get('/admin/products/:id/history', function($p) {
     $pid = intval($p['id']);
     $product = dbGet("SELECT p.*, c.name AS cat_name, b.name AS car_brand_name, ua.full_name AS approved_by_name FROM products p LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN users ua ON ua.id=p.approved_by WHERE p.id=?", [$pid]);
     if (!$product) { flash('error','Không tìm thấy sản phẩm.'); redirect('/admin/products'); return; }
+    
+    $history = dbAll("SELECT ph.*, u.full_name AS changer_name FROM product_history ph LEFT JOIN users u ON u.id = ph.changed_by WHERE ph.product_id = ? ORDER BY ph.changed_at DESC LIMIT 100", [$pid]);
     $changes = dbAll("SELECT al.*, u.full_name, u.email FROM audit_logs al LEFT JOIN users u ON u.id=al.user_id WHERE al.entity_type='product' AND al.entity_id=? AND al.action!='view' ORDER BY al.created_at DESC LIMIT 200", [$pid]);
     $viewTotal = dbGet("SELECT COUNT(*) AS c FROM audit_logs WHERE entity_type='product' AND entity_id=? AND action='view'", [$pid])['c'] ?? 0;
     $viewPerPage = 50;
     $viewPages = max(1, (int)ceil($viewTotal / $viewPerPage));
     $viewPage = min(max(1, intval($_GET['page'] ?? 1)), $viewPages);
     $views = dbAll("SELECT al.*, u.full_name, u.email FROM audit_logs al LEFT JOIN users u ON u.id=al.user_id WHERE al.entity_type='product' AND al.entity_id=? AND al.action='view' ORDER BY al.created_at DESC LIMIT ? OFFSET ?", [$pid, $viewPerPage, ($viewPage-1)*$viewPerPage]);
-    view('admin/product-history', compact('product','changes','views','viewTotal','viewPage','viewPages','viewPerPage') + ['title'=>'Lịch sử & lượt truy cập']);
+    
+    view('admin/product-history', compact('product','history','changes','views','viewTotal','viewPage','viewPages','viewPerPage') + ['title'=>'Lịch sử & lượt truy cập: '.truncate($product['name'],30)]);
 });
+
 
 post('/admin/products/:id/toggle-status', function($p) {
     requireStaffPermission('rbac:catalog.products.archive|products', '/admin/login'); csrfCheck();
