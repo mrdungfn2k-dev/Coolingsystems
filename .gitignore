@@ -5,6 +5,9 @@ node_modules/
 *.db
 *.sqlite
 database.sqlite
+!cooling_master_data.db
+!master_products_dump.sql
+
 
 # Uploads (user-generated content)
 public/uploads/
