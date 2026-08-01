@@ -160,9 +160,14 @@ get('/customer/cart', function() {
     } elseif (!in_array($user['role'], ['customer','admin','staff'])) {
         redirect('/auth/login'); exit;
     }
-    $items = dbAll("SELECT ci.*, p.name, CASE WHEN p.is_on_sale=1 AND p.sale_price>0 AND p.sale_price<p.price THEN p.sale_price ELSE p.price END AS price, p.stock, p.oem_code, pt.shop_name, pt.id AS partner_id, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM cart_items ci INNER JOIN products p ON p.id=ci.product_id LEFT JOIN partners pt ON pt.id=p.partner_id WHERE ci.user_id=?", [$user['id']]);
+    $items = dbAll("SELECT ci.*, p.name, p.price, p.wholesale_price, p.is_on_sale, p.sale_price, p.stock, p.oem_code, pt.shop_name, pt.id AS partner_id, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM cart_items ci INNER JOIN products p ON p.id=ci.product_id LEFT JOIN partners pt ON pt.id=p.partner_id WHERE ci.user_id=?", [$user['id']]);
+    foreach ($items as &$it) {
+        $it['price'] = getProductEffectivePrice($it, $user);
+    }
+    unset($it);
     view('customer/cart', ['title'=>'Giỏ hàng','items'=>$items]);
 });
+
 
 get('/customer/profile', function() {
     $user = requireRole(['customer','staff','admin'], '/auth/login');
@@ -803,8 +808,9 @@ get('/customer/checkout', function() {
         $items = [];
         if (!empty($_SESSION['guest_cart']) && is_array($_SESSION['guest_cart'])) {
             foreach ($_SESSION['guest_cart'] as $pid => $qty) {
-                $p = dbGet("SELECT p.id as product_id, p.name, CASE WHEN p.is_on_sale=1 AND p.sale_price>0 AND p.sale_price<p.price THEN p.sale_price ELSE p.price END AS price, p.stock, p.weight_g, pt.shop_name, pt.id AS partner_id, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id WHERE p.id=?", [$pid]);
+                $p = dbGet("SELECT p.id as product_id, p.name, p.price, p.wholesale_price, p.is_on_sale, p.sale_price, p.stock, p.weight_g, pt.shop_name, pt.id AS partner_id, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id WHERE p.id=?", [$pid]);
                 if ($p) {
+                    $p['price'] = getProductEffectivePrice($p, null);
                     $p['quantity'] = $qty;
                     $items[] = $p;
                 }
@@ -816,12 +822,16 @@ get('/customer/checkout', function() {
     } elseif (!in_array($user['role'], ['customer','admin','staff'])) {
         redirect('/auth/login'); exit;
     }
-    $items = dbAll("SELECT ci.*, p.name, CASE WHEN p.is_on_sale=1 AND p.sale_price>0 AND p.sale_price<p.price THEN p.sale_price ELSE p.price END AS price, p.stock, p.weight_g, pt.shop_name, pt.id AS partner_id,
+    $items = dbAll("SELECT ci.*, p.name, p.price, p.wholesale_price, p.is_on_sale, p.sale_price, p.stock, p.weight_g, pt.shop_name, pt.id AS partner_id,
         (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image
         FROM cart_items ci
         INNER JOIN products p ON p.id=ci.product_id
-        INNER JOIN partners pt ON pt.id=p.partner_id
+        LEFT JOIN partners pt ON pt.id=p.partner_id
         WHERE ci.user_id=?", [$user['id']]);
+    foreach ($items as &$it) {
+        $it['price'] = getProductEffectivePrice($it, $user);
+    }
+    unset($it);
     if (empty($items)) { flash('error','Giỏ hàng trống'); redirect('/customer/cart'); return; }
     view('customer/checkout', ['title'=>'Thanh toán', 'items'=>$items]);
 });
@@ -836,8 +846,9 @@ post('/customer/checkout', function() {
         $items = [];
         if (!empty($_SESSION['guest_cart']) && is_array($_SESSION['guest_cart'])) {
             foreach ($_SESSION['guest_cart'] as $pid => $qty) {
-                $p = dbGet("SELECT p.id as product_id, p.name, CASE WHEN p.is_on_sale=1 AND p.sale_price>0 AND p.sale_price<p.price THEN p.sale_price ELSE p.price END AS price, p.stock, p.partner_id, p.part_brand, p.weight_g FROM products p WHERE p.id=?", [$pid]);
+                $p = dbGet("SELECT p.id as product_id, p.name, p.price, p.wholesale_price, p.is_on_sale, p.sale_price, p.stock, p.partner_id, p.part_brand, p.weight_g FROM products p WHERE p.id=?", [$pid]);
                 if ($p) {
+                    $p['price'] = getProductEffectivePrice($p, null);
                     $p['quantity'] = $qty;
                     $items[] = $p;
                 }

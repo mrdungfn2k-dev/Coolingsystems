@@ -31,38 +31,6 @@ function googleTranslateElementInit() {
 
 var _currentLang = 'vi';
 
-function switchLang() {
-  var frame = document.querySelector('.goog-te-menu-frame');
-  if (!frame) {
-    // Google Translate not loaded yet, try cookie approach
-    if (_currentLang === 'vi') {
-      document.cookie = "googtrans=/vi/en; path=/; domain=." + location.hostname;
-      document.cookie = "googtrans=/vi/en; path=/";
-      _currentLang = 'en';
-    } else {
-      document.cookie = "googtrans=; path=/; domain=." + location.hostname + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      _currentLang = 'vi';
-    }
-    location.reload();
-    return;
-  }
-  // If frame exists, trigger via the select
-  var sel = document.querySelector('.goog-te-combo');
-  if (sel) {
-    if (_currentLang === 'vi') {
-      sel.value = 'en';
-      _currentLang = 'en';
-    } else {
-      sel.value = 'vi';
-      _currentLang = 'vi';
-    }
-    sel.dispatchEvent(new Event('change'));
-    document.getElementById('langSwitchBtn').textContent = _currentLang === 'en' ? 'VI/EN' : 'EN/VI';
-  }
-}
-
-// Check if already translated
 (function() {
   var c = document.cookie.match(/googtrans=\/vi\/(\w+)/);
   if (c && c[1] === 'en') {
@@ -71,6 +39,23 @@ function switchLang() {
     if (btn) btn.textContent = 'VI/EN';
   }
 })();
+
+function switchLang() {
+  var isEn = (_currentLang === 'vi');
+  var host = location.hostname;
+  var domainPart = host ? ("; domain=." + host) : "";
+  
+  if (isEn) {
+    document.cookie = "googtrans=/vi/en; path=/" + domainPart;
+    document.cookie = "googtrans=/vi/en; path=/";
+  } else {
+    document.cookie = "googtrans=; path=/" + domainPart + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "googtrans=; path=/; domain=" + host + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+  location.reload();
+}
+
 function loadGoogleTranslate() {
   if (window._gtLoaded) return;
   window._gtLoaded = true;
@@ -79,16 +64,26 @@ function loadGoogleTranslate() {
   s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
   document.body.appendChild(s);
 }
-window.addEventListener('load', function() {
-  setTimeout(loadGoogleTranslate, 3500);
-});
+
+// Load translate script immediately if translated to EN, or defer slightly on idle
+if (_currentLang === 'en') {
+  loadGoogleTranslate();
+} else {
+  window.addEventListener('load', function() {
+    setTimeout(loadGoogleTranslate, 1000);
+  });
+}
 </script>
 <style>
-/* Hide Google Translate bar */
-.goog-te-banner-frame { display: none !important; }
-body { top: 0 !important; }
-.goog-te-gadget { font-size: 0 !important; }
-.skiptranslate { display: none !important; }
+/* Hide Google Translate top bar & prevent layout shifting */
+body { top: 0 !important; position: static !important; }
+.goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-te-spinner-pos { display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; }
+font { background-color: transparent !important; box-shadow: none !important; border: none !important; font-family: inherit !important; color: inherit !important; display: inline !important; vertical-align: baseline !important; }
+.skiptranslate { font-size: 0 !important; }
+iframe.skiptranslate { display: none !important; visibility: hidden !important; }
+#goog-gt- { display: none !important; }
+
+
 @media (max-width: 768px) {
   .top-bar { min-height: 36px !important; height: auto !important; padding: 2px 0 !important; overflow: visible !important; width: 100% !important; box-sizing: border-box !important; }
   .top-bar .wrap { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 6px !important; width: 100% !important; box-sizing: border-box !important; min-height: 32px !important; }

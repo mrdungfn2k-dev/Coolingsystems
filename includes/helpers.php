@@ -150,25 +150,56 @@ function jsonResponse(array $data, int $code = 200): void {
 
 // Cart helper
 function cartInfo(): array {
-    $user = currentUser();
-    if (!$user || $user['role'] !== 'customer') {
+    return getCartSummary();
+}
+
+function getProductEffectivePrice(array $product, ?array $user = null): float {
+
+    if ($user === null) {
+        $user = currentUser();
+    }
+    if (function_exists('isVerifiedGarage') && isVerifiedGarage($user)) {
+        if (!empty($product['wholesale_price']) && (float)$product['wholesale_price'] > 0) {
+            return (float)$product['wholesale_price'];
+        }
+        $retail = (float)($product['price'] ?? 0);
+        return round($retail * 0.85);
+    }
+    if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && (float)$product['sale_price'] < (float)($product['price'] ?? 0)) {
+        return (float)$product['sale_price'];
+    }
+    return (float)($product['price'] ?? 0);
+}
+
+function getCartSummary(?array $user = null): array {
+    if (!$user) $user = currentUser();
+    if (!$user) {
         if (!empty($_SESSION['guest_cart']) && is_array($_SESSION['guest_cart'])) {
             $cnt = 0;
             $total = 0;
             foreach ($_SESSION['guest_cart'] as $pid => $qty) {
-                $p = dbGet('SELECT CASE WHEN is_on_sale=1 AND sale_price>0 AND sale_price<price THEN sale_price ELSE price END AS final_price FROM products WHERE id=?', [(int)$pid]);
+                $p = dbGet('SELECT * FROM products WHERE id=?', [(int)$pid]);
                 if ($p) {
                     $cnt += $qty;
-                    $total += $p['final_price'] * $qty;
+                    $total += getProductEffectivePrice($p, null) * $qty;
                 }
             }
             return ['cnt' => $cnt, 'total' => $total];
         }
         return ['cnt' => 0, 'total' => 0];
     }
-    $r = dbGet('SELECT COALESCE(SUM(ci.quantity),0) AS cnt, COALESCE(SUM((CASE WHEN p.is_on_sale=1 AND p.sale_price>0 AND p.sale_price<p.price THEN p.sale_price ELSE p.price END) * ci.quantity),0) AS total FROM cart_items ci INNER JOIN products p ON p.id = ci.product_id WHERE ci.user_id = ?', [$user['id']]);
-    return $r ?: ['cnt' => 0, 'total' => 0];
+    $cartItems = dbAll("SELECT ci.quantity, p.* FROM cart_items ci INNER JOIN products p ON p.id = ci.product_id WHERE ci.user_id = ?", [$user['id']]);
+    $cnt = 0;
+    $total = 0;
+    foreach ($cartItems as $item) {
+        $qty = (int)($item['quantity'] ?? 0);
+        $price = getProductEffectivePrice($item, $user);
+        $cnt += $qty;
+        $total += $price * $qty;
+    }
+    return ['cnt' => $cnt, 'total' => $total];
 }
+
 
 function favCount(): int {
     $user = currentUser();

@@ -2,14 +2,23 @@
 $title = $product['name'];
 $mainImg = !empty($images) ? 'https://coolingsystems.vn/uploads/products/'.str_replace('%2F', '/', rawurlencode($images[0]['file_path'])) : null;
 $productUrl = productCanonicalUrl($product);
-$displayPrice = $product['price'] ?? 0;
-$displayOriginalPrice = $product['original_price'] ?? null;
-if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product['sale_price'] < $product['price']) {
-    $displayPrice = $product['sale_price'];
-    $displayOriginalPrice = $product['price'];
+
+$isVerifiedGara = function_exists('isVerifiedGarage') ? isVerifiedGarage() : (!empty($user['is_verified_garage']) || !empty($user['garage_name']));
+$retailPrice = (float)($product['price'] ?? 0);
+$displayPrice = function_exists('getProductEffectivePrice') ? getProductEffectivePrice($product) : $retailPrice;
+
+if ($isVerifiedGara) {
+    $displayOriginalPrice = ($retailPrice > $displayPrice) ? $retailPrice : null;
+} else {
+    $displayOriginalPrice = $product['original_price'] ?? null;
+    if (!empty($product['is_on_sale']) && !empty($product['sale_price']) && $product['sale_price'] < $product['price']) {
+        $displayPrice = (float)$product['sale_price'];
+        $displayOriginalPrice = (float)$product['price'];
+    }
 }
 
 $descriptionHtml = preg_replace('#<\s*(/?)\s*h1\b#i', '<$1h2', (string)($product['description'] ?? ''));
+
 $descriptionPlain = seoPlainText($descriptionHtml);
 $metaDescription = productMetaDescription(array_merge($product, ['display_price' => $displayPrice]));
 $seo = [
@@ -301,6 +310,13 @@ if (!empty($faqItems)) {
             <span class="pd-discount-badge">-<?= round(($displayOriginalPrice-$displayPrice)/$displayOriginalPrice*100) ?>%</span>
           <?php endif; ?>
         </div>
+        <?php if (!empty($isVerifiedGara)): ?>
+          <div style="margin:8px 0 14px;background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:8px 12px;font-size:12.5px;color:#166534;display:flex;align-items:center;gap:6px">
+            <span style="font-weight:700;background:#15803d;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;text-transform:uppercase">✓ Giá buôn Gara</span>
+            <span>Tài khoản Gara đã xác thực: Đã áp dụng <strong>Bảng Giá Buôn Chiết Khấu</strong><?= $retailPrice > $displayPrice ? ' (Tiết kiệm ' . vnd($retailPrice - $displayPrice) . '/sp so với giá bán lẻ)' : '' ?>.</span>
+          </div>
+        <?php endif; ?>
+
 
         <!-- Stock -->
         <div style="margin-bottom:12px">

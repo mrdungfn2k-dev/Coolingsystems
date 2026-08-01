@@ -8,10 +8,18 @@
     -webkit-overflow-scrolling: touch;
     display: flex;
     align-items: center;
+    justify-content: center;
     white-space: nowrap;
-    padding-bottom: 6px;
+    padding-bottom: 0px;
     scrollbar-width: thin;
     scrollbar-color: rgba(255,255,255,0.35) rgba(255,255,255,0.08);
+  }
+  #navScrollWrap .nav-link {
+    padding: 0 11px !important;
+    font-size: 11.5px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    letter-spacing: 0.02em !important;
   }
   #navScrollWrap::-webkit-scrollbar {
     height: 5px;
@@ -30,6 +38,7 @@
   #navScrollWrap.dragging { cursor: grabbing; }
   #navScrollWrap .nav-link, #navScrollWrap .all-cats { flex-shrink: 0; }
   #navScrollWrap .all-cats-wrap { display: none !important; }
+
   @media (max-width: 768px) {
     nav.primary { background: #1a3258 !important; padding: 0 !important; overflow: hidden !important; width: 100% !important; }
     nav.primary .wrap, #navScrollWrap {

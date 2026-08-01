@@ -1,9 +1,16 @@
 <?php
-$displayPrice = $p['price'] ?? 0;
-$displayOriginalPrice = $p['original_price'] ?? null;
-if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $p['price']) {
-    $displayPrice = $p['sale_price'];
-    $displayOriginalPrice = $p['price'];
+$isVerifiedGara = function_exists('isVerifiedGarage') ? isVerifiedGarage() : (!empty($curU['is_verified_garage']) || !empty($curU['garage_name']));
+$retailPrice = (float)($p['price'] ?? 0);
+$displayPrice = function_exists('getProductEffectivePrice') ? getProductEffectivePrice($p) : $retailPrice;
+
+if ($isVerifiedGara) {
+    $displayOriginalPrice = ($retailPrice > $displayPrice) ? $retailPrice : null;
+} else {
+    $displayOriginalPrice = $p['original_price'] ?? null;
+    if (!empty($p['is_on_sale']) && !empty($p['sale_price']) && $p['sale_price'] < $p['price']) {
+        $displayPrice = (float)$p['sale_price'];
+        $displayOriginalPrice = (float)$p['price'];
+    }
 }
 $productPath = productPath($p);
 
@@ -69,9 +76,10 @@ if ($rawOem !== '') {
   <!-- Nhãn Giá buôn Gara -->
   <?php if (!empty($isVerifiedGara)): ?>
     <div style="margin-bottom:6px">
-      <span class="gara-wholesale-badge" title="Đăng ký Gara/Đại lý để nhận bảng giá chiết khấu đơn từ 10 - 20 triệu - Hotline 0705 070 526" style="font-size:10px;font-weight:700;color:#1d4ed8;background:#eff6ff;border:1px solid #93c5fd;padding:2px 6px;border-radius:4px;display:inline-block">Giá buôn Gara</span>
+      <span class="gara-wholesale-badge" title="Tài khoản Gara đã xác thực: Áp dụng giá buôn chiết khấu - Hotline 0705 070 526" style="font-size:10px;font-weight:700;color:#15803d;background:#f0fdf4;border:1px solid #86efac;padding:2px 6px;border-radius:4px;display:inline-block">✓ Giá buôn Gara</span>
     </div>
   <?php endif; ?>
+
 
   <!-- Footer: Còn hàng + Xem chi tiết -->
   <div style="display:flex;align-items:center;justify-content:space-between">

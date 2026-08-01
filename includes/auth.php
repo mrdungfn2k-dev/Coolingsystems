@@ -32,6 +32,26 @@ function currentUser(): ?array {
     return $user;
 }
 
+function isVerifiedGarage(?array $user = null): bool {
+    if ($user === null) {
+        $user = currentUser();
+    }
+    if (empty($user) || empty($user['id'])) return false;
+    
+    if (!empty($user['is_verified_garage']) || !empty($user['garage_name']) || ($user['role'] ?? '') === 'garage') {
+        return true;
+    }
+    
+    static $cache = [];
+    $uid = (int)$user['id'];
+    if (!isset($cache[$uid])) {
+        $approvedReg = dbGet("SELECT id FROM garage_registrations WHERE user_id=? AND status='approved' LIMIT 1", [$uid]);
+        $cache[$uid] = !empty($approvedReg);
+    }
+    return $cache[$uid];
+}
+
+
 function requireLogin(string $redirect = '/auth/login'): array {
     $user = currentUser();
     if (!$user) {
