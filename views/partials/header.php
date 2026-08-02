@@ -8,7 +8,7 @@
 /* Modern header & search bar responsive layout */
 header.main { min-height: 90px !important; height: auto !important; padding: 12px 0 !important; background: #fff !important; }
 header.main .wrap { max-width: 1280px !important; margin: 0 auto !important; padding: 0 16px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; flex-wrap: nowrap !important; gap: 10px 12px !important; }
-header.main .search { border: 1px solid var(--line) !important; border-radius: 8px !important; display: flex !important; flex: 1 1 200px !important; max-width: 360px !important; min-width: 150px !important; margin: 0 !important; }
+header.main .search { border: 1px solid var(--line) !important; border-radius: 8px !important; display: flex !important; flex: 1 1 300px !important; max-width: 520px !important; min-width: 180px !important; margin: 0 16px !important; }
 header.main .search:focus-within { border-color: var(--navy) !important; box-shadow: 0 0 0 3px var(--navy-soft) !important; }
 header.main .search .submit { flex-shrink:0; padding:0!important; min-width:44px!important; width:44px!important; background:transparent!important; color:#555!important; border-left:1px solid var(--line)!important; border-radius:0!important; display:flex; align-items:center; justify-content:center; }
 header.main .search .submit::before { display:none!important; }
@@ -207,71 +207,6 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
       </button>
     </form>
     
-    <!-- Dynamic Auto-Sliding Hotline Carousel -->
-    <div class="hotline-slider-card" id="csHotlineCarousel">
-      <div class="pulse-icon" title="Hệ thống Hotline & Tư vấn">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-        </svg>
-      </div>
-      <div class="slider-box">
-        <?php foreach ($hotlineItems as $hIndex => $hItem): ?>
-          <?php $hClean = preg_replace('/[^0-9\+]/', '', $hItem['phone']); ?>
-          <div class="slide-unit <?= $hIndex === 0 ? 'active' : '' ?>" data-index="<?= $hIndex ?>">
-            <span class="lbl"><?= htmlspecialchars($hItem['label']) ?></span>
-            <a href="tel:<?= htmlspecialchars($hClean) ?>" class="num"><?= htmlspecialchars($hItem['phone']) ?></a>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <div class="slider-arrow" onclick="nextHotlineSlide()" title="Số tiếp theo">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </div>
-    </div>
-    
-    <script>
-    (function() {
-      let currentIndex = 0;
-      const container = document.getElementById('csHotlineCarousel');
-      if (!container) return;
-      const slides = container.querySelectorAll('.slide-unit');
-      if (slides.length <= 1) return;
-
-      let timer = null;
-
-      function nextSlide() {
-        const currentSlide = slides[currentIndex];
-        currentSlide.classList.remove('active');
-        currentSlide.classList.add('exit-right');
-
-        setTimeout(function() {
-          currentSlide.classList.remove('exit-right');
-        }, 450);
-
-        currentIndex = (currentIndex + 1) % slides.length;
-        const nextSlide = slides[currentIndex];
-        nextSlide.classList.add('active');
-      }
-
-      window.nextHotlineSlide = function() {
-        nextSlide();
-        resetTimer();
-      };
-
-      function startTimer() {
-        timer = setInterval(nextSlide, 2800);
-      }
-
-      function resetTimer() {
-        clearInterval(timer);
-        startTimer();
-      }
-
-      container.addEventListener('mouseenter', function() { clearInterval(timer); });
-      container.addEventListener('mouseleave', function() { startTimer(); });
-
-      startTimer();
-    })();
-    </script>
     <div class="header-actions">
       <?php
         $isGuestUser = $user && strpos($user['email'] ?? '', '@guest.local') !== false;

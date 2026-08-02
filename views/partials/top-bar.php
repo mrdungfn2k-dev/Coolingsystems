@@ -1,9 +1,46 @@
-<?php ?>
+<?php
+$tbConfig = dbAll("SELECT key, value FROM system_config WHERE key IN ('hotline_list','site_phone')");
+$tbMap = [];
+if (!empty($tbConfig) && is_array($tbConfig)) {
+    foreach($tbConfig as $c) { $tbMap[$c['key']] = $c['value']; }
+}
+$rawHotlineConfig = $tbMap['hotline_list'] ?? '';
+$hotlineItems = !empty($rawHotlineConfig) ? json_decode($rawHotlineConfig, true) : null;
+if (empty($hotlineItems) || !is_array($hotlineItems)) {
+    $hotlineItems = [
+        ['label' => 'CSKH & Dịch vụ', 'phone' => '0705.0705.26'],
+        ['label' => 'CSKH & Dịch vụ', 'phone' => '0705.0705.28'],
+        ['label' => 'Kĩ thuật & Bảo Hành', 'phone' => '0704.0704.18'],
+        ['label' => 'Bán Buôn', 'phone' => '0703.0703.21'],
+        ['label' => 'Bán Buôn', 'phone' => '0703.0703.61'],
+        ['label' => 'Bán lẻ', 'phone' => '0703.0703.15']
+    ];
+}
+?>
 <div class="top-bar">
   <div class="wrap">
     <div class="left">
       <span class="badge-live"><span class="dot"></span> Đang phục vụ</span>
     </div>
+    
+    <!-- Dynamic Smooth Left-to-Right Hotline Marquee Stream -->
+    <div class="top-bar-hotline-stream" title="Rê chuột để tạm dừng & nhấp gọi">
+      <div class="marquee-track">
+        <?php for ($repeat = 0; $repeat < 2; $repeat++): ?>
+          <div class="marquee-group">
+            <?php foreach ($hotlineItems as $hItem): ?>
+              <?php $hClean = preg_replace('/[^0-9\+]/', '', $hItem['phone']); ?>
+              <span class="hotline-pill">
+                <span class="h-label"><?= htmlspecialchars($hItem['label']) ?>:</span>
+                <a href="tel:<?= htmlspecialchars($hClean) ?>" class="h-num"><?= htmlspecialchars($hItem['phone']) ?></a>
+              </span>
+              <span class="h-sep">•</span>
+            <?php endforeach; ?>
+          </div>
+        <?php endfor; ?>
+      </div>
+    </div>
+
     <div class="right" style="display:flex;align-items:center;gap:12px">
       <a href="/policies" style="color:rgba(255,255,255,0.75);font-size:11px;font-weight:600;text-decoration:none;transition:0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.75)'">Chính sách</a>
       <span style="width:1px;height:12px;background:rgba(255,255,255,0.15)"></span>
@@ -11,8 +48,8 @@
       <span style="width:1px;height:12px;background:rgba(255,255,255,0.15)"></span>
       <div id="google_translate_element" style="display:none"></div>
       <button id="langSwitchBtn" onclick="switchLang()" style="background:none;border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.8);padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;transition:0.2s" onmouseover="this.style.borderColor='#fff';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='rgba(255,255,255,0.8)'">EN/VI</button>
-      <?php if ($user): ?>
-        <a href="<?= $user['role']==='admin' ? '/admin/logout' : '/auth/logout' ?>" style="background:#e74c3c;color:#fff;font-weight:700;padding:4px 12px;border-radius:4px;font-size:12px;text-decoration:none;text-transform:uppercase;box-shadow:0 2px 4px rgba(231,76,60,0.3)">Đăng xuất</a>
+      <?php if (!empty($user)): ?>
+        <a href="<?= ($user['role']??'')==='admin' ? '/admin/logout' : '/auth/logout' ?>" style="background:#e74c3c;color:#fff;font-weight:700;padding:4px 12px;border-radius:4px;font-size:12px;text-decoration:none;text-transform:uppercase;box-shadow:0 2px 4px rgba(231,76,60,0.3)">Đăng xuất</a>
       <?php endif; ?>
     </div>
   </div>
@@ -84,11 +121,77 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
 #goog-gt- { display: none !important; }
 
 
+/* Top Bar Marquee Stream Styles */
+.top-bar-hotline-stream {
+  flex: 1 !important;
+  margin: 0 16px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 28px !important;
+  mask-image: linear-gradient(to right, transparent, #000 15px, #000 calc(100% - 15px), transparent) !important;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15px, #000 calc(100% - 15px), transparent) !important;
+  cursor: pointer !important;
+}
+.top-bar-hotline-stream .marquee-track {
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  animation: marqueeLeftToRight 28s linear infinite !important;
+  will-change: transform !important;
+}
+.top-bar-hotline-stream:hover .marquee-track {
+  animation-play-state: paused !important;
+}
+@keyframes marqueeLeftToRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+.top-bar-hotline-stream .marquee-group {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+.top-bar-hotline-stream .hotline-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 2px 6px !important;
+  font-size: 11.5px !important;
+}
+.top-bar-hotline-stream .h-label {
+  color: #c8a951 !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2px !important;
+}
+.top-bar-hotline-stream .h-num {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+  transition: color 0.15s !important;
+}
+.top-bar-hotline-stream .h-num:hover {
+  color: #f59e0b !important;
+  text-decoration: underline !important;
+}
+.top-bar-hotline-stream .h-sep {
+  color: rgba(255,255,255,0.35) !important;
+  margin: 0 10px !important;
+  font-size: 10px !important;
+}
+
 @media (max-width: 768px) {
   .top-bar { min-height: 36px !important; height: auto !important; padding: 2px 0 !important; overflow: visible !important; width: 100% !important; box-sizing: border-box !important; }
   .top-bar .wrap { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 6px !important; width: 100% !important; box-sizing: border-box !important; min-height: 32px !important; }
   .top-bar .left { flex: 0 0 auto !important; display: flex !important; align-items: center !important; }
   .top-bar .left .badge-live { font-size: 9.5px !important; padding: 2px 4px !important; line-height: 1.2 !important; }
+  .top-bar-hotline-stream { margin: 0 6px !important; height: 24px !important; }
+  .top-bar-hotline-stream .h-label { font-size: 9.5px !important; }
+  .top-bar-hotline-stream .h-num { font-size: 10.5px !important; }
   .top-bar .right { display: flex !important; align-items: center !important; gap: 4px !important; flex: 0 0 auto !important; margin-left: auto !important; }
   .top-bar .right a[href="/policies"],
   .top-bar .right a[href="/stores"] { display: inline-block !important; color: rgba(255,255,255,0.85) !important; font-size: 10.5px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
