@@ -84,6 +84,75 @@
       </div>
     </form>
   </div>
+
+  <!-- Hotline & Service Phone Numbers Management -->
+  <?php
+    $rawHotlines = dbGet("SELECT value FROM system_config WHERE key='hotline_list'")['value'] ?? '';
+    $hotlineItems = !empty($rawHotlines) ? json_decode($rawHotlines, true) : null;
+    if (empty($hotlineItems) || !is_array($hotlineItems)) {
+        $hotlineItems = [
+            ['label' => 'CSKH & Dịch vụ', 'phone' => '0705.0705.26'],
+            ['label' => 'CSKH & Dịch vụ', 'phone' => '0705.0705.28'],
+            ['label' => 'Kĩ thuật & Bảo Hành', 'phone' => '0704.0704.18'],
+            ['label' => 'Bán Buôn', 'phone' => '0703.0703.21'],
+            ['label' => 'Bán Buôn', 'phone' => '0703.0703.61'],
+            ['label' => 'Bán lẻ', 'phone' => '0703.0703.15']
+        ];
+    }
+  ?>
+  <div class="settings-card" style="grid-column: 1 / -1;">
+    <h3>📞 Quản lý Danh sách Hotline & Bộ phận hỗ trợ</h3>
+    <p style="font-size:13.5px;color:#666;margin-bottom:18px">Thêm, sửa, xóa các số điện thoại hotline theo từng bộ phận (CSKH & Dịch vụ, Kĩ thuật & Bảo Hành, Bán Buôn, Bán lẻ...). Danh sách số điện thoại này sẽ tự động chạy trượt tự động sang phải mượt mà trên thanh Header trang chủ.</p>
+    
+    <form method="post" action="/admin/settings/hotlines" id="hotlineForm">
+      <?= csrfField() ?>
+      <div id="hotlineListContainer" style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px">
+        <?php foreach ($hotlineItems as $idx => $item): ?>
+        <div class="hotline-row" style="display:flex;gap:12px;align-items:center;background:#f8fafc;padding:12px 16px;border-radius:10px;border:1px solid #e2e8f0">
+          <span style="color:#a0aec0;font-size:16px;font-weight:bold" title="STT"><?= $idx + 1 ?>.</span>
+          <div style="flex:1">
+            <label style="font-size:12px;color:#4a5568;margin-bottom:4px;font-weight:700">Tên bộ phận / Nhóm hỗ trợ</label>
+            <input type="text" name="hotline_labels[]" value="<?= htmlspecialchars($item['label'] ?? '') ?>" placeholder="VD: CSKH & Dịch vụ" required style="width:100%">
+          </div>
+          <div style="flex:1">
+            <label style="font-size:12px;color:#4a5568;margin-bottom:4px;font-weight:700">Số điện thoại hotline</label>
+            <input type="text" name="hotline_phones[]" value="<?= htmlspecialchars($item['phone'] ?? '') ?>" placeholder="VD: 0705.0705.26" required style="width:100%">
+          </div>
+          <button type="button" onclick="this.closest('.hotline-row').remove()" style="background:#fff0f0;color:#e53e3e;border:1px solid #fed7d7;padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;margin-top:20px">✕ Xóa</button>
+        </div>
+        <?php endforeach; ?>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+        <button type="button" onclick="addHotlineRow()" style="background:#edf2f7;color:#2d3748;border:1px solid #cbd5e0;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13.5px;font-weight:700">+ Thêm số hotline mới</button>
+        <button type="submit" class="btn-save">Lưu danh sách Hotline</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  function addHotlineRow() {
+    const container = document.getElementById('hotlineListContainer');
+    const count = container.querySelectorAll('.hotline-row').length + 1;
+    const div = document.createElement('div');
+    div.className = 'hotline-row';
+    div.style = 'display:flex;gap:12px;align-items:center;background:#f8fafc;padding:12px 16px;border-radius:10px;border:1px solid #e2e8f0';
+    div.innerHTML = `
+      <span style="color:#a0aec0;font-size:16px;font-weight:bold">${count}.</span>
+      <div style="flex:1">
+        <label style="font-size:12px;color:#4a5568;margin-bottom:4px;font-weight:700">Tên bộ phận / Nhóm hỗ trợ</label>
+        <input type="text" name="hotline_labels[]" placeholder="VD: CSKH & Dịch vụ" required style="width:100%">
+      </div>
+      <div style="flex:1">
+        <label style="font-size:12px;color:#4a5568;margin-bottom:4px;font-weight:700">Số điện thoại hotline</label>
+        <input type="text" name="hotline_phones[]" placeholder="VD: 0705.0705.26" required style="width:100%">
+      </div>
+      <button type="button" onclick="this.closest('.hotline-row').remove()" style="background:#fff0f0;color:#e53e3e;border:1px solid #fed7d7;padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;margin-top:20px">✕ Xóa</button>
+    `;
+    container.appendChild(div);
+  }
+  </script>
+
   <!-- Admin Account -->
   <div class="settings-card" style="grid-column:1 / -1">
     <h3>🔑 Tài khoản quản trị</h3>
@@ -150,6 +219,13 @@
           WhatsApp Link
         </label>
         <input type="text" name="social_whatsapp" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_whatsapp'")['value'] ?? '') ?>" placeholder="https://wa.me/84xxxxxxxxx" pattern="https?://(wa\.me|(www\.)?whatsapp\.com)/.*" title="Phải là link WhatsApp (wa.me / whatsapp.com)">
+      </div>
+      <div class="form-group">
+        <label>
+          <img src="/uploads/zalo_icon.png" alt="Zalo" style="width:16px;height:16px;vertical-align:middle;margin-right:4px">
+          Zalo Link <small>(VD: https://zalo.me/0705070526)</small>
+        </label>
+        <input type="text" name="social_zalo" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='social_zalo'")['value'] ?? 'https://zalo.me/0705070526') ?>" placeholder="https://zalo.me/0705070526" pattern="https?://.*" title="Link Zalo hợp lệ (VD: https://zalo.me/0705070526)">
       </div>
       <div class="form-group">
         <label>

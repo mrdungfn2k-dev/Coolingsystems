@@ -3960,6 +3960,39 @@ post('/admin/settings/general', function() {
 redirect('/admin/settings');
 });
 
+// Admin Hotline List Management Handler
+post('/admin/settings/hotlines', function() {
+    requireStaffPermission('rbac:system.business.manage', '/admin/login'); csrfCheck();
+    
+    $labels = $_POST['hotline_labels'] ?? [];
+    $phones = $_POST['hotline_phones'] ?? [];
+    
+    $list = [];
+    for ($i = 0; $i < count($labels); $i++) {
+        $lbl = trim($labels[$i] ?? '');
+        $ph = trim($phones[$i] ?? '');
+        if ($lbl !== '' && $ph !== '') {
+            $list[] = [
+                'label' => $lbl,
+                'phone' => $ph
+            ];
+        }
+    }
+    
+    $json = json_encode($list, JSON_UNESCAPED_UNICODE);
+    dbRun("INSERT INTO system_config (key, value) VALUES ('hotline_list',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$json]);
+    
+    if (!empty($list[0]['phone'])) {
+        $clean = preg_replace('/[^0-9]/', '', $list[0]['phone']);
+        if (strlen($clean) >= 9) {
+            dbRun("INSERT INTO system_config (key, value) VALUES ('site_phone',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=datetime('now')", [$clean]);
+        }
+    }
+    
+    flash('success', 'Đã cập nhật danh sách Hotline & Bộ phận hỗ trợ đồng bộ tự động trên toàn hệ thống!');
+    redirect('/admin/settings');
+});
+
 
 // Delete individual product image
 post('/admin/products/delete-image', function() {
@@ -4044,7 +4077,7 @@ post('/admin/products/delete-images-bulk', function() {
 
 post('/admin/settings/social', function() {
     requireStaffPermission('rbac:system.social.manage|tax_config', '/auth/login'); csrfCheck();
-    $fields = ['social_whatsapp','social_tiktok','social_facebook'];
+    $fields = ['social_whatsapp','social_zalo','social_tiktok','social_facebook'];
     foreach($fields as $f) {
         $val = trim($_POST[$f] ?? '');
                 if (!empty($val) && !preg_match('#^https?://.+\\..+#', $val)) {

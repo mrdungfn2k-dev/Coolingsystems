@@ -185,16 +185,13 @@ if (!empty($faqItems)) {
 }
 .pd-gallery{position:sticky;top:100px;margin-top:0;padding:0!important;border:none!important;background:transparent!important;box-shadow:none!important}
 .pd-main-img{background:#fff;border-radius:8px;padding:0;text-align:center;aspect-ratio:4/3;width:100%;height:300px;min-height:280px;max-height:310px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #e2e8f0;box-shadow:none;margin-top:0}
-.pd-main-img img{max-width:100%;object-fit:contain!important;object-position:center;border-radius:8px;width:100%;height:100%;background:#fff}
+.pd-main-img img{max-width:100%;object-fit:cover!important;object-position:center;border-radius:8px;width:100%;height:100%;background:#fff}
 .pd-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pd-thumb{width:54px;height:54px;border-radius:4px;border:2px solid transparent;overflow:hidden;cursor:pointer;background:#f5f7fb;display:flex;align-items:center;justify-content:center}
 .pd-thumb img{width:100%;height:100%;object-fit:contain}
 .pd-thumb.active,.pd-thumb:hover{border-color:var(--gold-warm)}
 .pd-gallery{position:relative}
-.pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.95);border:1px solid #ccc;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:30;font-size:22px;font-weight:700;color:#1a3258;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s}
-.pd-nav:hover{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.2)}
-.pd-nav.prev{left:8px}
-.pd-nav.next{right:8px}
+.pd-nav{display:none!important}
 .pd-counter{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,0.55);color:#fff;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;z-index:5}
 .pd-main-img{position:relative;overflow:hidden;cursor:zoom-in}
 .pd-main-img.zoomed{cursor:zoom-out}
@@ -263,7 +260,7 @@ if (!empty($faqItems)) {
                  alt="<?= e($product['name']) ?>" id="pdMainImg"
                  fetchpriority="high" loading="eager"
                  width="600" height="600"
-                 style="max-width:100%;width:100%;height:100%;object-fit:contain!important;object-position:center;border-radius:8px;background:#fff">
+                 style="max-width:100%;width:100%;height:100%;object-fit:cover!important;object-position:center;border-radius:8px;background:#fff">
           <?php else: ?>
             <div style="text-align:center;color:#ccc">
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -273,8 +270,6 @@ if (!empty($faqItems)) {
             </div>
           <?php endif; ?>
           <?php if(!empty($images) && count($images) > 1): ?>
-            <button class="pd-nav prev" onclick="slideImg(-1, event)" aria-label="Ảnh trước">‹</button>
-            <button class="pd-nav next" onclick="slideImg(1, event)" aria-label="Ảnh sau">›</button>
             <div class="pd-counter"><span id="imgIdx">1</span>/<?= count($images) ?></div>
           <?php endif; ?>
         </div>

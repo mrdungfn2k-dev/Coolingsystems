@@ -14,21 +14,119 @@ header.main .search .submit { flex-shrink:0; padding:0!important; min-width:44px
 header.main .search .submit::before { display:none!important; }
 header.main .search .submit:hover { background:var(--bg-soft)!important; color:var(--navy)!important; }
 header.main .search input { flex:1; min-width:120px!important; width:100%; padding:10px 12px; color:#1e293b; font-size:13.5px; }
-header.main .hotline { flex-shrink: 0 !important; }
-header.main .header-actions { display: flex !important; align-items: center !important; gap: 4px !important; flex-shrink: 0 !important; flex-wrap: nowrap !important; }
-
-
-@media(min-width: 769px) {
-  .mobile-search-bar { display: none !important; }
-  .mobile-right-actions { display: none !important; }
-  .mobile-cart-btn { display: none !important; }
+header.main .hotline-slider-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%) !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 12px !important;
+  padding: 5px 10px !important;
+  min-width: 220px !important;
+  max-width: 245px !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  box-shadow: 0 2px 8px rgba(26,50,88,0.06) !important;
+  user-select: none !important;
+  flex-shrink: 0 !important;
 }
+header.main .hotline-slider-card .pulse-icon {
+  width: 32px !important;
+  height: 32px !important;
+  background: #1a3258 !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 0 0 0 rgba(26,50,88,0.4) !important;
+  animation: pulse-ring 2s infinite !important;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(26,50,88,0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(26,50,88,0); }
+  100% { box-shadow: 0 0 0 0 rgba(26,50,88,0); }
+}
+header.main .hotline-slider-card .slider-box {
+  flex: 1 !important;
+  position: relative !important;
+  height: 36px !important;
+  overflow: hidden !important;
+}
+header.main .hotline-slider-card .slide-unit {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  opacity: 0 !important;
+  transform: translateX(-100%) !important;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s ease !important;
+  pointer-events: none !important;
+}
+header.main .hotline-slider-card .slide-unit.active {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}
+header.main .hotline-slider-card .slide-unit.exit-right {
+  opacity: 0 !important;
+  transform: translateX(100%) !important;
+  pointer-events: none !important;
+}
+header.main .hotline-slider-card .slide-unit .lbl {
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  line-height: 1.2 !important;
+}
+header.main .hotline-slider-card .slide-unit .num {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #1a3258 !important;
+  text-decoration: none !important;
+  line-height: 1.2 !important;
+  transition: color 0.15s !important;
+}
+header.main .hotline-slider-card .slide-unit .num:hover {
+  color: #c8a951 !important;
+}
+header.main .hotline-slider-card .slider-arrow {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  border: 1px solid #cbd5e1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #475569 !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: all 0.15s !important;
+}
+header.main .hotline-slider-card .slider-arrow:hover {
+  background: #1a3258 !important;
+  color: #fff !important;
+  border-color: #1a3258 !important;
+}
+
 @media(max-width: 768px) {
   header.main { min-height: auto !important; padding: 8px 0 !important; }
   header.main .wrap { padding: 0 12px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; }
   header.main .logo { width: 135px !important; height: 44px !important; max-width: 135px !important; max-height: 44px !important; flex-shrink: 0 !important; margin: 0 !important; display: block !important; }
   header.main .logo img, header.main .logo svg { width: 135px !important; height: 44px !important; max-width: 135px !important; max-height: 44px !important; object-fit: contain !important; }
-  header.main .hotline { display: none !important; }
+  header.main .hotline-slider-card { display: none !important; }
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
   
@@ -76,6 +174,19 @@ foreach($sysConfig as $cfg) {
 }
 $siteLogo = $configMap['site_logo'] ?? '';
 $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
+
+$rawHotlineConfig = $configMap['hotline_list'] ?? '';
+$hotlineItems = !empty($rawHotlineConfig) ? json_decode($rawHotlineConfig, true) : null;
+if (empty($hotlineItems) || !is_array($hotlineItems)) {
+    $hotlineItems = [
+        ['label' => 'CSKH & Dịch vụ', 'phone' => '0705.0705.26'],
+        ['label' => 'CSKH & Dịch vụ', 'phone' => '0705.0705.28'],
+        ['label' => 'Kĩ thuật & Bảo Hành', 'phone' => '0704.0704.18'],
+        ['label' => 'Bán Buôn', 'phone' => '0703.0703.21'],
+        ['label' => 'Bán Buôn', 'phone' => '0703.0703.61'],
+        ['label' => 'Bán lẻ', 'phone' => '0703.0703.15']
+    ];
+}
 ?>
 <header class="main">
   <div class="wrap">
@@ -95,10 +206,72 @@ $sitePhone = $configMap['site_phone'] ?? '<?= $sysHotline ?>';
         </svg>
       </button>
     </form>
-    <div class="hotline">
-      <div class="pulse">T</div>
-      <div class="info"><div class="lbl">Tư vấn miễn phí 24/7</div><div class="num"><?= htmlspecialchars($sitePhone) ?></div></div>
+    
+    <!-- Dynamic Auto-Sliding Hotline Carousel -->
+    <div class="hotline-slider-card" id="csHotlineCarousel">
+      <div class="pulse-icon" title="Hệ thống Hotline & Tư vấn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+      </div>
+      <div class="slider-box">
+        <?php foreach ($hotlineItems as $hIndex => $hItem): ?>
+          <?php $hClean = preg_replace('/[^0-9\+]/', '', $hItem['phone']); ?>
+          <div class="slide-unit <?= $hIndex === 0 ? 'active' : '' ?>" data-index="<?= $hIndex ?>">
+            <span class="lbl"><?= htmlspecialchars($hItem['label']) ?></span>
+            <a href="tel:<?= htmlspecialchars($hClean) ?>" class="num"><?= htmlspecialchars($hItem['phone']) ?></a>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <div class="slider-arrow" onclick="nextHotlineSlide()" title="Số tiếp theo">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
     </div>
+    
+    <script>
+    (function() {
+      let currentIndex = 0;
+      const container = document.getElementById('csHotlineCarousel');
+      if (!container) return;
+      const slides = container.querySelectorAll('.slide-unit');
+      if (slides.length <= 1) return;
+
+      let timer = null;
+
+      function nextSlide() {
+        const currentSlide = slides[currentIndex];
+        currentSlide.classList.remove('active');
+        currentSlide.classList.add('exit-right');
+
+        setTimeout(function() {
+          currentSlide.classList.remove('exit-right');
+        }, 450);
+
+        currentIndex = (currentIndex + 1) % slides.length;
+        const nextSlide = slides[currentIndex];
+        nextSlide.classList.add('active');
+      }
+
+      window.nextHotlineSlide = function() {
+        nextSlide();
+        resetTimer();
+      };
+
+      function startTimer() {
+        timer = setInterval(nextSlide, 2800);
+      }
+
+      function resetTimer() {
+        clearInterval(timer);
+        startTimer();
+      }
+
+      container.addEventListener('mouseenter', function() { clearInterval(timer); });
+      container.addEventListener('mouseleave', function() { startTimer(); });
+
+      startTimer();
+    })();
+    </script>
     <div class="header-actions">
       <?php
         $isGuestUser = $user && strpos($user['email'] ?? '', '@guest.local') !== false;
