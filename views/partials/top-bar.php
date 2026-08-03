@@ -220,9 +220,11 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   .top-bar-main-row { 
     display: flex !important; 
     align-items: center !important; 
-    justify-content: space-between !important; 
+    justify-content: flex-start !important; 
+    gap: 8px !important;
     width: 100% !important; 
     box-sizing: border-box !important;
+    padding: 0 2px !important;
   }
   .top-bar-main-row .left { flex: 0 0 auto !important; display: flex !important; align-items: center !important; margin: 0 !important; }
   .top-bar-main-row .left .badge-live { font-size: 9.5px !important; padding: 1.5px 5px !important; line-height: 1.2 !important; white-space: nowrap !important; }
@@ -230,9 +232,9 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   .top-bar-main-row .right { 
     display: flex !important; 
     align-items: center !important; 
-    gap: 3px !important; 
+    gap: 4px !important; 
     flex: 0 0 auto !important; 
-    margin-left: auto !important; 
+    margin-left: 0 !important; 
   }
   .top-bar-main-row .right a { color: rgba(255,255,255,0.92) !important; font-size: 10px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
   .top-bar-main-row .right .sep { color: rgba(255,255,255,0.25) !important; font-size: 9px !important; margin: 0 1px !important; }
@@ -243,6 +245,6 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   .top-bar-hotline-stream .hotline-list { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; align-items: center !important; white-space: normal !important; gap: 2px 6px !important; width: 100% !important; }
   .top-bar-hotline-stream .hotline-pill { font-size: 10px !important; padding: 0 2px !important; }
   .top-bar-hotline-stream .h-label { font-size: 9.5px !important; }
-  .top-bar-hotline-stream .h-num { font-size: 10.5px !important; }
+  .top-bar-hotline-stream .h-num { font-size: 11px !important; }
 }
 </style>
