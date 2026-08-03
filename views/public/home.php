@@ -95,8 +95,8 @@ require __DIR__ . '/../partials/head.php';
       <style>
       @media (max-width: 768px) {
         #heroSliderWrap.hero-slider-wrap {
-          aspect-ratio: 16 / 9 !important;
-          min-height: 200px !important;
+          aspect-ratio: 16 / 7 !important;
+          min-height: 180px !important;
           height: auto !important;
           background: #0b1a30 !important;
           border-radius: 12px !important;
@@ -119,48 +119,10 @@ require __DIR__ . '/../partials/head.php';
       </style>
       <div class="banner pure-image-banner hero-slider-wrap" id="heroSliderWrap" style="padding:0;overflow:hidden;background:#0b1a30;position:relative;border-radius:12px;width:100%;aspect-ratio:16/7;min-height:220px">
         <div class="hero-slides-container" style="position:relative;width:100%;height:100%">
-          <?php foreach ($rawBannersList as $idx => $bn): 
-            $mobImg = preg_replace('/\.webp$/i', '_mob.webp', $bn['img']);
-            if (!file_exists(__DIR__ . '/../../public/uploads/banners/' . $mobImg)) {
-                $mobImg = $bn['img'];
-            }
-
-            // Dynamic text overlays for crystal clear rendering
-            if ($idx === 0) {
-                $bBadge = "CAM KẾT CHẤT LƯỢNG";
-                $bTitle = "PHỤ TÙNG CHÍNH HÃNG";
-                $bSub   = "Hơn 100.000 mã OEM · Bảo hành toàn quốc";
-                $bBtn   = "KHÁM PHÁ NGAY";
-            } elseif ($idx === 1) {
-                $bBadge = "ƯU ĐÃI CÓ HẠN";
-                $bTitle = "KHUYẾN MÃI ĐẶC BIỆT";
-                $bSub   = "Giao hàng nhanh 24h toàn quốc";
-                $bBtn   = "XEM NGAY";
-            } else {
-                $bBadge = "CHÍNH HÃNG 100%";
-                $bTitle = "HỆ THỐNG ĐIỆN LẠNH Ô TÔ";
-                $bSub   = "Bảo hành dài hạn · Giá sỉ cạnh tranh";
-                $bBtn   = "TƯ VẤN NGAY";
-            }
-          ?>
+          <?php foreach ($rawBannersList as $idx => $bn): ?>
             <div class="hero-slide-item <?= $idx === 0 ? 'active' : '' ?>" style="position:absolute;inset:0;opacity:<?= $idx === 0 ? '1' : '0' ?>;transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease;z-index:<?= $idx === 0 ? '2' : '1' ?>;pointer-events:<?= $idx === 0 ? 'auto' : 'none' ?>">
-              <a href="<?= e(!empty($bn['link']) ? $bn['link'] : '/products') ?>" style="display:block;width:100%;height:100%;position:relative;text-decoration:none">
-                <!-- Background Navy Image Layer -->
-                <div style="position:absolute;inset:0;background:#0b1a30">
-                  <picture>
-                    <source media="(max-width: 640px)" srcset="/uploads/banners/<?= e($mobImg) ?>" type="image/webp">
-                    <source media="(min-width: 641px)" srcset="/uploads/banners/<?= e($bn['img']) ?>" type="image/webp">
-                    <img src="/uploads/banners/<?= e($mobImg) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="640" height="280" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;opacity:0.3">
-                  </picture>
-                </div>
-                <!-- 100% Crisp Vector HTML Text Overlay -->
-                <div class="hero-text-overlay" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;z-index:5">
-                  <div style="width:36px;height:3px;background:#c8962b;margin-bottom:8px;border-radius:2px"></div>
-                  <div style="color:#d4af37;font-size:clamp(10px, 2.5vw, 13px);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px"><?= $bBadge ?></div>
-                  <h2 style="color:#ffffff;font-size:clamp(20px, 5vw, 36px);font-weight:900;margin:2px 0 6px 0;letter-spacing:1px;text-shadow:0 2px 8px rgba(0,0,0,0.6);line-height:1.2"><?= $bTitle ?></h2>
-                  <p style="color:#e2e8f0;font-size:clamp(11px, 2.8vw, 15px);margin:0 0 12px 0;font-weight:500"><?= $bSub ?></p>
-                  <span style="display:inline-block;padding:7px 20px;background:#c8962b;color:#0b1a30;font-size:clamp(11px, 2.6vw, 13px);font-weight:800;border-radius:6px;box-shadow:0 4px 12px rgba(200,150,43,0.35);text-transform:uppercase"><?= $bBtn ?></span>
-                </div>
+              <a href="<?= e(!empty($bn['link']) ? $bn['link'] : '/products') ?>" style="display:block;width:100%;height:100%;text-decoration:none">
+                <img src="/uploads/banners/<?= e($bn['img']) ?>?v=<?= filemtime(__DIR__ . '/../../public/uploads/banners/' . $bn['img']) ?>" alt="Banner phụ tùng làm mát <?= $idx + 1 ?>" width="1600" height="700" <?= $idx === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"' ?> style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
               </a>
             </div>
           <?php endforeach; ?>
