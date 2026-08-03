@@ -122,7 +122,7 @@ header.main .hotline-slider-card .slider-arrow:hover {
 }
 
 @media(max-width: 768px) {
-  header.main { min-height: auto !important; padding: 2px 0 !important; background: #fff !important; margin: 0 !important; border-bottom: 1px solid #e2e8f0 !important; }
+  header.main { min-height: auto !important; padding: 4px 0 !important; background: #fff !important; margin: 0 !important; border-bottom: 1px solid #e2e8f0 !important; }
   header.main .wrap { 
     display: flex !important; 
     flex-direction: row !important; 
@@ -132,32 +132,32 @@ header.main .hotline-slider-card .slider-arrow:hover {
     padding: 0 12px !important; 
     gap: 8px !important; 
     width: 100% !important; 
-    height: 44px !important;
-    min-height: 44px !important;
-    max-height: 44px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
     box-sizing: border-box !important;
     grid-template-columns: none !important;
     margin: 0 !important;
   }
   
-  /* Ultra-compact mobile logo aligned inline with cart and menu icons */
+  /* Ultra-compact mobile logo centered inline with cart and menu icons */
   header.main .logo { 
     display: flex !important; 
     align-items: center !important; 
     justify-content: flex-start !important; 
     flex: 0 0 auto !important; 
-    width: 185px !important; 
-    height: 38px !important; 
-    max-width: 185px !important; 
-    max-height: 38px !important; 
+    width: 180px !important; 
+    height: 40px !important; 
+    max-width: 180px !important; 
+    max-height: 40px !important; 
     margin: 0 !important; 
     padding: 0 !important;
   }
   header.main .logo img, header.main .logo svg { 
-    width: 185px !important; 
-    height: 38px !important; 
-    max-width: 185px !important; 
-    max-height: 38px !important; 
+    width: 180px !important; 
+    height: 40px !important; 
+    max-width: 180px !important; 
+    max-height: 40px !important; 
     object-fit: contain !important; 
     object-position: left center !important; 
     margin: 0 !important;
@@ -167,13 +167,13 @@ header.main .hotline-slider-card .slider-arrow:hover {
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
   
-  /* Ultra-compact search bar below header with zero wasted space */
+  /* Ultra-compact search bar below header */
   .mobile-search-bar { display: flex !important; padding: 4px 12px 4px 12px !important; width: 100% !important; box-sizing: border-box !important; background: #fff !important; }
   .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 36px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
   .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 10px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
   .mobile-search-bar button { width: 40px !important; height: 36px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
-  /* Cart & Menu toggle shifted UP inline with logo with zero bottom whitespace */
+  /* Right actions (Cart & Menu toggle) in static flex flow perfectly centered on same row */
   .mobile-right-actions { 
     position: static !important;
     top: auto !important;
@@ -185,7 +185,7 @@ header.main .hotline-slider-card .slider-arrow:hover {
     gap: 6px !important; 
     margin-left: auto !important; 
     flex-shrink: 0 !important; 
-    height: 38px !important;
+    height: 40px !important;
     padding: 0 !important;
   }
   .mobile-icon-btn, .mobile-cart-btn { 
@@ -420,7 +420,6 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
         <a href="/auth/login" class="h-btn"><span class="label">Tài khoản</span><span class="value">Đăng nhập</span></a>
         <a href="/auth/register" class="h-btn"><span class="label">Mới?</span><span class="value">Đăng ký</span></a>
       <?php endif; ?>
-    </div>
     </div>
     <div class="mobile-right-actions" style="display:flex;align-items:center;gap:8px;margin-left:auto;">
       <?php if ($user && in_array($user['role'], ['customer','garage','staff'])): ?>
