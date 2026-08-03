@@ -122,7 +122,7 @@ header.main .hotline-slider-card .slider-arrow:hover {
 }
 
 @media(max-width: 768px) {
-  header.main { min-height: auto !important; padding: 4px 0 2px 0 !important; background: #fff !important; margin: 0 !important; border-bottom: 1px solid #f1f5f9 !important; }
+  header.main { min-height: auto !important; padding: 2px 0 !important; background: #fff !important; margin: 0 !important; border-bottom: 1px solid #e2e8f0 !important; }
   header.main .wrap { 
     display: flex !important; 
     flex-direction: row !important; 
@@ -132,32 +132,32 @@ header.main .hotline-slider-card .slider-arrow:hover {
     padding: 0 12px !important; 
     gap: 8px !important; 
     width: 100% !important; 
-    height: 60px !important;
-    min-height: 60px !important;
-    max-height: 60px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
     box-sizing: border-box !important;
     grid-template-columns: none !important;
     margin: 0 !important;
   }
   
-  /* Large unconstrained mobile logo filling left of white header box */
+  /* Ultra-compact mobile logo aligned inline with cart and menu icons */
   header.main .logo { 
     display: flex !important; 
     align-items: center !important; 
     justify-content: flex-start !important; 
     flex: 0 0 auto !important; 
-    width: 220px !important; 
-    height: 54px !important; 
-    max-width: none !important; 
-    max-height: none !important; 
+    width: 185px !important; 
+    height: 38px !important; 
+    max-width: 185px !important; 
+    max-height: 38px !important; 
     margin: 0 !important; 
     padding: 0 !important;
   }
   header.main .logo img, header.main .logo svg { 
-    width: 220px !important; 
-    height: 54px !important; 
-    max-width: none !important; 
-    max-height: none !important; 
+    width: 185px !important; 
+    height: 38px !important; 
+    max-width: 185px !important; 
+    max-height: 38px !important; 
     object-fit: contain !important; 
     object-position: left center !important; 
     margin: 0 !important;
@@ -167,13 +167,13 @@ header.main .hotline-slider-card .slider-arrow:hover {
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
   
-  /* Compact, clean search bar below header */
-  .mobile-search-bar { display: flex !important; padding: 6px 12px 6px 12px !important; width: 100% !important; box-sizing: border-box !important; background: #fff !important; }
-  .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 38px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
-  .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 12px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
-  .mobile-search-bar button { width: 42px !important; height: 38px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+  /* Ultra-compact search bar below header with zero wasted space */
+  .mobile-search-bar { display: flex !important; padding: 4px 12px 4px 12px !important; width: 100% !important; box-sizing: border-box !important; background: #fff !important; }
+  .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 36px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
+  .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 10px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
+  .mobile-search-bar button { width: 40px !important; height: 36px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
-  /* Right actions (Cart & Menu toggle) in static flex flow perfectly centered on same row */
+  /* Cart & Menu toggle shifted UP inline with logo with zero bottom whitespace */
   .mobile-right-actions { 
     position: static !important;
     top: auto !important;
@@ -182,14 +182,14 @@ header.main .hotline-slider-card .slider-arrow:hover {
     display: flex !important; 
     align-items: center !important; 
     align-self: center !important; 
-    gap: 8px !important; 
+    gap: 6px !important; 
     margin-left: auto !important; 
     flex-shrink: 0 !important; 
-    height: 54px !important;
+    height: 38px !important;
     padding: 0 !important;
   }
   .mobile-icon-btn, .mobile-cart-btn { 
-    padding: 6px !important; 
+    padding: 2px !important; 
     color: #1a3258 !important; 
     background: transparent !important; 
     border: none !important; 
@@ -199,18 +199,18 @@ header.main .hotline-slider-card .slider-arrow:hover {
     border-radius: 6px !important; 
     position: relative !important; 
     text-decoration: none !important; 
-    height: 36px !important;
-    width: 36px !important;
+    height: 34px !important;
+    width: 34px !important;
   }
-  .cart-badge-mobile { position: absolute !important; top: -2px !important; right: -2px !important; background: #c8962b !important; color: #fff !important; font-size: 10px !important; font-weight: 800 !important; border-radius: 10px !important; min-width: 17px !important; height: 17px !important; line-height: 17px !important; text-align: center !important; padding: 0 4px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important; z-index: 5 !important; }
+  .cart-badge-mobile { position: absolute !important; top: -2px !important; right: -2px !important; background: #c8962b !important; color: #fff !important; font-size: 10px !important; font-weight: 800 !important; border-radius: 10px !important; min-width: 16px !important; height: 16px !important; line-height: 16px !important; text-align: center !important; padding: 0 3px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important; z-index: 5 !important; }
   
   /* Transparent frameless hamburger toggle matching cart button color */
   .mobile-menu-toggle {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    height: 34px !important;
     padding: 0 !important;
     background: transparent !important;
     border: none !important;
@@ -220,7 +220,7 @@ header.main .hotline-slider-card .slider-arrow:hover {
     color: #1a3258 !important;
     margin-left: 2px !important;
   }
-  .mobile-menu-toggle svg { width: 24px !important; height: 24px !important; stroke: #1a3258 !important; }
+  .mobile-menu-toggle svg { width: 22px !important; height: 22px !important; stroke: #1a3258 !important; }
 }
 </style>
 <?php 
