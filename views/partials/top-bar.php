@@ -23,21 +23,19 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
       <span class="badge-live"><span class="dot"></span> Đang phục vụ</span>
     </div>
     
-    <!-- Dynamic Smooth Left-to-Right Hotline Marquee Stream -->
-    <div class="top-bar-hotline-stream" title="Rê chuột để tạm dừng & nhấp gọi">
-      <div class="marquee-track">
-        <?php for ($repeat = 0; $repeat < 2; $repeat++): ?>
-          <div class="marquee-group">
-            <?php foreach ($hotlineItems as $hItem): ?>
-              <?php $hClean = preg_replace('/[^0-9\+]/', '', $hItem['phone']); ?>
-              <span class="hotline-pill">
-                <span class="h-label"><?= htmlspecialchars($hItem['label']) ?>:</span>
-                <a href="tel:<?= htmlspecialchars($hClean) ?>" class="h-num"><?= htmlspecialchars($hItem['phone']) ?></a>
-              </span>
-              <span class="h-sep">•</span>
-            <?php endforeach; ?>
-          </div>
-        <?php endfor; ?>
+    <!-- Static Hotline Stream filling top-bar space (scrollable horizontally without auto-scrolling marquee) -->
+    <div class="top-bar-hotline-stream">
+      <div class="hotline-list">
+        <?php foreach ($hotlineItems as $hIdx => $hItem): ?>
+          <?php $hClean = preg_replace('/[^0-9\+]/', '', $hItem['phone']); ?>
+          <span class="hotline-pill">
+            <span class="h-label"><?= htmlspecialchars($hItem['label']) ?>:</span>
+            <a href="tel:<?= htmlspecialchars($hClean) ?>" class="h-num"><?= htmlspecialchars($hItem['phone']) ?></a>
+          </span>
+          <?php if ($hIdx < count($hotlineItems) - 1): ?>
+            <span class="h-sep">•</span>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </div>
     </div>
 
@@ -120,45 +118,37 @@ font { background-color: transparent !important; box-shadow: none !important; bo
 iframe.skiptranslate { display: none !important; visibility: hidden !important; }
 #goog-gt- { display: none !important; }
 
-
-/* Top Bar Marquee Stream Styles */
+/* Static Hotline List Styles (No Marquee Animation, Spans Space, Scrollable) */
 .top-bar-hotline-stream {
   flex: 1 !important;
   margin: 0 16px !important;
-  overflow: hidden !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   position: relative !important;
   display: flex !important;
   align-items: center !important;
   height: 28px !important;
-  mask-image: linear-gradient(to right, transparent, #000 15px, #000 calc(100% - 15px), transparent) !important;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 15px, #000 calc(100% - 15px), transparent) !important;
-  cursor: pointer !important;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important;  /* IE/Edge */
 }
-.top-bar-hotline-stream .marquee-track {
+.top-bar-hotline-stream::-webkit-scrollbar {
+  display: none !important; /* Chrome/Safari */
+}
+.top-bar-hotline-stream .hotline-list {
   display: flex !important;
   align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
   white-space: nowrap !important;
-  animation: marqueeLeftToRight 28s linear infinite !important;
-  will-change: transform !important;
-}
-.top-bar-hotline-stream:hover .marquee-track {
-  animation-play-state: paused !important;
-}
-@keyframes marqueeLeftToRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
-}
-.top-bar-hotline-stream .marquee-group {
-  display: flex !important;
-  align-items: center !important;
-  flex-shrink: 0 !important;
+  gap: 8px !important;
 }
 .top-bar-hotline-stream .hotline-pill {
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
-  padding: 2px 6px !important;
+  padding: 2px 4px !important;
   font-size: 11.5px !important;
+  white-space: nowrap !important;
 }
 .top-bar-hotline-stream .h-label {
   color: #c8a951 !important;
@@ -180,7 +170,7 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
 }
 .top-bar-hotline-stream .h-sep {
   color: rgba(255,255,255,0.35) !important;
-  margin: 0 10px !important;
+  margin: 0 4px !important;
   font-size: 10px !important;
 }
 
@@ -190,6 +180,7 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   .top-bar .left { flex: 0 0 auto !important; display: flex !important; align-items: center !important; }
   .top-bar .left .badge-live { font-size: 9.5px !important; padding: 2px 4px !important; line-height: 1.2 !important; }
   .top-bar-hotline-stream { margin: 0 6px !important; height: 24px !important; }
+  .top-bar-hotline-stream .hotline-list { justify-content: flex-start !important; gap: 6px !important; }
   .top-bar-hotline-stream .h-label { font-size: 9.5px !important; }
   .top-bar-hotline-stream .h-num { font-size: 10.5px !important; }
   .top-bar .right { display: flex !important; align-items: center !important; gap: 4px !important; flex: 0 0 auto !important; margin-left: auto !important; }
@@ -200,4 +191,5 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   .top-bar .right a[href*="logout"] { padding: 3px 6px !important; font-size: 10.5px !important; border-radius: 4px !important; white-space: nowrap !important; margin-right: 0 !important; display: inline-block !important; line-height: 1.2 !important; }
 }
 </style>
+
 
