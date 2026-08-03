@@ -260,11 +260,7 @@
   /* Nav primary: simplify to just logo + hamburger */
   nav.primary .wrap { display: none; }
 
-  /* Top bar: only show essential items on mobile */
-  .top-bar .wrap { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .top-bar .left .item,
-  .top-bar .left .sep { display: none; }
-  .top-bar .badge-live { display: inline-flex; }
+  /* Top bar: handled in top-bar.php */
 
   /* Banner improvements */
   .banner { border-radius: 4px; }
@@ -496,28 +492,8 @@
 
 /* === HEADER MOBILE ≤ 640px === */
 @media (max-width: 640px) {
-  /* Top bar - simplify */
-  .top-bar { font-size: 11px; }
-  .top-bar .wrap { padding: 6px 12px; gap: 8px; }
-  .top-bar .left { display: none; }
-  .top-bar .right { width: 100%; justify-content: center; gap: 8px; flex-wrap: nowrap; overflow: hidden; }
-  .top-bar .right a { font-size: 10px; white-space: nowrap; }
-
-  /* Header - clean mobile layout */
-  header.main { padding: 10px 0; position: sticky; top: 0; z-index: 100; background: #fff; }
-  header.main .wrap {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    padding: 0 12px !important;
-    gap: 8px !important;
-    grid-template-columns: unset !important;
-  }
-  
-  /* Logo smaller on mobile */
-  header.main .logo { flex-shrink: 0; }
-  header.main .logo img { max-width: 120px !important; max-height: 50px !important; }
-  header.main .logo svg { width: 110px; }
+  /* Top bar & Header - handled in views/partials/top-bar.php & header.php */
+  header.main { padding: 8px 0; position: relative; z-index: 100; background: #fff; }
   
   /* Hide desktop search, header-actions, hotline on mobile */
   header.main .search { display: none !important; }
