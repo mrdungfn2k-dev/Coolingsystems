@@ -122,14 +122,14 @@ header.main .hotline-slider-card .slider-arrow:hover {
 }
 
 @media(max-width: 768px) {
-  header.main { min-height: auto !important; padding: 4px 0 6px 0 !important; background: #fff !important; }
+  header.main { min-height: auto !important; padding: 2px 0 4px 0 !important; background: #fff !important; }
   header.main .wrap { 
     display: flex !important; 
     flex-direction: row !important; 
     flex-wrap: nowrap !important; 
-    align-items: center !important; 
+    align-items: flex-end !important; 
     justify-content: space-between !important; 
-    padding: 2px 14px !important; 
+    padding: 4px 14px 2px 14px !important; 
     gap: 8px !important; 
     width: 100% !important; 
     box-sizing: border-box !important;
@@ -137,25 +137,25 @@ header.main .hotline-slider-card .slider-arrow:hover {
     min-height: auto !important;
   }
   
-  /* Large, crisp, left-aligned mobile logo on same row as cart button */
+  /* Large mobile logo pulled down flush to align bottom with cart & menu icons */
   header.main .logo { 
     display: flex !important; 
-    align-items: center !important; 
+    align-items: flex-end !important; 
     justify-content: flex-start !important; 
     flex: 0 0 auto !important; 
     width: 195px !important; 
-    height: 48px !important; 
+    height: 44px !important; 
     max-width: 195px !important; 
-    max-height: 48px !important; 
-    margin: 0 !important; 
+    max-height: 44px !important; 
+    margin: 4px 0 0 0 !important; 
   }
   header.main .logo img, header.main .logo svg { 
     width: 195px !important; 
-    height: 48px !important; 
+    height: 44px !important; 
     max-width: 195px !important; 
-    max-height: 48px !important; 
+    max-height: 44px !important; 
     object-fit: contain !important; 
-    object-position: left center !important; 
+    object-position: left bottom !important; 
   }
 
   header.main .hotline-slider-card { display: none !important; }
@@ -167,8 +167,8 @@ header.main .hotline-slider-card .slider-arrow:hover {
   .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 10px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
   .mobile-search-bar button { width: 42px !important; height: 38px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
-  /* Right actions (Cart & Menu toggle) on exact same row */
-  .mobile-right-actions { display: flex !important; align-items: center !important; gap: 8px !important; margin-left: auto !important; flex-shrink: 0 !important; }
+  /* Right actions (Cart & Menu toggle) aligned to bottom row with logo */
+  .mobile-right-actions { display: flex !important; align-items: center !important; align-self: flex-end !important; gap: 8px !important; margin-left: auto !important; flex-shrink: 0 !important; padding-bottom: 2px !important; }
   .mobile-icon-btn, .mobile-cart-btn { padding: 2px 4px !important; color: #1a3258 !important; background: transparent !important; border: none !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
   .cart-badge-mobile { position: absolute !important; top: -2px !important; right: -2px !important; background: #c8962b !important; color: #fff !important; font-size: 10px !important; font-weight: 800 !important; border-radius: 10px !important; min-width: 17px !important; height: 17px !important; line-height: 17px !important; text-align: center !important; padding: 0 4px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important; z-index: 5 !important; }
   
