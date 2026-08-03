@@ -123,47 +123,39 @@ header.main .hotline-slider-card .slider-arrow:hover {
 
 @media(max-width: 768px) {
   header.main { min-height: auto !important; padding: 8px 0 !important; }
-  header.main .wrap { padding: 0 12px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; }
-  header.main .logo { width: 165px !important; height: 48px !important; max-width: 165px !important; max-height: 48px !important; flex-shrink: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; }
-  header.main .logo img, header.main .logo svg { width: 165px !important; height: 48px !important; max-width: 165px !important; max-height: 48px !important; object-fit: contain !important; object-position: left center !important; }
+  header.main .wrap { padding: 0 16px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; position: relative !important; }
+  header.main .logo { width: 190px !important; height: 52px !important; max-width: 190px !important; max-height: 52px !important; flex-shrink: 0 !important; margin: 0 auto !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+  header.main .logo img, header.main .logo svg { width: 190px !important; height: 52px !important; max-width: 190px !important; max-height: 52px !important; object-fit: contain !important; object-position: center !important; }
   header.main .hotline-slider-card { display: none !important; }
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
   
-  .mobile-search-bar { display: flex !important; padding: 6px 12px 6px 12px !important; width: 100% !important; box-sizing: border-box !important; }
+  .mobile-search-bar { display: flex !important; padding: 6px 16px !important; width: 100% !important; box-sizing: border-box !important; }
   .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 40px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
   .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 12px !important; font-size: 13.5px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
   .mobile-search-bar button { width: 44px !important; height: 40px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
-  .mobile-right-actions { display: flex !important; align-items: center !important; gap: 4px !important; margin-left: auto !important; }
-  .mobile-icon-btn, .mobile-cart-btn { padding: 6px !important; color: #1a3258 !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
+  .mobile-right-actions { display: flex !important; align-items: center !important; gap: 8px !important; margin-left: auto !important; padding-right: 4px !important; }
+  .mobile-icon-btn, .mobile-cart-btn { padding: 6px !important; color: #1a3258 !important; background: transparent !important; border: none !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
   .cart-badge-mobile { position: absolute !important; top: -1px !important; right: -1px !important; background: #c8962b !important; color: #fff !important; font-size: 10px !important; font-weight: 800 !important; border-radius: 10px !important; min-width: 17px !important; height: 17px !important; line-height: 17px !important; text-align: center !important; padding: 0 4px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important; z-index: 5 !important; }
   
+  /* Transparent frameless hamburger toggle matching cart button color */
   .mobile-menu-toggle {
     display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
+    align-items: center !important;
+    justify-content: center !important;
     width: 36px !important;
     height: 36px !important;
-    padding: 8px 6px !important;
-    background: #1a3258 !important;
+    padding: 0 !important;
+    background: transparent !important;
     border: none !important;
     border-radius: 6px !important;
     cursor: pointer !important;
     box-sizing: border-box !important;
-    margin-left: 4px !important;
+    color: #1a3258 !important;
+    margin-left: 2px !important;
   }
-  .mobile-menu-toggle span {
-    display: block !important;
-    width: 100% !important;
-    height: 2.5px !important;
-    background: #fff !important;
-    border-radius: 2px !important;
-    transition: all 0.25s ease !important;
-  }
-  .mobile-menu-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg) !important; }
-  .mobile-menu-toggle.open span:nth-child(2) { opacity: 0 !important; }
-  .mobile-menu-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg) !important; }
+  .mobile-menu-toggle svg { width: 24px !important; height: 24px !important; stroke: #1a3258 !important; }
 }
 </style>
 <?php 

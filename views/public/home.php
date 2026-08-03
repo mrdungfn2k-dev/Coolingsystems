@@ -353,14 +353,34 @@ foreach ($trustSteps as $step):
 
 <style>
 @media (max-width: 768px) {
+  .home-banners { margin-top: 14px !important; }
+  .hbc { aspect-ratio: 16 / 8 !important; min-height: 190px !important; border-radius: 12px !important; }
+  .hbc-slide img { object-fit: fill !important; object-position: center !important; height: 100% !important; width: 100% !important; }
+  
+  .trust { padding: 14px 0 !important; }
+  .trust-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .trust-item { padding: 12px 10px !important; background: #fff !important; border-radius: 10px !important; border: 1px solid #e2e8f0 !important; }
+  .trust-item .num { font-size: 16px !important; font-weight: 800 !important; color: #c8962b !important; margin-bottom: 4px !important; }
+  .trust-item .ttl { font-size: 13.5px !important; font-weight: 800 !important; color: #1a3258 !important; margin-bottom: 2px !important; line-height: 1.3 !important; }
+  .trust-item .desc { font-size: 11.5px !important; color: #64748b !important; line-height: 1.35 !important; }
+
   .gara-home-banner {
     flex-direction: column !important;
     text-align: center !important;
-    padding: 16px !important;
+    padding: 20px 16px !important;
+    gap: 14px !important;
+  }
+  .gara-home-banner div {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    line-height: 1.4 !important;
   }
   .gara-home-banner a, .gara-home-banner button {
     width: 100% !important;
     justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    padding: 12px 20px !important;
   }
   .gara-modal-grid {
     grid-template-columns: 1fr !important;
