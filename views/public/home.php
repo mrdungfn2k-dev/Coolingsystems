@@ -95,20 +95,21 @@ require __DIR__ . '/../partials/head.php';
       <style>
       @media (max-width: 768px) {
         #heroSliderWrap.hero-slider-wrap {
-          aspect-ratio: 16 / 6 !important;
-          min-height: auto !important;
+          aspect-ratio: 16 / 9 !important;
+          min-height: 200px !important;
           height: auto !important;
           background: #0b1a30 !important;
-          border-radius: 10px !important;
-          margin-bottom: 8px !important;
+          border-radius: 12px !important;
+          margin-bottom: 12px !important;
           overflow: hidden !important;
+          box-shadow: 0 4px 12px rgba(15,26,48,0.15) !important;
         }
         #heroSliderWrap .hero-slide-item img {
           width: 100% !important;
           height: 100% !important;
-          object-fit: contain !important;
+          object-fit: cover !important;
           object-position: center !important;
-          border-radius: 10px !important;
+          border-radius: 12px !important;
           transform: none !important;
         }
         .all-link::after { content: "" !important; }
