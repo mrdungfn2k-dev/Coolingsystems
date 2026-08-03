@@ -215,6 +215,12 @@ if (!function_exists('_phFmt')) {
             default     => $h['action'] ?? 'update'
           };
           $fmtMoney = fn($val) => number_format((int)$val, 0, ',', '.') . 'đ';
+          $snap = !empty($h['snapshot_json']) ? (is_array($h['snapshot_json']) ? $h['snapshot_json'] : json_decode($h['snapshot_json'], true)) : [];
+          $hPrice = (int)($h['price'] ?? $snap['price'] ?? $product['price'] ?? 0);
+          $hStock = (int)($h['stock'] ?? $snap['stock'] ?? $product['stock'] ?? 0);
+          $hStatus = $h['status'] ?? $snap['status'] ?? $product['status'] ?? '';
+          $hOrigPrice = (int)($h['original_price'] ?? $snap['original_price'] ?? $product['original_price'] ?? 0);
+          $hName = $h['name'] ?? $snap['name'] ?? $product['name'] ?? '';
         ?>
           <tr>
             <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7"><?= $idx + 1 ?></td>
@@ -223,11 +229,11 @@ if (!function_exists('_phFmt')) {
             <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;font-weight:600;color:#1a3258"><?= e($h['changer_name'] ?? 'Quản trị viên') ?></td>
             <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;color:#555">
               <?php if (($h['action'] ?? '') === 'create'): ?>
-                Tạo ban đầu — Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Trạng thái: <?= e(_phStatus($h['status'] ?? '')) ?>
+                Tạo ban đầu — Giá: <?= $fmtMoney($hPrice) ?> · Tồn kho: <?= $hStock ?> · Trạng thái: <?= e(_phStatus($hStatus)) ?>
               <?php elseif (($h['action'] ?? '') === 'inventory'): ?>
-                Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Giá gốc: <?= $fmtMoney($h['original_price'] ?? 0) ?>
+                Giá: <?= $fmtMoney($hPrice) ?> · Tồn kho: <?= $hStock ?> · Giá gốc: <?= $fmtMoney($hOrigPrice) ?>
               <?php else: ?>
-                <?= e(mb_substr($h['name'] ?? '', 0, 45)) ?> · Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Trạng thái: <?= e(_phStatus($h['status'] ?? '')) ?>
+                <?= e(mb_substr($hName, 0, 45)) ?> · Giá: <?= $fmtMoney($hPrice) ?> · Tồn kho: <?= $hStock ?> · Trạng thái: <?= e(_phStatus($hStatus)) ?>
               <?php endif; ?>
             </td>
             <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;text-align:center">
@@ -240,6 +246,7 @@ if (!function_exists('_phFmt')) {
             </td>
           </tr>
         <?php endforeach; ?>
+
         </tbody>
       </table>
       </div>
