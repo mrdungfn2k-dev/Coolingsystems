@@ -1,7 +1,21 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
 <?php
 if (!function_exists('_phFmt')) {
-  function _phFmt($ts){ if(!$ts) return '—'; try{ $d=new DateTime($ts); $d->setTimezone(new DateTimeZone('Asia/Ho_Chi_Minh')); return $d->format('d/m/Y H:i'); }catch(\Exception $e){ return $ts; } }
+  function _phFmt($ts){
+    if(!$ts) return '—';
+    try {
+      $str = (string)$ts;
+      if (preg_match('/[Z\+\-]\d{2}:?\d{2}$/i', $str)) {
+        $d = new DateTime($str);
+        $d->setTimezone(new DateTimeZone('Asia/Ho_Chi_Minh'));
+      } else {
+        $d = new DateTime($str, new DateTimeZone('Asia/Ho_Chi_Minh'));
+      }
+      return $d->format('d/m/Y H:i');
+    }
+    catch (\Exception $e) { return (string)$ts; }
+  }
+
   function _phBrowser($ua){ $ua=(string)$ua; $m=['Edg'=>'Edge','OPR'=>'Opera','Chrome'=>'Chrome','Firefox'=>'Firefox','Safari'=>'Safari']; foreach($m as $k=>$v){ if(stripos($ua,$k)!==false) return $v; } return $ua!=='' ? mb_substr($ua,0,22) : '—'; }
   function _phDevice($ua){ return preg_match('/Mobile|Android|iPhone|iPad/i',(string)$ua) ? 'Mobile' : 'Desktop'; }
   function _phStatus($s){ $m=['draft'=>'Bản nháp','pending'=>'Chờ duyệt','published'=>'Xuất bản','hidden'=>'Ẩn / Ngừng KD','out_of_stock'=>'Hết hàng','rejected'=>'Từ chối','blocked'=>'Khóa']; return $m[$s] ?? ($s ?: '—'); }

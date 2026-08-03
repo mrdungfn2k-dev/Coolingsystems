@@ -523,9 +523,19 @@ function logPasswordChange(int $targetUserId, string $method): void {
 
 function fmtVnDateTime($ts) {
     if (!$ts) return '—';
-    try { $d = new DateTime((string)$ts); $d->setTimezone(new DateTimeZone('Asia/Ho_Chi_Minh')); return $d->format('d/m/Y H:i'); }
+    try {
+        $str = (string)$ts;
+        if (preg_match('/[Z\+\-]\d{2}:?\d{2}$/i', $str)) {
+            $d = new DateTime($str);
+            $d->setTimezone(new DateTimeZone('Asia/Ho_Chi_Minh'));
+        } else {
+            $d = new DateTime($str, new DateTimeZone('Asia/Ho_Chi_Minh'));
+        }
+        return $d->format('d/m/Y H:i');
+    }
     catch (\Exception $e) { return (string)$ts; }
 }
+
 
 // ===== Phí vận chuyển theo vùng miền + cân nặng (kiểu Viettel Post) =====
 function vnProvinceList(): array {
