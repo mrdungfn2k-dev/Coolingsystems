@@ -39,13 +39,46 @@ require __DIR__ . '/../partials/head.php';
 <section class="hero-section">
   <div class="wrap">
     <aside class="cat-sidebar">
-      <div class="head"><span class="lines"><span></span><span></span><span></span></span><span>Danh mục phụ tùng</span></div>
-      <ul>
+      <div class="head" id="catSidebarHeader" onclick="toggleCatSidebarMobile()" style="cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="lines"><span></span><span></span><span></span></span>
+          <span>Danh mục phụ tùng</span>
+        </div>
+        <span class="cat-arr-icon" id="catSidebarArr" style="font-size:12px;transition:transform 0.25s ease;color:#fff">▼</span>
+      </div>
+      <ul id="catSidebarList">
         <?php foreach ($sidebarCategories as $c): ?>
           <li class="<?= ($c['is_featured'] ?? 0) ? 'featured' : '' ?>"><a href="/products?cat=<?= e($c['slug']) ?>"><span><?= e($c['name']) ?></span><span class="arr">›</span></a></li>
         <?php endforeach; ?>
       </ul>
     </aside>
+
+    <script>
+    function toggleCatSidebarMobile() {
+      if (window.innerWidth > 768) return;
+      var list = document.getElementById('catSidebarList');
+      var arr = document.getElementById('catSidebarArr');
+      if (!list) return;
+      var isHidden = window.getComputedStyle(list).display === 'none';
+      if (isHidden) {
+        list.style.display = 'block';
+        if (arr) arr.style.transform = 'rotate(180deg)';
+      } else {
+        list.style.display = 'none';
+        if (arr) arr.style.transform = 'rotate(0deg)';
+      }
+    }
+    </script>
+    <style>
+    @media (max-width: 768px) {
+      .cat-sidebar #catSidebarList { display: none; }
+      .cat-sidebar .head { cursor: pointer !important; }
+    }
+    @media (min-width: 769px) {
+      .cat-sidebar #catSidebarList { display: block !important; }
+      .cat-arr-icon { display: none !important; }
+    }
+    </style>
 
     <?php
       $heroBadge = dbGet("SELECT value FROM settings WHERE key='hero_badge'")['value'] ?? 'Phụ tùng & Dịch vụ Ô tô — Est. 2026';

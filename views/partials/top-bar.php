@@ -204,23 +204,23 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
 }
 
 @media (max-width: 768px) {
-  .top-bar { min-height: auto !important; height: auto !important; padding: 6px 0 !important; overflow: visible !important; width: 100% !important; box-sizing: border-box !important; }
-  .top-bar .wrap { display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: center !important; padding: 0 12px !important; width: 100% !important; box-sizing: border-box !important; gap: 6px !important; }
+  .top-bar { min-height: auto !important; height: auto !important; padding: 4px 0 !important; overflow: hidden !important; width: 100% !important; box-sizing: border-box !important; }
+  .top-bar .wrap { display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: center !important; padding: 0 8px !important; width: 100% !important; box-sizing: border-box !important; gap: 4px !important; }
   
-  .top-bar-top-row { display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; }
+  .top-bar-top-row { display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; flex-wrap: nowrap !important; }
   .top-bar .left { flex: 0 0 auto !important; display: flex !important; align-items: center !important; }
-  .top-bar .left .badge-live { font-size: 10px !important; padding: 2px 6px !important; line-height: 1.2 !important; }
-  .top-bar .right { display: flex !important; align-items: center !important; gap: 6px !important; flex: 0 0 auto !important; margin-left: auto !important; }
+  .top-bar .left .badge-live { font-size: 9px !important; padding: 1px 4px !important; line-height: 1.2 !important; white-space: nowrap !important; }
+  .top-bar .right { display: flex !important; align-items: center !important; gap: 3px !important; flex: 0 0 auto !important; margin-left: auto !important; }
   .top-bar .right a[href="/policies"],
-  .top-bar .right a[href="/stores"] { display: inline-block !important; color: rgba(255,255,255,0.9) !important; font-size: 11px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
-  .top-bar .right span { display: inline-block !important; width: 1px !important; height: 10px !important; background: rgba(255,255,255,0.3) !important; }
-  #langSwitchBtn { padding: 2px 6px !important; font-size: 10px !important; border-radius: 4px !important; line-height: 1.2 !important; }
-  .top-bar .right a[href*="logout"] { padding: 3px 6px !important; font-size: 10.5px !important; border-radius: 4px !important; white-space: nowrap !important; margin-right: 0 !important; display: inline-block !important; line-height: 1.2 !important; }
+  .top-bar .right a[href="/stores"] { display: inline-block !important; color: rgba(255,255,255,0.9) !important; font-size: 10px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; padding: 0 1px !important; }
+  .top-bar .right span { display: inline-block !important; width: 1px !important; height: 9px !important; background: rgba(255,255,255,0.25) !important; margin: 0 1px !important; }
+  #langSwitchBtn { padding: 1px 4px !important; font-size: 9.5px !important; border-radius: 3px !important; line-height: 1.2 !important; white-space: nowrap !important; }
+  .top-bar .right a[href*="logout"] { padding: 2px 5px !important; font-size: 9.5px !important; border-radius: 3px !important; white-space: nowrap !important; margin-right: 0 !important; display: inline-block !important; line-height: 1.2 !important; }
 
   .top-bar-hotline-stream { margin: 0 !important; height: auto !important; min-height: auto !important; overflow: visible !important; width: 100% !important; justify-content: center !important; }
-  .top-bar-hotline-stream .hotline-list { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; align-items: center !important; white-space: normal !important; gap: 4px 8px !important; width: 100% !important; }
-  .top-bar-hotline-stream .hotline-pill { font-size: 11px !important; padding: 1px 2px !important; }
-  .top-bar-hotline-stream .h-label { font-size: 10px !important; }
-  .top-bar-hotline-stream .h-num { font-size: 11px !important; }
+  .top-bar-hotline-stream .hotline-list { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; align-items: center !important; white-space: normal !important; gap: 2px 6px !important; width: 100% !important; }
+  .top-bar-hotline-stream .hotline-pill { font-size: 10px !important; padding: 0 2px !important; }
+  .top-bar-hotline-stream .h-label { font-size: 9.5px !important; }
+  .top-bar-hotline-stream .h-num { font-size: 10.5px !important; }
 }
 </style>

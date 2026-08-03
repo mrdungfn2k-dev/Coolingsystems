@@ -123,9 +123,9 @@ header.main .hotline-slider-card .slider-arrow:hover {
 
 @media(max-width: 768px) {
   header.main { min-height: auto !important; padding: 8px 0 !important; }
-  header.main .wrap { padding: 0 16px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; position: relative !important; }
-  header.main .logo { width: 190px !important; height: 52px !important; max-width: 190px !important; max-height: 52px !important; flex-shrink: 0 !important; margin: 0 auto !important; display: flex !important; align-items: center !important; justify-content: center !important; }
-  header.main .logo img, header.main .logo svg { width: 190px !important; height: 52px !important; max-width: 190px !important; max-height: 52px !important; object-fit: contain !important; object-position: center !important; }
+  header.main .wrap { padding: 0 12px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; position: relative !important; }
+  header.main .logo { width: 180px !important; height: 52px !important; max-width: 180px !important; max-height: 52px !important; flex-shrink: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; }
+  header.main .logo img, header.main .logo svg { width: 180px !important; height: 52px !important; max-width: 180px !important; max-height: 52px !important; object-fit: contain !important; object-position: left center !important; }
   header.main .hotline-slider-card { display: none !important; }
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }

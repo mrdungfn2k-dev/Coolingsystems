@@ -212,12 +212,13 @@ window.alert=function(msg){coolToastShow(msg);};
 }
 
 @media (max-width: 768px) {
-  .floating-social { display: flex !important; bottom: 85px !important; right: 14px !important; gap: 8px !important; z-index: 9999 !important; }
-  .floating-social a { width: 38px !important; height: 38px !important; box-shadow: 0 3px 10px rgba(0,0,0,0.2) !important; }
-  .floating-social a svg, .floating-social a img { width: 20px !important; height: 20px !important; }
-  .floating-social .tooltip { display: none !important; }
-  .float-stack { bottom: 24px !important; right: 14px !important; z-index: 9998 !important; }
-  .float-stack .float-btn { padding: 8px 14px !important; font-size: 12px !important; font-weight: 800 !important; }
+  .floating-social,
+  .float-stack { 
+    display: none !important; 
+    visibility: hidden !important; 
+    pointer-events: none !important; 
+    opacity: 0 !important; 
+  }
 }
 </style>
 <?php if (!str_starts_with(currentPath(), '/admin') && !str_starts_with(currentPath(), '/partner')): ?>
