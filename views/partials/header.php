@@ -129,34 +129,35 @@ header.main .hotline-slider-card .slider-arrow:hover {
     flex-wrap: nowrap !important; 
     align-items: center !important; 
     justify-content: space-between !important; 
-    padding: 0 14px !important; 
-    gap: 10px !important; 
+    padding: 0 12px !important; 
+    gap: 8px !important; 
     width: 100% !important; 
-    height: 52px !important;
-    min-height: 52px !important;
-    max-height: 52px !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
     box-sizing: border-box !important;
     grid-template-columns: none !important;
     margin: 0 !important;
   }
   
-  /* Perfectly centered, crisp, elegant mobile logo */
+  /* Large unconstrained mobile logo filling left of white header box */
   header.main .logo { 
     display: flex !important; 
     align-items: center !important; 
     justify-content: flex-start !important; 
     flex: 0 0 auto !important; 
-    width: auto !important; 
-    height: 42px !important; 
-    max-height: 42px !important; 
+    width: 220px !important; 
+    height: 54px !important; 
+    max-width: none !important; 
+    max-height: none !important; 
     margin: 0 !important; 
     padding: 0 !important;
   }
   header.main .logo img, header.main .logo svg { 
-    width: auto !important;
-    height: 38px !important; 
-    max-width: 190px !important; 
-    max-height: 38px !important; 
+    width: 220px !important; 
+    height: 54px !important; 
+    max-width: none !important; 
+    max-height: none !important; 
     object-fit: contain !important; 
     object-position: left center !important; 
     margin: 0 !important;
@@ -167,7 +168,7 @@ header.main .hotline-slider-card .slider-arrow:hover {
   header.main .header-actions { display: none !important; }
   
   /* Compact, clean search bar below header */
-  .mobile-search-bar { display: flex !important; padding: 6px 14px 6px 14px !important; width: 100% !important; box-sizing: border-box !important; background: #fff !important; }
+  .mobile-search-bar { display: flex !important; padding: 6px 12px 6px 12px !important; width: 100% !important; box-sizing: border-box !important; background: #fff !important; }
   .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 38px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
   .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 12px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
   .mobile-search-bar button { width: 42px !important; height: 38px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
@@ -181,10 +182,10 @@ header.main .hotline-slider-card .slider-arrow:hover {
     display: flex !important; 
     align-items: center !important; 
     align-self: center !important; 
-    gap: 10px !important; 
+    gap: 8px !important; 
     margin-left: auto !important; 
     flex-shrink: 0 !important; 
-    height: 42px !important;
+    height: 54px !important;
     padding: 0 !important;
   }
   .mobile-icon-btn, .mobile-cart-btn { 
