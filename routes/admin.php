@@ -3351,6 +3351,14 @@ post('/admin/products/:id/edit', function($p) {
     }
     dbRun("UPDATE products SET car_brand_id=? WHERE id=?", [$firstBrand, $p['id']]);
 
+    // Save the NEW updated product state into product_history & audit_logs
+    $updatedProduct = dbGet("SELECT * FROM products WHERE id=?", [$p['id']]);
+    if ($updatedProduct) {
+        saveProductHistory($updatedProduct, 'update', (int)($user['id'] ?? 0));
+        dbRun("INSERT INTO audit_logs (user_id, role, action, entity_type, entity_id, meta, ip, user_agent) VALUES (?,?,?,?,?,?,?,?)",
+            [(int)($user['id']??0), $user['role']??'admin', 'update', 'product', (int)$p['id'], "Cập nhật sản phẩm: " . mb_substr((string)$updatedProduct['name'], 0, 100), $_SERVER['REMOTE_ADDR']??'', $_SERVER['HTTP_USER_AGENT']??'']);
+    }
+
     $successMessage = 'Cập nhật sản phẩm thành công!';
     if ($imageUploadErrors) {
         $successMessage .= ' Một số ảnh chưa xử lý được: ' . implode('; ', $imageUploadErrors);
@@ -3358,6 +3366,7 @@ post('/admin/products/:id/edit', function($p) {
     flash('success', $successMessage);
     redirect($editUrl);
 });
+
 
 // ── STATIC CONTENT MANAGEMENT ────────────────────────────────────────────
 
