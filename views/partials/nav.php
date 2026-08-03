@@ -109,13 +109,27 @@
   var el = document.getElementById('navScrollWrap');
   if(!el) return;
 
+  // Auto scroll active link into view on page load
+  function scrollActiveIntoView() {
+    var activeLink = el.querySelector('.nav-link.active');
+    if (activeLink) {
+      activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+
   // Preserve & restore navbar scroll position across clicks
   try {
     var savedPos = sessionStorage.getItem('navScrollPos');
-    if (savedPos !== null) {
+    if (savedPos !== null && !el.querySelector('.nav-link.active')) {
       el.scrollLeft = parseInt(savedPos, 10);
+    } else {
+      scrollActiveIntoView();
     }
-  } catch(e){}
+  } catch(e){
+    scrollActiveIntoView();
+  }
+
+  window.addEventListener('load', scrollActiveIntoView);
 
   el.querySelectorAll('a').forEach(function(link){
     link.addEventListener('click', function(){

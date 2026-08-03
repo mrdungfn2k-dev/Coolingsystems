@@ -59,6 +59,28 @@ require __DIR__ . '/../partials/head.php';
 
     <?php if ($heroShowText === '0'): ?>
       <!-- Chế độ TẮT chữ: Slidesshow Banner Đồ Họa Tự Động Chuyển Tiếp -->
+      <style>
+      @media (max-width: 768px) {
+        #heroSliderWrap.hero-slider-wrap {
+          aspect-ratio: 16 / 9 !important;
+          min-height: auto !important;
+          height: auto !important;
+          background: transparent !important;
+          border-radius: 10px !important;
+          margin-bottom: 8px !important;
+        }
+        #heroSliderWrap .hero-slide-item img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          object-position: center !important;
+          border-radius: 10px !important;
+        }
+        .all-link::after { content: "" !important; }
+        .sec-head { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 12px !important; }
+        .sec-head .all-link { font-size: 12.5px !important; font-weight: 700 !important; color: #1a3258 !important; text-decoration: none !important; text-transform: uppercase !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; }
+      }
+      </style>
       <div class="banner pure-image-banner hero-slider-wrap" id="heroSliderWrap" style="padding:0;overflow:hidden;background:#0f172a;position:relative;border-radius:12px;width:100%;aspect-ratio:16/7;min-height:220px">
         <div class="hero-slides-container" style="position:relative;width:100%;height:100%">
           <?php foreach ($rawBannersList as $idx => $bn): 

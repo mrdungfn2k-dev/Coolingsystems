@@ -42,10 +42,19 @@ function updateCartBadge(n, totalText) {
   document.querySelectorAll('.count,[data-cart-count]').forEach(function(b){
     b.textContent=cc>0?cc:'';b.style.display=cc>0?'inline-block':'none';
   });
-  var mb=document.querySelector('.cart-badge-mobile');
-  if(!mb&&cc>0){var mc=document.querySelector('.mobile-cart-btn');if(mc){mb=document.createElement('span');mb.className='cart-badge-mobile';mb.style.cssText='';mc.appendChild(mb);}}
-  if(mb){mb.textContent=cc;mb.style.display=cc>0?'flex':'none';}
-  
+  var mCartBtn=document.querySelector('.mobile-cart-btn');
+  if(mCartBtn){
+    var mb=mCartBtn.querySelector('.cart-badge-mobile');
+    if(!mb && cc>0){
+      mb=document.createElement('span');
+      mb.className='cart-badge-mobile';
+      mCartBtn.appendChild(mb);
+    }
+    if(mb){
+      mb.textContent=cc;
+      mb.style.display=cc>0?'inline-block':'none';
+    }
+  }
   document.querySelectorAll('a[href="/customer/cart"]').forEach(function(link){
     var badge=link.querySelector('.count');
     if(!badge&&cc>0){badge=document.createElement('span');badge.className='count';link.style.position='relative';link.appendChild(badge);}
@@ -203,11 +212,8 @@ window.alert=function(msg){coolToastShow(msg);};
 }
 
 @media (max-width: 768px) {
-  .floating-social { bottom: 138px; right: 14px; gap: 9px; }
-  .floating-social a { width: 42px; height: 42px; }
-  .floating-social a svg { width: 20px; height: 20px; }
-  .floating-social .tooltip { display: none; }
-  .float-stack { bottom: 78px; right: 14px; }
+  .floating-social { display: none !important; }
+  .float-stack { bottom: 16px; right: 14px; }
 }
 </style>
 <?php if (!str_starts_with(currentPath(), '/admin') && !str_starts_with(currentPath(), '/partner')): ?>

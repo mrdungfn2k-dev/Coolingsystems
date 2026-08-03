@@ -124,8 +124,8 @@ header.main .hotline-slider-card .slider-arrow:hover {
 @media(max-width: 768px) {
   header.main { min-height: auto !important; padding: 8px 0 !important; }
   header.main .wrap { padding: 0 12px !important; gap: 8px !important; justify-content: space-between !important; align-items: center !important; }
-  header.main .logo { width: 135px !important; height: 44px !important; max-width: 135px !important; max-height: 44px !important; flex-shrink: 0 !important; margin: 0 !important; display: block !important; }
-  header.main .logo img, header.main .logo svg { width: 135px !important; height: 44px !important; max-width: 135px !important; max-height: 44px !important; object-fit: contain !important; }
+  header.main .logo { width: 165px !important; height: 48px !important; max-width: 165px !important; max-height: 48px !important; flex-shrink: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; }
+  header.main .logo img, header.main .logo svg { width: 165px !important; height: 48px !important; max-width: 165px !important; max-height: 48px !important; object-fit: contain !important; object-position: left center !important; }
   header.main .hotline-slider-card { display: none !important; }
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
@@ -136,7 +136,8 @@ header.main .hotline-slider-card .slider-arrow:hover {
   .mobile-search-bar button { width: 44px !important; height: 40px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
   .mobile-right-actions { display: flex !important; align-items: center !important; gap: 4px !important; margin-left: auto !important; }
-  .mobile-icon-btn, .mobile-cart-btn { padding: 6px !important; color: #1a3258 !important; display: flex !important; align-items: center !important; justify-content: justify !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
+  .mobile-icon-btn, .mobile-cart-btn { padding: 6px !important; color: #1a3258 !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
+  .cart-badge-mobile { position: absolute !important; top: -1px !important; right: -1px !important; background: #c8962b !important; color: #fff !important; font-size: 10px !important; font-weight: 800 !important; border-radius: 10px !important; min-width: 17px !important; height: 17px !important; line-height: 17px !important; text-align: center !important; padding: 0 4px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important; z-index: 5 !important; }
   
   .mobile-menu-toggle {
     display: flex !important;
@@ -388,7 +389,7 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
       <!-- Giỏ hàng -->
       <a href="/customer/cart" class="mobile-cart-btn" aria-label="Giỏ hàng<?= $cart['cnt'] > 0 ? ' (' . $cart['cnt'] . ' sản phẩm)' : '' ?>" style="position:relative;color:var(--navy);display:flex;align-items:center;padding:6px;">
          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-         <?php if ($cart['cnt'] > 0): ?><span style="position:absolute;top:0px;right:0px;background:#c8962b;color:#fff;font-size:9px;font-weight:bold;border-radius:10px;min-width:15px;height:15px;line-height:15px;text-align:center;padding:0 3px;" aria-hidden="true"><?= $cart['cnt'] ?></span><?php endif; ?>
+         <?php if ($cart['cnt'] > 0): ?><span class="cart-badge-mobile" aria-hidden="true"><?= $cart['cnt'] ?></span><?php endif; ?>
       </a>
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;background:#1a3258;border:none;border-radius:6px;cursor:pointer;color:#fff;flex-shrink:0;margin-left:4px">
         <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
