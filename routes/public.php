@@ -318,41 +318,52 @@ get('/products', function() {
 // Slug-based SEO-friendly URL: /products/dan-lanh-toyota-camry-2018-xyz
 get('/products/:slug', function($p) {
     // Browser links may carry legacy percent-encoded slugs from old imports.
-    // Decode once so they can be resolved through the redirect history.
     $param = rawurldecode((string)$p['slug']);
+    $user = currentUser();
+    $isAdmin = $user && in_array($user['role'] ?? '', ['admin', 'staff', 'superadmin']);
+    
     $product = null;
     $productSelect = "SELECT p.*, COALESCE(pt.shop_name,'Cooling') AS shop_name, pt.shop_slug, pt.id AS partner_id, b.name as car_brand_name, c.name as category_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN brands b ON b.id=p.car_brand_id LEFT JOIN categories c ON c.id=p.category_id";
-    // Legacy numeric IDs were reused after catalog resets, so they cannot be redirected safely.
-    if(is_numeric($param)) {
-        $product = null;
+    
+    if ($isAdmin) {
+        // Admin preview: match slug or ID regardless of status
+        if (is_numeric($param)) {
+            $product = dbGet($productSelect . " WHERE p.id=?", [intval($param)]);
+        } else {
+            $product = dbGet($productSelect . " WHERE p.slug=?", [$param]);
+        }
     } else {
-        // Lookup by slug
-        $product = dbGet($productSelect . " WHERE p.slug=? AND p.status='published'", [$param]);
+        if (!is_numeric($param)) {
+            // Lookup published product by slug
+            $product = dbGet($productSelect . " WHERE p.slug=? AND p.status='published'", [$param]);
 
-        // Preserve every previous slug recorded during migrations or product edits.
-        if (!$product) {
-            $redirectTable = dbGet("SELECT 1 AS found FROM sqlite_master WHERE type='table' AND name='product_slug_redirects'");
-            if ($redirectTable) {
-                $redirectProduct = dbGet($productSelect . " INNER JOIN product_slug_redirects psr ON psr.product_id=p.id WHERE psr.slug=? AND p.status='published'", [$param]);
-                if ($redirectProduct) {
-                    header('Location: ' . productPath($redirectProduct), true, 301);
-                    exit;
+            // Preserve every previous slug recorded during migrations or product edits.
+            if (!$product) {
+                $redirectTable = dbGet("SELECT 1 AS found FROM sqlite_master WHERE type='table' AND name='product_slug_redirects'");
+                if ($redirectTable) {
+                    $redirectProduct = dbGet($productSelect . " INNER JOIN product_slug_redirects psr ON psr.product_id=p.id WHERE psr.slug=? AND p.status='published'", [$param]);
+                    if ($redirectProduct) {
+                        header('Location: ' . productPath($redirectProduct), true, 301);
+                        exit;
+                    }
                 }
             }
-        }
 
-        // Fallback for legacy installs that have not created the redirect history yet.
-        if (!$product) {
-            $publishedProducts = dbAll($productSelect . " WHERE p.status='published'");
-            foreach ($publishedProducts as $candidate) {
-                if (legacyProductSlug((string)$candidate['name']) === $param) {
-                    header('Location: ' . productPath($candidate), true, 301);
-                    exit;
+            // Fallback for legacy installs that have not created the redirect history yet.
+            if (!$product) {
+                $publishedProducts = dbAll($productSelect . " WHERE p.status='published'");
+                foreach ($publishedProducts as $candidate) {
+                    if (legacyProductSlug((string)$candidate['name']) === $param) {
+                        header('Location: ' . productPath($candidate), true, 301);
+                        exit;
+                    }
                 }
             }
         }
     }
+
     if (!$product) { http_response_code(404); view('errors/404',['title'=>'SP không tìm thấy']); return; }
+
     $images = dbAll("SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC", [(int)$product['id']]);
     $reviews = dbAll("SELECT r.*, u.full_name, u.avatar FROM reviews r INNER JOIN users u ON u.id=r.user_id WHERE r.product_id=? AND r.status='published' ORDER BY r.created_at DESC", [(int)$product['id']]);
     $related = dbAll("SELECT p.*, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p WHERE p.category_id=? AND p.id!=? AND p.status='published' ORDER BY p.rating_avg DESC LIMIT 5", [$product['category_id'], (int)$product['id']]);
