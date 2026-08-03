@@ -19,11 +19,11 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
   <div class="wrap">
     <!-- Main Top-Bar Row: Đang phục vụ (Left) + Links (Right) on Same Row -->
     <div class="top-bar-main-row">
-      <div class="left">
+      <div class="top-bar-left-status">
         <span class="badge-live"><span class="dot"></span> Đang phục vụ</span>
       </div>
       
-      <div class="right">
+      <div class="top-bar-right-nav">
         <a href="/policies">Chính sách</a>
         <span class="sep">|</span>
         <a href="/stores">Cửa hàng</a>
@@ -215,31 +215,33 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
 
 @media (max-width: 768px) {
   .top-bar { min-height: auto !important; height: auto !important; padding: 4px 0 !important; overflow: hidden !important; width: 100% !important; box-sizing: border-box !important; }
-  .top-bar .wrap { display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: center !important; padding: 0 8px !important; width: 100% !important; box-sizing: border-box !important; gap: 3px !important; }
+  .top-bar .wrap { display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: center !important; padding: 0 6px !important; width: 100% !important; box-sizing: border-box !important; gap: 3px !important; }
   
   .top-bar-main-row { 
     display: flex !important; 
     align-items: center !important; 
     justify-content: flex-start !important; 
-    gap: 8px !important;
+    gap: 6px !important;
     width: 100% !important; 
     box-sizing: border-box !important;
     padding: 0 2px !important;
   }
-  .top-bar-main-row .left { flex: 0 0 auto !important; display: flex !important; align-items: center !important; margin: 0 !important; }
-  .top-bar-main-row .left .badge-live { font-size: 9.5px !important; padding: 1.5px 5px !important; line-height: 1.2 !important; white-space: nowrap !important; }
+  .top-bar-left-status { flex: 0 0 auto !important; display: flex !important; align-items: center !important; margin: 0 !important; width: auto !important; }
+  .top-bar-left-status .badge-live { font-size: 9.5px !important; padding: 1.5px 4px !important; line-height: 1.2 !important; white-space: nowrap !important; }
 
-  .top-bar-main-row .right { 
+  .top-bar-right-nav { 
     display: flex !important; 
     align-items: center !important; 
-    gap: 4px !important; 
+    gap: 3px !important; 
     flex: 0 0 auto !important; 
     margin-left: 0 !important; 
+    width: auto !important;
+    justify-content: flex-start !important;
   }
-  .top-bar-main-row .right a { color: rgba(255,255,255,0.92) !important; font-size: 10px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
-  .top-bar-main-row .right .sep { color: rgba(255,255,255,0.25) !important; font-size: 9px !important; margin: 0 1px !important; }
-  .top-bar-main-row .right #langSwitchBtn { background: none !important; border: 1px solid rgba(255,255,255,0.35) !important; color: #fff !important; padding: 1px 5px !important; border-radius: 3px !important; font-size: 9.5px !important; font-weight: 700 !important; cursor: pointer !important; white-space: nowrap !important; line-height: 1.2 !important; }
-  .top-bar-main-row .right .logout-link { background: #e74c3c !important; color: #fff !important; padding: 1px 5px !important; border-radius: 3px !important; font-size: 9.5px !important; font-weight: 700 !important; text-decoration: none !important; white-space: nowrap !important; }
+  .top-bar-right-nav a { color: rgba(255,255,255,0.92) !important; font-size: 10px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
+  .top-bar-right-nav .sep { color: rgba(255,255,255,0.25) !important; font-size: 9px !important; margin: 0 1px !important; }
+  .top-bar-right-nav #langSwitchBtn { background: none !important; border: 1px solid rgba(255,255,255,0.35) !important; color: #fff !important; padding: 1px 4px !important; border-radius: 3px !important; font-size: 9.5px !important; font-weight: 700 !important; cursor: pointer !important; white-space: nowrap !important; line-height: 1.2 !important; }
+  .top-bar-right-nav .logout-link { background: #e74c3c !important; color: #fff !important; padding: 1px 4px !important; border-radius: 3px !important; font-size: 9.5px !important; font-weight: 700 !important; text-decoration: none !important; white-space: nowrap !important; }
 
   .top-bar-hotline-stream { margin: 0 !important; height: auto !important; min-height: auto !important; overflow: visible !important; width: 100% !important; justify-content: center !important; }
   .top-bar-hotline-stream .hotline-list { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; align-items: center !important; white-space: normal !important; gap: 2px 6px !important; width: 100% !important; }
