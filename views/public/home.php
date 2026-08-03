@@ -98,9 +98,10 @@ require __DIR__ . '/../partials/head.php';
           aspect-ratio: 16 / 9 !important;
           min-height: auto !important;
           height: auto !important;
-          background: transparent !important;
+          background: #0f172a !important;
           border-radius: 10px !important;
           margin-bottom: 8px !important;
+          overflow: hidden !important;
         }
         #heroSliderWrap .hero-slide-item img {
           width: 100% !important;
@@ -108,6 +109,7 @@ require __DIR__ . '/../partials/head.php';
           object-fit: cover !important;
           object-position: center !important;
           border-radius: 10px !important;
+          transform: none !important;
         }
         .all-link::after { content: "" !important; }
         .sec-head { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 12px !important; }
