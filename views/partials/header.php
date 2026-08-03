@@ -122,54 +122,81 @@ header.main .hotline-slider-card .slider-arrow:hover {
 }
 
 @media(max-width: 768px) {
-  header.main { min-height: auto !important; padding: 2px 0 4px 0 !important; background: #fff !important; }
+  header.main { min-height: auto !important; padding: 4px 0 2px 0 !important; background: #fff !important; margin: 0 !important; border-bottom: 1px solid #f1f5f9 !important; }
   header.main .wrap { 
     display: flex !important; 
     flex-direction: row !important; 
     flex-wrap: nowrap !important; 
-    align-items: flex-end !important; 
+    align-items: center !important; 
     justify-content: space-between !important; 
-    padding: 4px 14px 2px 14px !important; 
-    gap: 8px !important; 
+    padding: 0 14px !important; 
+    gap: 10px !important; 
     width: 100% !important; 
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
     box-sizing: border-box !important;
     grid-template-columns: none !important;
-    min-height: auto !important;
+    margin: 0 !important;
   }
   
-  /* Large mobile logo pulled down flush to align bottom with cart & menu icons */
+  /* Perfectly centered, crisp, elegant mobile logo */
   header.main .logo { 
     display: flex !important; 
-    align-items: flex-end !important; 
+    align-items: center !important; 
     justify-content: flex-start !important; 
     flex: 0 0 auto !important; 
-    width: 195px !important; 
-    height: 44px !important; 
-    max-width: 195px !important; 
-    max-height: 44px !important; 
-    margin: 4px 0 0 0 !important; 
+    width: auto !important; 
+    height: 42px !important; 
+    max-height: 42px !important; 
+    margin: 0 !important; 
+    padding: 0 !important;
   }
   header.main .logo img, header.main .logo svg { 
-    width: 195px !important; 
-    height: 44px !important; 
-    max-width: 195px !important; 
-    max-height: 44px !important; 
+    width: auto !important;
+    height: 38px !important; 
+    max-width: 190px !important; 
+    max-height: 38px !important; 
     object-fit: contain !important; 
-    object-position: left bottom !important; 
+    object-position: left center !important; 
+    margin: 0 !important;
   }
 
   header.main .hotline-slider-card { display: none !important; }
   header.main .search { display: none !important; }
   header.main .header-actions { display: none !important; }
   
-  .mobile-search-bar { display: flex !important; padding: 4px 14px 2px 14px !important; width: 100% !important; box-sizing: border-box !important; }
+  /* Compact, clean search bar below header */
+  .mobile-search-bar { display: flex !important; padding: 6px 14px 6px 14px !important; width: 100% !important; box-sizing: border-box !important; background: #fff !important; }
   .mobile-search-bar form { display: flex !important; border: 1.5px solid #1a3258 !important; border-radius: 8px !important; overflow: hidden !important; background: #fff !important; width: 100% !important; height: 38px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
-  .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 10px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
+  .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 12px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
   .mobile-search-bar button { width: 42px !important; height: 38px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
-  /* Right actions (Cart & Menu toggle) aligned to bottom row with logo */
-  .mobile-right-actions { display: flex !important; align-items: center !important; align-self: flex-end !important; gap: 8px !important; margin-left: auto !important; flex-shrink: 0 !important; padding-bottom: 2px !important; }
-  .mobile-icon-btn, .mobile-cart-btn { padding: 2px 4px !important; color: #1a3258 !important; background: transparent !important; border: none !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 6px !important; position: relative !important; text-decoration: none !important; }
+  /* Right actions (Cart & Menu toggle) perfectly centered vertically on same row */
+  .mobile-right-actions { 
+    display: flex !important; 
+    align-items: center !important; 
+    align-self: center !important; 
+    gap: 10px !important; 
+    margin-left: auto !important; 
+    flex-shrink: 0 !important; 
+    height: 42px !important;
+    padding: 0 !important;
+  }
+  .mobile-icon-btn, .mobile-cart-btn { 
+    padding: 6px !important; 
+    color: #1a3258 !important; 
+    background: transparent !important; 
+    border: none !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    border-radius: 6px !important; 
+    position: relative !important; 
+    text-decoration: none !important; 
+    height: 36px !important;
+    width: 36px !important;
+  }
   .cart-badge-mobile { position: absolute !important; top: -2px !important; right: -2px !important; background: #c8962b !important; color: #fff !important; font-size: 10px !important; font-weight: 800 !important; border-radius: 10px !important; min-width: 17px !important; height: 17px !important; line-height: 17px !important; text-align: center !important; padding: 0 4px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important; z-index: 5 !important; }
   
   /* Transparent frameless hamburger toggle matching cart button color */
