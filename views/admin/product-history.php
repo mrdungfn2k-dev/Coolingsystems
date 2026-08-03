@@ -178,58 +178,102 @@ if (!function_exists('_phFmt')) {
 </div>
 
 
-<?php if (!empty($history)): ?>
 <div style="background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);padding:18px 22px;margin-top:16px">
-  <h3 style="margin:0 0 14px;font-size:15px;color:#1a3258">📜 Lịch sử thay đổi nội dung & Khôi phục phiên bản</h3>
-  <div style="overflow-x:auto">
-  <table style="width:100%;border-collapse:collapse;font-size:13px">
-    <thead><tr style="text-align:left;color:#888;font-size:11px;text-transform:uppercase">
-      <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">#</th>
-      <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Thời gian</th>
-      <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Loại</th>
-      <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Người thực hiện</th>
-      <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Thông tin phiên bản</th>
-      <th style="padding:8px 10px;border-bottom:2px solid #eef0f4;text-align:center">Thao tác</th>
-    </tr></thead>
-    <tbody>
-    <?php foreach ($history as $idx => $h):
-      $actionLabel = match($h['action'] ?? '') {
-        'create'    => 'Tạo mới',
-        'update'    => 'Cập nhật SP',
-        'inventory' => 'Kho / Giá',
-        'status'    => 'Trạng thái',
-        default     => $h['action'] ?? 'update'
-      };
-      $fmtMoney = fn($val) => number_format((int)$val, 0, ',', '.') . 'đ';
-    ?>
-      <tr>
-        <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7"><?= $idx + 1 ?></td>
-        <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;white-space:nowrap"><?= e($h['changed_at']) ?></td>
-        <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7"><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258"><?= $actionLabel ?></span></td>
-        <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;font-weight:600;color:#1a3258"><?= e($h['changer_name'] ?? 'Admin') ?></td>
-        <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;color:#555">
-          <?php if ($h['action'] === 'create'): ?>
-            Tạo ban đầu — Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Trạng thái: <?= e($h['status'] ?? '') ?>
-          <?php elseif ($h['action'] === 'inventory'): ?>
-            Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Giá gốc: <?= $fmtMoney($h['original_price'] ?? 0) ?>
-          <?php else: ?>
-            <?= e(mb_substr($h['name'] ?? '', 0, 45)) ?> · Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · <?= e($h['status'] ?? '') ?>
-          <?php endif; ?>
-        </td>
-        <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;text-align:center">
-          <?php if ($h['action'] !== 'create'): ?>
-            <form method="POST" action="/admin/products/<?= e($product['id']) ?>/restore/<?= $h['id'] ?>" onsubmit="return confirm('Khôi phục sản phẩm về phiên bản này?
-Nội dung hiện tại sẽ được cập nhật lại!')" style="margin:0">
-              <?= csrfField() ?>
-              <button type="submit" style="padding:4px 10px;border-radius:4px;border:1px solid #1a3258;background:#fff;color:#1a3258;font-size:11px;font-weight:700;cursor:pointer">Khôi phục</button>
-            </form>
-          <?php endif; ?>
-        </td>
-      </tr>
-    <?php endforeach; ?>
-    </tbody>
-  </table>
-  </div>
+  <h3 style="margin:0 0 6px;font-size:15px;color:#1a3258">📜 Lịch sử thay đổi & Khôi phục phiên bản sản phẩm</h3>
+  <p style="margin:0 0 14px;font-size:12px;color:#888">Ghi lại toàn bộ nhật ký chỉnh sửa thông tin, giá bán, tồn kho, trạng thái và các phiên bản lưu trữ của sản phẩm này.</p>
+  
+  <?php if (empty($history) && empty($changes)): ?>
+    <div style="padding:26px;text-align:center;color:#999;font-size:13px;background:#fafbfc;border-radius:8px">
+      Chưa có lịch sử thay đổi nào được ghi nhận cho sản phẩm này.<br>Các thay đổi về giá, tồn kho, nội dung hoặc trạng thái sẽ tự động xuất hiện tại đây khi được cập nhật.
+    </div>
+  <?php else: ?>
+    
+    <!-- 1. BẢNG PHIÊN BẢN KHÔI PHỤC (NẾU CÓ SNAPSHOT) -->
+    <?php if (!empty($history)): ?>
+    <div style="margin-bottom:20px">
+      <div style="font-size:13px;font-weight:700;color:#1a3258;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+        <span>🔄 Các phiên bản sao lưu có thể khôi phục</span>
+        <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#eef2f9;color:#1a3258"><?= count($history) ?> phiên bản</span>
+      </div>
+      <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="text-align:left;color:#888;font-size:11px;text-transform:uppercase">
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">#</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Thời gian</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Loại</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Người thực hiện</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Thông tin phiên bản</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4;text-align:center">Thao tác</th>
+        </tr></thead>
+        <tbody>
+        <?php foreach ($history as $idx => $h):
+          $actionLabel = match($h['action'] ?? '') {
+            'create'    => 'Tạo mới',
+            'update'    => 'Cập nhật SP',
+            'inventory' => 'Kho / Giá',
+            'status'    => 'Trạng thái',
+            default     => $h['action'] ?? 'update'
+          };
+          $fmtMoney = fn($val) => number_format((int)$val, 0, ',', '.') . 'đ';
+        ?>
+          <tr>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7"><?= $idx + 1 ?></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;white-space:nowrap"><?= e(_phFmt($h['changed_at'] ?? '')) ?></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7"><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;background:#eef2f9;color:#1a3258"><?= $actionLabel ?></span></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;font-weight:600;color:#1a3258"><?= e($h['changer_name'] ?? 'Quản trị viên') ?></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;color:#555">
+              <?php if (($h['action'] ?? '') === 'create'): ?>
+                Tạo ban đầu — Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Trạng thái: <?= e(_phStatus($h['status'] ?? '')) ?>
+              <?php elseif (($h['action'] ?? '') === 'inventory'): ?>
+                Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Giá gốc: <?= $fmtMoney($h['original_price'] ?? 0) ?>
+              <?php else: ?>
+                <?= e(mb_substr($h['name'] ?? '', 0, 45)) ?> · Giá: <?= $fmtMoney($h['price'] ?? 0) ?> · Tồn kho: <?= (int)($h['stock'] ?? 0) ?> · Trạng thái: <?= e(_phStatus($h['status'] ?? '')) ?>
+              <?php endif; ?>
+            </td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;text-align:center">
+              <?php if (($h['action'] ?? '') !== 'create'): ?>
+                <form method="POST" action="/admin/products/<?= e($product['id']) ?>/restore/<?= $h['id'] ?>" onsubmit="return confirm('Khôi phục sản phẩm về phiên bản này?\nNội dung hiện tại sẽ được cập nhật lại!')" style="margin:0">
+                  <?= csrfField() ?>
+                  <button type="submit" style="padding:4px 10px;border-radius:4px;border:1px solid #1a3258;background:#fff;color:#1a3258;font-size:11px;font-weight:700;cursor:pointer">Khôi phục</button>
+                </form>
+              <?php endif; ?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <?php endif; ?>
+
+    <!-- 2. NHẬT KÝ THAY ĐỔI CHI TIẾT (AUDIT LOGS) -->
+    <?php if (!empty($changes)): ?>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#1a3258;margin-bottom:8px">📝 Nhật ký thao tác & chỉnh sửa hệ thống</div>
+      <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="text-align:left;color:#888;font-size:11px;text-transform:uppercase">
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Thời gian</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Nội dung thay đổi</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">Người thực hiện</th>
+          <th style="padding:8px 10px;border-bottom:2px solid #eef0f4">IP</th>
+        </tr></thead>
+        <tbody>
+        <?php foreach ($changes as $ch): ?>
+          <tr>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;white-space:nowrap;color:#666"><?= e(_phFmt($ch['created_at'] ?? '')) ?></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7"><?= _phParseMeta($ch) ?></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;font-weight:600;color:#1a3258"><?= e($ch['full_name'] ?? $ch['email'] ?? ('User #'.($ch['user_id']??'?'))) ?></td>
+            <td style="padding:8px 10px;border-bottom:1px solid #f3f4f7;color:#888;font-family:monospace;font-size:12px"><?= e($ch['ip'] ?? '—') ?></td>
+          </tr>
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <?php endif; ?>
+
+  <?php endif; ?>
 </div>
-<?php endif; ?>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
+
