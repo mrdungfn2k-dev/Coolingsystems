@@ -172,8 +172,12 @@ header.main .hotline-slider-card .slider-arrow:hover {
   .mobile-search-bar input { flex: 1 !important; border: none !important; padding: 0 12px !important; font-size: 13px !important; outline: none !important; background: transparent !important; color: #1e293b !important; }
   .mobile-search-bar button { width: 42px !important; height: 38px !important; border: none !important; background: #1a3258 !important; color: #fff !important; cursor: pointer !important; flex-shrink: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   
-  /* Right actions (Cart & Menu toggle) perfectly centered vertically on same row */
+  /* Right actions (Cart & Menu toggle) in static flex flow perfectly centered on same row */
   .mobile-right-actions { 
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
     display: flex !important; 
     align-items: center !important; 
     align-self: center !important; 

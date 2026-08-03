@@ -1001,25 +1001,7 @@
 /* ═══════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════ */
-@media (max-width: 640px) {
-  .mobile-right-actions {
-    position: absolute !important;
-    right: 12px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    z-index: 50 !important;
-  }
-  header.main > .wrap {
-    position: relative !important;
-  }
-  .mobile-cart-btn {
-    display: flex !important;
-    align-items: center !important;
-  }
-}
+/* Clean mobile-right-actions flex flow - handled in header.php */
 
 
 /* ═══════════════════════════════════════════════════════ */
