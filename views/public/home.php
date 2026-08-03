@@ -95,10 +95,10 @@ require __DIR__ . '/../partials/head.php';
       <style>
       @media (max-width: 768px) {
         #heroSliderWrap.hero-slider-wrap {
-          aspect-ratio: 16 / 9 !important;
+          aspect-ratio: 16 / 6 !important;
           min-height: auto !important;
           height: auto !important;
-          background: #0f172a !important;
+          background: #0b1a30 !important;
           border-radius: 10px !important;
           margin-bottom: 8px !important;
           overflow: hidden !important;
@@ -106,7 +106,7 @@ require __DIR__ . '/../partials/head.php';
         #heroSliderWrap .hero-slide-item img {
           width: 100% !important;
           height: 100% !important;
-          object-fit: cover !important;
+          object-fit: contain !important;
           object-position: center !important;
           border-radius: 10px !important;
           transform: none !important;
