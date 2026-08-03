@@ -124,10 +124,25 @@ font { background-color: transparent !important; box-shadow: none !important; bo
 iframe.skiptranslate { display: none !important; visibility: hidden !important; }
 #goog-gt- { display: none !important; }
 
+/* Make Top-Bar Wrap Expand 100% Full Width across screen */
+.top-bar {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.top-bar .wrap {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 4px 24px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
 /* Static Hotline List Styles (100% Fully Visible Across Space) */
 .top-bar-hotline-stream {
   flex: 1 !important;
-  margin: 0 10px !important;
+  margin: 0 16px !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   position: relative !important;
