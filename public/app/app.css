@@ -1,5 +1,5 @@
 /* ==========================================================================
-   COOLING SYSTEMS MOBILE APP - EXACT DESIGN SYSTEM (3 COLORS: NAVY, ORANGE, WHITE)
+   COOLING SYSTEMS MOBILE APP - IPHONE 14 PRO MAX FRAME & STYLING
    ========================================================================== */
 
 :root {
@@ -16,7 +16,7 @@
   --gray-text-sub: #64748b;
   --gray-text-main: #1e293b;
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --bottom-nav-height: 60px;
+  --bottom-nav-height: 64px;
   --top-header-height: 56px;
 }
 
@@ -30,36 +30,70 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: var(--navy-dark);
+  background-color: #0d1b2f;
   font-family: var(--font-family);
   font-size: 13.5px;
   color: var(--gray-text-main);
   overflow: hidden;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Mobile Frame Container */
+/* Simulated iPhone 14 Pro Max Outer Frame */
 #app-root {
-  max-width: 440px;
-  height: 100%;
+  width: 420px;
+  max-width: 95vw;
+  height: 870px;
+  max-height: 95vh;
   margin: 0 auto;
   background-color: var(--gray-bg);
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  border-radius: 48px;
+  border: 11px solid #1c1c1e;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), inset 0 0 0 2px #3a3a3c;
   overflow: hidden;
 }
 
-/* Top Navy Status Header */
+/* iPhone Dynamic Island Notch */
+.dynamic-island {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 115px;
+  height: 28px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.dynamic-island::after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #1c1c1e;
+  border: 2px solid #000000;
+}
+
+/* Status Header */
 .app-header {
-  height: var(--top-header-height);
+  height: calc(var(--top-header-height) + 16px);
   background: var(--navy-dark);
   color: #ffffff;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 16px 10px;
   position: relative;
   z-index: 100;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -73,22 +107,22 @@ html, body {
 }
 
 .app-brand img {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   border-radius: 6px;
 }
 
 .app-brand-title {
   font-weight: 800;
-  font-size: 14px;
+  font-size: 13.5px;
   letter-spacing: -0.2px;
   color: #ffffff;
   line-height: 1.1;
 }
 
 .app-brand-sub {
-  font-size: 9.5px;
+  font-size: 9px;
   color: #ffffff;
   opacity: 0.8;
   font-weight: 600;
@@ -98,7 +132,7 @@ html, body {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .header-badge-nav {
@@ -107,12 +141,12 @@ html, body {
   color: #ffffff;
   background: rgba(255,255,255,0.12);
   padding: 4px 8px;
-  border-radius: 12px;
+  border-radius: 14px;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Main Content Views - NO FLICKER ANIMATION & NO TEXT JITTER */
+/* Main Content Views - NO FLICKER ANIMATION */
 .app-content {
   flex: 1;
   overflow-y: auto;
@@ -122,7 +156,6 @@ html, body {
   padding-bottom: calc(var(--bottom-nav-height) + 12px);
 }
 
-/* Instant Screen Toggle (NO JITTER / NO KEYFRAME ANIMATION) */
 .view-screen {
   display: none;
   width: 100%;
@@ -133,7 +166,7 @@ html, body {
   display: block;
 }
 
-/* Bottom Navigation Bar (5 Main Tabs matching UI Spec) */
+/* Bottom Navigation Bar with Gray SVG Icons */
 .bottom-nav {
   position: absolute;
   bottom: 0;
@@ -146,6 +179,7 @@ html, body {
   align-items: center;
   justify-content: space-around;
   z-index: 1000;
+  padding-bottom: 6px;
 }
 
 .nav-item {
@@ -156,12 +190,22 @@ html, body {
   gap: 3px;
   color: var(--gray-text-sub);
   text-decoration: none;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 600;
   flex: 1;
   height: 100%;
   cursor: pointer;
   position: relative;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.nav-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gray-text-sub);
+  fill: none;
+  stroke-width: 2;
+  transition: stroke 0.15s ease, transform 0.15s ease;
 }
 
 .nav-item.active {
@@ -169,23 +213,50 @@ html, body {
   font-weight: 800;
 }
 
+.nav-item.active svg {
+  stroke: var(--navy-dark);
+  transform: translateY(-1px);
+}
+
 .nav-item .nav-badge {
   position: absolute;
-  top: 6px;
-  right: 20%;
+  top: 4px;
+  right: 22%;
   background: var(--orange-accent);
   color: #ffffff;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 800;
-  padding: 1px 5px;
+  padding: 1px 4px;
   border-radius: 10px;
 }
 
-/* Search Input Widget */
+/* Fully Rounded Forms & Custom Rounded Select Boxes */
+select, input[type="text"], input[type="password"], input[type="search"] {
+  border-radius: 12px !important;
+  border: 1px solid var(--gray-border);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--gray-text-main);
+  background-color: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%2364748b" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px !important;
+  cursor: pointer;
+}
+
+/* Search Widget */
 .search-box-widget {
   background: #ffffff;
   border: 1px solid var(--gray-border);
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 8px 12px;
   display: flex;
   align-items: center;
@@ -193,61 +264,32 @@ html, body {
 }
 
 .search-box-widget input {
-  border: none;
+  border: none !important;
   outline: none;
   width: 100%;
   font-size: 12.5px;
-  color: var(--gray-text-main);
   background: transparent;
+  padding: 0 !important;
 }
 
-/* Category Chips */
-.cat-chips-scroll {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: none;
-}
-
-.cat-chips-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.chip-btn {
-  white-space: nowrap;
-  background: #ffffff;
+/* Rounded Cards */
+.prod-card, .brand-card, .rounded-card {
+  border-radius: 14px !important;
   border: 1px solid var(--gray-border);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--gray-text-main);
-  cursor: pointer;
+  background: #ffffff;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.chip-btn.active {
-  background: var(--navy-dark);
-  color: #ffffff;
-  border-color: var(--navy-dark);
+.prod-card:active, .brand-card:active {
+  transform: scale(0.97);
 }
 
-/* Product Grid (2 Columns) */
+/* Product Cards Grid */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-}
-
-.prod-card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid var(--gray-border);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  cursor: pointer;
 }
 
 .prod-img-wrap {
@@ -267,18 +309,6 @@ html, body {
   object-fit: cover;
 }
 
-.prod-badge-discount {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  background: var(--orange-accent);
-  color: #ffffff;
-  font-size: 9.5px;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
 .prod-info {
   padding: 10px;
   display: flex;
@@ -292,7 +322,7 @@ html, body {
   font-weight: 600;
 }
 
-/* NO TEXT JITTER: Fixed height, clear line-height, no -webkit-line-clamp jumps */
+/* NO TEXT JITTER */
 .prod-name {
   font-size: 12px;
   font-weight: 700;
@@ -323,7 +353,7 @@ html, body {
   font-weight: 700;
 }
 
-/* UI Buttons (Matching UI Spec: Orange Primary, Navy Secondary, White Outline) */
+/* UI Buttons with Micro-Animations & Rounded Corners */
 .btn-orange, .btn-primary {
   width: 100%;
   background: var(--orange-accent);
@@ -331,7 +361,7 @@ html, body {
   font-size: 13.5px;
   font-weight: 700;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   text-align: center;
@@ -339,6 +369,12 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-orange:active, .btn-primary:active {
+  transform: scale(0.97);
+  background: var(--orange-hover);
 }
 
 .btn-navy {
@@ -348,7 +384,7 @@ html, body {
   font-size: 13.5px;
   font-weight: 700;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   text-align: center;
@@ -356,6 +392,11 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.btn-navy:active {
+  transform: scale(0.97);
 }
 
 .btn-outline {
@@ -365,7 +406,7 @@ html, body {
   font-size: 13.5px;
   font-weight: 700;
   padding: 11px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--gray-border);
   cursor: pointer;
   text-align: center;
@@ -373,6 +414,11 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.btn-outline:active {
+  transform: scale(0.97);
 }
 
 /* Section Header */
@@ -395,9 +441,46 @@ html, body {
   color: var(--orange-accent);
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 }
 
-/* Lists & Grids */
+/* Category Chips */
+.cat-chips-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.cat-chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.chip-btn {
+  white-space: nowrap;
+  background: #ffffff;
+  border: 1px solid var(--gray-border);
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--gray-text-main);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.chip-btn:active {
+  transform: scale(0.95);
+}
+
+.chip-btn.active {
+  background: var(--navy-dark);
+  color: #ffffff;
+  border-color: var(--navy-dark);
+}
+
+/* Brand Grid */
 .brand-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -405,9 +488,6 @@ html, body {
 }
 
 .brand-card {
-  background: #ffffff;
-  border: 1px solid var(--gray-border);
-  border-radius: 10px;
   padding: 12px 8px;
   text-align: center;
   cursor: pointer;

@@ -1,20 +1,38 @@
 <?php
-// API Endpoint serving complete App Data (Products, Categories, Brands, Car Brands)
+// API Endpoint serving 100% complete VPS DB Data (Categories, Car Brands, Part Brands, Products)
 header('Content-Type: application/json; charset=utf-8');
 chdir(__DIR__ . '/..');
 require_once 'includes/db.php';
 require_once 'includes/helpers.php';
 
-// 1. Fetch Categories
-$categories = dbAll("SELECT id, name, (SELECT COUNT(*) FROM products WHERE category_id=c.id AND status='published') as prod_count FROM categories c ORDER BY id ASC");
+// 1. Fetch All Categories
+$categories = dbAll("
+    SELECT c.id, c.name, COUNT(p.id) as prod_count 
+    FROM categories c 
+    LEFT JOIN products p ON p.category_id=c.id AND p.status='published'
+    GROUP BY c.id, c.name 
+    ORDER BY c.name ASC
+");
 
-// 2. Fetch Car Brands
-$carBrands = dbAll("SELECT id, name, logo, (SELECT COUNT(*) FROM products WHERE car_brand_id=b.id AND status='published') as prod_count FROM brands b ORDER BY name ASC");
+// 2. Fetch All Car Brands
+$carBrands = dbAll("
+    SELECT b.id, b.name, b.logo, COUNT(p.id) as prod_count 
+    FROM brands b 
+    LEFT JOIN products p ON p.car_brand_id=b.id AND p.status='published'
+    GROUP BY b.id, b.name, b.logo 
+    ORDER BY b.name ASC
+");
 
-// 3. Fetch Part Brands (distinct part_brand from products)
-$partBrands = dbAll("SELECT DISTINCT part_brand FROM products WHERE part_brand IS NOT NULL AND part_brand != '' ORDER BY part_brand ASC");
+// 3. Fetch Distinct Part Brands
+$partBrands = dbAll("
+    SELECT part_brand AS name, COUNT(*) as prod_count 
+    FROM products 
+    WHERE status='published' AND part_brand IS NOT NULL AND part_brand != '' 
+    GROUP BY part_brand 
+    ORDER BY part_brand ASC
+");
 
-// 4. Fetch All Published Products with Main Image
+// 4. Fetch Products with Images
 $products = dbAll("
     SELECT p.id, p.sku, p.oem_code, p.name, p.price, p.original_price, 
            c.name AS cat_name, b.name AS brand_name, p.part_brand, p.description,
@@ -24,6 +42,7 @@ $products = dbAll("
     LEFT JOIN brands b ON b.id=p.car_brand_id
     WHERE p.status='published'
     ORDER BY p.id DESC
+    LIMIT 100
 ");
 
 // Format product image URLs
