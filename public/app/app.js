@@ -1,5 +1,5 @@
 /* ==========================================================================
-   COOLING SYSTEMS MOBILE APP - COMPLETE REAL VPS DB DATA & SPA LOGIC
+   COOLING SYSTEMS MOBILE APP - EXACT DESIGN SPEC (LOGIN & DOWNWARDS SELECTS)
    ========================================================================== */
 
 (function () {
@@ -1632,7 +1632,6 @@
       </div>
     `).join('');
 
-    // Populate search dropdowns with all car brands & categories
     const brandSelect = document.getElementById('home-brand-select');
     if (brandSelect && brandSelect.children.length <= 1) {
       brandSelect.innerHTML = carBrandsDB.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
@@ -1826,7 +1825,7 @@
 
         <div style="border-top:1px solid var(--gray-border); padding-top:12px; margin-top:12px;">
           <h4 style="font-size:13px; font-weight:700; color:var(--navy-dark); margin-bottom:6px;">Mô tả sản phẩm:</h4>
-          <p style="font-size:12px; color:var(--gray-text-sub); line-height:1.5;">${p.desc || 'Linh kiện phụ tùng điện lạnh điều hòa ô tô chính hãng, chịu nhiệt và áp suất lớn, vận hành êm ái.'}</p>
+          <p style="font-size:12px; color:var(--gray-text-sub); line-height:1.5;">${p.desc || 'Linh kiện phụ tùng điện lạnh điều hòa ô tô chính hãng.'}</p>
         </div>
 
         <div style="margin-top:20px; display:flex; gap:10px;">
@@ -1978,7 +1977,6 @@
     `;
   }
 
-  // 15. Render Account View (CONNECTED LOGOUT BUTTON TO LOGIN SCREEN)
   function renderAccountView() {
     const container = document.getElementById('account-container');
     if (!container) return;
@@ -2014,7 +2012,6 @@
           <div style="padding:14px; font-weight:700; color:var(--navy-dark); font-size:13px;" onclick="window.App.navigateTo('stores')">Hệ thống cửa hàng & kho</div>
         </div>
 
-        <!-- LOGOUT BUTTON CONNECTED TO LOGIN SCREEN -->
         <button class="btn-outline" style="color:var(--red-alert); border-color:#fecaca;" onclick="window.App.navigateTo('login')">Đăng xuất</button>
       </div>
     `;
@@ -2039,26 +2036,51 @@
     `;
   }
 
-  // 17. Render Login Screen (Matching Screenshot 2)
+  // 17. REDESIGNED LOGIN SCREEN MATCHING SCREENSHOT 2 (NO GO-BACK LINK, EXACT UI SPEC)
   function renderLoginView() {
     const container = document.getElementById('screen-login');
     if (!container) return;
 
     container.innerHTML = `
-      <div style="background:var(--navy-dark); color:#fff; padding:20px 16px;">
-        <span class="back-link" onclick="window.App.navigateTo('home')">← Quay lại Trang Chủ</span>
-        <div style="font-size:18px; font-weight:800; margin-top:10px;">Xin chào, Đăng nhập tài khoản</div>
+      <div style="background:var(--navy-dark); color:#fff; padding:24px 16px 16px;">
+        <div style="font-size:11px; opacity:0.8;">Xin chào,</div>
+        <div style="font-size:20px; font-weight:800; margin-top:2px;">Đăng nhập tài khoản</div>
       </div>
       <div style="padding:16px;">
-        <div style="background:#fff; border-radius:14px; padding:16px; border:1px solid var(--gray-border);">
+        <div style="background:#fff; border-radius:14px; padding:16px; border:1px solid var(--gray-border); margin-bottom:14px;">
           <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Số điện thoại</label>
           <input type="text" value="0912 345 678" style="width:100%; margin-bottom:12px;">
 
           <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Mật khẩu</label>
-          <input type="password" value="12345678" style="width:100%; margin-bottom:16px;">
+          <div style="position:relative; margin-bottom:12px;">
+            <input type="password" value="12345678" style="width:100%; padding-right:50px;">
+            <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); font-size:11px; font-weight:700; color:var(--navy-dark); cursor:pointer;">Hiện</span>
+          </div>
 
-          <button class="btn-orange" style="margin-bottom:10px;" onclick="window.App.navigateTo('account')">Đăng nhập</button>
-          <button class="btn-outline" onclick="alert('Mã OTP Zalo đã được gửi tới SĐT 0912 345 678!')">Đăng nhập bằng OTP Zalo</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; font-size:12px;">
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-weight:600; color:var(--gray-text-sub);">
+              <input type="checkbox" checked> Ghi nhớ
+            </label>
+            <a href="#" style="color:var(--navy-dark); font-weight:700; text-decoration:none;">Quên mật khẩu?</a>
+          </div>
+
+          <button class="btn-orange" style="margin-bottom:14px;" onclick="window.App.navigateTo('account')">Đăng nhập</button>
+
+          <div style="text-align:center; font-size:11.5px; color:var(--gray-text-sub); margin-bottom:14px; position:relative;">
+            <span style="background:#fff; padding:0 8px; position:relative; z-index:1;">hoặc</span>
+            <div style="position:absolute; top:50%; left:0; right:0; height:1px; background:#e8ecf3;"></div>
+          </div>
+
+          <button class="btn-outline" style="margin-bottom:14px;" onclick="alert('Mã OTP Zalo đã được gửi tới SĐT 0912 345 678!')">Đăng nhập bằng OTP Zalo</button>
+
+          <div style="text-align:center; font-size:12px; color:var(--gray-text-sub);">
+            Chưa có tài khoản? <a href="#" style="color:var(--navy-dark); font-weight:800; text-decoration:none;" onclick="alert('Vui lòng điền form Đăng ký Gara!')">Đăng ký</a>
+          </div>
+        </div>
+
+        <div style="background:#f8fafc; border-radius:14px; padding:14px; border:1px solid #e2e8f0;">
+          <div style="font-size:13px; font-weight:800; color:var(--navy-dark); margin-bottom:2px;">Là Gara / Đại lý?</div>
+          <div style="font-size:11px; color:var(--gray-text-sub); line-height:1.4;">Đăng ký để nhận bảng giá buôn gốc và chính sách công nợ gối đầu.</div>
         </div>
       </div>
     `;
@@ -2105,7 +2127,6 @@
     }
   }
 
-  // Global App API
   window.App = {
     state,
     navigateTo,
