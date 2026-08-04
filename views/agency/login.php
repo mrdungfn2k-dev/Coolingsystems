@@ -277,19 +277,22 @@ require_once __DIR__ . '/../../includes/helpers.php';
           
           <div class="form-group">
             <label style="color:#b91c1c;">1. Ảnh bảng hiệu Cửa hàng / Gara * (Bắt buộc)</label>
-            <input type="file" name="signboard_image" accept="image/*" required>
+            <input type="file" name="signboard_image" id="signboardInput" accept="image/*" required>
+            <div id="signboardPreview" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;"></div>
             <small style="color:#64748b; font-size:11.5px;">Chụp rõ tên Gara/Đại lý, địa chỉ &amp; SĐT trên bảng hiệu mặt tiền.</small>
           </div>
 
           <div class="form-group">
             <label style="color:#b91c1c;">2. Giấy phép kinh doanh / Đăng ký HKD * (Bắt buộc)</label>
-            <input type="file" name="license_image" accept="image/*,.pdf" required>
+            <input type="file" name="license_image" id="licenseInput" accept="image/*,.pdf" required>
+            <div id="licensePreview" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;"></div>
             <small style="color:#64748b; font-size:11.5px;">Ảnh chụp hoặc file PDF Đăng ký kinh doanh / Mã số thuế HKD.</small>
           </div>
 
           <div class="form-group">
             <label style="color:#b91c1c;">3. Tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara * (Bắt buộc ≥ 3 ảnh)</label>
             <input type="file" name="real_images[]" id="realImagesInput" accept="image/*" multiple required>
+            <div id="realPreview" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;"></div>
             <small style="color:#64748b; font-size:11.5px;">Chụp các góc: Toàn cảnh xưởng/cửa hàng, khu vực kho hàng/kệ phụ tùng (Giữ phím Ctrl để chọn cùng lúc 3+ ảnh).</small>
           </div>
         </div>
@@ -312,6 +315,40 @@ require_once __DIR__ . '/../../includes/helpers.php';
       modal.style.display = 'none';
     }
   };
+
+  function previewFiles(input, containerId) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = '';
+    if (!input.files || input.files.length === 0) return;
+    Array.from(input.files).forEach(function(file) {
+      if (file.type.startsWith('image/')) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var img = document.createElement('img');
+          img.src = e.target.result;
+          img.style.width = '70px';
+          img.style.height = '70px';
+          img.style.objectFit = 'cover';
+          img.style.borderRadius = '8px';
+          img.style.border = '1px solid #cbd5e1';
+          container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        var tag = document.createElement('span');
+        tag.textContent = file.name;
+        tag.style.fontSize = '12px';
+        tag.style.background = '#e2e8f0';
+        tag.style.padding = '4px 8px';
+        tag.style.borderRadius = '6px';
+        container.appendChild(tag);
+      }
+    });
+  }
+
+  document.getElementById('signboardInput').addEventListener('change', function() { previewFiles(this, 'signboardPreview'); });
+  document.getElementById('licenseInput').addEventListener('change', function() { previewFiles(this, 'licensePreview'); });
+  document.getElementById('realImagesInput').addEventListener('change', function() { previewFiles(this, 'realPreview'); });
 
   document.getElementById('agencyRegForm').addEventListener('submit', function(e) {
     var input = document.getElementById('realImagesInput');

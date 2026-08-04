@@ -404,7 +404,11 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
             <?php endif; ?>
           </div>
           <div>
-            <span class="label" style="display:block;font-size:10px;text-transform:uppercase;color:#888;font-weight:700">Tài khoản</span>
+            <?php if (($user['role'] ?? '') === 'agent'): ?>
+              <span style="display:block;font-size:9px;text-transform:uppercase;background:#0b1d3a;color:#ffffff;padding:1px 5px;border-radius:4px;font-weight:800;letter-spacing:0.3px;">TÀI KHOẢN ĐẠI LÝ</span>
+            <?php else: ?>
+              <span class="label" style="display:block;font-size:10px;text-transform:uppercase;color:#888;font-weight:700">Tài khoản</span>
+            <?php endif; ?>
             <span class="value" style="display:block;font-size:13px;font-weight:700;color:var(--navy)"><?= truncate($user['full_name'], 12) ?></span>
           </div>
         </a>
