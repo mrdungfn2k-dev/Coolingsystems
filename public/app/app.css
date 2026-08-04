@@ -1,13 +1,11 @@
 /* ==========================================================================
-   COOLING SYSTEMS MOBILE APP - EXACT DESIGN SYSTEM (MATCHING UI SPEC)
+   COOLING SYSTEMS MOBILE APP - EXACT DESIGN SYSTEM (3 COLORS: NAVY, ORANGE, WHITE)
    ========================================================================== */
 
 :root {
   --navy-dark: #1a3258;
   --navy-main: #1a3258;
   --navy-light: #244270;
-  --gold-accent: #c8a951;
-  --gold-light: #dfc272;
   --orange-accent: #f26a1b;
   --orange-hover: #d8570e;
   --green-status: #10b981;
@@ -32,15 +30,15 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #0b1a30;
+  background-color: var(--navy-dark);
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--gray-text-main);
   overflow: hidden;
   user-select: none;
 }
 
-/* Mobile Viewport Container */
+/* Mobile Frame Container */
 #app-root {
   max-width: 440px;
   height: 100%;
@@ -53,7 +51,7 @@ html, body {
   overflow: hidden;
 }
 
-/* Status Header */
+/* Top Navy Status Header */
 .app-header {
   height: var(--top-header-height);
   background: var(--navy-dark);
@@ -75,25 +73,25 @@ html, body {
 }
 
 .app-brand img {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   border-radius: 6px;
 }
 
 .app-brand-title {
   font-weight: 800;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: -0.2px;
   color: #ffffff;
   line-height: 1.1;
 }
 
 .app-brand-sub {
-  font-size: 10px;
-  color: var(--gold-accent);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-size: 9.5px;
+  color: #ffffff;
+  opacity: 0.8;
+  font-weight: 600;
   letter-spacing: 0.2px;
 }
 
@@ -103,17 +101,18 @@ html, body {
   gap: 10px;
 }
 
-.header-btn-call {
-  background: rgba(255,255,255,0.12);
-  color: #ffffff;
-  font-size: 12px;
+.header-badge-nav {
+  font-size: 11px;
   font-weight: 700;
-  padding: 6px 12px;
-  border-radius: 20px;
+  color: #ffffff;
+  background: rgba(255,255,255,0.12);
+  padding: 4px 8px;
+  border-radius: 12px;
   text-decoration: none;
+  cursor: pointer;
 }
 
-/* Main Content Views - NO FLICKER ANIMATION */
+/* Main Content Views - NO FLICKER ANIMATION & NO TEXT JITTER */
 .app-content {
   flex: 1;
   overflow-y: auto;
@@ -134,7 +133,7 @@ html, body {
   display: block;
 }
 
-/* Bottom Navigation Bar */
+/* Bottom Navigation Bar (5 Main Tabs matching UI Spec) */
 .bottom-nav {
   position: absolute;
   bottom: 0;
@@ -157,7 +156,7 @@ html, body {
   gap: 3px;
   color: var(--gray-text-sub);
   text-decoration: none;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   flex: 1;
   height: 100%;
@@ -176,13 +175,13 @@ html, body {
   right: 20%;
   background: var(--orange-accent);
   color: #ffffff;
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 800;
   padding: 1px 5px;
   border-radius: 10px;
 }
 
-/* Search Box */
+/* Search Input Widget */
 .search-box-widget {
   background: #ffffff;
   border: 1px solid var(--gray-border);
@@ -197,7 +196,7 @@ html, body {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--gray-text-main);
   background: transparent;
 }
@@ -219,9 +218,9 @@ html, body {
   white-space: nowrap;
   background: #ffffff;
   border: 1px solid var(--gray-border);
-  padding: 7px 14px;
+  padding: 6px 14px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--gray-text-main);
   cursor: pointer;
@@ -233,21 +232,22 @@ html, body {
   border-color: var(--navy-dark);
 }
 
-/* Product Cards Grid */
+/* Product Grid (2 Columns) */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .prod-card {
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid var(--gray-border);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
+  cursor: pointer;
 }
 
 .prod-img-wrap {
@@ -267,6 +267,18 @@ html, body {
   object-fit: cover;
 }
 
+.prod-badge-discount {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: var(--orange-accent);
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
 .prod-info {
   padding: 10px;
   display: flex;
@@ -280,16 +292,16 @@ html, body {
   font-weight: 600;
 }
 
+/* NO TEXT JITTER: Fixed height, clear line-height, no -webkit-line-clamp jumps */
 .prod-name {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--navy-dark);
   line-height: 1.35;
   margin: 3px 0 6px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  height: 32px;
   overflow: hidden;
+  display: block;
 }
 
 .prod-price-row {
@@ -300,12 +312,18 @@ html, body {
 }
 
 .prod-price {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 800;
   color: var(--orange-accent);
 }
 
-/* Exact UI Button Colors (Matching Screenshots) */
+.prod-status-stock {
+  font-size: 10px;
+  color: var(--green-status);
+  font-weight: 700;
+}
+
+/* UI Buttons (Matching UI Spec: Orange Primary, Navy Secondary, White Outline) */
 .btn-orange, .btn-primary {
   width: 100%;
   background: var(--orange-accent);
@@ -357,25 +375,52 @@ html, body {
   justify-content: center;
 }
 
-/* Sections & Tabs */
-.sub-header-bar {
-  background: var(--navy-dark);
-  color: #ffffff;
-  padding: 14px 16px;
+/* Section Header */
+.section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 2px;
 }
 
-.sub-header-title {
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.back-link {
-  color: #ffffff;
-  font-size: 13px;
+.section-title {
+  font-size: 14.5px;
   font-weight: 700;
+  color: var(--navy-dark);
+}
+
+.section-link {
+  font-size: 11.5px;
+  color: var(--orange-accent);
+  font-weight: 600;
   text-decoration: none;
+}
+
+/* Lists & Grids */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.brand-card {
+  background: #ffffff;
+  border: 1px solid var(--gray-border);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
   cursor: pointer;
+}
+
+.brand-card-name {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--navy-dark);
+}
+
+.brand-card-count {
+  font-size: 10px;
+  color: var(--gray-text-sub);
+  margin-top: 2px;
 }

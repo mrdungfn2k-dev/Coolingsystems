@@ -14,6 +14,11 @@ get('/app', function() {
     exit;
 });
 
+get('/api/app-data', function() {
+    require __DIR__ . '/../api/app-data.php';
+    exit;
+});
+
 get('/account', function() {
     header('Location: /customer/profile', true, 301);
     exit;

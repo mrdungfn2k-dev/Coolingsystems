@@ -1,12 +1,12 @@
 /* ==========================================================================
-   COOLING SYSTEMS MOBILE APP - CORE SPA LOGIC & REAL PRODUCTS ENGINE
+   COOLING SYSTEMS MOBILE APP - COMPLETE SPA & LIVE DATA ENGINE
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  // Real VPS Products Data Database
-  const productsDB = [
+  // Seed VPS Products Data
+  let productsDB = [
   {
     "id": 6919,
     "sku": "TCA-LIVE-49-3",
@@ -458,6 +458,46 @@
     "desc": "1. M&ocirc; Tả Sản Phẩm BỘ ĐẦU LỐC PORTER 4PK 12V BỘ ĐẦU STAREX HANON <div style=\"text-align: center; margin: 20px 0;\">&nbsp;</div> 2. Thiết Kế Kỹ Thuật &amp; Tương Th&iacute;ch D&"
   }
 ];
+  let categoriesDB = [
+    { id: 1, name: 'Dàn lạnh điều hòa', count: '412 mã' },
+    { id: 2, name: 'Dàn nóng điều hòa', count: '386 mã' },
+    { id: 3, name: 'Lốc điều hòa', count: '524 mã' },
+    { id: 4, name: 'Bộ đầu lốc điều hòa', count: '148 mã' },
+    { id: 5, name: 'Van tiết lưu điều hòa', count: '231 mã' },
+    { id: 6, name: 'Van đuôi lốc', count: '96 mã' },
+    { id: 7, name: 'Motor, quạt dàn lạnh', count: '174 mã' },
+    { id: 8, name: 'Motor, quạt dàn nóng', count: '168 mã' },
+    { id: 9, name: 'Phin lọc ga', count: '88 mã' },
+    { id: 10, name: 'Ống dẫn gas điều hòa', count: '142 mã' },
+    { id: 11, name: 'Dàn sưởi điều hòa', count: '119 mã' }
+  ];
+  let carBrandsDB = [
+    { name: 'Toyota', count: '649' },
+    { name: 'Hyundai', count: '512' },
+    { name: 'KIA', count: '486' },
+    { name: 'Mazda', count: '318' },
+    { name: 'Ford', count: '297' },
+    { name: 'Honda', count: '284' },
+    { name: 'Mitsubishi', count: '233' },
+    { name: 'Chevrolet', count: '189' },
+    { name: 'Daewoo', count: '142' },
+    { name: 'Mercedes', count: '176' },
+    { name: 'BMW', count: '161' },
+    { name: 'Audi', count: '118' },
+    { name: 'Nissan', count: '131' },
+    { name: 'VinFast', count: '72' },
+    { name: 'Lexus', count: '96' }
+  ];
+  let partBrandsDB = [
+    { name: 'DENSO', origin: 'Nhật Bản • OEM', count: '1.240 mã' },
+    { name: 'VALEO', origin: 'Pháp • OEM', count: '862 mã' },
+    { name: 'HANON', origin: 'Hàn Quốc • OEM', count: '744 mã' },
+    { name: 'SANDEN', origin: 'Nhật Bản • Lốc điều hòa', count: '631 mã' },
+    { name: 'FUJIKOKI', origin: 'Nhật Bản • Van tiết lưu', count: '286 mã' },
+    { name: 'DOOWON', origin: 'Hàn Quốc • Dàn lạnh', count: '318 mã' },
+    { name: 'BEHR / MAHLE', origin: 'Đức • Làm mát', count: '482 mã' },
+    { name: 'KEIHIN', origin: 'Nhật Bản • Lốc & van', count: '164 mã' }
+  ];
 
   // State Management
   const state = {
@@ -469,12 +509,12 @@
     wishlist: [productsDB[0].id, productsDB[1].id],
     user: {
       isLoggedIn: true,
-      name: 'Garage Thành Công',
-      phone: '0912345678',
-      tier: 'Đại Lý Partner',
+      name: 'Gara Thành Công',
+      phone: '0912 345 678',
+      tier: 'ĐẠI LÝ',
       points: 12500,
       taxId: '0101234567-001',
-      address: '145 Quang Trung, P. Quang Trung, Hà Đông, Hà Nội'
+      address: 'Số 12 Nguyễn Văn Cừ, P. Gia Thụy, Long Biên, Hà Nội'
     },
     activeCategory: 'all',
     searchQuery: '',
@@ -484,7 +524,32 @@
   // Helper Functions
   const fmtVND = (num) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num);
 
-  // Navigation Router (NO SCREEN FLICKERING)
+  // Fetch Live Data from VPS API
+  function fetchLiveData() {
+    fetch('/api/app-data')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.success && data.products && data.products.length > 0) {
+          productsDB = data.products.map(p => ({
+            id: p.id,
+            sku: p.sku || 'TCA-COOLING',
+            oem: p.oem_code || 'OEM-STANDARD',
+            name: p.name,
+            price: parseFloat(p.price) || 0,
+            oldPrice: p.original_price ? parseFloat(p.original_price) : null,
+            cat: p.cat_name || 'Phụ Tùng Điều Hòa',
+            brand: p.brand_name || 'Chính Hãng',
+            partBrand: p.part_brand || 'Cooling',
+            image: p.image || '/favicon-512x512.png',
+            desc: p.description ? p.description.replace(/<[^>]*>?/gm, '').substring(0, 180) : ''
+          }));
+          renderScreen(state.currentScreen);
+        }
+      })
+      .catch(err => console.log('Using local embedded products database:', err));
+  }
+
+  // Navigation Router (NO FLICKER, NO TEXT JITTER)
   function navigateTo(screenId, params = {}) {
     state.currentScreen = screenId;
     if (params.product) state.selectedProduct = params.product;
@@ -502,15 +567,14 @@
       }
     });
 
-    // Scroll container to top
+    // Scroll content to top
     const container = document.querySelector('.app-content');
     if (container) container.scrollTop = 0;
 
-    // Render screen content
     renderScreen(screenId);
   }
 
-  // Render Screens
+  // Render Screen Switcher
   function renderScreen(screenId) {
     updateCartBadges();
     
@@ -521,6 +585,18 @@
       case 'search':
         renderSearchResults();
         break;
+      case 'vehicle-search':
+        renderVehicleSearchView();
+        break;
+      case 'categories':
+        renderCategoriesView();
+        break;
+      case 'car-brands':
+        renderCarBrandsView();
+        break;
+      case 'part-brands':
+        renderPartBrandsView();
+        break;
       case 'cart':
         renderCartView();
         break;
@@ -530,8 +606,17 @@
       case 'orders':
         renderOrdersView();
         break;
+      case 'order-tracking':
+        renderOrderTrackingView();
+        break;
       case 'warranty':
         renderWarrantyView();
+        break;
+      case 'coupons':
+        renderCouponsView();
+        break;
+      case 'stores':
+        renderStoresView();
         break;
       case 'account':
         renderAccountView();
@@ -539,31 +624,38 @@
       case 'product-detail':
         renderProductDetailView();
         break;
+      case 'login':
+        renderLoginView();
+        break;
+      case 'welcome':
+        renderWelcomeView();
+        break;
     }
   }
 
-  // Render Home Screen Products
+  // 1. Render Home Screen
   function renderHomeProducts() {
     const grid = document.getElementById('home-product-grid');
     if (!grid) return;
 
-    grid.innerHTML = productsDB.slice(0, 10).map(p => `
+    grid.innerHTML = productsDB.slice(0, 12).map(p => `
       <div class="prod-card" onclick="window.App.viewDetail(${p.id})">
         <div class="prod-img-wrap">
           <img src="${p.image}" alt="${p.name}" onerror="this.src='/favicon-512x512.png'">
         </div>
         <div class="prod-info">
-          <span class="prod-sku">${p.sku} • ${p.brand}</span>
+          <span class="prod-sku">Cooling • ${p.oem || p.sku}</span>
           <h4 class="prod-name">${p.name}</h4>
           <div class="prod-price-row">
             <span class="prod-price">${fmtVND(p.price)}</span>
+            <span class="prod-status-stock">• Còn hàng</span>
           </div>
         </div>
       </div>
     `).join('');
   }
 
-  // Render Search Results
+  // 2. Render Search Results
   function renderSearchResults() {
     const grid = document.getElementById('search-product-grid');
     if (!grid) return;
@@ -578,22 +670,149 @@
     }
 
     grid.innerHTML = filtered.map(p => `
-      <div class="prod-card" onclick="window.App.viewDetail(${p.id})">
-        <div class="prod-img-wrap">
-          <img src="${p.image}" alt="${p.name}" onerror="this.src='/favicon-512x512.png'">
+      <div class="prod-card" onclick="window.App.viewDetail(${p.id})" style="display:flex; flex-direction:row; height:100px; margin-bottom:10px; grid-column: 1 / -1;">
+        <div style="width:90px; height:100%; background:#f8fafc; overflow:hidden;">
+          <img src="${p.image}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/favicon-512x512.png'">
         </div>
-        <div class="prod-info">
-          <span class="prod-sku">${p.sku}</span>
-          <h4 class="prod-name">${p.name}</h4>
-          <div class="prod-price-row">
-            <span class="prod-price">${fmtVND(p.price)}</span>
+        <div style="padding:10px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:10px; color:var(--gray-text-sub); font-weight:700;">Cooling • ${p.oem || p.sku}</div>
+            <div style="font-size:12px; font-weight:700; color:var(--navy-dark); margin:2px 0;">${p.name}</div>
+            <span style="background:#ecfdf5; color:#047857; font-size:10px; font-weight:700; padding:1px 6px; border-radius:4px;">VALEO Khớp 100%</span>
           </div>
+          <div style="font-size:13px; font-weight:800; color:var(--orange-accent);">${fmtVND(p.price)}</div>
         </div>
       </div>
     `).join('');
   }
 
-  // Render Product Detail View
+  // 3. Render Vehicle Search Screen (Matching Screenshot 4)
+  function renderVehicleSearchView() {
+    const container = document.getElementById('screen-vehicle-search');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px;">
+        <div style="font-size:16px; font-weight:800;">Tra theo xe</div>
+        <div style="font-size:11px; opacity:0.8; margin-top:2px;">Chọn xe → hệ thống lọc đúng mã tương thích</div>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:#fff; border-radius:12px; border:1px solid var(--gray-border); padding:12px; margin-bottom:12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--gray-text-sub); margin-bottom:6px;">XE ĐÃ LƯU</div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-size:13px; font-weight:800; color:var(--navy-dark);">Toyota Vios</div>
+              <div style="font-size:11px; color:var(--gray-text-sub);">2014 · 1.5G · 30A-123.45</div>
+            </div>
+            <button class="btn-outline" style="width:auto; padding:6px 12px; font-size:11px;">+ Thêm xe</button>
+          </div>
+        </div>
+
+        <div style="background:#fff; border-radius:12px; border:1px solid var(--gray-border); padding:14px;">
+          <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Hãng xe</label>
+          <select style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; font-size:13px; font-weight:700; margin-bottom:12px;">
+            <option>Toyota</option><option>Hyundai</option><option>KIA</option><option>Mazda</option><option>Ford</option>
+          </select>
+
+          <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Dòng xe</label>
+          <select style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; font-size:13px; font-weight:700; margin-bottom:12px;">
+            <option>Vios</option><option>Innova</option><option>Camry</option><option>Fortuner</option>
+          </select>
+
+          <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Đời xe</label>
+          <select style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; font-size:13px; font-weight:700; margin-bottom:12px;">
+            <option>2014 - 2018</option><option>2019 - 2023</option>
+          </select>
+
+          <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Danh mục phụ tùng</label>
+          <select style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; font-size:13px; font-weight:700; margin-bottom:14px;">
+            <option>Dàn lạnh điều hòa</option><option>Lốc điều hòa</option><option>Dàn nóng điều hòa</option>
+          </select>
+
+          <button class="btn-orange" onclick="window.App.navigateTo('search')">Tìm kiếm phụ tùng</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // 4. Render Categories List (Matching Screenshot 6)
+  function renderCategoriesView() {
+    const container = document.getElementById('screen-categories');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px; font-size:16px; font-weight:800;">
+        Danh mục
+      </div>
+      <div style="padding:14px;">
+        <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); overflow:hidden;">
+          ${categoriesDB.map((c, i) => `
+            <div onclick="window.App.filterCategory('${c.name}')" style="padding:14px 16px; border-bottom:1px solid #f1f5f9; display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span style="font-size:11px; font-weight:800; color:var(--gray-text-sub);">${String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <div style="font-size:13px; font-weight:700; color:var(--navy-dark);">${c.name}</div>
+                  <div style="font-size:10.5px; color:var(--gray-text-sub);">${c.count}</div>
+                </div>
+              </div>
+              <span style="color:var(--gray-text-sub); font-size:16px;">›</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 5. Render Car Brands Grid (Matching Screenshot 7)
+  function renderCarBrandsView() {
+    const container = document.getElementById('screen-car-brands');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px;">
+        <div style="font-size:16px; font-weight:800;">Theo hãng xe</div>
+        <div style="font-size:11px; opacity:0.8; margin-top:2px;">24 hãng · phổ thông đến châu Âu</div>
+      </div>
+      <div style="padding:14px;">
+        <div class="brand-grid">
+          ${carBrandsDB.map(b => `
+            <div class="brand-card" onclick="window.App.navigateTo('search')">
+              <div class="brand-card-name">${b.name}</div>
+              <div class="brand-card-count">${b.count}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 6. Render Part Brands List (Matching Screenshot 8)
+  function renderPartBrandsView() {
+    const container = document.getElementById('screen-part-brands');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px;">
+        <div style="font-size:16px; font-weight:800;">Thương hiệu</div>
+        <div style="font-size:11px; opacity:0.8; margin-top:2px;">Nguồn hàng OEM đã xác minh giấy phép</div>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); overflow:hidden;">
+          ${partBrandsDB.map(pb => `
+            <div style="padding:14px 16px; border-bottom:1px solid #f1f5f9; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="window.App.navigateTo('search')">
+              <div>
+                <div style="font-size:13.5px; font-weight:800; color:var(--navy-dark);">${pb.name}</div>
+                <div style="font-size:11px; color:var(--gray-text-sub);">${pb.origin}</div>
+              </div>
+              <span style="font-size:11px; font-weight:700; color:var(--gray-text-sub);">${pb.count}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 7. Render Product Detail
   function renderProductDetailView() {
     const p = state.selectedProduct || productsDB[0];
     const container = document.getElementById('screen-product-detail');
@@ -612,7 +831,7 @@
         <div style="margin-top:14px;">
           <span style="background:var(--navy-dark); color:#fff; font-size:10.5px; font-weight:700; padding:3px 8px; border-radius:4px;">${p.sku}</span>
           <span style="color:var(--gray-text-sub); font-size:11px; font-weight:600; margin-left:6px;">OEM: ${p.oem}</span>
-          <h2 style="font-size:16px; font-weight:800; color:var(--navy-dark); margin:8px 0;">${p.name}</h2>
+          <h2 style="font-size:15px; font-weight:800; color:var(--navy-dark); margin:8px 0; line-height:1.3;">${p.name}</h2>
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
             <span style="font-size:18px; font-weight:800; color:var(--orange-accent);">${fmtVND(p.price)}</span>
             ${p.oldPrice ? `<span style="font-size:13px; color:var(--gray-text-sub); text-decoration:line-through;">${fmtVND(p.oldPrice)}</span>` : ''}
@@ -621,7 +840,7 @@
 
         <div style="border-top:1px solid var(--gray-border); padding-top:12px; margin-top:12px;">
           <h4 style="font-size:13px; font-weight:700; color:var(--navy-dark); margin-bottom:6px;">Mô tả sản phẩm:</h4>
-          <p style="font-size:12.5px; color:var(--gray-text-sub); line-height:1.5;">${p.desc}</p>
+          <p style="font-size:12px; color:var(--gray-text-sub); line-height:1.5;">${p.desc || 'Sản phẩm linh kiện điện lạnh điều hòa chính hãng.'}</p>
         </div>
 
         <div style="margin-top:20px; display:flex; gap:10px;">
@@ -636,7 +855,7 @@
     `;
   }
 
-  // Cart View
+  // 8. Render Cart View (Matching Screenshot 11)
   function renderCartView() {
     const container = document.getElementById('cart-items-list');
     const summary = document.getElementById('cart-summary-box');
@@ -655,7 +874,7 @@
         <img src="${item.image}" style="width:65px; height:65px; object-fit:cover; border-radius:8px;" onerror="this.src='/favicon-512x512.png'">
         <div style="flex:1;">
           <div style="font-size:10px; color:var(--gray-text-sub); font-weight:700;">${item.sku}</div>
-          <div style="font-size:12.5px; font-weight:700; color:var(--navy-dark); line-height:1.3; margin:2px 0;">${item.name}</div>
+          <div style="font-size:12px; font-weight:700; color:var(--navy-dark); line-height:1.3; margin:2px 0;">${item.name}</div>
           <div style="font-size:13.5px; font-weight:800; color:var(--orange-accent);">${fmtVND(item.price)}</div>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
@@ -670,19 +889,19 @@
     document.getElementById('cart-total-price').textContent = fmtVND(total);
   }
 
-  // Checkout View
+  // 9. Render Checkout View (Matching Screenshot 12)
   function renderCheckoutView() {
     const total = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
     document.getElementById('checkout-total-price').textContent = fmtVND(total);
   }
 
-  // Orders View (MATCHING USER SCREENSHOT SPEC)
+  // 10. Render Orders List View (Matching Screenshot 14)
   function renderOrdersView() {
     const list = document.getElementById('orders-list-container');
     if (!list) return;
 
     list.innerHTML = `
-      <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px;">
+      <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px;" onclick="window.App.navigateTo('order-tracking')">
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; margin-bottom:8px;">
           <span style="color:var(--gray-text-sub); font-weight:700;">Mã đơn: CS-2688-04127</span>
           <span style="background:#e0f2fe; color:#0369a1; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:10px;">Đang giao</span>
@@ -691,33 +910,64 @@
         <div style="font-size:11.5px; color:var(--gray-text-sub);">+2 sản phẩm khác</div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; border-top:1px solid #f1f5f9; padding-top:10px;">
           <span style="font-size:14px; font-weight:800; color:var(--navy-dark);">4.310.000 ₫</span>
-          <span class="section-link" onclick="alert('Đơn hàng CS-2688-04127 đang trên đường giao bởi Shipper ViettelPost!')">Xem chi tiết ›</span>
-        </div>
-      </div>
-
-      <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; margin-bottom:8px;">
-          <span style="color:var(--gray-text-sub); font-weight:700;">Mã đơn: CS-2687-83989</span>
-          <span style="background:#fef3c7; color:#b45309; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:10px;">Chờ xác nhận</span>
-        </div>
-        <div style="font-size:13px; font-weight:700; color:var(--navy-dark); margin-bottom:4px;">Dàn nóng Hyundai Santafe 2.0L 2018</div>
-        <div style="font-size:11.5px; color:var(--gray-text-sub);">1 sản phẩm</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; border-top:1px solid #f1f5f9; padding-top:10px;">
-          <span style="font-size:14px; font-weight:800; color:var(--navy-dark);">4.600.000 ₫</span>
           <span class="section-link">Xem chi tiết ›</span>
         </div>
       </div>
     `;
   }
 
-  // Warranty View
+  // 11. Render Order Tracking View (Matching Screenshot 15)
+  function renderOrderTrackingView() {
+    const container = document.getElementById('screen-order-tracking');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px;">
+        <span class="back-link" onclick="window.App.navigateTo('orders')">← CS-2688-04127</span>
+        <div style="font-size:16px; font-weight:800; margin-top:4px;">Đang trên đường giao</div>
+        <div style="font-size:11px; opacity:0.8;">Dự kiến hôm nay 09–12h · Viettel Post</div>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:13px; font-weight:800; color:var(--navy-dark);">Anh Hùng · Shipper</div>
+            <div style="font-size:11px; color:var(--gray-text-sub);">0911.456.78</div>
+          </div>
+          <button class="btn-navy" style="width:auto; padding:6px 14px; font-size:11px;">Gọi</button>
+        </div>
+
+        <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:16px;">
+          <div style="border-left:2px solid var(--navy-dark); padding-left:14px;">
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12.5px; font-weight:800; color:var(--navy-dark);">● Shipper đang giao</div>
+              <div style="font-size:11px; color:var(--gray-text-sub);">Cách bạn 3,2 km — Long Biên, Hà Nội / Hôm nay 08:41</div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12.5px; font-weight:700; color:var(--navy-dark);">● Rời kho Cooling Long Biên</div>
+              <div style="font-size:11px; color:var(--gray-text-sub);">Đã bàn giao Viettel Post · VN2608412</div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12.5px; font-weight:700; color:var(--navy-dark);">● Đóng gói & kiểm mã OE</div>
+              <div style="font-size:11px; color:var(--gray-text-sub);">Kĩ thuật đối chiếu 88501-0K390 — khớp</div>
+            </div>
+            <div>
+              <div style="font-size:12.5px; font-weight:700; color:var(--navy-dark);">● Đặt hàng thành công</div>
+              <div style="font-size:11px; color:var(--gray-text-sub);">Thanh toán COD khi nhận hàng</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 12. Render Warranty View (Matching Screenshot 16)
   function renderWarrantyView() {
     const container = document.getElementById('warranty-container');
     if (!container) return;
 
     container.innerHTML = `
       <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:16px;">
-        <h4 style="font-size:13px; font-weight:700; color:var(--navy-dark); margin-bottom:8px;">Mã phiếu bảo hành / Serial</h4>
+        <h4 style="font-size:12px; font-weight:700; color:var(--gray-text-sub); margin-bottom:6px;">Mã phiếu bảo hành / Serial</h4>
         <input type="text" value="BH-88501-0K390" style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; font-size:13px; font-weight:700; margin-bottom:14px;">
         <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:10px; padding:12px; margin-bottom:14px;">
           <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; color:#047857; margin-bottom:6px;">
@@ -726,13 +976,72 @@
           </div>
           <div style="font-size:13px; font-weight:700; color:var(--navy-dark);">Dàn lạnh điều hòa Toyota Innova 2017</div>
         </div>
-        <button class="btn-orange" style="margin-bottom:10px;" onclick="alert('Đã gửi yêu cầu hỗ trợ bảo hành!')">Tạo yêu cầu bảo hành</button>
+        <button class="btn-orange" style="margin-bottom:10px;" onclick="alert('Đã tạo yêu cầu hỗ trợ bảo hành thành công!')">Tạo yêu cầu bảo hành</button>
         <button class="btn-outline">Gửi ảnh & mô tả lỗi</button>
       </div>
     `;
   }
 
-  // Account View (MATCHING USER SCREENSHOT SPEC)
+  // 13. Render Coupons View (Matching Screenshot 17)
+  function renderCouponsView() {
+    const container = document.getElementById('screen-coupons');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px;">
+        <div style="font-size:16px; font-weight:800;">Khuyến mại</div>
+        <div style="font-size:11px; opacity:0.8; margin-top:2px;">Áp dụng tự động khi thanh toán</div>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:#fff; border-radius:12px; border:1px solid var(--gray-border); padding:14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:13px; font-weight:800; color:var(--navy-dark);">Giảm 10% phụ tùng điện lạnh</div>
+            <div style="font-size:11px; color:var(--gray-text-sub);">Đơn từ 2 triệu - áp dụng dàn lạnh, lốc...</div>
+          </div>
+          <button class="btn-outline" style="width:auto; padding:6px 12px; font-size:11px;">Lưu</button>
+        </div>
+        <div style="background:#fff; border-radius:12px; border:1px solid var(--gray-border); padding:14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:13px; font-weight:800; color:var(--navy-dark);">Miễn phí giao toàn quốc</div>
+            <div style="font-size:11px; color:var(--gray-text-sub);">Tự động áp dụng đơn từ 2 triệu</div>
+          </div>
+          <button class="btn-outline" style="width:auto; padding:6px 12px; font-size:11px;">Lưu</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // 14. Render Stores View (Matching Screenshot 19)
+  function renderStoresView() {
+    const container = document.getElementById('screen-stores');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:14px 16px;">
+        <div style="font-size:16px; font-weight:800;">Cửa hàng & kho</div>
+      </div>
+      <div style="padding:14px;">
+        <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px;">
+          <div style="font-size:13.5px; font-weight:800; color:var(--navy-dark);">Cooling Long Biên — Kho tổng</div>
+          <div style="font-size:11px; color:var(--gray-text-sub); margin:3px 0 8px;">Số 12 Nguyễn Văn Cừ, P. Gia Thụy, Long Biên, Hà Nội</div>
+          <div style="display:flex; gap:10px;">
+            <a href="tel:0786976626" class="btn-navy" style="flex:1; padding:8px; font-size:11.5px;">Gọi</a>
+            <button class="btn-outline" style="flex:1; padding:8px; font-size:11.5px;">Chỉ đường</button>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px;">
+          <div style="font-size:13.5px; font-weight:800; color:var(--navy-dark);">Cooling Hà Đông</div>
+          <div style="font-size:11px; color:var(--gray-text-sub); margin:3px 0 8px;">145 Quang Trung, P. Quang Trung, Hà Đông, Hà Nội</div>
+          <div style="display:flex; gap:10px;">
+            <a href="tel:0783976315" class="btn-navy" style="flex:1; padding:8px; font-size:11.5px;">Gọi</a>
+            <button class="btn-outline" style="flex:1; padding:8px; font-size:11.5px;">Chỉ đường</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 15. Render Account View (Matching Screenshot 20)
   function renderAccountView() {
     const container = document.getElementById('account-container');
     if (!container) return;
@@ -761,13 +1070,64 @@
         </div>
 
         <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); overflow:hidden; margin-bottom:16px;">
-          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;">Bảng giá gốc bán buôn</div>
-          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;">Công nợ & Hóa đơn</div>
-          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;">Phiếu bảo hành</div>
-          <div style="padding:14px; font-weight:700; color:var(--navy-dark); font-size:13px;">Địa chỉ giao hàng</div>
+          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;" onclick="window.App.navigateTo('coupons')">Bảng giá buôn gốc</div>
+          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;" onclick="window.App.navigateTo('orders')">Công nợ & hóa đơn</div>
+          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;" onclick="window.App.navigateTo('vehicle-search')">Xe đã lưu</div>
+          <div style="padding:14px; border-bottom:1px solid #f1f5f9; font-weight:700; color:var(--navy-dark); font-size:13px;" onclick="window.App.navigateTo('warranty')">Phiếu bảo hành</div>
+          <div style="padding:14px; font-weight:700; color:var(--navy-dark); font-size:13px;" onclick="window.App.navigateTo('stores')">Hệ thống cửa hàng & kho</div>
         </div>
 
         <button class="btn-outline" style="color:var(--red-alert); border-color:#fecaca;" onclick="alert('Đã đăng xuất!')">Đăng xuất</button>
+      </div>
+    `;
+  }
+
+  // 16. Render Welcome Screen (Matching Screenshot 1)
+  function renderWelcomeView() {
+    const container = document.getElementById('screen-welcome');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); min-height:100%; color:#fff; padding:30px 20px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div style="text-align:center;">
+          <img src="/favicon-512x512.png" style="width:80px; height:80px; margin-bottom:20px;">
+          <h1 style="font-size:22px; font-weight:800; line-height:1.3; margin-bottom:20px;">Phụ tùng điện lạnh ô tô, tra đúng xe trong 30 giây.</h1>
+          
+          <div style="text-align:left; font-size:13px; line-height:1.8; opacity:0.9;">
+            <div style="margin-bottom:8px;">01. <b>Chính hãng OEM</b> (Denso, Valeo, Hanon, Sanden...)</div>
+            <div style="margin-bottom:8px;">02. <b>Giao 24h toàn quốc</b> (Miễn phí ship đơn từ 2 triệu)</div>
+            <div>03. <b>Bảo hành 6 – 24 tháng</b> (Theo tiêu chuẩn nhà sản xuất)</div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn-orange" style="margin-bottom:10px;" onclick="window.App.navigateTo('vehicle-search')">Tìm phụ tùng cho xe của tôi</button>
+          <button class="btn-navy" style="background:#244270;" onclick="window.App.navigateTo('login')">Đăng nhập Gara / Đại lý</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // 17. Render Login Screen (Matching Screenshot 2)
+  function renderLoginView() {
+    const container = document.getElementById('screen-login');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background:var(--navy-dark); color:#fff; padding:20px 16px;">
+        <span class="back-link" onclick="window.App.navigateTo('home')">← Quay lại</span>
+        <div style="font-size:18px; font-weight:800; margin-top:10px;">Xin chào, Đăng nhập tài khoản</div>
+      </div>
+      <div style="padding:16px;">
+        <div style="background:#fff; border-radius:14px; padding:16px; border:1px solid var(--gray-border);">
+          <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Số điện thoại</label>
+          <input type="text" value="0912 345 678" style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; margin-bottom:12px; font-size:13px;">
+
+          <label style="font-size:11px; font-weight:700; color:var(--gray-text-sub); display:block; margin-bottom:4px;">Mật khẩu</label>
+          <input type="password" value="12345678" style="width:100%; padding:10px; border:1px solid var(--gray-border); border-radius:8px; margin-bottom:16px; font-size:13px;">
+
+          <button class="btn-orange" onclick="window.App.navigateTo('account')">Đăng nhập</button>
+        </div>
       </div>
     `;
   }
@@ -833,6 +1193,7 @@
 
   // DOM Loaded Init
   document.addEventListener('DOMContentLoaded', () => {
+    fetchLiveData();
     navigateTo('home');
   });
 
