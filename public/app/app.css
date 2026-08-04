@@ -1,9 +1,9 @@
 /* ==========================================================================
-   COOLING SYSTEMS MOBILE APP - DESIGN SYSTEM & UI STYLESHEET
+   COOLING SYSTEMS MOBILE APP - EXACT DESIGN SYSTEM (MATCHING UI SPEC)
    ========================================================================== */
 
 :root {
-  --navy-dark: #0b1a30;
+  --navy-dark: #1a3258;
   --navy-main: #1a3258;
   --navy-light: #244270;
   --gold-accent: #c8a951;
@@ -11,21 +11,14 @@
   --orange-accent: #f26a1b;
   --orange-hover: #d8570e;
   --green-status: #10b981;
-  --red-alert: #ef4444;
+  --red-alert: #e74c3c;
   --gray-bg: #f4f6f9;
   --gray-card: #ffffff;
   --gray-border: #e8ecf3;
   --gray-text-sub: #64748b;
   --gray-text-main: #1e293b;
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --shadow-sm: 0 2px 8px rgba(11, 26, 48, 0.06);
-  --shadow-md: 0 4px 16px rgba(11, 26, 48, 0.1);
-  --shadow-lg: 0 8px 24px rgba(11, 26, 48, 0.15);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-  --bottom-nav-height: 64px;
+  --bottom-nav-height: 60px;
   --top-header-height: 56px;
 }
 
@@ -47,7 +40,7 @@ html, body {
   user-select: none;
 }
 
-/* Mobile Container Wrapper (Simulated or Full Mobile Device) */
+/* Mobile Viewport Container */
 #app-root {
   max-width: 440px;
   height: 100%;
@@ -77,20 +70,23 @@ html, body {
 .app-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
 }
 
 .app-brand img {
-  height: 32px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
+  border-radius: 6px;
 }
 
 .app-brand-title {
   font-weight: 800;
   font-size: 15px;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.2px;
   color: #ffffff;
+  line-height: 1.1;
 }
 
 .app-brand-sub {
@@ -98,6 +94,7 @@ html, body {
   color: var(--gold-accent);
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.2px;
 }
 
 .header-actions {
@@ -106,42 +103,17 @@ html, body {
   gap: 10px;
 }
 
-.icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
+.header-btn-call {
+  background: rgba(255,255,255,0.12);
   color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.2s ease;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
 }
 
-.icon-btn:active {
-  transform: scale(0.92);
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.icon-btn .badge-count {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  background: var(--orange-accent);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 2px 5px;
-  border-radius: var(--radius-full);
-  min-width: 16px;
-  text-align: center;
-  border: 1.5px solid var(--navy-dark);
-}
-
-/* Main View Container */
+/* Main Content Views - NO FLICKER ANIMATION */
 .app-content {
   flex: 1;
   overflow-y: auto;
@@ -151,21 +123,15 @@ html, body {
   padding-bottom: calc(var(--bottom-nav-height) + 12px);
 }
 
-/* Screen Transitions */
+/* Instant Screen Toggle (NO JITTER / NO KEYFRAME ANIMATION) */
 .view-screen {
   display: none;
   width: 100%;
   min-height: 100%;
-  animation: fadeIn 0.25s ease-in-out;
 }
 
 .view-screen.active {
   display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Bottom Navigation Bar */
@@ -181,7 +147,6 @@ html, body {
   align-items: center;
   justify-content: space-around;
   z-index: 1000;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
 }
 
 .nav-item {
@@ -192,55 +157,40 @@ html, body {
   gap: 3px;
   color: var(--gray-text-sub);
   text-decoration: none;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
   flex: 1;
   height: 100%;
   cursor: pointer;
   position: relative;
-  transition: color 0.2s ease;
-}
-
-.nav-item svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-  transition: transform 0.2s ease;
 }
 
 .nav-item.active {
-  color: var(--navy-main);
-}
-
-.nav-item.active svg {
-  stroke: var(--orange-accent);
-  transform: translateY(-2px);
+  color: var(--navy-dark);
+  font-weight: 800;
 }
 
 .nav-item .nav-badge {
   position: absolute;
   top: 6px;
-  right: 22%;
+  right: 20%;
   background: var(--orange-accent);
   color: #ffffff;
   font-size: 9.5px;
   font-weight: 800;
-  padding: 1px 4px;
-  border-radius: var(--radius-full);
+  padding: 1px 5px;
+  border-radius: 10px;
 }
 
-/* Components: Search Bar */
+/* Search Box */
 .search-box-widget {
   background: #ffffff;
   border: 1px solid var(--gray-border);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   padding: 8px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: var(--shadow-sm);
 }
 
 .search-box-widget input {
@@ -252,29 +202,7 @@ html, body {
   background: transparent;
 }
 
-/* Cards & Section Titles */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 0 4px;
-}
-
-.section-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--navy-dark);
-}
-
-.section-link {
-  font-size: 12px;
-  color: var(--orange-accent);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-/* Category Chips Carousel */
+/* Category Chips */
 .cat-chips-scroll {
   display: flex;
   gap: 8px;
@@ -291,20 +219,15 @@ html, body {
   white-space: nowrap;
   background: #ffffff;
   border: 1px solid var(--gray-border);
-  padding: 6px 12px;
-  border-radius: var(--radius-full);
+  padding: 7px 14px;
+  border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
   color: var(--gray-text-main);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
 }
 
-.chip-btn.active, .chip-btn:hover {
+.chip-btn.active {
   background: var(--navy-dark);
   color: #ffffff;
   border-color: var(--navy-dark);
@@ -319,18 +242,12 @@ html, body {
 
 .prod-card {
   background: #ffffff;
-  border-radius: var(--radius-md);
+  border-radius: 14px;
   border: 1px solid var(--gray-border);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease;
-}
-
-.prod-card:active {
-  transform: scale(0.98);
 }
 
 .prod-img-wrap {
@@ -348,18 +265,6 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.prod-badge-discount {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  background: var(--orange-accent);
-  color: #ffffff;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
 }
 
 .prod-info {
@@ -400,106 +305,77 @@ html, body {
   color: var(--orange-accent);
 }
 
-.prod-add-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-full);
-  background: var(--navy-dark);
-  color: #ffffff;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-/* Modals & Overlays */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(11, 26, 48, 0.65);
-  backdrop-filter: blur(4px);
-  z-index: 2000;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.modal-overlay.active {
-  display: flex;
-}
-
-.modal-sheet {
-  width: 100%;
-  max-width: 440px;
-  background: #ffffff;
-  border-top-left-radius: var(--radius-lg);
-  border-top-right-radius: var(--radius-lg);
-  padding: 20px;
-  max-height: 85vh;
-  overflow-y: auto;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.modal-handle {
-  width: 36px;
-  height: 4px;
-  background: var(--gray-border);
-  border-radius: var(--radius-full);
-  margin: 0 auto 16px;
-}
-
-/* Action Buttons */
-.btn-primary {
+/* Exact UI Button Colors (Matching Screenshots) */
+.btn-orange, .btn-primary {
   width: 100%;
   background: var(--orange-accent);
   color: #ffffff;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   padding: 12px;
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   border: none;
   cursor: pointer;
-  display: flex;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(242, 106, 27, 0.3);
-  transition: all 0.2s ease;
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-  background: var(--orange-hover);
 }
 
 .btn-navy {
   width: 100%;
   background: var(--navy-dark);
   color: #ffffff;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   padding: 12px;
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   border: none;
   cursor: pointer;
-}
-
-/* Garage Tier Badge */
-.tier-badge {
+  text-align: center;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background: linear-gradient(135deg, #c8a951, #dfc272);
-  color: #0b1a30;
-  font-size: 11px;
+  justify-content: center;
+}
+
+.btn-outline {
+  width: 100%;
+  background: #ffffff;
+  color: var(--navy-dark);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-border);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sections & Tabs */
+.sub-header-bar {
+  background: var(--navy-dark);
+  color: #ffffff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sub-header-title {
+  font-size: 16px;
   font-weight: 800;
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
+}
+
+.back-link {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
 }
