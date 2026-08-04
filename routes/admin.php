@@ -4998,7 +4998,7 @@ post('/admin/garages/requests/:id/approve', function($p) {
             return;
         }
         dbRun("UPDATE agency_registrations SET status='approved', reviewed_at=datetime('now','localtime') WHERE id=?", [$id]);
-        dbRun("UPDATE users SET role='agent', is_verified_garage=1, garage_name=? WHERE id=?", [$reg['agency_name'], $reg['user_id']]);
+        dbRun("UPDATE users SET role='partner', is_verified_garage=1, garage_name=? WHERE id=?", [$reg['agency_name'], $reg['user_id']]);
 
         dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'agency_approved', 'Đăng ký Đại lý thành công 🎉', ?, '/agency/dashboard', datetime('now','localtime'))", [
             $reg['user_id'],
@@ -5018,7 +5018,7 @@ post('/admin/garages/requests/:id/approve', function($p) {
     }
 
     dbRun("UPDATE garage_registrations SET status='approved', reviewed_at=datetime('now','localtime'), reviewed_by=? WHERE id=?", [$admin['id'], $id]);
-    dbRun("UPDATE users SET is_verified_garage=1, role='garage', garage_name=? WHERE id=?", [$reg['garage_name'], $reg['user_id']]);
+    dbRun("UPDATE users SET is_verified_garage=1, role='partner', garage_name=? WHERE id=?", [$reg['garage_name'], $reg['user_id']]);
 
     dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_approved', 'Đăng ký Gara thành công 🎉', ?, '/customer/profile', datetime('now','localtime'))", [
         $reg['user_id'],
@@ -5042,9 +5042,17 @@ post('/admin/garages/requests/:id/reject', function($p) {
     if ($reason === '') $reason = 'Hồ sơ chứng từ chưa đạt yêu cầu.';
 
     if ($targetType === 'agency') {
-        dbRun("UPDATE agency_registrations SET status='rejected', reviewed_at=datetime('now','localtime') WHERE id=?", [$id]);
-        flash('success', 'Đã từ chối hồ sơ Đăng ký Đại lý.');
-        redirect('/admin/garages?tab=requests&reg_type=agency');
+        $reg = dbGet("SELECT * FROM agency_registrations WHERE id=?", [$id]);
+        if ($reg) {
+            dbRun("UPDATE agency_registrations SET status='rejected', reviewed_at=datetime('now','localtime') WHERE id=?", [$id]);
+            dbRun("UPDATE users SET role='customer', is_verified_garage=0 WHERE id=?", [$reg['user_id']]);
+            dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'agency_rejected', 'Đơn đăng ký Đại lý bị từ chối', ?, '/agency/login', datetime('now','localtime'))", [
+                $reg['user_id'],
+                "Lý do từ chối: {$reason}. Vui lòng nộp lại yêu cầu mới nếu cần xét duyệt."
+            ]);
+        }
+        flash('success', 'Đã từ chối hồ sơ Đăng ký Đại lý và chuyển sang mục Từ chối.');
+        redirect('/admin/garages?tab=requests&reg_type=agency&status=rejected');
         return;
     }
 
@@ -5056,14 +5064,31 @@ post('/admin/garages/requests/:id/reject', function($p) {
     }
 
     dbRun("UPDATE garage_registrations SET status='rejected', reject_reason=?, reviewed_at=datetime('now','localtime'), reviewed_by=? WHERE id=?", [$reason, $admin['id'], $id]);
+    dbRun("UPDATE users SET role='customer', is_verified_garage=0 WHERE id=?", [$reg['user_id']]);
 
     dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_rejected', 'Đơn đăng ký chưa được duyệt', ?, '/customer/profile', datetime('now','localtime'))", [
         $reg['user_id'],
-        "Lý do từ chối: {$reason}. Vui lòng nộp lại chứng từ tại trang Hồ sơ."
+        "Lý do từ chối: {$reason}. Vui lòng nộp lại chứng từ mới tại trang Hồ sơ."
     ]);
 
-    flash('success', "Đã từ chối đơn đăng ký thành công.");
-    redirect('/admin/garages?tab=requests');
+    flash('success', "Đã từ chối đơn đăng ký thành công và chuyển sang mục Từ chối.");
+    redirect('/admin/garages?tab=requests&status=rejected');
+});
+
+post('/admin/garages/requests/:id/delete', function($p) {
+    $admin = requireStaffPermission('rbac:users|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+    $targetType = trim((string)($_POST['reg_type'] ?? 'garage'));
+
+    if ($targetType === 'agency') {
+        dbRun("DELETE FROM agency_registrations WHERE id=?", [$id]);
+        flash('success', 'Đã xóa hẳn hồ sơ đăng ký Đại lý.');
+    } else {
+        dbRun("DELETE FROM garage_registrations WHERE id=?", [$id]);
+        flash('success', 'Đã xóa hẳn hồ sơ đăng ký Gara.');
+    }
+    redirect('/admin/garages?tab=requests&status=rejected');
 });
 
 

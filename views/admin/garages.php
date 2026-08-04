@@ -183,7 +183,7 @@
             <div style="display:flex;gap:6px;justify-content:center">
               <button type="button" onclick="showRegistrationDetail(<?= e(json_encode($r)) ?>)" class="btn-action-detail">Chi tiết</button>
               
-              <?php if ($r['status'] === 'pending' || $r['status'] === 'rejected'): ?>
+              <?php if ($r['status'] === 'pending'): ?>
                 <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT <?= $isAgency ? 'Đại lý' : 'Gara' ?> <?= e($r['name']) ?>?')">
                   <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
                   <input type="hidden" name="reg_type" value="<?= e($r['reg_type']) ?>">
@@ -193,6 +193,14 @@
 
               <?php if ($r['status'] === 'pending' || $r['status'] === 'approved'): ?>
                 <button type="button" onclick="openRejectModal(<?= $r['id'] ?>, '<?= e($r['name']) ?>', '<?= e($r['reg_type']) ?>')" class="btn-action-reject">Từ chối</button>
+              <?php endif; ?>
+
+              <?php if ($r['status'] === 'rejected'): ?>
+                <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Xác nhận XÓA HẲN hồ sơ từ chối này khỏi hệ thống?')">
+                  <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+                  <input type="hidden" name="reg_type" value="<?= e($r['reg_type']) ?>">
+                  <button type="submit" class="btn-action-reject" style="background:#475569">Xóa hẳn</button>
+                </form>
               <?php endif; ?>
             </div>
           </td>
