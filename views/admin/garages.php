@@ -76,13 +76,13 @@
 
   <!-- SUB-FILTERS FOR AGENCY VS GARAGE -->
   <div style="display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
-    <a href="/admin/garages?tab=requests&reg_type=all" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? 'all') === 'all' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
+    <a href="/admin/garages?tab=requests&reg_type=all<?= !empty($statusFilter) ? '&status='.e($statusFilter) : '' ?>" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? 'all') === 'all' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
       Tất cả Hồ sơ B2B
     </a>
-    <a href="/admin/garages?tab=requests&reg_type=agency" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? '') === 'agency' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
+    <a href="/admin/garages?tab=requests&reg_type=agency<?= !empty($statusFilter) ? '&status='.e($statusFilter) : '' ?>" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? '') === 'agency' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
       Hồ sơ Đăng ký Đại lý <?= ($agencyPendingCount ?? 0) > 0 ? '('.$agencyPendingCount.' chờ)' : '' ?>
     </a>
-    <a href="/admin/garages?tab=requests&reg_type=garage" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? '') === 'garage' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
+    <a href="/admin/garages?tab=requests&reg_type=garage<?= !empty($statusFilter) ? '&status='.e($statusFilter) : '' ?>" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? '') === 'garage' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
       Hồ sơ Đăng ký Gara <?= ($garagePendingCount ?? 0) > 0 ? '('.$garagePendingCount.' chờ)' : '' ?>
     </a>
   </div>

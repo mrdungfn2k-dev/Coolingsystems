@@ -54,10 +54,10 @@ post('/agency/login', function() {
 
     $user = dbGet("SELECT * FROM users WHERE (phone=? OR email=?) AND status='active'", [$phoneEmail, $phoneEmail]);
     if ($user && password_verify($password, $user['password_hash'])) {
-        // Auto upgrade user to Agent if not already
-        if ($user['role'] !== 'agent') {
+        // Auto upgrade user to Partner (Agency) if not already
+        if ($user['role'] !== 'partner') {
             $refCode = !empty($user['referral_code']) ? $user['referral_code'] : ('AGENT-' . str_pad($user['id'], 4, '0', STR_PAD_LEFT));
-            dbRun("UPDATE users SET role='agent', referral_code=?, is_verified_garage=1 WHERE id=?", [$refCode, $user['id']]);
+            dbRun("UPDATE users SET role='partner', referral_code=?, is_verified_garage=1 WHERE id=?", [$refCode, $user['id']]);
         }
 
         // Auto ensure agency registration entry
@@ -179,7 +179,7 @@ post('/agency/register', function() {
     $realImagesJson = json_encode($realImages, JSON_UNESCAPED_SLASHES);
 
     $userId = dbInsert("INSERT INTO users (role, phone, email, full_name, password_hash, status, address) VALUES (?, ?, ?, ?, ?, ?, ?)", [
-        'agent', $phone, $email, $ownerName, password_hash($password, PASSWORD_DEFAULT), 'active', $address
+        'partner', $phone, $email, $ownerName, password_hash($password, PASSWORD_DEFAULT), 'active', $address
     ]);
 
     $refCode = 'AGENT-' . str_pad($userId, 4, '0', STR_PAD_LEFT);
