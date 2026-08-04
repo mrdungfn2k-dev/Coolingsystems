@@ -251,19 +251,20 @@ require_once __DIR__ . '/../../includes/helpers.php';
           </div>
           <div class="form-group">
             <label>Số điện thoại liên hệ * (Bắt buộc)</label>
-            <input type="text" name="phone" required placeholder="VD: 0912345678">
+            <input type="tel" name="phone" required placeholder="VD: 0912345678" pattern="0[35789][0-9]{8}" maxlength="10" inputmode="numeric" title="Vui lòng nhập đúng 10 số điện thoại đầu 03, 05, 07, 08 hoặc 09">
           </div>
           <div class="form-group">
             <label>Email liên hệ * (Bắt buộc)</label>
-            <input type="email" name="email" required placeholder="daily@gmail.com">
+            <input type="email" name="email" required placeholder="daily@gmail.com" maxlength="254">
           </div>
           <div class="form-group">
             <label>Mã số thuế / Số ĐKKD * (Bắt buộc)</label>
-            <input type="text" name="tax_code" required placeholder="VD: 0101234567">
+            <input type="text" name="tax_code" required placeholder="VD: 0101234567" pattern="[0-9]{10,13}" minlength="10" maxlength="13" title="Mã số thuế gồm 10 đến 13 chữ số">
           </div>
           <div class="form-group">
             <label>Mật khẩu đăng nhập * (Bắt buộc)</label>
-            <input type="password" name="password" required placeholder="••••••••">
+            <input type="password" name="password" required placeholder="••••••••" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Mật khẩu tối thiểu 8 ký tự, có cả chữ hoa, chữ thường và chữ số">
+            <small style="color:#64748b; font-size:11px;">Tối thiểu 8 ký tự, gồm 1 chữ hoa, 1 chữ thường và 1 chữ số.</small>
           </div>
         </div>
 
@@ -291,9 +292,27 @@ require_once __DIR__ . '/../../includes/helpers.php';
 
           <div class="form-group">
             <label style="color:#b91c1c;">3. Tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara * (Bắt buộc ≥ 3 ảnh)</label>
-            <input type="file" name="real_images[]" id="realImagesInput" accept="image/*" multiple required>
-            <div id="realPreview" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;"></div>
-            <small style="color:#64748b; font-size:11.5px;">Chụp các góc: Toàn cảnh xưởng/cửa hàng, khu vực kho hàng/kệ phụ tùng (Giữ phím Ctrl để chọn cùng lúc 3+ ảnh).</small>
+            <small style="color:#64748b; font-size:11.5px; display:block; margin-bottom:8px;">Vui lòng chọn 3 ảnh tương ứng với 3 góc chụp dưới đây:</small>
+            
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px;">
+              <div>
+                <label style="font-size:11px; font-weight:700; color:#334155;">3.1. Ảnh toàn cảnh xưởng / cửa hàng mặt tiền *</label>
+                <input type="file" name="real_images[]" class="real-img-slot" accept="image/*" required>
+                <div class="real-slot-preview" style="margin-top:6px;"></div>
+              </div>
+
+              <div>
+                <label style="font-size:11px; font-weight:700; color:#334155;">3.2. Ảnh khu vực kho hàng / kệ phụ tùng *</label>
+                <input type="file" name="real_images[]" class="real-img-slot" accept="image/*" required>
+                <div class="real-slot-preview" style="margin-top:6px;"></div>
+              </div>
+
+              <div>
+                <label style="font-size:11px; font-weight:700; color:#334155;">3.3. Ảnh khu vực sửa chữa / làm việc *</label>
+                <input type="file" name="real_images[]" class="real-img-slot" accept="image/*" required>
+                <div class="real-slot-preview" style="margin-top:6px;"></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -348,13 +367,38 @@ require_once __DIR__ . '/../../includes/helpers.php';
 
   document.getElementById('signboardInput').addEventListener('change', function() { previewFiles(this, 'signboardPreview'); });
   document.getElementById('licenseInput').addEventListener('change', function() { previewFiles(this, 'licensePreview'); });
-  document.getElementById('realImagesInput').addEventListener('change', function() { previewFiles(this, 'realPreview'); });
+
+  document.querySelectorAll('.real-img-slot').forEach(function(slotInput) {
+    slotInput.addEventListener('change', function() {
+      var previewBox = this.nextElementSibling;
+      previewBox.innerHTML = '';
+      if (this.files && this.files[0]) {
+        var file = this.files[0];
+        if (file.type.startsWith('image/')) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.width = '70px';
+            img.style.height = '70px';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '8px';
+            img.style.border = '1px solid #cbd5e1';
+            previewBox.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    });
+  });
 
   document.getElementById('agencyRegForm').addEventListener('submit', function(e) {
-    var input = document.getElementById('realImagesInput');
-    if (input.files.length < 3) {
+    var slots = document.querySelectorAll('.real-img-slot');
+    var filled = 0;
+    slots.forEach(function(s) { if (s.files && s.files.length > 0) filled++; });
+    if (filled < 3) {
       e.preventDefault();
-      alert('Vui lòng chọn tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng/Gara (Giữ phím Ctrl khi chọn tệp).');
+      alert('Vui lòng chọn đầy đủ 3 tấm ảnh chụp thực tế theo đúng 3 mục hướng dẫn!');
       return false;
     }
   });

@@ -40,6 +40,18 @@ post('/agency/login', function() {
         exit;
     }
 
+    // Rate Limiting: Lock 10 mins (600s) after 5 failed attempts
+    $lockKey = 'login_lockout_' . md5($_SERVER['REMOTE_ADDR'] ?? 'ip') . '_' . md5($phoneEmail);
+    $attemptsKey = 'login_attempts_' . md5($_SERVER['REMOTE_ADDR'] ?? 'ip') . '_' . md5($phoneEmail);
+
+    $lockedUntil = $_SESSION[$lockKey] ?? 0;
+    if ($lockedUntil > time()) {
+        $remaining = ceil(($lockedUntil - time()) / 60);
+        setFlash('error', "Tài khoản tạm thời bị khóa do thử sai mật khẩu quá 5 lần. Vui lòng thử lại sau {$remaining} phút.");
+        header('Location: /agency/login');
+        exit;
+    }
+
     $user = dbGet("SELECT * FROM users WHERE (phone=? OR email=?) AND status='active'", [$phoneEmail, $phoneEmail]);
     if ($user && password_verify($password, $user['password_hash'])) {
         $agencyReg = dbGet("SELECT id FROM agency_registrations WHERE user_id=? OR phone=? OR email=?", [$user['id'], $phoneEmail, $phoneEmail]);
@@ -47,6 +59,9 @@ post('/agency/login', function() {
             if ($user['role'] !== 'agent') {
                 dbRun("UPDATE users SET role='agent' WHERE id=?", [$user['id']]);
             }
+            // Reset lockout counters on successful login
+            unset($_SESSION[$attemptsKey], $_SESSION[$lockKey]);
+
             loginUser((int)$user['id']);
             header('Location: /agency/dashboard');
             exit;
@@ -56,7 +71,18 @@ post('/agency/login', function() {
             exit;
         }
     }
-    setFlash('error', 'Số điện thoại, mã số thuế hoặc mật khẩu không chính xác!');
+
+    $attempts = ($_SESSION[$attemptsKey] ?? 0) + 1;
+    $_SESSION[$attemptsKey] = $attempts;
+
+    if ($attempts >= 5) {
+        $_SESSION[$lockKey] = time() + 600;
+        unset($_SESSION[$attemptsKey]);
+        setFlash('error', 'Bạn đã nhập sai mật khẩu 5 lần liên tiếp. Hệ thống đã khóa đăng nhập trong 10 phút để bảo vệ tài khoản.');
+    } else {
+        $left = 5 - $attempts;
+        setFlash('error', "Số điện thoại, mã số thuế hoặc mật khẩu không chính xác! (Còn {$left} lần thử).");
+    }
     header('Location: /agency/login');
     exit;
 });
@@ -70,13 +96,32 @@ post('/agency/register', function() {
     $agencyName = trim($_POST['agency_name'] ?? '');
     $ownerName = trim($_POST['owner_name'] ?? '');
     $phone = preg_replace('/\D+/', '', $_POST['phone'] ?? '');
-    $email = trim($_POST['email'] ?? '');
+    $email = strtolower(trim($_POST['email'] ?? ''));
     $taxCode = trim($_POST['tax_code'] ?? '');
     $password = trim($_POST['password'] ?? '');
     $address = trim($_POST['address'] ?? '');
 
-    if (empty($agencyName) || empty($phone) || empty($password) || empty($taxCode) || empty($address)) {
-        setFlash('error', 'Vui lòng điền đầy đủ tất cả các trường bắt buộc (*)!');
+    // Strict Validations
+    if (empty($agencyName) || empty($ownerName) || empty($phone) || empty($email) || empty($taxCode) || empty($password) || empty($address)) {
+        setFlash('error', 'Vui lòng điền đầy đủ tất cả các trường thông tin bắt buộc (*)!');
+        header('Location: /agency/login');
+        exit;
+    }
+
+    if (!preg_match('/^0[35789]\d{8}$/', $phone)) {
+        setFlash('error', 'Số điện thoại không hợp lệ! Vui lòng nhập đúng 10 số đầu 03, 05, 07, 08 hoặc 09.');
+        header('Location: /agency/login');
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        setFlash('error', 'Định dạng Email không hợp lệ (VD: daily@gmail.com)!');
+        header('Location: /agency/login');
+        exit;
+    }
+
+    if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password)) {
+        setFlash('error', 'Mật khẩu phải dài tối thiểu 8 ký tự, gồm ít nhất 1 chữ hoa, 1 chữ thường và 1 chữ số!');
         header('Location: /agency/login');
         exit;
     }
@@ -119,6 +164,13 @@ post('/agency/register', function() {
             }
         }
     }
+
+    if (empty($signboardPath) || empty($licensePath) || count($realImages) < 3) {
+        setFlash('error', 'Vui lòng tải lên đủ Ảnh bảng hiệu, Giấy phép kinh doanh và tối thiểu 3 tấm ảnh thực tế!');
+        header('Location: /agency/login');
+        exit;
+    }
+
     $realImagesJson = json_encode($realImages, JSON_UNESCAPED_SLASHES);
 
     $userId = dbInsert("INSERT INTO users (role, phone, email, full_name, password_hash, status, address) VALUES (?, ?, ?, ?, ?, ?, ?)", [
@@ -132,7 +184,7 @@ post('/agency/register', function() {
         $userId, $agencyName, $ownerName, $phone, $email, $taxCode, $address, $signboardPath, $licensePath, $realImagesJson
     ]);
 
-    setFlash('success', 'Đăng ký Đại lý thành công! Hồ sơ của bạn đã gửi và đang được ban quản trị xét duyệt.');
+    setFlash('success', 'Đăng ký Đại lý thành công! Hồ sơ của bạn đã được gửi và đang được ban quản trị xét duyệt.');
     header('Location: /agency/login');
     exit;
 });

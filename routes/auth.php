@@ -7,14 +7,43 @@ post('/auth/login', function() {
     $input = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     if (!$input || !$password) { flash('error','Vui lòng nhập email/SĐT và mật khẩu.'); redirect('/auth/login'); }
+
+    // Rate Limiting: Lock 10 mins (600s) after 5 failed attempts
+    $lockKey = 'login_lockout_' . md5($_SERVER['REMOTE_ADDR'] ?? 'ip') . '_' . md5($input);
+    $attemptsKey = 'login_attempts_' . md5($_SERVER['REMOTE_ADDR'] ?? 'ip') . '_' . md5($input);
+
+    $lockedUntil = $_SESSION[$lockKey] ?? 0;
+    if ($lockedUntil > time()) {
+        $remaining = ceil(($lockedUntil - time()) / 60);
+        flash('error', "Tài khoản tạm thời bị khóa do thử sai mật khẩu quá 5 lần. Vui lòng thử lại sau {$remaining} phút.");
+        redirect('/auth/login');
+    }
+
     // Support login by phone or email (exclude deleted user records)
     if (preg_match('/^0[0-9]{9}$/', $input)) {
         $user = dbGet("SELECT * FROM users WHERE phone=? AND email NOT LIKE '%_deleted_%' AND status != 'deleted' ORDER BY id DESC LIMIT 1", [$input]);
     } else {
         $user = dbGet("SELECT * FROM users WHERE email=? AND email NOT LIKE '%_deleted_%' AND status != 'deleted' ORDER BY id DESC LIMIT 1", [strtolower($input)]);
     }
-    if (!$user || !password_verify($password, $user['password_hash'])) { flash('error','Email/SĐT hoặc mật khẩu không đúng.'); redirect('/auth/login'); }
+
+    if (!$user || !password_verify($password, $user['password_hash'])) {
+        $attempts = ($_SESSION[$attemptsKey] ?? 0) + 1;
+        $_SESSION[$attemptsKey] = $attempts;
+        if ($attempts >= 5) {
+            $_SESSION[$lockKey] = time() + 600;
+            unset($_SESSION[$attemptsKey]);
+            flash('error', 'Bạn đã nhập sai mật khẩu 5 lần liên tiếp. Hệ thống đã khóa đăng nhập trong 10 phút để bảo vệ tài khoản.');
+        } else {
+            $left = 5 - $attempts;
+            flash('error', "Email/SĐT hoặc mật khẩu không đúng. (Còn {$left} lần thử).");
+        }
+        redirect('/auth/login');
+    }
+
     if ($user['status'] !== 'active') { flash('error','Tài khoản bị khóa.'); redirect('/auth/login'); }
+
+    // Reset lockout counters on successful login
+    unset($_SESSION[$attemptsKey], $_SESSION[$lockKey]);
     // Admin goes to admin dashboard
     if ($user['role'] === 'admin') {
         loginUser($user['id']);
