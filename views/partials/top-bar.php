@@ -31,7 +31,7 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
         </span>
         <span class="h-sep">•</span>
         <span class="hotline-pill">
-          <span class="h-label">KĨ THUẬT & BẢO HÀNH:</span>
+          <span class="h-label"><span class="desktop-only-inline">KĨ THUẬT & BẢO HÀNH:</span><span class="mobile-only-inline">KĨ THUẬT & BH:</span></span>
           <a href="tel:0704070418" class="h-num">0704.0704.18</a>
         </span>
       </div>
@@ -210,6 +210,9 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   font-size: 10px !important;
 }
 
+.desktop-only-inline { display: inline !important; }
+.mobile-only-inline { display: none !important; }
+
 @media (max-width: 992px) {
   .top-bar-hotline-stream .hotline-row { gap: 6px !important; }
   .top-bar-hotline-stream .h-label { font-size: 10px !important; }
@@ -217,13 +220,16 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
 }
 
 @media (max-width: 768px) {
+  .desktop-only-inline { display: none !important; }
+  .mobile-only-inline { display: inline !important; }
+
   .top-bar { min-height: auto !important; height: auto !important; padding: 4px 0 !important; overflow: hidden !important; width: 100% !important; box-sizing: border-box !important; }
   .top-bar .wrap { 
     display: flex !important; 
     flex-wrap: wrap !important; 
     align-items: center !important; 
     justify-content: space-between !important; 
-    padding: 0 8px !important; 
+    padding: 0 6px !important; 
     width: 100% !important; 
     box-sizing: border-box !important; 
     gap: 3px !important; 
@@ -240,7 +246,7 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
     flex: 0 0 auto !important; 
     margin-left: auto !important; 
     justify-content: flex-end !important;
-    padding-right: 4px !important;
+    padding-right: 2px !important;
   }
   .top-bar-right-nav a { color: rgba(255,255,255,0.92) !important; font-size: 9.5px !important; font-weight: 600 !important; text-decoration: none !important; white-space: nowrap !important; }
   .top-bar-right-nav .sep { color: rgba(255,255,255,0.25) !important; font-size: 9px !important; margin: 0 1px !important; }
@@ -268,10 +274,10 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
     justify-content: center !important; 
     width: 100% !important; 
     white-space: nowrap !important; 
-    gap: 4px !important; 
+    gap: 3px !important; 
   }
-  .top-bar-hotline-stream .hotline-pill { font-size: 9.5px !important; padding: 0 !important; white-space: nowrap !important; }
-  .top-bar-hotline-stream .h-label { font-size: 9px !important; letter-spacing: -0.1px !important; }
-  .top-bar-hotline-stream .h-num { font-size: 10.5px !important; }
+  .top-bar-hotline-stream .hotline-pill { font-size: clamp(8px, 2.4vw, 9.5px) !important; padding: 0 !important; white-space: nowrap !important; }
+  .top-bar-hotline-stream .h-label { font-size: clamp(7.8px, 2.3vw, 9px) !important; letter-spacing: -0.2px !important; }
+  .top-bar-hotline-stream .h-num { font-size: clamp(9px, 2.6vw, 10.5px) !important; letter-spacing: -0.2px !important; }
 }
 </style>
