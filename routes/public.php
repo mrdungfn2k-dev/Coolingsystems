@@ -24,6 +24,190 @@ get('/account', function() {
     exit;
 });
 
+// ── AGENCY PORTAL ROUTES ──
+get('/agency/login', function() {
+    require __DIR__ . '/../views/agency/login.php';
+    exit;
+});
+
+post('/agency/login', function() {
+    $phoneEmail = trim($_POST['phone_email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    $user = dbGet("SELECT * FROM users WHERE (phone=? OR email=?) AND status='active'", [$phoneEmail, $phoneEmail]);
+    if ($user && password_verify($password, $user['password_hash'])) {
+        if ($user['role'] === 'agent' || !empty($user['referral_code'])) {
+            loginUser((int)$user['id']);
+            header('Location: /agency/dashboard');
+            exit;
+        }
+    }
+    setFlash('error', 'Số điện thoại hoặc mật khẩu Đại lý không đúng!');
+    header('Location: /agency/login');
+    exit;
+});
+
+get('/agency/register', function() {
+    require __DIR__ . '/../views/agency/register.php';
+    exit;
+});
+
+post('/agency/register', function() {
+    $agencyName = trim($_POST['agency_name'] ?? '');
+    $ownerName = trim($_POST['owner_name'] ?? '');
+    $phone = preg_replace('/\D+/', '', $_POST['phone'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $taxCode = trim($_POST['tax_code'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    $address = trim($_POST['address'] ?? '');
+
+    if (empty($agencyName) || empty($phone) || empty($password)) {
+        setFlash('error', 'Vui lòng điền đầy đủ các thông tin bắt buộc!');
+        header('Location: /agency/register');
+        exit;
+    }
+
+    $existing = dbGet("SELECT id FROM users WHERE phone=? OR email=?", [$phone, $email]);
+    if ($existing) {
+        setFlash('error', 'Số điện thoại hoặc Email đã tồn tại trên hệ thống!');
+        header('Location: /agency/register');
+        exit;
+    }
+
+    $userId = dbInsert("INSERT INTO users (role, phone, email, full_name, password_hash, status, address) VALUES (?, ?, ?, ?, ?, ?, ?)", [
+        'agent', $phone, $email, $ownerName, password_hash($password, PASSWORD_DEFAULT), 'active', $address
+    ]);
+
+    $refCode = 'AGENT-' . str_pad($userId, 4, '0', STR_PAD_LEFT);
+    dbRun("UPDATE users SET referral_code=?, is_verified_garage=1, garage_name=? WHERE id=?", [$refCode, $agencyName, $userId]);
+
+    dbInsert("INSERT INTO agency_registrations (user_id, agency_name, owner_name, phone, email, tax_code, address, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')", [
+        $userId, $agencyName, $ownerName, $phone, $email, $taxCode, $address
+    ]);
+
+    setFlash('success', 'Đăng ký Đại lý thành công! Hồ sơ của bạn đang được xét duyệt. Vui lòng đăng nhập.');
+    header('Location: /agency/login');
+    exit;
+});
+
+get('/agency/dashboard', function() {
+    $user = requireLogin('/agency/login');
+    $agency = dbGet("SELECT * FROM agency_registrations WHERE user_id=? ORDER BY id DESC LIMIT 1", [$user['id']]) ?: $user;
+    
+    // Dynamic Commission Rate Calculation
+    $customRate = $user['custom_commission_rate'] ?? null;
+    if ($customRate !== null && $customRate > 0) {
+        $currentRate = (float)$customRate;
+        $tierName = 'VIP Custom Override';
+    } else {
+        $tier = dbGet("SELECT * FROM agency_tiers WHERE id=?", [$user['agency_tier_id'] ?? 1]) ?: dbGet("SELECT * FROM agency_tiers ORDER BY id ASC LIMIT 1");
+        $currentRate = (float)($tier['commission_percent'] ?? 5.0);
+        $tierName = $tier['tier_name'] ?? 'Đại lý Chuẩn';
+    }
+
+    $downlineGarages = dbAll("SELECT * FROM users WHERE referred_by_agent_id=? ORDER BY id DESC", [$user['id']]);
+    $commissions = dbAll("SELECT * FROM commission_transactions WHERE partner_id=? ORDER BY id DESC", [$user['id']]);
+    
+    $totalEarned = (float)(dbGet("SELECT SUM(commission_fee) AS s FROM commission_transactions WHERE partner_id=?", [$user['id']])['s'] ?? 0);
+    $totalSales = (float)(dbGet("SELECT SUM(gross_amount) AS s FROM commission_transactions WHERE partner_id=?", [$user['id']])['s'] ?? 0);
+
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+    $referralUrl = $protocol . '://' . ($_SERVER['HTTP_HOST'] ?? 'coolingsystems.vn') . '/customer/register?ref=' . ($user['referral_code'] ?? ('AGENT-' . $user['id']));
+
+    require __DIR__ . '/../views/agency/dashboard.php';
+    exit;
+});
+
+post('/agency/withdraw', function() {
+    $user = requireLogin('/agency/login');
+    $amount = (float)($_POST['amount'] ?? 0);
+    $bankName = trim($_POST['bank_name'] ?? '');
+    $bankAccount = trim($_POST['bank_account'] ?? '');
+    $bankHolder = trim($_POST['bank_holder'] ?? '');
+
+    if ($amount < 100000) {
+        setFlash('error', 'Số tiền rút tối thiểu là 100.000 đ');
+        header('Location: /agency/dashboard');
+        exit;
+    }
+
+    dbInsert("INSERT INTO withdrawal_requests (user_id, amount, bank_name, bank_account, bank_holder, status) VALUES (?, ?, ?, ?, ?, 'pending')", [
+        $user['id'], $amount, $bankName, $bankAccount, $bankHolder
+    ]);
+
+    setFlash('success', 'Yêu cầu rút tiền hoa hồng đã được gửi thành công! Admin sẽ xử lý trong 24h.');
+    header('Location: /agency/dashboard');
+    exit;
+});
+
+get('/agency/logout', function() {
+    logout('/agency/login');
+    exit;
+});
+
+// ── WARRANTY LOOKUP PUBLIC ROUTE ──
+get('/warranty/lookup', function() {
+    $q = trim($_GET['q'] ?? '');
+    $cases = [];
+    if (!empty($q)) {
+        $cases = dbAll("
+            SELECT w.*, p.name AS product_name 
+            FROM warranty_cases w 
+            LEFT JOIN products p ON p.id=w.product_id
+            WHERE w.serial_no LIKE ? OR w.customer_phone LIKE ? OR w.order_code LIKE ? OR w.case_code LIKE ?
+            ORDER BY w.id DESC
+        ", ["%$q%", "%$q%", "%$q%", "%$q%"]);
+    }
+    require __DIR__ . '/../views/public/warranty-lookup.php';
+    exit;
+});
+
+// ── ADMIN AGENCY TIERS MANAGEMENT ──
+get('/admin/agency-tiers', function() {
+    requireStaffPermission('admin:settings');
+    $tiers = dbAll("SELECT * FROM agency_tiers ORDER BY id ASC");
+    $pendingRegistrations = dbAll("SELECT * FROM agency_registrations WHERE status='pending' ORDER BY id DESC");
+    require __DIR__ . '/../views/admin/agency-tiers.php';
+    exit;
+});
+
+post('/admin/agency-tiers/update', function() {
+    requireStaffPermission('admin:settings');
+    $ids = $_POST['tier_id'] ?? [];
+    $names = $_POST['tier_name'] ?? [];
+    $rates = $_POST['commission_percent'] ?? [];
+    $sales = $_POST['min_monthly_sales'] ?? [];
+
+    foreach ($ids as $idx => $tid) {
+        dbRun("UPDATE agency_tiers SET tier_name=?, commission_percent=?, min_monthly_sales=? WHERE id=?", [
+            $names[$idx] ?? '', floatval($rates[$idx] ?? 5), floatval($sales[$idx] ?? 0), intval($tid)
+        ]);
+    }
+    setFlash('success', 'Đã lưu cấu hình tỷ lệ % hoa hồng Hạng Đại lý thành công!');
+    header('Location: /admin/agency-tiers');
+    exit;
+});
+
+post('/admin/agency-registrations/:id/approve', function($id) {
+    requireStaffPermission('admin:settings');
+    dbRun("UPDATE agency_registrations SET status='approved', reviewed_at=CURRENT_TIMESTAMP WHERE id=?", [intval($id)]);
+    $reg = dbGet("SELECT user_id FROM agency_registrations WHERE id=?", [intval($id)]);
+    if ($reg) {
+        dbRun("UPDATE users SET role='agent' WHERE id=?", [$reg['user_id']]);
+    }
+    setFlash('success', 'Đã duyệt đại lý thành công!');
+    header('Location: /admin/agency-tiers');
+    exit;
+});
+
+post('/admin/agency-registrations/:id/reject', function($id) {
+    requireStaffPermission('admin:settings');
+    dbRun("UPDATE agency_registrations SET status='rejected', reviewed_at=CURRENT_TIMESTAMP WHERE id=?", [intval($id)]);
+    setFlash('success', 'Đã từ chối hồ sơ đại lý!');
+    header('Location: /admin/agency-tiers');
+    exit;
+});
+
 get('/', function() {
     $newDaysRow = dbGet("SELECT value FROM site_config WHERE key='new_product_days'");
     $newDays = intval($newDaysRow['value'] ?? 30);

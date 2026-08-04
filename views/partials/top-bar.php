@@ -51,6 +51,10 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
     </div>
     
     <div class="top-bar-right-nav">
+      <a href="/agency/register" style="color:var(--gold-warm); font-weight:700;">🤝 Kênh Đại Lý</a>
+      <span class="sep">|</span>
+      <a href="/warranty/lookup" style="color:#ffffff;">🔍 Tra bảo hành</a>
+      <span class="sep">|</span>
       <a href="/policies">Chính sách</a>
       <span class="sep">|</span>
       <a href="/stores">Cửa hàng</a>

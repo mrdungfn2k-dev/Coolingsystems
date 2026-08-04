@@ -35,8 +35,16 @@
         <?php if ($ds === 'pending'): ?>
           <button type="button" onclick="openCancelModal(<?= $o['id'] ?>)" style="font-size:11px;padding:4px 10px;background:#ef4444;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600">Hủy đơn</button>
         <?php endif; ?>
+        <?php 
+          $deliveredTime = !empty($o['delivered_at']) ? strtotime($o['delivered_at']) : strtotime($o['updated_at'] ?? $o['created_at']);
+          $within7Days = (time() - $deliveredTime) <= (7 * 86400);
+        ?>
         <?php if (in_array($ds, ['delivered','completed']) && !$hasReturn): ?>
-          <a href="/customer/orders/<?= $o['id'] ?>?return=1" style="font-size:11px;padding:4px 10px;background:#1a3258;color:#fff;border-radius:4px;text-decoration:none;font-weight:600">Trả hàng</a>
+          <?php if ($within7Days): ?>
+            <a href="/customer/orders/<?= $o['id'] ?>?return=1" style="font-size:11px;padding:4px 10px;background:#1a3258;color:#fff;border-radius:4px;text-decoration:none;font-weight:600">Đổi trả (7 ngày)</a>
+          <?php else: ?>
+            <span style="font-size:10.5px;color:#94a3b8;font-weight:600;" title="Chính sách Đổi trả áp dụng trong vòng 7 ngày kể từ khi nhận hàng">Hết hạn đổi trả 7 ngày</span>
+          <?php endif; ?>
         <?php elseif ($hasReturn): ?>
           <span style="font-size:11px;color:#6b7280;font-weight:600">Đã yêu cầu trả</span>
         <?php endif; ?>
