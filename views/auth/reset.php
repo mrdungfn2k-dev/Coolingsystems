@@ -1,41 +1,77 @@
 <?php require __DIR__ . '/../partials/head-auth.php'; ?>
-<section class="block"><div class="wrap" style="max-width:480px">
-<div class="sec-card"><div class="panel-body" style="padding:40px">
-  <div class="text-center mb-3">
-    <svg width="100" height="42" viewBox="0 0 480 200"><use href="#cooling-logo"/></svg>
-  </div>
-  <h2 class="serif text-navy mb-1 text-center">Đặt lại mật khẩu</h2>
-  <p class="text-center fs-13 text-muted mb-3">Nhập mã OTP đã gửi về <strong><?= e($reset_email ?? '') ?></strong></p>
-  <form method="post" action="/auth/reset" id="resetForm" onsubmit="return validateResetForm()">
-    <?= csrfField() ?>
-    <div class="form-group">
-      <label>Mã OTP (6 số) <span class="req">*</span></label>
-      <input type="text" name="otp" required maxlength="6" pattern="[0-9]{6}"
-             placeholder="______" autofocus
-             style="font-size:28px;letter-spacing:10px;text-align:center;font-weight:700">
+<style>
+.reset-card-wrap {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  padding: 40px 16px;
+}
+.reset-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  padding: 36px 32px;
+}
+</style>
+
+<div class="reset-card-wrap">
+  <div class="reset-card">
+    <div style="text-align:center; margin-bottom:18px;">
+      <svg width="120" height="48" viewBox="0 0 480 200"><use href="#cooling-logo"/></svg>
     </div>
-    <div class="form-group">
-      <label>Mật khẩu mới <span class="req">*</span></label>
-      <input type="password" name="password" required minlength="8" id="npw" oninput="checkPwStrength()">
-      <div id="pwRules" style="margin-top:8px;font-size:12px;line-height:1.8">
-        <div id="rule-len" style="color:#999">○ Tối thiểu 8 ký tự</div>
-        <div id="rule-upper" style="color:#999">○ Ít nhất 1 chữ hoa (A-Z)</div>
-        <div id="rule-lower" style="color:#999">○ Ít nhất 1 chữ thường (a-z)</div>
-        <div id="rule-num" style="color:#999">○ Ít nhất 1 chữ số (0-9)</div>
+
+    <h2 style="font-size:20px; font-weight:800; color:#0b1d3a; text-align:center; margin-bottom:6px;">Đặt lại mật khẩu</h2>
+    <p style="text-align:center; font-size:13px; color:#64748b; margin-bottom:24px;">Nhập mã OTP đã gửi về <strong><?= e($reset_email ?? '') ?></strong></p>
+
+    <?php foreach (getFlash() as $f): ?>
+      <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:16px;">
+        <?= e($f['message']) ?>
       </div>
+    <?php endforeach; ?>
+
+    <form method="post" action="/auth/reset" id="resetForm" onsubmit="return validateResetForm()">
+      <?= csrfField() ?>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label style="display:block; font-size:12.5px; font-weight:700; color:#0b1d3a; margin-bottom:6px;">Mã OTP (6 số) *</label>
+        <input type="text" name="otp" required maxlength="6" pattern="[0-9]{6}"
+               placeholder="______" autofocus
+               style="width:100%; height:48px; border-radius:8px; border:1px solid #cbd5e1; font-size:26px; letter-spacing:10px; text-align:center; font-weight:800; color:#0b1d3a;">
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label style="display:block; font-size:12.5px; font-weight:700; color:#0b1d3a; margin-bottom:6px;">Mật khẩu mới *</label>
+        <input type="password" name="password" required minlength="8" id="npw" oninput="checkPwStrength()" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 12px; font-size:14px;">
+        <div id="pwRules" style="margin-top:8px; font-size:12px; line-height:1.8;">
+          <div id="rule-len" style="color:#94a3b8">○ Tối thiểu 8 ký tự</div>
+          <div id="rule-upper" style="color:#94a3b8">○ Ít nhất 1 chữ hoa (A-Z)</div>
+          <div id="rule-lower" style="color:#94a3b8">○ Ít nhất 1 chữ thường (a-z)</div>
+          <div id="rule-num" style="color:#94a3b8">○ Ít nhất 1 chữ số (0-9)</div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:20px;">
+        <label style="display:block; font-size:12.5px; font-weight:700; color:#0b1d3a; margin-bottom:6px;">Nhập lại mật khẩu mới *</label>
+        <input type="password" name="password2" required minlength="8" id="npw2" oninput="checkPwMatch()" style="width:100%; height:42px; border-radius:8px; border:1px solid #cbd5e1; padding:0 12px; font-size:14px;">
+        <div id="pwMatch" style="margin-top:4px; font-size:12px; display:none;"></div>
+      </div>
+
+      <button type="submit" id="submitBtn" style="width:100%; height:44px; background:#0b1d3a; color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:800; cursor:pointer;">
+        ĐẶT LẠI MẬT KHẨU
+      </button>
+    </form>
+
+    <div style="text-align:center; margin-top:20px; font-size:12.5px; color:#64748b; display:flex; justify-content:space-around;">
+      <a href="/auth/login" style="color:#0b1d3a; font-weight:700; text-decoration:none;">Quay lại Đăng nhập Khách</a>
+      <span>|</span>
+      <a href="/agency/login" style="color:#0b1d3a; font-weight:800; text-decoration:none;">Quay lại Đăng nhập Đại lý</a>
     </div>
-    <div class="form-group">
-      <label>Nhập lại mật khẩu mới <span class="req">*</span></label>
-      <input type="password" name="password2" required minlength="8" id="npw2" oninput="checkPwMatch()">
-      <div id="pwMatch" style="margin-top:4px;font-size:12px;display:none"></div>
-    </div>
-    <button type="submit" class="btn btn-navy btn-block btn-lg" id="submitBtn">Đặt lại mật khẩu</button>
-  </form>
-  <div class="text-center mt-2 fs-12 text-muted">
-    Không nhận được OTP? <a href="/auth/forgot" class="text-navy">Gửi lại</a>
   </div>
-</div></div>
-</div></section>
+</div>
 
 <script>
 function checkPwStrength() {
@@ -59,27 +95,26 @@ function checkPwStrength() {
   checkPwMatch();
 }
 function checkPwMatch() {
-  var pw = document.getElementById('npw').value;
-  var pw2 = document.getElementById('npw2').value;
-  var el = document.getElementById('pwMatch');
-  if (!pw2) { el.style.display = 'none'; return; }
-  el.style.display = 'block';
-  if (pw === pw2) {
-    el.style.color = '#059669';
-    el.textContent = '✓ Mật khẩu khớp';
+  var p1 = document.getElementById('npw').value;
+  var p2 = document.getElementById('npw2').value;
+  var m = document.getElementById('pwMatch');
+  if (!p2) { m.style.display = 'none'; return; }
+  m.style.display = 'block';
+  if (p1 === p2) {
+    m.style.color = '#059669';
+    m.textContent = '✓ Mật khẩu khớp';
   } else {
-    el.style.color = '#dc2626';
-    el.textContent = '✗ Mật khẩu không khớp';
+    m.style.color = '#dc2626';
+    m.textContent = '✗ Mật khẩu chưa khớp';
   }
 }
 function validateResetForm() {
-  var pw = document.getElementById('npw').value;
-  var pw2 = document.getElementById('npw2').value;
-  if (pw.length < 8) { alert('Mật khẩu phải có tối thiểu 8 ký tự.'); return false; }
-  if (!/[A-Z]/.test(pw)) { alert('Mật khẩu phải có ít nhất 1 chữ hoa (A-Z).'); return false; }
-  if (!/[a-z]/.test(pw)) { alert('Mật khẩu phải có ít nhất 1 chữ thường (a-z).'); return false; }
-  if (!/[0-9]/.test(pw)) { alert('Mật khẩu phải có ít nhất 1 chữ số (0-9).'); return false; }
-  if (pw !== pw2) { alert('Mật khẩu không khớp.'); return false; }
+  var p1 = document.getElementById('npw').value;
+  var p2 = document.getElementById('npw2').value;
+  if (p1 !== p2) {
+    alert('Mật khẩu nhập lại chưa khớp!');
+    return false;
+  }
   return true;
 }
 </script>
