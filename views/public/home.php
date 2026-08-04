@@ -95,23 +95,26 @@ require __DIR__ . '/../partials/head.php';
       <style>
       @media (max-width: 768px) {
         #heroSliderWrap.hero-slider-wrap {
-          aspect-ratio: 16 / 7 !important;
-          min-height: 180px !important;
+          aspect-ratio: 16 / 6 !important;
+          min-height: 140px !important;
+          max-height: 165px !important;
           height: auto !important;
           background: #0b1a30 !important;
-          border-radius: 12px !important;
-          margin-bottom: 12px !important;
+          border-radius: 8px !important;
+          margin-bottom: 6px !important;
           overflow: hidden !important;
-          box-shadow: 0 4px 12px rgba(15,26,48,0.15) !important;
+          box-shadow: 0 2px 8px rgba(15,26,48,0.12) !important;
         }
         #heroSliderWrap .hero-slide-item img {
           width: 100% !important;
           height: 100% !important;
           object-fit: cover !important;
           object-position: center !important;
-          border-radius: 12px !important;
+          border-radius: 8px !important;
           transform: none !important;
         }
+        .hero-nav-btn { display: none !important; }
+        .hero-slider-dots { bottom: 8px !important; }
         .all-link::after { content: "" !important; }
         .sec-head { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-bottom: 12px !important; }
         .sec-head .all-link { font-size: 12.5px !important; font-weight: 700 !important; color: #1a3258 !important; text-decoration: none !important; text-transform: uppercase !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; }
@@ -372,16 +375,34 @@ foreach ($trustSteps as $step):
 
 <style>
 @media (max-width: 768px) {
-  .home-banners { margin-top: 14px !important; }
-  .hbc { aspect-ratio: 16 / 8 !important; min-height: 190px !important; border-radius: 12px !important; }
+  .home-banners { margin-top: 10px !important; }
+  .hbc { aspect-ratio: 16 / 7 !important; min-height: 150px !important; border-radius: 8px !important; }
   .hbc-slide img { object-fit: fill !important; object-position: center !important; height: 100% !important; width: 100% !important; }
   
-  .trust { padding: 14px 0 !important; }
-  .trust-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-  .trust-item { padding: 12px 10px !important; background: #fff !important; border-radius: 10px !important; border: 1px solid #e2e8f0 !important; }
-  .trust-item .num { font-size: 16px !important; font-weight: 800 !important; color: #c8962b !important; margin-bottom: 4px !important; }
-  .trust-item .ttl { font-size: 13.5px !important; font-weight: 800 !important; color: #1a3258 !important; margin-bottom: 2px !important; line-height: 1.3 !important; }
-  .trust-item .desc { font-size: 11.5px !important; color: #64748b !important; line-height: 1.35 !important; }
+  .trust { padding: 6px 0 !important; }
+  .trust-grid { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
+  .trust-item { 
+    padding: 8px 10px !important; 
+    background: #fff !important; 
+    border-radius: 8px !important; 
+    border: 1px solid #e2e8f0 !important; 
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03) !important;
+  }
+  .trust-item .num { 
+    font-size: 15px !important; 
+    font-weight: 800 !important; 
+    color: #c8962b !important; 
+    margin-bottom: 0 !important; 
+    line-height: 1 !important;
+    padding-bottom: 2px !important;
+    border-bottom: 2px solid #c8962b !important;
+    flex-shrink: 0 !important;
+  }
+  .trust-item .ttl { font-size: 12px !important; font-weight: 800 !important; color: #1a3258 !important; margin-bottom: 1px !important; line-height: 1.2 !important; }
+  .trust-item .desc { font-size: 10px !important; color: #64748b !important; line-height: 1.25 !important; }
 
   .gara-home-banner {
     flex-direction: column !important;
