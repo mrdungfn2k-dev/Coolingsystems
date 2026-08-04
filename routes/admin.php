@@ -5058,18 +5058,6 @@ post('/admin/garages/requests/:id/reject', function($p) {
     flash('success', "Đã từ chối đơn đăng ký thành công.");
     redirect('/admin/garages?tab=requests');
 });
-        $email = $reg['email'] ?: $reg['user_email'];
-        $name = $reg['owner_name'] ?: $reg['full_name'];
-        if (!empty($email) && function_exists('sendGarageRejectedEmail')) {
-            @sendGarageRejectedEmail($email, $name, $reg['garage_name'], $reason);
-        }
-    } catch (\Throwable $e) {
-        error_log('[GARAGE_REJECT_EMAIL] ' . $e->getMessage());
-    }
-
-    flash('success', "Đã từ chối đơn đăng ký của Gara '{$reg['garage_name']}'. Email & Thông báo kèm lý do đã được gửi tới khách hàng.");
-    redirect('/admin/garages?tab=requests');
-});
 
 
 // C4: Danh sách hoa hồng (Commissions)
