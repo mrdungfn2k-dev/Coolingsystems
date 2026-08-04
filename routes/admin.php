@@ -4927,28 +4927,50 @@ get('/admin/garages', function() {
         return;
     }
 
-    // Default Tab: requests (Đơn đăng ký Gara)
+    // Default Tab: requests (Đơn đăng ký B2B: Gara & Đại lý)
+    $regType = trim((string)($_GET['reg_type'] ?? 'all'));
     $statusFilter = trim((string)($_GET['status'] ?? ''));
     $where = 'WHERE 1=1'; $params = [];
+
+    if ($regType === 'agency') {
+        $where .= " AND reg_type='agency'";
+    } elseif ($regType === 'garage') {
+        $where .= " AND reg_type='garage'";
+    }
+
     if ($q !== '') {
-        $where .= ' AND (gr.garage_name LIKE ? OR gr.owner_name LIKE ? OR gr.phone LIKE ? OR gr.tax_code LIKE ? OR gr.email LIKE ?)';
+        $where .= ' AND (name LIKE ? OR owner_name LIKE ? OR phone LIKE ? OR tax_code LIKE ? OR email LIKE ?)';
         $like = '%'.$q.'%';
         array_push($params, $like, $like, $like, $like, $like);
     }
     if ($statusFilter !== '') {
-        $where .= ' AND gr.status=?';
+        $where .= ' AND status=?';
         $params[] = $statusFilter;
     }
 
-    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id $where", $params)['c'] ?? 0);
+    $unionSql = "
+        SELECT id, 'garage' AS reg_type, user_id, garage_name AS name, owner_name, phone, email, tax_code, address, signboard_image, license_image, real_images, status, reject_reason, created_at
+        FROM garage_registrations
+        UNION ALL
+        SELECT id, 'agency' AS reg_type, user_id, agency_name AS name, owner_name, phone, email, tax_code, address, signboard_image, license_image, real_images, status, '' AS reject_reason, created_at
+        FROM agency_registrations
+    ";
+
+    $total = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub $where", $params)['c'] ?? 0);
     $totalPages = max(1, (int)ceil($total/$perPage));
     $page = min($page, $totalPages);
 
     $listParams = array_merge($params, [$perPage, max(0, ($page-1)*$perPage)]);
-    $requests = dbAll("SELECT gr.*, u.full_name AS user_name, u.email AS user_email, u.phone AS user_phone, u.role AS user_role, u.is_verified_garage FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id $where ORDER BY gr.created_at DESC LIMIT ? OFFSET ?", $listParams);
+    $requests = dbAll("SELECT sub.* FROM ($unionSql) sub $where ORDER BY created_at DESC LIMIT ? OFFSET ?", $listParams);
 
-    $title = 'Garage khách hàng & Xét duyệt Đăng ký Gara';
-    view('admin/garages', compact('title', 'tab', 'requests', 'q', 'statusFilter', 'page', 'totalPages', 'pendingRequestsCount', 'approvedRequestsCount', 'rejectedRequestsCount'));
+    $pendingRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub WHERE status='pending'")['c'] ?? 0);
+    $approvedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub WHERE status='approved'")['c'] ?? 0);
+    $rejectedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub WHERE status='rejected'")['c'] ?? 0);
+    $agencyPendingCount = (int)(dbGet("SELECT COUNT(*) AS c FROM agency_registrations WHERE status='pending'")['c'] ?? 0);
+    $garagePendingCount = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations WHERE status='pending'")['c'] ?? 0);
+
+    $title = 'Trung tâm Xét duyệt Hồ sơ B2B (Đại lý & Gara)';
+    view('admin/garages', compact('title', 'tab', 'requests', 'q', 'regType', 'statusFilter', 'page', 'totalPages', 'pendingRequestsCount', 'approvedRequestsCount', 'rejectedRequestsCount', 'agencyPendingCount', 'garagePendingCount'));
 });
 
 get('/admin/garages/requests/:id/approve', function($p) {
@@ -4959,9 +4981,31 @@ post('/admin/garages/requests/:id/approve', function($p) {
     $admin = requireStaffPermission('rbac:users|products', '/admin/login');
     csrfCheck();
     $id = (int)$p['id'];
+    $targetType = trim((string)($_POST['reg_type'] ?? 'garage'));
+
+    if ($targetType === 'agency') {
+        $reg = dbGet("SELECT * FROM agency_registrations WHERE id=?", [$id]);
+        if (!$reg) {
+            flash('error', 'Đơn đăng ký Đại lý không tồn tại.');
+            redirect('/admin/garages?tab=requests');
+            return;
+        }
+        dbRun("UPDATE agency_registrations SET status='approved', reviewed_at=datetime('now','localtime') WHERE id=?", [$id]);
+        dbRun("UPDATE users SET role='agent', is_verified_garage=1, garage_name=? WHERE id=?", [$reg['agency_name'], $reg['user_id']]);
+
+        dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'agency_approved', 'Đăng ký Đại lý thành công 🎉', ?, '/agency/dashboard', datetime('now','localtime'))", [
+            $reg['user_id'],
+            "Hồ sơ đăng ký Đại lý '{$reg['agency_name']}' của bạn đã được phê duyệt chính thức. Bạn đã được cấp mã giới thiệu & hưởng chiết khấu % hoa hồng."
+        ]);
+
+        flash('success', "Đã phê duyệt Đại lý '{$reg['agency_name']}' thành công!");
+        redirect('/admin/garages?tab=requests&reg_type=agency');
+        return;
+    }
+
     $reg = dbGet("SELECT gr.*, u.full_name, u.email AS user_email FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id WHERE gr.id=?", [$id]);
     if (!$reg) {
-        flash('error', 'Đơn đăng ký không tồn tại.');
+        flash('error', 'Đơn đăng ký Gara không tồn tại.');
         redirect('/admin/garages?tab=requests');
         return;
     }
@@ -4969,24 +5013,12 @@ post('/admin/garages/requests/:id/approve', function($p) {
     dbRun("UPDATE garage_registrations SET status='approved', reviewed_at=datetime('now','localtime'), reviewed_by=? WHERE id=?", [$admin['id'], $id]);
     dbRun("UPDATE users SET is_verified_garage=1, role='garage', garage_name=? WHERE id=?", [$reg['garage_name'], $reg['user_id']]);
 
-    // Insert user notification (bell)
     dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_approved', 'Đăng ký Gara thành công 🎉', ?, '/customer/profile', datetime('now','localtime'))", [
         $reg['user_id'],
-        "Đơn đăng ký Gara '{$reg['garage_name']}' của bạn đã được Ban quản trị phê duyệt. Bạn đã được áp dụng bảng giá buôn & ưu đãi công nợ."
+        "Đơn đăng ký Gara '{$reg['garage_name']}' của bạn đã được phê duyệt. Bạn đã được áp dụng giá buôn."
     ]);
 
-    // Send SMTP Email safely
-    try {
-        $email = $reg['email'] ?: $reg['user_email'];
-        $name = $reg['owner_name'] ?: $reg['full_name'];
-        if (!empty($email) && function_exists('sendGarageApprovedEmail')) {
-            @sendGarageApprovedEmail($email, $name, $reg['garage_name']);
-        }
-    } catch (\Throwable $e) {
-        error_log('[GARAGE_APPROVE_EMAIL] ' . $e->getMessage());
-    }
-
-    flash('success', "Đã phê duyệt Gara '{$reg['garage_name']}' thành công! Tài khoản đã chuyển sang quyền Gara & email thông báo đã được gửi.");
+    flash('success', "Đã phê duyệt Gara '{$reg['garage_name']}' thành công!");
     redirect('/admin/garages?tab=requests');
 });
 
@@ -4998,8 +5030,16 @@ post('/admin/garages/requests/:id/reject', function($p) {
     $admin = requireStaffPermission('rbac:users|products', '/admin/login');
     csrfCheck();
     $id = (int)$p['id'];
+    $targetType = trim((string)($_POST['reg_type'] ?? 'garage'));
     $reason = trim((string)($_POST['reject_reason'] ?? 'Hồ sơ chứng từ chưa đạt yêu cầu.'));
     if ($reason === '') $reason = 'Hồ sơ chứng từ chưa đạt yêu cầu.';
+
+    if ($targetType === 'agency') {
+        dbRun("UPDATE agency_registrations SET status='rejected', reviewed_at=datetime('now','localtime') WHERE id=?", [$id]);
+        flash('success', 'Đã từ chối hồ sơ Đăng ký Đại lý.');
+        redirect('/admin/garages?tab=requests&reg_type=agency');
+        return;
+    }
 
     $reg = dbGet("SELECT gr.*, u.full_name, u.email AS user_email FROM garage_registrations gr LEFT JOIN users u ON u.id=gr.user_id WHERE gr.id=?", [$id]);
     if (!$reg) {
@@ -5010,14 +5050,14 @@ post('/admin/garages/requests/:id/reject', function($p) {
 
     dbRun("UPDATE garage_registrations SET status='rejected', reject_reason=?, reviewed_at=datetime('now','localtime'), reviewed_by=? WHERE id=?", [$reason, $admin['id'], $id]);
 
-    // Insert user notification (bell)
-    dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_rejected', 'Đơn đăng ký Gara chưa được duyệt', ?, '/customer/profile', datetime('now','localtime'))", [
+    dbRun("INSERT INTO user_notifications (user_id, type, title, message, link, created_at) VALUES (?, 'garage_rejected', 'Đơn đăng ký chưa được duyệt', ?, '/customer/profile', datetime('now','localtime'))", [
         $reg['user_id'],
-        "Lý do từ chối: {$reason}. Vui lòng nộp lại chứng từ chính xác tại trang Hồ sơ."
+        "Lý do từ chối: {$reason}. Vui lòng nộp lại chứng từ tại trang Hồ sơ."
     ]);
 
-    // Send SMTP Email safely
-    try {
+    flash('success', "Đã từ chối đơn đăng ký thành công.");
+    redirect('/admin/garages?tab=requests');
+});
         $email = $reg['email'] ?: $reg['user_email'];
         $name = $reg['owner_name'] ?: $reg['full_name'];
         if (!empty($email) && function_exists('sendGarageRejectedEmail')) {

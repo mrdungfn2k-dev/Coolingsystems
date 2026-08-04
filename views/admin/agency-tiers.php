@@ -47,49 +47,15 @@
   </button>
 </form>
 
-<!-- 2. Danh sách Đăng ký Đại lý chờ duyệt -->
-<div style="background:#fff; border-radius:12px; padding:20px; border:1px solid #cbd5e1; margin-bottom:28px;">
-  <h2 style="font-size:16px; font-weight:800; color:var(--navy); margin-bottom:14px;">2. XÉT DUYỆT HỒ SƠ ĐĂNG KÝ ĐẠI LÝ MỚI (<?= count($pendingRegistrations) ?>)</h2>
-  
-  <div style="overflow-x:auto;">
-    <table class="tbl" style="width:100%; border-collapse:collapse;">
-      <thead>
-        <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0;">
-          <th style="padding:10px; text-align:left; font-size:11px; text-transform:uppercase; color:#64748b;">Tên Đại lý</th>
-          <th style="padding:10px; text-align:left; font-size:11px; text-transform:uppercase; color:#64748b;">Chủ ĐL / SĐT</th>
-          <th style="padding:10px; text-align:left; font-size:11px; text-transform:uppercase; color:#64748b;">Mã số thuế</th>
-          <th style="padding:10px; text-align:left; font-size:11px; text-transform:uppercase; color:#64748b;">Địa chỉ thực tế</th>
-          <th style="padding:10px; text-align:center; font-size:11px; text-transform:uppercase; color:#64748b;">Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php if (empty($pendingRegistrations)): ?>
-          <tr>
-            <td colspan="5" style="text-align:center; padding:24px; color:#64748b;">Hiện không có hồ sơ Đại lý nào chờ duyệt.</td>
-          </tr>
-        <?php else: ?>
-          <?php foreach ($pendingRegistrations as $reg): ?>
-            <tr style="border-bottom:1px solid #edf1f5;">
-              <td style="padding:10px;"><strong><?= e($reg['agency_name']) ?></strong></td>
-              <td style="padding:10px;"><?= e($reg['owner_name']) ?><br><small style="color:#64748b;"><?= e($reg['phone']) ?></small></td>
-              <td style="padding:10px; font-weight:700;"><?= e($reg['tax_code']) ?></td>
-              <td style="padding:10px; font-size:12px;"><?= e($reg['address']) ?></td>
-              <td style="padding:10px; text-align:center;">
-                <form method="post" action="/admin/agency-registrations/<?= $reg['id'] ?>/approve" style="display:inline-block;">
-                  <?= csrfField() ?>
-                  <button type="submit" class="btn btn-sm" style="background:#16a34a; color:#fff; font-weight:700; padding:5px 12px; border-radius:6px; border:none; cursor:pointer;">Duyệt Đại lý</button>
-                </form>
-                <form method="post" action="/admin/agency-registrations/<?= $reg['id'] ?>/reject" style="display:inline-block; margin-left:4px;">
-                  <?= csrfField() ?>
-                  <button type="submit" class="btn btn-sm" style="background:#dc2626; color:#fff; font-weight:700; padding:5px 12px; border-radius:6px; border:none; cursor:pointer;">Từ chối</button>
-                </form>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </tbody>
-    </table>
-  </div>
+<!-- 2. Thông báo gộp Trung tâm Xét duyệt Hồ sơ tập trung -->
+<div style="background:#ffffff; border-radius:12px; padding:24px; border:1px solid #cbd5e1; box-shadow:0 4px 12px rgba(0,0,0,0.03); margin-bottom:28px; text-align:center;">
+  <h2 style="font-size:16px; font-weight:800; color:#0b1d3a; margin-bottom:8px;">XÉT DUYỆT HỒ SƠ ĐẠI LÝ VÀ GARA ĐÃ ĐƯỢC GỘP TẬP TRUNG</h2>
+  <p style="font-size:13px; color:#64748b; margin-bottom:18px; max-width:640px; margin-left:auto; margin-right:auto; line-height:1.5;">
+    Tất cả các đơn đăng ký Đại lý mới và Gara đều được thẩm định chứng từ trực quan (Ảnh Bảng hiệu, GPKD, 3+ ảnh thực tế xưởng) tập trung tại <strong>Trung tâm Xét duyệt Hồ sơ B2B</strong>.
+  </p>
+  <a href="/admin/garages?tab=requests&reg_type=agency" style="display:inline-block; background:#0b1d3a; color:#ffffff; font-weight:800; font-size:13.5px; padding:11px 24px; border-radius:8px; text-decoration:none; box-shadow:0 4px 12px rgba(11,29,58,0.2);">
+    VÀO TRANG XÉT DUYỆT HỒ SƠ ĐẠI LÝ MỚI <?= !empty($pendingRegistrations) ? '('.count($pendingRegistrations).' CHỜ DUYỆT)' : '' ?>
+  </a>
 </div>
 
 <?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

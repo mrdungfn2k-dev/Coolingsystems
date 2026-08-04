@@ -69,7 +69,7 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <div class="sb-section">NHÂN SỰ<span class="sb-sec-desc">Phân quyền · Khách hàng · Nhân viên · Tin tức</span></div>
       <?php if($__isAdmin): ?><a href="/admin/staff" class="<?= (currentPath()==='/admin/staff' || startsWith(currentPath(),'/admin/staff/'))?'active':'' ?>"><?= sbIcon('shield') ?>Phân quyền NV</a><?php endif; ?>
       <?php if($sb('users')): ?><a href="/admin/users" class="<?= currentPath()==='/admin/users' && !startsWith(currentPath(),'/admin/users/')?'active':'' ?>"><?= sbIcon('users') ?>Khách hàng</a>
-      <a href="/admin/garages" class="<?= startsWith(currentPath(),'/admin/garages')?'active':'' ?>"><?= sbIcon('truck') ?>Garage khách hàng</a>
+      <a href="/admin/garages" class="<?= startsWith(currentPath(),'/admin/garages')?'active':'' ?>"><?= sbIcon('truck') ?>Xét duyệt Hồ sơ B2B (Đại lý &amp; Gara)</a>
       <a href="/admin/quotations" class="<?= startsWith(currentPath(),'/admin/quotations')?'active':'' ?>"><?= sbIcon('filetext') ?>Yêu cầu Báo Giá</a>
       <a href="/admin/garage-tiers" class="<?= startsWith(currentPath(),'/admin/garage-tiers')?'active':'' ?>"><?= sbIcon('shield') ?>Cấu hình Hạng Gara</a>
       <?php if($sb('staff')): ?><a href="/admin/staff-accounts" class="<?= startsWith(currentPath(),'/admin/staff-accounts')?'active':'' ?>"><?= sbIcon('user') ?>Nhân viên</a><?php endif; ?>
@@ -88,13 +88,13 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <div class="sb-section">BÁO CÁO QUẢN TRỊ<span class="sb-sec-desc">Xuất nhập tồn · Lợi nhuận · KPI</span></div>
       <a href="/admin/reports/xnt" class="<?= currentPath()==='/admin/reports/xnt'?'active':'' ?>"><?= sbIcon('chart') ?>Báo cáo Xuất-Nhập-Tồn</a>
       <a href="/admin/reports/margin" class="<?= currentPath()==='/admin/reports/margin'?'active':'' ?>"><?= sbIcon('chart') ?>Lợi nhuận gộp SKU</a>
-      <a href="/admin/reports/kpi" class="<?= currentPath()==='/admin/reports/kpi'?'active':'' ?>"><?= sbIcon('users') ?>KPI Bán hàng & NV</a>
+      <a href="/admin/reports/kpi" class="<?= currentPath()==='/admin/reports/kpi'?'active':'' ?>"><?= sbIcon('users') ?>KPI Bán hàng &amp; NV</a>
       <?php endif; ?>
       <?php if($__isAdmin || $sb('users')): ?>
-      <div class="sb-section">CRM & MARKETING<span class="sb-sec-desc">Phân khúc · Bảo dưỡng · Tickets · Campaign</span></div>
+      <div class="sb-section">CRM &amp; MARKETING<span class="sb-sec-desc">Phân khúc · Bảo dưỡng · Tickets · Campaign</span></div>
       <a href="/admin/crm/segments" class="<?= currentPath()==='/admin/crm/segments'?'active':'' ?>"><?= sbIcon('users') ?>Phân khúc khách hàng</a>
       <a href="/admin/crm/maintenance" class="<?= currentPath()==='/admin/crm/maintenance'?'active':'' ?>"><?= sbIcon('tool') ?>Lịch nhắc bảo dưỡng</a>
-      <a href="/admin/crm/tickets" class="<?= currentPath()==='/admin/crm/tickets'?'active':'' ?>"><?= sbIcon('message') ?>Khiếu nại & Hỗ trợ KH</a>
+      <a href="/admin/crm/tickets" class="<?= currentPath()==='/admin/crm/tickets'?'active':'' ?>"><?= sbIcon('message') ?>Khiếu nại &amp; Hỗ trợ KH</a>
       <a href="/admin/marketing/campaigns" class="<?= currentPath()==='/admin/marketing/campaigns'?'active':'' ?>"><?= sbIcon('gift') ?>Chiến dịch Marketing</a>
       <?php endif; ?>
       <?php if($__isAdmin): ?>
@@ -112,7 +112,7 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <?php if($sb('promotions')): ?><a href="/admin/promotions" class="<?= isActive('/admin/promotions') ?>"><?= sbIcon('gift') ?>Khuyến mãi</a><?php endif; ?>
       <?php if($sb('vouchers')): ?><a href="/admin/vouchers" class="<?= startsWith(currentPath(),'/admin/vouchers')?'active':'' ?>"><?= sbIcon('ticket') ?>Voucher toàn sàn</a><?php endif; ?>
       <?php if($sb('tax_config')): ?><a href="/admin/settings/finance" class="<?= isActive('/admin/settings/finance') ?>"><?= sbIcon('truck') ?>Cấu hình Vận chuyển</a><?php endif; ?>
-      <?php if($__isAdmin||$sb('settings')): ?><a href="/admin/agency-tiers" class="<?= isActive('/admin/agency-tiers') ?>"><?= sbIcon('list') ?>Cấu hình Đại lý &amp; % Hoa hồng</a><?php endif; ?>
+      <?php if($__isAdmin||$sb('settings')): ?><a href="/admin/agency-tiers" class="<?= isActive('/admin/agency-tiers') ?>"><?= sbIcon('list') ?>Cấu hình % Hoa hồng Đại lý</a><?php endif; ?>
       <?php if($__isAdmin||$sb('settings')): ?><a href="/admin/settings" class="<?= isActive('/admin/settings') ?>"><?= sbIcon('gear') ?>Cài đặt hệ thống</a><?php endif; ?>
       <?php endif; ?>
       <a href="/admin/logout"><?= sbIcon('logout') ?>Đăng xuất</a>

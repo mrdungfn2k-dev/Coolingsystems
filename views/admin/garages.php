@@ -1,8 +1,8 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
 <div class="dash-head">
   <div>
-    <h1>Garage khách hàng &amp; Xét duyệt Đăng ký Gara</h1>
-    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý Gara (Bảng hiệu, GPKD, 3+ ảnh thực tế) &amp; Quản lý quyền giá buôn, công nợ.</p>
+    <h1>Trung tâm Xét duyệt Hồ sơ B2B (Đại lý &amp; Gara)</h1>
+    <p style="margin:4px 0 0;color:#718096;font-size:13px">Thẩm định hồ sơ pháp lý (Bảng hiệu, GPKD, 3+ ảnh thực tế), duyệt phân quyền Đại lý phân phối &amp; Gara mua buôn.</p>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <button type="button" onclick="document.getElementById('importGaragesModal').style.display='flex'" class="btn btn-navy btn-sm" style="background:#0b1d3a;color:#fff;font-weight:700">Nhập CSV</button>
@@ -62,8 +62,8 @@
 <!-- MAIN NAVIGATION TABS -->
 <div class="tab-nav">
   <a href="/admin/garages?tab=requests" class="<?= ($tab ?? 'requests') === 'requests' ? 'active' : '' ?>">
-    Yêu cầu Đăng ký Gara
-    <?php if ($pendingRequestsCount > 0): ?>
+    Tất cả Đơn Đăng ký B2B
+    <?php if (($pendingRequestsCount ?? 0) > 0): ?>
       <span class="tab-badge gold"><?= $pendingRequestsCount ?> chờ duyệt</span>
     <?php endif; ?>
   </a>
@@ -74,18 +74,31 @@
 
 <?php if (($tab ?? 'requests') === 'requests'): ?>
 
+  <!-- SUB-FILTERS FOR AGENCY VS GARAGE -->
+  <div style="display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
+    <a href="/admin/garages?tab=requests&reg_type=all" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? 'all') === 'all' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
+      Tất cả Hồ sơ B2B
+    </a>
+    <a href="/admin/garages?tab=requests&reg_type=agency" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? '') === 'agency' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
+      Hồ sơ Đăng ký Đại lý <?= ($agencyPendingCount ?? 0) > 0 ? '('.$agencyPendingCount.' chờ)' : '' ?>
+    </a>
+    <a href="/admin/garages?tab=requests&reg_type=garage" class="btn" style="font-size:13px; padding:8px 16px; border-radius:8px; font-weight:700; <?= ($regType ?? '') === 'garage' ? 'background:#0b1d3a; color:#fff; border:none;' : 'background:#fff; color:#0b1d3a; border:1px solid #cbd5e1;' ?>">
+      Hồ sơ Đăng ký Gara <?= ($garagePendingCount ?? 0) > 0 ? '('.$garagePendingCount.' chờ)' : '' ?>
+    </a>
+  </div>
+
   <!-- KPI SUMMARY -->
   <div class="garage-kpis">
     <div class="garage-kpi" style="border-left:4px solid #0b1d3a">
-      <b style="color:#0b1d3a"><?= number_format($pendingRequestsCount) ?></b>
-      <span>Đơn đang chờ duyệt</span>
+      <b style="color:#0b1d3a"><?= number_format($pendingRequestsCount ?? 0) ?></b>
+      <span>Hồ sơ đang chờ duyệt</span>
     </div>
     <div class="garage-kpi" style="border-left:4px solid #1a3258">
-      <b style="color:#1a3258"><?= number_format($approvedRequestsCount) ?></b>
-      <span>Đã xác thực Gara (Giá buôn)</span>
+      <b style="color:#1a3258"><?= number_format($approvedRequestsCount ?? 0) ?></b>
+      <span>Hồ sơ đã phê duyệt</span>
     </div>
     <div class="garage-kpi" style="border-left:4px solid #475569">
-      <b style="color:#475569"><?= number_format($rejectedRequestsCount) ?></b>
+      <b style="color:#475569"><?= number_format($rejectedRequestsCount ?? 0) ?></b>
       <span>Hồ sơ bị từ chối</span>
     </div>
   </div>
@@ -93,13 +106,14 @@
   <!-- SEARCH & STATUS FILTER -->
   <form class="garage-filter" method="get" action="/admin/garages" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
     <input type="hidden" name="tab" value="requests">
-    <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên Gara, chủ Gara, SĐT, MST..." style="min-width:280px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:13px">
+    <input type="hidden" name="reg_type" value="<?= e($regType ?? 'all') ?>">
+    <input type="search" name="q" value="<?= e($q) ?>" placeholder="Tìm tên Đơn vị, chủ Gara/Đại lý, SĐT, MST..." style="min-width:280px;height:38px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:13px">
     
     <div style="display:flex;gap:6px">
-      <a href="/admin/garages?tab=requests" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;font-weight:700;<?= ($statusFilter ?? '') === '' ? 'background:#0b1d3a;color:#fff;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Tất cả</a>
-      <a href="/admin/garages?tab=requests&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Chờ duyệt</a>
-      <a href="/admin/garages?tab=requests&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Đã duyệt</a>
-      <a href="/admin/garages?tab=requests&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Từ chối</a>
+      <a href="/admin/garages?tab=requests&reg_type=<?= e($regType ?? 'all') ?>" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;font-weight:700;<?= ($statusFilter ?? '') === '' ? 'background:#0b1d3a;color:#fff;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Tất cả</a>
+      <a href="/admin/garages?tab=requests&reg_type=<?= e($regType ?? 'all') ?>&status=pending" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'pending' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Chờ duyệt</a>
+      <a href="/admin/garages?tab=requests&reg_type=<?= e($regType ?? 'all') ?>&status=approved" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'approved' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Đã duyệt</a>
+      <a href="/admin/garages?tab=requests&reg_type=<?= e($regType ?? 'all') ?>&status=rejected" class="btn" style="font-size:12px;padding:7px 14px;border-radius:6px;<?= ($statusFilter ?? '') === 'rejected' ? 'background:#0b1d3a;color:#fff;font-weight:700;border:none' : 'background:#fff;color:#0b1d3a;border:1px solid #cbd5e1' ?>">Từ chối</a>
     </div>
 
     <button class="btn btn-navy" type="submit" style="margin-left:auto;height:38px;padding:0 18px;border-radius:6px;font-weight:700;background:#0b1d3a;color:#fff">Lọc kết quả</button>
@@ -111,8 +125,9 @@
       <thead>
         <tr>
           <th>#Mã</th>
-          <th>Tên Gara / Cửa hàng</th>
-          <th>Chủ Gara / Đại diện</th>
+          <th>Phân Loại</th>
+          <th>Tên Đơn Vị / Cửa hàng</th>
+          <th>Người đại diện</th>
           <th>SĐT &amp; Email</th>
           <th>Mã số thuế / HKD</th>
           <th>Địa chỉ thực tế</th>
@@ -124,19 +139,28 @@
       <tbody>
         <?php foreach($requests as $r): 
           $realImgs = json_decode($r['real_images'] ?? '[]', true) ?: [];
+          $isAgency = ($r['reg_type'] ?? '') === 'agency';
         ?>
         <tr>
           <td style="color:#9ca3af;font-size:12px">#<?= (int)$r['id'] ?></td>
           <td>
-            <strong style="color:#0b1d3a;font-size:14px"><?= e($r['garage_name']) ?></strong>
-            <?php if (!empty($r['is_verified_garage'])): ?>
-              <span style="display:inline-block;background:#e0f2fe;color:#0369a1;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:4px">GARA CHÍNH THỨC</span>
+            <?php if ($isAgency): ?>
+              <span style="display:inline-block; background:#0b1d3a; color:#fff; font-size:10px; font-weight:800; padding:3px 8px; border-radius:6px; letter-spacing:0.3px;">
+                ĐẠI LÝ PHÂN PHỐI
+              </span>
+            <?php else: ?>
+              <span style="display:inline-block; background:#0284c7; color:#fff; font-size:10px; font-weight:800; padding:3px 8px; border-radius:6px; letter-spacing:0.3px;">
+                GARA MUA BUÔN
+              </span>
             <?php endif; ?>
+          </td>
+          <td>
+            <strong style="color:#0b1d3a;font-size:14px"><?= e($r['name']) ?></strong>
           </td>
           <td style="font-weight:600;color:#334155"><?= e($r['owner_name']) ?></td>
           <td>
             <div style="font-weight:700;color:#0b1d3a"><?= e($r['phone']) ?></div>
-            <div style="font-size:11px;color:#64748b"><?= e($r['email'] ?: $r['user_email']) ?></div>
+            <div style="font-size:11px;color:#64748b"><?= e($r['email']) ?></div>
           </td>
           <td>
             <span style="background:#f1f5f9;color:#0f172a;font-family:monospace;font-weight:700;padding:3px 8px;border-radius:4px;border:1px solid #cbd5e1;font-size:12px"><?= e($r['tax_code']) ?></span>
@@ -149,8 +173,8 @@
             <?php elseif ($r['status'] === 'approved'): ?>
               <span class="badge-status badge-approved">Đã duyệt</span>
             <?php else: ?>
-              <span class="badge-status badge-rejected" title="<?= e($r['reject_reason']) ?>">Từ chối</span>
-              <?php if ($r['reject_reason']): ?>
+              <span class="badge-status badge-rejected" title="<?= e($r['reject_reason'] ?? '') ?>">Từ chối</span>
+              <?php if (!empty($r['reject_reason'])): ?>
                 <div style="font-size:11px;color:#dc2626;margin-top:2px;max-width:140px"><?= e($r['reject_reason']) ?></div>
               <?php endif; ?>
             <?php endif; ?>
@@ -160,21 +184,22 @@
               <button type="button" onclick="showRegistrationDetail(<?= e(json_encode($r)) ?>)" class="btn-action-detail">Chi tiết</button>
               
               <?php if ($r['status'] === 'pending' || $r['status'] === 'rejected'): ?>
-                <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT Gara <?= e($r['garage_name']) ?> và kích hoạt giá buôn?')">
+                <form method="post" action="/admin/garages/requests/<?= $r['id'] ?>/approve" style="display:inline" onsubmit="return confirm('Xác nhận ĐÃ DUYỆT <?= $isAgency ? 'Đại lý' : 'Gara' ?> <?= e($r['name']) ?>?')">
                   <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+                  <input type="hidden" name="reg_type" value="<?= e($r['reg_type']) ?>">
                   <button type="submit" class="btn-action-approve">Duyệt</button>
                 </form>
               <?php endif; ?>
 
               <?php if ($r['status'] === 'pending' || $r['status'] === 'approved'): ?>
-                <button type="button" onclick="openRejectModal(<?= $r['id'] ?>, '<?= e($r['garage_name']) ?>')" class="btn-action-reject">Từ chối</button>
+                <button type="button" onclick="openRejectModal(<?= $r['id'] ?>, '<?= e($r['name']) ?>', '<?= e($r['reg_type']) ?>')" class="btn-action-reject">Từ chối</button>
               <?php endif; ?>
             </div>
           </td>
         </tr>
         <?php endforeach; ?>
         <?php if(!$requests): ?>
-        <tr><td colspan="9" style="padding:40px;text-align:center;color:#94a3b8;font-size:14px">Không tìm thấy yêu cầu đăng ký Gara nào.</td></tr>
+        <tr><td colspan="10" style="padding:40px;text-align:center;color:#94a3b8;font-size:14px">Không tìm thấy yêu cầu đăng ký nào.</td></tr>
         <?php endif; ?>
       </tbody>
     </table>
@@ -319,11 +344,12 @@
 <div id="rejectRegModal" style="display:none;position:fixed;inset:0;background:rgba(11,29,58,0.75);z-index:99999;align-items:center;justify-content:center;padding:16px">
   <form id="rejectForm" method="post" action="" style="background:#fff;border-radius:10px;max-width:480px;width:100%;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,0.3)">
     <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
-    <h3 style="margin:0 0 10px;color:#dc2626">Từ chối Đơn đăng ký Gara</h3>
-    <p style="margin:0 0 14px;font-size:13px;color:#475569">Gara: <strong id="reject_garage_name"></strong></p>
+    <input type="hidden" name="reg_type" id="reject_reg_type" value="garage">
+    <h3 style="margin:0 0 10px;color:#dc2626">Từ chối Đơn đăng ký</h3>
+    <p style="margin:0 0 14px;font-size:13px;color:#475569">Đơn vị: <strong id="reject_garage_name"></strong></p>
     
     <div style="margin-bottom:18px">
-      <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:6px">Lý do từ chối (Sẽ gửi trực tiếp qua Email &amp; Chuông thông báo cho khách):</label>
+      <label style="display:block;font-size:13px;font-weight:700;color:#1e293b;margin-bottom:6px">Lý do từ chối (Sẽ gửi thông báo cho đối tác):</label>
       <textarea name="reject_reason" required rows="4" placeholder="VD: Ảnh bảng hiệu không rõ địa chỉ, Giấy phép kinh doanh không đúng MST, Thiếu ảnh thực tế xưởng..." style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px"></textarea>
     </div>
 
@@ -342,7 +368,7 @@
 <script>
 function showRegistrationDetail(r) {
   document.getElementById('dt_id').textContent = r.id;
-  document.getElementById('dt_garage_name').textContent = r.garage_name || '';
+  document.getElementById('dt_garage_name').textContent = r.name || r.garage_name || r.agency_name || '';
   document.getElementById('dt_owner_name').textContent = r.owner_name || '';
   document.getElementById('dt_phone').textContent = r.phone || '';
   document.getElementById('dt_tax_code').textContent = r.tax_code || '';
@@ -394,8 +420,9 @@ function showRegistrationDetail(r) {
   document.getElementById('detailRegModal').style.display = 'flex';
 }
 
-function openRejectModal(id, garageName) {
+function openRejectModal(id, garageName, regType) {
   document.getElementById('reject_garage_name').textContent = garageName;
+  document.getElementById('reject_reg_type').value = regType || 'garage';
   document.getElementById('rejectForm').action = '/admin/garages/requests/' + id + '/reject';
   document.getElementById('rejectRegModal').style.display = 'flex';
 }
