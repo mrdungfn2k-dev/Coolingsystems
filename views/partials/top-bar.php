@@ -109,22 +109,21 @@ font { background-color: transparent !important; box-shadow: none !important; bo
 iframe.skiptranslate { display: none !important; visibility: hidden !important; }
 #goog-gt- { display: none !important; }
 
-/* Make Top-Bar Wrap Align with Main Container (1240px centered) */
+/* Expand Top-Bar Wrap 100% Full Width (Far Left Status, Far Right Nav, Center Hotline) */
 .top-bar {
   width: 100% !important;
   box-sizing: border-box !important;
   background: var(--navy-dark, #0b1a30) !important;
 }
 .top-bar .wrap {
-  max-width: 1240px !important;
-  margin: 0 auto !important;
+  max-width: 100% !important;
   width: 100% !important;
-  padding: 4px 16px !important;
+  padding: 4px 20px !important;
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 16px !important;
+  gap: 12px !important;
 }
 
 .top-bar-left-status {
