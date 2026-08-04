@@ -54,22 +54,27 @@ post('/agency/login', function() {
 
     $user = dbGet("SELECT * FROM users WHERE (phone=? OR email=?) AND status='active'", [$phoneEmail, $phoneEmail]);
     if ($user && password_verify($password, $user['password_hash'])) {
-        $agencyReg = dbGet("SELECT id FROM agency_registrations WHERE user_id=? OR phone=? OR email=?", [$user['id'], $phoneEmail, $phoneEmail]);
-        if ($user['role'] === 'agent' || !empty($user['referral_code']) || $agencyReg) {
-            if ($user['role'] !== 'agent') {
-                dbRun("UPDATE users SET role='agent' WHERE id=?", [$user['id']]);
-            }
-            // Reset lockout counters on successful login
-            unset($_SESSION[$attemptsKey], $_SESSION[$lockKey]);
-
-            loginUser((int)$user['id']);
-            header('Location: /agency/dashboard');
-            exit;
-        } else {
-            setFlash('error', 'Tài khoản này chưa đăng ký tài khoản đại lý bán hàng. Vui lòng bấm nút Đăng ký Đại lý mới bên dưới để gửi hồ sơ.');
-            header('Location: /agency/login');
-            exit;
+        // Auto upgrade user to Agent if not already
+        if ($user['role'] !== 'agent') {
+            $refCode = !empty($user['referral_code']) ? $user['referral_code'] : ('AGENT-' . str_pad($user['id'], 4, '0', STR_PAD_LEFT));
+            dbRun("UPDATE users SET role='agent', referral_code=?, is_verified_garage=1 WHERE id=?", [$refCode, $user['id']]);
         }
+
+        // Auto ensure agency registration entry
+        $agencyReg = dbGet("SELECT id FROM agency_registrations WHERE user_id=? OR phone=? OR email=?", [$user['id'], $user['phone'], $user['email']]);
+        if (!$agencyReg) {
+            $agencyName = !empty($user['garage_name']) ? $user['garage_name'] : ($user['full_name'] . ' Agency');
+            dbInsert("INSERT INTO agency_registrations (user_id, agency_name, owner_name, phone, email, tax_code, address, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'approved')", [
+                $user['id'], $agencyName, $user['full_name'], $user['phone'], $user['email'], '0101234567', $user['address'] ?? ''
+            ]);
+        }
+
+        // Reset lockout counters on successful login
+        unset($_SESSION[$attemptsKey], $_SESSION[$lockKey]);
+
+        loginUser((int)$user['id']);
+        header('Location: /agency/dashboard');
+        exit;
     }
 
     $attempts = ($_SESSION[$attemptsKey] ?? 0) + 1;

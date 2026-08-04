@@ -199,13 +199,22 @@
         </tr>
         <?php endforeach; ?>
         <?php if(!$requests): ?>
-        <tr><td colspan="10" style="padding:40px;text-align:center;color:#94a3b8;font-size:14px">Không tìm thấy yêu cầu đăng ký nào.</td></tr>
+        <tr>
+          <td colspan="10" style="padding:50px 20px;text-align:center;color:#64748b;font-size:14px">
+            <div style="font-weight:700;color:#0b1d3a;font-size:15px;margin-bottom:4px">
+              <?= ($regType === 'agency') ? 'Chưa có hồ sơ Đăng ký Đại lý nào' : (($regType === 'garage') ? 'Chưa có hồ sơ Đăng ký Gara nào' : 'Chưa có hồ sơ B2B nào') ?>
+            </div>
+            <div style="font-size:13px;color:#94a3b8">
+              Không tìm thấy kết quả phù hợp với điều kiện lọc hiện tại. Hãy thử chọn tab bộ lọc khác hoặc tìm kiếm lại.
+            </div>
+          </td>
+        </tr>
         <?php endif; ?>
       </tbody>
     </table>
   </div>
 
-  <?php if($totalPages > 1): $base = ['tab'=>'requests','q'=>$q,'status'=>$statusFilter?:null]; ?>
+  <?php if($totalPages > 1): $base = ['tab'=>'requests','reg_type'=>$regType,'q'=>$q,'status'=>$statusFilter?:null]; ?>
   <div class="pagination" style="margin-top:16px">
     <?php if($page>1): ?><a href="/admin/garages?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?>
     <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>

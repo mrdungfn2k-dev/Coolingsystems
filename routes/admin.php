@@ -4963,9 +4963,16 @@ get('/admin/garages', function() {
     $listParams = array_merge($params, [$perPage, max(0, ($page-1)*$perPage)]);
     $requests = dbAll("SELECT sub.* FROM ($unionSql) sub $where ORDER BY created_at DESC LIMIT ? OFFSET ?", $listParams);
 
-    $pendingRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub WHERE status='pending'")['c'] ?? 0);
-    $approvedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub WHERE status='approved'")['c'] ?? 0);
-    $rejectedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub WHERE status='rejected'")['c'] ?? 0);
+    $kpiWhere = "WHERE 1=1";
+    if ($regType === 'agency') {
+        $kpiWhere .= " AND reg_type='agency'";
+    } elseif ($regType === 'garage') {
+        $kpiWhere .= " AND reg_type='garage'";
+    }
+
+    $pendingRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub $kpiWhere AND status='pending'")['c'] ?? 0);
+    $approvedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub $kpiWhere AND status='approved'")['c'] ?? 0);
+    $rejectedRequestsCount = (int)(dbGet("SELECT COUNT(*) AS c FROM ($unionSql) sub $kpiWhere AND status='rejected'")['c'] ?? 0);
     $agencyPendingCount = (int)(dbGet("SELECT COUNT(*) AS c FROM agency_registrations WHERE status='pending'")['c'] ?? 0);
     $garagePendingCount = (int)(dbGet("SELECT COUNT(*) AS c FROM garage_registrations WHERE status='pending'")['c'] ?? 0);
 
