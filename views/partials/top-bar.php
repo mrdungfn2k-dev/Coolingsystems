@@ -114,16 +114,17 @@ font { background-color: transparent !important; box-shadow: none !important; bo
 iframe.skiptranslate { display: none !important; visibility: hidden !important; }
 #goog-gt- { display: none !important; }
 
-/* Make Top-Bar Wrap Expand 100% Full Width across screen */
+/* Make Top-Bar Wrap Align with Main Container (1240px centered) */
 .top-bar {
   width: 100% !important;
   box-sizing: border-box !important;
   background: var(--navy-dark, #0b1a30) !important;
 }
 .top-bar .wrap {
-  max-width: 100% !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
   width: 100% !important;
-  padding: 4px 24px !important;
+  padding: 4px 16px !important;
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
