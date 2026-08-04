@@ -150,7 +150,7 @@ require_once __DIR__ . '/../../includes/helpers.php';
     }
     .modal-card {
       width: 100%;
-      max-width: 640px;
+      max-width: 680px;
       max-height: 90vh;
       overflow-y: auto;
       background: #ffffff;
@@ -185,7 +185,7 @@ require_once __DIR__ . '/../../includes/helpers.php';
 </head>
 <body>
 
-  <!-- Centered Login Card (Admin Style) -->
+  <!-- Centered Login Card -->
   <div class="agency-auth-container">
     <div class="agency-card">
       <div class="agency-logo-wrap">
@@ -196,7 +196,7 @@ require_once __DIR__ . '/../../includes/helpers.php';
       <p class="agency-subtitle">Đăng nhập hệ thống quản lý kênh phân phối Cooling System</p>
 
       <?php foreach (getFlash() as $f): ?>
-        <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:16px;text-align:left;">
+        <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:12px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:16px;text-align:left;line-height:1.4;">
           <?= e($f['message']) ?>
         </div>
       <?php endforeach; ?>
@@ -204,12 +204,12 @@ require_once __DIR__ . '/../../includes/helpers.php';
       <form method="post" action="/agency/login">
         <?= csrfField() ?>
         <div class="form-group">
-          <label>Số điện thoại / Mã số thuế Đại lý *</label>
+          <label>Số điện thoại / Mã số thuế Đại lý * (Bắt buộc)</label>
           <input type="text" name="phone_email" required placeholder="0912345678 hoặc Mã số thuế..." value="<?= e($_POST['phone_email'] ?? '') ?>">
         </div>
 
         <div class="form-group">
-          <label>Mật khẩu *</label>
+          <label>Mật khẩu * (Bắt buộc)</label>
           <input type="password" name="password" required placeholder="••••••••">
         </div>
 
@@ -235,58 +235,66 @@ require_once __DIR__ . '/../../includes/helpers.php';
     <div class="modal-card">
       <button class="modal-close-btn" onclick="closeRegModal()">&times;</button>
       
-      <h2 style="font-size:18px; font-weight:800; color:var(--navy); margin-bottom:4px;">ĐĂNG KÝ NGUYÊN MẠNG LƯỚI ĐẠI LÝ</h2>
+      <h2 style="font-size:18px; font-weight:800; color:var(--navy); margin-bottom:4px;">ĐĂNG KÝ MẠNG LƯỚI ĐẠI LÝ PHÂN PHỐI</h2>
       <p style="font-size:12.5px; color:var(--text-sub); margin-bottom:18px;">Hưởng chiết khấu hoa hồng linh hoạt từ 5% đến 10% cho mọi đơn hàng hoàn tất</p>
 
-      <form method="post" action="/agency/register" enctype="multipart/form-data">
+      <form method="post" action="/agency/register" enctype="multipart/form-data" id="agencyRegForm">
         <?= csrfField() ?>
         <div class="reg-grid">
           <div class="form-group">
-            <label>Tên Đại lý / Cửa hàng Phụ tùng *</label>
+            <label>Tên Đại lý / Cửa hàng Phụ tùng * (Bắt buộc)</label>
             <input type="text" name="agency_name" required placeholder="VD: Đại Lý Phụ Tùng Hải Hà">
           </div>
           <div class="form-group">
-            <label>Họ tên Người đại diện *</label>
+            <label>Họ tên Người đại diện * (Bắt buộc)</label>
             <input type="text" name="owner_name" required placeholder="VD: Nguyễn Văn Mạnh">
           </div>
           <div class="form-group">
-            <label>Số điện thoại liên hệ *</label>
+            <label>Số điện thoại liên hệ * (Bắt buộc)</label>
             <input type="text" name="phone" required placeholder="VD: 0912345678">
           </div>
           <div class="form-group">
-            <label>Email liên hệ *</label>
+            <label>Email liên hệ * (Bắt buộc)</label>
             <input type="email" name="email" required placeholder="daily@gmail.com">
           </div>
           <div class="form-group">
-            <label>Mã số thuế / Số ĐKKD (Bắt buộc) *</label>
+            <label>Mã số thuế / Số ĐKKD * (Bắt buộc)</label>
             <input type="text" name="tax_code" required placeholder="VD: 0101234567">
           </div>
           <div class="form-group">
-            <label>Mật khẩu đăng nhập *</label>
+            <label>Mật khẩu đăng nhập * (Bắt buộc)</label>
             <input type="password" name="password" required placeholder="••••••••">
           </div>
         </div>
 
         <div class="form-group">
-          <label>Địa chỉ Cửa hàng / Kho hàng Đại lý thực tế *</label>
+          <label>Địa chỉ Cửa hàng / Kho hàng Đại lý thực tế * (Bắt buộc)</label>
           <input type="text" name="address" required placeholder="VD: Số 88 Giải Phóng, P. Phương Mai, Q. Đống Đa, Hà Nội">
         </div>
 
         <div style="border-top:1px solid #e2e8f0; padding-top:14px; margin-top:14px;">
-          <h4 style="font-size:12.5px; font-weight:800; color:var(--navy); margin-bottom:10px;">TẢI LÊN HỒ SƠ PHÁP LÝ ĐẠI LÝ</h4>
-          <div class="reg-grid">
-            <div class="form-group">
-              <label>1. Ảnh Bảng hiệu Cửa hàng *</label>
-              <input type="file" name="signboard_image" accept="image/*" required>
-            </div>
-            <div class="form-group">
-              <label>2. Giấy phép ĐKKD / Mã số thuế HKD *</label>
-              <input type="file" name="license_image" accept="image/*" required>
-            </div>
+          <h4 style="font-size:13px; font-weight:800; color:var(--navy); margin-bottom:12px;">TẢI LÊN HỒ SƠ XÁC THỰC PHÁP LÝ (BẮT BUỘC)</h4>
+          
+          <div class="form-group">
+            <label style="color:#b91c1c;">1. Ảnh bảng hiệu Cửa hàng / Gara * (Bắt buộc)</label>
+            <input type="file" name="signboard_image" accept="image/*" required>
+            <small style="color:#64748b; font-size:11.5px;">Chụp rõ tên Gara/Đại lý, địa chỉ &amp; SĐT trên bảng hiệu mặt tiền.</small>
+          </div>
+
+          <div class="form-group">
+            <label style="color:#b91c1c;">2. Giấy phép kinh doanh / Đăng ký HKD * (Bắt buộc)</label>
+            <input type="file" name="license_image" accept="image/*,.pdf" required>
+            <small style="color:#64748b; font-size:11.5px;">Ảnh chụp hoặc file PDF Đăng ký kinh doanh / Mã số thuế HKD.</small>
+          </div>
+
+          <div class="form-group">
+            <label style="color:#b91c1c;">3. Tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng / Gara * (Bắt buộc ≥ 3 ảnh)</label>
+            <input type="file" name="real_images[]" id="realImagesInput" accept="image/*" multiple required>
+            <small style="color:#64748b; font-size:11.5px;">Chụp các góc: Toàn cảnh xưởng/cửa hàng, khu vực kho hàng/kệ phụ tùng (Giữ phím Ctrl để chọn cùng lúc 3+ ảnh).</small>
           </div>
         </div>
 
-        <button type="submit" class="btn-submit" style="margin-top:10px;">Gửi Hồ Sơ Đăng Ký Đại Lý</button>
+        <button type="submit" class="btn-submit" style="margin-top:10px;">GỬI HỒ SƠ ĐĂNG KÝ ĐẠI LÝ</button>
       </form>
     </div>
   </div>
@@ -304,6 +312,15 @@ require_once __DIR__ . '/../../includes/helpers.php';
       modal.style.display = 'none';
     }
   };
+
+  document.getElementById('agencyRegForm').addEventListener('submit', function(e) {
+    var input = document.getElementById('realImagesInput');
+    if (input.files.length < 3) {
+      e.preventDefault();
+      alert('Vui lòng chọn tối thiểu 3 tấm ảnh chụp thực tế Cửa hàng/Gara (Giữ phím Ctrl khi chọn tệp).');
+      return false;
+    }
+  });
   </script>
 
 </body>

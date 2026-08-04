@@ -34,6 +34,12 @@ post('/agency/login', function() {
     $phoneEmail = trim($_POST['phone_email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
+    if (empty($phoneEmail) || empty($password)) {
+        setFlash('error', 'Vui lòng nhập đầy đủ Số điện thoại/Mã số thuế và Mật khẩu!');
+        header('Location: /agency/login');
+        exit;
+    }
+
     $user = dbGet("SELECT * FROM users WHERE (phone=? OR email=?) AND status='active'", [$phoneEmail, $phoneEmail]);
     if ($user && password_verify($password, $user['password_hash'])) {
         $agencyReg = dbGet("SELECT id FROM agency_registrations WHERE user_id=? OR phone=? OR email=?", [$user['id'], $phoneEmail, $phoneEmail]);
@@ -44,15 +50,19 @@ post('/agency/login', function() {
             loginUser((int)$user['id']);
             header('Location: /agency/dashboard');
             exit;
+        } else {
+            setFlash('error', 'Tài khoản này chưa đăng ký tài khoản đại lý bán hàng. Vui lòng bấm nút Đăng ký Đại lý mới bên dưới để gửi hồ sơ.');
+            header('Location: /agency/login');
+            exit;
         }
     }
-    setFlash('error', 'Số điện thoại hoặc mật khẩu Đại lý không đúng!');
+    setFlash('error', 'Số điện thoại, mã số thuế hoặc mật khẩu không chính xác!');
     header('Location: /agency/login');
     exit;
 });
 
 get('/agency/register', function() {
-    require __DIR__ . '/../views/agency/register.php';
+    header('Location: /agency/login');
     exit;
 });
 
@@ -65,18 +75,51 @@ post('/agency/register', function() {
     $password = trim($_POST['password'] ?? '');
     $address = trim($_POST['address'] ?? '');
 
-    if (empty($agencyName) || empty($phone) || empty($password)) {
-        setFlash('error', 'Vui lòng điền đầy đủ các thông tin bắt buộc!');
-        header('Location: /agency/register');
+    if (empty($agencyName) || empty($phone) || empty($password) || empty($taxCode) || empty($address)) {
+        setFlash('error', 'Vui lòng điền đầy đủ tất cả các trường bắt buộc (*)!');
+        header('Location: /agency/login');
         exit;
     }
 
-    $existing = dbGet("SELECT id FROM users WHERE phone=? OR email=?", [$phone, $email]);
+    $existing = dbGet("SELECT id FROM users WHERE phone=? OR (email=? AND email != '')", [$phone, $email]);
     if ($existing) {
-        setFlash('error', 'Số điện thoại hoặc Email đã tồn tại trên hệ thống!');
-        header('Location: /agency/register');
+        setFlash('error', 'Số điện thoại hoặc Email này đã tồn tại trên hệ thống!');
+        header('Location: /agency/login');
         exit;
     }
+
+    // Handle File Uploads
+    $uploadDir = __DIR__ . '/../public/uploads/agency/';
+    if (!is_dir($uploadDir)) {
+        @mkdir($uploadDir, 0777, true);
+    }
+
+    $signboardPath = '';
+    if (!empty($_FILES['signboard_image']['name'])) {
+        $ext = pathinfo($_FILES['signboard_image']['name'], PATHINFO_EXTENSION);
+        $signboardPath = '/uploads/agency/signboard_' . time() . '_' . rand(100,999) . '.' . $ext;
+        @move_uploaded_file($_FILES['signboard_image']['tmp_name'], __DIR__ . '/../public' . $signboardPath);
+    }
+
+    $licensePath = '';
+    if (!empty($_FILES['license_image']['name'])) {
+        $ext = pathinfo($_FILES['license_image']['name'], PATHINFO_EXTENSION);
+        $licensePath = '/uploads/agency/license_' . time() . '_' . rand(100,999) . '.' . $ext;
+        @move_uploaded_file($_FILES['license_image']['tmp_name'], __DIR__ . '/../public' . $licensePath);
+    }
+
+    $realImages = [];
+    if (!empty($_FILES['real_images']['name']) && is_array($_FILES['real_images']['name'])) {
+        foreach ($_FILES['real_images']['name'] as $idx => $fname) {
+            if (!empty($fname) && !empty($_FILES['real_images']['tmp_name'][$idx])) {
+                $ext = pathinfo($fname, PATHINFO_EXTENSION);
+                $rPath = '/uploads/agency/real_' . time() . '_' . $idx . '_' . rand(100,999) . '.' . $ext;
+                @move_uploaded_file($_FILES['real_images']['tmp_name'][$idx], __DIR__ . '/../public' . $rPath);
+                $realImages[] = $rPath;
+            }
+        }
+    }
+    $realImagesJson = json_encode($realImages, JSON_UNESCAPED_SLASHES);
 
     $userId = dbInsert("INSERT INTO users (role, phone, email, full_name, password_hash, status, address) VALUES (?, ?, ?, ?, ?, ?, ?)", [
         'agent', $phone, $email, $ownerName, password_hash($password, PASSWORD_DEFAULT), 'active', $address
@@ -85,11 +128,11 @@ post('/agency/register', function() {
     $refCode = 'AGENT-' . str_pad($userId, 4, '0', STR_PAD_LEFT);
     dbRun("UPDATE users SET referral_code=?, is_verified_garage=1, garage_name=? WHERE id=?", [$refCode, $agencyName, $userId]);
 
-    dbInsert("INSERT INTO agency_registrations (user_id, agency_name, owner_name, phone, email, tax_code, address, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')", [
-        $userId, $agencyName, $ownerName, $phone, $email, $taxCode, $address
+    dbInsert("INSERT INTO agency_registrations (user_id, agency_name, owner_name, phone, email, tax_code, address, signboard_image, license_image, real_images, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')", [
+        $userId, $agencyName, $ownerName, $phone, $email, $taxCode, $address, $signboardPath, $licensePath, $realImagesJson
     ]);
 
-    setFlash('success', 'Đăng ký Đại lý thành công! Hồ sơ của bạn đang được xét duyệt. Vui lòng đăng nhập.');
+    setFlash('success', 'Đăng ký Đại lý thành công! Hồ sơ của bạn đã gửi và đang được ban quản trị xét duyệt.');
     header('Location: /agency/login');
     exit;
 });
