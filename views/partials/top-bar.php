@@ -21,32 +21,27 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
       <span class="badge-live"><span class="dot"></span> Đang phục vụ</span>
     </div>
 
-    <!-- Hotline Stream (Center 1 row on Desktop, Exactly 2 rows on Mobile) -->
+    <!-- Hotline Stream (Center 1 row on Desktop, Responsive Wrapped Pills on Mobile) -->
     <div class="top-bar-hotline-stream">
-      <!-- Dòng 1: CSKH & Dịch vụ + Kĩ thuật & Bảo hành -->
-      <div class="hotline-row hotline-row-1">
-        <span class="hotline-pill">
-          <span class="h-label">CSKH & DỊCH VỤ:</span>
-          <a href="tel:0705070526" class="h-num">0705.0705.26</a> - <a href="tel:0705070528" class="h-num">28</a>
-        </span>
-        <span class="h-sep">•</span>
-        <span class="hotline-pill">
-          <span class="h-label"><span class="desktop-only-inline">KĨ THUẬT & BẢO HÀNH:</span><span class="mobile-only-inline">KĨ THUẬT & BH:</span></span>
-          <a href="tel:0704070418" class="h-num">0704.0704.18</a>
-        </span>
-      </div>
-      
-      <!-- Dòng 2: Bán buôn + Bán lẻ -->
-      <div class="hotline-row hotline-row-2">
-        <span class="hotline-pill">
-          <span class="h-label">BÁN BUÔN:</span>
-          <a href="tel:0703070321" class="h-num">0703.0703.21</a> - <a href="tel:0703070361" class="h-num">61</a>
-        </span>
-        <span class="h-sep">•</span>
-        <span class="hotline-pill">
-          <span class="h-label">BÁN LẺ:</span>
-          <a href="tel:0703070315" class="h-num">0703.0703.15</a>
-        </span>
+      <div class="hotline-list">
+        <?php foreach ($hotlineItems as $hIdx => $hItem): ?>
+          <span class="hotline-pill">
+            <span class="h-label"><?= htmlspecialchars(mb_strtoupper($hItem['label'], 'UTF-8')) ?>:</span>
+            <?php
+              $rawPhone = $hItem['phone'] ?? '';
+              $pParts = preg_split('/\s*[\-\/]\s*/', $rawPhone);
+              $linkParts = [];
+              foreach ($pParts as $pVal) {
+                  $pClean = preg_replace('/[^0-9\+]/', '', $pVal);
+                  $linkParts[] = '<a href="tel:'.htmlspecialchars($pClean).'" class="h-num">'.htmlspecialchars(trim($pVal)).'</a>';
+              }
+              echo implode(' - ', $linkParts);
+            ?>
+          </span>
+          <?php if ($hIdx < count($hotlineItems) - 1): ?>
+            <span class="h-sep">•</span>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </div>
     </div>
     
@@ -167,20 +162,21 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   cursor: pointer !important;
 }
 
-/* Static Hotline Stream Styles (Desktop: Center 1 row, Mobile: Exactly 2 rows) */
+/* Static Hotline Stream Styles (Desktop: Center 1 row, Mobile: Responsive Wrapped) */
 .top-bar-hotline-stream {
   flex: 1 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 16px !important;
+  gap: 12px !important;
   overflow: hidden !important;
 }
-.top-bar-hotline-stream .hotline-row {
+.top-bar-hotline-stream .hotline-list {
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  justify-content: center !important;
   white-space: nowrap !important;
+  gap: 10px !important;
 }
 .top-bar-hotline-stream .hotline-pill {
   display: inline-flex !important;
@@ -211,19 +207,13 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
   font-size: 10px !important;
 }
 
-.desktop-only-inline { display: inline !important; }
-.mobile-only-inline { display: none !important; }
-
 @media (max-width: 992px) {
-  .top-bar-hotline-stream .hotline-row { gap: 6px !important; }
+  .top-bar-hotline-stream .hotline-list { gap: 6px !important; }
   .top-bar-hotline-stream .h-label { font-size: 10px !important; }
   .top-bar-hotline-stream .h-num { font-size: 11px !important; }
 }
 
 @media (max-width: 768px) {
-  .desktop-only-inline { display: none !important; }
-  .mobile-only-inline { display: inline !important; }
-
   .top-bar { min-height: auto !important; height: auto !important; padding: 4px 0 !important; overflow: hidden !important; width: 100% !important; box-sizing: border-box !important; }
   .top-bar .wrap { 
     display: flex !important; 
@@ -259,26 +249,46 @@ iframe.skiptranslate { display: none !important; visibility: hidden !important; 
     flex: 0 0 100% !important; 
     width: 100% !important; 
     display: flex !important; 
-    flex-direction: column !important; 
     align-items: center !important; 
     justify-content: center !important; 
     margin: 2px 0 0 0 !important; 
     height: auto !important; 
     min-height: auto !important; 
     overflow: visible !important; 
-    gap: 2px !important;
   }
-  .top-bar-hotline-stream .hotline-row { 
+  .top-bar-hotline-stream .hotline-list { 
     display: flex !important; 
-    flex-direction: row !important; 
-    align-items: center !important; 
+    flex-wrap: wrap !important; 
     justify-content: center !important; 
+    align-items: center !important; 
+    white-space: normal !important; 
+    gap: 3px 6px !important; 
     width: 100% !important; 
-    white-space: nowrap !important; 
-    gap: 3px !important; 
   }
-  .top-bar-hotline-stream .hotline-pill { font-size: clamp(8px, 2.4vw, 9.5px) !important; padding: 0 !important; white-space: nowrap !important; }
-  .top-bar-hotline-stream .h-label { font-size: clamp(7.8px, 2.3vw, 9px) !important; letter-spacing: -0.2px !important; }
-  .top-bar-hotline-stream .h-num { font-size: clamp(9px, 2.6vw, 10.5px) !important; letter-spacing: -0.2px !important; }
+  .top-bar-hotline-stream .hotline-pill { 
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    font-size: clamp(8.5px, 2.5vw, 10px) !important; 
+    padding: 1.5px 5px !important; 
+    white-space: nowrap !important; 
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 4px !important;
+  }
+  .top-bar-hotline-stream .h-label { 
+    font-size: clamp(8px, 2.3vw, 9.5px) !important; 
+    font-weight: 700 !important;
+    color: #c8a951 !important;
+    letter-spacing: -0.1px !important;
+  }
+  .top-bar-hotline-stream .h-num { 
+    font-size: clamp(9px, 2.6vw, 10.5px) !important; 
+    font-weight: 800 !important;
+    color: #ffffff !important;
+  }
+  .top-bar-hotline-stream .h-sep { 
+    display: none !important; 
+  }
 }
 </style>
