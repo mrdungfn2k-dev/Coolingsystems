@@ -112,6 +112,7 @@ $sb = function($perm) use ($__isAdmin, $__perms, $__sbU) {
       <?php if($sb('promotions')): ?><a href="/admin/promotions" class="<?= isActive('/admin/promotions') ?>"><?= sbIcon('gift') ?>Khuyến mãi</a><?php endif; ?>
       <?php if($sb('vouchers')): ?><a href="/admin/vouchers" class="<?= startsWith(currentPath(),'/admin/vouchers')?'active':'' ?>"><?= sbIcon('ticket') ?>Voucher toàn sàn</a><?php endif; ?>
       <?php if($sb('tax_config')): ?><a href="/admin/settings/finance" class="<?= isActive('/admin/settings/finance') ?>"><?= sbIcon('truck') ?>Cấu hình Vận chuyển</a><?php endif; ?>
+      <?php if($__isAdmin||$sb('settings')): ?><a href="/admin/agency-tiers" class="<?= isActive('/admin/agency-tiers') ?>"><?= sbIcon('list') ?>Cấu hình Đại lý &amp; % Hoa hồng</a><?php endif; ?>
       <?php if($__isAdmin||$sb('settings')): ?><a href="/admin/settings" class="<?= isActive('/admin/settings') ?>"><?= sbIcon('gear') ?>Cài đặt hệ thống</a><?php endif; ?>
       <?php endif; ?>
       <a href="/admin/logout"><?= sbIcon('logout') ?>Đăng xuất</a>

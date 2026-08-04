@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../../includes/helpers.php';
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -5,22 +8,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bảng Điều Khiển Đại Lý | Cooling Systems</title>
   <link rel="manifest" href="/app/manifest.json">
-  <meta name="theme-color" content="#1a3258">
+  <meta name="theme-color" content="#0b1d3a">
   <style>
     :root {
-      --navy-dark: #1a3258;
-      --orange-accent: #f26a1b;
-      --orange-hover: #d8570e;
-      --gray-bg: #f4f6f9;
-      --gray-border: #e8ecf3;
+      --navy: #0b1d3a;
+      --navy-main: #1a3258;
+      --bg-color: #f8fafc;
+      --border-color: #e2e8f0;
       --text-main: #1e293b;
       --text-sub: #64748b;
-      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: var(--font-family);
-      background-color: var(--gray-bg);
+      font-family: var(--font-stack);
+      background-color: var(--bg-color);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -28,7 +30,7 @@
       justify-content: space-between;
     }
     .agency-top-bar {
-      background: var(--navy-dark);
+      background: var(--navy);
       padding: 14px 24px;
       display: flex;
       align-items: center;
@@ -50,7 +52,6 @@
     .agency-brand-title {
       font-weight: 800;
       font-size: 14.5px;
-      letter-spacing: -0.2px;
       color: #ffffff;
     }
     .agency-brand-sub {
@@ -66,12 +67,11 @@
       flex: 1;
     }
     .agency-banner {
-      background: linear-gradient(135deg, var(--navy-dark) 0%, #244270 100%);
+      background: var(--navy);
       color: #ffffff;
-      border-radius: 16px;
+      border-radius: 14px;
       padding: 24px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 25px rgba(26, 50, 88, 0.15);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -103,9 +103,9 @@
     }
     .agency-kpi-card {
       background: #ffffff;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 20px;
-      border: 1px solid var(--gray-border);
+      border: 1px solid var(--border-color);
       box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
     .agency-kpi-card span {
@@ -118,19 +118,19 @@
     .agency-kpi-card strong {
       font-size: 20px;
       font-weight: 900;
-      color: var(--navy-dark);
+      color: var(--navy);
     }
     .agency-section-box {
       background: #ffffff;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 20px;
-      border: 1px solid var(--gray-border);
+      border: 1px solid var(--border-color);
       margin-bottom: 24px;
     }
     .agency-section-title {
       font-size: 15px;
       font-weight: 800;
-      color: var(--navy-dark);
+      color: var(--navy);
       margin-bottom: 16px;
       display: flex;
       align-items: center;
@@ -139,7 +139,7 @@
     .referral-box {
       background: #f8fafc;
       border: 1px dashed #cbd5e1;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 14px;
       display: flex;
       align-items: center;
@@ -149,12 +149,12 @@
     .referral-box input {
       flex: 1;
       height: 40px;
-      border: 1px solid var(--gray-border);
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 0 12px;
       font-size: 13px;
       font-weight: 700;
-      color: var(--navy-dark);
+      color: var(--navy);
       background: #ffffff;
     }
     .tbl-agency {
@@ -169,7 +169,7 @@
       text-transform: uppercase;
       padding: 12px 14px;
       text-align: left;
-      border-bottom: 1px solid var(--gray-border);
+      border-bottom: 1px solid var(--border-color);
     }
     .tbl-agency td {
       padding: 14px;
@@ -178,7 +178,7 @@
       color: var(--text-main);
     }
     .btn-action {
-      background: var(--orange-accent);
+      background: var(--navy);
       color: #ffffff;
       border-radius: 8px;
       padding: 8px 16px;
@@ -188,20 +188,18 @@
       cursor: pointer;
       text-decoration: none;
     }
-    .btn-action:hover { background: var(--orange-hover); }
+    .btn-action:hover { background: var(--navy-main); }
     .agency-footer {
-      background: var(--navy-dark);
-      color: rgba(255, 255, 255, 0.6);
       text-align: center;
-      padding: 16px;
-      font-size: 11.5px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      font-size: 12px;
+      color: var(--text-sub);
     }
   </style>
 </head>
 <body>
 
-  <!-- Standalone Agency Header (NO PUBLIC B2C STORE NAV) -->
+  <!-- Standalone Agency Header -->
   <header class="agency-top-bar">
     <a href="/agency/dashboard" class="agency-brand">
       <img src="/favicon-512x512.png" alt="Cooling Logo" onerror="this.src='/public/favicon-512x512.png'">
@@ -222,7 +220,7 @@
   <div class="agency-dash-container">
     
     <?php foreach (getFlash() as $f): ?>
-      <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#b91c1c':'#047857' ?>;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:700;margin-bottom:20px;">
+      <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:700;margin-bottom:20px;">
         <?= e($f['message']) ?>
       </div>
     <?php endforeach; ?>
@@ -230,11 +228,11 @@
     <!-- Banner Top -->
     <div class="agency-banner">
       <div class="agency-banner-info">
-        <h2>Xin chào, <?= e($agency['agency_name'] ?? $agency['full_name'] ?? 'Đại lý Partner') ?>!</h2>
-        <p>Cổng thông tin Đại lý Chuyên nghiệp · Mã số thuế: <strong><?= e($agency['tax_code'] ?? '0101234567') ?></strong> · Hạng Đại lý: <span style="background:var(--orange-accent); color:#fff; padding:2px 8px; border-radius:10px; font-weight:800; font-size:11px;"><?= e($tierName) ?></span></p>
+        <h2>Xin chào, <?= e($agency['agency_name'] ?? $user['full_name'] ?? 'Đại lý Partner') ?>!</h2>
+        <p>Cổng thông tin Đại lý Chuyên nghiệp · Mã số thuế: <strong><?= e($agency['tax_code'] ?? 'Chưa cập nhật') ?></strong> · Hạng Đại lý: <span style="background:var(--navy-main); color:#fff; padding:2px 8px; border-radius:10px; font-weight:800; font-size:11px;"><?= e($tierName ?? 'Đại lý Chuẩn') ?></span></p>
       </div>
       <div>
-        <button class="btn-action" style="background:#ffffff; color:var(--navy-dark);" onclick="document.getElementById('withdrawModal').style.display='flex'">Đề Nghị Rút Tiền</button>
+        <button class="btn-action" style="background:#ffffff; color:var(--navy);" onclick="document.getElementById('withdrawModal').style.display='flex'">Đề Nghị Rút Tiền</button>
       </div>
     </div>
 
@@ -242,19 +240,19 @@
     <div class="agency-kpi-grid">
       <div class="agency-kpi-card">
         <span>MỨC HOA HỒNG ĐANG HƯỞNG</span>
-        <strong style="color:var(--orange-accent);"><?= number_format($currentRate, 1) ?>%</strong>
+        <strong style="color:var(--navy);"><?= number_format($currentRate ?? 5.0, 1) ?>%</strong>
       </div>
       <div class="agency-kpi-card">
         <span>DOANH SỐ TUYẾN ĐẠI LÝ</span>
-        <strong><?= vnd($totalSales) ?></strong>
+        <strong><?= function_exists('vnd') ? vnd($totalSales) : number_format($totalSales, 0, ',', '.') . ' đ' ?></strong>
       </div>
       <div class="agency-kpi-card">
         <span>TỔNG HOA HỒNG TÍCH LŨY</span>
-        <strong style="color:#059669;"><?= vnd($totalEarned) ?></strong>
+        <strong style="color:#15803d;"><?= function_exists('vnd') ? vnd($totalEarned) : number_format($totalEarned, 0, ',', '.') . ' đ' ?></strong>
       </div>
       <div class="agency-kpi-card">
         <span>SỐ GARA THUỘC TUYẾN</span>
-        <strong><?= count($downlineGarages) ?> Gara</strong>
+        <strong><?= count($downlineGarages ?? []) ?> Gara</strong>
       </div>
     </div>
 
@@ -263,17 +261,17 @@
       <div class="agency-section-title">
         <span>MÃ &amp; LINK GIỚI THIỆU TẠO GARA THUỘC TUYẾN</span>
       </div>
-      <p style="font-size:12.5px; color:var(--text-sub); margin-bottom:12px;">Gửi link này cho các Gara đăng ký. Mọi đơn hàng do Gara này đặt sẽ tự động trích <strong><?= number_format($currentRate, 1) ?>% hoa hồng</strong> vào tài khoản Đại lý của bạn!</p>
+      <p style="font-size:12.5px; color:var(--text-sub); margin-bottom:12px;">Gửi link này cho các Gara đăng ký. Mọi đơn hàng do Gara này đặt sẽ tự động trích <strong><?= number_format($currentRate ?? 5.0, 1) ?>% hoa hồng</strong> vào tài khoản Đại lý của bạn!</p>
       <div class="referral-box">
-        <input type="text" id="refLinkInput" readonly value="<?= e($referralUrl) ?>">
-        <button class="btn-action" style="background:var(--navy-dark);" onclick="copyRefLink()">Sao chép Link</button>
+        <input type="text" id="refLinkInput" readonly value="<?= e($referralUrl ?? '') ?>">
+        <button class="btn-action" onclick="copyRefLink()">Sao chép Link</button>
       </div>
     </div>
 
     <!-- Section 2: Downline Garages List -->
     <div class="agency-section-box">
       <div class="agency-section-title">
-        <span>DANH SÁCH GARA THUỘC TUYẾN ĐẠI LÝ (<?= count($downlineGarages) ?>)</span>
+        <span>DANH SÁCH GARA THUỘC TUYẾN ĐẠI LÝ (<?= count($downlineGarages ?? []) ?>)</span>
       </div>
       <div style="overflow-x:auto;">
         <table class="tbl-agency">
@@ -310,7 +308,7 @@
     <!-- Section 3: Commission Transactions Log -->
     <div class="agency-section-box">
       <div class="agency-section-title">
-        <span>LỊCH SỬ HOA HỒNG GIAO DỊCH (<?= count($commissions) ?>)</span>
+        <span>LỊCH SỬ HOA HỒNG GIAO DỊCH (<?= count($commissions ?? []) ?>)</span>
       </div>
       <div style="overflow-x:auto;">
         <table class="tbl-agency">
@@ -333,9 +331,9 @@
               <?php foreach ($commissions as $c): ?>
                 <tr>
                   <td><strong>#Sub-<?= $c['sub_order_id'] ?></strong></td>
-                  <td><?= vnd($c['gross_amount']) ?></td>
+                  <td><?= function_exists('vnd') ? vnd($c['gross_amount']) : number_format($c['gross_amount'], 0, ',', '.') . ' đ' ?></td>
                   <td><span style="background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:10px; font-weight:800; font-size:11px;"><?= number_format($c['commission_rate'], 1) ?>%</span></td>
-                  <td><strong style="color:#059669;"><?= vnd($c['commission_fee']) ?></strong></td>
+                  <td><strong style="color:#15803d;"><?= function_exists('vnd') ? vnd($c['commission_fee']) : number_format($c['commission_fee'], 0, ',', '.') . ' đ' ?></strong></td>
                   <td>
                     <span style="padding:2px 8px; border-radius:10px; font-size:11px; font-weight:700; background:<?= $c['status']==='settled'?'#dcfce7':'#fef9c3' ?>; color:<?= $c['status']==='settled'?'#15803d':'#854d0e' ?>;">
                       <?= $c['status']==='settled'?'Đã đối soát':'Chờ đối soát' ?>
@@ -353,32 +351,32 @@
   </div>
 
   <!-- Modal Đề nghị rút tiền hoa hồng -->
-  <div id="withdrawModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; padding:16px;">
-    <form method="post" action="/agency/withdraw" style="background:#fff; border-radius:14px; padding:24px; max-width:480px; width:100%; box-shadow:0 20px 40px rgba(0,0,0,0.2);">
+  <div id="withdrawModal" style="display:none; position:fixed; inset:0; background:rgba(11,29,58,0.6); z-index:9999; align-items:center; justify-content:center; padding:16px;">
+    <form method="post" action="/agency/withdraw" style="background:#fff; border-radius:12px; padding:24px; max-width:480px; width:100%; box-shadow:0 20px 40px rgba(0,0,0,0.2);">
       <?= csrfField() ?>
-      <h3 style="font-size:16px; font-weight:800; color:var(--navy-dark); margin:0 0 14px;">YÊU CẦU RÚT TIỀN HOA HỒNG</h3>
+      <h3 style="font-size:16px; font-weight:800; color:var(--navy); margin:0 0 14px;">YÊU CẦU RÚT TIỀN HOA HỒNG</h3>
       <div style="font-size:12.5px; color:var(--text-sub); margin-bottom:16px;">
-        Số dư hoa hồng khả dụng: <strong style="color:#059669; font-size:15px;"><?= vnd($totalEarned) ?></strong>
+        Số dư hoa hồng khả dụng: <strong style="color:#15803d; font-size:15px;"><?= function_exists('vnd') ? vnd($totalEarned) : number_format($totalEarned, 0, ',', '.') . ' đ' ?></strong>
       </div>
 
       <div style="margin-bottom:12px;">
-        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy-dark); margin-bottom:4px;">Số tiền muốn rút (VNĐ) *</label>
-        <input type="number" name="amount" required min="100000" max="<?= (int)$totalEarned ?>" placeholder="VD: 5000000" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--gray-border); padding:0 12px; font-size:14px; font-weight:700;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:4px;">Số tiền muốn rút (VNĐ) *</label>
+        <input type="number" name="amount" required min="100000" max="<?= (int)($totalEarned ?? 0) ?>" placeholder="VD: 5000000" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--border-color); padding:0 12px; font-size:14px; font-weight:700;">
       </div>
 
       <div style="margin-bottom:12px;">
-        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy-dark); margin-bottom:4px;">Tên Ngân hàng *</label>
-        <input type="text" name="bank_name" required placeholder="VD: Vietcombank / Techcombank / MBBank" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--gray-border); padding:0 12px; font-size:13.5px;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:4px;">Tên Ngân hàng *</label>
+        <input type="text" name="bank_name" required placeholder="VD: Vietcombank / Techcombank / MBBank" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--border-color); padding:0 12px; font-size:13.5px;">
       </div>
 
       <div style="margin-bottom:12px;">
-        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy-dark); margin-bottom:4px;">Số tài khoản Ngân hàng *</label>
-        <input type="text" name="bank_account" required placeholder="VD: 1012345678" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--gray-border); padding:0 12px; font-size:13.5px;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:4px;">Số tài khoản Ngân hàng *</label>
+        <input type="text" name="bank_account" required placeholder="VD: 1012345678" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--border-color); padding:0 12px; font-size:13.5px;">
       </div>
 
       <div style="margin-bottom:18px;">
-        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy-dark); margin-bottom:4px;">Tên chủ tài khoản (Chữ in hoa) *</label>
-        <input type="text" name="bank_holder" required placeholder="VD: NGUYEN VAN A" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--gray-border); padding:0 12px; font-size:13.5px; text-transform:uppercase;">
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:4px;">Tên chủ tài khoản (Chữ in hoa) *</label>
+        <input type="text" name="bank_holder" required placeholder="VD: NGUYEN VAN A" style="width:100%; height:40px; border-radius:8px; border:1px solid var(--border-color); padding:0 12px; font-size:13.5px; text-transform:uppercase;">
       </div>
 
       <div style="display:flex; gap:10px; justify-content:flex-end;">
@@ -389,7 +387,7 @@
   </div>
 
   <footer class="agency-footer">
-    &copy; <?= date('Y') ?> Cooling Systems. Hệ thống Quản lý Kênh Phân Phối &amp; Đại lý Toàn Quốc.
+    &copy; <?= date('Y') ?> Cooling Systems. Tất cả quyền được bảo lưu.
   </footer>
 
   <script>

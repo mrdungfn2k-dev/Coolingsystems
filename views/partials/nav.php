@@ -100,6 +100,7 @@
     <a href="/news" class="nav-link <?= isActive('/news') ?>">Tin tức</a>
     <!-- Chính sách moved to footer -->
     <a href="/stores" class="nav-link <?= isActive('/stores') ?>">Hệ thống cửa hàng</a>
+    <a href="/warranty/lookup" class="nav-link <?= isActive('/warranty/lookup') ?>">Tra bảo hành</a>
 
   </div>
 </nav>

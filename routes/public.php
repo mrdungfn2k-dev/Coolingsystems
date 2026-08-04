@@ -36,7 +36,11 @@ post('/agency/login', function() {
 
     $user = dbGet("SELECT * FROM users WHERE (phone=? OR email=?) AND status='active'", [$phoneEmail, $phoneEmail]);
     if ($user && password_verify($password, $user['password_hash'])) {
-        if ($user['role'] === 'agent' || !empty($user['referral_code'])) {
+        $agencyReg = dbGet("SELECT id FROM agency_registrations WHERE user_id=? OR phone=? OR email=?", [$user['id'], $phoneEmail, $phoneEmail]);
+        if ($user['role'] === 'agent' || !empty($user['referral_code']) || $agencyReg) {
+            if ($user['role'] !== 'agent') {
+                dbRun("UPDATE users SET role='agent' WHERE id=?", [$user['id']]);
+            }
             loginUser((int)$user['id']);
             header('Location: /agency/dashboard');
             exit;
