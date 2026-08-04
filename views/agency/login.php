@@ -230,6 +230,25 @@ require_once __DIR__ . '/../../includes/helpers.php';
     &copy; <?= date('Y') ?> Cooling Systems. Tất cả quyền được bảo lưu.
   </footer>
 
+  <?php
+    $isRevoked = !empty($_GET['revoked']) || !empty($_SESSION['agency_revoked_popup']);
+    if (!empty($_SESSION['agency_revoked_popup'])) { unset($_SESSION['agency_revoked_popup']); }
+  ?>
+  <?php if ($isRevoked): ?>
+  <div id="agencyRevokedModal" style="display:flex;position:fixed;inset:0;background:rgba(10,25,47,0.75);z-index:99999;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#fff;border-radius:14px;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.3);padding:24px;text-align:center">
+      <div style="width:48px;height:48px;border-radius:50%;background:#fef2f2;color:#dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:24px">⚠️</div>
+      <h3 style="margin:0 0 8px;font-size:17px;color:#0b1d3a;font-weight:800">Tài khoản Đại lý đã bị thu hồi</h3>
+      <p style="font-size:13.5px;color:#475569;margin:0 0 20px;line-height:1.5">
+        Tài khoản Đại lý của bạn đã bị Ban quản trị thu hồi hoặc xóa khỏi hệ thống. Bạn đã được tự động đăng xuất. Vui lòng liên hệ bộ phận CSKH để được hỗ trợ.
+      </p>
+      <button type="button" onclick="document.getElementById('agencyRevokedModal').style.display='none'; if(window.history.replaceState) history.replaceState(null,'','/agency/login');" style="width:100%;padding:11px;background:#0b1d3a;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">
+        OK - XÁC NHẬN
+      </button>
+    </div>
+  </div>
+  <?php endif; ?>
+
   <!-- Modal Popup Registration (Nút Đăng ký Đại lý hiển thị Popup giữa màn hình) -->
   <div class="modal-overlay" id="regModal">
     <div class="modal-card">

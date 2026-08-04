@@ -195,6 +195,15 @@ post('/agency/register', function() {
 });
 
 get('/agency/dashboard', function() {
+    if (isset($_SESSION['user_id'])) {
+        $checkUser = dbGet("SELECT * FROM users WHERE id=? AND status='active'", [$_SESSION['user_id']]);
+        if (!$checkUser || ($checkUser['role'] ?? '') !== 'partner') {
+            unset($_SESSION['user_id']);
+            $_SESSION['agency_revoked_popup'] = true;
+            header('Location: /agency/login?revoked=1');
+            exit;
+        }
+    }
     $user = requireLogin('/agency/login');
     $agency = dbGet("SELECT * FROM agency_registrations WHERE user_id=? ORDER BY id DESC LIMIT 1", [$user['id']]) ?: $user;
     

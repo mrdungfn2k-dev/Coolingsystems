@@ -269,7 +269,7 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
       <?php
         $isGuestUser = $user && strpos($user['email'] ?? '', '@guest.local') !== false;
       ?>
-      <?php if ($user && in_array($user['role'], ['customer','staff']) && !$isGuestUser): ?>
+      <?php if ($user && in_array($user['role'], ['customer','staff','partner']) && !$isGuestUser): ?>
         <?php
           $unreadNotiCount = dbGet("SELECT COUNT(*) as n FROM user_notifications WHERE user_id=? AND is_read=0", [$user['id']])['n'] ?? 0;
           $userNotis = dbAll("SELECT * FROM user_notifications WHERE user_id=? ORDER BY created_at DESC LIMIT 8", [$user['id']]);
@@ -404,7 +404,7 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
             <?php endif; ?>
           </div>
           <div>
-            <?php if (($user['role'] ?? '') === 'agent'): ?>
+            <?php if (in_array($user['role'] ?? '', ['agent', 'partner'])): ?>
               <span style="display:block;font-size:9px;text-transform:uppercase;background:#0b1d3a;color:#ffffff;padding:1px 5px;border-radius:4px;font-weight:800;letter-spacing:0.3px;">TÀI KHOẢN ĐẠI LÝ</span>
             <?php else: ?>
               <span class="label" style="display:block;font-size:10px;text-transform:uppercase;color:#888;font-weight:700">Tài khoản</span>
