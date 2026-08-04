@@ -9,6 +9,11 @@ get('/cart', function() {
     exit;
 });
 
+get('/app', function() {
+    require __DIR__ . '/../public/app/index.html';
+    exit;
+});
+
 get('/account', function() {
     header('Location: /customer/profile', true, 301);
     exit;
