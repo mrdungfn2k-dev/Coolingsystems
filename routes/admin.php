@@ -2907,7 +2907,7 @@ post('/admin/products/new', function() {
     $valErrors = [];
     if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
     if (!$sku)  $valErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
-    $isContactPrice = !empty($d['is_contact_price']) || !empty($d['is_call']);
+    $isContactPrice = !empty($d['is_call_price']) || !empty($d['is_contact_price']) || !empty($d['is_call']);
     if (!$inventoryManagedSeparately) {
         if (!$isContactPrice && $price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
         if ($stockRaw === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
@@ -2943,7 +2943,7 @@ post('/admin/products/new', function() {
         return;
     }
 
-    $id = dbInsert("INSERT INTO products (name,sku,slug,oem_code,oem_code2,part_brand,car_brand_id,category_id,price,price_before_tax,tax_amount,vat_rate,original_price,stock,min_stock,max_stock,features,specifications,warranty_months,description,status,is_featured,show_on_home,show_on_promo,is_new,is_indexed,partner_id,published_at,created_at,weight_g,width_cm,height_cm,depth_cm,seo_title,seo_description,seo_keyword,video_url,cost_price,total_import_value) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime('now','localtime'),datetime('now','localtime'),?,?,?,?,?,?,?,?,?,?)", [
+    $id = dbInsert("INSERT INTO products (name,sku,slug,oem_code,oem_code2,part_brand,car_brand_id,category_id,price,price_before_tax,tax_amount,vat_rate,original_price,stock,min_stock,max_stock,features,specifications,warranty_months,description,status,is_featured,is_call_price,show_on_home,show_on_promo,is_new,is_indexed,partner_id,published_at,created_at,weight_g,width_cm,height_cm,depth_cm,seo_title,seo_description,seo_keyword,video_url,cost_price,total_import_value) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime('now','localtime'),datetime('now','localtime'),?,?,?,?,?,?,?,?,?,?)", [
         $name,
         $sku,
         $slug,
@@ -2966,6 +2966,7 @@ post('/admin/products/new', function() {
         $d['description'] ?? '',
         $status,
         isset($d['is_featured']) ? 1 : 0,
+        $isContactPrice ? 1 : 0,
         isset($d['show_on_home']) ? 1 : 0,
         isset($d['show_on_promo']) ? 1 : 0,
         isset($d['is_new']) ? 1 : 0,
@@ -3116,7 +3117,7 @@ post('/admin/products/:id/edit', function($p) {
     // === SERVER-SIDE VALIDATION ===
     $editErrors = [];
     if (!trim($d['name'] ?? '')) $editErrors[] = 'Tên sản phẩm không được để trống';
-    $isContactPrice = !empty($d['is_contact_price']) || !empty($d['is_call']);
+    $isContactPrice = !empty($d['is_call_price']) || !empty($d['is_contact_price']) || !empty($d['is_call']);
     if (!$isContactPrice && $price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
     if ($stockRaw === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
     elseif (!ctype_digit($stockRaw) || $stock > 1000) $editErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
@@ -3161,7 +3162,7 @@ post('/admin/products/:id/edit', function($p) {
     // === LƯU LỊCH SỬ TRƯỚC KHI CẬP NHẬT ===
     saveProductHistory($currentProduct, 'update', (int)($user['id'] ?? 0));
 
-    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,oem_code2=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
+    dbRun("UPDATE products SET name=?,sku=?,oem_code=?,oem_code2=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,is_call_price=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
         trim($d['name']??''),
         $editSku,
         $editOem,
@@ -3181,6 +3182,7 @@ post('/admin/products/:id/edit', function($p) {
         $d['description']??'',
         $status,
         isset($d['is_featured'])?1:0,
+        $isContactPrice ? 1 : 0,
         isset($d['show_on_home'])?1:0,
         isset($d['show_on_promo'])?1:0,
         isset($d['is_new'])?1:0,

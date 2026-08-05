@@ -435,6 +435,12 @@ function swTab(t){
               Sản phẩm nổi bật
             </label>
           </div>
+          <div class="form-group" style="margin-top:10px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;color:#1e293b">
+              <input type="checkbox" name="is_call_price" value="1" <?= (!empty($product['is_call_price']) || !empty($product['is_contact_price']) || !empty($product['is_call']))?'checked':'' ?>>
+              Liên hệ báo giá (Call)
+            </label>
+          </div>
           <button type="submit" class="btn btn-gold btn-block btn-lg" style="margin-top:8px">
             <?= isset($product) ? ' Cập nhật SP' : ' Đăng sản phẩm' ?>
           </button>
