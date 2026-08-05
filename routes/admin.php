@@ -244,6 +244,7 @@ get('/admin/products', function() {    requireStaffPermission('rbac:catalog.prod
     if($partBrand){$where.=" AND (p.part_brand=? OR p.part_brand LIKE ? OR p.part_brand LIKE ? OR p.part_brand LIKE ?)"; $params[]=$partBrand; $params[]=$partBrand.',%'; $params[]='%, '.$partBrand.',%'; $params[]='%, '.$partBrand;}
     $total=dbGet("SELECT COUNT(*) AS n FROM products p $where",$params)['n']??0;
     $totalPages=max(1,ceil($total/$perPage));
+    if ($page > $totalPages) { $page = $totalPages; }
     $p2=array_merge($params,[$perPage,($page-1)*$perPage]);
     $products=dbAll("SELECT p.*,COALESCE(pt.shop_name,'Admin') AS shop_name,c.name AS cat_name,b.name AS brand_name FROM products p LEFT JOIN partners pt ON pt.id=p.partner_id LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN brands b ON b.id=p.car_brand_id $where ORDER BY p.created_at DESC LIMIT ? OFFSET ?",$p2);
     $categories=dbAll("SELECT * FROM categories ORDER BY sort_order");

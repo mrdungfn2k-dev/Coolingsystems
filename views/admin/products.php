@@ -336,7 +336,16 @@ function doBulkDelete() {
   .then(function(data) {
     if (data.ok) {
       alert('Đã xóa thành công ' + data.deleted + ' sản phẩm.');
-      if(window.csNav){ csNav(location.pathname); } else { window.location.reload(); }
+      var targetUrl = location.pathname + location.search;
+      var currentScroll = window.scrollY || window.pageYOffset || 0;
+      if (window.csNav) {
+        csNav(targetUrl);
+        setTimeout(function() {
+          window.scrollTo(0, currentScroll);
+        }, 150);
+      } else {
+        window.location.href = targetUrl;
+      }
     } else {
       alert('Lỗi: ' + (data.msg || 'Không thể xóa'));
     }
