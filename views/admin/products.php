@@ -405,7 +405,10 @@ function submitDeleteModal() {
       closeDeleteModal();
       doBulkDelete();
     } else if (currentDeleteId) {
-      document.getElementById('deleteForm-' + currentDeleteId).submit();
+      const targetId = currentDeleteId;
+      closeDeleteModal();
+      const form = document.getElementById('deleteForm-' + targetId);
+      if (form) form.submit();
     }
   } else {
     document.getElementById('deleteModalError').style.display = 'block';
