@@ -1167,8 +1167,9 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
   if (!name)  errors.push('• Tên sản phẩm không được để trống');
   if (!sku)   errors.push('• Vui lòng nhập mã sản phẩm (SKU) hoặc mã OEM');
   var inventoryManagedSeparately = document.querySelector('input[name="_inventory_in_product_form"]')?.value === '0';
+  var isContactPrice = !!(document.querySelector('input[name="is_contact_price"]')?.checked || document.querySelector('input[name="is_call"]')?.checked);
   if (!inventoryManagedSeparately) {
-    if (!price || parseInt(price) <= 0) errors.push('• Giá bán sau VAT phải lớn hơn 0');
+    if (!isContactPrice && (!price || parseInt(price) <= 0)) errors.push('• Giá bán sau VAT phải lớn hơn 0');
     if (stock === '' || stock === null) errors.push('• Tồn kho hiện tại không được để trống');
     else if (!/^\d+$/.test(stock) || parseInt(stock, 10) > 1000) errors.push('• Tồn kho hiện tại chỉ được từ 0 đến 1000');
     var maxStock = (document.querySelector('input[name="max_stock"]')?.value || '').trim();

@@ -2907,8 +2907,9 @@ post('/admin/products/new', function() {
     $valErrors = [];
     if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
     if (!$sku)  $valErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
+    $isContactPrice = !empty($d['is_contact_price']) || !empty($d['is_call']);
     if (!$inventoryManagedSeparately) {
-        if ($price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
+        if (!$isContactPrice && $price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
         if ($stockRaw === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
         elseif (!ctype_digit($stockRaw) || $stock > 1000) $valErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
         if ($maxStockRaw !== '' && (!ctype_digit($maxStockRaw) || $maxStock > 1000)) $valErrors[] = 'Tồn kho tối đa chỉ được từ 0 đến 1000';
@@ -3115,8 +3116,8 @@ post('/admin/products/:id/edit', function($p) {
     // === SERVER-SIDE VALIDATION ===
     $editErrors = [];
     if (!trim($d['name'] ?? '')) $editErrors[] = 'Tên sản phẩm không được để trống';
-    if (!$editSku) $editErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
-    if ($price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
+    $isContactPrice = !empty($d['is_contact_price']) || !empty($d['is_call']);
+    if (!$isContactPrice && $price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
     if ($stockRaw === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
     elseif (!ctype_digit($stockRaw) || $stock > 1000) $editErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
     if ($maxStockRaw !== '' && (!ctype_digit($maxStockRaw) || $maxStock > 1000)) $editErrors[] = 'Tồn kho tối đa chỉ được từ 0 đến 1000';
