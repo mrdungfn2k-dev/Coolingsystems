@@ -69,10 +69,10 @@
           <td style="padding:11px 12px;font-size:13px"><?= e($serial['warranty_end_date']) ?></td>
           <td style="padding:11px 12px"><?= $serial['warranty_end_date']>=date('Y-m-d')?'<span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:4px;font-weight:700;font-size:12px">Còn hạn</span>':'<span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:4px;font-weight:700;font-size:12px">Hết hạn</span>' ?></td>
           <td style="padding:11px 12px;text-align:center">
-            <button type="button" onclick='openEditSerialModal(<?= json_encode($serial, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?>)' class="btn btn-outline-navy btn-sm" style="padding:3px 8px;font-size:12px;margin-right:4px">✏️ Sửa</button>
+            <button type="button" onclick='openEditSerialModal(<?= json_encode($serial, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?>)' class="btn btn-outline-navy btn-sm" style="padding:3px 8px;font-size:12px;margin-right:4px">Sửa</button>
             <form method="post" action="/admin/serials/<?= (int)$serial['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa số serial <?= e($serial['serial_no']) ?>?')">
               <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
-              <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:12px;color:#dc2626">🗑️ Xóa</button>
+              <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:12px;color:#dc2626">Xóa</button>
             </form>
           </td>
         </tr>

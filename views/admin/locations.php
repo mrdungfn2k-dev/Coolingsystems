@@ -61,15 +61,15 @@
       <td><?= e($loc['bin_name'] ?: '—') ?></td>
       <td>
         <button type="button" onclick="openLocProductsModal('<?= e($loc['code']) ?>')" style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:4px 10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" title="Bấm để xem danh sách chi tiết các mã phụ tùng đang lưu trữ tại vị trí này">
-          📦 <?= number_format((int)($loc['product_count'] ?? 0)) ?> mã SP (Xem danh sách)
+          <?= number_format((int)($loc['product_count'] ?? 0)) ?> mã SP (Xem danh sách)
         </button>
       </td>
       <td style="font-size:12px;color:#64748b"><?= e($loc['note'] ?: '—') ?></td>
       <td style="white-space:nowrap">
-        <button type="button" onclick='openEditLocModal(<?= json_encode($loc, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?>)' class="btn btn-outline-navy btn-sm" style="padding:3px 8px;font-size:11px;margin-right:4px">✏️ Sửa</button>
+        <button type="button" onclick='openEditLocModal(<?= json_encode($loc, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?>)' class="btn btn-outline-navy btn-sm" style="padding:3px 8px;font-size:11px;margin-right:4px">Sửa</button>
         <form method="post" action="/admin/locations/<?= (int)$loc['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa vị trí <?= e($loc['code']) ?>? Tất cả sản phẩm lưu tại đây sẽ bị gỡ liên kết vị trí.')">
           <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
-          <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:11px;color:#dc2626">🗑️ Xóa</button>
+          <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:11px;color:#dc2626">Xóa</button>
         </form>
       </td>
     </tr>
@@ -177,11 +177,11 @@
 
     <!-- Khung gán thêm phụ tùng vào vị trí kho -->
     <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin-bottom:16px">
-      <div style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px">➕ Gán sản phẩm phụ tùng vào vị trí kho này</div>
+      <div style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px">Gán sản phẩm phụ tùng vào vị trí kho này</div>
       <div style="display:flex;gap:8px;position:relative">
         <input type="hidden" id="assign_product_id">
         <input type="text" id="assign_product_search" placeholder="Nhập tên sản phẩm, SKU hoặc OEM để tìm và gán..." autocomplete="off" style="flex:1;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
-        <button type="button" onclick="submitAssignProduct()" class="btn btn-navy" style="height:38px;padding:0 16px;white-space:nowrap">+ Gán vị trí</button>
+        <button type="button" onclick="submitAssignProduct()" class="btn btn-navy" style="height:38px;padding:0 16px;white-space:nowrap">Gán vị trí</button>
         <div id="assign_product_suggestions" style="display:none;position:absolute;top:100%;left:0;right:110px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;max-height:220px;overflow-y:auto;z-index:99999;box-shadow:0 4px 14px rgba(0,0,0,0.18);margin-top:2px"></div>
       </div>
       <div id="assign_msg" style="margin-top:6px;font-size:12px;font-weight:600"></div>
@@ -341,7 +341,7 @@ function loadLocProducts(code) {
         html += '<td style="padding:10px 8px;font-family:monospace;color:#64748b">' + escapeHtml(p.sku || '—') + '</td>';
         html += '<td style="padding:10px 8px;font-family:monospace;color:#0284c7">' + escapeHtml(p.oem_code || '—') + '</td>';
         html += '<td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">' + (p.stock || 0) + '</td>';
-        html += '<td style="padding:10px 8px;text-align:center"><button type="button" onclick="unassignProduct(' + p.id + ')" style="background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer">❌ Bỏ gán</button></td>';
+        html += '<td style="padding:10px 8px;text-align:center"><button type="button" onclick="unassignProduct(' + p.id + ')" style="background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer">Bỏ gán</button></td>';
         html += '</tr>';
       });
       html += '</tbody></table>';
