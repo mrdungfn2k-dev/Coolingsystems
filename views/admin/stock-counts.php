@@ -105,12 +105,46 @@
 </table>
 </div>
 
-<?php if($totalPages > 1): $base = ['q'=>$q,'status'=>$statusFilter?:null]; ?>
-<div class="pagination" style="margin-top:16px">
-  <?php if($page>1): ?><a href="/admin/stock-counts?<?= e(http_build_query(array_filter($base+['page'=>$page-1]))) ?>">‹</a><?php endif; ?>
-  <span style="padding:0 12px;font-size:13px">Trang <?= $page ?> / <?= $totalPages ?></span>
-  <?php if($page<$totalPages): ?><a href="/admin/stock-counts?<?= e(http_build_query(array_filter($base+['page'=>$page+1]))) ?>">›</a><?php endif; ?>
+<?php 
+$totalRecs = $total ?? count($stockCounts);
+$perP = $perPage ?? 25;
+$totPages = $totalPages ?? 1;
+$curPage = $page ?? 1;
+$startRec = $totalRecs > 0 ? ($curPage - 1) * $perP + 1 : 0;
+$endRec = min($curPage * $perP, $totalRecs);
+$baseQuery = array_filter(['q' => $q ?? '', 'status' => $statusFilter ?? '']);
+?>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px;background:#fff;padding:12px 16px;border:1px solid #e6ebf1;border-radius:8px">
+  <div style="font-size:13px;color:#64748b">
+    Hiển thị <strong><?= $startRec ?> - <?= $endRec ?></strong> trong tổng số <strong><?= number_format($totalRecs) ?></strong> phiên kiểm kho
+  </div>
+
+  <div style="display:flex;align-items:center;gap:16px">
+    <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#64748b">
+      <span>Hiển thị:</span>
+      <select onchange="location.href=this.value" style="height:32px;border:1px solid #cbd5e1;border-radius:6px;padding:0 8px;font-size:13px;background:#fff">
+        <?php foreach ([10, 25, 50, 100] as $optLimit): ?>
+          <option value="/admin/stock-counts?<?= e(http_build_query(array_merge($baseQuery, ['per_page' => $optLimit, 'page' => 1]))) ?>" <?= $perP == $optLimit ? 'selected' : '' ?>>
+            <?= $optLimit ?> / trang
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <?php if ($totPages > 1): ?>
+    <div class="pagination" style="margin:0;display:flex;gap:4px;align-items:center">
+      <?php if ($curPage > 1): ?>
+        <a href="/admin/stock-counts?<?= e(http_build_query(array_merge($baseQuery, ['per_page' => $perP, 'page' => $curPage - 1]))) ?>" class="btn btn-outline btn-sm" style="padding:4px 10px">‹ Trang trước</a>
+      <?php endif; ?>
+
+      <span style="padding:0 8px;font-size:13px;font-weight:600;color:#1e293b">Trang <?= $curPage ?> / <?= $totPages ?></span>
+
+      <?php if ($curPage < $totPages): ?>
+        <a href="/admin/stock-counts?<?= e(http_build_query(array_merge($baseQuery, ['per_page' => $perP, 'page' => $curPage + 1]))) ?>" class="btn btn-outline btn-sm" style="padding:4px 10px">Trang sau ›</a>
+      <?php endif; ?>
+    </div>
+    <?php endif; ?>
+  </div>
 </div>
-<?php endif; ?>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

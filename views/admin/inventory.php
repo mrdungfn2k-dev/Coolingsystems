@@ -92,6 +92,48 @@ $canSaveInventory = $canEditCost || $canEditPrice || $canEditStock || $canEditTh
       </tbody>
     </table>
   </div>
+
+  <?php 
+  $hTot = $hTotal ?? count($history);
+  $hP = $hperPage ?? 15;
+  $hTotPages = $hTotalPages ?? 1;
+  $hCurPage = $hpage ?? 1;
+  $hStartRec = $hTot > 0 ? ($hCurPage - 1) * $hP + 1 : 0;
+  $hEndRec = min($hCurPage * $hP, $hTot);
+  $invQuery = array_filter(['q' => $q ?? '', 'status' => $stockStatus ?? '', 'category' => $categoryId ?? 0, 'page' => $page ?? 1]);
+  ?>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-top:1px solid #edf2f7;background:#fafbfc;flex-wrap:wrap;gap:12px">
+    <div style="font-size:13px;color:#64748b">
+      Hiển thị <strong><?= $hStartRec ?> - <?= $hEndRec ?></strong> trong tổng số <strong><?= number_format($hTot) ?></strong> bản ghi lịch sử
+    </div>
+
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#64748b">
+        <span>Hiển thị:</span>
+        <select onchange="location.href=this.value" style="height:32px;border:1px solid #cbd5e1;border-radius:6px;padding:0 8px;font-size:13px;background:#fff">
+          <?php foreach ([10, 15, 25, 50, 100] as $hOpt): ?>
+            <option value="/admin/inventory?<?= e(http_build_query(array_merge($invQuery, ['hper_page' => $hOpt, 'hpage' => 1]))) ?>" <?= $hP == $hOpt ? 'selected' : '' ?>>
+              <?= $hOpt ?> / trang
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
+      <?php if ($hTotPages > 1): ?>
+      <div style="display:flex;gap:4px;align-items:center">
+        <?php if ($hCurPage > 1): ?>
+          <a href="/admin/inventory?<?= e(http_build_query(array_merge($invQuery, ['hper_page' => $hP, 'hpage' => $hCurPage - 1]))) ?>" class="btn btn-outline btn-sm" style="padding:4px 10px;font-size:12px">‹ Trang trước</a>
+        <?php endif; ?>
+
+        <span style="padding:0 8px;font-size:13px;font-weight:600;color:#1e293b">Trang <?= $hCurPage ?> / <?= $hTotPages ?></span>
+
+        <?php if ($hCurPage < $hTotPages): ?>
+          <a href="/admin/inventory?<?= e(http_build_query(array_merge($invQuery, ['hper_page' => $hP, 'hpage' => $hCurPage + 1]))) ?>" class="btn btn-outline btn-sm" style="padding:4px 10px;font-size:12px">Trang sau ›</a>
+        <?php endif; ?>
+      </div>
+      <?php endif; ?>
+    </div>
+  </div>
 </div>
 
 <script>

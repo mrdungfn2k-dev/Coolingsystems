@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="form-group"><label>Email</label><input type="email" value="<?= e($user['email']) ?>" readonly style="background:#f8f9fa;color:#888;cursor:not-allowed"></div>
-          <div class="form-group"><label>Họ và tên <span class="req">*</span></label><input type="text" name="full_name" id="pf_name" value="<?= e($user['full_name']) ?>" required maxlength="20" placeholder="Nguyễn Văn A"></div>
+          <div class="form-group"><label>Họ và tên <span class="req">*</span></label><input type="text" name="full_name" id="pf_name" value="<?= e($user['full_name']) ?>" required pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'')" title="Họ và tên không được chứa chữ số" maxlength="50" placeholder="Nguyễn Văn A"></div>
           <div class="form-group"><label>Số điện thoại <span class="req">*</span></label><input type="tel" name="phone" id="pf_phone" value="<?= e($user['phone']??'') ?>" maxlength="10" required pattern="0[1-9][0-9]{8}"></div>
                     <?php
             $uAddr = $user['address'] ?? '';

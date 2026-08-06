@@ -262,11 +262,11 @@ require_once __DIR__ . '/../../includes/helpers.php';
         <div class="reg-grid">
           <div class="form-group">
             <label>Tên Đại lý / Cửa hàng Phụ tùng * (Bắt buộc)</label>
-            <input type="text" name="agency_name" required placeholder="VD: Đại Lý Phụ Tùng Hải Hà">
+            <input type="text" name="agency_name" required placeholder="VD: Đại Lý Phụ Tùng Hải Hà" pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'')" title="Tên đại lý không được chứa chữ số">
           </div>
           <div class="form-group">
             <label>Họ tên Người đại diện * (Bắt buộc)</label>
-            <input type="text" name="owner_name" required placeholder="VD: Nguyễn Văn Mạnh">
+            <input type="text" name="owner_name" required placeholder="VD: Nguyễn Văn Mạnh" pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'')" title="Họ tên người đại diện không được chứa chữ số">
           </div>
           <div class="form-group">
             <label>Số điện thoại liên hệ * (Bắt buộc)</label>

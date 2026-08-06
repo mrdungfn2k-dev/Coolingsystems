@@ -20,7 +20,7 @@
         <?php if(!$isCustomerForm): ?><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 18px"><?php endif; ?>
         <div class="form-group">
           <label>Họ và tên <span class="req">*</span></label>
-          <input type="text" name="full_name" id="ueNameF" value="<?= e($editUser['full_name']??'') ?>" required>
+          <input type="text" name="full_name" id="ueNameF" value="<?= e($editUser['full_name']??'') ?>" required pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'')" title="Họ và tên không được chứa chữ số">
         </div>
         <div class="form-group">
           <label>Email <span class="req">*</span></label>

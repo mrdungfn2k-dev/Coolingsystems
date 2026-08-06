@@ -17,13 +17,14 @@
 .search-item:hover{background:#f0f7ff}
 </style>
 
-<form method="post" action="/admin/stock-transfers" style="max-width:950px;background:#fff;padding:24px;border:1px solid #e6ebf1;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.03)">
+<form method="post" action="/admin/stock-transfers" id="stockTransferForm" style="max-width:950px;background:#fff;padding:24px;border:1px solid #e6ebf1;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.03)">
   <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
     <div>
-      <label style="display:block;font-weight:700;font-size:13px;color:#1a3258;margin-bottom:6px">Kho xuất hàng <span style="color:#e11d48">*</span></label>
-      <select name="from_warehouse" required style="width:100%;height:40px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:14px;background:#fff">
+      <label style="display:block;font-weight:700;font-size:13px;color:#1a3258;margin-bottom:6px">Kho chuyển (Kho nguồn) <span style="color:#e11d48">*</span></label>
+      <select name="from_warehouse" id="fromWarehouseSelect" required style="width:100%;height:40px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:14px;background:#fff">
+        <option value="">-- Chọn Kho chuyển (Kho nguồn) --</option>
         <option value="Kho chính">Kho chính (Tổng kho)</option>
         <option value="Chi nhánh Hà Nội">Chi nhánh Hà Nội</option>
         <option value="Chi nhánh TP.HCM">Chi nhánh TP.HCM</option>
@@ -31,8 +32,9 @@
     </div>
 
     <div>
-      <label style="display:block;font-weight:700;font-size:13px;color:#1a3258;margin-bottom:6px">Kho nhận hàng <span style="color:#e11d48">*</span></label>
-      <select name="to_warehouse" required style="width:100%;height:40px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:14px;background:#fff">
+      <label style="display:block;font-weight:700;font-size:13px;color:#1a3258;margin-bottom:6px">Kho nhận (Kho đích) <span style="color:#e11d48">*</span></label>
+      <select name="to_warehouse" id="toWarehouseSelect" required style="width:100%;height:40px;border:1px solid #d8e0ea;border-radius:6px;padding:0 12px;font-size:14px;background:#fff">
+        <option value="">-- Chọn Kho nhận (Kho đích) --</option>
         <option value="Chi nhánh Hà Nội">Chi nhánh Hà Nội</option>
         <option value="Chi nhánh TP.HCM">Chi nhánh TP.HCM</option>
         <option value="Kho Bảo hành">Kho Bảo hành & Lắp đặt</option>
@@ -172,6 +174,26 @@ function escapeHtml(str) {
   if (!str) return '';
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
+document.getElementById('stockTransferForm').addEventListener('submit', function(e) {
+  var fromW = document.getElementById('fromWarehouseSelect').value;
+  var toW = document.getElementById('toWarehouseSelect').value;
+  if (!fromW) {
+    e.preventDefault();
+    alert('Vui lòng chọn Kho chuyển (Kho nguồn)!');
+    return false;
+  }
+  if (!toW) {
+    e.preventDefault();
+    alert('Vui lòng chọn Kho nhận (Kho đích)!');
+    return false;
+  }
+  if (fromW === toW) {
+    e.preventDefault();
+    alert('Kho chuyển (Kho nguồn) và Kho nhận (Kho đích) không được trùng nhau!');
+    return false;
+  }
+});
 </script>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

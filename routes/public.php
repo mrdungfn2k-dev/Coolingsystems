@@ -109,6 +109,16 @@ post('/agency/register', function() {
     // Strict Validations
     if (empty($agencyName) || empty($ownerName) || empty($phone) || empty($email) || empty($taxCode) || empty($password) || empty($address)) {
         setFlash('error', 'Vui lòng điền đầy đủ tất cả các trường thông tin bắt buộc (*)!');
+    }
+
+    if (preg_match('/[0-9]/', $agencyName)) {
+        setFlash('error', 'Tên Đại lý / Cửa hàng không được chứa chữ số!');
+        header('Location: /agency/login');
+        exit;
+    }
+
+    if (preg_match('/[0-9]/', $ownerName)) {
+        setFlash('error', 'Họ tên Người đại diện không được chứa chữ số!');
         header('Location: /agency/login');
         exit;
     }

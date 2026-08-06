@@ -2554,8 +2554,33 @@ get('/admin/inventory', function() {
       'edit_thresholds'=>!$detailedRbac || rbacCan((int)$user['id'], 'inventory.thresholds.edit'),
       'edit_warranty'=>!$detailedRbac || rbacCan((int)$user['id'], 'catalog.products.edit'),
     ];
-    $history = dbAll("SELECT m.*, p.name AS product_name, p.sku, u.full_name AS creator_name FROM inventory_stock_movements m INNER JOIN products p ON p.id=m.product_id LEFT JOIN users u ON u.id=m.created_by WHERE m.reference_type='manual_adjust' ORDER BY m.id DESC LIMIT 15");
-    view('admin/inventory',['title'=>'Quản lý kho','role'=>'admin','products'=>$products,'summary'=>$summary,'categories'=>$categories,'q'=>$q,'stockStatus'=>$stockStatus,'categoryId'=>$categoryId,'inventoryPermissions'=>$inventoryPermissions,'page'=>$page,'totalPages'=>$totalPages,'history'=>$history]);
+    $hpage = max(1, (int)($_GET['hpage'] ?? 1));
+    $hperPage = max(5, min(100, (int)($_GET['hper_page'] ?? 15)));
+    $hTotal = (int)(dbGet("SELECT COUNT(*) AS c FROM inventory_stock_movements WHERE reference_type='manual_adjust'")['c'] ?? 0);
+    $hTotalPages = max(1, (int)ceil($hTotal / $hperPage));
+    $hpage = min($hpage, $hTotalPages);
+    $hOffset = max(0, ($hpage - 1) * $hperPage);
+
+    $history = dbAll("SELECT m.*, p.name AS product_name, p.sku, u.full_name AS creator_name FROM inventory_stock_movements m INNER JOIN products p ON p.id=m.product_id LEFT JOIN users u ON u.id=m.created_by WHERE m.reference_type='manual_adjust' ORDER BY m.id DESC LIMIT ? OFFSET ?", [$hperPage, $hOffset]);
+
+    view('admin/inventory',[
+        'title'=>'Quản lý kho',
+        'role'=>'admin',
+        'products'=>$products,
+        'summary'=>$summary,
+        'categories'=>$categories,
+        'q'=>$q,
+        'stockStatus'=>$stockStatus,
+        'categoryId'=>$categoryId,
+        'inventoryPermissions'=>$inventoryPermissions,
+        'page'=>$page,
+        'totalPages'=>$totalPages,
+        'history'=>$history,
+        'hpage'=>$hpage,
+        'hperPage'=>$hperPage,
+        'hTotal'=>$hTotal,
+        'hTotalPages'=>$hTotalPages
+    ]);
 });
 
 post('/admin/inventory/:id/update', function($p) {
@@ -5454,7 +5479,7 @@ post('/admin/quotations/:id/convert', function($p) {
 get('/admin/stock-counts', function() {
     $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
     $page = max(1, (int)($_GET['page'] ?? 1));
-    $perPage = 25;
+    $perPage = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
     $q = trim((string)($_GET['q'] ?? ''));
     $statusFilter = trim((string)($_GET['status'] ?? ''));
 
@@ -5473,7 +5498,7 @@ get('/admin/stock-counts', function() {
     $totalPages = max(1, (int)ceil($total/$perPage));
     $page = min($page, $totalPages);
 
-    $listParams = array_merge($params, [$perPage, ($page-1)*$perPage]);
+    $listParams = array_merge($params, [$perPage, max(0, ($page-1)*$perPage)]);
     $stockCounts = dbAll("SELECT sc.*, u.full_name AS creator_name FROM stock_counts sc LEFT JOIN users u ON u.id=sc.created_by $where ORDER BY sc.created_at DESC LIMIT ? OFFSET ?", $listParams);
 
     view('admin/stock-counts', [
@@ -5482,6 +5507,8 @@ get('/admin/stock-counts', function() {
         'q' => $q,
         'statusFilter' => $statusFilter,
         'page' => $page,
+        'perPage' => $perPage,
+        'total' => $total,
         'totalPages' => $totalPages
     ]);
 });
@@ -5668,13 +5695,23 @@ post('/admin/stock-transfers', function() {
     $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
     csrfCheck();
 
-    $fromWh = trim((string)($_POST['from_warehouse'] ?? 'Kho chính'));
-    $toWh = trim((string)($_POST['to_warehouse'] ?? 'Chi nhánh'));
+    $fromWh = trim((string)($_POST['from_warehouse'] ?? ''));
+    $toWh = trim((string)($_POST['to_warehouse'] ?? ''));
     $note = trim((string)($_POST['note'] ?? ''));
     $items = $_POST['items'] ?? [];
 
-    if ($fromWh === $toWh || !$items) {
-        flash('error', 'Kho xuất và kho nhận phải khác nhau và phiếu chuyển phải chứa ít nhất một sản phẩm.');
+    if (!$fromWh || !$toWh) {
+        flash('error', 'Vui lòng chọn Kho chuyển (Kho nguồn) và Kho nhận (Kho đích).');
+        redirect('/admin/stock-transfers/new'); return;
+    }
+
+    if ($fromWh === $toWh) {
+        flash('error', 'Kho chuyển (Kho nguồn) và Kho nhận (Kho đích) không được trùng nhau.');
+        redirect('/admin/stock-transfers/new'); return;
+    }
+
+    if (!$items) {
+        flash('error', 'Phiếu chuyển kho phải chứa ít nhất một sản phẩm.');
         redirect('/admin/stock-transfers/new'); return;
     }
 

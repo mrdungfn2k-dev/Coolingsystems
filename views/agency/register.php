@@ -215,11 +215,11 @@
           <div class="reg-grid">
             <div class="form-field">
               <label>Tên Đại lý / Cửa hàng Phụ tùng *</label>
-              <input type="text" name="agency_name" required placeholder="VD: Đại Lý Phụ Tùng Hải Hà" value="<?= e($_POST['agency_name'] ?? '') ?>">
+              <input type="text" name="agency_name" required placeholder="VD: Đại Lý Phụ Tùng Hải Hà" pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'')" title="Tên đại lý không được chứa chữ số" value="<?= e($_POST['agency_name'] ?? '') ?>">
             </div>
             <div class="form-field">
               <label>Họ tên Người đại diện *</label>
-              <input type="text" name="owner_name" required placeholder="VD: Nguyễn Văn Mạnh" value="<?= e($_POST['owner_name'] ?? '') ?>">
+              <input type="text" name="owner_name" required placeholder="VD: Nguyễn Văn Mạnh" pattern="[^0-9]+" oninput="this.value=this.value.replace(/[0-9]/g,'')" title="Họ tên người đại diện không được chứa chữ số" value="<?= e($_POST['owner_name'] ?? '') ?>">
             </div>
             <div class="form-field">
               <label>Số điện thoại liên hệ *</label>
