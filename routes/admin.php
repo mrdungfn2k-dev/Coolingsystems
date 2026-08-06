@@ -5882,6 +5882,64 @@ get('/admin/locations/api/products', function() {
     exit;
 });
 
+get('/admin/locations/api/search-products', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    header('Content-Type: application/json; charset=utf-8');
+    $q = trim($_GET['q'] ?? '');
+    if (mb_strlen($q) < 2) { echo json_encode([]); exit; }
+    $like = '%' . $q . '%';
+    $products = dbAll("SELECT id, name, sku, oem_code, location_code FROM products WHERE name LIKE ? OR sku LIKE ? OR oem_code LIKE ? ORDER BY name ASC LIMIT 15", [$like, $like, $like]);
+    echo json_encode(array_map(function($p) {
+        return [
+            'id' => (int)$p['id'],
+            'sku' => $p['sku'],
+            'name' => $p['name'],
+            'oem_code' => $p['oem_code'] ?? '',
+            'location_code' => $p['location_code'] ?? ''
+        ];
+    }, $products), JSON_UNESCAPED_UNICODE);
+    exit;
+});
+
+post('/admin/locations/api/assign-product', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    header('Content-Type: application/json; charset=utf-8');
+    csrfCheck();
+    $code = trim($_POST['code'] ?? '');
+    $productId = (int)($_POST['product_id'] ?? 0);
+
+    if (!$code || !$productId) {
+        echo json_encode(['success' => false, 'message' => 'Vui lòng chọn sản phẩm và vị trí kho hợp lệ.']);
+        exit;
+    }
+
+    $loc = dbGet("SELECT id FROM warehouse_locations WHERE code=?", [$code]);
+    if (!$loc) {
+        echo json_encode(['success' => false, 'message' => 'Mã vị trí kho không tồn tại.']);
+        exit;
+    }
+
+    dbRun("UPDATE products SET location_code=?, updated_at=datetime('now','localtime') WHERE id=?", [$code, $productId]);
+    echo json_encode(['success' => true, 'message' => 'Đã gán sản phẩm vào vị trí kho thành công!']);
+    exit;
+});
+
+post('/admin/locations/api/unassign-product', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    header('Content-Type: application/json; charset=utf-8');
+    csrfCheck();
+    $productId = (int)($_POST['product_id'] ?? 0);
+
+    if (!$productId) {
+        echo json_encode(['success' => false, 'message' => 'Sản phẩm không hợp lệ.']);
+        exit;
+    }
+
+    dbRun("UPDATE products SET location_code=NULL, updated_at=datetime('now','localtime') WHERE id=?", [$productId]);
+    echo json_encode(['success' => true, 'message' => 'Đã gỡ sản phẩm khỏi vị trí kho thành công!']);
+    exit;
+});
+
 // D3: Vị trí kho - Lưu mới
 post('/admin/locations', function() {
     $user = requireStaffPermission('rbac:inventory|products', '/admin/login');

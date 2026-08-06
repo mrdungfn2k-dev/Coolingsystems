@@ -126,23 +126,37 @@
   </form>
 </div>
 
-<!-- Modal xem danh sách phụ tùng tại vị trí kho -->
+<!-- Modal xem & gán danh sách phụ tùng tại vị trí kho -->
 <div id="locProductsModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
-  <div style="background:#fff;padding:24px;border-radius:10px;max-width:750px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+  <div style="background:#fff;padding:24px;border-radius:10px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;border-bottom:1px solid #e2e8f0;padding-bottom:12px">
       <h3 style="margin:0;color:#1a3258;font-size:16px">Danh sách phụ tùng lưu tại vị trí: <span id="modalLocCode" style="color:#0284c7;font-family:monospace;font-weight:700"></span></h3>
-      <button type="button" onclick="document.getElementById('locProductsModal').style.display='none'" style="background:none;border:none;font-size:22px;color:#64748b;cursor:pointer">&times;</button>
+      <button type="button" onclick="closeLocProductsModal()" style="background:none;border:none;font-size:22px;color:#64748b;cursor:pointer">&times;</button>
+    </div>
+
+    <!-- Khung gán thêm phụ tùng vào vị trí kho -->
+    <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:12px 16px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px">➕ Gán sản phẩm phụ tùng vào vị trí kho này</div>
+      <div style="display:flex;gap:8px;position:relative">
+        <input type="hidden" id="assign_product_id">
+        <input type="text" id="assign_product_search" placeholder="Nhập tên sản phẩm, SKU hoặc OEM để tìm và gán..." autocomplete="off" style="flex:1;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+        <button type="button" onclick="submitAssignProduct()" class="btn btn-navy" style="height:38px;padding:0 16px;white-space:nowrap">+ Gán vị trí</button>
+        <div id="assign_product_suggestions" style="display:none;position:absolute;top:100%;left:0;right:110px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;max-height:220px;overflow-y:auto;z-index:99999;box-shadow:0 4px 14px rgba(0,0,0,0.18);margin-top:2px"></div>
+      </div>
+      <div id="assign_msg" style="margin-top:6px;font-size:12px;font-weight:600"></div>
     </div>
 
     <div id="locProductsContent">Đang tải danh sách phụ tùng...</div>
 
     <div style="display:flex;justify-content:flex-end;margin-top:16px">
-      <button type="button" onclick="document.getElementById('locProductsModal').style.display='none'" class="btn btn-navy">Đóng</button>
+      <button type="button" onclick="closeLocProductsModal()" class="btn btn-navy">Đóng & Cập nhật</button>
     </div>
   </div>
 </div>
 
 <script>
+var currentLocCode = '';
+
 (function(){
   function setupCharCounter(inputEl, maxChars, counterEl) {
     if(!inputEl) return;
@@ -187,31 +201,84 @@
   setupCharCounter(document.getElementById('loc_shelf'), 50, document.getElementById('shelfCharCnt'));
   setupCharCounter(document.getElementById('loc_bin'), 50, document.getElementById('binCharCnt'));
   enforceLiveWordLimit(document.getElementById('loc_note'), 200, document.getElementById('noteWordCnt'));
+
+  // Auto-complete gán sản phẩm vào vị trí kho
+  var searchInput = document.getElementById('assign_product_search');
+  var hiddenInput = document.getElementById('assign_product_id');
+  var sugBox = document.getElementById('assign_product_suggestions');
+
+  if(searchInput && sugBox) {
+    searchInput.addEventListener('input', function(){
+      var q = searchInput.value.trim();
+      hiddenInput.value = '';
+      if(q.length < 2) { sugBox.style.display = 'none'; return; }
+      fetch('/admin/locations/api/search-products?q=' + encodeURIComponent(q))
+        .then(function(r){ return r.json(); })
+        .then(function(items){
+          if(!items || !items.length) {
+            sugBox.innerHTML = '<div style="padding:10px;font-size:12px;color:#94a3b8;text-align:center">Không tìm thấy sản phẩm</div>';
+          } else {
+            sugBox.innerHTML = items.map(function(item){
+              var locText = item.location_code ? ' [Đang ở: ' + item.location_code + ']' : '';
+              return '<div class="as-item" data-id="' + item.id + '" data-label="' + escapeHtml(item.sku + ' - ' + item.name) + '" style="padding:8px 12px;font-size:12.5px;cursor:pointer;border-bottom:1px solid #f1f5f9"><strong>' + escapeHtml(item.sku) + '</strong> - ' + escapeHtml(item.name) + '<span style="color:#0284c7;font-size:11px;font-weight:600">' + escapeHtml(locText) + '</span></div>';
+            }).join('');
+          }
+          sugBox.style.display = 'block';
+        });
+    });
+
+    sugBox.addEventListener('click', function(e){
+      var item = e.target.closest('.as-item');
+      if(item) {
+        hiddenInput.value = item.getAttribute('data-id');
+        searchInput.value = item.getAttribute('data-label');
+        sugBox.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('click', function(e){
+      if(!searchInput.contains(e.target) && !sugBox.contains(e.target)) sugBox.style.display = 'none';
+    });
+  }
 })();
 
 function openLocProductsModal(code) {
+  currentLocCode = code;
   var modal = document.getElementById('locProductsModal');
   var codeSpan = document.getElementById('modalLocCode');
-  var contentDiv = document.getElementById('locProductsContent');
   codeSpan.textContent = code;
-  contentDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#64748b">⏳ Đang tải dữ liệu phụ tùng...</div>';
+  document.getElementById('assign_product_id').value = '';
+  document.getElementById('assign_product_search').value = '';
+  document.getElementById('assign_msg').textContent = '';
   modal.style.display = 'flex';
+  loadLocProducts(code);
+}
+
+function closeLocProductsModal() {
+  document.getElementById('locProductsModal').style.display = 'none';
+  window.location.reload();
+}
+
+function loadLocProducts(code) {
+  var contentDiv = document.getElementById('locProductsContent');
+  contentDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#64748b">⏳ Đang tải dữ liệu phụ tùng...</div>';
 
   fetch('/admin/locations/api/products?code=' + encodeURIComponent(code))
     .then(function(res) { return res.json(); })
     .then(function(data) {
       if(!data.success || !data.products || data.products.length === 0) {
-        contentDiv.innerHTML = '<div style="padding:30px;text-align:center;color:#9ca3af;font-size:14px">Chưa có mã phụ tùng nào được xếp lưu trữ tại vị trí <strong>' + escapeHtml(code) + '</strong>.</div>';
+        contentDiv.innerHTML = '<div style="padding:25px;text-align:center;color:#9ca3af;font-size:14px">Chưa có mã phụ tùng nào được xếp lưu trữ tại vị trí <strong>' + escapeHtml(code) + '</strong>. Hãy chọn sản phẩm từ ô ở trên để gán vào vị trí này.</div>';
         return;
       }
       var html = '<table style="width:100%;border-collapse:collapse;margin-top:10px">';
-      html += '<thead><tr style="background:#f8fafc;font-size:12px;color:#475569;text-align:left;border-bottom:2px solid #e2e8f0"><th style="padding:10px 8px">Tên sản phẩm phụ tùng</th><th style="padding:10px 8px">Mã SKU</th><th style="padding:10px 8px">Mã OEM</th><th style="padding:10px 8px;text-align:center">Tồn kho hiện tại</th></tr></thead><tbody>';
+      html += '<thead><tr style="background:#f8fafc;font-size:12px;color:#475569;text-align:left;border-bottom:2px solid #e2e8f0"><th style="padding:10px 8px">Tên sản phẩm phụ tùng</th><th style="padding:10px 8px">Mã SKU</th><th style="padding:10px 8px">Mã OEM</th><th style="padding:10px 8px;text-align:center">Tồn kho hiện tại</th><th style="padding:10px 8px;text-align:center">Thao tác</th></tr></thead><tbody>';
       data.products.forEach(function(p) {
         html += '<tr style="border-bottom:1px solid #f1f5f9;font-size:13px">';
         html += '<td style="padding:10px 8px;font-weight:600;color:#1e293b">' + escapeHtml(p.name) + '</td>';
         html += '<td style="padding:10px 8px;font-family:monospace;color:#64748b">' + escapeHtml(p.sku || '—') + '</td>';
         html += '<td style="padding:10px 8px;font-family:monospace;color:#0284c7">' + escapeHtml(p.oem_code || '—') + '</td>';
         html += '<td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">' + (p.stock || 0) + '</td>';
+        html += '<td style="padding:10px 8px;text-align:center"><button type="button" onclick="unassignProduct(' + p.id + ')" style="background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer">❌ Bỏ gán</button></td>';
         html += '</tr>';
       });
       html += '</tbody></table>';
@@ -219,6 +286,60 @@ function openLocProductsModal(code) {
     })
     .catch(function(err) {
       contentDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#dc2626">Lỗi tải dữ liệu. Vui lòng thử lại.</div>';
+    });
+}
+
+function submitAssignProduct() {
+  var pid = document.getElementById('assign_product_id').value;
+  var msg = document.getElementById('assign_msg');
+  if(!pid) {
+    msg.style.color = '#dc2626';
+    msg.textContent = 'Vui lòng gõ tìm và chọn một sản phẩm từ danh sách gợi ý.';
+    return;
+  }
+  msg.style.color = '#0284c7';
+  msg.textContent = '⏳ Đang lưu gán vị trí kho...';
+
+  var formData = new FormData();
+  formData.append('_csrf', '<?= csrfToken() ?>');
+  formData.append('code', currentLocCode);
+  formData.append('product_id', pid);
+
+  fetch('/admin/locations/api/assign-product', { method: 'POST', body: formData })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(res.success) {
+        msg.style.color = '#15803d';
+        msg.textContent = res.message;
+        document.getElementById('assign_product_id').value = '';
+        document.getElementById('assign_product_search').value = '';
+        loadLocProducts(currentLocCode);
+      } else {
+        msg.style.color = '#dc2626';
+        msg.textContent = res.message || 'Gán vị trí thất bại.';
+      }
+    })
+    .catch(function(){
+      msg.style.color = '#dc2626';
+      msg.textContent = 'Lỗi kết nối máy chủ.';
+    });
+}
+
+function unassignProduct(pid) {
+  if(!confirm('Bạn có chắc muốn gỡ sản phẩm này khỏi vị trí kho ' + currentLocCode + '?')) return;
+
+  var formData = new FormData();
+  formData.append('_csrf', '<?= csrfToken() ?>');
+  formData.append('product_id', pid);
+
+  fetch('/admin/locations/api/unassign-product', { method: 'POST', body: formData })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(res.success) {
+        loadLocProducts(currentLocCode);
+      } else {
+        alert(res.message || 'Gỡ vị trí thất bại.');
+      }
     });
 }
 
