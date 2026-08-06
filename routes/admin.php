@@ -5867,6 +5867,8 @@ get('/admin/locations', function() {
         'page' => $page,
         'totalPages' => $totalPages
     ]);
+});
+
 get('/admin/locations/api/products', function() {
     requireStaffPermission('rbac:inventory|products', '/admin/login');
     header('Content-Type: application/json; charset=utf-8');
