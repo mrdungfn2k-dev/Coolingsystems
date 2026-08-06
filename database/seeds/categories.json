@@ -1,0 +1,200 @@
+[
+    {
+        "id": 11,
+        "parent_id": null,
+        "name": "Két Nước",
+        "slug": "ket-nuoc",
+        "icon": null,
+        "sort_order": 2,
+        "is_featured": 0,
+        "product_count": 0,
+        "is_active": 0
+    },
+    {
+        "id": 21,
+        "parent_id": null,
+        "name": "Dàn Sưởi Điều Hòa",
+        "slug": "dan-suoi",
+        "icon": null,
+        "sort_order": 3,
+        "is_featured": 0,
+        "product_count": 104,
+        "is_active": 1
+    },
+    {
+        "id": 22,
+        "parent_id": null,
+        "name": "Lốc Điều Hòa",
+        "slug": "loc-dieu-hoa",
+        "icon": null,
+        "sort_order": 4,
+        "is_featured": 0,
+        "product_count": 655,
+        "is_active": 1
+    },
+    {
+        "id": 23,
+        "parent_id": null,
+        "name": "Van Tiết Lưu",
+        "slug": "van-tiet-luu",
+        "icon": null,
+        "sort_order": 6,
+        "is_featured": 0,
+        "product_count": 194,
+        "is_active": 1
+    },
+    {
+        "id": 24,
+        "parent_id": null,
+        "name": "Van Đuôi Lốc",
+        "slug": "van-duoi-loc",
+        "icon": null,
+        "sort_order": 7,
+        "is_featured": 0,
+        "product_count": 140,
+        "is_active": 1
+    },
+    {
+        "id": 25,
+        "parent_id": null,
+        "name": "Motor, Quạt Dàn Nóng",
+        "slug": "motor-quat-dan-nong",
+        "icon": null,
+        "sort_order": 8,
+        "is_featured": 0,
+        "product_count": 166,
+        "is_active": 1
+    },
+    {
+        "id": 26,
+        "parent_id": null,
+        "name": "Motor, Quạt Dàn Lạnh",
+        "slug": "motor-quat-dan-lanh",
+        "icon": null,
+        "sort_order": 9,
+        "is_featured": 0,
+        "product_count": 414,
+        "is_active": 1
+    },
+    {
+        "id": 27,
+        "parent_id": null,
+        "name": "Phin Lọc Ga",
+        "slug": "phin-loc-ga",
+        "icon": null,
+        "sort_order": 10,
+        "is_featured": 0,
+        "product_count": 34,
+        "is_active": 1
+    },
+    {
+        "id": 31,
+        "parent_id": 11,
+        "name": "Ket Nuoc Con",
+        "slug": "ket-nuoc-con",
+        "icon": null,
+        "sort_order": 1,
+        "is_featured": 0,
+        "product_count": 0,
+        "is_active": 0
+    },
+    {
+        "id": 41,
+        "parent_id": null,
+        "name": "Ống dẫn gas điều hòa",
+        "slug": "ong-dan-gas-dieu-hoa",
+        "icon": null,
+        "sort_order": 12,
+        "is_featured": 0,
+        "product_count": 121,
+        "is_active": 1
+    },
+    {
+        "id": 42,
+        "parent_id": null,
+        "name": "Mô tơ quạt gió điều hòa",
+        "slug": "mo-to-quat-gio-dieu-hoa",
+        "icon": null,
+        "sort_order": 13,
+        "is_featured": 0,
+        "product_count": 0,
+        "is_active": 1
+    },
+    {
+        "id": 43,
+        "parent_id": null,
+        "name": "Dàn nóng điều hòa",
+        "slug": "dan-nong-dieu-hoa",
+        "icon": null,
+        "sort_order": 14,
+        "is_featured": 0,
+        "product_count": 382,
+        "is_active": 1
+    },
+    {
+        "id": 44,
+        "parent_id": null,
+        "name": "Cảm biến áp suất gas",
+        "slug": "cam-bien-ap-suat-gas",
+        "icon": null,
+        "sort_order": 15,
+        "is_featured": 0,
+        "product_count": 87,
+        "is_active": 1
+    },
+    {
+        "id": 45,
+        "parent_id": null,
+        "name": "Van tiết lưu điều hòa",
+        "slug": "van-tiet-luu-dieu-hoa",
+        "icon": null,
+        "sort_order": 16,
+        "is_featured": 0,
+        "product_count": 0,
+        "is_active": 1
+    },
+    {
+        "id": 46,
+        "parent_id": null,
+        "name": "Dàn lạnh điều hòa",
+        "slug": "dan-lanh-dieu-hoa",
+        "icon": null,
+        "sort_order": 17,
+        "is_featured": 0,
+        "product_count": 538,
+        "is_active": 1
+    },
+    {
+        "id": 47,
+        "parent_id": null,
+        "name": "Lọc Gió Điều Hòa",
+        "slug": "loc-gio-dieu-hoa",
+        "icon": null,
+        "sort_order": 11,
+        "is_featured": 0,
+        "product_count": 0,
+        "is_active": 1
+    },
+    {
+        "id": 48,
+        "parent_id": null,
+        "name": "Điều Hòa Điện & Phụ kiện",
+        "slug": "dieu-hoa-dien-phu-kien",
+        "icon": "",
+        "sort_order": 1,
+        "is_featured": 1,
+        "product_count": 0,
+        "is_active": 1
+    },
+    {
+        "id": 49,
+        "parent_id": null,
+        "name": "Bộ đầu lốc điều hòa",
+        "slug": "bo-dau-loc-dieu-hoa",
+        "icon": "",
+        "sort_order": 5,
+        "is_featured": 0,
+        "product_count": 0,
+        "is_active": 1
+    }
+]
