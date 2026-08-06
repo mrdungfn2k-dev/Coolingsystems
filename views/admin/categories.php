@@ -84,6 +84,28 @@ if (!empty($_GET['parent_id'])) {
     </div>
 </div>
 
+<form method="get" action="/admin/categories" style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;padding:12px 16px;border-radius:10px;border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,0.03)">
+    <?php if(!empty($_GET['parent_id'])): ?>
+        <input type="hidden" name="parent_id" value="<?= intval($_GET['parent_id']) ?>">
+    <?php endif; ?>
+    <div style="flex:1;min-width:200px">
+        <input type="text" name="q" id="catSearchInput" placeholder="🔍 Tìm kiếm danh mục theo tên hoặc slug..." value="<?= e($_GET['q'] ?? '') ?>" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box" onkeyup="filterCategoryList(this.value)">
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+        <label style="font-size:13px;font-weight:600;color:#555;white-space:nowrap">Trạng thái:</label>
+        <select name="status" onchange="this.form.submit()" style="padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:13px">
+            <option value="all" <?= ($_GET['status'] ?? '') === 'all' ? 'selected' : '' ?>>Tất cả trạng thái</option>
+            <option value="active" <?= ($_GET['status'] ?? '') === 'active' ? 'selected' : '' ?>>Đang hiển thị</option>
+            <option value="inactive" <?= ($_GET['status'] ?? '') === 'inactive' ? 'selected' : '' ?>>Đã ẩn</option>
+            <option value="featured" <?= ($_GET['status'] ?? '') === 'featured' ? 'selected' : '' ?>>Nổi bật</option>
+        </select>
+        <button type="submit" class="btn btn-navy btn-sm">Tìm kiếm</button>
+        <?php if (!empty($_GET['q']) || (!empty($_GET['status']) && $_GET['status'] !== 'all')): ?>
+            <a href="/admin/categories<?= !empty($_GET['parent_id']) ? '?parent_id='.intval($_GET['parent_id']) : '' ?>" class="btn btn-outline-navy btn-sm">Xóa lọc</a>
+        <?php endif; ?>
+    </div>
+</form>
+
 <div class="catalog-wrap">
     <!-- Left: Parent categories -->
     <div class="catalog-panel" style="flex:1">
@@ -93,10 +115,10 @@ if (!empty($_GET['parent_id'])) {
         </div>
         <div class="panel-list">
             <?php if (empty($parentCats)): ?>
-                <div class="empty-state">Chưa có danh mục nào</div>
+                <div class="empty-state">Chưa có danh mục nào phù hợp</div>
             <?php else: ?>
             <?php foreach ($parentCats as $cat): ?>
-            <div class="panel-item <?= ($activeParent && $activeParent['id'] == $cat['id']) ? 'active' : '' ?>">
+            <div class="panel-item cat-item-row <?= ($activeParent && $activeParent['id'] == $cat['id']) ? 'active' : '' ?>">
                 <div style="display:flex;align-items:center;gap:8px;flex:1">
                     <input type="checkbox" class="cat-parent-tick" value="<?= $cat['id'] ?>" onchange="updateCatCount()">
                     <a href="/admin/categories?parent_id=<?= $cat['id'] ?>" style="text-decoration:none;flex:1;display:flex;align-items:center;gap:10px">
@@ -315,6 +337,18 @@ function openCatModal(parentId, parentName) {
     document.getElementById('catImageInput').value=''; document.getElementById('catCurrentImage').value=''; document.getElementById('catImgPreview').style.display='none'; document.getElementById('catImgPlaceholder').style.display='block'; document.getElementById('catImgName').textContent='Chưa chọn ảnh';
     document.getElementById('catModal').classList.add('show');
 }
+function filterCategoryList(val) {
+    var term = val.toLowerCase().trim();
+    document.querySelectorAll('.cat-item-row').forEach(function(item) {
+        var text = item.textContent.toLowerCase();
+        if (!term || text.indexOf(term) !== -1) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
 function openCatEditModal(id, parentId, name, slug, sort, featured, image) {
     document.getElementById('catModalTitle').textContent = 'Sửa danh mục';
     document.getElementById('catForm').action = '/admin/categories/'+id+'/edit';

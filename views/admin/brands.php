@@ -70,17 +70,22 @@ if (!empty($_GET['brand_id'])) {
 
 <div class="catalog-wrap">
     <!-- Left: Brands list -->
-    <div class="catalog-panel" style="flex:0 0 320px">
-        <div class="panel-header">
-            <h3>Hãng xe (<?= count($brands) ?>)</h3>
-            <label style="font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" onchange="document.querySelectorAll('.row-check').forEach(c=>c.checked=this.checked)"> Chọn tất cả</label>
+    <div class="catalog-panel" style="flex:0 0 340px">
+        <div class="panel-header" style="flex-direction:column;align-items:stretch;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3>Hãng xe (<?= count($brands) ?>)</h3>
+                <label style="font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" onchange="document.querySelectorAll('.row-check').forEach(c=>c.checked=this.checked)"> Chọn tất cả</label>
+            </div>
+            <div>
+                <input type="text" id="brandSearchInput" placeholder="🔍 Tìm tên hoặc slug hãng xe..." value="<?= e($q ?? '') ?>" style="width:100%;padding:7px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:12.5px;box-sizing:border-box" onkeyup="filterBrandItems(this.value)">
+            </div>
         </div>
-        <div class="panel-list">
+        <div class="panel-list" id="brandPanelList">
             <?php if (empty($brands)): ?>
-                <div class="empty-state">Chưa có hãng xe nào</div>
+                <div class="empty-state">Chưa có hãng xe nào phù hợp</div>
             <?php else: ?>
             <?php foreach ($brands as $b): ?>
-            <div class="panel-item <?= ($activeBrand && $activeBrand['id'] == $b['id']) ? 'active' : '' ?>">
+            <div class="panel-item brand-list-item <?= ($activeBrand && $activeBrand['id'] == $b['id']) ? 'active' : '' ?>" data-name="<?= e(mb_strtolower($b['name'])) ?>" data-slug="<?= e(mb_strtolower($b['slug'])) ?>">
                 <input type="checkbox" class="row-check" value="<?=$b['id']?>" style="margin-right:8px;flex-shrink:0" onclick="event.stopPropagation()">
                 <a href="/admin/brands?brand_id=<?= $b['id'] ?>" onclick="return loadBrandModels(<?= $b['id'] ?>, this, event)" style="text-decoration:none;flex:1">
                     <div class="panel-item-name">
@@ -109,8 +114,11 @@ if (!empty($_GET['brand_id'])) {
     <div class="catalog-panel" style="flex:1" id="brandModelsPanel">
         <?php if ($activeBrand): ?>
         <div class="panel-header">
-            <h3>Dòng xe – <?= e($activeBrand['name']) ?></h3>
-            <button class="add-btn" onclick="openModelModal(<?= $activeBrand['id'] ?>, '<?= e($activeBrand['name']) ?>')">+ Thêm dòng xe</button>
+            <h3>Dòng xe – <?= e($activeBrand['name']) ?> (<?= count($models) ?>)</h3>
+            <div style="display:flex;gap:8px;align-items:center">
+                <input type="text" id="modelSearchInput" placeholder="🔍 Tìm tên dòng xe..." style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:12.5px;width:180px" onkeyup="filterModelRows(this.value)">
+                <button class="add-btn" onclick="openModelModal(<?= $activeBrand['id'] ?>, '<?= e($activeBrand['name']) ?>')">+ Thêm dòng xe</button>
+            </div>
         </div>
         <div class="panel-list">
             <?php if (empty($models)): ?>
@@ -236,6 +244,30 @@ document.getElementById('modelName').addEventListener('input', function() {
     if (!sl.dataset.manual) sl.value = slugify(this.value);
 });
 document.getElementById('modelSlug').addEventListener('input', function() { this.dataset.manual = '1'; });
+
+function filterBrandItems(val) {
+    var term = val.toLowerCase().trim();
+    document.querySelectorAll('.brand-list-item').forEach(function(item) {
+        var text = item.textContent.toLowerCase();
+        if (!term || text.indexOf(term) !== -1) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function filterModelRows(val) {
+    var term = val.toLowerCase().trim();
+    document.querySelectorAll('#brandModelsPanel tbody tr').forEach(function(row) {
+        var text = row.textContent.toLowerCase();
+        if (!term || text.indexOf(term) !== -1) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
 
 function openBrandModal() {
     document.getElementById('brandModalTitle').textContent = 'Thêm hãng xe';

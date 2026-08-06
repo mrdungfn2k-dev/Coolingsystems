@@ -4272,7 +4272,23 @@ function shiftSortOrder($table, $id, $newSort, $parentField = null, $parentVal =
 get('/admin/brands', function() {
     $user = requireStaffPermission('rbac:catalog.vehicle.view|brands', '/admin/login');
     normalizeSortOrders('brands');
-    view('admin/brands', ['title'=>'Quản lý Hãng xe', 'role'=>'admin', 'user'=>$user]);
+    $q = trim($_GET['q'] ?? '');
+    $where = "";
+    $params = [];
+    if ($q !== '') {
+        $where = " WHERE b.name LIKE ? OR b.slug LIKE ?";
+        $params = ["%$q%", "%$q%"];
+    }
+    $brands = dbAll("SELECT b.*, 
+      (SELECT COUNT(*) FROM car_models m WHERE m.brand_id = b.id) AS model_count, 
+      (SELECT COUNT(DISTINCT p.id) FROM products p 
+       LEFT JOIN product_fitments pf ON pf.product_id=p.id 
+       LEFT JOIN product_brand_map pbm ON pbm.product_id=p.id 
+       WHERE (p.car_brand_id=b.id OR pf.brand_id=b.id OR pbm.brand_id=b.id OR p.name LIKE '%' || b.name || '%')
+      ) AS product_count 
+      FROM brands b {$where} ORDER BY b.sort_order ASC, b.id ASC", $params);
+
+    view('admin/brands', ['title'=>'Quản lý Hãng xe', 'role'=>'admin', 'user'=>$user, 'brands'=>$brands, 'q'=>$q]);
 });
 
 post('/admin/brands/add', function() {
@@ -4518,8 +4534,40 @@ post('/admin/promotions/:id/toggle', function($p) {
 get('/admin/product-brands', function() {
     requireStaffPermission('rbac:catalog.vehicle.view|brand_models', '/auth/login');
     normalizeSortOrders('product_brands');
-    $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
-    view('admin/product-brands', ['title' => 'Quan ly Thuong hieu', 'productBrands' => $productBrands]);
+    $q = trim($_GET['q'] ?? '');
+    $sortBy = trim($_GET['sort'] ?? 'sort_order');
+    $page = max(1, intval($_GET['page'] ?? 1));
+    $limit = 16;
+    $offset = ($page - 1) * $limit;
+
+    $where = "";
+    $params = [];
+    if ($q !== '') {
+        $where = " WHERE name LIKE ? OR slug LIKE ? OR description LIKE ?";
+        $params = ["%$q%", "%$q%", "%$q%"];
+    }
+
+    $orderBy = "sort_order ASC, name ASC";
+    if ($sortBy === 'name') {
+        $orderBy = "name ASC";
+    } elseif ($sortBy === 'products') {
+        $orderBy = "(SELECT COUNT(*) FROM products p WHERE p.brand_id = product_brands.id) DESC, sort_order ASC";
+    }
+
+    $total = dbGet("SELECT COUNT(*) as c FROM product_brands {$where}", $params)['c'] ?? 0;
+    $totalPages = max(1, ceil($total / $limit));
+
+    $productBrands = dbAll("SELECT *, (SELECT COUNT(*) FROM products p WHERE p.brand_id = product_brands.id) as product_count FROM product_brands {$where} ORDER BY {$orderBy} LIMIT {$limit} OFFSET {$offset}", $params);
+
+    view('admin/product-brands', [
+        'title' => 'Quản lý Thương hiệu',
+        'productBrands' => $productBrands,
+        'q' => $q,
+        'sortBy' => $sortBy,
+        'page' => $page,
+        'totalPages' => $totalPages,
+        'total' => $total
+    ]);
 });
 
 post('/admin/product-brands/new', function() {

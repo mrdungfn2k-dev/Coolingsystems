@@ -42,14 +42,31 @@ $productBrands = $productBrands ?? dbAll("SELECT * FROM product_brands ORDER BY 
 .pb-empty{padding:50px;text-align:center;color:#aaa;background:#fff;border:1px dashed var(--line);border-radius:12px}
 </style>
 
+<form method="get" action="/admin/product-brands" style="margin-bottom:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;padding:12px 16px;border-radius:10px;border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,0.03)">
+    <div style="flex:1;min-width:200px">
+        <input type="text" name="q" id="pbSearchInput" placeholder="Tìm tên, slug hoặc mô tả thương hiệu..." value="<?= e($q ?? '') ?>" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box" onkeyup="filterPbCards(this.value)">
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+        <label style="font-size:13px;font-weight:600;color:#555;white-space:nowrap">Sắp xếp:</label>
+        <select name="sort" onchange="this.form.submit()" style="padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:13px">
+            <option value="sort_order" <?= ($sortBy ?? '') === 'sort_order' ? 'selected' : '' ?>>Theo thứ tự hiển thị</option>
+            <option value="name" <?= ($sortBy ?? '') === 'name' ? 'selected' : '' ?>>Theo tên (A-Z)</option>
+            <option value="products" <?= ($sortBy ?? '') === 'products' ? 'selected' : '' ?>>Nhiều sản phẩm nhất</option>
+        </select>
+        <button type="submit" class="btn btn-navy btn-sm">Tìm kiếm</button>
+        <?php if (!empty($q) || (!empty($sortBy) && $sortBy !== 'sort_order')): ?>
+            <a href="/admin/product-brands" class="btn btn-outline-navy btn-sm">Xóa lọc</a>
+        <?php endif; ?>
+    </div>
+</form>
+
 <?php if (empty($productBrands)): ?>
-  <div class="pb-empty">Chưa có thương hiệu nào. Bấm “+ Thêm thương hiệu” để tạo mới.</div>
+  <div class="pb-empty">Chưa có thương hiệu nào phù hợp. Bấm “+ Thêm thương hiệu” để tạo mới.</div>
 <?php else: ?>
-<div style="font-size:14px;font-weight:700;color:var(--navy);margin:2px 0 14px">Tổng: <?= count($productBrands) ?> thương hiệu</div>
+<div style="font-size:14px;font-weight:700;color:var(--navy);margin:2px 0 14px">Tổng: <?= $total ?? count($productBrands) ?> thương hiệu</div>
 <div class="pb-grid">
   <?php foreach ($productBrands as $b):
-      $r = dbGet("SELECT COUNT(*) AS c FROM products WHERE (part_brand=? OR part_brand LIKE ? OR part_brand LIKE ? OR part_brand LIKE ?) AND status='published'", [$b['name'], $b['name'].',%', '%, '.$b['name'].',%', '%, '.$b['name']]);
-      $cnt = (int)($r['c'] ?? 0);
+      $cnt = (int)($b['product_count'] ?? 0);
   ?>
   <div class="pb-card">
     <div class="pb-logo">
@@ -77,6 +94,17 @@ $productBrands = $productBrands ?? dbAll("SELECT * FROM product_brands ORDER BY 
   </div>
   <?php endforeach; ?>
 </div>
+
+<?php if (!empty($totalPages) && $totalPages > 1): ?>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px;background:#fff;padding:12px 16px;border-radius:10px;border:1px solid var(--line)">
+    <div style="font-size:13px;color:#666">Hiển thị <b><?= count($productBrands) ?></b> / <b><?= $total ?></b> thương hiệu (Trang <?= $page ?> / <?= $totalPages ?>)</div>
+    <div style="display:flex;gap:4px">
+        <?php for ($p = 1; $p <= $totalPages; $p++): ?>
+            <a href="/admin/product-brands?page=<?= $p ?>&q=<?= urlencode($q ?? '') ?>&sort=<?= urlencode($sortBy ?? '') ?>" class="btn btn-sm <?= $p === $page ? 'btn-navy' : 'btn-outline-navy' ?>" style="min-width:32px;text-align:center"><?= $p ?></a>
+        <?php endfor; ?>
+    </div>
+</div>
+<?php endif; ?>
 <?php endif; ?>
 
 <!-- Modal: Thêm / Sửa thương hiệu -->
@@ -119,6 +147,17 @@ $productBrands = $productBrands ?? dbAll("SELECT * FROM product_brands ORDER BY 
 </div>
 
 <script>
+function filterPbCards(val) {
+  var term = val.toLowerCase().trim();
+  document.querySelectorAll('.pb-card').forEach(function(card) {
+    var text = card.textContent.toLowerCase();
+    if (!term || text.indexOf(term) !== -1) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
 function openPbModal(){
   document.getElementById('pbModalTitle').textContent='Thêm thương hiệu';
   document.getElementById('pbForm').action='/admin/product-brands/new';
