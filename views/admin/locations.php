@@ -59,7 +59,11 @@
       <td style="font-weight:700;color:#1a3258"><?= e($loc['area_name'] ?? '') ?></td>
       <td><?= e($loc['shelf_name'] ?: '—') ?></td>
       <td><?= e($loc['bin_name'] ?: '—') ?></td>
-      <td style="font-weight:700;color:#0284c7"><?= number_format((int)($loc['product_count'] ?? 0)) ?> mã SP</td>
+      <td>
+        <button type="button" onclick="openLocProductsModal('<?= e($loc['code']) ?>')" style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:4px 10px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" title="Bấm để xem danh sách chi tiết các mã phụ tùng đang lưu trữ tại vị trí này">
+          📦 <?= number_format((int)($loc['product_count'] ?? 0)) ?> mã SP (Xem danh sách)
+        </button>
+      </td>
       <td style="font-size:12px;color:#64748b"><?= e($loc['note'] ?: '—') ?></td>
       <td>
         <form method="post" action="/admin/locations/<?= (int)$loc['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa vị trí này?')">
@@ -122,6 +126,22 @@
   </form>
 </div>
 
+<!-- Modal xem danh sách phụ tùng tại vị trí kho -->
+<div id="locProductsModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;padding:24px;border-radius:10px;max-width:750px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;border-bottom:1px solid #e2e8f0;padding-bottom:12px">
+      <h3 style="margin:0;color:#1a3258;font-size:16px">Danh sách phụ tùng lưu tại vị trí: <span id="modalLocCode" style="color:#0284c7;font-family:monospace;font-weight:700"></span></h3>
+      <button type="button" onclick="document.getElementById('locProductsModal').style.display='none'" style="background:none;border:none;font-size:22px;color:#64748b;cursor:pointer">&times;</button>
+    </div>
+
+    <div id="locProductsContent">Đang tải danh sách phụ tùng...</div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:16px">
+      <button type="button" onclick="document.getElementById('locProductsModal').style.display='none'" class="btn btn-navy">Đóng</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   function setupCharCounter(inputEl, maxChars, counterEl) {
@@ -133,7 +153,9 @@
         counterEl.style.color = len >= maxChars ? '#e11d48' : '#64748b';
       }
     }
-    inputEl.addEventListener('input', update);
+    ['input', 'keyup', 'change', 'paste'].forEach(function(evt) {
+      inputEl.addEventListener(evt, update);
+    });
     update();
   }
 
@@ -155,7 +177,9 @@
         counterEl.style.color = words.length >= maxWords ? '#e11d48' : '#64748b';
       }
     }
-    inputEl.addEventListener('input', update);
+    ['input', 'keyup', 'change', 'paste'].forEach(function(evt) {
+      inputEl.addEventListener(evt, update);
+    });
     update();
   }
 
@@ -164,6 +188,44 @@
   setupCharCounter(document.getElementById('loc_bin'), 50, document.getElementById('binCharCnt'));
   enforceLiveWordLimit(document.getElementById('loc_note'), 200, document.getElementById('noteWordCnt'));
 })();
+
+function openLocProductsModal(code) {
+  var modal = document.getElementById('locProductsModal');
+  var codeSpan = document.getElementById('modalLocCode');
+  var contentDiv = document.getElementById('locProductsContent');
+  codeSpan.textContent = code;
+  contentDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#64748b">⏳ Đang tải dữ liệu phụ tùng...</div>';
+  modal.style.display = 'flex';
+
+  fetch('/admin/locations/api/products?code=' + encodeURIComponent(code))
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if(!data.success || !data.products || data.products.length === 0) {
+        contentDiv.innerHTML = '<div style="padding:30px;text-align:center;color:#9ca3af;font-size:14px">Chưa có mã phụ tùng nào được xếp lưu trữ tại vị trí <strong>' + escapeHtml(code) + '</strong>.</div>';
+        return;
+      }
+      var html = '<table style="width:100%;border-collapse:collapse;margin-top:10px">';
+      html += '<thead><tr style="background:#f8fafc;font-size:12px;color:#475569;text-align:left;border-bottom:2px solid #e2e8f0"><th style="padding:10px 8px">Tên sản phẩm phụ tùng</th><th style="padding:10px 8px">Mã SKU</th><th style="padding:10px 8px">Mã OEM</th><th style="padding:10px 8px;text-align:center">Tồn kho hiện tại</th></tr></thead><tbody>';
+      data.products.forEach(function(p) {
+        html += '<tr style="border-bottom:1px solid #f1f5f9;font-size:13px">';
+        html += '<td style="padding:10px 8px;font-weight:600;color:#1e293b">' + escapeHtml(p.name) + '</td>';
+        html += '<td style="padding:10px 8px;font-family:monospace;color:#64748b">' + escapeHtml(p.sku || '—') + '</td>';
+        html += '<td style="padding:10px 8px;font-family:monospace;color:#0284c7">' + escapeHtml(p.oem_code || '—') + '</td>';
+        html += '<td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">' + (p.stock || 0) + '</td>';
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      contentDiv.innerHTML = html;
+    })
+    .catch(function(err) {
+      contentDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#dc2626">Lỗi tải dữ liệu. Vui lòng thử lại.</div>';
+    });
+}
+
+function escapeHtml(str) {
+  if(!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 </script>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

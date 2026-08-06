@@ -1461,7 +1461,56 @@ function rbacSanitizeRolePermissions(array $permissions): array {
 }
 
 get('/admin/serials', function() { requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login'); $serials=dbAll("SELECT serial.*,product.name AS product_name,product.sku FROM product_serials serial INNER JOIN products product ON product.id=serial.product_id ORDER BY serial.created_at DESC LIMIT 500"); $products=dbAll("SELECT id,sku,name FROM products ORDER BY name LIMIT 3000"); view('admin/serials',['title'=>'Quản lý Serial & Lô hàng','userRole'=>'admin','serials'=>$serials,'products'=>$products]); });
+
 post('/admin/serials', function() { $actor=requireStaffPermission('rbac:catalog.serials.manage|products','/admin/login');csrfCheck();$productId=(int)($_POST['product_id']??0);$serial=strtoupper(trim($_POST['serial_no']??''));$mfg=trim($_POST['manufactured_at']??'');$end=trim($_POST['warranty_end_date']??'');if(!$productId||!dbGet('SELECT id FROM products WHERE id=?',[$productId])){flash('error','Vui lòng gõ tìm và chọn sản phẩm hợp lệ từ danh sách gợi ý.');redirect('/admin/serials');}if($serial===''||!preg_match('/^[A-Z0-9\-]{3,50}$/',$serial)){flash('error','Số serial không hợp lệ (chỉ gồm chữ cái A-Z, chữ số 0-9 và dấu gạch ngang, 3-50 ký tự).');redirect('/admin/serials');}if($end===''||!preg_match('/^\d{4}-\d{2}-\d{2}$/',$end)){flash('error','Vui lòng chọn Hạn bảo hành hợp lệ.');redirect('/admin/serials');}try{$id=dbInsert('INSERT INTO product_serials (product_id,serial_no,manufactured_at,warranty_end_date,created_by) VALUES (?,?,?,?,?)',[$productId,$serial,$mfg!==''?$mfg:null,$end,$actor['id']]);dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)",[$actor['id'],$actor['role']??'admin','serial_created','product_serial',$id,json_encode(['product_id'=>$productId,'serial'=>$serial],JSON_UNESCAPED_UNICODE),$_SERVER['REMOTE_ADDR']??'',$_SERVER['HTTP_USER_AGENT']??'']);flash('success','Đã thêm số serial '.$serial.' thành công.');}catch(Throwable $e){flash('error','Số Serial '.$serial.' đã tồn tại trong hệ thống (đảm bảo tính duy nhất).');}redirect('/admin/serials'); });
+
+post('/admin/serials/:id/edit', function($p) {
+    $actor = requireStaffPermission('rbac:catalog.serials.manage|products', '/admin/login');
+    csrfCheck();
+    $id = (int)($p['id'] ?? 0);
+    $serial = strtoupper(trim($_POST['serial_no'] ?? ''));
+    $mfg = trim($_POST['manufactured_at'] ?? '');
+    $end = trim($_POST['warranty_end_date'] ?? '');
+
+    if (!$id) { redirect('/admin/serials'); }
+    if ($serial === '' || !preg_match('/^[A-Z0-9\-]{3,50}$/', $serial)) {
+        flash('error', 'Số serial không hợp lệ (chỉ gồm chữ cái A-Z, chữ số 0-9 và dấu gạch ngang, 3-50 ký tự).');
+        redirect('/admin/serials');
+    }
+    if ($end === '' || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $end)) {
+        flash('error', 'Vui lòng chọn Hạn bảo hành hợp lệ.');
+        redirect('/admin/serials');
+    }
+
+    try {
+        dbRun("UPDATE product_serials SET serial_no=?, manufactured_at=?, warranty_end_date=? WHERE id=?", [
+            $serial, $mfg !== '' ? $mfg : null, $end, $id
+        ]);
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [
+            $actor['id'], $actor['role'] ?? 'admin', 'serial_updated', 'product_serial', $id,
+            json_encode(['serial' => $serial], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
+        ]);
+        flash('success', "Đã cập nhật số serial {$serial} thành công.");
+    } catch (Throwable $e) {
+        flash('error', "Số Serial {$serial} đã tồn tại trong hệ thống (đảm bảo tính duy nhất).");
+    }
+    redirect('/admin/serials');
+});
+
+post('/admin/serials/:id/delete', function($p) {
+    $actor = requireStaffPermission('rbac:catalog.serials.manage|products', '/admin/login');
+    csrfCheck();
+    $id = (int)($p['id'] ?? 0);
+    if ($id > 0) {
+        dbRun("DELETE FROM product_serials WHERE id=?", [$id]);
+        dbRun("INSERT INTO audit_logs (user_id,role,action,entity_type,entity_id,meta,ip,user_agent) VALUES (?,?,?,?,?,?,?,?)", [
+            $actor['id'], $actor['role'] ?? 'admin', 'serial_deleted', 'product_serial', $id,
+            json_encode(['id' => $id], JSON_UNESCAPED_UNICODE), $_SERVER['REMOTE_ADDR'] ?? '', $_SERVER['HTTP_USER_AGENT'] ?? ''
+        ]);
+        flash('success', 'Đã xóa số serial thành công.');
+    }
+    redirect('/admin/serials');
+});
 
 get('/admin/warranties/products', function() { requireStaffPermission('rbac:warranty.cases.view|returns','/admin/login'); $q=trim($_GET['q']??''); header('Content-Type: application/json; charset=utf-8'); if(mb_strlen($q)<2){echo '[]';exit;} $like='%'.$q.'%'; $rows=dbAll('SELECT id,sku,oem_code,name FROM products WHERE name LIKE ? OR sku LIKE ? OR oem_code LIKE ? ORDER BY name LIMIT 12',[$like,$like,$like]); echo json_encode(array_map(fn($row)=>['id'=>(int)$row['id'],'label'=>trim($row['sku'].' | '.$row['name'].(!empty($row['oem_code'])?' | OEM: '.$row['oem_code']:''))],$rows),JSON_UNESCAPED_UNICODE); exit; });
 get('/admin/cashbook', function() {
@@ -5818,6 +5867,17 @@ get('/admin/locations', function() {
         'page' => $page,
         'totalPages' => $totalPages
     ]);
+get('/admin/locations/api/products', function() {
+    requireStaffPermission('rbac:inventory|products', '/admin/login');
+    header('Content-Type: application/json; charset=utf-8');
+    $code = trim($_GET['code'] ?? '');
+    if (!$code) {
+        echo json_encode(['success' => false, 'products' => []]);
+        exit;
+    }
+    $products = dbAll("SELECT id, name, sku, oem_code, stock, status FROM products WHERE location_code=? ORDER BY name ASC", [$code]);
+    echo json_encode(['success' => true, 'code' => $code, 'products' => $products]);
+    exit;
 });
 
 // D3: Vị trí kho - Lưu mới

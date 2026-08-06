@@ -57,6 +57,7 @@
           <th style="padding:11px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#64748b">Ngày sản xuất</th>
           <th style="padding:11px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#64748b">Hết bảo hành</th>
           <th style="padding:11px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#64748b">Trạng thái</th>
+          <th style="padding:11px 12px;text-align:center;font-size:11px;text-transform:uppercase;color:#64748b">Thao tác</th>
         </tr>
       </thead>
       <tbody>
@@ -67,14 +68,54 @@
           <td style="padding:11px 12px;font-size:13px"><?= e($serial['manufactured_at']?:'—') ?></td>
           <td style="padding:11px 12px;font-size:13px"><?= e($serial['warranty_end_date']) ?></td>
           <td style="padding:11px 12px"><?= $serial['warranty_end_date']>=date('Y-m-d')?'<span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:4px;font-weight:700;font-size:12px">Còn hạn</span>':'<span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:4px;font-weight:700;font-size:12px">Hết hạn</span>' ?></td>
+          <td style="padding:11px 12px;text-align:center">
+            <button type="button" onclick='openEditSerialModal(<?= json_encode($serial, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?>)' class="btn btn-outline-navy btn-sm" style="padding:3px 8px;font-size:12px;margin-right:4px">✏️ Sửa</button>
+            <form method="post" action="/admin/serials/<?= (int)$serial['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa số serial <?= e($serial['serial_no']) ?>?')">
+              <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+              <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:12px;color:#dc2626">🗑️ Xóa</button>
+            </form>
+          </td>
         </tr>
         <?php endforeach; ?>
         <?php if(!$serials): ?>
-        <tr><td colspan="5" style="padding:30px;text-align:center;color:#9ca3af">Chưa có serial nào.</td></tr>
+        <tr><td colspan="6" style="padding:30px;text-align:center;color:#9ca3af">Chưa có serial nào.</td></tr>
         <?php endif; ?>
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- Modal Sửa Serial & Lô hàng -->
+<div id="editSerialModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
+  <form id="editSerialForm" method="post" action="" style="background:#fff;padding:24px;border-radius:10px;max-width:500px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+    <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+    <h3 style="margin:0 0 16px;color:#1a3258">Cập nhật thông tin Serial</h3>
+
+    <div class="form-group" style="margin-bottom:12px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Sản phẩm</label>
+      <input type="text" id="edit_product_name" readonly disabled style="width:100%;height:38px;border:1px solid #e2e8f0;background:#f8fafc;border-radius:6px;padding:0 10px;font-size:13px;font-weight:700;color:#334155">
+    </div>
+
+    <div class="form-group" style="margin-bottom:12px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Số Serial (Số sê-ri) <span style="color:#e11d48">*</span></label>
+      <input type="text" name="serial_no" id="edit_serial_no" required pattern="[A-Za-z0-9\-]{3,50}" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9\-]/g,'')" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px;font-family:monospace;font-weight:700">
+    </div>
+
+    <div class="form-group" style="margin-bottom:12px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ngày sản xuất</label>
+      <input type="date" name="manufactured_at" id="edit_manufactured_at" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+    </div>
+
+    <div class="form-group" style="margin-bottom:20px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Hết bảo hành <span style="color:#e11d48">*</span></label>
+      <input type="date" name="warranty_end_date" id="edit_warranty_end_date" required style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" onclick="document.getElementById('editSerialModal').style.display='none'" class="btn btn-outline">Hủy</button>
+      <button type="submit" class="btn btn-navy">Lưu cập nhật</button>
+    </div>
+  </form>
 </div>
 
 <script>
@@ -115,6 +156,16 @@
     if(!input.contains(e.target) && !box.contains(e.target)) box.style.display = 'none';
   });
 })();
+
+function openEditSerialModal(item) {
+  if(!item) return;
+  document.getElementById('editSerialForm').action = '/admin/serials/' + item.id + '/edit';
+  document.getElementById('edit_product_name').value = (item.sku || '') + ' - ' + (item.product_name || '');
+  document.getElementById('edit_serial_no').value = item.serial_no || '';
+  document.getElementById('edit_manufactured_at').value = item.manufactured_at || '';
+  document.getElementById('edit_warranty_end_date').value = item.warranty_end_date || '';
+  document.getElementById('editSerialModal').style.display = 'flex';
+}
 </script>
 
 <?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

@@ -69,8 +69,8 @@ post('/agency/login', function() {
             ]);
         }
 
-        // Reset lockout counters on successful login
-        unset($_SESSION[$attemptsKey], $_SESSION[$lockKey]);
+        // Reset lockout counters and clear previous login error flashes on successful login
+        unset($_SESSION[$attemptsKey], $_SESSION[$lockKey], $_SESSION['flash']);
 
         loginUser((int)$user['id']);
         header('Location: /agency/dashboard');

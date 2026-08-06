@@ -220,8 +220,9 @@ require_once __DIR__ . '/../../includes/helpers.php';
   <div class="agency-dash-container">
     
     <?php foreach (getFlash() as $f): ?>
-      <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:700;margin-bottom:20px;">
-        <?= e($f['message']) ?>
+      <div style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#991b1b':'#15803d' ?>;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:700;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;border:1px solid <?= $f['type']==='error'?'#fca5a5':'#6ee7b7' ?>">
+        <span><?= e($f['message']) ?></span>
+        <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:inherit;font-size:20px;font-weight:bold;cursor:pointer;padding:0 6px;line-height:1" title="Đóng thông báo">&times;</button>
       </div>
     <?php endforeach; ?>
 
