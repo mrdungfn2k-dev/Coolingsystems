@@ -4207,9 +4207,29 @@ post('/admin/settings/payment', function() {
 });
 
 
-// ── HELPER: Shift Sort Orders ────────────────────────────────────────────────
+// ── HELPER: Shift & Normalize Sort Orders ──────────────────────────────────
+function normalizeSortOrders($table, $parentField = null, $parentVal = null) {
+    $whereParent = "";
+    $params = [];
+    if ($parentField !== null) {
+        if ($parentVal === null) {
+            $whereParent = " WHERE {$parentField} IS NULL";
+        } else {
+            $whereParent = " WHERE {$parentField} = ?";
+            $params[] = $parentVal;
+        }
+    }
+    
+    $rows = dbAll("SELECT id FROM {$table} {$whereParent} ORDER BY sort_order ASC, id ASC", $params);
+    $seq = 1;
+    foreach ($rows as $r) {
+        dbRun("UPDATE {$table} SET sort_order = ? WHERE id = ?", [$seq, $r['id']]);
+        $seq++;
+    }
+}
+
 function shiftSortOrder($table, $id, $newSort, $parentField = null, $parentVal = null) {
-    $newSort = max(0, intval($newSort));
+    $newSort = max(1, intval($newSort));
     $whereParent = "";
     $parentParams = [];
     if ($parentField !== null) {
@@ -4225,7 +4245,10 @@ function shiftSortOrder($table, $id, $newSort, $parentField = null, $parentVal =
         $oldRow = dbGet("SELECT sort_order FROM {$table} WHERE id=?", [$id]);
         if ($oldRow) {
             $oldSort = (int)$oldRow['sort_order'];
-            if ($oldSort === $newSort) return $newSort;
+            if ($oldSort === $newSort) {
+                normalizeSortOrders($table, $parentField, $parentVal);
+                return $newSort;
+            }
 
             if ($newSort < $oldSort) {
                 $sql = "UPDATE {$table} SET sort_order = sort_order + 1 WHERE sort_order >= ? AND sort_order < ? AND id != ? {$whereParent}";
@@ -4248,6 +4271,7 @@ function shiftSortOrder($table, $id, $newSort, $parentField = null, $parentVal =
 // ── BRANDS (Hãng xe) CRUD ────────────────────────────────────────────────────
 get('/admin/brands', function() {
     $user = requireStaffPermission('rbac:catalog.vehicle.view|brands', '/admin/login');
+    normalizeSortOrders('brands');
     view('admin/brands', ['title'=>'Quản lý Hãng xe', 'role'=>'admin', 'user'=>$user]);
 });
 
@@ -4277,6 +4301,7 @@ post('/admin/brands/add', function() {
         } else {
             dbInsert("INSERT INTO brands (name, slug, sort_order) VALUES (?,?,?)", [$name, $slug, $sort]);
         }
+        normalizeSortOrders('brands');
         flash('success', "Đã thêm hãng xe: $name");
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại. Vui lòng đổi slug khác.');
@@ -4310,6 +4335,7 @@ post('/admin/brands/:id/edit', function($p) {
         } else {
             dbRun("UPDATE brands SET name=?, slug=?, sort_order=? WHERE id=?", [$name, $slug, $sort, $p['id']]);
         }
+        normalizeSortOrders('brands');
         flash('success', "Đã cập nhật hãng xe.");
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại. Vui lòng đổi slug khác.');
@@ -4398,6 +4424,7 @@ post('/admin/categories/add', function() {
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
         $catImg=catUploadImage(); dbInsert("INSERT INTO categories (name, slug, parent_id, sort_order, is_featured, icon) VALUES (?,?,?,?,?,?)", [$name, $slug, $parentId, $sort, $featured, $catImg]);
+        normalizeSortOrders('categories', 'parent_id', $parentId);
         flash('success', "Đã thêm danh mục: $name");
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại. Vui lòng đổi slug khác.');
@@ -4428,6 +4455,7 @@ post('/admin/categories/:id/edit', function($p) {
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
         $catImg=catUploadImage(); if($catImg!==''){ dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=?, icon=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $catImg, $p['id']]); } else { dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $p['id']]); }
+        normalizeSortOrders('categories', 'parent_id', $parentId);
         flash('success', 'Đã cập nhật danh mục.');
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại.');
@@ -4489,6 +4517,7 @@ post('/admin/promotions/:id/toggle', function($p) {
 // ===== Product Brands Management =====
 get('/admin/product-brands', function() {
     requireStaffPermission('rbac:catalog.vehicle.view|brand_models', '/auth/login');
+    normalizeSortOrders('product_brands');
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     view('admin/product-brands', ['title' => 'Quan ly Thuong hieu', 'productBrands' => $productBrands]);
 });
@@ -4514,6 +4543,7 @@ post('/admin/product-brands/new', function() {
     $desc = trim($_POST['description'] ?? '');
     try {
         dbInsert("INSERT INTO product_brands (name, slug, logo, description, sort_order) VALUES (?,?,?,?,?)", [$name, $slug, $logoFile, $desc, $sort]);
+        normalizeSortOrders('product_brands');
         flash('success', 'Đã thêm thương hiệu thành công!');
     } catch (\Exception $e) {
         flash('error', 'Tên thương hiệu đã tồn tại.');
@@ -4542,6 +4572,7 @@ post('/admin/product-brands/:id/edit', function($p) {
         }
     }
     dbRun("UPDATE product_brands SET name=?, slug=?, logo=?, description=?, sort_order=? WHERE id=?", [$name, $slug, $logoFile, $desc, $sort, $p['id']]);
+    normalizeSortOrders('product_brands');
     flash('success', 'Da cap nhat thuong hieu!');
     redirect('/admin/product-brands');
 });

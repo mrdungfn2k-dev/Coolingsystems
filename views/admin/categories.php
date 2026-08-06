@@ -4,13 +4,19 @@
    ADMIN: Quản lý Danh mục (Categories)
    ───────────────────────────────────────────────── */
 
-$parentCats = dbAll("SELECT c.*, (SELECT COUNT(*) FROM categories ch WHERE ch.parent_id=c.id) AS child_count, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id) AS product_count FROM categories c WHERE c.parent_id IS NULL ORDER BY c.sort_order, c.name");
+// Auto-normalize sort orders to clean up any duplicate positions
+normalizeSortOrders('categories', 'parent_id', null);
+if (!empty($_GET['parent_id'])) {
+    normalizeSortOrders('categories', 'parent_id', intval($_GET['parent_id']));
+}
+
+$parentCats = dbAll("SELECT c.*, (SELECT COUNT(*) FROM categories ch WHERE ch.parent_id=c.id) AS child_count, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id) AS product_count FROM categories c WHERE c.parent_id IS NULL ORDER BY c.sort_order ASC, c.id ASC");
 $activeParent = null;
 $childCats = [];
 if (!empty($_GET['parent_id'])) {
     $activeParent = dbGet("SELECT * FROM categories WHERE id=?", [intval($_GET['parent_id'])]);
     if ($activeParent) {
-        $childCats = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id) AS product_count FROM categories c WHERE parent_id=? ORDER BY sort_order, name", [$activeParent['id']]);
+        $childCats = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id) AS product_count FROM categories c WHERE parent_id=? ORDER BY sort_order ASC, id ASC", [$activeParent['id']]);
     }
 }
 ?>
