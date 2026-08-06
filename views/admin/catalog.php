@@ -167,7 +167,7 @@ if (!empty($_GET['parent_id'])) {
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
                 <div class="form-group">
                     <label>Thứ tự hiển thị</label>
-                    <input type="number" name="sort_order" id="catSort" value="100">
+                    <input type="number" name="sort_order" id="catSort" min="0" value="100" oninput="if(this.value < 0) this.value = 0;">
                 </div>
                 <div class="form-group">
                     <label>Nổi bật?</label>

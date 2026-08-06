@@ -4218,7 +4218,8 @@ post('/admin/brands/add', function() {
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $sort = intval($_POST['sort_order'] ?? 100);
-    if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/brands'); }
+    if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/brands'); return; }
+    if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/brands'); return; }
     $slug = strtolower(preg_replace('/[^a-z0-9]+/', '-', $slug));
     $imagePath = null;
     if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -4249,7 +4250,8 @@ post('/admin/brands/:id/edit', function($p) {
     $name = trim($_POST['name'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $sort = intval($_POST['sort_order'] ?? 100);
-    if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/brands'); }
+    if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/brands'); return; }
+    if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/brands'); return; }
     $slug = strtolower(preg_replace('/[^a-z0-9]+/', '-', $slug));
     $imagePath = null;
     if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -4349,7 +4351,9 @@ post('/admin/categories/add', function() {
     $parentId = !empty($_POST['parent_id']) ? intval($_POST['parent_id']) : null;
     $sort = intval($_POST['sort_order'] ?? 100);
     $featured = intval($_POST['is_featured'] ?? 0);
-    if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/categories'); }
+    $redir = $parentId ? '/admin/categories?parent_id='.$parentId : '/admin/categories';
+    if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect($redir); return; }
+    if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect($redir); return; }
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
         $catImg=catUploadImage(); dbInsert("INSERT INTO categories (name, slug, parent_id, sort_order, is_featured, icon) VALUES (?,?,?,?,?,?)", [$name, $slug, $parentId, $sort, $featured, $catImg]);
@@ -4357,7 +4361,6 @@ post('/admin/categories/add', function() {
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại. Vui lòng đổi slug khác.');
     }
-    $redir = $parentId ? '/admin/categories?parent_id='.$parentId : '/admin/categories';
     redirect($redir);
 });
 
@@ -4378,6 +4381,8 @@ post('/admin/categories/:id/edit', function($p) {
     $sort = intval($_POST['sort_order'] ?? 100);
     $featured = intval($_POST['is_featured'] ?? 0);
     $isActive = intval($_POST['is_active'] ?? 1);
+    $redir = $parentId ? '/admin/categories?parent_id='.$parentId : '/admin/categories';
+    if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect($redir); return; }
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
         $catImg=catUploadImage(); if($catImg!==''){ dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=?, icon=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $catImg, $p['id']]); } else { dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $p['id']]); }
@@ -4385,7 +4390,6 @@ post('/admin/categories/:id/edit', function($p) {
     } catch (Exception $e) {
         flash('error', 'Slug đã tồn tại.');
     }
-    $redir = $parentId ? '/admin/categories?parent_id='.$parentId : '/admin/categories';
     redirect($redir);
 });
 
@@ -4451,7 +4455,9 @@ post('/admin/product-brands/new', function() {
     requireStaffPermission('rbac:catalog.vehicle.manage|brand_models', '/auth/login');
     csrfCheck();
     $name = trim($_POST['name'] ?? '');
-    if (!$name) { flash('error', 'Ten thuong hieu khong duoc de trong.'); redirect('/admin/product-brands'); return; }
+    if (!$name) { flash('error', 'Tên thương hiệu không được để trống.'); redirect('/admin/product-brands'); return; }
+    $sort = intval($_POST['sort_order'] ?? 0);
+    if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/product-brands'); return; }
     $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $name));
     $logoFile = '';
     if (!empty($_FILES['logo']['tmp_name']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
@@ -4463,12 +4469,11 @@ post('/admin/product-brands/new', function() {
         }
     }
     $desc = trim($_POST['description'] ?? '');
-    $sort = intval($_POST['sort_order'] ?? 0);
     try {
         dbInsert("INSERT INTO product_brands (name, slug, logo, description, sort_order) VALUES (?,?,?,?,?)", [$name, $slug, $logoFile, $desc, $sort]);
-        flash('success', 'Da them thuong hieu thanh cong!');
+        flash('success', 'Đã thêm thương hiệu thành công!');
     } catch (\Exception $e) {
-        flash('error', 'Ten thuong hieu da ton tai.');
+        flash('error', 'Tên thương hiệu đã tồn tại.');
     }
     redirect('/admin/product-brands');
 });
@@ -4477,10 +4482,11 @@ post('/admin/product-brands/:id/edit', function($p) {
     requireStaffPermission('rbac:catalog.vehicle.manage|brand_models', '/auth/login');
     csrfCheck();
     $name = trim($_POST['name'] ?? '');
-    if (!$name) { flash('error', 'Ten khong duoc de trong.'); redirect('/admin/product-brands'); return; }
+    if (!$name) { flash('error', 'Tên không được để trống.'); redirect('/admin/product-brands'); return; }
+    $sort = intval($_POST['sort_order'] ?? 0);
+    if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/product-brands'); return; }
     $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $name));
     $desc = trim($_POST['description'] ?? '');
-    $sort = intval($_POST['sort_order'] ?? 0);
     $existing = dbGet("SELECT logo FROM product_brands WHERE id=?", [$p['id']]);
     $logoFile = $existing['logo'] ?? '';
     if (!empty($_FILES['logo']['tmp_name']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {

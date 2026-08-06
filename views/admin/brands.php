@@ -173,7 +173,7 @@ if (!empty($_GET['brand_id'])) {
             </div>
             <div class="form-group">
                 <label>Thứ tự hiển thị</label>
-                <input type="number" name="sort_order" id="brandSort" value="100">
+                <input type="number" name="sort_order" id="brandSort" min="0" value="100" oninput="if(this.value < 0) this.value = 0;">
             </div>
             <div class="form-group">
                 <label>Hình ảnh (Logo hãng xe)</label>

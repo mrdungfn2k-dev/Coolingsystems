@@ -90,7 +90,7 @@ $productBrands = $productBrands ?? dbAll("SELECT * FROM product_brands ORDER BY 
       <label>Mô tả</label>
       <textarea name="description" id="pbDesc" placeholder="Mô tả ngắn về thương hiệu"></textarea>
       <label>Thứ tự hiển thị (số nhỏ lên trước)</label>
-      <input type="number" name="sort_order" id="pbSort" value="0">
+      <input type="number" name="sort_order" id="pbSort" min="0" value="0" oninput="if(this.value < 0) this.value = 0;">
       <label>Logo (jpg, png, webp, svg)</label>
       <input type="file" name="logo" accept=".jpg,.jpeg,.png,.webp,.svg,image/*">
       <div id="pbCurLogo" style="margin-top:8px"></div>
