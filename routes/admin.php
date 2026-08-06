@@ -4207,6 +4207,44 @@ post('/admin/settings/payment', function() {
 });
 
 
+// ── HELPER: Shift Sort Orders ────────────────────────────────────────────────
+function shiftSortOrder($table, $id, $newSort, $parentField = null, $parentVal = null) {
+    $newSort = max(0, intval($newSort));
+    $whereParent = "";
+    $parentParams = [];
+    if ($parentField !== null) {
+        if ($parentVal === null) {
+            $whereParent = " AND {$parentField} IS NULL";
+        } else {
+            $whereParent = " AND {$parentField} = ?";
+            $parentParams[] = $parentVal;
+        }
+    }
+
+    if ($id) {
+        $oldRow = dbGet("SELECT sort_order FROM {$table} WHERE id=?", [$id]);
+        if ($oldRow) {
+            $oldSort = (int)$oldRow['sort_order'];
+            if ($oldSort === $newSort) return $newSort;
+
+            if ($newSort < $oldSort) {
+                $sql = "UPDATE {$table} SET sort_order = sort_order + 1 WHERE sort_order >= ? AND sort_order < ? AND id != ? {$whereParent}";
+                $params = array_merge([$newSort, $oldSort, $id], $parentParams);
+                dbRun($sql, $params);
+            } else {
+                $sql = "UPDATE {$table} SET sort_order = sort_order - 1 WHERE sort_order > ? AND sort_order <= ? AND id != ? {$whereParent}";
+                $params = array_merge([$oldSort, $newSort, $id], $parentParams);
+                dbRun($sql, $params);
+            }
+        }
+    } else {
+        $sql = "UPDATE {$table} SET sort_order = sort_order + 1 WHERE sort_order >= ? {$whereParent}";
+        $params = array_merge([$newSort], $parentParams);
+        dbRun($sql, $params);
+    }
+    return $newSort;
+}
+
 // ── BRANDS (Hãng xe) CRUD ────────────────────────────────────────────────────
 get('/admin/brands', function() {
     $user = requireStaffPermission('rbac:catalog.vehicle.view|brands', '/admin/login');
@@ -4220,6 +4258,7 @@ post('/admin/brands/add', function() {
     $sort = intval($_POST['sort_order'] ?? 100);
     if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/brands'); return; }
     if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/brands'); return; }
+    $sort = shiftSortOrder('brands', null, $sort);
     $slug = strtolower(preg_replace('/[^a-z0-9]+/', '-', $slug));
     $imagePath = null;
     if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -4252,6 +4291,7 @@ post('/admin/brands/:id/edit', function($p) {
     $sort = intval($_POST['sort_order'] ?? 100);
     if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/brands'); return; }
     if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect('/admin/brands'); return; }
+    $sort = shiftSortOrder('brands', $p['id'], $sort);
     $slug = strtolower(preg_replace('/[^a-z0-9]+/', '-', $slug));
     $imagePath = null;
     if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -4354,6 +4394,7 @@ post('/admin/categories/add', function() {
     $redir = $parentId ? '/admin/categories?parent_id='.$parentId : '/admin/categories';
     if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect($redir); return; }
     if (!$name || !$slug) { flash('error','Vui lòng nhập tên và slug.'); redirect($redir); return; }
+    $sort = shiftSortOrder('categories', null, $sort, 'parent_id', $parentId);
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
         $catImg=catUploadImage(); dbInsert("INSERT INTO categories (name, slug, parent_id, sort_order, is_featured, icon) VALUES (?,?,?,?,?,?)", [$name, $slug, $parentId, $sort, $featured, $catImg]);
@@ -4383,6 +4424,7 @@ post('/admin/categories/:id/edit', function($p) {
     $isActive = intval($_POST['is_active'] ?? 1);
     $redir = $parentId ? '/admin/categories?parent_id='.$parentId : '/admin/categories';
     if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect($redir); return; }
+    $sort = shiftSortOrder('categories', $p['id'], $sort, 'parent_id', $parentId);
     $slug = strtolower(preg_replace('/[^a-z0-9-]+/', '-', $slug));
     try {
         $catImg=catUploadImage(); if($catImg!==''){ dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=?, icon=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $catImg, $p['id']]); } else { dbRun("UPDATE categories SET name=?, slug=?, parent_id=?, sort_order=?, is_featured=?, is_active=? WHERE id=?", [$name, $slug, $parentId, $sort, $featured, $isActive, $p['id']]); }
@@ -4458,6 +4500,7 @@ post('/admin/product-brands/new', function() {
     if (!$name) { flash('error', 'Tên thương hiệu không được để trống.'); redirect('/admin/product-brands'); return; }
     $sort = intval($_POST['sort_order'] ?? 0);
     if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/product-brands'); return; }
+    $sort = shiftSortOrder('product_brands', null, $sort);
     $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $name));
     $logoFile = '';
     if (!empty($_FILES['logo']['tmp_name']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
@@ -4485,6 +4528,7 @@ post('/admin/product-brands/:id/edit', function($p) {
     if (!$name) { flash('error', 'Tên không được để trống.'); redirect('/admin/product-brands'); return; }
     $sort = intval($_POST['sort_order'] ?? 0);
     if ($sort < 0) { flash('error', 'Thứ tự hiển thị phải là số nguyên không âm (≥ 0).'); redirect('/admin/product-brands'); return; }
+    $sort = shiftSortOrder('product_brands', $p['id'], $sort);
     $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $name));
     $desc = trim($_POST['description'] ?? '');
     $existing = dbGet("SELECT logo FROM product_brands WHERE id=?", [$p['id']]);

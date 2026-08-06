@@ -98,6 +98,7 @@ if (!empty($_GET['parent_id'])) {
                         <div style="flex:1;min-width:0">
                             <div class="panel-item-name">
                                 <?= e($cat['name']) ?>
+                                <span style="display:inline-block;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:700;margin-left:4px" title="Thứ tự hiển thị (Tự động đảo vị trí khi đổi)">Thứ tự #<?= (int)$cat['sort_order'] ?></span>
                                 <?php if ($cat['is_featured']): ?><span class="featured-badge">Nổi bật</span><?php endif; ?>
                                 <?php if (isset($cat['is_active']) && intval($cat['is_active']) === 0): ?><span class="hidden-badge">Đã ẩn</span><?php endif; ?>
                             </div>

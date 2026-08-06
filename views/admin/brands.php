@@ -88,6 +88,7 @@ if (!empty($_GET['brand_id'])) {
                             <img src="/uploads/brands/<?= e($b['image']) ?>" style="height:20px; width:40px; vertical-align:middle; margin-right:8px; object-fit:contain;">
                         <?php endif; ?>
                         <?= e($b['name']) ?>
+                        <span style="display:inline-block;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:700;margin-left:4px" title="Thứ tự hiển thị (Tự động đảo vị trí khi đổi)">Thứ tự #<?= (int)$b['sort_order'] ?></span>
                     </div>
                     <div class="panel-item-sub"><?= $b['model_count'] ?> dòng xe · <?= $b['product_count'] ?> sản phẩm</div>
                 </a>

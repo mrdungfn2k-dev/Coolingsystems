@@ -61,7 +61,7 @@ $productBrands = $productBrands ?? dbAll("SELECT * FROM product_brands ORDER BY 
     </div>
     <div class="pb-name"><?= e($b['name']) ?></div>
     <div class="pb-slug"><?= e($b['slug'] ?? '') ?></div>
-    <div class="pb-sub"><?= $cnt ?> sản phẩm &nbsp;·&nbsp; thứ tự #<?= (int)($b['sort_order'] ?? 0) ?></div>
+    <div class="pb-sub"><?= $cnt ?> sản phẩm &nbsp;·&nbsp; <span style="display:inline-block;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:2px 6px;border-radius:4px;font-weight:700;font-size:11px" title="Thứ tự hiển thị (Tự động đảo vị trí khi đổi)">Thứ tự #<?= (int)($b['sort_order'] ?? 0) ?></span></div>
     <div class="pb-actions">
       <button type="button" class="adm-edit pb-edit-btn"
         data-id="<?= (int)$b['id'] ?>"
