@@ -5982,13 +5982,68 @@ post('/admin/locations', function() {
     redirect('/admin/locations');
 });
 
+// D3: Vị trí kho - Chỉnh sửa
+post('/admin/locations/:id/edit', function($p) {
+    $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
+    csrfCheck();
+    $id = (int)$p['id'];
+
+    $oldLoc = dbGet("SELECT * FROM warehouse_locations WHERE id=?", [$id]);
+    if (!$oldLoc) {
+        flash('error', 'Không tìm thấy vị trí kho.');
+        redirect('/admin/locations'); return;
+    }
+
+    $code = strtoupper(trim((string)($_POST['code'] ?? '')));
+    $areaName = trim((string)($_POST['area_name'] ?? ''));
+    $shelfName = trim((string)($_POST['shelf_name'] ?? ''));
+    $binName = trim((string)($_POST['bin_name'] ?? ''));
+    $note = trim((string)($_POST['note'] ?? ''));
+
+    if (!$code || !preg_match('/^[A-Z0-9\-]{3,30}$/', $code)) {
+        flash('error', 'Mã vị trí không hợp lệ (Viết liền không dấu, từ 3-30 ký tự, VD: KE-A-T1-K05).');
+        redirect('/admin/locations'); return;
+    }
+
+    if (!$areaName || mb_strlen($areaName) > 50) {
+        flash('error', 'Vui lòng nhập Khu vực/Kệ hợp lệ (tối đa 50 ký tự).');
+        redirect('/admin/locations'); return;
+    }
+
+    if (mb_strlen($shelfName) > 50 || mb_strlen($binName) > 50) {
+        flash('error', 'Tên Tầng và Khay/Ô tối đa 50 ký tự.');
+        redirect('/admin/locations'); return;
+    }
+
+    $dup = dbGet("SELECT id FROM warehouse_locations WHERE code=? AND id!=?", [$code, $id]);
+    if ($dup) {
+        flash('error', "Mã vị trí '{$code}' đã tồn tại trên hệ thống.");
+        redirect('/admin/locations'); return;
+    }
+
+    dbRun("UPDATE warehouse_locations SET code=?, area_name=?, shelf_name=?, bin_name=?, note=? WHERE id=?", [
+        $code, $areaName, $shelfName ?: null, $binName ?: null, $note ?: null, $id
+    ]);
+
+    if ($oldLoc['code'] !== $code) {
+        dbRun("UPDATE products SET location_code=? WHERE location_code=?", [$code, $oldLoc['code']]);
+    }
+
+    flash('success', "Đã cập nhật vị trí kho {$code} thành công!");
+    redirect('/admin/locations');
+});
+
 // D3: Vị trí kho - Xóa
 post('/admin/locations/:id/delete', function($p) {
     $user = requireStaffPermission('rbac:inventory|products', '/admin/login');
     csrfCheck();
     $id = (int)$p['id'];
-    dbRun("DELETE FROM warehouse_locations WHERE id=?", [$id]);
-    flash('success', 'Đã xóa vị trí kho.');
+    $loc = dbGet("SELECT code FROM warehouse_locations WHERE id=?", [$id]);
+    if ($loc) {
+        dbRun("UPDATE products SET location_code=NULL WHERE location_code=?", [$loc['code']]);
+        dbRun("DELETE FROM warehouse_locations WHERE id=?", [$id]);
+        flash('success', 'Đã xóa vị trí kho ' . $loc['code'] . ' và gỡ liên kết phụ tùng thành công.');
+    }
     redirect('/admin/locations');
 });
 

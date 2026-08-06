@@ -65,10 +65,11 @@
         </button>
       </td>
       <td style="font-size:12px;color:#64748b"><?= e($loc['note'] ?: '—') ?></td>
-      <td>
-        <form method="post" action="/admin/locations/<?= (int)$loc['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa vị trí này?')">
+      <td style="white-space:nowrap">
+        <button type="button" onclick='openEditLocModal(<?= json_encode($loc, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP|JSON_HEX_QUOT) ?>)' class="btn btn-outline-navy btn-sm" style="padding:3px 8px;font-size:11px;margin-right:4px">✏️ Sửa</button>
+        <form method="post" action="/admin/locations/<?= (int)$loc['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Bạn có chắc muốn xóa vị trí <?= e($loc['code']) ?>? Tất cả sản phẩm lưu tại đây sẽ bị gỡ liên kết vị trí.')">
           <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
-          <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:11px;color:#dc2626">Xóa</button>
+          <button type="submit" class="btn btn-outline" style="padding:3px 8px;font-size:11px;color:#dc2626">🗑️ Xóa</button>
         </form>
       </td>
     </tr>
@@ -88,6 +89,7 @@
 </div>
 <?php endif; ?>
 
+<!-- Modal Thêm vị trí kho mới -->
 <div id="newLocationModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
   <form id="locForm" method="post" action="/admin/locations" style="background:#fff;padding:24px;border-radius:10px;max-width:500px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
     <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
@@ -122,6 +124,45 @@
     <div style="display:flex;gap:10px;justify-content:flex-end">
       <button type="button" onclick="document.getElementById('newLocationModal').style.display='none'" class="btn btn-outline">Hủy</button>
       <button type="submit" class="btn btn-navy">Lưu vị trí</button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal Chỉnh sửa vị trí kho -->
+<div id="editLocationModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
+  <form id="editLocForm" method="post" action="" style="background:#fff;padding:24px;border-radius:10px;max-width:500px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2)">
+    <input type="hidden" name="_csrf" value="<?= csrfToken() ?>">
+    <h3 style="margin:0 0 16px;color:#1a3258">Chỉnh sửa vị trí kho</h3>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Mã vị trí (VD: KE-A-T1-K05) <span style="color:#e11d48">*</span></label>
+      <input type="text" name="code" id="edit_loc_code" required pattern="[A-Z0-9\-]{3,30}" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9\-]/g,'')" placeholder="Mã viết liền không dấu (VD: KE-A-T1-K05)" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px;font-family:monospace;font-weight:700">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khu vực / Kệ <span style="color:#e11d48">*</span> <span id="editAreaCharCnt" style="font-weight:400;color:#64748b">(0/50 ký tự)</span></label>
+      <input type="text" id="edit_loc_area" name="area_name" required maxlength="50" placeholder="Ví dụ: Kệ A, Kệ B, Khu Vực 1 (tối đa 50 ký tự)..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+      <div>
+        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Tầng <span id="editShelfCharCnt" style="font-weight:400;color:#64748b">(0/50 ký tự)</span></label>
+        <input type="text" id="edit_loc_shelf" name="shelf_name" maxlength="50" placeholder="Tầng 1, Tầng 2..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Khay / Ô <span id="editBinCharCnt" style="font-weight:400;color:#64748b">(0/50 ký tự)</span></label>
+        <input type="text" id="edit_loc_bin" name="bin_name" maxlength="50" placeholder="Khay 05, Ô 12..." style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:6px;padding:0 10px;font-size:13px">
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px">
+      <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px">Ghi chú <span id="editNoteWordCnt" style="font-weight:400;color:#64748b">(0/200 từ)</span></label>
+      <textarea id="edit_loc_note" name="note" rows="3" placeholder="Mô tả loại phụ tùng lưu ở đây (tối đa 200 từ)..." style="width:100%;border:1px solid #cbd5e1;border-radius:6px;padding:8px 10px;font-size:13px"></textarea>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" onclick="document.getElementById('editLocationModal').style.display='none'" class="btn btn-outline">Hủy</button>
+      <button type="submit" class="btn btn-navy">Lưu thay đổi</button>
     </div>
   </form>
 </div>
@@ -202,6 +243,11 @@ var currentLocCode = '';
   setupCharCounter(document.getElementById('loc_bin'), 50, document.getElementById('binCharCnt'));
   enforceLiveWordLimit(document.getElementById('loc_note'), 200, document.getElementById('noteWordCnt'));
 
+  setupCharCounter(document.getElementById('edit_loc_area'), 50, document.getElementById('editAreaCharCnt'));
+  setupCharCounter(document.getElementById('edit_loc_shelf'), 50, document.getElementById('editShelfCharCnt'));
+  setupCharCounter(document.getElementById('edit_loc_bin'), 50, document.getElementById('editBinCharCnt'));
+  enforceLiveWordLimit(document.getElementById('edit_loc_note'), 200, document.getElementById('editNoteWordCnt'));
+
   // Auto-complete gán sản phẩm vào vị trí kho
   var searchInput = document.getElementById('assign_product_search');
   var hiddenInput = document.getElementById('assign_product_id');
@@ -241,6 +287,23 @@ var currentLocCode = '';
     });
   }
 })();
+
+function openEditLocModal(item) {
+  if(!item) return;
+  document.getElementById('editLocForm').action = '/admin/locations/' + item.id + '/edit';
+  document.getElementById('edit_loc_code').value = item.code || '';
+  document.getElementById('edit_loc_area').value = item.area_name || '';
+  document.getElementById('edit_loc_shelf').value = item.shelf_name || '';
+  document.getElementById('edit_loc_bin').value = item.bin_name || '';
+  document.getElementById('edit_loc_note').value = item.note || '';
+
+  ['edit_loc_area', 'edit_loc_shelf', 'edit_loc_bin', 'edit_loc_note'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.dispatchEvent(new Event('input'));
+  });
+
+  document.getElementById('editLocationModal').style.display = 'flex';
+}
 
 function openLocProductsModal(code) {
   currentLocCode = code;
