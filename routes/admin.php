@@ -308,6 +308,123 @@ get('/admin/products/export-csv', function() {
     exit;
 });
 
+// Export product images to ZIP (organized by Category -> OEM/Name)
+$exportImagesHandler = function() {
+    requireStaffPermission('rbac:catalog.products.view|products', '/admin/login');
+    $selectedIds = [];
+    $rawIds = $_GET['ids'] ?? $_POST['ids'] ?? '';
+    if (!empty($rawIds)) {
+        $selectedIds = array_filter(array_map('intval', explode(',', $rawIds)), function($v){ return $v > 0; });
+    }
+
+    $where = "";
+    $params = [];
+    if (!empty($selectedIds)) {
+        $ph = implode(',', array_fill(0, count($selectedIds), '?'));
+        $where = " WHERE p.id IN ($ph)";
+        $params = $selectedIds;
+    }
+
+    $sql = "SELECT p.id, p.sku, p.oem_code, p.name, c.name AS cat_name 
+            FROM products p 
+            LEFT JOIN categories c ON c.id=p.category_id 
+            {$where} 
+            ORDER BY c.name ASC, p.name ASC";
+    $products = dbAll($sql, $params);
+
+    if (empty($products)) {
+        flash('error', 'Không có sản phẩm nào để xuất ảnh.');
+        redirect('/admin/products');
+        return;
+    }
+
+    if (!class_exists('ZipArchive')) {
+        flash('error', 'Máy chủ PHP chưa cài đặt tiện ích ZipArchive.');
+        redirect('/admin/products');
+        return;
+    }
+
+    $zipFile = tempnam(sys_get_temp_dir(), 'prod_img_') . '.zip';
+    $zip = new ZipArchive();
+    if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
+        flash('error', 'Không thể tạo tệp nén ZIP.');
+        redirect('/admin/products');
+        return;
+    }
+
+    $sanitizer = function($str) {
+        $clean = preg_replace('/[\/\\\\:\*\?"<>\|]/', '_', (string)$str);
+        return trim(preg_replace('/\s+/', ' ', $clean));
+    };
+
+    $addedCount = 0;
+    foreach ($products as $p) {
+        $catFolder = !empty($p['cat_name']) ? $sanitizer($p['cat_name']) : 'Chua phan loai';
+        $oemOrSku = !empty($p['oem_code']) ? trim($p['oem_code']) : trim($p['sku']);
+        $prodFolderName = $sanitizer($oemOrSku . ' - ' . $p['name']);
+        if ($prodFolderName === '' || $prodFolderName === '-') {
+            $prodFolderName = 'SP_' . $p['id'];
+        }
+
+        $images = dbAll("SELECT file_path, is_main, sort_order FROM product_images WHERE product_id=? AND file_path IS NOT NULL AND file_path!='' ORDER BY is_main DESC, sort_order ASC, id ASC", [$p['id']]);
+        if (empty($images)) continue;
+
+        $imgIndex = 1;
+        foreach ($images as $img) {
+            $f = trim($img['file_path']);
+            $localFile = '';
+            $possible = [
+                "/var/lib/coolingsystems/uploads/products/{$f}",
+                "/var/lib/coolingsystems/uploads/{$f}",
+                "/opt/coolingsystems/uploads/products/{$f}",
+                "/opt/coolingsystems/uploads/{$f}",
+                __DIR__ . "/../uploads/products/{$f}",
+                __DIR__ . "/../uploads/{$f}"
+            ];
+            foreach ($possible as $src) {
+                if (file_exists($src)) {
+                    $localFile = $src;
+                    break;
+                }
+            }
+
+            if ($localFile && file_exists($localFile)) {
+                $ext = strtolower(pathinfo($f, PATHINFO_EXTENSION)) ?: 'jpg';
+                $prefix = (!empty($img['is_main']) && $imgIndex === 1) ? 'anh_chinh' : ('anh_phu_' . ($imgIndex - 1));
+                if (empty($img['is_main']) && $imgIndex === 1) {
+                    $prefix = 'anh_1';
+                }
+                $zipEntryName = "{$catFolder}/{$prodFolderName}/{$prefix}.{$ext}";
+                $zip->addFile($localFile, $zipEntryName);
+                $addedCount++;
+            }
+            $imgIndex++;
+        }
+    }
+
+    $zip->close();
+
+    if ($addedCount === 0 || !file_exists($zipFile) || filesize($zipFile) === 0) {
+        if (file_exists($zipFile)) @unlink($zipFile);
+        flash('error', 'Không tìm thấy tệp ảnh hợp lệ để xuất ZIP.');
+        redirect('/admin/products');
+        return;
+    }
+
+    $filename = 'anh_san_pham_' . date('Ymd_His') . '.zip';
+    header('Content-Type: application/zip');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Content-Length: ' . filesize($zipFile));
+    header('Pragma: no-cache');
+    header('Expires: 0');
+    readfile($zipFile);
+    @unlink($zipFile);
+    exit;
+};
+
+get('/admin/products/export-images', $exportImagesHandler);
+post('/admin/products/export-images', $exportImagesHandler);
+
 // Import products from CSV (header-based: chấp nhận tiêu đề tiếng Việt hoặc tiếng Anh, mọi thứ tự cột)
 post('/admin/products/import-csv', function() {
     requireStaffPermission('rbac:catalog.products.import|products', '/admin/login'); csrfCheck();

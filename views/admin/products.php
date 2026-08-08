@@ -23,9 +23,12 @@
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         Xuất CSV ▾
       </button>
-      <div id="exportMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:100;min-width:200px;margin-top:4px;overflow:hidden">
-        <a href="#" onclick="document.getElementById('exportMenu').style.display='none';csColPick({section:'products',url:'/admin/products/export-csv',title:'Tất cả sản phẩm'});return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">📄 Xuất tất cả SP</a>
-        <a href="#" onclick="exportSelected();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">☑️ Xuất SP đã chọn</a>
+      <div id="exportMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:100;min-width:220px;margin-top:4px;overflow:hidden">
+        <a href="#" onclick="document.getElementById('exportMenu').style.display='none';csColPick({section:'products',url:'/admin/products/export-csv',title:'Tất cả sản phẩm'});return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">📄 Xuất tất cả SP (CSV)</a>
+        <a href="#" onclick="exportSelected();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">☑️ Xuất SP đã chọn (CSV)</a>
+        <hr style="margin:4px 0;border:0;border-top:1px solid #eee">
+        <a href="/admin/products/export-images" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh tất cả SP (ZIP)</a>
+        <a href="#" onclick="exportSelectedImages();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh SP đã chọn (ZIP)</a>
       </div>
     </div>
     <button type="button" onclick="document.getElementById('csvImportModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">
@@ -287,6 +290,13 @@ function exportSelected() {
   if (checked.length === 0) { alert('Vui lòng chọn ít nhất 1 sản phẩm để xuất'); return; }
   var ids = Array.from(checked).map(function(c){ return c.value; }).join(',');
   document.getElementById('exportMenu').style.display='none'; csColPick({section:'products',url:'/admin/products/export-csv',title:'SP đã chọn ('+checked.length+')',extra:{ids:ids}});
+}
+function exportSelectedImages() {
+  var checked = document.querySelectorAll('.row-check:checked');
+  if (checked.length === 0) { alert('Vui lòng chọn ít nhất 1 sản phẩm để xuất ảnh'); return; }
+  var ids = Array.from(checked).map(function(c){ return c.value; }).join(',');
+  document.getElementById('exportMenu').style.display='none';
+  window.location.href = '/admin/products/export-images?ids=' + ids;
 }
 document.addEventListener('click', function(e) {
   var dd = document.getElementById('exportDropdown');
