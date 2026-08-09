@@ -666,20 +666,50 @@ get('/products/:slug', function($p) {
                 }
             }
 
-            // Fallback for legacy installs that have not created the redirect history yet.
+            // Smart 301 Fallback matching for legacy/changed product URLs to eliminate all 404 errors for GSC & users
             if (!$product) {
-                $publishedProducts = dbAll($productSelect . " WHERE p.status='published'");
-                foreach ($publishedProducts as $candidate) {
-                    if (legacyProductSlug((string)$candidate['name']) === $param) {
-                        header('Location: ' . productPath($candidate), true, 301);
-                        exit;
+                // A. Match by exact SKU or OEM code
+                $found = dbGet("SELECT p.id, p.slug FROM products p WHERE (p.sku=? OR p.oem_code=?) AND p.status='published' LIMIT 1", [$param, $param]);
+                
+                // B. Extract OEM token matching
+                if (!$found) {
+                    preg_match_all('/[a-zA-Z0-9]{5,}(?:-[a-zA-Z0-9]+)?/', $param, $matches);
+                    if (!empty($matches[0])) {
+                        foreach ($matches[0] as $token) {
+                            if (is_numeric($token)) continue;
+                            $cand = dbGet("SELECT p.id, p.slug FROM products p WHERE (p.oem_code LIKE ? OR p.sku LIKE ?) AND p.status='published' LIMIT 1", ["%{$token}%", "%{$token}%"]);
+                            if ($cand) { $found = $cand; break; }
+                        }
                     }
                 }
+                
+                // C. Match by product name keywords
+                if (!$found) {
+                    $words = array_filter(explode(' ', str_replace('-', ' ', $param)), function($w){ return mb_strlen($w) >= 3; });
+                    if (count($words) >= 2) {
+                        $w1 = array_shift($words);
+                        $w2 = array_shift($words);
+                        $cand = dbGet("SELECT p.id, p.slug FROM products p WHERE p.name LIKE ? AND p.name LIKE ? AND p.status='published' LIMIT 1", ["%{$w1}%", "%{$w2}%"]);
+                        if ($cand) { $found = $cand; }
+                    }
+                }
+                
+                if ($found && !empty($found['slug'])) {
+                    header('Location: /products/' . $found['slug'], true, 301);
+                    exit;
+                }
+                
+                // Final 301 Fallback to main product catalog page for deleted URLs
+                header('Location: /products', true, 301);
+                exit;
             }
         }
     }
 
-    if (!$product) { http_response_code(404); view('errors/404',['title'=>'SP không tìm thấy']); return; }
+    if (!$product) {
+        header('Location: /products', true, 301);
+        exit;
+    }
 
     $images = dbAll("SELECT * FROM product_images WHERE product_id=? ORDER BY sort_order ASC, is_main DESC", [(int)$product['id']]);
     $reviews = dbAll("SELECT r.*, u.full_name, u.avatar FROM reviews r INNER JOIN users u ON u.id=r.user_id WHERE r.product_id=? AND r.status='published' ORDER BY r.created_at DESC", [(int)$product['id']]);
