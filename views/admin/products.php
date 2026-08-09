@@ -324,7 +324,7 @@ function triggerImageExport(mode) {
   document.getElementById('exportMenu').style.display = 'none';
   
   var url = '/admin/products/export-images';
-  var descText = 'Hệ thống đang tự động đóng gói toàn bộ hình ảnh theo Danh mục & Mã OEM. Vui lòng đợi trong giây lát...';
+  var descText = 'Hệ thống đang mở luồng tải trực tiếp gói hình ảnh đầy đủ (~840 MB). Vui lòng đợi trình duyệt tải xong 100% trước khi mở giải nén!';
   
   if (mode === 'selected') {
     var checked = document.querySelectorAll('.row-check:checked');
@@ -334,29 +334,32 @@ function triggerImageExport(mode) {
     }
     var ids = Array.from(checked).map(function(c) { return c.value; }).join(',');
     url += '?ids=' + ids;
-    descText = 'Hệ thống đang đóng gói hình ảnh của ' + checked.length + ' sản phẩm đã chọn. Vui lòng đợi trong giây lát...';
+    descText = 'Hệ thống đang đóng gói hình ảnh của ' + checked.length + ' sản phẩm đã chọn...';
   }
   
   document.getElementById('zipModalDesc').textContent = descText;
-  document.getElementById('zipStatusText').textContent = '⏳ Đang kết nối VPS & chuẩn bị tệp ZIP...';
+  document.getElementById('zipStatusText').textContent = '⏳ Đang khởi tạo luồng tải tệp ZIP từ máy chủ VPS...';
   document.getElementById('zipProgressModal').style.display = 'flex';
   
-  var iframe = document.getElementById('hiddenDownloadIframe');
-  if (!iframe) {
-    iframe = document.createElement('iframe');
-    iframe.id = 'hiddenDownloadIframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+  if (mode === 'all') {
+    window.location.href = url;
+  } else {
+    var iframe = document.getElementById('hiddenDownloadIframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = 'hiddenDownloadIframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    iframe.src = url;
   }
   
-  iframe.src = url;
-  
   setTimeout(function() {
-    document.getElementById('zipStatusText').textContent = '✅ Đã bắt đầu tải về tệp ZIP!';
+    document.getElementById('zipStatusText').textContent = '✅ Đang tải tệp ZIP về máy! Vui lòng kiểm tra thanh tải về của trình duyệt và đợi hoàn tất 100% trước khi giải nén.';
     setTimeout(function() {
       closeZipModal();
-    }, 2000);
-  }, 4500);
+    }, 4500);
+  }, 2000);
 }
 
 function closeZipModal() {

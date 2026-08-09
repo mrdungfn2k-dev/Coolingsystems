@@ -319,6 +319,14 @@ $exportImagesHandler = function() {
         $selectedIds = array_filter(array_map('intval', explode(',', $rawIds)), function($v){ return $v > 0; });
     }
 
+    $staticZip = '/var/lib/coolingsystems/uploads/exports/anh_san_pham_full.zip';
+
+    // If exporting ALL products and static zip package exists, serve direct Nginx download for 100% instant & complete file transmission
+    if (empty($selectedIds) && file_exists($staticZip) && filesize($staticZip) > 100000) {
+        header('Location: /uploads/exports/anh_san_pham_full.zip');
+        exit;
+    }
+
     $where = "";
     $params = [];
     if (!empty($selectedIds)) {
