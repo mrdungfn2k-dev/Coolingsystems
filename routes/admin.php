@@ -310,6 +310,8 @@ get('/admin/products/export-csv', function() {
 
 // Export product images to ZIP (organized by Category -> OEM/Name)
 $exportImagesHandler = function() {
+    set_time_limit(600);
+    @ini_set('memory_limit', '512M');
     requireStaffPermission('rbac:catalog.products.view|products', '/admin/login');
     $selectedIds = [];
     $rawIds = $_GET['ids'] ?? $_POST['ids'] ?? '';

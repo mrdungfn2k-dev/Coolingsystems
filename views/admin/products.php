@@ -27,8 +27,8 @@
         <a href="#" onclick="document.getElementById('exportMenu').style.display='none';csColPick({section:'products',url:'/admin/products/export-csv',title:'Tất cả sản phẩm'});return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">📄 Xuất tất cả SP (CSV)</a>
         <a href="#" onclick="exportSelected();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">☑️ Xuất SP đã chọn (CSV)</a>
         <hr style="margin:4px 0;border:0;border-top:1px solid #eee">
-        <a href="/admin/products/export-images" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh tất cả SP (ZIP)</a>
-        <a href="#" onclick="exportSelectedImages();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh SP đã chọn (ZIP)</a>
+        <a href="#" onclick="triggerImageExport('all');return false;" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh tất cả SP (ZIP)</a>
+        <a href="#" onclick="triggerImageExport('selected');return false;" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh SP đã chọn (ZIP)</a>
       </div>
     </div>
     <button type="button" onclick="document.getElementById('csvImportModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">
@@ -278,6 +278,34 @@ document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){
 
 
 
+<!-- Modal Tiến trình Nén & Tải tệp ZIP -->
+<div id="zipProgressModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:99999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:14px;padding:28px;width:440px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,0.2);text-align:center">
+    <div style="width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center">
+      <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+    </div>
+    <h3 style="margin:0 0 8px;font-size:17px;font-weight:700;color:var(--navy)" id="zipModalTitle">Đang nén & xuất ảnh sản phẩm...</h3>
+    <p style="font-size:13px;color:#666;margin:0 0 20px;line-height:1.5" id="zipModalDesc">Hệ thống đang tự động đóng gói hình ảnh theo Danh mục & Mã OEM. Vui lòng đợi trong giây lát...</p>
+    
+    <div style="background:#f1f5f9;border-radius:10px;height:10px;overflow:hidden;margin-bottom:16px;position:relative">
+      <div id="zipProgressBar" style="background:linear-gradient(90deg, #2563eb, #3b82f6);height:100%;width:100%;animation:zipPulse 1.5s infinite ease-in-out;border-radius:10px"></div>
+    </div>
+    
+    <div style="font-size:12px;color:#888;display:flex;justify-content:space-between;align-items:center">
+      <span id="zipStatusText">⏳ Đang xử lý trên máy chủ VPS...</span>
+      <button type="button" onclick="closeZipModal()" class="btn btn-outline-navy btn-sm" style="padding:4px 12px;font-size:12px">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes zipPulse {
+  0% { opacity: 0.4; transform: scaleX(0.2); transform-origin: left; }
+  50% { opacity: 1; transform: scaleX(0.85); transform-origin: left; }
+  100% { opacity: 0.4; transform: scaleX(1); transform-origin: left; }
+}
+</style>
+
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>
 
 <script>
@@ -291,12 +319,48 @@ function exportSelected() {
   var ids = Array.from(checked).map(function(c){ return c.value; }).join(',');
   document.getElementById('exportMenu').style.display='none'; csColPick({section:'products',url:'/admin/products/export-csv',title:'SP đã chọn ('+checked.length+')',extra:{ids:ids}});
 }
-function exportSelectedImages() {
-  var checked = document.querySelectorAll('.row-check:checked');
-  if (checked.length === 0) { alert('Vui lòng chọn ít nhất 1 sản phẩm để xuất ảnh'); return; }
-  var ids = Array.from(checked).map(function(c){ return c.value; }).join(',');
-  document.getElementById('exportMenu').style.display='none';
-  window.location.href = '/admin/products/export-images?ids=' + ids;
+
+function triggerImageExport(mode) {
+  document.getElementById('exportMenu').style.display = 'none';
+  
+  var url = '/admin/products/export-images';
+  var descText = 'Hệ thống đang tự động đóng gói toàn bộ hình ảnh theo Danh mục & Mã OEM. Vui lòng đợi trong giây lát...';
+  
+  if (mode === 'selected') {
+    var checked = document.querySelectorAll('.row-check:checked');
+    if (checked.length === 0) {
+      alert('Vui lòng chọn ít nhất 1 sản phẩm để xuất ảnh.');
+      return;
+    }
+    var ids = Array.from(checked).map(function(c) { return c.value; }).join(',');
+    url += '?ids=' + ids;
+    descText = 'Hệ thống đang đóng gói hình ảnh của ' + checked.length + ' sản phẩm đã chọn. Vui lòng đợi trong giây lát...';
+  }
+  
+  document.getElementById('zipModalDesc').textContent = descText;
+  document.getElementById('zipStatusText').textContent = '⏳ Đang kết nối VPS & chuẩn bị tệp ZIP...';
+  document.getElementById('zipProgressModal').style.display = 'flex';
+  
+  var iframe = document.getElementById('hiddenDownloadIframe');
+  if (!iframe) {
+    iframe = document.createElement('iframe');
+    iframe.id = 'hiddenDownloadIframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+  }
+  
+  iframe.src = url;
+  
+  setTimeout(function() {
+    document.getElementById('zipStatusText').textContent = '✅ Đã bắt đầu tải về tệp ZIP!';
+    setTimeout(function() {
+      closeZipModal();
+    }, 2000);
+  }, 4500);
+}
+
+function closeZipModal() {
+  document.getElementById('zipProgressModal').style.display = 'none';
 }
 document.addEventListener('click', function(e) {
   var dd = document.getElementById('exportDropdown');
