@@ -355,7 +355,12 @@ $exportImagesHandler = function() {
     }
 
     $sanitizer = function($str) {
-        $clean = preg_replace('/[\/\\\\:\*\?"<>\|]/', '_', (string)$str);
+        if (function_exists('removeAccents')) {
+            $str = removeAccents((string)$str);
+        } else {
+            $str = (string)$str;
+        }
+        $clean = preg_replace('/[\/\\\\:\*\?"<>\|]/', '_', $str);
         return trim(preg_replace('/\s+/', ' ', $clean));
     };
 
@@ -411,6 +416,10 @@ $exportImagesHandler = function() {
         flash('error', 'Không tìm thấy tệp ảnh hợp lệ để xuất ZIP.');
         redirect('/admin/products');
         return;
+    }
+
+    while (ob_get_level()) {
+        @ob_end_clean();
     }
 
     $filename = 'anh_san_pham_' . date('Ymd_His') . '.zip';
