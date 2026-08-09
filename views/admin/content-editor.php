@@ -52,6 +52,97 @@
 </form>
 
 <script>
+function setupTinyMCECallout(editor) {
+  editor.ui.registry.addMenuButton('calloutbox', {
+    text: '🎨 Khung Nền',
+    tooltip: 'Tạo / Đổi màu khung background & màu viền',
+    fetch: function(callback) {
+      var applyBox = function(bgColor, borderColor) {
+        var sel = editor.selection;
+        var node = sel.getNode();
+        var box = editor.dom.getParent(node, 'div, p, blockquote, ul, ol');
+        
+        if (!box || box.nodeName.toLowerCase() === 'body') {
+          var content = sel.getContent() || '<p>Nhập nội dung khung thông tin...</p>';
+          editor.insertContent('<div style="background-color: ' + bgColor + '; border: 1px solid ' + borderColor + '; border-radius: 12px; padding: 16px; margin: 12px 0;">' + content + '</div>');
+        } else {
+          editor.dom.setStyle(box, 'background-color', bgColor);
+          editor.dom.setStyle(box, 'border', '1px solid ' + borderColor);
+          editor.dom.setStyle(box, 'border-radius', '12px');
+          editor.dom.setStyle(box, 'padding', '16px');
+          editor.dom.setStyle(box, 'margin', '12px 0');
+        }
+      };
+
+      var items = [
+        {
+          type: 'menuitem',
+          text: '🟢 Khung Xanh lá (Giống mẫu ảnh)',
+          onAction: function() { applyBox('#f0fdf4', '#4ade80'); }
+        },
+        {
+          type: 'menuitem',
+          text: '🔵 Khung Xanh dương (Blue Callout)',
+          onAction: function() { applyBox('#eff6ff', '#60a5fa'); }
+        },
+        {
+          type: 'menuitem',
+          text: '🟡 Khung Vàng Gold (Yellow Callout)',
+          onAction: function() { applyBox('#fefce8', '#facc15'); }
+        },
+        {
+          type: 'menuitem',
+          text: '🔴 Khung Đỏ (Red Alert)',
+          onAction: function() { applyBox('#fef2f2', '#f87171'); }
+        },
+        {
+          type: 'menuitem',
+          text: '⚪ Khung Xám (Modern Gray)',
+          onAction: function() { applyBox('#f8fafc', '#cbd5e1'); }
+        },
+        {
+          type: 'menuitem',
+          text: '🟣 Khung Tím (Purple)',
+          onAction: function() { applyBox('#faf5ff', '#c084fc'); }
+        },
+        {
+          type: 'menuitem',
+          text: '🎨 Tự chọn Màu Nền & Màu Viền...',
+          onAction: function() {
+            var node = editor.selection.getNode();
+            var box = editor.dom.getParent(node, 'div, p, blockquote, ul, ol') || node;
+            var curBg = editor.dom.getStyle(box, 'background-color') || '#f0fdf4';
+            var curBorder = editor.dom.getStyle(box, 'border-color') || '#4ade80';
+            
+            var bg = prompt('Nhập mã màu nền (ví dụ: #f0fdf4, #fff7ed, #e0f2fe...):', curBg);
+            if (bg !== null && bg.trim() !== '') {
+              var border = prompt('Nhập mã màu viền (ví dụ: #4ade80, #f97316, #3b82f6...):', curBorder);
+              if (!border) border = bg;
+              applyBox(bg.trim(), border.trim());
+            }
+          }
+        },
+        {
+          type: 'menuitem',
+          text: '❌ Xóa màu khung nền',
+          onAction: function() {
+            var node = editor.selection.getNode();
+            var box = editor.dom.getParent(node, 'div, p, blockquote, ul, ol');
+            if (box) {
+              editor.dom.setStyle(box, 'background-color', '');
+              editor.dom.setStyle(box, 'border', '');
+              editor.dom.setStyle(box, 'border-radius', '');
+              editor.dom.setStyle(box, 'padding', '');
+              editor.dom.setStyle(box, 'margin', '');
+            }
+          }
+        }
+      ];
+      callback(items);
+    }
+  });
+}
+
 tinymce.init({
   selector: '#tinymceContent',
   height: 550,
@@ -62,7 +153,7 @@ tinymce.init({
   convert_newlines_to_brs: false,
   plugins: 'table lists link image code wordcount fullscreen preview searchreplace autolink visualblocks',
   toolbar: [
-    'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | removeformat',
+    'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | calloutbox removeformat',
     'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | link image | code fullscreen'
   ],
   font_family_formats: 'Mặc định=; Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
@@ -91,6 +182,7 @@ tinymce.init({
   branding: false,
   license_key: 'gpl',
   setup: function(editor) {
+    setupTinyMCECallout(editor);
     editor.on('BeforeExecCommand', function(e) {
       if (['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'].indexOf(e.command) !== -1) {
         var node = editor.selection.getNode();
