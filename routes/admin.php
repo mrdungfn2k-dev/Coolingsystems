@@ -3808,7 +3808,8 @@ get('/admin/news/new', function() {
 });
 post('/admin/news/new', function() {
     $user = requireStaffPermission('content', '/auth/login'); csrfCheck();
-    $title=$_POST['title']??''; $slug=trim($_POST['slug']??''); $excerpt=$_POST['excerpt']??''; $content=$_POST['content']??''; $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
+    $content = preg_replace('#(\.\./)+uploads/#i', '/uploads/', $_POST['content']??'');
+    $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
     $seoTitle = trim($_POST['seo_title'] ?? '');
     $seoDesc = trim($_POST['seo_description'] ?? '');
     $seoKw = trim($_POST['seo_keyword'] ?? '');
@@ -3839,7 +3840,9 @@ post('/admin/news/:id/edit', function($p) {
     $user=requireStaffPermission('content', '/auth/login'); csrfCheck();
     $article=dbGet('SELECT * FROM articles WHERE id=?',[$p['id']]);
     if (!$article) { flash('error','Không tìm thấy.'); redirect('/admin/news'); }
-    $title=$_POST['title']??''; $slug=trim($_POST['slug']??'')?:$article['slug']; $excerpt=$_POST['excerpt']??''; $content=$_POST['content']??''; $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
+    $title=$_POST['title']??''; $slug=trim($_POST['slug']??'')?:$article['slug']; $excerpt=$_POST['excerpt']??'';
+    $content = preg_replace('#(\.\./)+uploads/#i', '/uploads/', $_POST['content']??'');
+    $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
     $seoTitle = trim($_POST['seo_title'] ?? '');
     $seoDesc = trim($_POST['seo_description'] ?? '');
     $seoKw = trim($_POST['seo_keyword'] ?? '');

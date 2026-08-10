@@ -2,6 +2,15 @@
 <style>
 
 .full-article .rich-content { font-size: 16px !important; }
+.rich-content img { max-width: 100% !important; height: auto !important; border-radius: 8px; margin: 14px auto; display: inline-block; vertical-align: middle; }
+.rich-content p[style*="text-align: center"], .rich-content div[style*="text-align: center"],
+.rich-content p[style*="text-align:center"], .rich-content div[style*="text-align:center"] { text-align: center !important; }
+.rich-content p[style*="text-align: center"] img, .rich-content div[style*="text-align: center"] img,
+.rich-content p[style*="text-align:center"] img, .rich-content div[style*="text-align:center"] img { display: inline-block !important; margin-left: auto !important; margin-right: auto !important; }
+.rich-content p[style*="text-align: right"], .rich-content div[style*="text-align: right"],
+.rich-content p[style*="text-align:right"], .rich-content div[style*="text-align:right"] { text-align: right !important; }
+.rich-content p[style*="text-align: right"] img, .rich-content div[style*="text-align: right"] img,
+.rich-content p[style*="text-align:right"] img, .rich-content div[style*="text-align:right"] img { display: inline-block !important; }
 @media(max-width:768px) {
   
 }

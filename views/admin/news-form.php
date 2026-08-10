@@ -231,6 +231,9 @@ tinymce.init({
   force_p_newlines: true,
   force_br_newlines: false,
   convert_newlines_to_brs: false,
+  relative_urls: false,
+  remove_script_host: true,
+  convert_urls: true,
   paste_data_images: true,
   images_upload_url: '/admin/upload-tinymce-image',
   file_picker_types: 'image',
@@ -282,7 +285,9 @@ tinymce.init({
     h1 { font-size: 28px; color: #0b1d3a; font-weight: 900; }
     h2 { font-size: 22px; color: #0b1d3a; font-weight: 800; }
     h3 { font-size: 18px; color: #0b1d3a; font-weight: 700; }
-    img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px auto; display: block; }
+    img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px auto; display: inline-block; vertical-align: middle; }
+    p[style*="text-align: center"], div[style*="text-align: center"], p[style*="text-align:center"], div[style*="text-align:center"] { text-align: center !important; }
+    p[style*="text-align: center"] img, div[style*="text-align: center"] img, p[style*="text-align:center"] img, div[style*="text-align:center"] img { display: inline-block !important; margin-left: auto !important; margin-right: auto !important; }
     blockquote { border-left: 3px solid #c9a14a; padding: 12px 16px; background: #faf8f3; border-radius: 0 8px 8px 0; }
   `,
   menubar: 'file edit view insert format table',
