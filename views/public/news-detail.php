@@ -34,14 +34,14 @@
   <div>
     <div style="padding:0">
       <div style="font-size:13px;color:var(--ink-4);margin-bottom:10px;display:flex;align-items:center;gap:6px">
-        <span>📅 <?= $article['published_at'] ? date('d/m/Y H:i', strtotime($article['published_at'])) : '' ?></span>
+        <span><?= $article['published_at'] ? date('d/m/Y H:i', strtotime($article['published_at'])) : '' ?></span>
         &nbsp;·&nbsp; <a href="/news" style="color:var(--navy);font-weight:600">← Tin tức</a>
       </div>
       <h1 style="font-size:28px;font-weight:800;color:var(--navy-dark);line-height:1.35;margin:0 0 16px"><?= e($article['title']) ?></h1>
       
       <?php if ($article['thumbnail']): ?>
         <div style="margin:0 0 24px;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06)">
-          <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;max-height:480px;object-fit:cover;display:block">
+          <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;height:auto;display:block">
         </div>
       <?php endif; ?>
 
