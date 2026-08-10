@@ -3841,7 +3841,12 @@ post('/admin/news/:id/edit', function($p) {
     $article=dbGet('SELECT * FROM articles WHERE id=?',[$p['id']]);
     if (!$article) { flash('error','Không tìm thấy.'); redirect('/admin/news'); }
     $title=$_POST['title']??''; $slug=trim($_POST['slug']??'')?:$article['slug']; $excerpt=$_POST['excerpt']??'';
-    $content = preg_replace('#(\.\./)+uploads/#i', '/uploads/', $_POST['content']??'');
+    $rawContent = trim($_POST['content'] ?? '');
+    if ($rawContent === '' && !empty($article['content'])) {
+        $content = $article['content'];
+    } else {
+        $content = preg_replace('#(\.\./)+uploads/#i', '/uploads/', $_POST['content'] ?? '');
+    }
     $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
     $seoTitle = trim($_POST['seo_title'] ?? '');
     $seoDesc = trim($_POST['seo_description'] ?? '');

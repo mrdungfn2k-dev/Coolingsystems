@@ -541,6 +541,13 @@ function selectKeyword(kw) {
 
 // ── BẮT LỖI SUBMIT KHI XUẤT BẢN NẾU ĐIỂM SEO < 85 ──
 document.getElementById('newsForm')?.addEventListener('submit', function(e) {
+  // Sync TinyMCE content back to textarea before submit
+  if (typeof tinymce !== 'undefined') {
+    tinymce.triggerSave();
+    var ed = tinymce.get('tinymceNews');
+    if (ed) ed.save();
+  }
+
   var statusSel = document.querySelector('select[name="status"]');
   var statusVal = statusSel ? statusSel.value : 'draft';
 
