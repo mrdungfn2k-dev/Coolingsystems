@@ -8,7 +8,7 @@
 .ql-editor h1{font-size:28px;font-weight:800;color:#1a3258;border-bottom:2px solid #e8edf5;padding-bottom:6px;margin:16px 0 10px}
 .ql-editor h2{font-size:22px;font-weight:700;color:#1a3258;margin:14px 0 8px}
 .ql-editor h3{font-size:18px;font-weight:700;color:#2c4a7c;margin:12px 0 6px}
-.news-layout{display:grid;grid-template-columns:1fr 260px;gap:20px;align-items:start}
+.news-layout{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
 @media(max-width:900px){.news-layout{grid-template-columns:1fr}}
 </style>
 <div class="dash-head">
@@ -17,7 +17,7 @@
 </div>
 <form method="post" action="<?= isset($article['id']) ? '/admin/news/'.$article['id'].'/edit' : '/admin/news/new' ?>" enctype="multipart/form-data" id="newsForm">
   <?= csrfField() ?>
-    <div class="news-layout">
+  <div class="news-layout">
     <div>
       <div class="panel">
         <div class="panel-body" style="padding:16px">
@@ -31,13 +31,68 @@
           </div>
         </div>
       </div>
+      
       <div class="panel" style="margin-top:16px">
         <div class="panel-head"><h3>Nội dung bài viết</h3></div>
         <div class="panel-body" style="padding:0">
           <textarea id="tinymceNews" name="content"><?= htmlspecialchars($article['content']??'') ?></textarea>
         </div>
       </div>
+
+      <!-- SEO CONTENT ANALYZER (Kiểu Rank Math / Yoast SEO) -->
+      <div class="panel" id="seoPanel" style="margin-top:16px">
+        <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center">
+          <h3> Phân tích SEO nội dung</h3>
+          <span id="seoScore" style="font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;background:#fef3c7;color:#d97706">— Đang phân tích</span>
+        </div>
+        <div class="panel-body">
+          <div style="font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.6;background:#f8fafc;padding:10px 12px;border-radius:6px;border:1px solid #e2e8f0">
+             Panel này phân tích Tiêu đề, Tóm tắt và Nội dung bài viết tin tức xem đã chuẩn SEO chưa — tương tự Rank Math / Yoast SEO trong WordPress.
+          </div>
+          <div class="form-group">
+            <label>Tiêu đề Google</label>
+            <input type="text" name="seo_title" id="seoTitle" maxlength="70"
+                   value="<?= e($article['seo_title']??'') ?>" placeholder="Để trống để hệ thống tự lấy Tiêu đề bài viết">
+          </div>
+          <div class="form-group">
+            <label>Mô tả Google</label>
+            <textarea name="seo_description" id="seoDescription" rows="3" maxlength="170"
+                      placeholder="Để trống để hệ thống tự lấy Tóm tắt bài viết"><?= e($article['seo_description']??'') ?></textarea>
+          </div>
+          <div class="form-group">
+            <label>Từ khóa mục tiêu <span style="font-weight:400;color:#888;font-size:11px">(Focus Keyword — để kiểm tra bài viết)</span></label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="text" name="seo_keyword" id="seoKeyword" style="flex:1"
+                     value="<?= e($article['seo_keyword']??'') ?>" placeholder="VD: hướng dẫn bảo dưỡng điều hòa ô tô"
+                     oninput="runSeoAnalysis()">
+              <button type="button" id="btnSuggestKw" onclick="suggestKeywords()" class="btn btn-outline-navy btn-sm" style="white-space:nowrap;height:38px;display:inline-flex;align-items:center;gap:4px;flex-shrink:0">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                Gợi ý từ khóa
+              </button>
+            </div>
+            <div id="kwSuggestions" style="display:none;margin-top:8px;padding:10px 12px;background:#f0f4ff;border-radius:8px;border:1px solid #c7d2fe"></div>
+          </div>
+
+          <!-- Google SERP Preview -->
+          <div style="background:#fff;border:1px solid #dfe1e5;border-radius:8px;padding:14px;margin-bottom:14px">
+            <div style="font-size:11px;font-weight:600;color:#64748b;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+              <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Xem trước hiển thị trên Google
+            </div>
+            <div id="seoPreviewTitle" style="font-size:18px;color:#1a0dab;line-height:1.3;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Tiêu đề bài viết...</div>
+            <div style="font-size:12px;color:#006621;margin-bottom:4px">https://coolingsystems.vn/news/<span id="seoPreviewSlug">...</span></div>
+            <div id="seoPreviewDesc" style="font-size:13px;color:#545454;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Mô tả bài viết...</div>
+          </div>
+
+          <!-- SEO Checklist -->
+          <div id="seoChecklist" style="font-size:12px;line-height:2.2"></div>
+
+          <button type="button" onclick="runSeoAnalysis()" class="btn btn-outline-navy btn-sm" style="margin-top:10px;width:100%"> Phân tích lại</button>
+        </div>
+      </div>
     </div>
+
+    <!-- RIGHT SIDEBAR -->
     <div style="display:flex;flex-direction:column;gap:14px;position:sticky;top:80px">
       <div class="panel">
         <div class="panel-head"><h3> Xuất bản</h3></div>
@@ -233,21 +288,200 @@ tinymce.init({
       });
     });
 
-    editor.on('change', function() { editor.save(); });
+    editor.on('change', function() {
+      editor.save();
+      clearTimeout(window._seoT);
+      window._seoT = setTimeout(runSeoAnalysis, 500);
+    });
+
+    editor.on('keyup', function() {
+      clearTimeout(window._seoT);
+      window._seoT = setTimeout(runSeoAnalysis, 500);
+    });
   }
 });
 
+// ── SEO ANALYSIS ENGINE FOR NEWS ARTICLES (Rank Math / Yoast SEO Style) ──
+function runSeoAnalysis() {
+  var title = (document.querySelector('input[name="title"]')?.value || '').trim();
+  var excerpt = (document.querySelector('textarea[name="excerpt"]')?.value || '').trim();
+  var keyword = (document.getElementById('seoKeyword')?.value || '').toLowerCase().trim();
+  var slugInput = document.querySelector('input[name="slug"]');
+  var slug = (slugInput?.value || '').trim();
 
-
-
-// TinyMCE auto-syncs on form submit
-// Auto-generate slug from title
-document.querySelector('[name=title]').addEventListener('input',function(){
-  var sl=document.querySelector('[name=slug]');
-  if(!sl.dataset.manual){
-    sl.value=this.value.toLowerCase().replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g,'a').replace(/[èéẹẻẽêềếệểễ]/g,'e').replace(/[ìíịỉĩ]/g,'i').replace(/[òóọỏõôồốộổỗơờớợởỡ]/g,'o').replace(/[ùúụủũưừứựửữ]/g,'u').replace(/[ỳýỵỷỹ]/g,'y').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  function getContentText() {
+    if (typeof tinymce !== 'undefined') {
+      var ed = tinymce.get('tinymceNews');
+      if (ed) {
+        try {
+          return {
+            html: ed.getContent() || '',
+            text: (ed.getContent({format:'text'}) || '').trim()
+          };
+        } catch(e) {}
+      }
+    }
+    var ta = document.getElementById('tinymceNews');
+    if (ta && ta.value) {
+      return { html: ta.value, text: ta.value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() };
+    }
+    return { html: '', text: '' };
   }
+
+  var cObj = getContentText();
+  var contentHtml = cObj.html;
+  var contentText = cObj.text;
+  var allText = (title + ' ' + excerpt + ' ' + contentText).toLowerCase();
+
+  // Preview Google SERP
+  var customSeoTitle = (document.getElementById('seoTitle')?.value || '').trim();
+  var customSeoDesc = (document.getElementById('seoDescription')?.value || '').trim();
+  var previewTitle = customSeoTitle || title;
+  var previewDesc = customSeoDesc || excerpt || (contentText ? contentText.substring(0, 155) : 'Mô tả bài viết...');
+
+  document.getElementById('seoPreviewTitle').textContent = previewTitle || 'Tiêu đề bài viết...';
+  document.getElementById('seoPreviewDesc').textContent = previewDesc;
+  document.getElementById('seoPreviewSlug').textContent = slug || '...';
+
+  // ── WEIGHTED SCORING FOR NEWS ARTICLES (100 điểm) ──
+  // Tiêu đề & Meta: 20đ | Tóm tắt & Bài viết: 35đ | Cấu trúc Heading: 20đ | Từ khóa: 25đ
+  var score = 0;
+  var checks = [];
+  function add(pass, msg, cat, pts) { if(pass) score += pts; checks.push({pass:pass,msg:msg,cat:cat,pts:pts}); }
+
+  // ─ TIÊU ĐỀ & META (20đ)
+  add(previewTitle.length >= 20 && previewTitle.length <= 70, 'Tiêu đề Google dài ' + previewTitle.length + ' ký tự (tốt nhất: 20-70 ký tự)', 'meta', 10);
+  add(previewDesc.length >= 120 && previewDesc.length <= 170, 'Mô tả Google dài ' + previewDesc.length + ' ký tự (tốt nhất: 120-170 ký tự)', 'meta', 10);
+
+  // ─ TÓM TẮT & BÀI VIẾT (35đ)
+  add(excerpt.length >= 50, 'Tóm tắt bài viết dài ' + excerpt.length + ' ký tự (≥50 ký tự)', 'content', 10);
+  var wordCount = contentText ? contentText.split(/\s+/).filter(Boolean).length : 0;
+  add(wordCount >= 300, 'Bài viết dài ' + wordCount + ' từ (đạt chuẩn tối thiểu ≥300 từ)', 'content', 15);
+  add(wordCount >= 600, 'Bài viết chuyên sâu ≥600 từ (' + wordCount + ' từ)', 'content', 10);
+
+  // ─ CẤU TRÚC HEADING & MINH HỌA (20đ)
+  var h2c = (contentHtml.match(/<h2\b[^>]*>/gi)||[]).length;
+  var h3c = (contentHtml.match(/<h3\b[^>]*>/gi)||[]).length;
+  add(h2c >= 1, 'Bài viết có ' + h2c + ' thẻ tiêu đề H2 (khuyên dùng ≥1 H2)', 'struct', 8);
+  add(h2c + h3c >= 2, 'Bài viết có tổng ' + (h2c+h3c) + ' thẻ H2/H3 phân đoạn', 'struct', 4);
+  add(/<(ul|ol)\b[^>]*>/i.test(contentHtml), 'Bài viết sử dụng danh sách gạch đầu dòng / số', 'struct', 4);
+  add(/<img\b[^>]*>/i.test(contentHtml) || document.querySelector('input[name="thumbnail"]')?.files?.length > 0, 'Bài viết có hình ảnh minh họa', 'struct', 4);
+
+  // ─ TỪ KHÓA MỤC TIÊU (25đ)
+  if (keyword) {
+    add(title.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa "' + keyword + '" có trong Tiêu đề bài viết', 'kw', 8);
+    add(previewDesc.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong Mô tả / Tóm tắt bài viết', 'kw', 6);
+    add(slug.toLowerCase().indexOf(keyword.replace(/\s+/g, '-')) !== -1 || slug.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa xuất hiện trong URL Slug', 'kw', 4);
+    var kwr = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+    var kwn = (allText.match(kwr)||[]).length;
+    var den = wordCount > 0 ? ((kwn/wordCount)*100).toFixed(1) : 0;
+    add(kwn >= 2 && den <= 4, 'Mật độ từ khóa: ' + den + '% (' + kwn + ' lần, tốt: 1-3%)', 'kw', 7);
+  } else {
+    add(title.length >= 15, 'Tiêu đề chứa từ khóa tự nhiên (Hãy nhập Từ khóa mục tiêu để phân tích chi tiết hơn)', 'kw', 25);
+  }
+
+  // Render checklist & badge
+  var catLabels = { meta: '📋 Tiêu đề & Meta Google', content: '📝 Tóm tắt & Nội dung bài', struct: '🏗 Cấu trúc bài viết', kw: '🔑 Từ khóa SEO' };
+  var html = '';
+  ['meta','content','struct','kw'].forEach(function(cat) {
+    var items = checks.filter(function(c){return c.cat===cat;});
+    if (!items.length) return;
+    html += '<div style="font-weight:700;color:#1e293b;margin:10px 0 4px;font-size:13px">' + catLabels[cat] + '</div>';
+    items.forEach(function(c){
+      html += '<div style="color:' + (c.pass ? '#059669' : '#dc2626') + ';font-size:12px">' + (c.pass ? '✅' : '❌') + ' ' + c.msg + ' <span style="font-size:10px;color:#94a3b8">(' + c.pts + 'đ)</span></div>';
+    });
+  });
+  document.getElementById('seoChecklist').innerHTML = html;
+
+  var pct = Math.min(score, 100);
+  var badge = document.getElementById('seoScore');
+  if (pct >= 80)      { badge.textContent='✅ Đạt chuẩn SEO ('+pct+'/100)'; badge.style.background='#ecfdf5'; badge.style.color='#059669'; }
+  else if (pct >= 50) { badge.textContent='⚠️ Trung bình ('+pct+'/100)'; badge.style.background='#fef3c7'; badge.style.color='#d97706'; }
+  else                { badge.textContent='❌ Cần cải thiện ('+pct+'/100)'; badge.style.background='#fef2f2'; badge.style.color='#dc2626'; }
+}
+
+function suggestKeywords() {
+  var title = (document.querySelector('input[name="title"]')?.value || '').trim();
+  var box = document.getElementById('kwSuggestions');
+  if (!title) {
+    alert('Vui lòng nhập Tiêu đề bài viết trước để hệ thống gợi ý từ khóa phù hợp!');
+    return;
+  }
+  box.style.display = 'block';
+  box.innerHTML = '<span style="font-size:12px;color:#475569">🔍 Đang phân tích từ khóa gợi ý...</span>';
+
+  // Generate smart keywords from title
+  var cleanTitle = title.toLowerCase().replace(/[^a-z0-9àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\s]/g, '');
+  var words = cleanTitle.split(/\s+/).filter(function(w){ return w.length >= 2; });
+  var kws = [];
+  kws.push(cleanTitle);
+
+  if (words.length >= 3) {
+    kws.push(words.slice(0, 3).join(' '));
+    kws.push(words.slice(-3).join(' '));
+  }
+  if (words.length >= 4) {
+    kws.push(words.slice(1, 4).join(' '));
+  }
+  if (cleanTitle.indexOf('ô tô') === -1 && cleanTitle.indexOf('xe') === -1) {
+    kws.push(cleanTitle + ' ô tô');
+  }
+
+  // Remove duplicates
+  kws = kws.filter(function(item, pos) { return kws.indexOf(item) == pos; });
+
+  var html = '<div style="font-size:12px;font-weight:700;color:#1e3a8a;margin-bottom:6px"> Từ khóa gợi ý cho bài viết này:</div><div style="display:flex;flex-wrap:wrap;gap:6px">';
+  kws.forEach(function(kw) {
+    html += '<button type="button" onclick="selectKeyword(\'' + kw.replace(/'/g, "\\'") + '\')" style="background:#fff;border:1px solid #93c5fd;color:#1e40af;padding:4px 10px;border-radius:16px;font-size:12px;cursor:pointer;font-weight:500">+ ' + kw + '</button>';
+  });
+  html += '</div>';
+  box.innerHTML = html;
+}
+
+function selectKeyword(kw) {
+  document.getElementById('seoKeyword').value = kw;
+  document.getElementById('kwSuggestions').style.display = 'none';
+  runSeoAnalysis();
+}
+
+// Auto-generate slug from title & bind SEO analysis listeners
+document.querySelector('input[name="title"]')?.addEventListener('input', function(){
+  var sl = document.querySelector('input[name="slug"]');
+  if (sl && !sl.dataset.manual) {
+    sl.value = this.value.toLowerCase().replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g,'a').replace(/[èéẹẻẽêềếệểễ]/g,'e').replace(/[ìíịỉĩ]/g,'i').replace(/[òóọỏõôồốộổỗơờớợởỡ]/g,'o').replace(/[ùúụủũưừứựửữ]/g,'u').replace(/[ỳýỵỷỹ]/g,'y').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+  clearTimeout(window._seoT);
+  window._seoT = setTimeout(runSeoAnalysis, 300);
 });
-document.querySelector('[name=slug]').addEventListener('input',function(){ this.dataset.manual='1'; });
+
+document.querySelector('input[name="slug"]')?.addEventListener('input', function(){
+  this.dataset.manual = '1';
+  clearTimeout(window._seoT);
+  window._seoT = setTimeout(runSeoAnalysis, 300);
+});
+
+document.querySelector('textarea[name="excerpt"]')?.addEventListener('input', function(){
+  clearTimeout(window._seoT);
+  window._seoT = setTimeout(runSeoAnalysis, 300);
+});
+
+document.getElementById('seoTitle')?.addEventListener('input', function(){
+  clearTimeout(window._seoT);
+  window._seoT = setTimeout(runSeoAnalysis, 300);
+});
+
+document.getElementById('seoDescription')?.addEventListener('input', function(){
+  clearTimeout(window._seoT);
+  window._seoT = setTimeout(runSeoAnalysis, 300);
+});
+
+document.getElementById('seoKeyword')?.addEventListener('input', function(){
+  clearTimeout(window._seoT);
+  window._seoT = setTimeout(runSeoAnalysis, 500);
+});
+
+setTimeout(function() {
+  runSeoAnalysis();
+}, 1000);
 </script>
 <?php require __DIR__ . '/../partials/dashboard-foot.php'; ?>

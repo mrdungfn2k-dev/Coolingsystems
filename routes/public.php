@@ -975,7 +975,15 @@ get('/news/:slug', function($p) {
     $article=dbGet("SELECT * FROM articles WHERE slug=? AND status='published'",[$p['slug']]);
     if (!$article) { http_response_code(404); echo '404'; return; }
     $related=dbAll("SELECT id,title,slug,thumbnail,published_at FROM articles WHERE status='published' AND id<>? ORDER BY published_at DESC LIMIT 3",[$article['id']]);
-    view('public/news-detail',['title'=>$article['title'],'article'=>$article,'related'=>$related]);
+    $seo = [
+        'meta_title' => !empty($article['seo_title']) ? $article['seo_title'] : $article['title'] . ' — Cooling',
+        'meta_description' => !empty($article['seo_description']) ? $article['seo_description'] : (!empty($article['excerpt']) ? $article['excerpt'] : mb_substr(trim(strip_tags($article['content'] ?? '')), 0, 160)),
+        'canonical' => 'https://coolingsystems.vn/news/' . $article['slug']
+    ];
+    if (!empty($article['thumbnail'])) {
+        $seo['og_image'] = 'https://coolingsystems.vn/uploads/news/' . $article['thumbnail'];
+    }
+    view('public/news-detail',['title'=>$article['title'],'article'=>$article,'related'=>$related,'seo'=>$seo]);
 });
 
 // ── NEWSLETTER ──────────────────────────────────────────────────────────────

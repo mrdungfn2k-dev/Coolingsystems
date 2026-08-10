@@ -3809,6 +3809,10 @@ get('/admin/news/new', function() {
 post('/admin/news/new', function() {
     $user = requireStaffPermission('content', '/auth/login'); csrfCheck();
     $title=$_POST['title']??''; $slug=trim($_POST['slug']??''); $excerpt=$_POST['excerpt']??''; $content=$_POST['content']??''; $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
+    $seoTitle = trim($_POST['seo_title'] ?? '');
+    $seoDesc = trim($_POST['seo_description'] ?? '');
+    $seoKw = trim($_POST['seo_keyword'] ?? '');
+
     if (!$title) { flash('error','Cần có tiêu đề.'); redirect('/admin/news/new'); }
     if (!$slug) {
         $slug=mb_strtolower($title);
@@ -3822,7 +3826,7 @@ post('/admin/news/new', function() {
         if (in_array($ext,['jpg','jpeg','png','webp'])) { $fname=uniqid('news_').'.'.$ext; if (move_uploaded_file($_FILES['thumbnail']['tmp_name'],'/var/lib/coolingsystems/uploads/news/'.$fname)) $thumb=$fname; }
     }
     $pub=$status==='published'?date('Y-m-d H:i:s'):null;
-    dbInsert("INSERT INTO articles (title,slug,excerpt,content,thumbnail,author_id,status,published_at) VALUES (?,?,?,?,?,?,?,?)",[$title,$slug,$excerpt,$content,$thumb,$user['id'],$status,$pub]);
+    dbInsert("INSERT INTO articles (title,slug,excerpt,content,thumbnail,author_id,status,published_at,seo_title,seo_description,seo_keyword) VALUES (?,?,?,?,?,?,?,?,?,?,?)",[$title,$slug,$excerpt,$content,$thumb,$user['id'],$status,$pub,$seoTitle,$seoDesc,$seoKw]);
     flash('success','Đã đăng bài!'); redirect('/admin/news');
 });
 get('/admin/news/:id/edit', function($p) {
@@ -3836,6 +3840,10 @@ post('/admin/news/:id/edit', function($p) {
     $article=dbGet('SELECT * FROM articles WHERE id=?',[$p['id']]);
     if (!$article) { flash('error','Không tìm thấy.'); redirect('/admin/news'); }
     $title=$_POST['title']??''; $slug=trim($_POST['slug']??'')?:$article['slug']; $excerpt=$_POST['excerpt']??''; $content=$_POST['content']??''; $status=in_array($_POST['status']??'',['draft','published'])?$_POST['status']:'draft';
+    $seoTitle = trim($_POST['seo_title'] ?? '');
+    $seoDesc = trim($_POST['seo_description'] ?? '');
+    $seoKw = trim($_POST['seo_keyword'] ?? '');
+
     if (!$title) { flash('error','Cần tiêu đề.'); redirect('/admin/news/'.$p['id'].'/edit'); }
     $thumb=$article['thumbnail'];
     if (!empty($_FILES['thumbnail']['tmp_name'])&&is_uploaded_file($_FILES['thumbnail']['tmp_name'])) {
@@ -3843,7 +3851,7 @@ post('/admin/news/:id/edit', function($p) {
         if (in_array($ext,['jpg','jpeg','png','webp'])) { $fname=uniqid('news_').'.'.$ext; if (move_uploaded_file($_FILES['thumbnail']['tmp_name'],'/var/lib/coolingsystems/uploads/news/'.$fname)) $thumb=$fname; }
     }
     $pub=($status==='published'&&!$article['published_at'])?date('Y-m-d H:i:s'):$article['published_at'];
-    dbRun("UPDATE articles SET title=?,slug=?,excerpt=?,content=?,thumbnail=?,status=?,published_at=?,updated_at=datetime('now') WHERE id=?",[$title,$slug,$excerpt,$content,$thumb,$status,$pub,$p['id']]);
+    dbRun("UPDATE articles SET title=?,slug=?,excerpt=?,content=?,thumbnail=?,status=?,published_at=?,updated_at=datetime('now'),seo_title=?,seo_description=?,seo_keyword=? WHERE id=?",[$title,$slug,$excerpt,$content,$thumb,$status,$pub,$seoTitle,$seoDesc,$seoKw,$p['id']]);
     flash('success','Đã lưu!'); redirect('/admin/news/'.$p['id'].'/edit');
 });
 post('/admin/news/:id/delete', function($p) {
