@@ -3928,18 +3928,55 @@ post('/admin/products/:id/delete', function($p) {
     redirect($ref);
 });
 post('/admin/upload-tinymce-image', function() {
-    requireStaffPermission('products', '/admin/login'); csrfCheck();
+    $user = currentUser();
+    if (!$user || !in_array($user['role'] ?? '', ['admin', 'staff', 'superadmin'])) {
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => false, 'msg' => 'Chưa đăng nhập']);
+        exit;
+    }
     header('Content-Type: application/json');
 
+    $uploadDir = is_dir('/var/lib/coolingsystems/uploads')
+        ? '/var/lib/coolingsystems/uploads/content/'
+        : __DIR__ . '/../uploads/content/';
+    if (!is_dir($uploadDir)) {
+        @mkdir($uploadDir, 0775, true);
+    }
+
+    // Support multi-file array uploads ($_FILES['files'])
+    if (!empty($_FILES['files']) && is_array($_FILES['files']['name'])) {
+        $locations = [];
+        $count = count($_FILES['files']['name']);
+        for ($i = 0; $i < $count; $i++) {
+            if ($_FILES['files']['error'][$i] !== UPLOAD_ERR_OK) continue;
+            $tmp = $_FILES['files']['tmp_name'][$i];
+            $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo, $tmp);
+            finfo_close($finfo);
+            if (!in_array($mime, $allowed)) continue;
+
+            $extMap = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/gif' => 'gif', 'image/webp' => 'webp'];
+            $extension = $extMap[$mime] ?? 'jpg';
+            $filename = 'tinymce_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
+            if (move_uploaded_file($tmp, $uploadDir . $filename)) {
+                $locations[] = '/uploads/content/' . $filename;
+            }
+        }
+        echo json_encode(['ok' => true, 'locations' => $locations]);
+        exit;
+    }
+
+    // Single file upload ($_FILES['file'])
     if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
         echo json_encode(['ok' => false, 'msg' => 'Không có file hoặc lỗi upload']);
         exit;
     }
 
     $file = $_FILES['file'];
-    $maxSize = 5 * 1024 * 1024; // 5MB
+    $maxSize = 10 * 1024 * 1024; // 10MB
     if ($file['size'] > $maxSize) {
-        echo json_encode(['ok' => false, 'msg' => 'File quá lớn (tối đa 5MB)']);
+        echo json_encode(['ok' => false, 'msg' => 'File quá lớn (tối đa 10MB)']);
         exit;
     }
 
@@ -3957,20 +3994,13 @@ post('/admin/upload-tinymce-image', function() {
     $extension = $ext[$mime] ?? 'jpg';
     $filename = 'tinymce_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
 
-    $uploadDir = is_dir('/var/lib/coolingsystems/uploads')
-        ? '/var/lib/coolingsystems/uploads/content/'
-        : __DIR__ . '/../uploads/content/';
-    if (!is_dir($uploadDir)) {
-        @mkdir($uploadDir, 0775, true);
-    }
-
     $dest = $uploadDir . $filename;
     if (!move_uploaded_file($file['tmp_name'], $dest)) {
         echo json_encode(['ok' => false, 'msg' => 'Không thể lưu file']);
         exit;
     }
 
-    echo json_encode(['location' => '/uploads/content/' . $filename]);
+    echo json_encode(['ok' => true, 'location' => '/uploads/content/' . $filename]);
     exit;
 });
 

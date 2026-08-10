@@ -10,6 +10,7 @@
 .ql-editor h3{font-size:18px;font-weight:700;color:#2c4a7c;margin:12px 0 6px}
 .news-layout{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
 @media(max-width:900px){.news-layout{grid-template-columns:1fr}}
+@keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 </style>
 <div class="dash-head">
   <h1><?= isset($article['id']) ? ' Sửa bài viết' : ' Viết bài mới' ?></h1>
@@ -33,7 +34,10 @@
       </div>
       
       <div class="panel" style="margin-top:16px">
-        <div class="panel-head"><h3>Nội dung bài viết</h3></div>
+        <div class="panel-head" style="display:flex;justify-content:space-between;align-items:center">
+          <h3>Nội dung bài viết</h3>
+          <span style="font-size:12px;color:#0284c7;background:#e0f2fe;padding:4px 10px;border-radius:12px;font-weight:600"> Hỗ trợ kéo thả & Chọn nhiều ảnh từ máy</span>
+        </div>
         <div class="panel-body" style="padding:0">
           <textarea id="tinymceNews" name="content"><?= htmlspecialchars($article['content']??'') ?></textarea>
         </div>
@@ -47,7 +51,7 @@
         </div>
         <div class="panel-body">
           <div style="font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.6;background:#f8fafc;padding:10px 12px;border-radius:6px;border:1px solid #e2e8f0">
-             Panel này phân tích Tiêu đề, Tóm tắt và Nội dung bài viết tin tức xem đã chuẩn SEO chưa — tương tự Rank Math / Yoast SEO trong WordPress.
+             Bài viết bắt buộc phải đạt từ <strong>85/100 điểm SEO</strong> trở lên mới được xuất bản lên Google — tương tự Rank Math / Yoast SEO.
           </div>
           <div class="form-group">
             <label>Tiêu đề Google</label>
@@ -99,9 +103,9 @@
         <div class="panel-body">
           <div class="form-group">
             <label>Trạng thái</label>
-            <select name="status">
+            <select name="status" id="statusSelect">
               <option value="draft" <?= ($article['status']??'')==='draft'?'selected':'' ?>>Bản nháp</option>
-              <option value="published" <?= ($article['status']??'')==='published'?'selected':'' ?>>Đăng ngay</option>
+              <option value="published" <?= ($article['status']??'')==='published'?'selected':'' ?>>Đăng ngay (Yêu cầu ≥85đ SEO)</option>
             </select>
           </div>
           <div class="form-group">
@@ -221,16 +225,44 @@ function setupTinyMCECallout(editor) {
 
 tinymce.init({
   selector: '#tinymceNews',
-  height: 400,
+  height: 480,
   language: 'vi',
   forced_root_block: 'p',
   force_p_newlines: true,
   force_br_newlines: false,
   convert_newlines_to_brs: false,
+  paste_data_images: true,
+  images_upload_url: '/admin/upload-tinymce-image',
+  file_picker_types: 'image',
+  file_picker_callback: function(cb, value, meta) {
+    if (meta.filetype === 'image') {
+      var input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*';
+      input.onchange = function() {
+        var file = this.files[0];
+        if (!file) return;
+        var fd = new FormData();
+        fd.append('file', file);
+        var csrf = document.querySelector('input[name="_csrf"]');
+        if (csrf) fd.append('_csrf', csrf.value);
+        fetch('/admin/upload-tinymce-image', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(data => {
+          if (data.location) {
+            cb(data.location, { title: file.name });
+          } else {
+            alert('Lỗi upload: ' + (data.msg || 'Không thể tải ảnh từ máy'));
+          }
+        })
+        .catch(err => alert('Lỗi kết nối: ' + err.message));
+      };
+      input.click();
+    }
+  },
   plugins: 'table lists link image code wordcount fullscreen preview searchreplace autolink visualblocks',
   toolbar: [
     'undo redo | fontfamily fontsize | blocks | bold italic underline strikethrough | forecolor backcolor | calloutbox removeformat',
-    'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | link image | code fullscreen'
+    'alignleft aligncenter alignright alignjustify | bullist numlist checklist | outdent indent | table | multiimage image link | code fullscreen'
   ],
   font_family_formats: 'Mặc định=; Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,serif; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,sans-serif; Georgia=georgia,serif; Courier New=courier new,monospace',
   font_size_formats: '8px 9px 10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 60px 72px',
@@ -250,7 +282,7 @@ tinymce.init({
     h1 { font-size: 28px; color: #0b1d3a; font-weight: 900; }
     h2 { font-size: 22px; color: #0b1d3a; font-weight: 800; }
     h3 { font-size: 18px; color: #0b1d3a; font-weight: 700; }
-    img { max-width: 100%; height: auto; border-radius: 8px; }
+    img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px auto; display: block; }
     blockquote { border-left: 3px solid #c9a14a; padding: 12px 16px; background: #faf8f3; border-radius: 0 8px 8px 0; }
   `,
   menubar: 'file edit view insert format table',
@@ -259,6 +291,61 @@ tinymce.init({
   license_key: 'gpl',
   setup: function(editor) {
     setupTinyMCECallout(editor);
+
+    // Multi Image Upload Toolbar Button
+    editor.ui.registry.addButton('multiimage', {
+      text: '🖼 Tải nhiều ảnh từ máy',
+      tooltip: 'Chọn và tải lên nhiều file ảnh từ máy tính cùng lúc',
+      onAction: function() {
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = true;
+        input.onchange = function() {
+          var files = Array.from(this.files);
+          if (!files.length) return;
+          var fd = new FormData();
+          files.forEach(function(file) {
+            fd.append('files[]', file);
+          });
+          var csrf = document.querySelector('input[name="_csrf"]');
+          if (csrf) fd.append('_csrf', csrf.value);
+          
+          if (editor.notificationManager) {
+            editor.notificationManager.open({
+              text: '⏳ Đang tải lên ' + files.length + ' ảnh từ máy tính...',
+              type: 'info',
+              timeout: 3000
+            });
+          }
+
+          fetch('/admin/upload-tinymce-image', { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(data => {
+            if (data.ok && data.locations && data.locations.length) {
+              var html = '';
+              data.locations.forEach(function(src) {
+                html += '<p style="text-align:center;"><img src="' + src + '" style="max-width:100%;height:auto;border-radius:8px;margin:12px auto;" /></p>';
+              });
+              editor.insertContent(html);
+              if (editor.notificationManager) {
+                editor.notificationManager.open({
+                  text: '✅ Đã tải và chèn thành công ' + data.locations.length + ' ảnh vào bài!',
+                  type: 'success',
+                  timeout: 3000
+                });
+              }
+              runSeoAnalysis();
+            } else {
+              alert('Lỗi upload: ' + (data.msg || 'Không thể tải ảnh từ máy'));
+            }
+          })
+          .catch(err => alert('Lỗi kết nối upload: ' + err.message));
+        };
+        input.click();
+      }
+    });
+
     editor.on('BeforeExecCommand', function(e) {
       if (['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'].indexOf(e.command) !== -1) {
         var node = editor.selection.getNode();
@@ -302,6 +389,8 @@ tinymce.init({
 });
 
 // ── SEO ANALYSIS ENGINE FOR NEWS ARTICLES (Rank Math / Yoast SEO Style) ──
+window._latestSeoScore = 0;
+
 function runSeoAnalysis() {
   var title = (document.querySelector('input[name="title"]')?.value || '').trim();
   var excerpt = (document.querySelector('textarea[name="excerpt"]')?.value || '').trim();
@@ -394,9 +483,10 @@ function runSeoAnalysis() {
   document.getElementById('seoChecklist').innerHTML = html;
 
   var pct = Math.min(score, 100);
+  window._latestSeoScore = pct;
   var badge = document.getElementById('seoScore');
-  if (pct >= 80)      { badge.textContent='✅ Đạt chuẩn SEO ('+pct+'/100)'; badge.style.background='#ecfdf5'; badge.style.color='#059669'; }
-  else if (pct >= 50) { badge.textContent='⚠️ Trung bình ('+pct+'/100)'; badge.style.background='#fef3c7'; badge.style.color='#d97706'; }
+  if (pct >= 85)      { badge.textContent='✅ Đạt chuẩn xuất bản ('+pct+'/100)'; badge.style.background='#ecfdf5'; badge.style.color='#059669'; }
+  else if (pct >= 50) { badge.textContent='⚠️ Chưa đủ 85đ ('+pct+'/100)'; badge.style.background='#fef3c7'; badge.style.color='#d97706'; }
   else                { badge.textContent='❌ Cần cải thiện ('+pct+'/100)'; badge.style.background='#fef2f2'; badge.style.color='#dc2626'; }
 }
 
@@ -443,6 +533,46 @@ function selectKeyword(kw) {
   document.getElementById('kwSuggestions').style.display = 'none';
   runSeoAnalysis();
 }
+
+// ── BẮT LỖI SUBMIT KHI XUẤT BẢN NẾU ĐIỂM SEO < 85 ──
+document.getElementById('newsForm')?.addEventListener('submit', function(e) {
+  var statusSel = document.querySelector('select[name="status"]');
+  var statusVal = statusSel ? statusSel.value : 'draft';
+
+  if (statusVal === 'published') {
+    runSeoAnalysis();
+    var currentScore = window._latestSeoScore || 0;
+    if (currentScore < 85) {
+      e.preventDefault();
+      
+      var oldModal = document.getElementById('seoErrorModal');
+      if (oldModal) oldModal.remove();
+
+      var modal = document.createElement('div');
+      modal.id = 'seoErrorModal';
+      modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.65);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);';
+      modal.innerHTML = `
+        <div style="background:#fff;border-radius:16px;max-width:520px;width:100%;padding:28px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);border:1px solid #fecaca;animation:popIn 0.25s ease-out">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <div style="width:48px;height:48px;border-radius:50%;background:#fee2e2;color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;flex-shrink:0">❌</div>
+            <div>
+              <h3 style="margin:0;font-size:18px;color:#991b1b;font-weight:800">Chưa đủ tiêu chuẩn xuất bản SEO!</h3>
+              <p style="margin:2px 0 0;font-size:13px;color:#7f1d1d">Điểm SEO hiện tại: <strong style="font-size:16px;color:#dc2626">${currentScore}/100</strong> (Yêu cầu tối thiểu: <strong style="color:#059669;font-size:16px">85/100</strong>)</p>
+            </div>
+          </div>
+          <div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:10px;padding:14px;font-size:13px;color:#881337;line-height:1.6;margin-bottom:20px">
+             <strong>Quy định SEO của Coolingsystems.vn:</strong> Để đảm bảo bài viết được Google chọn lên Top và lập chỉ mục nhanh chóng, bài viết phải đạt ít nhất <strong>85/100 điểm SEO</strong> trước khi Đăng bài.<br><br>👉 Hãy bổ sung các mục màu đỏ trong phần <strong>Phân tích SEO nội dung</strong> bên dưới để nâng điểm!
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:10px">
+            <button type="button" onclick="document.getElementById('seoErrorModal').remove();document.getElementById('seoPanel').scrollIntoView({behavior:'smooth'});" class="btn btn-navy" style="padding:10px 20px;font-weight:700"> Cải thiện tiêu chí SEO ngay</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      document.getElementById('seoPanel').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+});
 
 // Auto-generate slug from title & bind SEO analysis listeners
 document.querySelector('input[name="title"]')?.addEventListener('input', function(){
