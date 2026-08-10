@@ -4736,13 +4736,13 @@ get('/admin/product-brands', function() {
     if ($sortBy === 'name') {
         $orderBy = "name ASC";
     } elseif ($sortBy === 'products') {
-        $orderBy = "(SELECT COUNT(*) FROM products p WHERE p.brand_id = product_brands.id) DESC, sort_order ASC";
+        $orderBy = "(SELECT COUNT(*) FROM products p WHERE LOWER(p.part_brand) = LOWER(product_brands.name)) DESC, sort_order ASC";
     }
 
     $total = dbGet("SELECT COUNT(*) as c FROM product_brands {$where}", $params)['c'] ?? 0;
     $totalPages = max(1, ceil($total / $limit));
 
-    $productBrands = dbAll("SELECT *, (SELECT COUNT(*) FROM products p WHERE p.brand_id = product_brands.id) as product_count FROM product_brands {$where} ORDER BY {$orderBy} LIMIT {$limit} OFFSET {$offset}", $params);
+    $productBrands = dbAll("SELECT *, (SELECT COUNT(*) FROM products p WHERE LOWER(p.part_brand) = LOWER(product_brands.name)) as product_count FROM product_brands {$where} ORDER BY {$orderBy} LIMIT {$limit} OFFSET {$offset}", $params);
 
     view('admin/product-brands', [
         'title' => 'Quản lý Thương hiệu',
