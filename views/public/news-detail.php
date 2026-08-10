@@ -2,7 +2,7 @@
 <style>
 
 .full-article .rich-content { font-size: 16px !important; }
-.rich-content img { max-width: 100% !important; height: auto !important; border-radius: 8px; margin: 14px auto; display: inline-block; vertical-align: middle; }
+.rich-content img { max-width: 100% !important; height: auto !important; border-radius: 8px; margin: 16px auto; display: inline-block; vertical-align: middle; }
 .rich-content p[style*="text-align: center"], .rich-content div[style*="text-align: center"],
 .rich-content p[style*="text-align:center"], .rich-content div[style*="text-align:center"] { text-align: center !important; }
 .rich-content p[style*="text-align: center"] img, .rich-content div[style*="text-align: center"] img,
@@ -11,25 +11,44 @@
 .rich-content p[style*="text-align:right"], .rich-content div[style*="text-align:right"] { text-align: right !important; }
 .rich-content p[style*="text-align: right"] img, .rich-content div[style*="text-align: right"] img,
 .rich-content p[style*="text-align:right"] img, .rich-content div[style*="text-align:right"] img { display: inline-block !important; }
+
+/* Rich content embedded links styling */
+.rich-content a {
+  color: #1d4ed8 !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+  word-break: break-word;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.rich-content a:hover {
+  color: #0b1d3a !important;
+  text-decoration: underline !important;
+  background: #eff6ff;
+  border-radius: 2px;
+}
 @media(max-width:768px) {
   
 }
 </style>
 <section class="block full-article"><div class="wrap">
   <div>
-    <?php if ($article['thumbnail']): ?>
-      <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;height:auto;border-radius:8px 8px 0 0;display:block">
-    <?php endif; ?>
     <div style="padding:0">
-      <div style="font-size:12px;color:var(--ink-4);margin-bottom:10px">
-         <?= $article['published_at'] ? date('d/m/Y H:i', strtotime($article['published_at'])) : '' ?>
-        &nbsp;·&nbsp; <a href="/news" style="color:var(--navy)">← Tin tức</a>
+      <div style="font-size:13px;color:var(--ink-4);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+        <span>📅 <?= $article['published_at'] ? date('d/m/Y H:i', strtotime($article['published_at'])) : '' ?></span>
+        &nbsp;·&nbsp; <a href="/news" style="color:var(--navy);font-weight:600">← Tin tức</a>
       </div>
-      <h1 style="font-size:26px;font-weight:800;color:var(--navy-dark);line-height:1.3;margin:0 0 16px"><?= e($article['title']) ?></h1>
-      <?php if ($article['excerpt']): ?>
-        <p style="font-size:16px;color:var(--ink-2);line-height:1.7;border-left:3px solid var(--navy);padding-left:14px;margin-bottom:24px;font-style:italic"><?= e($article['excerpt']) ?></p>
+      <h1 style="font-size:28px;font-weight:800;color:var(--navy-dark);line-height:1.35;margin:0 0 16px"><?= e($article['title']) ?></h1>
+      
+      <?php if ($article['thumbnail']): ?>
+        <div style="margin:0 0 24px;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.06)">
+          <img src="/uploads/news/<?= e($article['thumbnail']) ?>" alt="<?= e($article['title']) ?>" style="width:100%;max-height:480px;object-fit:cover;display:block">
+        </div>
       <?php endif; ?>
-      <div class="rich-content" style="font-size:15px;line-height:1.9;color:var(--ink-1)">
+
+      <?php if ($article['excerpt']): ?>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.75;border-left:4px solid #1d4ed8;background:#f8fafc;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:24px;font-style:italic"><?= e($article['excerpt']) ?></p>
+      <?php endif; ?>
+      <div class="rich-content" style="font-size:16px;line-height:1.9;color:var(--ink-1)">
         <?= $article['content'] ?>
       </div>
     </div>
