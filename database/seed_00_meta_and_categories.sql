@@ -45,7 +45,6 @@ INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "imag
 INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (9, 'Mitsubishi', 'mitsubishi', 9, 0, 'brand_1785140573.png', 1);
 INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (10, 'Nissan', 'nissan', 10, 0, 'brand_1785140759.jfif', 1);
 INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (11, 'Suzuki', 'suzuki', 23, 0, 'brand_1785954150.jfif', 1);
-INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (12, 'VinFast', 'vinfast', 24, 0, 'brand_1785140859.jfif', 1);
 INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (19, 'MG', 'mg', 11, 0, 'brand_1785140716.jfif', 1);
 INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (20, 'Mercedes-Benz', 'mercedes-benz', 12, 0, 'brand_1785954086.jfif', 1);
 INSERT INTO "brands" ("id", "name", "slug", "sort_order", "product_count", "image", "is_active") VALUES (21, 'BMW', 'bmw', 13, 0, 'brand_1785140681.jfif', 1);
