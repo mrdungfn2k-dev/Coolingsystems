@@ -21,32 +21,43 @@ if (empty($hotlineItems) || !is_array($hotlineItems)) {
       <span class="badge-live"><span class="dot"></span> Đang phục vụ</span>
     </div>
 
-    <!-- Hotline Stream (Center 1 row on Desktop, Exactly 2 rows on Mobile) -->
+<?php
+$groupedHotlines = [];
+foreach ($hotlineItems as $item) {
+    $lbl = trim($item['label'] ?? '');
+    $ph = trim($item['phone'] ?? '');
+    if ($lbl !== '' && $ph !== '') {
+        if (!isset($groupedHotlines[$lbl])) {
+            $groupedHotlines[$lbl] = [];
+        }
+        $groupedHotlines[$lbl][] = $ph;
+    }
+}
+?>
+    <!-- Hotline Stream (Dynamic from Admin Settings) -->
     <div class="top-bar-hotline-stream">
-      <!-- Dòng 1: CSKH & DỊCH VỤ + KĨ THUẬT & BẢO HÀNH -->
-      <div class="hotline-row hotline-row-1">
-        <span class="hotline-pill">
-          <span class="h-label">CSKH & DỊCH VỤ:</span>
-          <a href="tel:0705070526" class="h-num">0705.0705.26</a> - <a href="tel:0705070528" class="h-num">0705.0705.28</a>
-        </span>
-        <span class="h-sep">•</span>
-        <span class="hotline-pill">
-          <span class="h-label">KĨ THUẬT & BẢO HÀNH:</span>
-          <a href="tel:0704070418" class="h-num">0704.0704.18</a>
-        </span>
-      </div>
-      
-      <!-- Dòng 2: BÁN BUÔN + BÁN LẺ -->
-      <div class="hotline-row hotline-row-2">
-        <span class="hotline-pill">
-          <span class="h-label">BÁN BUÔN:</span>
-          <a href="tel:0703070321" class="h-num">0703.0703.21</a> - <a href="tel:0703070361" class="h-num">0703.0703.61</a>
-        </span>
-        <span class="h-sep">•</span>
-        <span class="hotline-pill">
-          <span class="h-label">BÁN LẺ:</span>
-          <a href="tel:0703070315" class="h-num">0703.0703.15</a>
-        </span>
+      <div class="hotline-row">
+        <?php 
+        $gIdx = 0;
+        $totalGroups = count($groupedHotlines);
+        foreach ($groupedHotlines as $lbl => $phones): 
+            $gIdx++;
+        ?>
+          <span class="hotline-pill">
+            <span class="h-label"><?= mb_strtoupper(htmlspecialchars($lbl), 'UTF-8') ?>:</span>
+            <?php 
+            $pLinks = [];
+            foreach ($phones as $ph) {
+                $cleanPh = preg_replace('/[^0-9]/', '', $ph);
+                $pLinks[] = '<a href="tel:' . htmlspecialchars($cleanPh) . '" class="h-num">' . htmlspecialchars($ph) . '</a>';
+            }
+            echo implode(' - ', $pLinks);
+            ?>
+          </span>
+          <?php if ($gIdx < $totalGroups): ?>
+            <span class="h-sep">•</span>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </div>
     </div>
     
