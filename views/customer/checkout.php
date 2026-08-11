@@ -131,6 +131,148 @@ if (!empty($uAddr)) {
     }
 }
 ?>
+        <?php 
+          $isPartnerUser = $user && (in_array($user['role'] ?? '', ['partner','agent']) || !empty($user['is_verified_garage']));
+          if ($isPartnerUser):
+            $agencyRate = (float)($user['custom_commission_rate'] ?? 5.0);
+        ?>
+        <!-- MODEL 3: AGENCY ORDER-ON-BEHALF PORTAL -->
+        <div class="co-card" style="background:#f0f4ff; border:2px solid #0b1d3a; border-radius:12px; margin-bottom:20px; padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+            <h3 style="margin:0; font-size:16px; color:#0b1d3a; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>🏬</span> ĐẶT HÀNG HỘ CHO KHÁCH HÀNG CUỐI (MÔ HÌNH 3)
+            </h3>
+            <span style="background:#0b1d3a; color:#fff; font-size:11px; font-weight:800; padding:4px 12px; border-radius:12px;">MỨC CHIẾT KHẤU <?= $agencyRate ?>%</span>
+          </div>
+
+          <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:700; color:#1a3258; margin-bottom:14px; font-size:14px;">
+            <input type="checkbox" name="is_agency_order" value="1" id="isAgencyOrderChk" onchange="toggleAgencyOrderBlock()" style="width:18px; height:18px; accent-color:#0b1d3a;">
+            Bật chế độ "Đại lý Đặt hàng hộ cho Khách hàng cuối"
+          </label>
+
+          <div id="agencyOrderBlock" style="display:none; border-top:1px dashed #cbd5e1; padding-top:14px;">
+            <p style="font-size:12.5px; color:#475569; margin-bottom:14px; line-height:1.5;">
+              Đơn hàng sẽ lưu thông tin bảo hành cho <strong>Khách hàng cuối</strong> và tích lũy <strong><?= $agencyRate ?>% Hoa hồng</strong> vào Ví Đại lý của bạn.
+            </p>
+
+            <!-- Thông tin Khách hàng cuối -->
+            <div style="background:#fff; padding:14px; border-radius:8px; border:1px solid #cbd5e1; margin-bottom:16px;">
+              <div style="font-weight:800; color:#0b1d3a; font-size:13px; margin-bottom:10px; text-transform:uppercase;">👤 Thông tin Khách hàng cuối (Chủ xe / Nơi lắp đặt)</div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label style="font-size:12px; font-weight:700;">Họ tên Khách hàng cuối *</label>
+                  <input type="text" name="end_customer_name" id="endCustName" placeholder="VD: Nguyễn Văn A (Khách lắp dàn lạnh)">
+                </div>
+                <div class="form-group">
+                  <label style="font-size:12px; font-weight:700;">Số điện thoại Khách cuối *</label>
+                  <input type="tel" name="end_customer_phone" id="endCustPhone" placeholder="0987654321" maxlength="10">
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label style="font-size:12px; font-weight:700;">Địa chỉ lắp đặt / Bảo hành Khách cuối</label>
+                <input type="text" name="end_customer_address" id="endCustAddr" placeholder="VD: Gara Ô Tô Hải Hà, Số 10 Lê Văn Lương, Hà Nội">
+              </div>
+            </div>
+
+            <!-- Hình thức Thu hộ & Thanh toán -->
+            <div style="background:#fff; padding:14px; border-radius:8px; border:1px solid #cbd5e1;">
+              <div style="font-weight:800; color:#0b1d3a; font-size:13px; margin-bottom:10px; text-transform:uppercase;">💵 Hình thức Thu hộ & Đối soát Hoa hồng</div>
+              
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; padding:10px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc;" id="lblCompCollect">
+                  <input type="radio" name="agency_payment_mode" value="company_collect" checked onchange="updateAgencyCalc()" style="margin-top:3px;">
+                  <div>
+                    <div style="font-weight:700; color:#0b1d3a; font-size:13.5px;">1. Công ty Thu hộ 100% khi Giao hàng (COD / Chuyển khoản Công ty)</div>
+                    <div style="font-size:12px; color:#64748b; margin-top:2px;">Khách trả đủ 100%. Công ty tự động trích <strong><?= $agencyRate ?>% Hoa hồng</strong> cộng vào Ví tích lũy Đại lý.</div>
+                  </div>
+                </label>
+
+                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; padding:10px; border:1px solid #e2e8f0; border-radius:8px; background:#f8fafc;" id="lblAgentCollect">
+                  <input type="radio" name="agency_payment_mode" value="agent_collected" onchange="updateAgencyCalc()" style="margin-top:3px;">
+                  <div>
+                    <div style="font-weight:700; color:#1b5e20; font-size:13.5px;">2. Đại lý tự thu tiền từ Khách (Khấu trừ ngay <?= $agencyRate ?>% Hoa hồng)</div>
+                    <div style="font-size:12px; color:#64748b; margin-top:2px;">Đại lý thu tiền mặt từ Khách. Đại lý chỉ thanh toán cho Công ty <strong>Tổng tiền - <?= $agencyRate ?>% Hoa hồng</strong>.</div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Bảng Tính Giá Chiết Khấu Realtime -->
+              <div id="agencyCalcBox" style="margin-top:14px; background:#fffbe6; border:1px solid #ffe58f; padding:12px; border-radius:6px; font-size:13px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span>Tổng giá trị hàng hóa (trước VAT):</span>
+                  <strong id="agencyOrderSubtotal"><?= vnd($cart['total']) ?></strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; color:#16a34a;">
+                  <span>Hoa hồng Đại lý (<?= $agencyRate ?>%):</span>
+                  <strong id="agencyCalcCommission">-0đ</strong>
+                </div>
+                <hr style="border:0; border-top:1px dashed #ffd591; margin:6px 0;">
+                <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:800; color:#0b1d3a;">
+                  <span id="agencyPayableLabel">Số tiền Đại lý thực trả Công ty:</span>
+                  <span id="agencyCalcPayable" style="color:#dc2626;"><?= vnd($cart['total']) ?></span>
+                </div>
+              </div>
+
+              <!-- Nghiệp vụ Thuế VAT B2B -->
+              <div style="margin-top:16px; border-top:1px dashed #cbd5e1; padding-top:12px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; color:#0b1d3a; font-size:13px;">
+                  <input type="checkbox" name="requires_vat" value="1" id="reqVatChk" onchange="document.getElementById('vatBox').style.display=this.checked?'block':'none'">
+                  🧾 Yêu cầu xuất Hóa đơn Tài chính (VAT B2B)
+                </label>
+                <div id="vatBox" style="display:none; margin-top:10px; background:#f8fafc; padding:12px; border-radius:6px; border:1px solid #cbd5e1;">
+                  <div style="display:flex; gap:16px; margin-bottom:10px; font-size:12.5px;">
+                    <label style="cursor:pointer;"><input type="radio" name="vat_invoice_type" value="agency" checked> Xuất cho Đại lý</label>
+                    <label style="cursor:pointer;"><input type="radio" name="vat_invoice_type" value="end_customer"> Xuất cho Khách cuối</label>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group" style="margin-bottom:8px;">
+                      <label style="font-size:11.5px; font-weight:700;">Mã số thuế doanh nghiệp *</label>
+                      <input type="text" name="vat_tax_code" placeholder="VD: 0101234567">
+                    </div>
+                    <div class="form-group" style="margin-bottom:8px;">
+                      <label style="font-size:11.5px; font-weight:700;">Tên Công ty / Đơn vị mua hàng *</label>
+                      <input type="text" name="vat_company_name" placeholder="VD: Công ty TNHH Phụ tùng Ô tô Hải Hà">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+        function toggleAgencyOrderBlock() {
+          const chk = document.getElementById('isAgencyOrderChk');
+          const blk = document.getElementById('agencyOrderBlock');
+          if (chk && blk) {
+            blk.style.display = chk.checked ? 'block' : 'none';
+            updateAgencyCalc();
+          }
+        }
+
+        function updateAgencyCalc() {
+          const chk = document.getElementById('isAgencyOrderChk');
+          if (!chk || !chk.checked) return;
+
+          const total = <?= (float)$cart['total'] ?>;
+          const rate = <?= (float)$agencyRate ?> / 100;
+          const comm = Math.round(total * rate);
+          const modeComp = document.querySelector('input[name="agency_payment_mode"]:checked')?.value === 'company_collect';
+
+          document.getElementById('agencyCalcCommission').textContent = '+' + new Intl.NumberFormat('vi-VN').format(comm) + 'đ';
+          
+          if (modeComp) {
+            document.getElementById('agencyPayableLabel').textContent = 'Số tiền Công ty thu hộ từ Khách hàng:';
+            document.getElementById('agencyCalcPayable').textContent = new Intl.NumberFormat('vi-VN').format(total) + 'đ';
+          } else {
+            const payable = Math.max(0, total - comm);
+            document.getElementById('agencyPayableLabel').textContent = 'Số tiền Đại lý thực trả Công ty (đã trừ ' + <?= (float)$agencyRate ?> + '%):';
+            document.getElementById('agencyCalcPayable').textContent = new Intl.NumberFormat('vi-VN').format(payable) + 'đ';
+          }
+        }
+        </script>
+        <?php endif; ?>
+
         <div class="co-card">
           <h3>Địa chỉ nhận hàng</h3>
           <div class="form-row">
@@ -175,6 +317,17 @@ if (!empty($uAddr)) {
               <div class="pay-name">Thanh toán khi nhận</div>
               <div class="pay-desc">Trả tiền mặt khi nhận hàng</div>
             </label>
+            <?php if ($isPartnerUser): 
+              $creditLimit = (float)($user['credit_limit'] ?? 100000000);
+              $currentDebt = (float)($user['current_debt'] ?? 0);
+              $availableCredit = max(0, $creditLimit - $currentDebt);
+            ?>
+            <label class="pay-btn" id="payBtnCredit" onclick="selectPay(this,'credit')">
+              <input type="radio" name="payment_method" value="credit" id="payCredit">
+              <div class="pay-name" style="color:#0b1d3a; font-weight:800;">Thanh toán Công nợ (Gối đầu B2B)</div>
+              <div class="pay-desc">Hạn mức khả dụng: <?= vnd($availableCredit) ?> (Thời hạn 30 ngày)</div>
+            </label>
+            <?php endif; ?>
           </div>
 
           

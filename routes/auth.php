@@ -15,7 +15,8 @@ post('/auth/login', function() {
     $lockedUntil = $_SESSION[$lockKey] ?? 0;
     if ($lockedUntil > time()) {
         $remaining = ceil(($lockedUntil - time()) / 60);
-        flash('error', "Tài khoản tạm thời bị khóa do thử sai mật khẩu quá 5 lần. Vui lòng thử lại sau {$remaining} phút.");
+        $timerSpan = '<span id="lockoutTimer" data-until="' . $lockedUntil . '" style="color:#dc2626; font-weight:800; background:#fff; padding:2px 8px; border-radius:6px; border:1px solid #fca5a5; display:inline-block; margin-left:4px;">' . sprintf('%02d:00', $remaining) . '</span>';
+        flash('error', "Tài khoản tạm thời bị khóa do thử sai mật khẩu quá 5 lần. Vui lòng thử lại sau " . $timerSpan);
         redirect('/auth/login');
     }
 

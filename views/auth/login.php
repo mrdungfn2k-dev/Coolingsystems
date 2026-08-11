@@ -46,7 +46,11 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
   <div class="auth-sub">PHỤ TÙNG & DỊCH VỤ</div>
   <h2>Đăng nhập</h2>
 
-  
+  <?php foreach (getFlash() as $f): ?>
+    <div class="flash-<?= e($f['type']) ?>" style="background:<?= $f['type']==='error'?'#fef2f2':'#ecfdf5' ?>;color:<?= $f['type']==='error'?'#dc2626':'#16a34a' ?>;padding:12px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:16px;border:1px solid <?= $f['type']==='error'?'#fecaca':'#bbf7d0' ?>;line-height:1.4;">
+      <?= str_contains($f['message'], '<') ? $f['message'] : e($f['message']) ?>
+    </div>
+  <?php endforeach; ?>
 
   <form method="post" action="/auth/login">
     <?= csrfField() ?>
@@ -58,6 +62,57 @@ body{background:linear-gradient(135deg,#f5f7fa 0%,#e4e9f0 100%);min-height:100vh
   </form>
   <div class="auth-footer">Chưa có tài khoản? <a href="/auth/register">Đăng ký</a></div>
 </div></div>
+
+<script>
+(function() {
+  function initLockoutCountdown() {
+    var timerEl = document.getElementById('lockoutTimer');
+    var btnEl = document.querySelector('button[type="submit"]') || document.querySelector('.btn-gold');
+    if (!timerEl) return;
+    var until = parseInt(timerEl.getAttribute('data-until') || '0', 10);
+    if (!until || until <= Math.floor(Date.now() / 1000)) return;
+
+    var origText = btnEl ? (btnEl.getAttribute('data-orig-text') || btnEl.textContent.trim()) : 'Đăng nhập';
+    if (btnEl && !btnEl.getAttribute('data-orig-text')) {
+      btnEl.setAttribute('data-orig-text', origText);
+    }
+
+    function update() {
+      var now = Math.floor(Date.now() / 1000);
+      var remaining = until - now;
+      if (remaining <= 0) {
+        timerEl.textContent = "00:00";
+        if (btnEl) {
+          btnEl.disabled = false;
+          btnEl.style.opacity = "1";
+          btnEl.style.cursor = "pointer";
+          btnEl.textContent = origText;
+        }
+        location.reload();
+        return;
+      }
+      var mins = Math.floor(remaining / 60);
+      var secs = remaining % 60;
+      var formatted = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+      timerEl.textContent = formatted;
+      if (btnEl) {
+        btnEl.disabled = true;
+        btnEl.style.opacity = "0.65";
+        btnEl.style.cursor = "not-allowed";
+        btnEl.innerHTML = origText + ' (' + formatted + ')';
+      }
+    }
+
+    update();
+    setInterval(update, 1000);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLockoutCountdown);
+  } else {
+    initLockoutCountdown();
+  }
+})();
+</script>
 
 <script>
 (function(){

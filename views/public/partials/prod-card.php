@@ -60,9 +60,13 @@ if ($rawOem !== '') {
   <!-- Giá + nút giỏ hàng cùng hàng -->
   <div class="prod-price-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;gap:4px">
     <div>
-      <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($displayPrice) ?></span>
-      <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
-        <span style="text-decoration:line-through;color:var(--ink-4);font-size:11px;margin-left:4px"><?= vnd($displayOriginalPrice) ?></span>
+      <?php if (!empty($p['is_call_price'])): ?>
+        <span style="font-size:12.5px;font-weight:700;color:#1e293b;white-space:nowrap">Liên hệ ngay: <a href="tel:0705070526" onclick="event.stopPropagation()" style="color:#2563eb;text-decoration:underline;font-weight:800">0705.0705.26</a></span>
+      <?php else: ?>
+        <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($displayPrice) ?></span>
+        <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+          <span style="text-decoration:line-through;color:var(--ink-4);font-size:11px;margin-left:4px"><?= vnd($displayOriginalPrice) ?></span>
+        <?php endif; ?>
       <?php endif; ?>
     </div>
     <!-- Nút giỏ hàng icon màu xám -->

@@ -994,24 +994,39 @@ post('/customer/checkout', function() {
     $shipping = ($isFreeship || ($freeShipThreshold > 0 && $afterDiscount >= $freeShipThreshold)) ? 0 : $shipFee;
     $grand = $afterDiscount + $taxAmount + $shipping;
     $rawMethod = $_POST['payment_method'] ?? 'cod';
-    $payMethod = in_array($rawMethod, ['cod','bank_transfer']) ? $rawMethod : 'cod';
-    $dbPayMethod = ($payMethod === 'bank_transfer') ? 'bank_transfer' : 'cod';
-    // Payment: bank_transfer = full prepayment, cod = pay on delivery
+    $isPartner = $user && (in_array($user['role'] ?? '', ['partner','agent']) || !empty($user['is_verified_garage']));
+    $payMethod = in_array($rawMethod, ['cod','bank_transfer','credit']) ? $rawMethod : 'cod';
+    $dbPayMethod = $payMethod;
+
+    // Validate B2B Credit Limit payment
+    if ($payMethod === 'credit' && $isPartner) {
+        $creditLimit = (float)($user['credit_limit'] ?? 100000000);
+        $currentDebt = (float)($user['current_debt'] ?? 0);
+        if ($currentDebt + $grand > $creditLimit) {
+            flash('error', 'Hạn mức công nợ không đủ để đặt đơn hàng này. Dư nợ hiện tại: ' . vnd($currentDebt) . ' / Hạn mức: ' . vnd($creditLimit));
+            redirect('/customer/checkout');
+            return;
+        }
+        dbRun("UPDATE users SET current_debt = current_debt + ? WHERE id=?", [$grand, $user['id']]);
+    }
+
+    // Payment: bank_transfer = full prepayment, cod = pay on delivery, credit = B2B credit
     $paidAmount = 0;
     $remainingAmount = 0;
-    $paymentType = 'cod';
+    $paymentType = $payMethod;
     if ($payMethod === 'bank_transfer') {
         $paidAmount = $grand;
         $remainingAmount = 0;
         $initPayStatus = 'paid';
-        $paymentType = 'bank_transfer';
+    } elseif ($payMethod === 'credit') {
+        $paidAmount = 0;
+        $remainingAmount = $grand;
+        $initPayStatus = 'unpaid';
     } else {
         $initPayStatus = 'unpaid';
-        $paymentType = 'cod';
     }
     $code = strtoupper(substr(base_convert(time(), 10, 36), -4) . substr(md5(uniqid()), 0, 6));
 
-    // Insert order
     // Handle payment receipt upload
     $paymentReceipt = null;
     if (!empty($_FILES['payment_receipt']['name'])) {
@@ -1027,18 +1042,56 @@ post('/customer/checkout', function() {
         }
     }
 
+    // Model 3 Agency Order-on-Behalf & VAT logic
+    $isAgencyOrder = !empty($_POST['is_agency_order']) ? 1 : 0;
+    $endCustName = trim($_POST['end_customer_name'] ?? '');
+    $endCustPhone = trim($_POST['end_customer_phone'] ?? '');
+    $endCustAddr = trim($_POST['end_customer_address'] ?? '');
+    $agencyPayMode = trim($_POST['agency_payment_mode'] ?? 'company_collect');
+    
+    $requiresVat = !empty($_POST['requires_vat']) ? 1 : 0;
+    $vatInvoiceType = trim($_POST['vat_invoice_type'] ?? 'agency');
+    $vatTaxCode = trim($_POST['vat_tax_code'] ?? '');
+    $vatCompanyName = trim($_POST['vat_company_name'] ?? '');
+    
+    $agencyCommAmount = 0;
+    $agencyPayableAmount = $grand;
+    $agencyCommRate = 5.0;
+
+    if ($isAgencyOrder && $isPartner) {
+        $customRate = $user['custom_commission_rate'] ?? null;
+        if ($customRate !== null && $customRate > 0) {
+            $agencyCommRate = (float)$customRate;
+        } else {
+            $tier = dbGet("SELECT * FROM agency_tiers WHERE id=?", [$user['agency_tier_id'] ?? 1]) ?: dbGet("SELECT * FROM agency_tiers ORDER BY id ASC LIMIT 1");
+            $agencyCommRate = (float)($tier['commission_percent'] ?? 5.0);
+        }
+        $agencyCommAmount = (float)round($subtotal * ($agencyCommRate / 100));
+
+        if ($agencyPayMode === 'agent_collected') {
+            $agencyPayableAmount = max(0, $grand - $agencyCommAmount);
+            $grand = $agencyPayableAmount; // Update grand total payable by agent
+        } else {
+            $agencyPayableAmount = $grand;
+        }
+    }
+
     $appliedVoucherCode = $_SESSION['cart_voucher']['code'] ?? ($newsletterDiscount > 0 ? 'UUDAI100K' : null);
 
     $orderId = dbInsert("INSERT INTO orders (code, user_id, total_items, subtotal, discount_total, tax_amount, shipping_total, grand_total,
         payment_method, payment_status, delivery_status, paid_amount, remaining_amount, payment_type,
-        shipping_full_name, shipping_phone, shipping_province, shipping_district, shipping_ward, shipping_detail, customer_note, payment_receipt, voucher_code, created_at)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))", [
+        shipping_full_name, shipping_phone, shipping_province, shipping_district, shipping_ward, shipping_detail, customer_note, payment_receipt, voucher_code,
+        is_agency_order, end_customer_name, end_customer_phone, end_customer_address, agency_payment_mode, agency_commission_amount, agency_payable_amount,
+        requires_vat, vat_invoice_type, vat_tax_code, vat_company_name, created_at)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))", [
         $code, $user['id'], count($items), $subtotal, $discountTotal, $taxAmount, $shipping, $grand,
         $dbPayMethod, $initPayStatus, 'pending', $paidAmount, $remainingAmount, $paymentType,
         trim($_POST['shipping_full_name']), trim($_POST['shipping_phone']),
         trim($_POST['shipping_province']), trim($_POST['shipping_district']),
         trim($_POST['shipping_ward']), trim($_POST['shipping_detail']),
-        trim($_POST['customer_note']??''), $paymentReceipt, $appliedVoucherCode
+        trim($_POST['customer_note']??''), $paymentReceipt, $appliedVoucherCode,
+        $isAgencyOrder, $endCustName, $endCustPhone, $endCustAddr, $agencyPayMode, $agencyCommAmount, $agencyPayableAmount,
+        $requiresVat, $vatInvoiceType, $vatTaxCode, $vatCompanyName
     ]);
 
     if (!empty($appliedVoucherCode)) {
@@ -1051,6 +1104,21 @@ post('/customer/checkout', function() {
         "Có đơn hàng mới #".$code." trị giá ".vnd($grand),
         "/admin/orders/".$orderId
     ]);
+
+    // Log commission transaction if agency order or referred user
+    $agentId = ($isAgencyOrder && $isPartner) ? $user['id'] : ($user['referred_by_agent_id'] ?? null);
+    if ($agentId) {
+        $commRate = ($isAgencyOrder && $isPartner) ? $agencyCommRate : (float)($user['custom_commission_rate'] ?? 5.0);
+        $commFee = ($isAgencyOrder && $isPartner) ? $agencyCommAmount : (float)round($subtotal * ($commRate / 100));
+        if ($commFee > 0) {
+            dbInsert("INSERT INTO commission_transactions (partner_id, sub_order_id, gross_amount, commission_rate, commission_fee, net_amount, type, status, note, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, 'pending', ?, datetime('now', 'localtime'))", [
+                $agentId, $orderId, $subtotal, $commRate, $commFee, $commFee,
+                $isAgencyOrder ? 'order_on_behalf' : 'referral',
+                $isAgencyOrder ? "Hoa hồng đơn đặt hộ #$code cho KH " . ($endCustName ?: trim($_POST['shipping_full_name'])) : "Hoa hồng từ đơn hàng #$code"
+            ]);
+        }
+    }
 
     // Group items by partner
     $byPartner = [];
@@ -1074,7 +1142,7 @@ post('/customer/checkout', function() {
     dbRun("DELETE FROM cart_items WHERE user_id=?", [$user['id']]);
     unset($_SESSION['cart_voucher']);
 
-    flash('success', "Đặt hàng thành công! Mã đơn: $code");
+    flash('success', $isAgencyOrder ? "Đặt hàng hộ thành công! Mã đơn: $code" : "Đặt hàng thành công! Mã đơn: $code");
     redirect('/customer/orders');
 });
 

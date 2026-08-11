@@ -10,6 +10,14 @@ function db(): PDO {
         ]);
         $pdo->exec('PRAGMA foreign_keys = ON');
         $pdo->exec('PRAGMA journal_mode = WAL');
+        $pdo->exec('PRAGMA synchronous = NORMAL');
+        $pdo->exec('PRAGMA cache_size = -64000');
+        $pdo->exec('PRAGMA temp_store = MEMORY');
+        $pdo->exec('PRAGMA mmap_size = 268435456');
+        $pdo->exec('PRAGMA busy_timeout = 5000');
+        if (function_exists('removeVietnameseAccents')) {
+            $pdo->sqliteCreateFunction('remove_accents', 'removeVietnameseAccents', 1);
+        }
     }
     return $pdo;
 }

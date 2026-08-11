@@ -50,6 +50,17 @@ function docSoThanhChu($number) {
     return $res;
 }
 
+function removeVietnameseAccents(string $str): string {
+    $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/ui", "a", $str);
+    $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/ui", "e", $str);
+    $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/ui", "i", $str);
+    $str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/ui", "o", $str);
+    $str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/ui", "u", $str);
+    $str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/ui", "y", $str);
+    $str = preg_replace("/(đ)/ui", "d", $str);
+    return strtolower((string)$str);
+}
+
 function relTime(string $iso): string {
     $ts = strtotime($iso);
     $diff = time() - $ts;

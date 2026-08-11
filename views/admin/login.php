@@ -47,14 +47,14 @@
     <p>Đăng nhập hệ thống quản lý CoolingSystem</p>
 
     <?php $flash = getFlash(); foreach($flash as $f): ?>
-        <div class="alert alert-<?= e($f['type']) ?>"><?= e($f['message']) ?></div>
+        <div class="alert alert-<?= e($f['type']) ?>"><?= str_contains($f['message'], '<') ? $f['message'] : e($f['message']) ?></div>
     <?php endforeach; ?>
 
     <form method="post" action="/admin/login">
         <?= csrfField() ?>
         <div class="form-group">
             <label>Email đăng nhập</label>
-            <input type="email" name="email" required autofocus placeholder="admin@coolingsystems.vn">
+            <input type="email" name="email" required autofocus placeholder="admin@coolingsystems.vn" value="<?= e($_POST['email'] ?? '') ?>">
         </div>
         <div class="form-group">
             <label>Mật khẩu</label>
@@ -63,9 +63,58 @@
         <button type="submit" class="btn-submit">Đăng nhập Admin</button>
     </form>
     <div style="margin-top:18px;font-size:13px"><a href="/admin/forgot" style="color:var(--navy);text-decoration:none;font-weight:600">Quên mật khẩu?</a></div>
-    
-
 </div>
+
+<script>
+(function() {
+  function initLockoutCountdown() {
+    var timerEl = document.getElementById('lockoutTimer');
+    var btnEl = document.querySelector('button[type="submit"]') || document.querySelector('.btn-submit');
+    if (!timerEl) return;
+    var until = parseInt(timerEl.getAttribute('data-until') || '0', 10);
+    if (!until || until <= Math.floor(Date.now() / 1000)) return;
+
+    var origText = btnEl ? (btnEl.getAttribute('data-orig-text') || btnEl.textContent.trim()) : 'Đăng nhập Admin';
+    if (btnEl && !btnEl.getAttribute('data-orig-text')) {
+      btnEl.setAttribute('data-orig-text', origText);
+    }
+
+    function update() {
+      var now = Math.floor(Date.now() / 1000);
+      var remaining = until - now;
+      if (remaining <= 0) {
+        timerEl.textContent = "00:00";
+        if (btnEl) {
+          btnEl.disabled = false;
+          btnEl.style.opacity = "1";
+          btnEl.style.cursor = "pointer";
+          btnEl.textContent = origText;
+        }
+        location.reload();
+        return;
+      }
+      var mins = Math.floor(remaining / 60);
+      var secs = remaining % 60;
+      var formatted = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+      timerEl.textContent = formatted;
+      if (btnEl) {
+        btnEl.disabled = true;
+        btnEl.style.opacity = "0.65";
+        btnEl.style.cursor = "not-allowed";
+        btnEl.innerHTML = origText + ' (' + formatted + ')';
+      }
+    }
+
+    update();
+    setInterval(update, 1000);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLockoutCountdown);
+  } else {
+    initLockoutCountdown();
+  }
+})();
+</script>
 
 </body>
 </html>

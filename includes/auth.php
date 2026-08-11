@@ -21,6 +21,11 @@ if (isset($_SESSION['user_id'])) {
     $_SESSION['last_activity'] = time(); // Cập nhật thời gian hoạt động mới nhất
 }
 
+// Unlock session file on GET requests to allow non-blocking concurrent clicks
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
+    session_write_close();
+}
+
 require_once __DIR__ . '/rbac.php';
 
 function currentUser(): ?array {

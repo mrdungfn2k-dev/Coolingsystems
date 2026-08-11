@@ -276,6 +276,7 @@ if (!empty($_bcItems) && $_curPath !== '/'):
     <?php endforeach; ?>
   </div>
 </nav>
+<?php endif; ?>
 <?php
 // Breadcrumb Schema.org JSON-LD
 $_schemaItems = [['name' => 'Trang chủ', 'url' => 'https://coolingsystems.vn']];
@@ -327,4 +328,29 @@ $orgSchema = [
 <script type="application/ld+json"><?= jsonLd($breadcrumbSchema) ?></script>
 <script type="application/ld+json"><?= jsonLd($websiteSchema) ?></script>
 <script type="application/ld+json"><?= jsonLd($orgSchema) ?></script>
-<?php endif; ?>
+<style>
+#coolTopProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#d4af37,#e53e3e,#1a3258);z-index:99999;width:0%;transition:width 0.25s ease-out,opacity 0.25s ease-out;pointer-events:none;box-shadow:0 0 8px rgba(212,175,55,0.8);}
+</style>
+<div id="coolTopProgress"></div>
+<script>
+(function() {
+  function startProgress() {
+    var bar = document.getElementById('coolTopProgress');
+    if (!bar) return;
+    bar.style.opacity = '1';
+    bar.style.width = '30%';
+    setTimeout(function() { bar.style.width = '75%'; }, 120);
+  }
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (a && a.href && !a.href.startsWith('javascript:') && !a.href.includes('#') && a.target !== '_blank' && !e.ctrlKey && !e.metaKey) {
+      startProgress();
+    }
+    var btn = e.target.closest('button, .btn, input[type="submit"]');
+    if (btn && !btn.disabled) {
+      startProgress();
+    }
+  });
+  window.addEventListener('beforeunload', startProgress);
+})();
+</script>

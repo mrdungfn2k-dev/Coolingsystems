@@ -298,11 +298,15 @@ if (!empty($faqItems)) {
 
         <!-- Price -->
         <div style="margin:0 0 10px">
-          <span class="pd-price-big"><?= vnd($displayPrice) ?></span>
-          <span class="fs-12 text-muted" style="margin-left:6px;font-weight:500">(Đã bao gồm <?= (int)($product['vat_rate']??0) ?>% VAT)</span>
-          <?php if(!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
-            <span class="pd-price-was"><?= vnd($displayOriginalPrice) ?></span>
-            <span class="pd-discount-badge">-<?= round(($displayOriginalPrice-$displayPrice)/$displayOriginalPrice*100) ?>%</span>
+          <?php if(!empty($product['is_call_price'])): ?>
+            <span class="pd-price-big" style="font-size:22px;color:#1e293b">Liên hệ ngay: <a href="tel:0705070526" style="color:#2563eb;text-decoration:underline;font-weight:800">0705.0705.26</a></span>
+          <?php else: ?>
+            <span class="pd-price-big"><?= vnd($displayPrice) ?></span>
+            <span class="fs-12 text-muted" style="margin-left:6px;font-weight:500">(Đã bao gồm <?= (int)($product['vat_rate']??0) ?>% VAT)</span>
+            <?php if(!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+              <span class="pd-price-was"><?= vnd($displayOriginalPrice) ?></span>
+              <span class="pd-discount-badge">-<?= round(($displayOriginalPrice-$displayPrice)/$displayOriginalPrice*100) ?>%</span>
+            <?php endif; ?>
           <?php endif; ?>
         </div>
         <?php if (!empty($isVerifiedGara)): ?>
@@ -744,6 +748,30 @@ window.toggleFav = function toggleFav(btn, productId) {
       </div>
     </div>
     <?php endif; ?>
+
+    <!-- Recently Viewed Products Section -->
+    <style>
+    .rv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .rv-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .rv-card {
+        padding: 8px !important;
+      }
+    }
+    </style>
+    <div id="recentlyViewedSection" style="margin-top:30px;border-top:1px solid var(--line);padding-top:24px;padding-left:16px;padding-right:16px;display:none">
+      <h2 class="serif text-navy mb-3" style="font-size:18px;font-weight:700">
+        Sản phẩm bạn đã xem gần đây
+      </h2>
+      <div id="recentlyViewedGrid" class="rv-grid"></div>
+    </div>
   </div>
 </article>
 </div></section>
@@ -1115,8 +1143,6 @@ function reactReview(reviewId, reaction, btn) {
 function showFavLoginPopup(url){ var m=document.getElementById("favLoginModal"); if(!m) return; var go=document.getElementById("favLoginGo"); if(go && url) go.href=url; m.style.display="flex"; }
 (function(){ var m=document.getElementById("favLoginModal"); if(m){ m.addEventListener("click", function(e){ if(e.target===m) m.style.display="none"; }); } document.addEventListener("keydown", function(e){ if(e.key==="Escape" && m) m.style.display="none"; }); })();
 </script>
-<?php require __DIR__ . '/../partials/foot.php'; ?>
-
 <script>
 function limitWords(el, maxWords) {
   var words = el.value.trim().split(/\s+/).filter(w => w.length > 0);
@@ -1155,4 +1181,60 @@ function previewReviewImages(input) {
     }
   }
 }
+
+// Track & Render Recently Viewed Products
+<?php
+$pImgUrl = '';
+if (!empty($images[0]['file_path'])) {
+    $pImgUrl = '/uploads/products/' . $images[0]['file_path'];
+} elseif (!empty($product['main_image'])) {
+    $pImgUrl = '/uploads/products/' . $product['main_image'];
+}
+?>
+(function() {
+  try {
+    var pData = {
+      id: <?= (int)$product['id'] ?>,
+      name: <?= json_encode($product['name']) ?>,
+      price: <?= (float)$product['price'] ?>,
+      is_call_price: <?= !empty($product['is_call_price']) ? 1 : 0 ?>,
+      image: <?= json_encode($pImgUrl) ?>,
+      slug: <?= json_encode($product['slug'] ?? '') ?>
+    };
+    var list = JSON.parse(localStorage.getItem('cs_recently_viewed') || '[]');
+    list = list.filter(function(item) { return item && item.id; });
+    
+    // Auto-repair missing/placeholder images for stored products
+    var exIdx = list.findIndex(function(item) { return item.id === pData.id; });
+    if (exIdx !== -1) {
+      if (pData.image && (!list[exIdx].image || list[exIdx].image.includes('favicon'))) {
+        list[exIdx].image = pData.image;
+      }
+      list.splice(exIdx, 1);
+    }
+    list.unshift(pData);
+    if (list.length > 10) list = list.slice(0, 10);
+    localStorage.setItem('cs_recently_viewed', JSON.stringify(list));
+
+    var otherItems = list.filter(function(item) { return item && item.id !== pData.id; });
+    var sec = document.getElementById('recentlyViewedSection');
+    var grid = document.getElementById('recentlyViewedGrid');
+    if (sec && grid && otherItems.length > 0) {
+      grid.innerHTML = otherItems.map(function(it) {
+        var pStr = it.is_call_price ? '<span style="color:#1e293b;font-weight:700;">Liên hệ ngay: </span><a href="tel:0705070526" onclick="event.stopPropagation()" style="color:#2563eb;text-decoration:underline;font-weight:800;">0705.0705.26</a>' : (new Intl.NumberFormat('vi-VN').format(it.price) + ' ₫');
+        var url = '/products/' + (it.slug || it.id);
+        var imgSrc = it.image || '/uploads/products/cooling-logo-placeholder.jpg';
+        return '<a href="' + url + '" class="rv-card" style="text-decoration:none; color:inherit; background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 6px 16px rgba(0,0,0,0.08)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'none\'">' +
+          '<div style="background:#fff; aspect-ratio:4/3; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center; margin-bottom:8px;">' +
+          '<img src="' + imgSrc + '" style="width:100%; height:100%; object-fit:contain; padding:4px;" onerror="this.src=\'/uploads/products/cooling-logo-placeholder.jpg\'">' +
+          '</div>' +
+          '<div style="font-size:12.5px; font-weight:600; color:#0b1d3a; line-clamp:2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:35px; line-height:1.4; margin-bottom:6px;">' + it.name + '</div>' +
+          '<div style="font-size:' + (it.is_call_price ? '12.5px' : '14.5px') + '; font-weight:800; color:var(--navy, #1a3258);">' + pStr + '</div>' +
+          '</a>';
+      }).join('');
+      sec.style.display = 'block';
+    }
+  } catch(e) { console.error('Recently viewed error:', e); }
+})();
 </script>
+<?php require __DIR__ . '/../partials/foot.php'; ?>
