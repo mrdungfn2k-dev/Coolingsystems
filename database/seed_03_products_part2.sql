@@ -1,218 +1,4 @@
 BEGIN TRANSACTION;
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3545, 1, '97139H8000', '97139-H8000 / 97139H8000', '', 46, 'Giàn lạnh Hyundai Accent 2018-2020 | 97139-H8000', 'gian-lanh-hyundai-accent-2018-2020-97139-h8000', '<h2>Tổng quan về Giàn lạnh Hyundai Accent 2018-2020</h2>
-<p>Sản phẩm Giàn lạnh Hyundai Accent 2018-2020 (Mã OEM: <strong>97139H8000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn</p>
-<h2>Ưu điểm nổi bật của Giàn lạnh Hyundai Accent 2018-2020</h2>
-<ul>
-<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh hyundai accent', NULL, 'gian-lanh-doowon-accent-97139h8000-01-main.jpg', 1, 0, 0, 10, '97139H8000', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97139H8000 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-<tbody>
-<tr>
-<th>Thông số kỹ thuật</th>
-<th>Chi tiết</th>
-</tr>
-<tr>
-<td><strong>Mã phụ tùng (OEM)</strong></td>
-<td>97139H8000</td>
-</tr>
-<tr>
-<td><strong>Tên sản phẩm</strong></td>
-<td>Giàn lạnh Hyundai Accent 2018-2020</td>
-</tr>
-<tr>
-<td><strong>Xuất xứ</strong></td>
-<td>Chính hãng</td>
-</tr>
-<tr>
-<td><strong>Tình trạng</strong></td>
-<td>Mới 100%</td>
-</tr>
-</tbody>
-</table>', 1, 0, 0, 0, 0, 'Giàn lạnh Hyundai Accent 2018-2020 | 97139-H8000', 'Tổng quan về Giàn lạnh Hyundai Accent 2018-2020 Sản phẩm Giàn lạnh Hyundai Accent 2018-2020 (Mã OEM: 97139H8000) là phụ tùng thuộc hệ thống làm mát và...', 'Giàn lạnh Hyundai Accent 2018-2020 97139-H8000', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh hyundai accent 2018-2020, dàn lạnh điều hòa hyundai, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3546, 1, '7L0820105A', '7L082-0105A / 7L0820105A', '', 46, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L082-0105A', 'gian-lanh-sau-audi-q7-2008-2010-7l082-0105a', '<h2>Tổng quan về Giàn lạnh sau Audi Q7 2008-2010</h2>
-<p>Sản phẩm Giàn lạnh sau Audi Q7 2008-2010 (Mã OEM: <strong>7L0820105A</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-<h2>Ưu điểm nổi bật của Giàn lạnh sau Audi Q7 2008-2010</h2>
-<ul>
-<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh sau audi q7', NULL, 'gian-lanh-sau-valeo-q7-7l0820105a-01-main.jpg', 1, 0, 0, 10, '7L0820105A', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7L0820105A cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-<tbody>
-<tr>
-<th>Thông số kỹ thuật</th>
-<th>Chi tiết</th>
-</tr>
-<tr>
-<td><strong>Mã phụ tùng (OEM)</strong></td>
-<td>7L0820105A</td>
-</tr>
-<tr>
-<td><strong>Tên sản phẩm</strong></td>
-<td>Giàn lạnh sau Audi Q7 2008-2010</td>
-</tr>
-<tr>
-<td><strong>Xuất xứ</strong></td>
-<td>Chính hãng</td>
-</tr>
-<tr>
-<td><strong>Tình trạng</strong></td>
-<td>Mới 100%</td>
-</tr>
-</tbody>
-</table>', 22, 0, 0, 0, 0, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L082-0105A', 'Tổng quan về Giàn lạnh sau Audi Q7 2008-2010 Sản phẩm Giàn lạnh sau Audi Q7 2008-2010 (Mã OEM: 7L0820105A) là phụ tùng thuộc hệ thống làm mát và điện lạnh...', 'Giàn lạnh sau Audi Q7 2008-2010 7L082-0105A', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh sau audi q7 2008-2010, dàn lạnh điều hòa audi, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3547, 1, '4L1820103', '4L1820103', '', 46, 'Giàn lạnh trước Audi Q7 2008-2010 | 4L1820103', 'gian-lanh-truoc-audi-q7-2008-2010-4l1820103', '<h2>Tổng quan về Giàn lạnh trước Audi Q7 2008-2010</h2>
-<p>Sản phẩm <strong>GGiàn lạnh trước Audi Q7 2008-2010</strong> (Mã OEM: <strong>4L1820103</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-<h2>Ưu điểm nổi bật của Giàn lạnh trước Audi Q7 2008-2010</h2>
-<ul>
-<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh trước audi q7', NULL, NULL, 1, 0, 0, 10, '4L1820103', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4L1820103 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-<tbody>
-<tr>
-<th>Thông số kỹ thuật</th>
-<th>Chi tiết</th>
-</tr>
-<tr>
-<td><strong>Mã phụ tùng (OEM)</strong></td>
-<td>4L1820103</td>
-</tr>
-<tr>
-<td><strong>Tên sản phẩm</strong></td>
-<td>Giàn lạnh trước Audi Q7 2008-2010</td>
-</tr>
-<tr>
-<td><strong>Xuất xứ</strong></td>
-<td>Chính hãng</td>
-</tr>
-<tr>
-<td><strong>Tình trạng</strong></td>
-<td>Mới 100%</td>
-</tr>
-</tbody>
-</table>', 22, 0, 0, 0, 0, 'Giàn lạnh trước Audi Q7 2008-2010 | 4L1820103', 'Tổng quan về Giàn lạnh trước Audi Q7 2008-2010 Sản phẩm GGiàn lạnh trước Audi Q7 2008-2010 (Mã OEM: 4L1820103) là phụ tùng thuộc hệ thống làm mát và điện...', 'Giàn lạnh trước Audi Q7 2008-2010 4L1820103', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh trước audi q7 2008-2010, dàn lạnh điều hòa audi, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3548, 1, '7L0820105A-01', '7L0820105A-01 / 7L0820105A01', 'VALEO', 46, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L0820105A-01', 'gian-lanh-sau-audi-q7-2008-2010-7l0820105a-01', '<h2>Tổng quan về Giàn lạnh sau Audi Q7 2008-2010</h2>
-<p>Sản phẩm Giàn lạnh sau Audi Q7 2008-2010(Mã OEM: <strong>7L0820105A-01</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-<h2>Ưu điểm nổi bật của Giàn lạnh sau Audi Q7 2008-2010</h2>
-<ul>
-<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh sau valeo q7', NULL, 'gian-lanh-sau-valeo-q7-7l0820105a-01-main.jpg', 1, 0, 0, 10, '7L0820105A01', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7L0820105A-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-<tbody>
-<tr>
-<th>Thông số kỹ thuật</th>
-<th>Chi tiết</th>
-</tr>
-<tr>
-<td><strong>Mã phụ tùng (OEM)</strong></td>
-<td>7L0820105A-01</td>
-</tr>
-<tr>
-<td><strong>Tên sản phẩm</strong></td>
-<td>Giàn lạnh sau Audi Q7 2008-2010</td>
-</tr>
-<tr>
-<td><strong>Xuất xứ</strong></td>
-<td>Chính hãng</td>
-</tr>
-<tr>
-<td><strong>Tình trạng</strong></td>
-<td>Mới 100%</td>
-</tr>
-</tbody>
-</table>', 22, 0, 0, 0, 0, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L0820105A-01', 'Tổng quan về Giàn lạnh sau Audi Q7 2008-2010 Sản phẩm Giàn lạnh sau Audi Q7 2008-2010(Mã OEM: 7L0820105A-01) là phụ tùng thuộc hệ thống làm mát và điện...', 'Giàn lạnh sau Audi Q7 2008-2010 7L0820105A-01', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh sau audi q7 2008-2010, dàn lạnh điều hòa audi, dàn lạnh điều hòa valeo, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3549, 1, '8850160430', '88501-60430 / 8850160430', '', 46, 'Giàn lạnh xe Toyota Land Cruiser Prado 2004-2009 chính hãng | 88501-60430', 'gian-lanh-xe-toyota-land-cruiser-prado-2004-2009-chinh-hang-88501-60430', '<h2>Tổng quan về Giàn lạnh TOYOTA Land Cruiser Prado</h2>
-<p>Sản phẩm <strong>Giàn lạnh TOYOTA Land Cruiser Prado</strong> (Mã OEM: <strong>8850160430</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Giàn lạnh TOYOTA Land Cruiser Prado"></p>
-<h2>Ưu điểm nổi bật của Giàn lạnh TOYOTA Land Cruiser Prado</h2>
-<ul>
-<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh toyota land cruiser prado', NULL, NULL, 1, 0, 0, 10, '8850160430', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850160430 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8850160430</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh TOYOTA Land Cruiser Prado</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, 'Giàn lạnh xe Toyota Land Cruiser Prado 2004-2009 chính hãng | 88501-60430', 'Tổng quan về Giàn lạnh TOYOTA Land Cruiser Prado Sản phẩm Giàn lạnh TOYOTA Land Cruiser Prado (Mã OEM: 8850160430) là phụ tùng thuộc hệ thống làm mát và...', 'Giàn lạnh xe Toyota Land Cruiser Prado 2004-2009 chính hãng 88501-60430', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh xe toyota land cruiser prado 2004-2009 chính hãng, dàn lạnh điều hòa toyota, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3550, 1, '8850060030', '88500-60030 / 8850060030', '', 46, 'Hộp giàn lạnh sau Toyota Land Cruiser Prado | 88500-60030', 'hop-gian-lanh-sau-toyota-land-cruiser-prado-88500-60030', '<h2>Tổng quan về Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</h2>
-<p>Sản phẩm <strong>Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</strong> (Mã OEM: <strong>8850060030</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Hộp giàn lạnh sau TOYOTA Land Cruiser Prado"></p>
-<h2>Ưu điểm nổi bật của Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</h2>
-<ul>
-<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'hộp giàn lạnh sau toyota land cruiser prado', NULL, NULL, 1, 0, 0, 10, '8850060030', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850060030 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8850060030</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, 'Hộp giàn lạnh sau Toyota Land Cruiser Prado | 88500-60030', 'Tổng quan về Hộp giàn lạnh sau TOYOTA Land Cruiser Prado Sản phẩm Hộp giàn lạnh sau TOYOTA Land Cruiser Prado (Mã OEM: 8850060030) là phụ tùng thuộc hệ...', 'Hộp giàn lạnh sau Toyota Land Cruiser Prado 88500-60030', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, hộp giàn lạnh sau toyota land cruiser prado, dàn lạnh điều hòa toyota, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3551, 1, '8850060040', '88500-60040 / 8850060040', '', 46, 'Hộp giàn lạnh sau Toyota Land Cruiser Prado 2004-2009 | 88500-60040', 'hop-gian-lanh-sau-toyota-land-cruiser-prado-2004-2009-88500-60040', '<h2>Tổng quan về Hộp giàn lạnh sau Toyota Land Cruiser Prado 2004-2009</h2>
 <p>Sản phẩm Hộp giàn lạnh sau Toyota Land Cruiser Prado 2004-2009 (Mã OEM: <strong>8850060040</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
 <h2>Ưu điểm nổi bật của Hộp giàn lạnh sau Toyota Land Cruiser Prado 2004-2009</h2>
@@ -2109,7 +1895,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh suzuki celerio', NULL, 'gian-lanh-suzuki-celerio-9541084m30-main.jpg', 1, 0, 0, 10, '9541084M30', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh suzuki celerio', NULL, 'gian-lanh-suzuki-celerio-9541084m30-main.jpg', 1, 0, 0, 10, '9541084M30', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9541084M30 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -10307,146 +10093,163 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
   <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
   <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
 </table>', 9, 0, 0, 0, 0, '7. Quạt gió điều hòa trong xe MITSUBISHI Lancer (sedanviet) | MR996982', 'Tổng quan về Quạt gió điều hòa trong xe MITSUBISHI Lancer Sản phẩm Quạt gió điều hòa trong xe MITSUBISHI Lancer (Mã OEM: MR996982) là phụ tùng thuộc hệ...', '7. Quạt gió điều hòa trong xe MITSUBISHI Lancer (sedanviet) MR996982', NULL, 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe mitsubishi lancer (sedanviet), motor, quạt dàn nóng mitsubishi, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3956, 1, '272204JG0A', '27220-4JG0A / 272204JG0A', '', 25, '7. Quạt gió điều hòa trong xe NISSAN Navara (sedanviet) | 27220-4JG0A', '7-quat-gio-dieu-hoa-trong-xe-nissan-navara-sedanviet-27220-4jg0a', '<h2>Tổng quan về Quạt gió điều hòa trong xe NISSAN Navara</h2>
-<p>Sản phẩm <strong>Quạt gió điều hòa trong xe NISSAN Navara</strong> (Mã OEM: <strong>272204JG0A</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/quat-gio-ieu-hoa-trong-xe-nissan-navara-272204jg0a-main.jpg" alt="Quạt gió điều hòa trong xe NISSAN Navara" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Quạt gió điều hòa trong xe NISSAN Navara</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 13:01:04', NULL, NULL, 'quạt gió điều hòa trong xe nissan navara', NULL, 'quat-gio-ieu-hoa-trong-xe-nissan-navara-272204jg0a-main.jpg', 0, 0, 0, 10, '272204JG0A', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 272204JG0A cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>272204JG0A</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe NISSAN Navara</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 10, 0, 0, 0, 0, '7. Quạt gió điều hòa trong xe NISSAN Navara (sedanviet) | 27220-4JG0A', 'Tổng quan về Quạt gió điều hòa trong xe NISSAN Navara Sản phẩm Quạt gió điều hòa trong xe NISSAN Navara (Mã OEM: 272204JG0A) là phụ tùng thuộc hệ thống...', '7. Quạt gió điều hòa trong xe NISSAN Navara (sedanviet) 27220-4JG0A', NULL, 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe nissan navara (sedanviet), motor, quạt dàn nóng nissan, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3958, 1, '97113B9000', '97113-B9000 / 97113B9000', '', 25, '7. Quạt gió điều hòa trong xe HYUNDAI i10 (sedanviet) | 97113-B9000', '7-quat-gio-dieu-hoa-trong-xe-hyundai-i10-sedanviet-97113-b9000', '<h2>Tổng quan về Quạt gió điều hòa trong xe HYUNDAI i10</h2>
-<p>Sản phẩm <strong>Quạt gió điều hòa trong xe HYUNDAI i10</strong> (Mã OEM: <strong>97113B9000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/quat-gio-ieu-hoa-trong-xe-hcc-i10-97113b9000-hcc-main.jpg" alt="Quạt gió điều hòa trong xe HYUNDAI i10" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Quạt gió điều hòa trong xe HYUNDAI i10</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 13:01:04', NULL, NULL, 'quạt gió điều hòa trong xe hyundai i10', NULL, 'quat-gio-ieu-hoa-trong-xe-hcc-i10-97113b9000-hcc-main.jpg', 0, 0, 0, 10, '97113B9000', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97113B9000 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97113B9000</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe HYUNDAI i10</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Quạt gió điều hòa trong xe HYUNDAI i10 (sedanviet) | 97113-B9000', 'Tổng quan về Quạt gió điều hòa trong xe HYUNDAI i10 Sản phẩm Quạt gió điều hòa trong xe HYUNDAI i10 (Mã OEM: 97113B9000) là phụ tùng thuộc hệ thống làm...', '7. Quạt gió điều hòa trong xe HYUNDAI i10 (sedanviet) 97113-B9000', NULL, 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe hyundai i10 (sedanviet), motor, quạt dàn nóng hyundai, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3959, 1, '1940007361', '19400-07361 / 1940007361', '', 25, '7. Mô tơ quạt gió điều hòa trong xe LEXUS Camry (sedanviet) | 19400-07361', '7-mo-to-quat-gio-dieu-hoa-trong-xe-lexus-camry-sedanviet-19400-07361', '<h2>Tổng quan về Mô tơ quạt gió điều hòa trong xe LEXUS Camry</h2>
-<p>Sản phẩm <strong>Mô tơ quạt gió điều hòa trong xe LEXUS Camry</strong> (Mã OEM: <strong>1940007361</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Mô tơ quạt gió điều hòa trong xe LEXUS Camry" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Mô tơ quạt gió điều hòa trong xe LEXUS Camry</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 13:01:04', NULL, NULL, 'mô tơ quạt gió điều hòa trong xe lexus camry', NULL, NULL, 0, 0, 0, 10, '1940007361', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1940007361 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1940007361</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Mô tơ quạt gió điều hòa trong xe LEXUS Camry</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, '7. Mô tơ quạt gió điều hòa trong xe LEXUS Camry (sedanviet) | 19400-07361', 'Tổng quan về Mô tơ quạt gió điều hòa trong xe LEXUS Camry Sản phẩm Mô tơ quạt gió điều hòa trong xe LEXUS Camry (Mã OEM: 1940007361) là phụ tùng thuộc hệ...', '7. Mô tơ quạt gió điều hòa trong xe LEXUS Camry (sedanviet) 19400-07361', NULL, 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. mô tơ quạt gió điều hòa trong xe lexus camry (sedanviet), motor, quạt dàn nóng toyota, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3960, 1, '1163601180', '11636-01180 / 1163601180', 'DENSO', 25, '7. Quạt gió điều hòa trong xe DENSO Innova (sedanviet) | 11636-01180', '7-quat-gio-dieu-hoa-trong-xe-denso-innova-sedanviet-11636-01180', '<h2>Tổng quan về Quạt gió điều hòa trong xe DENSO Innova</h2>
-<p>Sản phẩm <strong>Quạt gió điều hòa trong xe DENSO Innova</strong> (Mã OEM: <strong>1163601180</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/quat-gio-ieu-hoa-trong-xe-denso-innova-1163601180-main.jpg" alt="Quạt gió điều hòa trong xe DENSO Innova" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Quạt gió điều hòa trong xe DENSO Innova</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 13:01:04', NULL, NULL, 'quạt gió điều hòa trong xe denso innova', NULL, 'quat-gio-ieu-hoa-trong-xe-denso-innova-1163601180-main.jpg', 0, 0, 0, 10, '1163601180', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1163601180 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1163601180</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe DENSO Innova</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, '7. Quạt gió điều hòa trong xe DENSO Innova (sedanviet) | 11636-01180', 'Tổng quan về Quạt gió điều hòa trong xe DENSO Innova Sản phẩm Quạt gió điều hòa trong xe DENSO Innova (Mã OEM: 1163601180) là phụ tùng thuộc hệ thống làm...', '7. Quạt gió điều hòa trong xe DENSO Innova (sedanviet) 11636-01180', NULL, 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe denso innova (sedanviet), motor, quạt dàn nóng toyota, motor, quạt dàn nóng denso, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3962, 1, '97113B9000-HCC', '97113B9000-HCC / 97113B9000HCC', '', 25, '7. Quạt gió điều hòa trong xe HCC i10 (sedanviet) | 97113B9000-HCC', '7-quat-gio-dieu-hoa-trong-xe-hcc-i10-sedanviet-97113b9000-hcc', '<h2>Tổng quan về Quạt gió điều hòa trong xe HCC i10</h2>
-<p>Sản phẩm <strong>Quạt gió điều hòa trong xe HCC i10</strong> (Mã OEM: <strong>97113B9000-HCC</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/quat-gio-ieu-hoa-trong-xe-hcc-i10-97113b9000-hcc-main.jpg" alt="Quạt gió điều hòa trong xe HCC i10" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Quạt gió điều hòa trong xe HCC i10</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 13:01:04', NULL, NULL, 'quạt gió điều hòa trong xe hcc i10', NULL, 'quat-gio-ieu-hoa-trong-xe-hcc-i10-97113b9000-hcc-main.jpg', 0, 0, 0, 10, '97113B9000HCC', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97113B9000-HCC cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97113B9000-HCC</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe HCC i10</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Quạt gió điều hòa trong xe HCC i10 (sedanviet) | 97113B9000-HCC', 'Tổng quan về Quạt gió điều hòa trong xe HCC i10 Sản phẩm Quạt gió điều hòa trong xe HCC i10 (Mã OEM: 97113B9000-HCC) là phụ tùng thuộc hệ thống làm mát và...', '7. Quạt gió điều hòa trong xe HCC i10 (sedanviet) 97113B9000-HCC', NULL, 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe hcc i10 (sedanviet), motor, quạt dàn nóng hyundai, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3956, 1, '272204JG0A', '27220-4JG0A / 272204JG0A', '', 25, 'Quạt gió điều hòa trong xe dùng cho xe Nissan Navara NP300 2015-2020', 'quat-gio-dieu-hoa-trong-xe-dung-cho-xe-nissan-navara-np300-2015-2020', '<h2>Tổng quan về Quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Nissan Navara NP300 2015-2020</h2>
+<p>Sản phẩm <strong>Quạt gi&oacute; điều h&ograve;a trong xe NISSAN Navara</strong> (M&atilde; OEM: <strong>272204JG0A</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Nissan Navara NP300 2015-2020</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 15:00:36', NULL, NULL, 'quạt gió điều hòa trong xe nissan navara', NULL, 'quat-gio-ieu-hoa-trong-xe-nissan-navara-272204jg0a-main.jpg', 1, 0, 0, 10, '272204JG0A', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 272204JG0A cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>272204JG0A</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe NISSAN Navara</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 10, 0, 0, 0, 0, 'Quạt gió điều hòa trong xe dùng cho xe Nissan Navara NP300 2015-2020 | CoolingSystems', 'Mua Quạt gió điều hòa trong xe dùng cho xe Nissan Navara NP300 2015-2020 chính hãng giá tốt tại CoolingSystems...', 'quạt gió điều hòa trong xe dùng cho xe nissan navara np300 2015-2020', '', 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe nissan navara (sedanviet), motor, quạt dàn nóng nissan, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3958, 1, '97113B9000', '97113-B9000 / 97113B9000', '', 25, 'Quạt gió điều hòa trong xe dùng cho xe Hyundai I10 Grand 2014-2016', 'quat-gio-dieu-hoa-trong-xe-dung-cho-xe-hyundai-i10-grand-2014-2016', '<h2>Tổng quan về Quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Hyundai I10 Grand 2014-2016</h2>
+<p>Sản phẩm <strong>Quạt gi&oacute; điều h&ograve;a trong xe HYUNDAI i10</strong> (M&atilde; OEM: <strong>97113B9000</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Hyundai I10 Grand 2014-2016</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 14:58:40', NULL, NULL, 'quạt gió điều hòa trong xe hyundai i10', NULL, 'quat-gio-ieu-hoa-trong-xe-hcc-i10-97113b9000-hcc-main.jpg', 1, 0, 0, 10, '97113B9000', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97113B9000 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97113B9000</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe HYUNDAI i10</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Quạt gió điều hòa trong xe dùng cho xe Hyundai I10 Grand 2014-2016 | CoolingSystems', 'Mua Quạt gió điều hòa trong xe dùng cho xe Hyundai I10 Grand 2014-2016 chính hãng giá tốt tại CoolingSystems...', 'quạt gió điều hòa trong xe dùng cho xe hyundai i10 grand 2014-2016', '', 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe hyundai i10 (sedanviet), motor, quạt dàn nóng hyundai, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3959, 1, '1940007361', '19400-07361 / 1940007361', '', 25, 'Mô tơ quạt gió điều hòa trong xe dùng cho xe Toyota Camry 2002-2004', 'mo-to-quat-gio-dieu-hoa-trong-xe-dung-cho-xe-toyota-camry-2002-2004', '<h2>Tổng quan về M&ocirc; tơ quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Toyota Camry 2002-2004</h2>
+<p>Sản phẩm <strong>M&ocirc; tơ quạt gi&oacute; điều h&ograve;a trong xe LEXUS Camry</strong> (M&atilde; OEM: <strong>1940007361</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của M&ocirc; tơ quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Toyota Camry 2002-2004</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 14:56:32', NULL, NULL, 'mô tơ quạt gió điều hòa trong xe lexus camry', NULL, NULL, 1, 0, 0, 10, '1940007361', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1940007361 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Th&ocirc;ng số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>M&atilde; phụ t&ugrave;ng (OEM)</strong></td>
+<td>1940007361</td>
+</tr>
+<tr>
+<td><strong>T&ecirc;n sản phẩm</strong></td>
+<td>M&ocirc; tơ quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Toyota Camry 2002-2004</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Ch&iacute;nh h&atilde;ng</td>
+</tr>
+<tr>
+<td><strong>T&igrave;nh trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', 3, 0, 0, 0, 0, 'Mô tơ quạt gió điều hòa trong xe dùng cho xe Toyota Camry 2002-2004', 'Mua Mô tơ quạt gió điều hòa trong xe dùng cho xe Toyota Camry 2002-2004 chính hãng giá tốt tại CoolingSystems...', 'mô tơ quạt gió điều hòa trong xe dùng cho xe toyota camry 2002-2004', '', 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. mô tơ quạt gió điều hòa trong xe lexus camry (sedanviet), motor, quạt dàn nóng toyota, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3960, 1, '1163601180', '11636-01180 / 1163601180', 'DENSO', 25, 'Quạt gió điều hòa trong xe dùng cho xe Toyota Innova 2014', 'quat-gio-dieu-hoa-trong-xe-dung-cho-xe-toyota-innova-2014', '<h2>Tổng quan về Quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Toyota Innova 2014</h2>
+<p>Sản phẩm <strong>Quạt gi&oacute; điều h&ograve;a trong xe DENSO Innova</strong> (M&atilde; OEM: <strong>1163601180</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.&nbsp;</p>
+<h2>Ưu điểm nổi bật của Quạt gi&oacute; điều h&ograve;a trong xe d&ugrave;ng cho xe Toyota Innova 2014</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 14:54:48', NULL, NULL, 'quạt gió điều hòa trong xe denso innova', NULL, 'quat-gio-ieu-hoa-trong-xe-denso-innova-1163601180-main.jpg', 1, 0, 0, 10, '1163601180', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1163601180 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1163601180</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe DENSO Innova</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 3, 0, 0, 0, 0, 'Quạt gió điều hòa trong xe dùng cho xe Toyota Innova 2014 Chính hãng | CoolingSystems', 'Mua Quạt gió điều hòa trong xe dùng cho xe Toyota Innova 2014 chính hãng giá tốt tại CoolingSystems...', 'quạt gió điều hòa trong xe dùng cho xe toyota innova 2014', '', 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe denso innova (sedanviet), motor, quạt dàn nóng toyota, motor, quạt dàn nóng denso, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3962, 1, '97113B9000-HCC', '97113B9000-HCC / 97113B9000HCC', '', 25, 'Quạt gió điều hòa trong xe Hyundai i10 Grand 2017-2020', 'quat-gio-dieu-hoa-trong-xe-hyundai-i10-grand-2017-2020', '<h2>Tổng quan về Quạt gi&oacute; điều h&ograve;a trong xe Hyundai i10 Grand 2017-2020</h2>
+<p>Sản phẩm Quạt gi&oacute; điều h&ograve;a trong xe Hyundai i10 Grand 2017-2020&nbsp;(M&atilde; OEM: <strong>97113B9000-HCC</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<h2>Ưu điểm nổi bật của Quạt gi&oacute; điều h&ograve;a trong xe Hyundai i10 Grand 2017-2020</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:09', '2026-08-12 15:34:33', NULL, NULL, 'quạt gió điều hòa trong xe hcc i10', NULL, 'quat-gio-ieu-hoa-trong-xe-hcc-i10-97113b9000-hcc-main.jpg', 1, 0, 0, 10, '97113B9000HCC', 5, 1000, '<ul>
+<li><strong>Chất liệu:</strong> Hợp kim cao cấp v&agrave; cao su tổng hợp chịu nhiệt, chống m&agrave;i m&ograve;n tốt.</li>
+<li><strong>Tương th&iacute;ch:</strong> Tương th&iacute;ch chuẩn 100% theo m&atilde; OEM 97113B9000-HCC cho c&aacute;c d&ograve;ng xe tương ứng.</li>
+<li><strong>Ch&iacute;nh s&aacute;ch:</strong> Đ&atilde; kiểm định chất lượng nghi&ecirc;m ngặt, bảo h&agrave;nh 12 th&aacute;ng tr&ecirc;n to&agrave;n quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Th&ocirc;ng số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>M&atilde; phụ t&ugrave;ng (OEM)</strong></td>
+<td>97113B9000-HCC</td>
+</tr>
+<tr>
+<td><strong>T&ecirc;n sản phẩm</strong></td>
+<td>Quạt gi&oacute; điều h&ograve;a trong xe Hyundai i10 Grand 2017-2020</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Ch&iacute;nh h&atilde;ng</td>
+</tr>
+<tr>
+<td><strong>T&igrave;nh trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', 1, 0, 0, 0, 0, 'Quạt gió điều hòa trong xe Hyundai i10 Grand 2017-2020', 'Tổng quan về Quạt gió điều hòa trong xe Hyundai i10 Grand 2017-2020 (Mã OEM: 97113B9000-HCC) là phụ tùng thuộc hệ thống làm mát và...', 'Quạt gió điều hòa trong xe Hyundai i10 Grand 2017-2020', '', 0, 0, NULL, 1, 1, 0, 'motor, quạt dàn nóng, 7. quạt gió điều hòa trong xe hcc i10 (sedanviet), motor, quạt dàn nóng hyundai, thay motor, quạt dàn nóng chính hãng, kiểm tra motor, quạt dàn nóng');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3963, 1, '8710335060', '87103-35060 / 8710335060', '', 25, 'Quạt gió điều hòa trong xe Lexus GX470 2002-2009 | 87103-35060', 'quat-gio-dieu-hoa-trong-xe-lexus-gx470-2002-2009-87103-35060', '<h2>Tổng quan về Quạt gió điều hòa trong xe Lexus GX470 2002-2009</h2>
 <p>Sản phẩm Quạt gió điều hòa trong xe xe Lexus GX470 2002-2009 (Mã OEM: <strong>8710335060</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
 <h2>Ưu điểm nổi bật của Quạt gió điều hòa trong xe Lexus GX470 2002-2009</h2>
@@ -23643,7 +23446,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 850000, 850000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T18:56:06.878Z', '2026-08-12 13:01:04', 'Cảm biến áp suất điều hòa, cảm biến gas lạnh Audi A3, Volkswagen Gol', 'Mua Cảm biến áp suất điều hòa, cảm biến gas lạnh Audi A3, Volkswagen Golf 7, Tiguan, Skoda, Passat đời chính hãng Mã OEM 5Q0959126A, 500959126A, 82CP6801 chấ...', 'cảm biến áp suất điều', NULL, '/uploads/products/dan-lanh-dieu-hoa-trong-xe-audi-a3-q3-skoda-octavia-ii-superb-seat-leon-toledo-iii-volkswagen-passat-golf-tiguan-20260731081047-d00351d4.webp', 1, 0, 0, 10, '5Q0959126A', 5, 1000, '<ul>
+</ul>', 850000, 850000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T18:56:06.878Z', '2026-08-12 13:01:04', 'Cảm biến áp suất điều hòa, cảm biến gas lạnh Audi A3, Volkswagen Gol', 'Mua Cảm biến áp suất điều hòa, cảm biến gas lạnh Audi A3, Volkswagen Golf 7, Tiguan, Skoda, Passat đời chính hãng Mã OEM 5Q0959126A, 500959126A, 82CP6801 chấ...', 'cảm biến áp suất điều', NULL, '/uploads/products/dan-lanh-dieu-hoa-trong-xe-audi-a3-q3-skoda-octavia-ii-superb-seat-leon-toledo-iii-volkswagen-passat-golf-tiguan-20260731081047-d00351d4.webp', 1, 0, 0, 10, '5Q0959126A', 5, 1000, '<ul>
  <li><strong>Mã OEM 5Q0959126A, 500959126A, 82CP6801</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Audi, không cần chỉnh sửa.</li>
@@ -27539,7 +27342,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1000000, 1000000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T18:56:06.896Z', '2026-08-12 13:01:04', 'DÀN NÓNG TOYOTA YARIS ĐỜI chính hãng | CoolingSystems', 'Mua DÀN NÓNG TOYOTA YARIS ĐỜI chính hãng Mã OEM 87107-0D050 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dn nng', NULL, '/uploads/products/6_dan_nong_toyota_yaris_oi_2008_87107-0d05_partsvietnam_2.jpg', 1, 0, 0, 10, '871070D050', 5, 1000, '<ul>
+</ul>', 1000000, 1000000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T18:56:06.896Z', '2026-08-12 13:01:04', 'DÀN NÓNG TOYOTA YARIS ĐỜI chính hãng | CoolingSystems', 'Mua DÀN NÓNG TOYOTA YARIS ĐỜI chính hãng Mã OEM 87107-0D050 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dn nng', NULL, '/uploads/products/6_dan_nong_toyota_yaris_oi_2008_87107-0d05_partsvietnam_2.jpg', 1, 0, 0, 10, '871070D050', 5, 1000, '<ul>
  <li><strong>Mã OEM 87107-0D050</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -31881,7 +31684,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1000000, 1000000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T18:56:06.917Z', '2026-08-12 13:01:04', 'HỘP QUẠT GIÀN LẠNH TOYOTA HIACE ĐỜI chính hãng | CoolingSystems', 'Mua HỘP QUẠT GIÀN LẠNH TOYOTA HIACE ĐỜI chính hãng Mã OEM 87130-0K012, 871300K012 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. ...', 'hp qut gin lnh', NULL, '/uploads/products/hop-quat-dan-lanh-toyota-hiace-doi-2011-87130-0k012-871300k012-dan-cs-153-2-20260731073807-f25997b9.webp', 1, 0, 0, 10, '871300K012', 5, 1000, '<ul>
+</ul>', 1000000, 1000000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T18:56:06.917Z', '2026-08-12 13:01:04', 'HỘP QUẠT GIÀN LẠNH TOYOTA HIACE ĐỜI chính hãng | CoolingSystems', 'Mua HỘP QUẠT GIÀN LẠNH TOYOTA HIACE ĐỜI chính hãng Mã OEM 87130-0K012, 871300K012 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. ...', 'hp qut gin lnh', NULL, '/uploads/products/hop-quat-dan-lanh-toyota-hiace-doi-2011-87130-0k012-871300k012-dan-cs-153-2-20260731073807-f25997b9.webp', 1, 0, 0, 10, '871300K012', 5, 1000, '<ul>
  <li><strong>Mã OEM 87130-0K012, 871300K012</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -46492,7 +46295,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 4320000, 4320000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T19:24:12.507721Z', '2026-08-12 13:01:04', 'Lốc lạnh hay lốc điều hòa xe Audi A4 B9 (Sedan, Avant, Allroad), A5,', 'Mua Lốc lạnh hay lốc điều hòa xe Audi A4 B9 (Sedan, Avant, Allroad), A5, A6, A7, Q7 chính hãng Mã OEM 4M0816803, 4M0820803, 8W5816803, 8W5820803A chất lượng ...', 'lốc lạnh hay lốc điều', NULL, '/uploads/products/6_loc_lanh_hay_loc_dieu_hoa_xe_audi_a4_b9_sedan_partsvietnam_2.jpg', 1, 0, 0, 10, '4M0816803', 5, 1000, '<ul>
+</ul>', 4320000, 4320000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T19:24:12.507721Z', '2026-08-12 13:01:04', 'Lốc lạnh hay lốc điều hòa xe Audi A4 B9 (Sedan, Avant, Allroad), A5,', 'Mua Lốc lạnh hay lốc điều hòa xe Audi A4 B9 (Sedan, Avant, Allroad), A5, A6, A7, Q7 chính hãng Mã OEM 4M0816803, 4M0820803, 8W5816803, 8W5820803A chất lượng ...', 'lốc lạnh hay lốc điều', NULL, '/uploads/products/6_loc_lanh_hay_loc_dieu_hoa_xe_audi_a4_b9_sedan_partsvietnam_2.jpg', 1, 0, 0, 10, '4M0816803', 5, 1000, '<ul>
  <li><strong>Mã OEM 4M0816803, 4M0820803, 8W5816803, 8W5820803A</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Audi, không cần chỉnh sửa.</li>
@@ -75817,7 +75620,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 4000000, 4000000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T21:17:26.144421Z', '2026-08-12 13:01:04', 'DÀN LẠNH PORSCHE MACAN chính hãng | CoolingSystems', 'Mua DÀN LẠNH PORSCHE MACAN chính hãng Mã OEM 8T1898191B chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dn lnh', NULL, '/uploads/products/thanhdung_61_4-dan-lanh-porsche-macan-thanhdungauto.jpg', 1, 0, 0, 10, '8T1898191B', 5, 1000, '<ul>
+</ul>', 4000000, 4000000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 9, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-31T21:17:26.144421Z', '2026-08-12 13:01:04', 'DÀN LẠNH PORSCHE MACAN chính hãng | CoolingSystems', 'Mua DÀN LẠNH PORSCHE MACAN chính hãng Mã OEM 8T1898191B chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dn lnh', NULL, '/uploads/products/thanhdung_61_4-dan-lanh-porsche-macan-thanhdungauto.jpg', 1, 0, 0, 10, '8T1898191B', 5, 1000, '<ul>
 <li><strong>Mã OEM 8T1898191B</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
 <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
 <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản, không cần chỉnh sửa.</li>
@@ -81254,7 +81057,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa suzuki celerio', NULL, NULL, 1, 0, 0, 10, '9520084M01000', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:55:28', NULL, NULL, 'lốc điều hòa suzuki celerio', NULL, NULL, 1, 0, 0, 10, '9520084M01000', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520084M01000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -81266,622 +81069,573 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
   <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
 </table>', 11, 0, 0, 0, 0, 'Lốc điều hòa SUZUKI Celerio | 9520084M01000', 'Tổng quan về Lốc điều hòa SUZUKI Celerio
 Sản phẩm Lốc điều hòa SUZUKI Celerio (Mã OEM: 9520084M01000) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đ', 'lốc điều hòa', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa suzuki celerio (sedanviet), lốc điều hòa suzuki, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5734, 1, '88370B1020', '88370-B1020 / 88370B1020', '', 22, '7. Lốc điều hòa (bản HYBRID) TOYOTA Yaris (sedanviet) | 88370-B1020', '7-loc-dieu-hoa-ban-hybrid-toyota-yaris-sedanviet-88370-b1020', '<h2>Tổng quan về Lốc điều hòa (bản HYBRID) TOYOTA Yaris</h2>
-<p>Sản phẩm <strong>Lốc điều hòa (bản HYBRID) TOYOTA Yaris</strong> (Mã OEM: <strong>88370B1020</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa (bản HYBRID) TOYOTA Yaris" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa (bản HYBRID) TOYOTA Yaris</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa (bản hybrid) toyota yaris', NULL, NULL, 0, 0, 0, 10, '88370B1020', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88370B1020 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88370B1020</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa (bản HYBRID) TOYOTA Yaris</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, '7. Lốc điều hòa (bản HYBRID) TOYOTA Yaris (sedanviet) | 88370-B1020', 'Tổng quan về Lốc điều hòa (bản HYBRID) TOYOTA Yaris Sản phẩm Lốc điều hòa (bản HYBRID) TOYOTA Yaris (Mã OEM: 88370B1020) là phụ tùng thuộc hệ thống làm...', '7. Lốc điều hòa (bản HYBRID) TOYOTA Yaris (sedanviet) 88370-B1020', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa (bản hybrid) toyota yaris (sedanviet), lốc điều hòa toyota, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5735, 1, '977011U150', '97701-1U150 / 977011U150', '', 22, '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) | 97701-1U150', '7-loc-dieu-hoa-hyundai-santafe-sedanviet-97701-1u150', '<h2>Tổng quan về Lốc điều hòa HYUNDAI Santafe</h2>
-<p>Sản phẩm <strong>Lốc điều hòa HYUNDAI Santafe</strong> (Mã OEM: <strong>977011U150</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa HYUNDAI Santafe" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa HYUNDAI Santafe</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa hyundai santafe', NULL, NULL, 0, 0, 0, 10, '977011U150', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 977011U150 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>977011U150</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Santafe</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) | 97701-1U150', 'Tổng quan về Lốc điều hòa HYUNDAI Santafe Sản phẩm Lốc điều hòa HYUNDAI Santafe (Mã OEM: 977011U150) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) 97701-1U150', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5736, 1, '7813B145', '7813B145', '', 22, '7. Lốc điều hòa MITSUBISHI Triton (sedanviet) | 7813B145', '7-loc-dieu-hoa-mitsubishi-triton-sedanviet-7813b145', '<h2>Tổng quan về Lốc điều hòa MITSUBISHI Triton</h2>
-<p>Sản phẩm <strong>Lốc điều hòa MITSUBISHI Triton</strong> (Mã OEM: <strong>7813B145</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa MITSUBISHI Triton" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa MITSUBISHI Triton</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa mitsubishi triton', NULL, NULL, 0, 0, 0, 10, '7813B145', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813B145 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813B145</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa MITSUBISHI Triton</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 9, 0, 0, 0, 0, '7. Lốc điều hòa MITSUBISHI Triton (sedanviet) | 7813B145', 'Tổng quan về Lốc điều hòa MITSUBISHI Triton Sản phẩm Lốc điều hòa MITSUBISHI Triton (Mã OEM: 7813B145) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô...', '7. Lốc điều hòa MITSUBISHI Triton (sedanviet) 7813B145', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa mitsubishi triton (sedanviet), lốc điều hòa mitsubishi, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5737, 1, '1320043000', '13200-43000 / 1320043000', '', 22, '7. Lốc điều hòa BYD Dolpin (sedanviet) | 13200-43000', '7-loc-dieu-hoa-byd-dolpin-sedanviet-13200-43000', '<h2>Tổng quan về Lốc điều hòa BYD Dolpin</h2>
-<p>Sản phẩm <strong>Lốc điều hòa BYD Dolpin</strong> (Mã OEM: <strong>1320043000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa BYD Dolpin" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa BYD Dolpin</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa byd dolpin', NULL, NULL, 0, 0, 0, 10, '1320043000', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1320043000 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1320043000</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa BYD Dolpin</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', NULL, 0, 0, 0, 0, '7. Lốc điều hòa BYD Dolpin (sedanviet) | 13200-43000', 'Tổng quan về Lốc điều hòa BYD Dolpin Sản phẩm Lốc điều hòa BYD Dolpin (Mã OEM: 1320043000) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', '7. Lốc điều hòa BYD Dolpin (sedanviet) 13200-43000', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa byd dolpin (sedanviet), thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5738, 1, 'G052300A2', 'G052300A2', '', 22, '7. Dầu lốc điều hòa VOLKSWAGEN Tiguan (sedanviet) | G052300A2', '7-dau-loc-dieu-hoa-volkswagen-tiguan-sedanviet-g052300a2', '<h2>Tổng quan về Dầu lốc điều hòa VOLKSWAGEN Tiguan</h2>
-<p>Sản phẩm <strong>Dầu lốc điều hòa VOLKSWAGEN Tiguan</strong> (Mã OEM: <strong>G052300A2</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Dầu lốc điều hòa VOLKSWAGEN Tiguan" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Dầu lốc điều hòa VOLKSWAGEN Tiguan</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'dầu lốc điều hòa volkswagen tiguan', NULL, NULL, 0, 0, 0, 10, 'G052300A2', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM G052300A2 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>G052300A2</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Dầu lốc điều hòa VOLKSWAGEN Tiguan</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 23, 0, 0, 0, 0, '7. Dầu lốc điều hòa VOLKSWAGEN Tiguan (sedanviet) | G052300A2', 'Tổng quan về Dầu lốc điều hòa VOLKSWAGEN Tiguan Sản phẩm Dầu lốc điều hòa VOLKSWAGEN Tiguan (Mã OEM: G052300A2) là phụ tùng thuộc hệ thống làm mát và điện...', '7. Dầu lốc điều hòa VOLKSWAGEN Tiguan (sedanviet) G052300A2', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. dầu lốc điều hòa volkswagen tiguan (sedanviet), lốc điều hòa volkswagen, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5739, 1, '1477405600', '14774-05600 / 1477405600', '', 22, '7. Lốc điều hòa BYD Tang (sedanviet) | 14774-05600', '7-loc-dieu-hoa-byd-tang-sedanviet-14774-05600', '<h2>Tổng quan về Lốc điều hòa BYD Tang</h2>
-<p>Sản phẩm <strong>Lốc điều hòa BYD Tang</strong> (Mã OEM: <strong>1477405600</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa BYD Tang" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa BYD Tang</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa byd tang', NULL, NULL, 0, 0, 0, 10, '1477405600', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1477405600 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1477405600</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa BYD Tang</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', NULL, 0, 0, 0, 0, '7. Lốc điều hòa BYD Tang (sedanviet) | 14774-05600', 'Tổng quan về Lốc điều hòa BYD Tang Sản phẩm Lốc điều hòa BYD Tang (Mã OEM: 1477405600) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt...', '7. Lốc điều hòa BYD Tang (sedanviet) 14774-05600', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa byd tang (sedanviet), thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5740, 1, '3881051MA02', '3881051MA02', '', 22, '7. Lốc điều hòa HONDA HR-V (sedanviet) | 3881051MA02', '7-loc-dieu-hoa-honda-hr-v-sedanviet-3881051ma02', '<h2>Tổng quan về Lốc điều hòa HONDA HR-V</h2>
-<p>Sản phẩm <strong>Lốc điều hòa HONDA HR-V</strong> (Mã OEM: <strong>3881051MA02</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa HONDA HR-V" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa HONDA HR-V</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa honda hr-v', NULL, NULL, 0, 0, 0, 10, '3881051MA02', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3881051MA02 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3881051MA02</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HONDA HR-V</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 7, 0, 0, 0, 0, '7. Lốc điều hòa HONDA HR-V (sedanviet) | 3881051MA02', 'Tổng quan về Lốc điều hòa HONDA HR-V Sản phẩm Lốc điều hòa HONDA HR-V (Mã OEM: 3881051MA02) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', '7. Lốc điều hòa HONDA HR-V (sedanviet) 3881051MA02', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa honda hr-v (sedanviet), lốc điều hòa honda, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5741, 1, '1KD820803P', '1KD82-0803P / 1KD820803P', '', 22, '7. Lốc điều hòa VOLKSWAGEN Viloran (sedanviet) | 1KD82-0803P', '7-loc-dieu-hoa-volkswagen-viloran-sedanviet-1kd82-0803p', '<h2>Tổng quan về Lốc điều hòa VOLKSWAGEN Viloran</h2>
-<p>Sản phẩm <strong>Lốc điều hòa VOLKSWAGEN Viloran</strong> (Mã OEM: <strong>1KD820803P</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa VOLKSWAGEN Viloran" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa VOLKSWAGEN Viloran</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa volkswagen viloran', NULL, NULL, 0, 0, 0, 10, '1KD820803P', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1KD820803P cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1KD820803P</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa VOLKSWAGEN Viloran</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 23, 0, 0, 0, 0, '7. Lốc điều hòa VOLKSWAGEN Viloran (sedanviet) | 1KD82-0803P', 'Tổng quan về Lốc điều hòa VOLKSWAGEN Viloran Sản phẩm Lốc điều hòa VOLKSWAGEN Viloran (Mã OEM: 1KD820803P) là phụ tùng thuộc hệ thống làm mát và điện lạnh...', '7. Lốc điều hòa VOLKSWAGEN Viloran (sedanviet) 1KD82-0803P', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa volkswagen viloran (sedanviet), lốc điều hòa volkswagen, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5742, 1, '92600C000P', '92600-C000P / 92600C000P', '', 22, '7. Lốc điều hòa MITSUBISHI Destinator (sedanviet) | 92600-C000P', '7-loc-dieu-hoa-mitsubishi-destinator-sedanviet-92600-c000p', '<h2>Tổng quan về Lốc điều hòa MITSUBISHI Destinator</h2>
-<p>Sản phẩm <strong>Lốc điều hòa MITSUBISHI Destinator</strong> (Mã OEM: <strong>92600C000P</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa MITSUBISHI Destinator" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa MITSUBISHI Destinator</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa mitsubishi destinator', NULL, NULL, 0, 0, 0, 10, '92600C000P', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 92600C000P cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>92600C000P</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa MITSUBISHI Destinator</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 9, 0, 0, 0, 0, '7. Lốc điều hòa MITSUBISHI Destinator (sedanviet) | 92600-C000P', 'Tổng quan về Lốc điều hòa MITSUBISHI Destinator Sản phẩm Lốc điều hòa MITSUBISHI Destinator (Mã OEM: 92600C000P) là phụ tùng thuộc hệ thống làm mát và...', '7. Lốc điều hòa MITSUBISHI Destinator (sedanviet) 92600-C000P', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa mitsubishi destinator (sedanviet), lốc điều hòa mitsubishi, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5743, 1, '1734793800', '17347-93800 / 1734793800', '', 22, '7. Lốc điều hòa BYD Dolpin (sedanviet) | 17347-93800', '7-loc-dieu-hoa-byd-dolpin-sedanviet-17347-93800', '<h2>Tổng quan về Lốc điều hòa BYD Dolpin</h2>
-<p>Sản phẩm <strong>Lốc điều hòa BYD Dolpin</strong> (Mã OEM: <strong>1734793800</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa BYD Dolpin" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa BYD Dolpin</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa byd dolpin', NULL, NULL, 0, 0, 0, 10, '1734793800', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1734793800 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1734793800</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa BYD Dolpin</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', NULL, 0, 0, 0, 0, '7. Lốc điều hòa BYD Dolpin (sedanviet) | 17347-93800', 'Tổng quan về Lốc điều hòa BYD Dolpin Sản phẩm Lốc điều hòa BYD Dolpin (Mã OEM: 1734793800) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', '7. Lốc điều hòa BYD Dolpin (sedanviet) 17347-93800', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa byd dolpin (sedanviet), thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5744, 1, '97641P6000', '97641-P6000 / 97641P6000', '', 22, '7. Cuộn điện lốc điều hòa HYUNDAI Santafe (sedanviet) | 97641-P6000', '7-cuon-dien-loc-dieu-hoa-hyundai-santafe-sedanviet-97641-p6000', '<h2>Tổng quan về Cuộn điện lốc điều hòa HYUNDAI Santafe</h2>
-<p>Sản phẩm <strong>Cuộn điện lốc điều hòa HYUNDAI Santafe</strong> (Mã OEM: <strong>97641P6000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Cuộn điện lốc điều hòa HYUNDAI Santafe" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Cuộn điện lốc điều hòa HYUNDAI Santafe</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'cuộn điện lốc điều hòa hyundai santafe', NULL, NULL, 0, 0, 0, 10, '97641P6000', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97641P6000 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97641P6000</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cuộn điện lốc điều hòa HYUNDAI Santafe</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Cuộn điện lốc điều hòa HYUNDAI Santafe (sedanviet) | 97641-P6000', 'Tổng quan về Cuộn điện lốc điều hòa HYUNDAI Santafe Sản phẩm Cuộn điện lốc điều hòa HYUNDAI Santafe (Mã OEM: 97641P6000) là phụ tùng thuộc hệ thống làm...', '7. Cuộn điện lốc điều hòa HYUNDAI Santafe (sedanviet) 97641-P6000', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. cuộn điện lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5745, 1, '97701AY000', '97701-AY000 / 97701AY000', '', 22, '7. Lốc điều hòa HYUNDAI Accent (sedanviet) | 97701-AY000', '7-loc-dieu-hoa-hyundai-accent-sedanviet-97701-ay000', '<h2>Tổng quan về Lốc điều hòa HYUNDAI Accent</h2>
-<p>Sản phẩm <strong>Lốc điều hòa HYUNDAI Accent</strong> (Mã OEM: <strong>97701AY000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa HYUNDAI Accent" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa HYUNDAI Accent</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa hyundai accent', NULL, NULL, 0, 0, 0, 10, '97701AY000', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97701AY000 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97701AY000</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Accent</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Lốc điều hòa HYUNDAI Accent (sedanviet) | 97701-AY000', 'Tổng quan về Lốc điều hòa HYUNDAI Accent Sản phẩm Lốc điều hòa HYUNDAI Accent (Mã OEM: 97701AY000) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', '7. Lốc điều hòa HYUNDAI Accent (sedanviet) 97701-AY000', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai accent (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5746, 1, 'A0008303202', 'A0008303202', '', 22, '7. Lốc điều hòa MERCEDES-BENZ V (sedanviet) | A0008303202', '7-loc-dieu-hoa-mercedes-benz-v-sedanviet-a0008303202', '<h2>Tổng quan về Lốc điều hòa MERCEDES-BENZ V</h2>
-<p>Sản phẩm <strong>Lốc điều hòa MERCEDES-BENZ V</strong> (Mã OEM: <strong>A0008303202</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa MERCEDES-BENZ V" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa MERCEDES-BENZ V</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa mercedes-benz v', NULL, NULL, 0, 0, 0, 10, 'A0008303202', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM A0008303202 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>A0008303202</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa MERCEDES-BENZ V</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 20, 0, 0, 0, 0, '7. Lốc điều hòa MERCEDES-BENZ V (sedanviet) | A0008303202', 'Tổng quan về Lốc điều hòa MERCEDES-BENZ V Sản phẩm Lốc điều hòa MERCEDES-BENZ V (Mã OEM: A0008303202) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', '7. Lốc điều hòa MERCEDES-BENZ V (sedanviet) A0008303202', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa mercedes-benz v (sedanviet), lốc điều hòa mercedes-benz, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5747, 1, '976413F400', '97641-3F400 / 976413F400', '', 22, '7. Cuộn dây điện lốc điều hòa HYUNDAI Santafe (sedanviet) | 97641-3F400', '7-cuon-day-dien-loc-dieu-hoa-hyundai-santafe-sedanviet-97641-3f400', '<h2>Tổng quan về Cuộn dây điện lốc điều hòa HYUNDAI Santafe</h2>
-<p>Sản phẩm <strong>Cuộn dây điện lốc điều hòa HYUNDAI Santafe</strong> (Mã OEM: <strong>976413F400</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Cuộn dây điện lốc điều hòa HYUNDAI Santafe" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Cuộn dây điện lốc điều hòa HYUNDAI Santafe</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'cuộn dây điện lốc điều hòa hyundai santafe', NULL, NULL, 0, 0, 0, 10, '976413F400', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 976413F400 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>976413F400</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cuộn dây điện lốc điều hòa HYUNDAI Santafe</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Cuộn dây điện lốc điều hòa HYUNDAI Santafe (sedanviet) | 97641-3F400', 'Tổng quan về Cuộn dây điện lốc điều hòa HYUNDAI Santafe Sản phẩm Cuộn dây điện lốc điều hòa HYUNDAI Santafe (Mã OEM: 976413F400) là phụ tùng thuộc hệ...', '7. Cuộn dây điện lốc điều hòa HYUNDAI Santafe (sedanviet) 97641-3F400', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. cuộn dây điện lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5748, 1, '97641R0000', '97641-R0000 / 97641R0000', '', 22, '7. Cuộn điện lốc điều hòa KIA Carnival (sedanviet) | 97641-R0000', '7-cuon-dien-loc-dieu-hoa-kia-carnival-sedanviet-97641-r0000', '<h2>Tổng quan về Cuộn điện lốc điều hòa KIA Carnival</h2>
-<p>Sản phẩm <strong>Cuộn điện lốc điều hòa KIA Carnival</strong> (Mã OEM: <strong>97641R0000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Cuộn điện lốc điều hòa KIA Carnival" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Cuộn điện lốc điều hòa KIA Carnival</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'cuộn điện lốc điều hòa kia carnival', NULL, NULL, 0, 0, 0, 10, '97641R0000', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97641R0000 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97641R0000</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cuộn điện lốc điều hòa KIA Carnival</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 2, 0, 0, 0, 0, '7. Cuộn điện lốc điều hòa KIA Carnival (sedanviet) | 97641-R0000', 'Tổng quan về Cuộn điện lốc điều hòa KIA Carnival Sản phẩm Cuộn điện lốc điều hòa KIA Carnival (Mã OEM: 97641R0000) là phụ tùng thuộc hệ thống làm mát và...', '7. Cuộn điện lốc điều hòa KIA Carnival (sedanviet) 97641-R0000', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. cuộn điện lốc điều hòa kia carnival (sedanviet), lốc điều hòa kia, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5749, 1, '97701H8400', '97701-H8400 / 97701H8400', '', 22, '7. Lốc điều hòa HYUNDAI Venue (sedanviet) | 97701-H8400', '7-loc-dieu-hoa-hyundai-venue-sedanviet-97701-h8400', '<h2>Tổng quan về Lốc điều hòa HYUNDAI Venue</h2>
-<p>Sản phẩm <strong>Lốc điều hòa HYUNDAI Venue</strong> (Mã OEM: <strong>97701H8400</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa HYUNDAI Venue" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa HYUNDAI Venue</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa hyundai venue', NULL, NULL, 0, 0, 0, 10, '97701H8400', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97701H8400 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97701H8400</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Venue</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Lốc điều hòa HYUNDAI Venue (sedanviet) | 97701-H8400', 'Tổng quan về Lốc điều hòa HYUNDAI Venue Sản phẩm Lốc điều hòa HYUNDAI Venue (Mã OEM: 97701H8400) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao...', '7. Lốc điều hòa HYUNDAI Venue (sedanviet) 97701-H8400', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai venue (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5750, 1, '95200M76M01', '95200M76M01', '', 22, '7. Lốc điều hòa SUZUKI Celerio (sedanviet) | 95200M76M01', '7-loc-dieu-hoa-suzuki-celerio-sedanviet-95200m76m01', '<h2>Tổng quan về Lốc điều hòa SUZUKI Celerio</h2>
-<p>Sản phẩm <strong>Lốc điều hòa SUZUKI Celerio</strong> (Mã OEM: <strong>95200M76M01</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/loc-ieu-hoa-suzuki-celerio-95200m76m01-main.jpg" alt="Lốc điều hòa SUZUKI Celerio" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa SUZUKI Celerio</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa suzuki celerio', NULL, 'loc-ieu-hoa-suzuki-celerio-95200m76m01-main.jpg', 0, 0, 0, 10, '95200M76M01', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95200M76M01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>95200M76M01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa SUZUKI Celerio</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 11, 0, 0, 0, 0, '7. Lốc điều hòa SUZUKI Celerio (sedanviet) | 95200M76M01', 'Tổng quan về Lốc điều hòa SUZUKI Celerio Sản phẩm Lốc điều hòa SUZUKI Celerio (Mã OEM: 95200M76M01) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', '7. Lốc điều hòa SUZUKI Celerio (sedanviet) 95200M76M01', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa suzuki celerio (sedanviet), lốc điều hòa suzuki, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5751, 1, '2QD820803', '2QD820803', '', 22, '7. Lốc điều hòa VOLKSWAGEN T-Cross (sedanviet) | 2QD820803', '7-loc-dieu-hoa-volkswagen-t-cross-sedanviet-2qd820803', '<h2>Tổng quan về Lốc điều hòa VOLKSWAGEN T-Cross</h2>
-<p>Sản phẩm <strong>Lốc điều hòa VOLKSWAGEN T-Cross</strong> (Mã OEM: <strong>2QD820803</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa VOLKSWAGEN T-Cross" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa VOLKSWAGEN T-Cross</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa volkswagen t-cross', NULL, NULL, 0, 0, 0, 10, '2QD820803', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2QD820803 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2QD820803</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa VOLKSWAGEN T-Cross</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 23, 0, 0, 0, 0, '7. Lốc điều hòa VOLKSWAGEN T-Cross (sedanviet) | 2QD820803', 'Tổng quan về Lốc điều hòa VOLKSWAGEN T-Cross Sản phẩm Lốc điều hòa VOLKSWAGEN T-Cross (Mã OEM: 2QD820803) là phụ tùng thuộc hệ thống làm mát và điện lạnh...', '7. Lốc điều hòa VOLKSWAGEN T-Cross (sedanviet) 2QD820803', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa volkswagen t-cross (sedanviet), lốc điều hòa volkswagen, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5752, 1, '977011Y001', '97701-1Y001 / 977011Y001', '', 22, '7. Lốc điều hòa KIA Morning (sedanviet) | 97701-1Y001', '7-loc-dieu-hoa-kia-morning-sedanviet-97701-1y001', '<h2>Tổng quan về Lốc điều hòa KIA Morning</h2>
-<p>Sản phẩm <strong>Lốc điều hòa KIA Morning</strong> (Mã OEM: <strong>977011Y001</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều hòa KIA Morning" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa KIA Morning</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa kia morning', NULL, NULL, 0, 0, 0, 10, '977011Y001', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 977011Y001 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>977011Y001</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa KIA Morning</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 2, 0, 0, 0, 0, '7. Lốc điều hòa KIA Morning (sedanviet) | 97701-1Y001', 'Tổng quan về Lốc điều hòa KIA Morning Sản phẩm Lốc điều hòa KIA Morning (Mã OEM: 977011Y001) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', '7. Lốc điều hòa KIA Morning (sedanviet) 97701-1Y001', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa kia morning (sedanviet), lốc điều hòa kia, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5753, 1, '97701S1250', '97701-S1250 / 97701S1250', '', 22, '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) | 97701-S1250', '7-loc-dieu-hoa-hyundai-santafe-sedanviet-97701-s1250', '<h2>Tổng quan về Lốc điều hòa HYUNDAI Santafe</h2>
-<p>Sản phẩm <strong>Lốc điều hòa HYUNDAI Santafe</strong> (Mã OEM: <strong>97701S1250</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/loc-ieu-hoa-hyundai-santafe-97701s1250-main.jpg" alt="Lốc điều hòa HYUNDAI Santafe" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa HYUNDAI Santafe</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa hyundai santafe', NULL, 'loc-ieu-hoa-hyundai-santafe-97701s1250-main.jpg', 0, 0, 0, 10, '97701S1250', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97701S1250 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97701S1250</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Santafe</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 1, 0, 0, 0, 0, '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) | 97701-S1250', 'Tổng quan về Lốc điều hòa HYUNDAI Santafe Sản phẩm Lốc điều hòa HYUNDAI Santafe (Mã OEM: 97701S1250) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) 97701-S1250', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5754, 1, 'DCP51002', 'DCP51002', 'DENSO', 22, '7. Lốc điều hòa DENSO IS (sedanviet) | DCP51002', '7-loc-dieu-hoa-denso-is-sedanviet-dcp51002', '<h2>Tổng quan về Lốc điều hòa DENSO IS</h2>
-<p>Sản phẩm <strong>Lốc điều hòa DENSO IS</strong> (Mã OEM: <strong>DCP51002</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/loc-ieu-hoa-denso-is-dcp51002-main.jpg" alt="Lốc điều hòa DENSO IS" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Lốc điều hòa DENSO IS</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa denso is', NULL, 'loc-ieu-hoa-denso-is-dcp51002-main.jpg', 0, 0, 0, 10, 'DCP51002', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM DCP51002 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>DCP51002</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa DENSO IS</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 30, 0, 0, 0, 0, '7. Lốc điều hòa DENSO IS (sedanviet) | DCP51002', 'Tổng quan về Lốc điều hòa DENSO IS Sản phẩm Lốc điều hòa DENSO IS (Mã OEM: DCP51002) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt...', '7. Lốc điều hòa DENSO IS (sedanviet) DCP51002', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa denso is (sedanviet), lốc điều hòa lexus, lốc điều hòa denso, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5755, 1, '7813A984', '7813A984', '', 22, '7. Bộ ly hợp lốc điều hòa MITSUBISHI Outlander (sedanviet) | 7813A984', '7-bo-ly-hop-loc-dieu-hoa-mitsubishi-outlander-sedanviet-7813a984', '<h2>Tổng quan về Bộ ly hợp lốc điều hòa MITSUBISHI Outlander</h2>
-<p>Sản phẩm <strong>Bộ ly hợp lốc điều hòa MITSUBISHI Outlander</strong> (Mã OEM: <strong>7813A984</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
-
-<p style="text-align:center;"><img src="/public/uploads/products/cooling-logo-placeholder.jpg" alt="Bộ ly hợp lốc điều hòa MITSUBISHI Outlander" style="max-width:100%;height:auto;border-radius:8px;margin:12px 0;" /></p>
-
-<h2>Ưu điểm nổi bật của Bộ ly hợp lốc điều hòa MITSUBISHI Outlander</h2>
-<ul>
-  <li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
-  <li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
-  <li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
-</ul>
-
-<div style="background:#f8fafc;border-radius:8px;padding:16px;margin:20px 0;border:1px solid #e2e8f0;">
-  <p style="color:#1e3a8a;font-weight:bold;margin:0 0 10px 0;font-size:15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
-  <p style="margin:0 0 6px 0;color:#334155;font-size:14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-  <p style="margin:0;color:#334155;font-size:14px;">Website chính thức: <a href="https://coolingsystems.vn" style="color:#2563eb;text-decoration:underline;">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'draft', NULL, 0, 0, 0, 1, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 13:01:04', NULL, NULL, 'bộ ly hợp lốc điều hòa mitsubishi outlander', NULL, NULL, 0, 0, 0, 10, '7813A984', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813A984 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A984</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Bộ ly hợp lốc điều hòa MITSUBISHI Outlander</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 9, 0, 0, 0, 0, '7. Bộ ly hợp lốc điều hòa MITSUBISHI Outlander (sedanviet) | 7813A984', 'Tổng quan về Bộ ly hợp lốc điều hòa MITSUBISHI Outlander Sản phẩm Bộ ly hợp lốc điều hòa MITSUBISHI Outlander (Mã OEM: 7813A984) là phụ tùng thuộc hệ...', '7. Bộ ly hợp lốc điều hòa MITSUBISHI Outlander (sedanviet) 7813A984', NULL, 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. bộ ly hợp lốc điều hòa mitsubishi outlander (sedanviet), lốc điều hòa mitsubishi, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5734, 1, '88370B1020', '88370-B1020 / 88370B1020', '', 22, 'Lốc điều hòa (bản HYBRID) TOYOTA Yaris | 88370-B1020', 'loc-dieu-hoa-ban-hybrid-toyota-yaris-88370-b1020', '<h2>Tổng quan về Lốc điều h&ograve;a (bản HYBRID) TOYOTA Yaris</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a (bản HYBRID) TOYOTA Yaris</strong> (M&atilde; OEM: <strong>88370B1020</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều h&ograve;a (bản HYBRID) TOYOTA Yaris"></p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a (bản HYBRID) TOYOTA Yaris</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:03:23', NULL, NULL, 'lốc điều hòa (bản hybrid) toyota yaris', NULL, NULL, 1, 0, 0, 10, '88370B1020', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88370B1020 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88370B1020</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa (bản HYBRID) TOYOTA Yaris</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 3, 0, 0, 0, 0, 'Lốc điều hòa (bản HYBRID) TOYOTA Yaris | 88370-B1020', 'Tổng quan về Lốc điều hòa (bản HYBRID) TOYOTA Yaris Sản phẩm Lốc điều hòa (bản HYBRID) TOYOTA Yaris (Mã OEM: 88370B1020) là phụ tùng thuộc hệ thống làm...', 'Lốc điều hòa (bản HYBRID) TOYOTA Yaris  88370-B1020', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa (bản hybrid) toyota yaris (sedanviet), lốc điều hòa toyota, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5735, 1, '977011U150', '97701-1U150 / 977011U150', '', 22, 'Lốc điều hòa HYUNDAI Santafe | 97701-1U150', 'loc-dieu-hoa-hyundai-santafe-97701-1u150', '<h2>Tổng quan về Lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a HYUNDAI Santafe</strong> (M&atilde; OEM: <strong>977011U150</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:06:02', NULL, NULL, 'lốc điều hòa hyundai santafe', NULL, NULL, 1, 0, 0, 10, '977011U150', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 977011U150 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>977011U150</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Santafe</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Lốc điều hòa HYUNDAI Santafe | 97701-1U150', 'Tổng quan về Lốc điều hòa HYUNDAI Santafe Sản phẩm Lốc điều hòa HYUNDAI Santafe (Mã OEM: 977011U150) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', 'Lốc điều hòa HYUNDAI Santafe 97701-1U150', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5736, 1, '7813B145', '7813B145', '', 22, 'Lốc điều hòa MITSUBISHI Triton | 7813B145', 'loc-dieu-hoa-mitsubishi-triton-7813b145', '<h2>Tổng quan về Lốc điều h&ograve;a MITSUBISHI Triton</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a MITSUBISHI Triton</strong> (M&atilde; OEM: <strong>7813B145</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a MITSUBISHI Triton</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:08:17', NULL, NULL, 'lốc điều hòa mitsubishi triton', NULL, NULL, 1, 0, 0, 10, '7813B145', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813B145 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813B145</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa MITSUBISHI Triton</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 9, 0, 0, 0, 0, 'Lốc điều hòa MITSUBISHI Triton | 7813B145', 'Tổng quan về Lốc điều hòa MITSUBISHI Triton Sản phẩm Lốc điều hòa MITSUBISHI Triton (Mã OEM: 7813B145) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô...', 'Lốc điều hòa MITSUBISHI Triton  7813B145', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa mitsubishi triton (sedanviet), lốc điều hòa mitsubishi, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5737, 1, '1320043000', '13200-43000 / 1320043000', '', 22, 'Lốc điều hòa BYD Dolpin  | 13200-43000', 'loc-dieu-hoa-byd-dolpin-13200-43000', '<h2>Tổng quan về Lốc điều h&ograve;a BYD Dolpin</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a BYD Dolpin</strong> (M&atilde; OEM: <strong>1320043000</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a BYD Dolpin</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:14:52', NULL, NULL, 'lốc điều hòa byd dolpin', NULL, NULL, 1, 0, 0, 10, '1320043000', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1320043000 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1320043000</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa BYD Dolpin</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', NULL, 0, 0, 0, 0, 'Lốc điều hòa BYD Dolpin  | 13200-43000', 'Tổng quan về Lốc điều hòa BYD Dolpin Sản phẩm Lốc điều hòa BYD Dolpin (Mã OEM: 1320043000) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', 'Lốc điều hòa BYD Dolpin  13200-43000', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa byd dolpin (sedanviet), thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5738, 1, 'G052300A2', 'G052300A2', '', 22, 'Dầu lốc điều hòa VOLKSWAGEN Tiguan | G052300A2', 'dau-loc-dieu-hoa-volkswagen-tiguan-g052300a2', '<h2>Tổng quan về Dầu lốc điều h&ograve;a VOLKSWAGEN Tiguan</h2>
+<p>Sản phẩm <strong>Dầu lốc điều h&ograve;a VOLKSWAGEN Tiguan</strong> (M&atilde; OEM: <strong>G052300A2</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Dầu lốc điều h&ograve;a VOLKSWAGEN Tiguan</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:16:05', NULL, NULL, 'dầu lốc điều hòa volkswagen tiguan', NULL, NULL, 1, 0, 0, 10, 'G052300A2', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM G052300A2 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>G052300A2</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dầu lốc điều hòa VOLKSWAGEN Tiguan</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 23, 0, 0, 0, 0, 'Dầu lốc điều hòa VOLKSWAGEN Tiguan | G052300A2', 'Tổng quan về Dầu lốc điều hòa VOLKSWAGEN Tiguan Sản phẩm Dầu lốc điều hòa VOLKSWAGEN Tiguan (Mã OEM: G052300A2) là phụ tùng thuộc hệ thống làm mát và điện...', 'Dầu lốc điều hòa VOLKSWAGEN Tiguan G052300A2', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. dầu lốc điều hòa volkswagen tiguan (sedanviet), lốc điều hòa volkswagen, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5739, 1, '1477405600', '14774-05600 / 1477405600', '', 22, 'Lốc điều hòa BYD Tang | 14774-05600', 'loc-dieu-hoa-byd-tang-14774-05600', '<h2>Tổng quan về Lốc điều h&ograve;a BYD Tang</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a BYD Tang</strong> (M&atilde; OEM: <strong>1477405600</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a BYD Tang</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:27:22', NULL, NULL, 'lốc điều hòa byd tang', NULL, NULL, 1, 0, 0, 10, '1477405600', 5, 1000, '<ul>
+<li><strong>Chất liệu:</strong> Hợp kim cao cấp v&agrave; cao su tổng hợp chịu nhiệt, chống m&agrave;i m&ograve;n tốt.</li>
+<li><strong>Tương th&iacute;ch:</strong> Tương th&iacute;ch chuẩn 100% theo m&atilde; OEM 1477405600 cho c&aacute;c d&ograve;ng xe tương ứng.</li>
+<li><strong>Ch&iacute;nh s&aacute;ch:</strong> Đ&atilde; kiểm định chất lượng nghi&ecirc;m ngặt, bảo h&agrave;nh 12 th&aacute;ng tr&ecirc;n to&agrave;n quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Th&ocirc;ng số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>M&atilde; phụ t&ugrave;ng (OEM)</strong></td>
+<td>1477405600</td>
+</tr>
+<tr>
+<td><strong>T&ecirc;n sản phẩm</strong></td>
+<td>Lốc điều h&ograve;a BYD Tang</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Ch&iacute;nh h&atilde;ng</td>
+</tr>
+<tr>
+<td><strong>T&igrave;nh trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', NULL, 0, 0, 0, 0, 'Lốc điều hòa BYD Tang | 14774-05600', 'Tổng quan về Lốc điều hòa BYD Tang Sản phẩm Lốc điều hòa BYD Tang (Mã OEM: 1477405600) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt...', 'Lốc điều hòa BYD Tang 14774-05600', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa byd tang (sedanviet), thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5740, 1, '3881051MA02', '3881051MA02', '', 22, 'Lốc điều hòa HONDA HR-V | 3881051MA02', 'loc-dieu-hoa-honda-hr-v-3881051ma02', '<h2>Tổng quan về Lốc điều h&ograve;a HONDA HR-V</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a HONDA HR-V</strong> (M&atilde; OEM: <strong>3881051MA02</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a HONDA HR-V</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:33:41', NULL, NULL, 'lốc điều hòa honda hr-v', NULL, NULL, 1, 0, 0, 10, '3881051MA02', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3881051MA02 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3881051MA02</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HONDA HR-V</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 7, 0, 0, 0, 0, 'Lốc điều hòa HONDA HR-V | 3881051MA02', 'Tổng quan về Lốc điều hòa HONDA HR-V Sản phẩm Lốc điều hòa HONDA HR-V (Mã OEM: 3881051MA02) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', 'Lốc điều hòa HONDA HR-V  3881051MA02', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa honda hr-v (sedanviet), lốc điều hòa honda, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5741, 1, '1KD820803P', '1KD82-0803P / 1KD820803P', '', 22, 'Lốc điều hòa VOLKSWAGEN Viloran | 1KD82-0803P', 'loc-dieu-hoa-volkswagen-viloran-1kd82-0803p', '<h2>Tổng quan về Lốc điều h&ograve;a VOLKSWAGEN Viloran</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a VOLKSWAGEN Viloran</strong> (M&atilde; OEM: <strong>1KD820803P</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Lốc điều h&ograve;a VOLKSWAGEN Viloran"></p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a VOLKSWAGEN Viloran</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:41:45', NULL, NULL, 'lốc điều hòa volkswagen viloran', NULL, NULL, 1, 0, 0, 10, '1KD820803P', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1KD820803P cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1KD820803P</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa VOLKSWAGEN Viloran</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 23, 0, 0, 0, 0, 'Lốc điều hòa VOLKSWAGEN Viloran | 1KD82-0803P', 'Tổng quan về Lốc điều hòa VOLKSWAGEN Viloran Sản phẩm Lốc điều hòa VOLKSWAGEN Viloran (Mã OEM: 1KD820803P) là phụ tùng thuộc hệ thống làm mát và điện lạnh...', '7. Lốc điều hòa VOLKSWAGEN Viloran (sedanviet) 1KD82-0803P', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa volkswagen viloran (sedanviet), lốc điều hòa volkswagen, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5742, 1, '92600C000P', '92600-C000P / 92600C000P', '', 22, 'Lốc điều hòa MITSUBISHI Destinator | 92600-C000P', 'loc-dieu-hoa-mitsubishi-destinator-92600-c000p', '<h2>Tổng quan về Lốc điều h&ograve;a MITSUBISHI Destinator</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a MITSUBISHI Destinator</strong> (M&atilde; OEM: <strong>92600C000P</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a MITSUBISHI Destinator</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:47:30', NULL, NULL, 'lốc điều hòa mitsubishi destinator', NULL, NULL, 1, 0, 0, 10, '92600C000P', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 92600C000P cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>92600C000P</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa MITSUBISHI Destinator</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 9, 0, 0, 0, 0, 'Lốc điều hòa MITSUBISHI Destinator | 92600-C000P', 'Tổng quan về Lốc điều hòa MITSUBISHI Destinator Sản phẩm Lốc điều hòa MITSUBISHI Destinator (Mã OEM: 92600C000P) là phụ tùng thuộc hệ thống làm mát và...', 'Lốc điều hòa MITSUBISHI Destinator 92600-C000P', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa mitsubishi destinator (sedanviet), lốc điều hòa mitsubishi, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5743, 1, '1734793800', '17347-93800 / 1734793800', '', 22, 'Lốc điều hòa BYD Dolpin  | 17347-93800', 'loc-dieu-hoa-byd-dolpin-17347-93800', '<h2>Tổng quan về Lốc điều h&ograve;a BYD Dolpin</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a BYD Dolpin</strong> (M&atilde; OEM: <strong>1734793800</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a BYD Dolpin</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:50:19', NULL, NULL, 'lốc điều hòa byd dolpin', NULL, NULL, 1, 0, 0, 10, '1734793800', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1734793800 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1734793800</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa BYD Dolpin</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', NULL, 0, 0, 0, 0, 'Lốc điều hòa BYD Dolpin  | 17347-93800', 'Tổng quan về Lốc điều hòa BYD Dolpin Sản phẩm Lốc điều hòa BYD Dolpin (Mã OEM: 1734793800) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', 'Lốc điều hòa BYD Dolpin 17347-93800', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa byd dolpin (sedanviet), thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5744, 1, '97641P6000', '97641-P6000 / 97641P6000', '', 22, 'Cuộn điện lốc điều hòa HYUNDAI Santafe  | 97641-P6000', 'cuon-dien-loc-dieu-hoa-hyundai-santafe-97641-p6000', '<h2>Tổng quan về Cuộn điện lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<p>Sản phẩm <strong>Cuộn điện lốc điều h&ograve;a HYUNDAI Santafe</strong> (M&atilde; OEM: <strong>97641P6000</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Cuộn điện lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:53:47', NULL, NULL, 'cuộn điện lốc điều hòa hyundai santafe', NULL, NULL, 1, 0, 0, 10, '97641P6000', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97641P6000 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97641P6000</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Cuộn điện lốc điều hòa HYUNDAI Santafe</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Cuộn điện lốc điều hòa HYUNDAI Santafe  | 97641-P6000', 'Tổng quan về Cuộn điện lốc điều hòa HYUNDAI Santafe Sản phẩm Cuộn điện lốc điều hòa HYUNDAI Santafe (Mã OEM: 97641P6000) là phụ tùng thuộc hệ thống làm...', 'Cuộn điện lốc điều hòa HYUNDAI Santafe 97641-P6000', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. cuộn điện lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5745, 1, '97701AY000', '97701-AY000 / 97701AY000', '', 22, 'Lốc điều hòa HYUNDAI Accent | 97701-AY000', 'loc-dieu-hoa-hyundai-accent-97701-ay000', '<h2>Tổng quan về Lốc điều h&ograve;a HYUNDAI Accent</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a HYUNDAI Accent</strong> (M&atilde; OEM: <strong>97701AY000</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a HYUNDAI Accent</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 14:55:03', NULL, NULL, 'lốc điều hòa hyundai accent', NULL, NULL, 1, 0, 0, 10, '97701AY000', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97701AY000 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97701AY000</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Accent</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Lốc điều hòa HYUNDAI Accent | 97701-AY000', 'Tổng quan về Lốc điều hòa HYUNDAI Accent Sản phẩm Lốc điều hòa HYUNDAI Accent (Mã OEM: 97701AY000) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', 'Lốc điều hòa HYUNDAI Accent  97701-AY000', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai accent (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5746, 1, 'A0008303202', 'A0008303202', '', 22, 'Lốc điều hòa  V | A0008303202', 'loc-dieu-hoa-v-a0008303202', '<h2>Tổng quan về Lốc điều h&ograve;a MERCEDES-BENZ V</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a MERCEDES-BENZ V</strong> (M&atilde; OEM: <strong>A0008303202</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a MERCEDES-BENZ V</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:23:54', NULL, NULL, 'lốc điều hòa mercedes-benz v', NULL, NULL, 1, 0, 0, 10, 'A0008303202', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM A0008303202 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>A0008303202</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa MERCEDES-BENZ V</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 20, 0, 0, 0, 0, 'Lốc điều hòa  V | A0008303202', 'Tổng quan về Lốc điều hòa MERCEDES-BENZ V Sản phẩm Lốc điều hòa MERCEDES-BENZ V (Mã OEM: A0008303202) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', 'Lốc điều hòa MERCEDES-BENZ V A0008303202', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa mercedes-benz v (sedanviet), lốc điều hòa mercedes-benz, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5747, 1, '976413F400', '97641-3F400 / 976413F400', '', 22, 'Cuộn dây điện lốc điều hòa Santafe  | 97641-3F400', 'cuon-day-dien-loc-dieu-hoa-santafe-97641-3f400', '<h2>Tổng quan về Cuộn d&acirc;y điện lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<p>Sản phẩm <strong>Cuộn d&acirc;y điện lốc điều h&ograve;a HYUNDAI Santafe</strong> (M&atilde; OEM: <strong>976413F400</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Cuộn d&acirc;y điện lốc điều h&ograve;a HYUNDAI Santafe"></p>
+<h2>Ưu điểm nổi bật của Cuộn d&acirc;y điện lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:24:01', NULL, NULL, 'cuộn dây điện lốc điều hòa hyundai santafe', NULL, NULL, 1, 0, 0, 10, '976413F400', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 976413F400 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>976413F400</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Cuộn dây điện lốc điều hòa HYUNDAI Santafe</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Cuộn dây điện lốc điều hòa Santafe  | 97641-3F400', 'Tổng quan về Cuộn dây điện lốc điều hòa HYUNDAI Santafe Sản phẩm Cuộn dây điện lốc điều hòa HYUNDAI Santafe (Mã OEM: 976413F400) là phụ tùng thuộc hệ...', 'Cuộn dây điện lốc điều hòa HYUNDAI Santafe  97641-3F400', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. cuộn dây điện lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5748, 1, '97641R0000', '97641-R0000 / 97641R0000', '', 22, 'Cuộn điện lốc điều hòa Carnival  | 97641-R0000', 'cuon-dien-loc-dieu-hoa-carnival-97641-r0000', '<h2>Tổng quan về Cuộn điện lốc điều h&ograve;a KIA Carnival</h2>
+<p>Sản phẩm <strong>Cuộn điện lốc điều h&ograve;a KIA Carnival</strong> (M&atilde; OEM: <strong>97641R0000</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Cuộn điện lốc điều h&ograve;a KIA Carnival</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:24:07', NULL, NULL, 'cuộn điện lốc điều hòa kia carnival', NULL, NULL, 1, 0, 0, 10, '97641R0000', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97641R0000 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97641R0000</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Cuộn điện lốc điều hòa KIA Carnival</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 2, 0, 0, 0, 0, 'Cuộn điện lốc điều hòa Carnival  | 97641-R0000', 'Tổng quan về Cuộn điện lốc điều hòa KIA Carnival Sản phẩm Cuộn điện lốc điều hòa KIA Carnival (Mã OEM: 97641R0000) là phụ tùng thuộc hệ thống làm mát và...', 'Cuộn điện lốc điều hòa KIA Carnival  97641-R0000', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. cuộn điện lốc điều hòa kia carnival (sedanviet), lốc điều hòa kia, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5749, 1, '97701H8400', '97701-H8400 / 97701H8400', '', 22, 'Lốc điều hòa Venue | 97701-H8400', 'loc-dieu-hoa-venue-97701-h8400', '<h2>Tổng quan về Lốc điều h&ograve;a HYUNDAI Venue</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a HYUNDAI Venue</strong> (M&atilde; OEM: <strong>97701H8400</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a HYUNDAI Venue</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:04:01', NULL, NULL, 'lốc điều hòa hyundai venue', NULL, NULL, 1, 0, 0, 10, '97701H8400', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97701H8400 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97701H8400</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Venue</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Lốc điều hòa Venue | 97701-H8400', 'Tổng quan về Lốc điều hòa HYUNDAI Venue Sản phẩm Lốc điều hòa HYUNDAI Venue (Mã OEM: 97701H8400) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao...', 'Lốc điều hòa HYUNDAI Venue  97701-H8400', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai venue (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5750, 1, '95200M76M01', '95200M76M01', '', 22, 'Lốc điều hòa Celerio  | 95200M76M01', 'loc-dieu-hoa-celerio-95200m76m01', '<h2>Tổng quan về &nbsp;Lốc điều h&ograve;a Celerio &nbsp;| 95200M76M01</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a Celerio</strong> (M&atilde; OEM: <strong>95200M76M01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của &nbsp;Lốc điều h&ograve;a Celerio &nbsp;| 95200M76M01</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:16:17', NULL, NULL, 'lốc điều hòa suzuki celerio', NULL, 'loc-ieu-hoa-suzuki-celerio-95200m76m01-main.jpg', 1, 0, 0, 10, '95200M76M01', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95200M76M01 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>95200M76M01</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa SUZUKI Celerio</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 11, 0, 0, 0, 0, 'Lốc điều hòa Celerio  | 95200M76M01', 'Tổng quan về Lốc điều hòa SUZUKI Celerio Sản phẩm Lốc điều hòa SUZUKI Celerio (Mã OEM: 95200M76M01) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', 'Lốc điều hòa  Celerio  95200M76M01', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa suzuki celerio (sedanviet), lốc điều hòa suzuki, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5751, 1, '2QD820803', '2QD820803', '', 22, 'Lốc điều hòa VOLKSWAGEN T-Cross  | 2QD820803', 'loc-dieu-hoa-volkswagen-t-cross-2qd820803', '<h2>Tổng quan về Lốc điều h&ograve;a VOLKSWAGEN T-Cross</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a VOLKSWAGEN T-Cross</strong> (M&atilde; OEM: <strong>2QD820803</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a VOLKSWAGEN T-Cross</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:21:22', NULL, NULL, 'lốc điều hòa volkswagen t-cross', NULL, NULL, 1, 0, 0, 10, '2QD820803', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2QD820803 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2QD820803</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa VOLKSWAGEN T-Cross</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 23, 0, 0, 0, 0, 'Lốc điều hòa VOLKSWAGEN T-Cross  | 2QD820803', 'Tổng quan về Lốc điều hòa VOLKSWAGEN T-Cross Sản phẩm Lốc điều hòa VOLKSWAGEN T-Cross (Mã OEM: 2QD820803) là phụ tùng thuộc hệ thống làm mát và điện lạnh...', 'Lốc điều hòa VOLKSWAGEN T-Cross  2QD820803', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa volkswagen t-cross (sedanviet), lốc điều hòa volkswagen, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5752, 1, '977011Y001', '97701-1Y001 / 977011Y001', '', 22, 'Lốc điều hòa Morning | 97701-1Y001', 'loc-dieu-hoa-morning-97701-1y001', '<h2>Tổng quan về Lốc điều h&ograve;a KIA Morning</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a KIA Morning</strong> (M&atilde; OEM: <strong>977011Y001</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a KIA Morning</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:24:15', NULL, NULL, 'lốc điều hòa kia morning', NULL, NULL, 1, 0, 0, 10, '977011Y001', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 977011Y001 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>977011Y001</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa KIA Morning</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 2, 0, 0, 0, 0, 'Lốc điều hòa Morning | 97701-1Y001', 'Tổng quan về Lốc điều hòa KIA Morning Sản phẩm Lốc điều hòa KIA Morning (Mã OEM: 977011Y001) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp....', 'Lốc điều hòa KIA Morning  97701-1Y001', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa kia morning (sedanviet), lốc điều hòa kia, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5753, 1, '97701S1250', '97701-S1250 / 97701S1250', '', 22, 'Lốc điều hòa Santafe  | 97701-S1250', 'loc-dieu-hoa-santafe-97701-s1250', '<h2>Tổng quan về Lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a HYUNDAI Santafe</strong> (M&atilde; OEM: <strong>97701S1250</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a HYUNDAI Santafe</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:26:16', NULL, NULL, 'lốc điều hòa hyundai santafe', NULL, 'loc-ieu-hoa-hyundai-santafe-97701s1250-main.jpg', 1, 0, 0, 10, '97701S1250', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97701S1250 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>97701S1250</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa HYUNDAI Santafe</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 1, 0, 0, 0, 0, 'Lốc điều hòa Santafe  | 97701-S1250', 'Tổng quan về Lốc điều hòa HYUNDAI Santafe Sản phẩm Lốc điều hòa HYUNDAI Santafe (Mã OEM: 97701S1250) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô...', 'Lốc điều hòa Santafe  97701-S1250', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa hyundai santafe (sedanviet), lốc điều hòa hyundai, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5754, 1, 'DCP51002', 'DCP51002', 'DENSO', 22, 'Lốc điều hòa DENSO IS  | DCP51002', 'loc-dieu-hoa-denso-is-dcp51002', '<h2>Tổng quan về Lốc điều h&ograve;a DENSO IS</h2>
+<p>Sản phẩm <strong>Lốc điều h&ograve;a DENSO IS</strong> (M&atilde; OEM: <strong>DCP51002</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Lốc điều h&ograve;a DENSO IS</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:28:39', NULL, NULL, 'lốc điều hòa denso is', NULL, 'loc-ieu-hoa-denso-is-dcp51002-main.jpg', 1, 0, 0, 10, 'DCP51002', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM DCP51002 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>DCP51002</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa DENSO IS</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 30, 0, 0, 0, 0, 'Lốc điều hòa DENSO IS  | DCP51002', 'Tổng quan về Lốc điều hòa DENSO IS Sản phẩm Lốc điều hòa DENSO IS (Mã OEM: DCP51002) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt...', 'Lốc điều hòa DENSO IS DCP51002', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. lốc điều hòa denso is (sedanviet), lốc điều hòa lexus, lốc điều hòa denso, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5755, 1, '7813A984', '7813A984', '', 22, 'Bộ ly hợp lốc điều hòa Outlander  | 7813A984', 'bo-ly-hop-loc-dieu-hoa-outlander-7813a984', '<h2>Tổng quan về Bộ ly hợp lốc điều h&ograve;a MITSUBISHI Outlander</h2>
+<p>Sản phẩm <strong>Bộ ly hợp lốc điều h&ograve;a MITSUBISHI Outlander</strong> (M&atilde; OEM: <strong>7813A984</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;">&nbsp;</p>
+<h2>Ưu điểm nổi bật của Bộ ly hợp lốc điều h&ograve;a MITSUBISHI Outlander</h2>
+<ul>
+<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 0, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:21', '2026-08-12 15:36:06', NULL, NULL, 'bộ ly hợp lốc điều hòa mitsubishi outlander', NULL, NULL, 1, 0, 0, 10, '7813A984', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813A984 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A984</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Bộ ly hợp lốc điều hòa MITSUBISHI Outlander</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 9, 0, 0, 0, 0, 'Bộ ly hợp lốc điều hòa Outlander  | 7813A984', 'Tổng quan về Bộ ly hợp lốc điều hòa MITSUBISHI Outlander Sản phẩm Bộ ly hợp lốc điều hòa MITSUBISHI Outlander (Mã OEM: 7813A984) là phụ tùng thuộc hệ...', 'Bộ ly hợp lốc điều hòa Outlander  7813A984', '', 0, 0, NULL, 1, 1, 0, 'lốc điều hòa, 7. bộ ly hợp lốc điều hòa mitsubishi outlander (sedanviet), lốc điều hòa mitsubishi, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (5756, 1, '97701P6050', '97701-P6050 / 97701P6050', '', 22, '7. Lốc điều hòa HYUNDAI Santafe (sedanviet) | 97701-P6050', '7-loc-dieu-hoa-hyundai-santafe-sedanviet-97701-p6050', '<h2>Tổng quan về Lốc điều hòa HYUNDAI Santafe</h2>
 <p>Sản phẩm <strong>Lốc điều hòa HYUNDAI Santafe</strong> (Mã OEM: <strong>97701P6050</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
 
@@ -83469,7 +83223,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">• Hotline & Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">• Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">• Website chính thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 3735000, 4150000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 18:00:30', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa porter 2 lốc lạnh porter 2 ...', NULL, NULL, 1, 0, 0, 10, '977014F200', 5, 1000, '<ul>
+</div>', NULL, 3735000, 4150000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 18:00:30', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa porter 2 lốc lạnh porter 2 ...', NULL, NULL, 1, 0, 0, 10, '977014F200', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Lốc điều hòa Porter 2 Lốc lạnh Porter 2 ... đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Porter 2 L</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -86172,7 +85926,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">• Hotline & Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">• Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">• Website chính thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 1980000, 2200000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 18:00:30', '2026-08-12 13:01:04', NULL, NULL, 'lốc lạnh điều hòa 508 chính hãng gy xịn lốc ...', NULL, NULL, 1, 0, 0, 10, '00971115566', 5, 1000, '<ul>
+</div>', NULL, 1980000, 2200000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 18:00:30', '2026-08-12 13:01:04', NULL, NULL, 'lốc lạnh điều hòa 508 chính hãng gy xịn lốc ...', NULL, NULL, 1, 0, 0, 10, '00971115566', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Lốc lạnh điều hòa 508 chính hãng GY xịn Lốc ... đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -98143,7 +97897,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">• Hotline & Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">• Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">• Website chính thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 2880000, 3200000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 18:00:31', '2026-08-12 13:01:04', NULL, NULL, 'mua quạt giàn lạnh camry 2018', NULL, NULL, 1, 0, 0, 10, '1163407063', 5, 1000, '<ul>
+</div>', NULL, 2880000, 3200000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 18:00:31', '2026-08-12 13:01:04', NULL, NULL, 'mua quạt giàn lạnh camry 2018', NULL, NULL, 1, 0, 0, 10, '1163407063', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm mua quạt giàn lạnh camry 2018 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -100701,7 +100455,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:10:00', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa mg hs 2023-2024', NULL, 'loc-dieu-hoa-mg-hs-2023-2024-10581271-main.jpg', 1, 0, 0, 10, '10581271', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:10:00', '2026-08-12 13:01:04', NULL, NULL, 'lốc điều hòa mg hs 2023-2024', NULL, 'loc-dieu-hoa-mg-hs-2023-2024-10581271-main.jpg', 1, 0, 0, 10, '10581271', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 10581271 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -101712,4 +101466,154 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
   <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
   <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
 </table>', 5, 0, 0, 0, 0, 'Dàn nóng Chevrolet Cruze 2009-2012 | 13267648', 'Tổng quan về Dàn nóng Chevrolet Cruze 2009-2012 Sản phẩm Dàn nóng Chevrolet Cruze 2009-2012 (Mã OEM: 13267648) là phụ tùng thuộc hệ thống làm mát và điện...', 'Dàn nóng Chevrolet Cruze 2009-2012 13267648', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng chevrolet cruze 2009-2012, dàn nóng điều hòa chevrolet, dàn nóng điều hòa denso, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (6631, 1, '13267648-V2', '13267648', 'DENSO', 43, 'Dàn nóng Daewoo Lacetti 2009-2011 | 13267648', 'dan-nong-daewoo-lacetti-2009-2011-13267648', '<h2>Tổng quan về Dàn nóng Daewoo Lacetti 2009-2011</h2>
+<p>Sản phẩm <strong>Dàn nóng Daewoo Lacetti 2009-2011</strong> (Mã OEM: <strong>13267648</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"> </p>
+<h2>Ưu điểm nổi bật của Dàn nóng Daewoo Lacetti 2009-2011</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:23', '2026-08-12 13:01:04', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-main.jpg', 1, 0, 0, 10, '13267648', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Daewoo Lacetti 2009-2011</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 6, 0, 0, 0, 0, 'Dàn nóng Daewoo Lacetti 2009-2011 | 13267648', 'Tổng quan về Dàn nóng Daewoo Lacetti 2009-2011 Sản phẩm Dàn nóng Daewoo Lacetti 2009-2011 (Mã OEM: 13267648) là phụ tùng thuộc hệ thống làm mát và điện...', 'Dàn nóng Daewoo Lacetti 2009-2011 13267648', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng daewoo lacetti 2009-2011, dàn nóng điều hòa daewoo, dàn nóng điều hòa denso, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (6632, 1, '13267648-V3', '13267648', 'DENSO', 43, 'Dàn nóng Chevrolet Orlando 2011-2014 | 13267648', 'dan-nong-chevrolet-orlando-2011-2014-13267648', '<h2>Tổng quan về Dàn nóng Chevrolet Orlando 2011-2014</h2>
+<p>Sản phẩm <strong>Dàn nóng Chevrolet Orlando 2011-2014</strong> (Mã OEM: <strong>13267648</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"> </p>
+<h2>Ưu điểm nổi bật của Dàn nóng Chevrolet Orlando 2011-2014</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:27', '2026-08-12 13:01:04', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13267648-main.jpg', 1, 0, 0, 10, '13267648', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Orlando 2011-2014</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 5, 0, 0, 0, 0, 'Dàn nóng Chevrolet Orlando 2011-2014 | 13267648', 'Tổng quan về Dàn nóng Chevrolet Orlando 2011-2014 Sản phẩm Dàn nóng Chevrolet Orlando 2011-2014 (Mã OEM: 13267648) là phụ tùng thuộc hệ thống làm mát và...', 'Dàn nóng Chevrolet Orlando 2011-2014 13267648', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng chevrolet orlando 2011-2014, dàn nóng điều hòa chevrolet, dàn nóng điều hòa denso, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (6633, 1, '13267648-01-V1', '13267648-01 / 1326764801', '', 43, 'Dàn nóng Chevrolet Cruze 2009-2012 | 13267648-01', 'dan-nong-chevrolet-cruze-2009-2012-13267648-01', '<h2>Tổng quan về Dàn nóng Chevrolet Cruze 2009-2012</h2>
+<p>Sản phẩm <strong>Dàn nóng Chevrolet Cruze 2009-2012</strong> (Mã OEM: <strong>13267648-01</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"> </p>
+<h2>Ưu điểm nổi bật của Dàn nóng Chevrolet Cruze 2009-2012</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:34', '2026-08-12 13:01:04', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-01-main.jpg', 1, 0, 0, 10, '1326764801', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-01 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648-01</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Cruze 2009-2012</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 5, 0, 0, 0, 0, 'Dàn nóng Chevrolet Cruze 2009-2012 | 13267648-01', 'Tổng quan về Dàn nóng Chevrolet Cruze 2009-2012 Sản phẩm Dàn nóng Chevrolet Cruze 2009-2012 (Mã OEM: 13267648-01) là phụ tùng thuộc hệ thống làm mát và...', 'Dàn nóng Chevrolet Cruze 2009-2012 13267648-01', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng chevrolet cruze 2009-2012, dàn nóng điều hòa chevrolet, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (6634, 1, '13267648-01-V2', '13267648-01 / 1326764801', '', 43, 'Dàn nóng Daewoo Lacetti 2009-2011 | 13267648-01', 'dan-nong-daewoo-lacetti-2009-2011-13267648-01', '<h2>Tổng quan về Dàn nóng Daewoo Lacetti 2009-2011</h2>
+<p>Sản phẩm <strong>Dàn nóng Daewoo Lacetti 2009-2011</strong> (Mã OEM: <strong>13267648-01</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/dan-nong-daewoo-lacetti-2009-2011-13267648-01-main.jpg" alt="Dàn nóng Daewoo Lacetti 2009-2011"></p>
+<h2>Ưu điểm nổi bật của Dàn nóng Daewoo Lacetti 2009-2011</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:38', '2026-08-12 13:01:04', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-01-main.jpg', 1, 0, 0, 10, '1326764801', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-01 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648-01</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Daewoo Lacetti 2009-2011</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 6, 0, 0, 0, 0, 'Dàn nóng Daewoo Lacetti 2009-2011 | 13267648-01', 'Tổng quan về Dàn nóng Daewoo Lacetti 2009-2011 Sản phẩm Dàn nóng Daewoo Lacetti 2009-2011 (Mã OEM: 13267648-01) là phụ tùng thuộc hệ thống làm mát và điện...', 'Dàn nóng Daewoo Lacetti 2009-2011 13267648-01', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng daewoo lacetti 2009-2011, dàn nóng điều hòa daewoo, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (6635, 1, '13267648-01-V3', '13267648-01 / 1326764801', '', 43, 'Dàn nóng Chevrolet Orlando 2011-2014 | 13267648-01', 'dan-nong-chevrolet-orlando-2011-2014-13267648-01', '<h2>Tổng quan về Dàn nóng Chevrolet Orlando 2011-2014</h2>
+<p>Sản phẩm <strong>Dàn nóng Chevrolet Orlando 2011-2014</strong> (Mã OEM: <strong>13267648-01</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"> </p>
+<h2>Ưu điểm nổi bật của Dàn nóng Chevrolet Orlando 2011-2014</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:40', '2026-08-12 13:01:04', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13267648-01-main.jpg', 1, 0, 0, 10, '1326764801', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-01 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648-01</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Orlando 2011-2014</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 5, 0, 0, 0, 0, 'Dàn nóng Chevrolet Orlando 2011-2014 | 13267648-01', 'Tổng quan về Dàn nóng Chevrolet Orlando 2011-2014 Sản phẩm Dàn nóng Chevrolet Orlando 2011-2014 (Mã OEM: 13267648-01) là phụ tùng thuộc hệ thống làm mát...', 'Dàn nóng Chevrolet Orlando 2011-2014 13267648-01', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng chevrolet orlando 2011-2014, dàn nóng điều hòa chevrolet, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (6636, 1, '13267648-HANON-V1', '13267648-HANON / 13267648HANON', 'HANON', 43, 'Dàn nóng Chevrolet Cruze 2009-2012 | 13267648-HANON', 'dan-nong-chevrolet-cruze-2009-2012-13267648-hanon', '<h2>Tổng quan về Dàn nóng Chevrolet Cruze 2009-2012</h2>
+<p>Sản phẩm <strong>Dàn nóng Chevrolet Cruze 2009-2012</strong> (Mã OEM: <strong>13267648-HANON</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"> </p>
+<h2>Ưu điểm nổi bật của Dàn nóng Chevrolet Cruze 2009-2012</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:44', '2026-08-12 13:01:04', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-hanon-main.jpg', 1, 0, 0, 10, '13267648HANON', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-HANON cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648-HANON</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Cruze 2009-2012</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 5, 0, 0, 0, 0, 'Dàn nóng Chevrolet Cruze 2009-2012 | 13267648-HANON', 'Tổng quan về Dàn nóng Chevrolet Cruze 2009-2012 Sản phẩm Dàn nóng Chevrolet Cruze 2009-2012 (Mã OEM: 13267648-HANON) là phụ tùng thuộc hệ thống làm mát và...', 'Dàn nóng Chevrolet Cruze 2009-2012 13267648-HANON', '', 0, 0, NULL, 1, 1, 0, 'dàn nóng điều hòa, dàn nóng chevrolet cruze 2009-2012, dàn nóng điều hòa chevrolet, dàn nóng điều hòa hanon, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
 COMMIT;

@@ -584,71 +584,6 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
  </tbody>
 </table>', 21, 0, 0, 0, 0, 'Lốc điều hòa không khí AC ô tô 12v Sanden SB010N cho OE 5A58A55-01 BMW', 'Lốc điều hòa BMW 2016-2023 2016 — Chính Hãng Giá Tốt Lốc điều hòa không khí AC ô tô 12v Sanden SB010N cho OE 5A58A55-01 BMW 2016-2023 (mã OEM: OE...', 'Lốc điều hòa không khí AC ô tô 12v Sanden SB010N cho OE 5A58A55-01 BMW', '', 0, 0, NULL, 0, 1, 0, 'lốc điều hòa, lốc điều hòa không khí ac ô tô 12v sanden sb010n cho oe 5a58a55-01 bmw, lốc điều hòa bmw, lốc điều hòa sanden, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (507, 1, 'DL-VALEO-VIOS0813', '88501-0D150 / 885010D150', 'VALEO', 46, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'dan-lanh-o-to-toyota-vios-88501-0d150', '<h2>Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>Dàn lạnh ô tô Toyota Vios 2008 - 2013 VALEO 88501-0D150</strong> (mã OEM: <strong>88501-0D150</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Vios. Sản phẩm có chức năng chính là <strong>làm lạnh không khí trong cabin xe</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, dàn lạnh đóng vai trò quan trọng trong chu trình làm lạnh. Dàn lạnh được thiết kế tối ưu để đảm bảo khả năng làm lạnh không khí trong cabin xe hiệu quả. Khi dàn lạnh gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Dàn lạnh</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã 88501-0D150 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Toyota Vios, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ dàn lạnh, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
- <li><strong>Chính hãng VALEO:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
- <li><strong>Mã 88501-0D150:</strong> Khớp chính xác 100% với xe Toyota Vios 2008.</li>
- <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1250000, 1300000, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 94, 38, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 22:19:51', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Hãng VALEO Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 07...', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
- <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất VALEO.</li>
- <li><strong>Chính hãng VALEO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Dàn lạnh điều hòa hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn lạnh ô tô Toyota Vios 2008 - 2013 VALEO 88501-0D150</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Dàn lạnh điều hòa</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">88501-0D150</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>VALEO</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Toyota Vios 2008</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
-</table>', 3, 0, 0, 0, 0, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt Dàn lạnh ô tô Toyota Vios 2008 - 2013 VALEO 88501-0D150 (mã OEM: 88501-0D150) là phụ tùng điện lạnh ô tô...', 'Dàn lạnh ô tô Toyota Vios 88501-0D150', '', 0, 0, NULL, 0, 1, 0, 'dàn lạnh điều hòa, dàn lạnh ô tô toyota vios, dàn lạnh điều hòa toyota, dàn lạnh điều hòa valeo, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (508, 1, 'Shs33L3141', 'OE A0008302601', 'SANDEN', 22, 'Lốc điều hòa không khí OE A0008302601 Sanden Shs33L3141  ô tô Benz', 'loc-dieu-hoa-khong-khi-oe-a0008302601-sanden-shs33l3141-o-to-benz', '<h2>Lốc điều hòa Mercedes-Benz 2018 — Chính Hãng Giá Tốt</h2>
 
 <p><strong>Lốc điều hòa không khí OE A0008302601 Sanden Shs33L3141 ô tô Benz 2018-2023</strong> (mã OEM: <strong>OE A0008302601</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Mercedes-Benz . Sản phẩm có chức năng chính là <strong>nén môi chất lạnh trong chu trình điều hòa</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
@@ -844,136 +779,6 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
  </tbody>
 </table>', 3, 0, 0, 0, 0, 'Van Tiết Lưu Điều Hòa Toyota Vios | 88515-0D240 / 88515-06080', 'Van tiết lưu Toyota Vios 2014 — Chính Hãng Giá Tốt Van Tiết Lưu Điều Hòa Toyota Vios 2014 - 2026 Chính Hãng Fujikoki Nhật Bản (mã OEM: 88515-0D240 /...', 'Van Tiết Lưu Điều Hòa Toyota Vios 88515-0D240 / 88515-06080', '', 0, 0, NULL, 0, 1, 0, 'van tiết lưu, van tiết lưu điều hòa toyota vios, van tiết lưu toyota, van tiết lưu fujikoki, thay van tiết lưu chính hãng, kiểm tra van tiết lưu');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (511, 1, 'DL-DOOWON-VIOS0813', '88501-0D150 / 885010D150', 'DOOWON', 46, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'dan-lanh-o-to-toyota-vios-88501-0d150', '<h2>Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>Dàn lạnh ô tô Toyota Vios 2008 - 2013 DOOWON 88501-0D150</strong> (mã OEM: <strong>88501-0D150</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Vios. Sản phẩm có chức năng chính là <strong>làm lạnh không khí trong cabin xe</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, dàn lạnh đóng vai trò quan trọng trong chu trình làm lạnh. Dàn lạnh được thiết kế tối ưu để đảm bảo khả năng làm lạnh không khí trong cabin xe hiệu quả. Khi dàn lạnh gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Dàn lạnh</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã 88501-0D150 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Toyota Vios, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ dàn lạnh, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
- <li><strong>Chính hãng DOOWON:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
- <li><strong>Mã 88501-0D150:</strong> Khớp chính xác 100% với xe Toyota Vios 2008.</li>
- <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 750000, 1250001, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 43, 28, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 22:48:04', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Hãng DOOWON Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0...', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
- <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DOOWON.</li>
- <li><strong>Chính hãng DOOWON</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Dàn lạnh điều hòa hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn lạnh ô tô Toyota Vios 2008 - 2013 DOOWON 88501-0D150</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Dàn lạnh điều hòa</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">88501-0D150</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>DOOWON</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Toyota Vios 2008</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
-</table>', 3, 0, 0, 0, 0, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt Dàn lạnh ô tô Toyota Vios 2008 - 2013 DOOWON 88501-0D150 (mã OEM: 88501-0D150) là phụ tùng điện lạnh ô tô...', 'Dàn lạnh ô tô Toyota Vios 88501-0D150', '', 0, 0, NULL, 0, 1, 0, 'dàn lạnh điều hòa, dàn lạnh ô tô toyota vios, dàn lạnh điều hòa toyota, dàn lạnh điều hòa doowon, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (512, 1, 'DL-BEHR-VIOS0813', '88501-0D150 / 885010D150', 'BEHR', 46, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'dan-lanh-o-to-toyota-vios-88501-0d150', '<h2>Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>Dàn lạnh ô tô Toyota Vios 2008 - 2013 BEHR 88501-0D150</strong> (mã OEM: <strong>88501-0D150</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Vios. Sản phẩm có chức năng chính là <strong>làm lạnh không khí trong cabin xe</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, dàn lạnh đóng vai trò quan trọng trong chu trình làm lạnh. Dàn lạnh được thiết kế tối ưu để đảm bảo khả năng làm lạnh không khí trong cabin xe hiệu quả. Khi dàn lạnh gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Dàn lạnh</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã 88501-0D150 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Toyota Vios, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ dàn lạnh, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
- <li><strong>Chính hãng BEHR:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
- <li><strong>Mã 88501-0D150:</strong> Khớp chính xác 100% với xe Toyota Vios 2008.</li>
- <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 920000, 1280000, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 35, 33, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 22:54:05', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Hãng BEHR Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 070...', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
- <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất BEHR.</li>
- <li><strong>Chính hãng BEHR</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Dàn lạnh điều hòa hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn lạnh ô tô Toyota Vios 2008 - 2013 BEHR 88501-0D150</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Dàn lạnh điều hòa</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">88501-0D150</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>BEHR</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Toyota Vios 2008</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
-</table>', 3, 0, 0, 0, 0, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt Dàn lạnh ô tô Toyota Vios 2008 - 2013 BEHR 88501-0D150 (mã OEM: 88501-0D150) là phụ tùng điện lạnh ô tô...', 'Dàn lạnh ô tô Toyota Vios 88501-0D150', '', 0, 0, NULL, 0, 1, 0, 'dàn lạnh điều hòa, dàn lạnh ô tô toyota vios, dàn lạnh điều hòa toyota, dàn lạnh điều hòa behr, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (514, 1, 'VHE-15QTEX-7', '88515-06080 / 8851506080', 'FUJIKOKI', 23, 'Van Tiết Lưu Điều Hòa Toyota Camry | 88515-06080 / 88515-06160', 'van-tiet-luu-dieu-hoa-toyota-camry-88515-06080-88515-06160', '<h2>Van tiết lưu Toyota Camry 2007 — Chính Hãng Giá Tốt</h2>
 
 <p><strong>Van Tiết Lưu Điều Hòa Toyota Camry 2007 - 2011 Chính Hãng Fujikoki Nhật Bản</strong> (mã OEM: <strong>88515-06080 / 88515-06160</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Camry. Sản phẩm có chức năng chính là <strong>điều tiết lưu lượng môi chất lạnh</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
@@ -1104,136 +909,6 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
  </tbody>
 </table>', 21, 0, 0, 0, 0, 'Lốc điều hòa không khí AC ô tô 12v Denso | 64526994082', 'Lốc điều hòa BMW OE — Chính Hãng Giá Tốt Lốc điều hòa không khí AC ô tô 12v Denso 447140-4751 cho BMW OE 64526994082 (mã OEM: 64526994082) là phụ tùng...', 'Lốc điều hòa không khí AC ô tô 12v Denso 64526994082', '', 0, 0, NULL, 0, 1, 0, 'lốc điều hòa, lốc điều hòa không khí ac ô tô 12v denso, lốc điều hòa bmw, lốc điều hòa denso, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (517, 1, 'DL-HCC-VIOS0813', '88501-0D150 / 885010D150', 'HCC', 46, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'dan-lanh-o-to-toyota-vios-88501-0d150', '<h2>Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>Dàn lạnh ô tô Toyota Vios 2008 - 2013 HCC 88501-0D150</strong> (mã OEM: <strong>88501-0D150</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Vios. Sản phẩm có chức năng chính là <strong>làm lạnh không khí trong cabin xe</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, dàn lạnh đóng vai trò quan trọng trong chu trình làm lạnh. Dàn lạnh được thiết kế tối ưu để đảm bảo khả năng làm lạnh không khí trong cabin xe hiệu quả. Khi dàn lạnh gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Dàn lạnh</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã 88501-0D150 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Toyota Vios, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ dàn lạnh, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
- <li><strong>Chính hãng HCC:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
- <li><strong>Mã 88501-0D150:</strong> Khớp chính xác 100% với xe Toyota Vios 2008.</li>
- <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 950000, 1250000, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 0, 18, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:10:03', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Hãng HCC Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705...', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
- <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất HCC.</li>
- <li><strong>Chính hãng HCC</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Dàn lạnh điều hòa hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn lạnh ô tô Toyota Vios 2008 - 2013 HCC 88501-0D150</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Dàn lạnh điều hòa</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">88501-0D150</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>HCC</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Toyota Vios 2008</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
-</table>', 3, 0, 0, 0, 0, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt Dàn lạnh ô tô Toyota Vios 2008 - 2013 HCC 88501-0D150 (mã OEM: 88501-0D150) là phụ tùng điện lạnh ô tô...', 'Dàn lạnh ô tô Toyota Vios 88501-0D150', '', 0, 0, NULL, 0, 1, 0, 'dàn lạnh điều hòa, dàn lạnh ô tô toyota vios, dàn lạnh điều hòa toyota, dàn lạnh điều hòa hcc, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (518, 1, 'DL-KEIHIN-VIOS0813', '88501-0D150 / 885010D150', 'KEIHIN', 46, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'dan-lanh-o-to-toyota-vios-88501-0d150', '<h2>Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>Dàn lạnh ô tô Toyota Vios 2008 - 2013 KEIHIN 88501-0D150</strong> (mã OEM: <strong>88501-0D150</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Vios. Sản phẩm có chức năng chính là <strong>làm lạnh không khí trong cabin xe</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, dàn lạnh đóng vai trò quan trọng trong chu trình làm lạnh. Dàn lạnh được thiết kế tối ưu để đảm bảo khả năng làm lạnh không khí trong cabin xe hiệu quả. Khi dàn lạnh gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Dàn lạnh</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã 88501-0D150 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Toyota Vios, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ dàn lạnh, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
- <li><strong>Chính hãng KEIHIN:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
- <li><strong>Mã 88501-0D150:</strong> Khớp chính xác 100% với xe Toyota Vios 2008.</li>
- <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 950000, 1250000, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 0, 18, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:14:12', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Hãng KEIHIN Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0...', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
- <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất KEIHIN.</li>
- <li><strong>Chính hãng KEIHIN</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Dàn lạnh điều hòa hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn lạnh ô tô Toyota Vios 2008 - 2013 KEIHIN 88501-0D150</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Dàn lạnh điều hòa</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">88501-0D150</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>KEIHIN</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Toyota Vios 2008</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
-</table>', 3, 0, 0, 0, 0, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt Dàn lạnh ô tô Toyota Vios 2008 - 2013 KEIHIN 88501-0D150 (mã OEM: 88501-0D150) là phụ tùng điện lạnh ô tô...', 'Dàn lạnh ô tô Toyota Vios 88501-0D150', '', 0, 0, NULL, 0, 1, 0, 'dàn lạnh điều hòa, dàn lạnh ô tô toyota vios, dàn lạnh điều hòa toyota, dàn lạnh điều hòa keihin, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (519, 1, 'BS016N', 'OE 971.260.601.M', 'SANDEN', 22, 'Lốc điều hòa không khí chính hãng Sanden BS016N / 8896N PORSCHE OE | OE 971.260.601.M', 'loc-dieu-hoa-khong-khi-chinh-hang-sanden-bs016n-8896n-porsche-oe-oe-971-260-601-m', '<h2>Lốc điều hòa 2016 — Chính Hãng Giá Tốt</h2>
 
 <p><strong>Lốc điều hòa không khí chính hãng Sanden BS016N / 8896N PORSCHE OE 971.260.601.M 2016-2017</strong> (mã OEM: <strong>OE 971.260.601.M</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe . Sản phẩm có chức năng chính là <strong>nén môi chất lạnh trong chu trình điều hòa</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
@@ -1299,71 +974,6 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
  </tbody>
 </table>', 24, 0, 0, 0, 0, 'Lốc điều hòa không khí chính hãng Sanden BS016N / 8896N PORSCHE OE | OE 971.260.601.M', 'Lốc điều hòa 2016 — Chính Hãng Giá Tốt Lốc điều hòa không khí chính hãng Sanden BS016N / 8896N PORSCHE OE 971.260.601.M 2016-2017 (mã OEM: OE...', 'Lốc điều hòa không khí chính hãng Sanden BS016N / 8896N PORSCHE OE OE 971.260.601.M', '', 0, 0, NULL, 0, 1, 0, 'lốc điều hòa, lốc điều hòa không khí chính hãng sanden bs016n / 8896n porsche oe, lốc điều hòa porsche, lốc điều hòa sanden, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (520, 1, 'DL-FUJIKOKI-VIOS0813', '88501-0D150 / 885010D150', 'FUJIKOKI', 46, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'dan-lanh-o-to-toyota-vios-88501-0d150', '<h2>Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>Dàn lạnh ô tô Toyota Vios 2008 - 2013 FUJIKOKI 88501-0D150</strong> (mã OEM: <strong>88501-0D150</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Vios. Sản phẩm có chức năng chính là <strong>làm lạnh không khí trong cabin xe</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, dàn lạnh đóng vai trò quan trọng trong chu trình làm lạnh. Dàn lạnh được thiết kế tối ưu để đảm bảo khả năng làm lạnh không khí trong cabin xe hiệu quả. Khi dàn lạnh gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Dàn lạnh</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã 88501-0D150 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Toyota Vios, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ dàn lạnh, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
- <li><strong>Chính hãng FUJIKOKI:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
- <li><strong>Mã 88501-0D150:</strong> Khớp chính xác 100% với xe Toyota Vios 2008.</li>
- <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 980000, 994000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 14, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:17:55', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Hãng FUJIKOKI Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline:...', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
- <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất FUJIKOKI.</li>
- <li><strong>Chính hãng FUJIKOKI</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Dàn lạnh điều hòa hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn lạnh ô tô Toyota Vios 2008 - 2013 FUJIKOKI 88501-0D150</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Dàn lạnh điều hòa</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">88501-0D150</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>FUJIKOKI</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Toyota Vios 2008</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
-</table>', 3, 0, 0, 0, 0, 'Dàn lạnh ô tô Toyota Vios | 88501-0D150', 'Dàn lạnh Toyota Vios 2008 — Chính Hãng Giá Tốt Dàn lạnh ô tô Toyota Vios 2008 - 2013 FUJIKOKI 88501-0D150 (mã OEM: 88501-0D150) là phụ tùng điện lạnh ô tô...', 'Dàn lạnh ô tô Toyota Vios 88501-0D150', '', 0, 0, NULL, 0, 1, 0, 'dàn lạnh điều hòa, dàn lạnh ô tô toyota vios, dàn lạnh điều hòa toyota, dàn lạnh điều hòa fujikoki, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (521, 1, 'VPE10QHGSZ1-CAM2526', '88515-16060 / 8851516060', 'FUJIKOKI', 23, 'Van Tiết Lưu Điều Hòa Toyota Camry | 88515-16060 / 88515-02100', 'van-tiet-luu-dieu-hoa-toyota-camry-88515-16060-88515-02100', '<h2>Van tiết lưu Toyota Camry 2025 — Chính Hãng Giá Tốt</h2>
 
 <p><strong>Van Tiết Lưu Điều Hòa Toyota Camry 2025 - 2026 Chính Hãng Fujikoki Nhật BảnVan</strong> (mã OEM: <strong>88515-16060 / 88515-02100</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Toyota Camry. Sản phẩm có chức năng chính là <strong>điều tiết lưu lượng môi chất lạnh</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
@@ -1469,7 +1079,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 900000, 1150000, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 0, 19, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:21:43', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
+</ul>', 900000, 1150000, 999, 0, 1500, 28, 9, 25, 'published', '', 0, 0, 0, 0, 0, 20, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:21:43', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Toyota Vios chính hãng | CoolingSystems', 'Mua Dàn lạnh ô tô Toyota Vios chính hãng Mã OEM 88501-0D150 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dàn lạnh ô tô toyota', '', '/uploads/products/dan-lanh-o-to-toyota-vios-2008-2013-denso-88501-0d150-88501-0d150-20260724152128-38eb202d.webp', 1, 0, 0, 10, '885010D150', 5, 999, '<ul>
  <li><strong>Mã OEM 88501-0D150</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -1599,7 +1209,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 500000, 550000, 999, 0, 140, 10, 5, 5, 'published', '', 0, 0, 0, 0, 0, 50, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:40:20', '2026-08-12 13:01:03', 'Van Đuôi Lốc Lạnh Điều Hòa Toyota Camry chính hãng | CoolingSystems', 'Mua Van Đuôi Lốc Lạnh Điều Hòa Toyota Camry chính hãng Hãng FUJIKOKI Mã OEM 88515-0D240 / 88515-06110 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, g...', 'van đuôi lốc lạnh điều', '', '/uploads/products/loc-gio-dieu-hoa-o-to-toyota-camry-2019-2024-mahle-lak490-87139-50100-mahle-lak490-cam19-2-20260724151807-2e277aed.webp', 1, 0, 0, 10, '885150D240', 5, 999, '<ul>
+</ul>', 500000, 550000, 999, 0, 140, 10, 5, 5, 'published', '', 0, 0, 0, 0, 0, 53, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-25 23:40:20', '2026-08-12 13:01:03', 'Van Đuôi Lốc Lạnh Điều Hòa Toyota Camry chính hãng | CoolingSystems', 'Mua Van Đuôi Lốc Lạnh Điều Hòa Toyota Camry chính hãng Hãng FUJIKOKI Mã OEM 88515-0D240 / 88515-06110 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, g...', 'van đuôi lốc lạnh điều', '', '/uploads/products/loc-gio-dieu-hoa-o-to-toyota-camry-2019-2024-mahle-lak490-87139-50100-mahle-lak490-cam19-2-20260724151807-2e277aed.webp', 1, 0, 0, 10, '885150D240', 5, 999, '<ul>
  <li><strong>Mã OEM 88515-0D240 / 88515-06110</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất FUJIKOKI.</li>
  <li><strong>Chính hãng FUJIKOKI</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -1664,7 +1274,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 6830000, 7000000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 23, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-26 13:42:05', '2026-08-12 13:01:03', 'Lốc điều hòa Everest chính hãng | CoolingSystems', 'Mua Lốc điều hòa Everest chính hãng Hãng DENSO Mã OEM FP9LXARZEK chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070...', 'lốc điều hòa everest', '', '/uploads/products/dan-nong-ford-ranger-mazda-bt50-2-2-va-3-2-ford-everest-ecosport-doi-1-dinh-oc-mat-bich-nam-2012-2017.webp', 1, 0, 0, 10, 'FP9LXARZEK', 5, 999, '<ul>
+</ul>', 6830000, 7000000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 24, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-26 13:42:05', '2026-08-12 13:01:03', 'Lốc điều hòa Everest chính hãng | CoolingSystems', 'Mua Lốc điều hòa Everest chính hãng Hãng DENSO Mã OEM FP9LXARZEK chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070...', 'lốc điều hòa everest', '', '/uploads/products/dan-nong-ford-ranger-mazda-bt50-2-2-va-3-2-ford-everest-ecosport-doi-1-dinh-oc-mat-bich-nam-2012-2017.webp', 1, 0, 0, 10, 'FP9LXARZEK', 5, 999, '<ul>
  <li><strong>Mã OEM FP9LXARZEK</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Ford, không cần chỉnh sửa.</li>
@@ -1729,7 +1339,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 7650000, 7700000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 32, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-26 13:42:06', '2026-08-12 13:01:03', 'Lốc điều hòa Toyota Camry chính hãng | CoolingSystems', 'Mua Lốc điều hòa Toyota Camry chính hãng Hãng DENSO Mã OEM RDKYMVBZ6G chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 070...', 'lốc điều hòa toyota camry', '', '/uploads/products/6_ong_tuy_o_hoi_dau_tro_luc_toyota_camry_acv40__partsvietnam_2.jpg', 1, 0, 0, 10, 'RDKYMVBZ6G', 5, 999, '<ul>
+</ul>', 7650000, 7700000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 33, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-26 13:42:06', '2026-08-12 13:01:03', 'Lốc điều hòa Toyota Camry chính hãng | CoolingSystems', 'Mua Lốc điều hòa Toyota Camry chính hãng Hãng DENSO Mã OEM RDKYMVBZ6G chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 070...', 'lốc điều hòa toyota camry', '', '/uploads/products/6_ong_tuy_o_hoi_dau_tro_luc_toyota_camry_acv40__partsvietnam_2.jpg', 1, 0, 0, 10, 'RDKYMVBZ6G', 5, 999, '<ul>
  <li><strong>Mã OEM RDKYMVBZ6G</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -2379,7 +1989,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 744000, 465000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 22, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-27 20:01:00', '2026-08-12 13:01:03', 'Van tiết lưu BMW E60 chính hãng Fujikoki VDE-15QTEX-106 Van tiết lưu', 'Mua Van tiết lưu BMW E60 chính hãng Fujikoki VDE-15QTEX-106 Van tiết lưu BMW E61 530I 520i chính hãng Hãng FUJIKOKI Mã OEM VDE-15QTEX-106 chất lượng cao tại ...', 'van tiết lưu bmw e60', '', '/uploads/products/van-tiet-luu-bmw-e60-chinh-hang-fujikoki-vde-15qtex-106-van-tiet-luu-bmw-e61-530-2.jpg', 1, 0, 0, 10, 'VDE15QTEX106', 5, 999, '<ul>
+</ul>', 744000, 465000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 23, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-27 20:01:00', '2026-08-12 13:01:03', 'Van tiết lưu BMW E60 chính hãng Fujikoki VDE-15QTEX-106 Van tiết lưu', 'Mua Van tiết lưu BMW E60 chính hãng Fujikoki VDE-15QTEX-106 Van tiết lưu BMW E61 530I 520i chính hãng Hãng FUJIKOKI Mã OEM VDE-15QTEX-106 chất lượng cao tại ...', 'van tiết lưu bmw e60', '', '/uploads/products/van-tiet-luu-bmw-e60-chinh-hang-fujikoki-vde-15qtex-106-van-tiet-luu-bmw-e61-530-2.jpg', 1, 0, 0, 10, 'VDE15QTEX106', 5, 999, '<ul>
  <li><strong>Mã OEM VDE-15QTEX-106</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất FUJIKOKI.</li>
  <li><strong>Chính hãng FUJIKOKI</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe BMW, không cần chỉnh sửa.</li>
@@ -2574,7 +2184,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 800000, 1000000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 16, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-27 20:47:04', '2026-08-12 13:01:03', 'Van đuôi lốc điều hòa Deawoo Lacetti Van đuôi . chính hãng | Cooling', 'Mua Van đuôi lốc điều hòa Deawoo Lacetti Van đuôi . chính hãng Hãng DOOWON Mã OEM 6EX3CRY0KH chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng ...', 'van đuôi lốc điều hòa', '', '/uploads/products/td_Lốc điều hòa-4-loc-dieu-hoa-daewoo-lacetti-2009-2011-96484932-thanhdungauto.jpg', 1, 0, 0, 10, '6EX3CRY0KH', 5, 999, '<ul>
+</ul>', 800000, 1000000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 17, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-27 20:47:04', '2026-08-12 13:01:03', 'Van đuôi lốc điều hòa Deawoo Lacetti Van đuôi . chính hãng | Cooling', 'Mua Van đuôi lốc điều hòa Deawoo Lacetti Van đuôi . chính hãng Hãng DOOWON Mã OEM 6EX3CRY0KH chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng ...', 'van đuôi lốc điều hòa', '', '/uploads/products/td_Lốc điều hòa-4-loc-dieu-hoa-daewoo-lacetti-2009-2011-96484932-thanhdungauto.jpg', 1, 0, 0, 10, '6EX3CRY0KH', 5, 999, '<ul>
  <li><strong>Mã OEM 6EX3CRY0KH</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DOOWON.</li>
  <li><strong>Chính hãng DOOWON</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Daewoo, không cần chỉnh sửa.</li>
@@ -2639,7 +2249,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 2500000, 2550000, 999, 0, 1500, 18, 23, 4, 'published', '', 0, 0, 0, 0, 0, 20, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-27 21:39:03', '2026-08-12 13:01:03', 'Két sưởi điều hòa Toyota Innova Denso chính hãng | CoolingSystems', 'Mua Két sưởi điều hòa Toyota Innova Denso chính hãng Hãng DENSO Mã OEM CSV-985F9756 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc...', 'két sưởi điều hòa toyota', '', '/uploads/products/denso_37_5-dan-lanh-dieu-hoa-sau-toyota-innova-2017-densovietnam.jpg', 1, 0, 0, 10, 'CSV985F9756', 5, 999, '<ul>
+</ul>', 2500000, 2550000, 999, 0, 1500, 18, 23, 4, 'published', '', 0, 0, 0, 0, 0, 21, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-27 21:39:03', '2026-08-12 13:01:03', 'Két sưởi điều hòa Toyota Innova Denso chính hãng | CoolingSystems', 'Mua Két sưởi điều hòa Toyota Innova Denso chính hãng Hãng DENSO Mã OEM CSV-985F9756 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc...', 'két sưởi điều hòa toyota', '', '/uploads/products/denso_37_5-dan-lanh-dieu-hoa-sau-toyota-innova-2017-densovietnam.jpg', 1, 0, 0, 10, 'CSV985F9756', 5, 999, '<ul>
  <li><strong>Mã OEM CSV-985F9756</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -2704,7 +2314,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1260000, 1300000, 999, 0, 2000, 24, 25, 6, 'published', '', 0, 0, 0, 0, 0, 20, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-28 08:13:54', '2026-08-12 13:01:03', 'Dàn lạnh Denso cho Lexus RX330, RX350 chính hãng | CoolingSystems', 'Mua Dàn lạnh Denso cho Lexus RX330, RX350 chính hãng Hãng DENSO Mã OEM 447610-2780 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc....', 'dàn lạnh denso cho lexus', '', '/uploads/products/van-tiet-luu-bmw-e60-chinh-hang-fujikoki-vde-15qtex-106-van-tiet-luu-bmw-e61-530-2.jpg', 1, 0, 0, 10, '4476102780', 5, 999, '<ul>
+</ul>', 1260000, 1300000, 999, 0, 2000, 24, 25, 6, 'published', '', 0, 0, 0, 0, 0, 21, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-28 08:13:54', '2026-08-12 13:01:03', 'Dàn lạnh Denso cho Lexus RX330, RX350 chính hãng | CoolingSystems', 'Mua Dàn lạnh Denso cho Lexus RX330, RX350 chính hãng Hãng DENSO Mã OEM 447610-2780 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc....', 'dàn lạnh denso cho lexus', '', '/uploads/products/van-tiet-luu-bmw-e60-chinh-hang-fujikoki-vde-15qtex-106-van-tiet-luu-bmw-e61-530-2.jpg', 1, 0, 0, 10, '4476102780', 5, 999, '<ul>
  <li><strong>Mã OEM 447610-2780</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe BMW, không cần chỉnh sửa.</li>
@@ -2769,7 +2379,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1980000, 2000000, 999, 0, 2000, 24, 25, 6, 'published', '', 0, 0, 0, 0, 0, 17, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-28 12:51:23', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Bộ phận làm mát động cơ  CAMRY chính hãng | CoolingSys', 'Mua Dàn lạnh ô tô Bộ phận làm mát động cơ  CAMRY chính hãng Hãng DENSO Mã OEM IC261417-0070 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng t...', 'dàn lạnh ô tô bộ', '', '/uploads/products/dan-lanh-toyota-camry-denso-447610-2560-447610-2560-20260724151254-1035ea78.webp', 1, 0, 0, 10, 'IC2614170070', 5, 999, '<ul>
+</ul>', 1980000, 2000000, 999, 0, 2000, 24, 25, 6, 'published', '', 0, 0, 0, 0, 0, 19, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-28 12:51:23', '2026-08-12 13:01:03', 'Dàn lạnh ô tô Bộ phận làm mát động cơ  CAMRY chính hãng | CoolingSys', 'Mua Dàn lạnh ô tô Bộ phận làm mát động cơ  CAMRY chính hãng Hãng DENSO Mã OEM IC261417-0070 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng t...', 'dàn lạnh ô tô bộ', '', '/uploads/products/dan-lanh-toyota-camry-denso-447610-2560-447610-2560-20260724151254-1035ea78.webp', 1, 0, 0, 10, 'IC2614170070', 5, 999, '<ul>
  <li><strong>Mã OEM IC261417-0070</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -27407,70 +27017,70 @@ Lưu ý khi lắp đặt và sử dụng
 </tbody></table>
 <p><em>Lưu ý: Quý khách vui lòng đối chiếu mã OEM AKC200A215 và đời xe Mitsubishi Pajero Sport để đảm bảo chọn đúng phụ tùng tương thích.</em></p>
 <!-- stage4-seo-specifications:start --><section class="product-seo-specifications"><h3>Thông số tra cứu</h3><table><tbody><tr><th scope="row">Tên sản phẩm</th><td>LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2009-2015 Denso AKC200A215</td></tr><tr><th scope="row">Mã sản phẩm</th><td>AKC200A215</td></tr><tr><th scope="row">Mã OEM</th><td>AKC200A215</td></tr><tr><th scope="row">Danh mục</th><td>Lốc Điều Hòa</td></tr><tr><th scope="row">Thương hiệu</th><td>DENSO</td></tr></tbody></table></section><!-- stage4-seo-specifications:end -->', 9, 0, 0, 0, 0, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2009-2015 Denso AKC200A215 | AKC20-0A215', 'Lốc điều hòa Mitsubishi Pajero Sport Denso AKC200A215 chính hãng Lốc điều hòa Mitsubishi Pajero Sport mã Denso AKC200A215 là phụ tùng điều hòa ô tô chính...', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2009-2015 Denso AKC200A215 AKC20-0A215', '', 0, 0, NULL, 0, 1, 0, 'lốc điều hòa, lốc điều hòa điều hòa ô tô cho mitsubishi pajero sport 2009-2015 denso akc200a215, lốc điều hòa mitsubishi, lốc điều hòa denso, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (1246, 1, 'AKC200A450', 'AKC20-0A450 / AKC200A450', 'DENSO', 22, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport | AKC20-0A450', 'loc-dieu-hoa-dieu-hoa-o-to-cho-mitsubishi-pajero-sport-akc20-0a450', '<h2>Lốc điều hòa Mitsubishi Pajero Sport 2016 — Chính Hãng Giá Tốt</h2>
-
-<p><strong>LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2016-2023 Denso AKC200A450</strong> (mã OEM: <strong>AKC200A450</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Mitsubishi Pajero Sport. Sản phẩm có chức năng chính là <strong>nén môi chất lạnh trong chu trình điều hòa</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, lốc điều hòa đóng vai trò quan trọng trong chu trình làm lạnh. Lốc điều hòa được thiết kế tối ưu để đảm bảo khả năng nén môi chất lạnh trong chu trình điều hòa hiệu quả. Khi lốc điều hòa gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-
-<h3>Dấu Hiệu Nhận Biết Cần Thay Lốc điều hòa</h3>
-<ul>
- <li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
- <li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
- <li>Rò rỉ môi chất hoặc nước bất thường</li>
- <li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
-</ul>
-
-<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
-<ul>
- <li><strong>Hàng chính hãng 100%:</strong> Mã AKC200A450 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
- <li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Mitsubishi Pajero Sport, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
- <li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
- <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
- <li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>
-
-<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ lốc điều hòa, Quý khách nên:</p>
-<ul>
- <li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
- <li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
- <li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
-</ul>
-
-
-<div style="background:#f0f7ff;border:1px solid #070526;border-radius:10px;padding:16px;margin:20px 0;color:#1e293b;font-family:sans-serif"><p style="margin:0 0 8px;font-weight:700;color:#070526;font-size:16px">Cooling Systems - Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p><ul style="margin:0;padding-left:20px;line-height:1.8;font-size:14px"><li><strong>Hotline & Zalo tư vấn:</strong> 0705 070 526</li><li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li><li><strong>Website chính thức:</strong> <a href="https://coolingsystems.vn" target="_blank" style="color:#070526;font-weight:700">https://coolingsystems.vn</a></li></ul></div>', '<ul>
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (1246, 1, 'AKC200A450', 'AKC20-0A450 / AKC200A450', 'DENSO', 22, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport | AKC20-0A450', 'loc-dieu-hoa-dieu-hoa-o-to-cho-mitsubishi-pajero-sport-akc20-0a450-2', '<h2>Lốc điều h&ograve;a Mitsubishi Pajero Sport 2016 &mdash; Ch&iacute;nh H&atilde;ng Gi&aacute; Tốt</h2>
+<p><strong>LỐC ĐIỀU H&Ograve;A điều h&ograve;a &ocirc; t&ocirc; cho Mitsubishi Pajero Sport 2016-2023 Denso AKC200A450</strong> (m&atilde; OEM: <strong>AKC200A450</strong>) l&agrave; phụ t&ugrave;ng điện lạnh &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng thuộc hệ thống điều h&ograve;a xe Mitsubishi Pajero Sport. Sản phẩm c&oacute; chức năng ch&iacute;nh l&agrave; <strong>n&eacute;n m&ocirc;i chất lạnh trong chu tr&igrave;nh điều h&ograve;a</strong>, đảm bảo hệ thống l&agrave;m m&aacute;t hoạt động đ&uacute;ng c&ocirc;ng suất v&agrave; hiệu quả.</p>
+<h3>Chức Năng &amp; Nguy&ecirc;n L&yacute; Hoạt Động</h3>
+<p>Trong hệ thống điều h&ograve;a &ocirc; t&ocirc;, lốc điều h&ograve;a đ&oacute;ng vai tr&ograve; quan trọng trong chu tr&igrave;nh l&agrave;m lạnh. Lốc điều h&ograve;a được thiết kế tối ưu để đảm bảo khả năng n&eacute;n m&ocirc;i chất lạnh trong chu tr&igrave;nh điều h&ograve;a hiệu quả. Khi lốc điều h&ograve;a gặp sự cố, hệ thống l&agrave;m lạnh sẽ giảm hiệu suất đ&aacute;ng kể hoặc ngừng hoạt động ho&agrave;n to&agrave;n, ảnh hưởng trực tiếp đến sự thoải m&aacute;i của người l&aacute;i v&agrave; h&agrave;nh kh&aacute;ch.</p>
+<h3>Dấu Hiệu Nhận Biết Cần Thay Lốc điều h&ograve;a</h3>
+<ul>
+<li>Điều h&ograve;a kh&ocirc;ng đủ lạnh hoặc kh&ocirc;ng lạnh ho&agrave;n to&agrave;n</li>
+<li>C&oacute; tiếng ồn bất thường từ hệ thống điều h&ograve;a</li>
+<li>R&ograve; rỉ m&ocirc;i chất hoặc nước bất thường</li>
+<li>Đ&egrave;n b&aacute;o lỗi điều h&ograve;a tr&ecirc;n bảng điều khiển s&aacute;ng l&ecirc;n</li>
+</ul>
+<h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
+<ul>
+<li><strong>H&agrave;ng ch&iacute;nh h&atilde;ng 100%:</strong> M&atilde; AKC200A450 &mdash; nguồn gốc xuất xứ r&otilde; r&agrave;ng, đầy đủ giấy tờ kiểm định.</li>
+<li><strong>Tương th&iacute;ch ho&agrave;n hảo:</strong> Thiết kế chuẩn k&iacute;ch thước nguy&ecirc;n bản xe Mitsubishi Pajero Sport, lắp đặt nhanh ch&oacute;ng kh&ocirc;ng cần chỉnh sửa.</li>
+<li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu &aacute;p suất gas lớn v&agrave; chống ăn m&ograve;n hiệu quả.</li>
+<li><strong>Tiết kiệm nhi&ecirc;n liệu:</strong> Hoạt động &ecirc;m &aacute;i đ&uacute;ng c&ocirc;ng suất, giảm tải cho lốc điều h&ograve;a v&agrave; động cơ xe.</li>
+<li><strong>Bảo h&agrave;nh 12 th&aacute;ng:</strong> Đổi mới ho&agrave;n to&agrave;n nếu ph&aacute;t sinh lỗi từ nh&agrave; sản xuất.</li>
+</ul>
+<h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
+<p>Để hệ thống điều h&ograve;a &ocirc; t&ocirc; lu&ocirc;n hoạt động tốt v&agrave; k&eacute;o d&agrave;i tuổi thọ lốc điều h&ograve;a, Qu&yacute; kh&aacute;ch n&ecirc;n:</p>
+<ul>
+<li>Kiểm tra v&agrave; vệ sinh d&agrave;n lạnh, d&agrave;n n&oacute;ng mỗi <strong>6 th&aacute;ng</strong> hoặc <strong>10.000 km</strong>.</li>
+<li>Bổ sung gas điều h&ograve;a đ&uacute;ng định kỳ theo khuyến nghị nh&agrave; sản xuất.</li>
+<li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống c&oacute; dấu hiệu bất thường.</li>
+</ul>
+<div style="background: #f0f7ff; border: 1px solid #070526; border-radius: 10px; padding: 16px; margin: 20px 0; color: #1e293b; font-family: sans-serif;">
+<p style="margin: 0 0 8px; font-weight: bold; color: #070526; font-size: 16px;">Cooling Systems - Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<ul style="margin: 0; padding-left: 20px; line-height: 1.8; font-size: 14px;">
+<li><strong>Hotline &amp; Zalo tư vấn:</strong> 0705 070 526</li>
+<li><strong>Email hỗ trợ:</strong> hotrokhachhang@autopartsvietnam.com</li>
+<li><strong>Website ch&iacute;nh thức:</strong> <a style="color: #070526; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></li>
+</ul>
+</div>', '<ul>
  <li><strong>Chính hãng DENSO:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
  <li><strong>Mã AKC200A450:</strong> Khớp chính xác 100% với xe Mitsubishi Pajero Sport 2016.</li>
  <li><strong>Chất liệu cao cấp:</strong> Chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 12000000, 12049000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport chính hãng |', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport chính hãng Hãng DENSO Mã OEM AKC200A450 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao...', 'lc điu ha điều hòa', '', '/uploads/products/loc-gio-dieu-hoa-mitsubishi-pajero-sport-2024-2026-mahle-lak436-7803a004-mahle-lak436-mpj24-2-20260727075159-36b03ea5.webp', 1, 10909091, 1090909, 10, 'AKC200A450', 5, 999, '<ul>
- <li><strong>Mã OEM AKC200A450</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
- <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
- <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Mitsubishi, không cần chỉnh sửa.</li>
- <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
- <li><strong>Hiệu suất ổn định</strong> — Lốc điều hòa (Compressor) hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
- <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', '<table class="table table-bordered" style="width:100%">
- <thead>
- <tr style="background:#f1f5f9;">
- <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
- <th style="padding:8px">Chi tiết</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Tên sản phẩm</strong></td><td>LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2016-2023 Denso AKC200A450</td></tr>
- <tr><td><strong>Loại phụ tùng</strong></td><td>Lốc điều hòa (Compressor)</td></tr>
- <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">AKC200A450</strong></td></tr>
- <tr><td><strong>Thương hiệu</strong></td><td>DENSO</td></tr>
- <tr><td><strong>Hãng xe tương thích</strong></td><td>Mitsubishi Pajero Sport 2016</td></tr>
- <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
- <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
- <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
- </tbody>
+</ul>', 12000000, 12049000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:46:07', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport chính hãng |', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport chính hãng Hãng DENSO Mã OEM AKC200A450 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao...', 'lc điu ha điều hòa', '', '/uploads/products/loc-gio-dieu-hoa-mitsubishi-pajero-sport-2024-2026-mahle-lak436-7803a004-mahle-lak436-mpj24-2-20260727075159-36b03ea5.webp', 1, 0, 0, 10, 'AKC200A450', 5, 999, '<ul>
+ <li><strong>Mã OEM AKC200A450</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
+ <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
+ <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Mitsubishi, không cần chỉnh sửa.</li>
+ <li><strong>Chất liệu cao cấp</strong> — Vật liệu chịu nhiệt độ cao, áp suất lớn, chống ăn mòn hiệu quả.</li>
+ <li><strong>Hiệu suất ổn định</strong> — Lốc điều hòa (Compressor) hoạt động êm ái, duy trì làm lạnh đúng công suất.</li>
+ <li><strong>Bảo hành 12 tháng</strong> — Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
+</ul>', '<table class="table table-bordered" style="width:100%">
+ <thead>
+ <tr style="background:#f1f5f9;">
+ <th style="width:40%;padding:8px">Thông số kỹ thuật</th>
+ <th style="padding:8px">Chi tiết</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td><strong>Tên sản phẩm</strong></td><td>LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2016-2023 Denso AKC200A450</td></tr>
+ <tr><td><strong>Loại phụ tùng</strong></td><td>Lốc điều hòa (Compressor)</td></tr>
+ <tr><td><strong>Mã phụ tùng / OEM</strong></td><td><strong style="color:#1e3a8a">AKC200A450</strong></td></tr>
+ <tr><td><strong>Thương hiệu</strong></td><td>DENSO</td></tr>
+ <tr><td><strong>Hãng xe tương thích</strong></td><td>Mitsubishi Pajero Sport 2016</td></tr>
+ <tr><td><strong>Xuất xứ</strong></td><td>Nhập khẩu chính hãng</td></tr>
+ <tr><td><strong>Tình trạng</strong></td><td>Mới 100%, nguyên hộp tem nhãn</td></tr>
+ <tr><td><strong>Bảo hành</strong></td><td>12 tháng chính hãng</td></tr>
+ </tbody>
 </table>', 9, 0, 0, 0, 0, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport | AKC20-0A450', 'Lốc điều hòa Mitsubishi Pajero Sport 2016 — Chính Hãng Giá Tốt LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport 2016-2023 Denso AKC200A450 (mã OEM:...', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Mitsubishi Pajero Sport AKC20-0A450', '', 0, 0, NULL, 0, 1, 0, 'lốc điều hòa, lốc điều hòa điều hòa ô tô cho mitsubishi pajero sport, lốc điều hòa mitsubishi, lốc điều hòa denso, thay lốc điều hòa chính hãng, kiểm tra lốc điều hòa');
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (1247, 1, '92600-1AA0A', '92600-1AA0A / 926001AA0A', 'DENSO', 22, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Nissan Sunny | 92600-1AA0A', 'loc-dieu-hoa-dieu-hoa-o-to-cho-nissan-sunny-92600-1aa0a', '<h2>Lốc điều hòa Nissan Sunny 2010 — Chính Hãng Giá Tốt</h2>
 <p><strong>LỐC ĐIỀU HÒA điều hòa ô tô cho Nissan Sunny 2010-2014 Denso 92600-1AA0A</strong> (mã OEM: <strong>92600-1AA0A</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Nissan Sunny. Sản phẩm có chức năng chính là <strong>nén môi chất lạnh trong chu trình điều hòa</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
@@ -27699,7 +27309,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 13000000, 13019000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Nissan Teana chính hãng | CoolingSyst', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Nissan Teana chính hãng Hãng DENSO Mã OEM 92600-3TA0A chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn...', 'lc điu ha điều hòa', '', '/uploads/products/dan-lanh-nissan-murano-nissan-teana-j32-doi-2008-2012-dan-cs-119-20260731050425-dcf68753.webp', 1, 0, 0, 10, '926003TA0A', 5, 999, '<ul>
+</ul>', 13000000, 13019000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Nissan Teana chính hãng | CoolingSyst', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Nissan Teana chính hãng Hãng DENSO Mã OEM 92600-3TA0A chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn...', 'lc điu ha điều hòa', '', '/uploads/products/dan-lanh-nissan-murano-nissan-teana-j32-doi-2008-2012-dan-cs-119-20260731050425-dcf68753.webp', 1, 0, 0, 10, '926003TA0A', 5, 999, '<ul>
  <li><strong>Mã OEM 92600-3TA0A</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Nissan, không cần chỉnh sửa.</li>
@@ -28040,7 +27650,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 8000000, 8011000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng | CoolingSyst', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng Hãng DENSO Mã OEM 95200-68L00 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn...', 'lc điu ha điều hòa', '', '/uploads/products/td_Lốc điều hòa-4-loc-lanh-suzuki-swift-2014-95200-m-55r30-thanhdungauto.jpg', 1, 0, 0, 10, '9520068L00', 5, 999, '<ul>
+</ul>', 8000000, 8011000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng | CoolingSyst', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng Hãng DENSO Mã OEM 95200-68L00 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn...', 'lc điu ha điều hòa', '', '/uploads/products/td_Lốc điều hòa-4-loc-lanh-suzuki-swift-2014-95200-m-55r30-thanhdungauto.jpg', 1, 0, 0, 10, '9520068L00', 5, 999, '<ul>
  <li><strong>Mã OEM 95200-68L00</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Suzuki, không cần chỉnh sửa.</li>
@@ -28103,7 +27713,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 8500000, 8541000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng | CoolingSyst', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng Hãng DENSO Mã OEM 95200-71L00 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn...', 'lc điu ha điều hòa', '', '/uploads/products/dan-lanh-dieu-hoa-o-to-cho-suzuki-swift-2018-2026-valeo-95860-71l00-valeo-9586071l00-20260727050945-cf2d22f8.webp', 1, 0, 0, 10, '9520071L00', 5, 999, '<ul>
+</ul>', 8500000, 8541000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng | CoolingSyst', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Suzuki Swift chính hãng Hãng DENSO Mã OEM 95200-71L00 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn...', 'lc điu ha điều hòa', '', '/uploads/products/dan-lanh-dieu-hoa-o-to-cho-suzuki-swift-2018-2026-valeo-95860-71l00-valeo-9586071l00-20260727050945-cf2d22f8.webp', 1, 0, 0, 10, '9520071L00', 5, 999, '<ul>
  <li><strong>Mã OEM 95200-71L00</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Suzuki, không cần chỉnh sửa.</li>
@@ -28433,7 +28043,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 14000000, 14030000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Subaru Forester chính hãng | CoolingS', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Subaru Forester chính hãng Hãng DENSO Mã OEM 73111SJ001 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng to...', 'lc điu ha điều hòa', '', '/uploads/products/dan-lanh-dieu-hoa-o-to-cho-subaru-forester-2019-2026-valeo-73523sj001-valeo-73523sj001-20260727072457-c444cdc0.webp', 1, 12727273, 1272727, 10, '73111SJ001', 5, 999, '<ul>
+</ul>', 14000000, 14030000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Subaru Forester chính hãng | CoolingS', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Subaru Forester chính hãng Hãng DENSO Mã OEM 73111SJ001 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng to...', 'lc điu ha điều hòa', '', '/uploads/products/dan-lanh-dieu-hoa-o-to-cho-subaru-forester-2019-2026-valeo-73523sj001-valeo-73523sj001-20260727072457-c444cdc0.webp', 1, 12727273, 1272727, 10, '73111SJ001', 5, 999, '<ul>
  <li><strong>Mã OEM 73111SJ001</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản, không cần chỉnh sửa.</li>
@@ -31621,7 +31231,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1400000, 1416000, 999, 0, 1500, 15, 15, 10, 'published', '', 0, 0, 0, 0, 0, 23, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'MÔ TƠ QUẠT DÀN NÓNG điều hòa ô tô cho Honda Civic chính hãng | Cooli', 'Mua MÔ TƠ QUẠT DÀN NÓNG điều hòa ô tô cho Honda Civic chính hãng Hãng DENSO Mã OEM 38616-RNA-A01 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao h...', 'm t qut dn nng', '', '/uploads/products/loc-lanh-xe-civic-honda-2006-2011-sanden-38810-rna-a02-ll-cv-sanden-38810-rna-a02-20260727081234-45bd5bad.webp', 1, 1272727, 127273, 10, '38616RNAA01', 5, 999, '<ul>
+</ul>', 1400000, 1416000, 999, 0, 1500, 15, 15, 10, 'published', '', 0, 0, 0, 0, 0, 24, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-30 23:31:44', '2026-08-12 13:01:03', 'MÔ TƠ QUẠT DÀN NÓNG điều hòa ô tô cho Honda Civic chính hãng | Cooli', 'Mua MÔ TƠ QUẠT DÀN NÓNG điều hòa ô tô cho Honda Civic chính hãng Hãng DENSO Mã OEM 38616-RNA-A01 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao h...', 'm t qut dn nng', '', '/uploads/products/loc-lanh-xe-civic-honda-2006-2011-sanden-38810-rna-a02-ll-cv-sanden-38810-rna-a02-20260727081234-45bd5bad.webp', 1, 1272727, 127273, 10, '38616RNAA01', 5, 999, '<ul>
  <li><strong>Mã OEM 38616-RNA-A01</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Honda, không cần chỉnh sửa.</li>
@@ -44464,37 +44074,37 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 </tr>
 </tbody>
 </table>', 1, 0, 0, 0, 0, 'DÀN NÓNG điều hòa ô tô cho Hyundai Stargazer | 97606-CG000', 'Dàn nóng Hyundai Stargazer 2022 — Chính Hãng Giá Tốt DÀN NÓNG điều hòa ô tô cho Hyundai Stargazer 2022-2026 Denso 97606-CG000 (mã OEM: 97606-CG000) là phụ...', 'DÀN NÓNG điều hòa ô tô cho Hyundai Stargazer 97606-CG000', '', 0, 0, NULL, 0, 1, 0, 'dàn nóng điều hòa, dàn nóng điều hòa ô tô cho hyundai stargazer, dàn nóng điều hòa hyundai, dàn nóng điều hòa denso, thay dàn nóng điều hòa chính hãng, kiểm tra dàn nóng điều hòa');
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (1575, 1, '97701-CG000', '97701-CG000 / 97701CG000', 'DENSO', 22, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer | 97701-CG000', 'loc-dieu-hoa-dieu-hoa-o-to-cho-hyundai-stargazer-97701-cg000', '<h2>Lốc điều hòa Hyundai Stargazer 2022 — Chính Hãng Giá Tốt</h2>
-<p><strong>LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer 2022-2026 Denso 97701-CG000</strong> (mã OEM: <strong>97701-CG000</strong>) là phụ tùng điện lạnh ô tô chính hãng thuộc hệ thống điều hòa xe Hyundai Stargazer. Sản phẩm có chức năng chính là <strong>nén môi chất lạnh trong chu trình điều hòa</strong>, đảm bảo hệ thống làm mát hoạt động đúng công suất và hiệu quả.</p>
-<h3>Chức Năng & Nguyên Lý Hoạt Động</h3>
-<p>Trong hệ thống điều hòa ô tô, lốc điều hòa đóng vai trò quan trọng trong chu trình làm lạnh. Lốc điều hòa được thiết kế tối ưu để đảm bảo khả năng nén môi chất lạnh trong chu trình điều hòa hiệu quả. Khi lốc điều hòa gặp sự cố, hệ thống làm lạnh sẽ giảm hiệu suất đáng kể hoặc ngừng hoạt động hoàn toàn, ảnh hưởng trực tiếp đến sự thoải mái của người lái và hành khách.</p>
-<h3>Dấu Hiệu Nhận Biết Cần Thay Lốc điều hòa</h3>
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (1575, 1, '97701-CG000', '97701-CG000 / 97701CG000', 'DENSO', 22, 'LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer | 97701-CG000', 'loc-dieu-hoa-dieu-hoa-o-to-cho-hyundai-stargazer-97701-cg000', '<h2>Lốc điều h&ograve;a Hyundai Stargazer 2022 &mdash; Ch&iacute;nh H&atilde;ng Gi&aacute; Tốt</h2>
+<p><strong>LỐC ĐIỀU H&Ograve;A điều h&ograve;a &ocirc; t&ocirc; cho Hyundai Stargazer 2022-2026 Denso 97701-CG000</strong> (m&atilde; OEM: <strong>97701-CG000</strong>) l&agrave; phụ t&ugrave;ng điện lạnh &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng thuộc hệ thống điều h&ograve;a xe Hyundai Stargazer. Sản phẩm c&oacute; chức năng ch&iacute;nh l&agrave; <strong>n&eacute;n m&ocirc;i chất lạnh trong chu tr&igrave;nh điều h&ograve;a</strong>, đảm bảo hệ thống l&agrave;m m&aacute;t hoạt động đ&uacute;ng c&ocirc;ng suất v&agrave; hiệu quả.</p>
+<h3>Chức Năng &amp; Nguy&ecirc;n L&yacute; Hoạt Động</h3>
+<p>Trong hệ thống điều h&ograve;a &ocirc; t&ocirc;, lốc điều h&ograve;a đ&oacute;ng vai tr&ograve; quan trọng trong chu tr&igrave;nh l&agrave;m lạnh. Lốc điều h&ograve;a được thiết kế tối ưu để đảm bảo khả năng n&eacute;n m&ocirc;i chất lạnh trong chu tr&igrave;nh điều h&ograve;a hiệu quả. Khi lốc điều h&ograve;a gặp sự cố, hệ thống l&agrave;m lạnh sẽ giảm hiệu suất đ&aacute;ng kể hoặc ngừng hoạt động ho&agrave;n to&agrave;n, ảnh hưởng trực tiếp đến sự thoải m&aacute;i của người l&aacute;i v&agrave; h&agrave;nh kh&aacute;ch.</p>
+<h3>Dấu Hiệu Nhận Biết Cần Thay Lốc điều h&ograve;a</h3>
 <ul>
-<li>Điều hòa không đủ lạnh hoặc không lạnh hoàn toàn</li>
-<li>Có tiếng ồn bất thường từ hệ thống điều hòa</li>
-<li>Rò rỉ môi chất hoặc nước bất thường</li>
-<li>Đèn báo lỗi điều hòa trên bảng điều khiển sáng lên</li>
+<li>Điều h&ograve;a kh&ocirc;ng đủ lạnh hoặc kh&ocirc;ng lạnh ho&agrave;n to&agrave;n</li>
+<li>C&oacute; tiếng ồn bất thường từ hệ thống điều h&ograve;a</li>
+<li>R&ograve; rỉ m&ocirc;i chất hoặc nước bất thường</li>
+<li>Đ&egrave;n b&aacute;o lỗi điều h&ograve;a tr&ecirc;n bảng điều khiển s&aacute;ng l&ecirc;n</li>
 </ul>
 <h3>Ưu Điểm Nổi Bật Khi Mua Tại CoolingSystems</h3>
 <ul>
-<li><strong>Hàng chính hãng 100%:</strong> Mã 97701-CG000 — nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.</li>
-<li><strong>Tương thích hoàn hảo:</strong> Thiết kế chuẩn kích thước nguyên bản xe Hyundai Stargazer, lắp đặt nhanh chóng không cần chỉnh sửa.</li>
-<li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu áp suất gas lớn và chống ăn mòn hiệu quả.</li>
-<li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động êm ái đúng công suất, giảm tải cho lốc điều hòa và động cơ xe.</li>
-<li><strong>Bảo hành 12 tháng:</strong> Đổi mới hoàn toàn nếu phát sinh lỗi từ nhà sản xuất.</li>
+<li><strong>H&agrave;ng ch&iacute;nh h&atilde;ng 100%:</strong> M&atilde; 97701-CG000 &mdash; nguồn gốc xuất xứ r&otilde; r&agrave;ng, đầy đủ giấy tờ kiểm định.</li>
+<li><strong>Tương th&iacute;ch ho&agrave;n hảo:</strong> Thiết kế chuẩn k&iacute;ch thước nguy&ecirc;n bản xe Hyundai Stargazer, lắp đặt nhanh ch&oacute;ng kh&ocirc;ng cần chỉnh sửa.</li>
+<li><strong>Độ bền vượt trội:</strong> Chất liệu cao cấp chịu nhiệt, chịu &aacute;p suất gas lớn v&agrave; chống ăn m&ograve;n hiệu quả.</li>
+<li><strong>Tiết kiệm nhi&ecirc;n liệu:</strong> Hoạt động &ecirc;m &aacute;i đ&uacute;ng c&ocirc;ng suất, giảm tải cho lốc điều h&ograve;a v&agrave; động cơ xe.</li>
+<li><strong>Bảo h&agrave;nh 12 th&aacute;ng:</strong> Đổi mới ho&agrave;n to&agrave;n nếu ph&aacute;t sinh lỗi từ nh&agrave; sản xuất.</li>
 </ul>
 <h3>Hướng Dẫn Bảo Dưỡng Định Kỳ</h3>
-<p>Để hệ thống điều hòa ô tô luôn hoạt động tốt và kéo dài tuổi thọ lốc điều hòa, Quý khách nên:</p>
+<p>Để hệ thống điều h&ograve;a &ocirc; t&ocirc; lu&ocirc;n hoạt động tốt v&agrave; k&eacute;o d&agrave;i tuổi thọ lốc điều h&ograve;a, Qu&yacute; kh&aacute;ch n&ecirc;n:</p>
 <ul>
-<li>Kiểm tra và vệ sinh dàn lạnh, dàn nóng mỗi <strong>6 tháng</strong> hoặc <strong>10.000 km</strong>.</li>
-<li>Bổ sung gas điều hòa đúng định kỳ theo khuyến nghị nhà sản xuất.</li>
-<li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống có dấu hiệu bất thường.</li>
+<li>Kiểm tra v&agrave; vệ sinh d&agrave;n lạnh, d&agrave;n n&oacute;ng mỗi <strong>6 th&aacute;ng</strong> hoặc <strong>10.000 km</strong>.</li>
+<li>Bổ sung gas điều h&ograve;a đ&uacute;ng định kỳ theo khuyến nghị nh&agrave; sản xuất.</li>
+<li>Thay thế phin lọc ga mỗi <strong>2 năm</strong> hoặc khi hệ thống c&oacute; dấu hiệu bất thường.</li>
 </ul>
 <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 24px; margin: 24px 0; font-family: ''Be Vietnam Pro'', sans-serif;">
-<p style="font-weight: bold; font-size: 16px; color: #1e3a8a; margin: 0 0 12px 0;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
-<p style="margin: 6px 0; color: #334155; font-size: 15px;">Hotline & Zalo tư vấn: 0705 070 526</p>
+<p style="font-weight: bold; font-size: 16px; color: #1e3a8a; margin: 0 0 12px 0;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
+<p style="margin: 6px 0; color: #334155; font-size: 15px;">Hotline &amp; Zalo tư vấn: 0705 070 526</p>
 <p style="margin: 6px 0; color: #334155; font-size: 15px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 6px 0; color: #334155; font-size: 15px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
+<p style="margin: 6px 0; color: #334155; font-size: 15px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
 </div>', '<ul>
  <li><strong>Chính hãng DENSO:</strong> Đạt chuẩn OEM, nhập khẩu trực tiếp, đầy đủ chứng nhận chất lượng.</li>
  <li><strong>Mã 97701-CG000:</strong> Khớp chính xác 100% với xe Hyundai Stargazer 2022.</li>
@@ -44502,7 +44112,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 9000000, 9014000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-31 17:57:00', '2026-08-12 13:01:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer chính hãng | Coolin', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer chính hãng Hãng DENSO Mã OEM 97701-CG000 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng...', 'lc điu ha điều hòa', '', '/uploads/products/mo-to-quat-ket-nuoc-hyundai-creta-2022-25386i7160-ptom-td-mo-8-426-20260729103710-d4bd9dd1.webp', 1, 0, 0, 10, '97701CG000', 5, 999, '<ul>
+</ul>', 9000000, 9014000, 999, 0, 6000, 20, 15, 15, 'published', '', 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-31 17:57:00', '2026-08-12 13:03:03', 'LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer chính hãng | Coolin', 'Mua LỐC ĐIỀU HÒA điều hòa ô tô cho Hyundai Stargazer chính hãng Hãng DENSO Mã OEM 97701-CG000 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng...', 'lc điu ha điều hòa', '', '/uploads/products/mo-to-quat-ket-nuoc-hyundai-creta-2022-25386i7160-ptom-td-mo-8-426-20260729103710-d4bd9dd1.webp', 1, 0, 0, 10, '97701CG000', 5, 999, '<ul>
  <li><strong>Mã OEM 97701-CG000</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Hyundai, không cần chỉnh sửa.</li>
@@ -50570,7 +50180,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 400000, 437000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-31 17:57:01', '2026-08-12 13:01:03', 'ỐNG DẪN GAS điều hòa ô tô cho Hyundai Accent chính hãng | CoolingSys', 'Mua ỐNG DẪN GAS điều hòa ô tô cho Hyundai Accent chính hãng Hãng DENSO Mã OEM 97761-H9000 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toà...', 'ng dn gas điều hòa', '', '/uploads/products/dan-lanh-hyundai-accent-2018-ptom-td-daf-9-9-20260730043333-3f735328.webp', 1, 363636, 36364, 10, '97761H9000', 5, 1000, '<ul>
+</ul>', 400000, 437000, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-05-31 17:57:01', '2026-08-12 13:01:03', 'ỐNG DẪN GAS điều hòa ô tô cho Hyundai Accent chính hãng | CoolingSys', 'Mua ỐNG DẪN GAS điều hòa ô tô cho Hyundai Accent chính hãng Hãng DENSO Mã OEM 97761-H9000 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toà...', 'ng dn gas điều hòa', '', '/uploads/products/dan-lanh-hyundai-accent-2018-ptom-td-daf-9-9-20260730043333-3f735328.webp', 1, 363636, 36364, 10, '97761H9000', 5, 1000, '<ul>
  <li><strong>Mã OEM 97761-H9000</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Hyundai, không cần chỉnh sửa.</li>
@@ -71192,7 +70802,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 2000000, NULL, 999, 0, 3000, 44, 60, 1, 'published', '', 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-06-02 14:38:45', '2026-08-12 13:01:03', 'Dàn nóng điều hòa ô tô cho Honda City chính hãng | CoolingSystems', 'Mua Dàn nóng điều hòa ô tô cho Honda City chính hãng Hãng VALEO Mã OEM 80110-T9A-003 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quố...', 'dàn nóng điều hòa ô', '', '/uploads/products/dv_6_mo_to_quat_gian_lanh_honda_city_honda_jazz_do_partsvietnam_1.jpg', 1, 0, 0, 10, '80110T9A003', 5, 999, '<ul>
+</ul>', 2000000, NULL, 999, 0, 3000, 44, 60, 1, 'published', '', 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-06-02 14:38:45', '2026-08-12 13:01:03', 'Dàn nóng điều hòa ô tô cho Honda City chính hãng | CoolingSystems', 'Mua Dàn nóng điều hòa ô tô cho Honda City chính hãng Hãng VALEO Mã OEM 80110-T9A-003 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quố...', 'dàn nóng điều hòa ô', '', '/uploads/products/dv_6_mo_to_quat_gian_lanh_honda_city_honda_jazz_do_partsvietnam_1.jpg', 1, 0, 0, 10, '80110T9A003', 5, 999, '<ul>
  <li><strong>Mã OEM 80110-T9A-003</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất VALEO.</li>
  <li><strong>Chính hãng VALEO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Honda, không cần chỉnh sửa.</li>
@@ -84221,7 +83831,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 8160000, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 15, 0.0, 0, 12, NULL, NULL, NULL, '2026-06-02 16:39:55', '2026-08-12 13:01:03', 'Lốc Lạnh Xe Fortuner Toyota chính hãng | CoolingSystems', 'Mua Lốc Lạnh Xe Fortuner Toyota chính hãng Hãng SANDEN Mã OEM 88310-12A50 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline:...', 'lốc lạnh xe fortuner toyota', '', '/uploads/products/loc-lanh-xe-fortuner-toyota-2009-2015-sanden-88320-0k010-ac-sanden-883200k010-20260727082820-cebbf6a3.webp', 1, 0, 0, 10, '8831012A50', 5, 999, '<ul>
+</ul>', 8160000, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', '', 0, 0, 0, 0, 0, 16, 0.0, 0, 12, NULL, NULL, NULL, '2026-06-02 16:39:55', '2026-08-12 13:01:03', 'Lốc Lạnh Xe Fortuner Toyota chính hãng | CoolingSystems', 'Mua Lốc Lạnh Xe Fortuner Toyota chính hãng Hãng SANDEN Mã OEM 88310-12A50 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline:...', 'lốc lạnh xe fortuner toyota', '', '/uploads/products/loc-lanh-xe-fortuner-toyota-2009-2015-sanden-88320-0k010-ac-sanden-883200k010-20260727082820-cebbf6a3.webp', 1, 0, 0, 10, '8831012A50', 5, 999, '<ul>
  <li><strong>Mã OEM 88310-12A50</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất SANDEN.</li>
  <li><strong>Chính hãng SANDEN</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -96977,7 +96587,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1360000, 850000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'DÀN LẠNH HYUNDAI ACCENT chính hãng | CoolingSystems', 'Mua DÀN LẠNH HYUNDAI ACCENT chính hãng Mã OEM HVAC9H2000 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dn lnh', NULL, '/uploads/products/1-dan-lanh-hyundai-accent-2018-97139-h2000-hvac9h2000-20260723031239-56164319.webp', 1, 0, 0, 10, 'HVAC9H2000', 5, 1000, '<ul>
+</ul>', 1360000, 850000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 9, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'DÀN LẠNH HYUNDAI ACCENT chính hãng | CoolingSystems', 'Mua DÀN LẠNH HYUNDAI ACCENT chính hãng Mã OEM HVAC9H2000 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'dn lnh', NULL, '/uploads/products/1-dan-lanh-hyundai-accent-2018-97139-h2000-hvac9h2000-20260723031239-56164319.webp', 1, 0, 0, 10, 'HVAC9H2000', 5, 1000, '<ul>
  <li><strong>Mã OEM HVAC9H2000</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Hyundai, không cần chỉnh sửa.</li>
@@ -98992,7 +98602,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 752000, 470000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 12, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH HYUNDAI I30 chính hãng | CoolingSystems', 'Mua QUẠT DÀN LẠNH HYUNDAI I30 chính hãng Mã OEM BW935A024 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'qut dn lnh', NULL, '/uploads/products/td_Van tiết lưu-4-van-tiet-luu-hyundai-i30-97626a7000-thanhdungauto.jpg', 1, 0, 0, 10, 'BW935A024', 5, 1000, '<ul>
+</ul>', 752000, 470000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 13, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH HYUNDAI I30 chính hãng | CoolingSystems', 'Mua QUẠT DÀN LẠNH HYUNDAI I30 chính hãng Mã OEM BW935A024 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'qut dn lnh', NULL, '/uploads/products/td_Van tiết lưu-4-van-tiet-luu-hyundai-i30-97626a7000-thanhdungauto.jpg', 1, 0, 0, 10, 'BW935A024', 5, 1000, '<ul>
  <li><strong>Mã OEM BW935A024</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Hyundai, không cần chỉnh sửa.</li>
@@ -100097,7 +99707,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 752000, 470000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 19, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH chính hãng | CoolingSystems', 'Mua QUẠT DÀN LẠNH chính hãng Mã OEM BW935A0163 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'qut dn lnh', NULL, '/uploads/products/gian-lanh-hyundai-i20-2008-2015-971391j000-ptom-td-daf-39-39-2-20260730065747-f137901c.webp', 1, 0, 0, 10, 'BW935A0163', 5, 1000, '<ul>
+</ul>', 752000, 470000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 21, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH chính hãng | CoolingSystems', 'Mua QUẠT DÀN LẠNH chính hãng Mã OEM BW935A0163 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 070 526.', 'qut dn lnh', NULL, '/uploads/products/gian-lanh-hyundai-i20-2008-2015-971391j000-ptom-td-daf-39-39-2-20260730065747-f137901c.webp', 1, 0, 0, 10, 'BW935A0163', 5, 1000, '<ul>
  <li><strong>Mã OEM BW935A0163</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Hyundai, không cần chỉnh sửa.</li>
@@ -100162,7 +99772,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 1744000, 1090000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 17, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH TOYOTA CROWN/REIZ LEXUS GS300/IS300 chính hãng | Cooli', 'Mua QUẠT DÀN LẠNH TOYOTA CROWN/REIZ LEXUS GS300/IS300 chính hãng Mã OEM BW935F003 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. ...', 'qut dn lnh', NULL, '/uploads/products/mo-to-quat-gio-dan-lanh-motor-quat-dan-lanh-dieu-hoa-trong-tap-lo-xe-toyota-highlander-land-cruiser-prado-lexus-es240-20260731045953-21850b89.webp', 1, 0, 0, 10, 'BW935F003', 5, 1000, '<ul>
+</ul>', 1744000, 1090000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 18, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH TOYOTA CROWN/REIZ LEXUS GS300/IS300 chính hãng | Cooli', 'Mua QUẠT DÀN LẠNH TOYOTA CROWN/REIZ LEXUS GS300/IS300 chính hãng Mã OEM BW935F003 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. ...', 'qut dn lnh', NULL, '/uploads/products/mo-to-quat-gio-dan-lanh-motor-quat-dan-lanh-dieu-hoa-trong-tap-lo-xe-toyota-highlander-land-cruiser-prado-lexus-es240-20260731045953-21850b89.webp', 1, 0, 0, 10, 'BW935F003', 5, 1000, '<ul>
  <li><strong>Mã OEM BW935F003</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -100617,7 +100227,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 752000, 470000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 20, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH TOYOTA INNOVA(FRONT) chính hãng | CoolingSystems', 'Mua QUẠT DÀN LẠNH TOYOTA INNOVA(FRONT) chính hãng Mã OEM BW935F011 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0...', 'qut dn lnh', NULL, '/uploads/products/6_quat_dan_lanh_sau_toyota_innova_fortuner_partsvietnam_8.jpg', 1, 0, 0, 10, 'BW935F011', 5, 1000, '<ul>
+</ul>', 752000, 470000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 21, 0.0, 0, 6, NULL, NULL, '2026-07-18 17:26:46', '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'QUẠT DÀN LẠNH TOYOTA INNOVA(FRONT) chính hãng | CoolingSystems', 'Mua QUẠT DÀN LẠNH TOYOTA INNOVA(FRONT) chính hãng Mã OEM BW935F011 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0...', 'qut dn lnh', NULL, '/uploads/products/6_quat_dan_lanh_sau_toyota_innova_fortuner_partsvietnam_8.jpg', 1, 0, 0, 10, 'BW935F011', 5, 1000, '<ul>
  <li><strong>Mã OEM BW935F011</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất OEM Chính hãng.</li>
  <li><strong>Chính hãng OEM Chính hãng</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Toyota, không cần chỉnh sửa.</li>
@@ -107962,7 +107572,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 304000, 190000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI HS15/18-24V chính hãng | CoolingSystems', 'Mua CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI HS15/18-24V chính hãng Hãng FORMULA Mã OEM HVACQ0274 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn qu...', 'cun đin bn đin', NULL, '/uploads/products/dv_6_loc_lanh_loc_dieu_hoa_may_lanh_hyundai_accent_partsvietnam_2.jpg', 1, 0, 0, 10, 'HVACQ0274', 5, 1000, '<ul>
+</ul>', 304000, 190000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI HS15/18-24V chính hãng | CoolingSystems', 'Mua CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI HS15/18-24V chính hãng Hãng FORMULA Mã OEM HVACQ0274 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn qu...', 'cun đin bn đin', NULL, '/uploads/products/dv_6_loc_lanh_loc_dieu_hoa_may_lanh_hyundai_accent_partsvietnam_2.jpg', 1, 0, 0, 10, 'HVACQ0274', 5, 1000, '<ul>
  <li><strong>Mã OEM HVACQ0274</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất FORMULA.</li>
  <li><strong>Chính hãng FORMULA</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Hyundai, không cần chỉnh sửa.</li>
@@ -108287,7 +107897,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 304000, 190000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI K250 NEW 12V chính hãng | CoolingSystem', 'Mua CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI K250 NEW 12V chính hãng Hãng FORMULA Mã OEM HVAC4F600 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn q...', 'cun đin bn đin', NULL, '/uploads/products/ket-nuoc-lam-mat-hyundai-2010-2016-kia-2012-2016-doowon-25310-22005-25310-22005-3.webp', 1, 0, 0, 10, 'HVAC4F600', 5, 1000, '<ul>
+</ul>', 304000, 190000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-17T17:44:31+00:00', '2026-08-12 13:01:04', 'CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI K250 NEW 12V chính hãng | CoolingSystem', 'Mua CUỘN ĐIỆN (BÔN ĐIỆN) HYUNDAI K250 NEW 12V chính hãng Hãng FORMULA Mã OEM HVAC4F600 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn q...', 'cun đin bn đin', NULL, '/uploads/products/ket-nuoc-lam-mat-hyundai-2010-2016-kia-2012-2016-doowon-25310-22005-25310-22005-3.webp', 1, 0, 0, 10, 'HVAC4F600', 5, 1000, '<ul>
  <li><strong>Mã OEM HVAC4F600</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất FORMULA.</li>
  <li><strong>Chính hãng FORMULA</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Kia, không cần chỉnh sửa.</li>
@@ -117527,7 +117137,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 1, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-28 01:23:36', '2026-08-12 13:01:04', 'Motor quạt giàn nóng Honda Civic chính hãng | CoolingSystems', 'Mua Motor quạt giàn nóng Honda Civic chính hãng Hãng DENSO Mã OEM 065000-2940 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotl...', 'motor quạt giàn nóng honda', NULL, '/uploads/products/dv_6_mo_to_quat_gian_lanh_honda_city_honda_jazz_do_partsvietnam_1.jpg', 1, 0, 0, 10, '0650002940', 5, 1000, '<ul>
+</ul>', 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 1, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-28 01:23:36', '2026-08-12 13:01:04', 'Motor quạt giàn nóng Honda Civic chính hãng | CoolingSystems', 'Mua Motor quạt giàn nóng Honda Civic chính hãng Hãng DENSO Mã OEM 065000-2940 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotl...', 'motor quạt giàn nóng honda', NULL, '/uploads/products/dv_6_mo_to_quat_gian_lanh_honda_city_honda_jazz_do_partsvietnam_1.jpg', 1, 0, 0, 10, '0650002940', 5, 1000, '<ul>
  <li><strong>Mã OEM 065000-2940</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Honda, không cần chỉnh sửa.</li>
@@ -117852,7 +117462,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 1, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-28 01:23:36', '2026-08-12 13:01:04', 'Motor quạt dàn nóng Honda CRV chính hãng | CoolingSystems', 'Mua Motor quạt dàn nóng Honda CRV chính hãng Hãng DENSO Mã OEM 065000-3330 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline...', 'motor quạt dàn nóng honda', NULL, '/uploads/products/dv_6_mo_to_quat_gian_lanh_honda_city_honda_jazz_do_partsvietnam_1.jpg', 1, 0, 0, 10, '0650003330', 5, 1000, '<ul>
+</ul>', 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 1, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-28 01:23:36', '2026-08-12 13:01:04', 'Motor quạt dàn nóng Honda CRV chính hãng | CoolingSystems', 'Mua Motor quạt dàn nóng Honda CRV chính hãng Hãng DENSO Mã OEM 065000-3330 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline...', 'motor quạt dàn nóng honda', NULL, '/uploads/products/dv_6_mo_to_quat_gian_lanh_honda_city_honda_jazz_do_partsvietnam_1.jpg', 1, 0, 0, 10, '0650003330', 5, 1000, '<ul>
  <li><strong>Mã OEM 065000-3330</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Honda, không cần chỉnh sửa.</li>
@@ -118372,7 +117982,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
  <li><strong>Lắp đặt nhanh chóng:</strong> Chuẩn kích thước nguyên bản, không cần chỉnh sửa hay đục khoét.</li>
  <li><strong>Tiết kiệm nhiên liệu:</strong> Hoạt động hiệu quả, giảm tải cho lốc điều hòa và động cơ.</li>
  <li><strong>Bảo hành 12 tháng:</strong> Cam kết đổi mới nếu phát sinh lỗi từ nhà sản xuất.</li>
-</ul>', 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 1, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-28 01:23:37', '2026-08-12 13:01:04', 'Dàn nóng điều hòa Ford Ranger chính hãng | CoolingSystems', 'Mua Dàn nóng điều hòa Ford Ranger chính hãng Hãng DENSO Mã OEM DI447770-4680 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotli...', 'dàn nóng điều hòa ford', NULL, '/uploads/products/dan-nong-ford-ranger-mazda-bt50-2-2-va-3-2-ford-everest-ecosport-doi-1-dinh-oc-mat-bich-nam-2012-2017.webp', 1, 0, 0, 10, 'DI4477704680', 5, 1000, '<ul>
+</ul>', 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 1, 0, 0, 1, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-07-28 01:23:37', '2026-08-12 13:01:04', 'Dàn nóng điều hòa Ford Ranger chính hãng | CoolingSystems', 'Mua Dàn nóng điều hòa Ford Ranger chính hãng Hãng DENSO Mã OEM DI447770-4680 chất lượng cao tại CoolingSystems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotli...', 'dàn nóng điều hòa ford', NULL, '/uploads/products/dan-nong-ford-ranger-mazda-bt50-2-2-va-3-2-ford-everest-ecosport-doi-1-dinh-oc-mat-bich-nam-2012-2017.webp', 1, 0, 0, 10, 'DI4477704680', 5, 1000, '<ul>
  <li><strong>Mã OEM DI447770-4680</strong> — Khớp chính xác 100% theo tiêu chuẩn nhà sản xuất DENSO.</li>
  <li><strong>Chính hãng DENSO</strong> — Đạt tiêu chuẩn kiểm định nghiêm ngặt, nhập khẩu trực tiếp.</li>
  <li><strong>Tương thích hoàn hảo</strong> — Lắp đặt vừa vặn 100% nguyên bản xe Ford, không cần chỉnh sửa.</li>
@@ -130941,4 +130551,218 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 </tr>
 </tbody>
 </table>', 11, 0, 0, 0, 0, 'Giàn lạnh Suzuki Ertiga 2018-2021 | 7412073RB0000', 'Tổng quan về Giàn lạnh Suzuki Ertiga 2018-2021 Sản phẩm Giàn lạnh Suzuki Ertiga 2018-2021 (Mã OEM: 7412073RB0000) là phụ tùng thuộc hệ thống làm mát và...', 'Giàn lạnh Suzuki Ertiga 2018-2021 7412073RB0000', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh suzuki ertiga 2018-2021, dàn lạnh điều hòa suzuki, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3545, 1, '97139H8000', '97139-H8000 / 97139H8000', '', 46, 'Giàn lạnh Hyundai Accent 2018-2020 | 97139-H8000', 'gian-lanh-hyundai-accent-2018-2020-97139-h8000', '<h2>Tổng quan về Giàn lạnh Hyundai Accent 2018-2020</h2>
+<p>Sản phẩm Giàn lạnh Hyundai Accent 2018-2020 (Mã OEM: <strong>97139H8000</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn</p>
+<h2>Ưu điểm nổi bật của Giàn lạnh Hyundai Accent 2018-2020</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh hyundai accent', NULL, 'gian-lanh-doowon-accent-97139h8000-01-main.jpg', 1, 0, 0, 10, '97139H8000', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97139H8000 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Thông số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>Mã phụ tùng (OEM)</strong></td>
+<td>97139H8000</td>
+</tr>
+<tr>
+<td><strong>Tên sản phẩm</strong></td>
+<td>Giàn lạnh Hyundai Accent 2018-2020</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Chính hãng</td>
+</tr>
+<tr>
+<td><strong>Tình trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', 1, 0, 0, 0, 0, 'Giàn lạnh Hyundai Accent 2018-2020 | 97139-H8000', 'Tổng quan về Giàn lạnh Hyundai Accent 2018-2020 Sản phẩm Giàn lạnh Hyundai Accent 2018-2020 (Mã OEM: 97139H8000) là phụ tùng thuộc hệ thống làm mát và...', 'Giàn lạnh Hyundai Accent 2018-2020 97139-H8000', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh hyundai accent 2018-2020, dàn lạnh điều hòa hyundai, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3546, 1, '7L0820105A', '7L082-0105A / 7L0820105A', '', 46, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L082-0105A', 'gian-lanh-sau-audi-q7-2008-2010-7l082-0105a', '<h2>Tổng quan về Giàn lạnh sau Audi Q7 2008-2010</h2>
+<p>Sản phẩm Giàn lạnh sau Audi Q7 2008-2010 (Mã OEM: <strong>7L0820105A</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<h2>Ưu điểm nổi bật của Giàn lạnh sau Audi Q7 2008-2010</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh sau audi q7', NULL, 'gian-lanh-sau-valeo-q7-7l0820105a-01-main.jpg', 1, 0, 0, 10, '7L0820105A', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7L0820105A cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Thông số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>Mã phụ tùng (OEM)</strong></td>
+<td>7L0820105A</td>
+</tr>
+<tr>
+<td><strong>Tên sản phẩm</strong></td>
+<td>Giàn lạnh sau Audi Q7 2008-2010</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Chính hãng</td>
+</tr>
+<tr>
+<td><strong>Tình trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', 22, 0, 0, 0, 0, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L082-0105A', 'Tổng quan về Giàn lạnh sau Audi Q7 2008-2010 Sản phẩm Giàn lạnh sau Audi Q7 2008-2010 (Mã OEM: 7L0820105A) là phụ tùng thuộc hệ thống làm mát và điện lạnh...', 'Giàn lạnh sau Audi Q7 2008-2010 7L082-0105A', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh sau audi q7 2008-2010, dàn lạnh điều hòa audi, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3547, 1, '4L1820103', '4L1820103', '', 46, 'Giàn lạnh trước Audi Q7 2008-2010 | 4L1820103', 'gian-lanh-truoc-audi-q7-2008-2010-4l1820103', '<h2>Tổng quan về Giàn lạnh trước Audi Q7 2008-2010</h2>
+<p>Sản phẩm <strong>GGiàn lạnh trước Audi Q7 2008-2010</strong> (Mã OEM: <strong>4L1820103</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<h2>Ưu điểm nổi bật của Giàn lạnh trước Audi Q7 2008-2010</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh trước audi q7', NULL, NULL, 1, 0, 0, 10, '4L1820103', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4L1820103 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Thông số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>Mã phụ tùng (OEM)</strong></td>
+<td>4L1820103</td>
+</tr>
+<tr>
+<td><strong>Tên sản phẩm</strong></td>
+<td>Giàn lạnh trước Audi Q7 2008-2010</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Chính hãng</td>
+</tr>
+<tr>
+<td><strong>Tình trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', 22, 0, 0, 0, 0, 'Giàn lạnh trước Audi Q7 2008-2010 | 4L1820103', 'Tổng quan về Giàn lạnh trước Audi Q7 2008-2010 Sản phẩm GGiàn lạnh trước Audi Q7 2008-2010 (Mã OEM: 4L1820103) là phụ tùng thuộc hệ thống làm mát và điện...', 'Giàn lạnh trước Audi Q7 2008-2010 4L1820103', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh trước audi q7 2008-2010, dàn lạnh điều hòa audi, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3548, 1, '7L0820105A-01', '7L0820105A-01 / 7L0820105A01', 'VALEO', 46, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L0820105A-01', 'gian-lanh-sau-audi-q7-2008-2010-7l0820105a-01', '<h2>Tổng quan về Giàn lạnh sau Audi Q7 2008-2010</h2>
+<p>Sản phẩm Giàn lạnh sau Audi Q7 2008-2010(Mã OEM: <strong>7L0820105A-01</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<h2>Ưu điểm nổi bật của Giàn lạnh sau Audi Q7 2008-2010</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh sau valeo q7', NULL, 'gian-lanh-sau-valeo-q7-7l0820105a-01-main.jpg', 1, 0, 0, 10, '7L0820105A01', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7L0820105A-01 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+<tbody>
+<tr>
+<th>Thông số kỹ thuật</th>
+<th>Chi tiết</th>
+</tr>
+<tr>
+<td><strong>Mã phụ tùng (OEM)</strong></td>
+<td>7L0820105A-01</td>
+</tr>
+<tr>
+<td><strong>Tên sản phẩm</strong></td>
+<td>Giàn lạnh sau Audi Q7 2008-2010</td>
+</tr>
+<tr>
+<td><strong>Xuất xứ</strong></td>
+<td>Chính hãng</td>
+</tr>
+<tr>
+<td><strong>Tình trạng</strong></td>
+<td>Mới 100%</td>
+</tr>
+</tbody>
+</table>', 22, 0, 0, 0, 0, 'Giàn lạnh sau Audi Q7 2008-2010 | 7L0820105A-01', 'Tổng quan về Giàn lạnh sau Audi Q7 2008-2010 Sản phẩm Giàn lạnh sau Audi Q7 2008-2010(Mã OEM: 7L0820105A-01) là phụ tùng thuộc hệ thống làm mát và điện...', 'Giàn lạnh sau Audi Q7 2008-2010 7L0820105A-01', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh sau audi q7 2008-2010, dàn lạnh điều hòa audi, dàn lạnh điều hòa valeo, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3549, 1, '8850160430', '88501-60430 / 8850160430', '', 46, 'Giàn lạnh xe Toyota Land Cruiser Prado 2004-2009 chính hãng | 88501-60430', 'gian-lanh-xe-toyota-land-cruiser-prado-2004-2009-chinh-hang-88501-60430', '<h2>Tổng quan về Giàn lạnh TOYOTA Land Cruiser Prado</h2>
+<p>Sản phẩm <strong>Giàn lạnh TOYOTA Land Cruiser Prado</strong> (Mã OEM: <strong>8850160430</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Giàn lạnh TOYOTA Land Cruiser Prado"></p>
+<h2>Ưu điểm nổi bật của Giàn lạnh TOYOTA Land Cruiser Prado</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'giàn lạnh toyota land cruiser prado', NULL, NULL, 1, 0, 0, 10, '8850160430', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850160430 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8850160430</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh TOYOTA Land Cruiser Prado</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 3, 0, 0, 0, 0, 'Giàn lạnh xe Toyota Land Cruiser Prado 2004-2009 chính hãng | 88501-60430', 'Tổng quan về Giàn lạnh TOYOTA Land Cruiser Prado Sản phẩm Giàn lạnh TOYOTA Land Cruiser Prado (Mã OEM: 8850160430) là phụ tùng thuộc hệ thống làm mát và...', 'Giàn lạnh xe Toyota Land Cruiser Prado 2004-2009 chính hãng 88501-60430', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, giàn lạnh xe toyota land cruiser prado 2004-2009 chính hãng, dàn lạnh điều hòa toyota, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
+INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price", "seo_secondary_keywords") VALUES (3550, 1, '8850060030', '88500-60030 / 8850060030', '', 46, 'Hộp giàn lạnh sau Toyota Land Cruiser Prado | 88500-60030', 'hop-gian-lanh-sau-toyota-land-cruiser-prado-88500-60030', '<h2>Tổng quan về Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</h2>
+<p>Sản phẩm <strong>Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</strong> (Mã OEM: <strong>8850060030</strong>) là phụ tùng thuộc hệ thống làm mát và điện lạnh ô tô cao cấp. Đạt tiêu chuẩn chất lượng khắt khe từ nhà sản xuất, sản phẩm mang lại khả năng vận hành bền bỉ, mượt mà và tối ưu hiệu suất cho xe của bạn.</p>
+<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cooling-logo-placeholder.jpg" alt="Hộp giàn lạnh sau TOYOTA Land Cruiser Prado"></p>
+<h2>Ưu điểm nổi bật của Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</h2>
+<ul>
+<li><strong>Chất lượng chính hãng:</strong> Sản xuất trên dây chuyền công nghệ hiện đại, đáp ứng chuẩn xác thông số kỹ thuật nguyên bản.</li>
+<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu áp suất cao và chống ăn mòn tối đa trong quá trình vận hành.</li>
+<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn kích thước ban đầu, thay thế và lắp đặt nhanh chóng, tiết kiệm thời gian.</li>
+</ul>
+<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
+<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ & Phụ tùng Điều Hòa Ô Tô Chuyên Nghiệp.</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline & Zalo tư vấn: 0705 0705 526</p>
+<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
+<p style="margin: 0; color: #334155; font-size: 14px;">Website chính thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 11:18:08', '2026-08-12 13:01:04', NULL, NULL, 'hộp giàn lạnh sau toyota land cruiser prado', NULL, NULL, 1, 0, 0, 10, '8850060030', 5, 1000, '<ul>
+  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
+  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850060030 cho các dòng xe tương ứng.</li>
+  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
+</ul>', '<table class="table-striped">
+  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
+  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8850060030</td></tr>
+  <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp giàn lạnh sau TOYOTA Land Cruiser Prado</td></tr>
+  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
+  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
+</table>', 3, 0, 0, 0, 0, 'Hộp giàn lạnh sau Toyota Land Cruiser Prado | 88500-60030', 'Tổng quan về Hộp giàn lạnh sau TOYOTA Land Cruiser Prado Sản phẩm Hộp giàn lạnh sau TOYOTA Land Cruiser Prado (Mã OEM: 8850060030) là phụ tùng thuộc hệ...', 'Hộp giàn lạnh sau Toyota Land Cruiser Prado 88500-60030', '', 0, 0, NULL, 1, 1, 0, 'dàn lạnh điều hòa, hộp giàn lạnh sau toyota land cruiser prado, dàn lạnh điều hòa toyota, thay dàn lạnh điều hòa chính hãng, kiểm tra dàn lạnh điều hòa');
 COMMIT;
