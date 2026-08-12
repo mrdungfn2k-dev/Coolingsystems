@@ -337,9 +337,9 @@ if (!empty($faqItems)) {
             <div style="margin-top:6px;line-height:1.5">
               <?php if(!empty($skuVal) && !empty($oemVal) && $skuVal !== $oemVal): ?>
                 <div style="color:#000;font-size:14px;font-weight:600">Mã SKU: <?= e($skuVal) ?></div>
-                <div style="color:#000;font-size:14px;font-weight:600">Mã OEM: <?= e($oemVal) ?><?= !empty($oem2Val) ? ' / '.e($oem2Val) : '' ?></div>
+                <div style="color:#000;font-size:14px;font-weight:600">Mã OEM: <?= e($oemVal) ?></div>
               <?php elseif(!empty($oemVal)): ?>
-                <div style="color:#000;font-size:14px;font-weight:600">Mã OEM: <?= e($oemVal) ?><?= !empty($oem2Val) ? ' / '.e($oem2Val) : '' ?></div>
+                <div style="color:#000;font-size:14px;font-weight:600">Mã OEM: <?= e($oemVal) ?></div>
               <?php elseif(!empty($skuVal)): ?>
                 <div style="color:#000;font-size:14px;font-weight:600">Mã SKU: <?= e($skuVal) ?></div>
               <?php endif; ?>
