@@ -1,0 +1,25 @@
+-- Brands Seed
+DELETE FROM brands;
+INSERT INTO brands VALUES ('1', 'Hyundai', 'hyundai', '1', '16', 'brand_1785953251.jfif', '1');
+INSERT INTO brands VALUES ('2', 'KIA', 'kia', '2', '8', 'brand_1785954188.jfif', '1');
+INSERT INTO brands VALUES ('3', 'Toyota', 'toyota', '3', '5', 'brand_1785953307.jfif', '1');
+INSERT INTO brands VALUES ('4', 'Mazda', 'mazda', '4', '1', 'brand_1785953333.jfif', '1');
+INSERT INTO brands VALUES ('5', 'Chevrolet', 'chevrolet', '5', '0', 'brand_1785141653.jfif', '1');
+INSERT INTO brands VALUES ('6', 'Daewoo', 'daewoo', '6', '0', 'brand_1785953346.jfif', '1');
+INSERT INTO brands VALUES ('7', 'Honda', 'honda', '7', '4', 'brand_1785953361.jfif', '1');
+INSERT INTO brands VALUES ('8', 'Ford', 'ford', '8', '0', 'brand_1785140518.jfif', '1');
+INSERT INTO brands VALUES ('9', 'Mitsubishi', 'mitsubishi', '9', '0', 'brand_1785140573.png', '1');
+INSERT INTO brands VALUES ('10', 'Nissan', 'nissan', '10', '0', 'brand_1785140759.jfif', '1');
+INSERT INTO brands VALUES ('11', 'Suzuki', 'suzuki', '23', '0', 'brand_1785954150.jfif', '1');
+INSERT INTO brands VALUES ('19', 'MG', 'mg', '11', '0', 'brand_1785140716.jfif', '1');
+INSERT INTO brands VALUES ('20', 'Mercedes-Benz', 'mercedes-benz', '12', '0', 'brand_1785954086.jfif', '1');
+INSERT INTO brands VALUES ('21', 'BMW', 'bmw', '13', '0', 'brand_1785140681.jfif', '1');
+INSERT INTO brands VALUES ('22', 'Audi', 'audi', '14', '0', 'brand_1785953372.avif', '1');
+INSERT INTO brands VALUES ('23', 'Volkswagen', 'volkswagen', '15', '0', 'brand_1785954129.jfif', '1');
+INSERT INTO brands VALUES ('24', 'Porsche', 'porsche', '16', '0', 'brand_1785954109.jfif', '1');
+INSERT INTO brands VALUES ('25', 'Volvo', 'volvo', '17', '0', 'brand_1785954142.jfif', '1');
+INSERT INTO brands VALUES ('26', 'Peugeot', 'peugeot', '18', '0', 'brand_1785954097.jfif', '1');
+INSERT INTO brands VALUES ('27', 'Land Rover', 'land-rover', '19', '0', 'brand_1785953992.jfif', '1');
+INSERT INTO brands VALUES ('28', 'Isuzu', 'isuzu', '20', '0', 'brand_1785140688.png', '1');
+INSERT INTO brands VALUES ('29', 'Subaru', 'subaru', '21', '0', 'brand_1785140815.jfif', '1');
+INSERT INTO brands VALUES ('30', 'Lexus', 'lexus', '22', '0', 'brand_1785954069.jfif', '1');
