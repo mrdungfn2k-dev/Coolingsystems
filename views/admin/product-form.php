@@ -383,8 +383,10 @@ function swTab(t){
                      oninput="runSeoAnalysis()">
               <button type="button" id="btnSuggestKw" onclick="suggestKeywords()" class="btn btn-outline-navy btn-sm" style="white-space:nowrap;height:38px;display:inline-flex;align-items:center;gap:4px;flex-shrink:0">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                Gợi ý từ khóa
-              </button>
+            </div>
+            <div id="kwSuggestions" style="display:none;margin-top:8px;padding:10px 12px;background:#f0f4ff;border-radius:8px;border:1px solid #c7d2fe"></div>
+          </div>
+
           <div class="form-group">
             <label>Từ khóa phụ <span style="font-weight:400;color:#888;font-size:11px">(Secondary Keywords — tên xe, đời xe, dấu hiệu hỏng hóc, cách kiểm tra...)</span></label>
             <div style="display:flex;gap:8px;align-items:center">
