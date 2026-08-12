@@ -1750,22 +1750,20 @@ setTimeout(function() {
       if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
     }
 
-    nameInput.addEventListener('input', syncTitleAndSlugNow);
-    nameInput.addEventListener('change', syncTitleAndSlugNow);
-  });
-
     ['input', 'keyup', 'change', 'paste', 'cut'].forEach(function(evtName) {
-      nameInput.addEventListener(evtName, syncSlugNow);
+      nameInput.addEventListener(evtName, syncTitleAndSlugNow);
     });
 
-    slugInput.addEventListener('input', function() {
-      var autoValue = toVietnameseSlug(nameInput.value);
-      if (this.value.trim() === '' || this.value.trim() === autoValue) {
-        this.dataset.userEdited = '0';
-      } else {
-        this.dataset.userEdited = '1';
-      }
-    });
+    if (slugInput) {
+      slugInput.addEventListener('input', function() {
+        var autoValue = toVietnameseSlug(nameInput.value);
+        if (this.value.trim() === '' || this.value.trim() === autoValue) {
+          this.dataset.userEdited = '0';
+        } else {
+          this.dataset.userEdited = '1';
+        }
+      });
+    }
   });
 })();
 </script>
