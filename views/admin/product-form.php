@@ -366,9 +366,14 @@ function swTab(t){
              Panel này phân tích nội dung bạn đã nhập ở <b>Thông tin cơ bản</b>, <b>Mô tả</b>, <b>Đặc điểm</b>, <b>Thông số kỹ thuật</b> xem đã chuẩn SEO chưa — tương tự Rank Math / Yoast SEO trong WordPress.
           </div>
           <div class="form-group">
-            <label>Tiêu đề Google</label>
-            <input type="text" name="seo_title" id="seoTitle" maxlength="70"
-                   value="<?= e(!empty($product['seo_title']) ? $product['seo_title'] : ($product['meta_title']??'')) ?>" placeholder="Để trống để hệ thống tự tạo">
+            <label style="display:flex;justify-content:space-between;align-items:center">
+              <span>Tiêu đề Google <span style="font-weight:400;color:#888;font-size:11px">(Tự động bắt theo Tên sản phẩm)</span></span>
+              <button type="button" onclick="forceSyncSeoTitleLive()" class="btn btn-link btn-sm" style="padding:0;font-size:11px;color:var(--navy);text-decoration:none">🔄 Đồng bộ Tên sản phẩm</button>
+            </label>
+            <input type="text" name="seo_title" id="seoTitle" maxlength="120"
+                   value="<?= e(!empty($product['seo_title']) ? $product['seo_title'] : ($product['name']??'')) ?>"
+                   placeholder="Tự động bắt theo tên sản phẩm..."
+                   oninput="this.dataset.userEdited='1';runSeoAnalysis()">
           </div>
           <div class="form-group">
             <label>Mô tả Google</label>
@@ -1712,7 +1717,7 @@ setTimeout(function() {
   }
 
   window.forceSyncSlugLive = function() {
-    var nameInput = document.getElementById('productName');
+    var nameInput = document.getElementById('productName') || document.querySelector('input[name="name"]');
     var slugInput = document.getElementById('productSlug');
     if (!nameInput || !slugInput) return;
     slugInput.dataset.userEdited = '0';
@@ -1720,18 +1725,34 @@ setTimeout(function() {
     if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
   };
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var nameInput = document.getElementById('productName');
-    var slugInput = document.getElementById('productSlug');
-    if (!nameInput || !slugInput) return;
+  window.forceSyncSeoTitleLive = function() {
+    var nameInput = document.getElementById('productName') || document.querySelector('input[name="name"]');
+    var seoTitleInput = document.getElementById('seoTitle');
+    if (!nameInput || !seoTitleInput) return;
+    seoTitleInput.dataset.userEdited = '0';
+    seoTitleInput.value = nameInput.value.trim();
+    if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
+  };
 
-    function syncSlugNow() {
-      // If user hasn't typed custom slug OR if slug input is empty
-      if (slugInput.dataset.userEdited !== '1' || !slugInput.value.trim()) {
+  document.addEventListener('DOMContentLoaded', function() {
+    var nameInput = document.getElementById('productName') || document.querySelector('input[name="name"]');
+    var slugInput = document.getElementById('productSlug');
+    var seoTitleInput = document.getElementById('seoTitle');
+    if (!nameInput) return;
+
+    function syncTitleAndSlugNow() {
+      if (slugInput && (slugInput.dataset.userEdited !== '1' || !slugInput.value.trim())) {
         slugInput.value = toVietnameseSlug(nameInput.value);
+      }
+      if (seoTitleInput && (seoTitleInput.dataset.userEdited !== '1' || !seoTitleInput.value.trim())) {
+        seoTitleInput.value = nameInput.value.trim();
       }
       if (typeof runSeoAnalysis === 'function') runSeoAnalysis();
     }
+
+    nameInput.addEventListener('input', syncTitleAndSlugNow);
+    nameInput.addEventListener('change', syncTitleAndSlugNow);
+  });
 
     ['input', 'keyup', 'change', 'paste', 'cut'].forEach(function(evtName) {
       nameInput.addEventListener(evtName, syncSlugNow);
