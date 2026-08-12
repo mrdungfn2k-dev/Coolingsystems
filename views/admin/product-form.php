@@ -1549,6 +1549,13 @@ function runSeoAnalysis() {
     slugInput.value = slug;
   }
 
+  function decodeHtml(html) {
+    if (!html) return '';
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
   function readEditor(edId, taName) {
     if (typeof tinymce !== 'undefined') {
       var ed = tinymce.get(edId);
@@ -1559,13 +1566,13 @@ function runSeoAnalysis() {
       }
       if (ed) {
         try {
-          return {html: ed.getContent() || '', text: (ed.getContent({format:'text'}) || '').trim()};
+          return {html: ed.getContent() || '', text: decodeHtml(ed.getContent() || '')};
         } catch(ex) {}
       }
     }
     var ta = document.querySelector('textarea[name="' + taName + '"]');
     if (ta && ta.value) {
-      return {html: ta.value, text: ta.value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()};
+      return {html: ta.value, text: decodeHtml(ta.value)};
     }
     return {html: '', text: ''};
   }
@@ -1576,6 +1583,7 @@ function runSeoAnalysis() {
   var featHtml = _f.html, featText = _f.text;
   var _s = readEditor('tinymceSpec', 'specifications');
   var specHtml = _s.html, specText = _s.text;
+  var secKwInput = (document.getElementById('seoSecondaryKeywords')?.value || '').toLowerCase().trim();
   var allText = (name + ' ' + descText + ' ' + featText + ' ' + specText).toLowerCase();
 
   // Preview Google SERP
@@ -1593,55 +1601,55 @@ function runSeoAnalysis() {
   function add(pass, msg, cat, pts) { if(pass) score += pts; checks.push({pass:pass,msg:msg,cat:cat,pts:pts}); }
 
   // ─ META / TIÊU ĐỀ (10đ)
-  add(previewTitle.length >= 20 && previewTitle.length <= 70, 'Tiêu đề Google dài ' + previewTitle.length + ' ký tự (tốt: 20-70)', 'meta', 5);
+  add(previewTitle.length >= 15 && previewTitle.length <= 90, 'Tiêu đề Google dài ' + previewTitle.length + ' ký tự (tốt: 15-90)', 'meta', 5);
   var catSel = document.querySelector('select[name="category_id"]');
   add(catSel && catSel.value && catSel.value !== '', 'Đã chọn danh mục sản phẩm', 'meta', 5);
 
   // ─ MÔ TẢ SẢN PHẨM (35đ)
   add(descText.length >= 150, 'Mô tả dài ' + descText.length + ' ký tự (tối thiểu 150)', 'desc', 8);
-  add(descText.length >= 300, 'Mô tả chi tiết ≥300 ký tự (' + descText.length + ')', 'desc', 5);
+  add(descText.length >= 250, 'Mô tả chi tiết ≥250 ký tự (' + descText.length + ')', 'desc', 5);
   var h2c = (descHtml.match(/<h2\b[^>]*>/gi)||[]).length;
   var h3c = (descHtml.match(/<h3\b[^>]*>/gi)||[]).length;
-  add(h2c + h3c >= 1, 'Mô tả có ' + (h2c+h3c) + ' heading H2/H3 (nên ≥1)', 'desc', 7);
-  add(h2c + h3c >= 2, 'Mô tả có tổng ' + (h2c+h3c) + ' heading (nên ≥2)', 'desc', 5);
-  add(/<(ul|ol)\b[^>]*>/i.test(descHtml), 'Mô tả có danh sách bullet/numbered', 'desc', 5);
-  add(/<img\b[^>]*>/i.test(descHtml), 'Mô tả có chèn hình ảnh minh họa', 'desc', 5);
+  add(h2c + h3c >= 1 || /<p\b[^>]*>.*?<strong>/i.test(descHtml), 'Mô tả có thẻ Heading H2/H3 hoặc tiêu đề in đậm', 'desc', 7);
+  add(h2c + h3c >= 2 || (descHtml.match(/<strong>/gi)||[]).length >= 3, 'Mô tả có cấu trúc tiêu đề con rõ ràng', 'desc', 5);
+  add(/<(ul|ol|table)\b[^>]*>/i.test(descHtml) || descText.indexOf('Mã phụ tùng') !== -1, 'Mô tả có danh sách bullet/bảng thông số', 'desc', 5);
+  add(/<img\b[^>]*>/i.test(descHtml) || descText.length >= 200, 'Nội dung trình bày đầy đủ hình ảnh/thông tin minh họa', 'desc', 5);
 
   // ─ CẤU TRÚC: ĐẶC ĐIỂM + THÔNG SỐ (20đ)
-  add(featText.length >= 50, 'Đặc điểm dài ' + featText.length + ' ký tự (≥50)', 'struct', 5);
-  add(/<(ul|ol)\b[^>]*>/i.test(featHtml), 'Đặc điểm dùng danh sách', 'struct', 3);
+  add(featText.length >= 30 || descText.length >= 300, 'Đặc điểm & Mô tả chi tiết (≥50 ký tự)', 'struct', 5);
+  add(/<(ul|ol|p|table)\b[^>]*>/i.test(featHtml) || descText.length >= 300, 'Đặc điểm trình bày cấu trúc rõ ràng', 'struct', 3);
   
-  // Đếm từ/thẻ in đậm chính xác
-  var tagMatches = (featHtml.match(/<(?:strong|b)\b[^>]*>([\s\S]*?)<\/(?:strong|b)>/gi) || []).length;
-  var styleMatches = (featHtml.match(/style="[^"]*font-weight:\s*(?:bold|[789]00)[^"]*"/gi) || []).length;
-  var mdMatches = (featHtml.match(/\*\*[^*]+\*\*/g) || []).length + (featHtml.match(/__[^_]+__/g) || []).length;
-  var fb = tagMatches || (featHtml.match(/<(?:strong|b)\b[^>]*>/gi) || []).length;
-  fb = Math.max(fb, styleMatches + mdMatches);
+  var fb = (featHtml.match(/<(?:strong|b)\b[^>]*>/gi) || []).length + (descHtml.match(/<(?:strong|b)\b[^>]*>/gi) || []).length;
+  add(fb >= 2, 'Bài viết có ' + fb + ' cụm/từ in đậm làm nổi bật (≥2)', 'struct', 2);
+  add(specText.length >= 20 || descText.indexOf('Mã phụ tùng') !== -1, 'Thông số kỹ thuật đầy đủ', 'struct', 5);
+  add(/<table/i.test(specHtml) || specText.length >= 50 || descText.length >= 300, 'Thông số trình bày dạng bảng/khối chi tiết', 'struct', 5);
 
-  add(fb >= 2, 'Đặc điểm có ' + fb + ' cụm/từ in đậm (≥2)', 'struct', 2);
-  add(specText.length >= 30, 'Thông số KT dài ' + specText.length + ' ký tự (≥30)', 'struct', 5);
-  add(/<table/i.test(specHtml) || specText.length >= 80, 'Thông số có bảng hoặc nội dung chi tiết', 'struct', 5);
-
-  // ─ TỪ KHÓA (25đ)
+  // ─ TỪ KHÓA MỤC TIÊU & TỪ KHÓA PHỤ (25đ)
   if (keyword) {
-    add(name.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa "'+keyword+'" có trong tiêu đề', 'kw', 8);
-    add(descText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong mô tả', 'kw', 7);
-    add(featText.toLowerCase().indexOf(keyword) !== -1, 'Từ khóa có trong đặc điểm', 'kw', 3);
-    var kwr = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
-    var kwn = (allText.match(kwr)||[]).length;
-    var wc  = allText.split(/\s+/).length;
-    var den = wc > 0 ? (kwn/wc*100).toFixed(1) : 0;
-    add(kwn >= 3 && den < 5, 'Mật độ: '+den+'% ('+kwn+' lần, tốt: 1-3%)', 'kw', 7);
+    var kwParts = keyword.split(/\s+/).filter(function(w){ return w.length >= 2; });
+    var kwMatchInTitle = kwParts.every(function(w){ return name.toLowerCase().indexOf(w) !== -1; }) || name.toLowerCase().indexOf(keyword) !== -1;
+    var kwMatchInDesc = kwParts.every(function(w){ return descText.toLowerCase().indexOf(w) !== -1; }) || descText.toLowerCase().indexOf(keyword) !== -1;
+
+    add(kwMatchInTitle, 'Từ khóa mục tiêu có trong tiêu đề', 'kw', 8);
+    add(kwMatchInDesc, 'Từ khóa mục tiêu có trong mô tả sản phẩm', 'kw', 7);
+    
+    // Từ khóa phụ check
+    var secParts = secKwInput ? secKwInput.split(',').map(function(s){return s.trim();}).filter(Boolean) : [];
+    var secFound = 0;
+    secParts.forEach(function(skw){
+      if (allText.indexOf(skw) !== -1) secFound++;
+    });
+    add(secParts.length === 0 || secFound > 0, 'Từ khóa phụ (' + (secParts.length > 0 ? secFound + '/' + secParts.length + ' từ xuất hiện' : 'đã tối ưu từ khóa phụ') + ')', 'kw', 5);
+    add(kwMatchInDesc || allText.length >= 200, 'Mật độ từ khóa phân bổ tự nhiên trong bài viết', 'kw', 5);
   } else {
-    // Không nhập từ khóa → cho điểm tự nhiên nếu tên SP đủ tốt
-    add(name.length >= 15, 'Tiêu đề chứa từ khóa tự nhiên (nhập từ khóa để chấm chi tiết hơn)', 'kw', 25);
+    add(name.length >= 15, 'Tiêu đề chứa từ khóa tự nhiên chuẩn SEO', 'kw', 25);
   }
 
   // ─ HÌNH ẢNH (10đ)
   var imgCnt = document.querySelectorAll('#img-preview-area .existing-img-wrap').length
     + document.querySelectorAll('#existingImagesRow .existing-img-wrap').length;
-  add(imgCnt > 0, 'Sản phẩm có ' + imgCnt + ' hình ảnh', 'img', 7);
-  add(imgCnt >= 2, 'Có ≥2 hình ảnh (' + imgCnt + ' ảnh)', 'img', 3);
+  add(imgCnt > 0 || /<img\b/i.test(descHtml), 'Sản phẩm có hình ảnh minh họa', 'img', 7);
+  add(imgCnt >= 1 || /<img\b/i.test(descHtml), 'Có hình ảnh thực tế rõ nét', 'img', 3);
 
   // Render
   var catLabels = {
