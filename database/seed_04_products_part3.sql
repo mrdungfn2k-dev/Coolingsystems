@@ -1,529 +1,4 @@
 BEGIN TRANSACTION;
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6610, 1, '1250236010-V2', '1250236010', '', 22, 'Giá bắt lốc điều hòa Toyota Camry 2012-2015', 'gia-bat-loc-dieu-hoa-toyota-camry-2012-2015', '<h2>Tổng quan về Gi&aacute; bắt lốc điều h&ograve;a Toyota Camry 2012-2015</h2>
-<p>Sản phẩm <strong>Gi&aacute; bắt lốc điều h&ograve;a Toyota Camry 2012-2015</strong> (M&atilde; OEM: <strong>1250236010</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&aacute; bắt lốc điều h&ograve;a Toyota Camry 2012-2015</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:06', '2026-08-06 17:26:53', NULL, NULL, 'giá bắt lốc điều hòa toyota camry 2012-2015', NULL, 'gia-bat-loc-dieu-hoa-toyota-camry-2012-2015-1250236010-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1250236010 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1250236010</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giá bắt lốc điều hòa Toyota Camry 2012-2015</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, 'Giá bắt lốc điều hòa Toyota Camry 2012-2015 chính hãng', 'Mua Giá bắt lốc điều hòa Toyota Camry 2012-2015 mã OEM 1250236010 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6611, 1, '1250236010-V3', '1250236010', '', 22, 'Giá bắt lốc điều hòa Toyota Camry 2019-2021', 'gia-bat-loc-dieu-hoa-toyota-camry-2019-2021', '<h2>Tổng quan về Gi&aacute; bắt lốc điều h&ograve;a Toyota Camry 2019-2021</h2>
-<p>Sản phẩm <strong>Gi&aacute; bắt lốc điều h&ograve;a Toyota Camry 2019-2021</strong> (M&atilde; OEM: <strong>1250236010</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&aacute; bắt lốc điều h&ograve;a Toyota Camry 2019-2021</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:08', '2026-08-06 17:26:23', NULL, NULL, 'giá bắt lốc điều hòa toyota camry 2019-2021', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1250236010 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>1250236010</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giá bắt lốc điều hòa Toyota Camry 2019-2021</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 3, 0, 0, 0, 0, 'Giá bắt lốc điều hòa Toyota Camry 2019-2021 chính hãng', 'Mua Giá bắt lốc điều hòa Toyota Camry 2019-2021 mã OEM 1250236010 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6612, 1, '13262987-V1', '13262987', '', 22, 'Bộ puly lốc điều hòa Chevrolet Cruze 2015-2016', 'bo-puly-loc-dieu-hoa-chevrolet-cruze-2015-2016', '<h2>Tổng quan về Bộ puly lốc điều h&ograve;a Chevrolet Cruze 2015-2016</h2>
-<p>Sản phẩm <strong>Bộ puly lốc điều h&ograve;a Chevrolet Cruze 2015-2016</strong> (M&atilde; OEM: <strong>13262987</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Bộ puly lốc điều h&ograve;a Chevrolet Cruze 2015-2016</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:10', '2026-08-06 17:22:26', NULL, NULL, 'bộ puly lốc điều hòa chevrolet cruze 2015-2016', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13262987 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13262987</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Bộ puly lốc điều hòa Chevrolet Cruze 2015-2016</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Bộ puly lốc điều hòa Chevrolet Cruze 2015-2016 chính hãng', 'Mua Bộ puly lốc điều hòa Chevrolet Cruze 2015-2016 mã OEM 13262987 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6613, 1, '13262987-V2', '13262987', '', 22, 'Bộ puly lốc điều hòa Chevrolet Cruze 2009-2012', 'bo-puly-loc-dieu-hoa-chevrolet-cruze-2009-2012', '<h2>Tổng quan về Bộ puly lốc điều h&ograve;a Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>Bộ puly lốc điều h&ograve;a Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13262987</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Bộ puly lốc điều h&ograve;a Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:11', '2026-08-06 17:21:57', NULL, NULL, 'bộ puly lốc điều hòa chevrolet cruze 2009-2012', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13262987 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13262987</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Bộ puly lốc điều hòa Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Bộ puly lốc điều hòa Chevrolet Cruze 2009-2012 chính hãng', 'Mua Bộ puly lốc điều hòa Chevrolet Cruze 2009-2012 mã OEM 13262987 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6614, 1, '13262987-V3', '13262987', '', 22, 'Bộ puly lốc điều hòa Daewoo Lacetti 2009-2011', 'bo-puly-loc-dieu-hoa-daewoo-lacetti-2009-2011', '<h2>Tổng quan về Bộ puly lốc điều h&ograve;a Daewoo Lacetti 2009-2011</h2>
-<p>Sản phẩm <strong>Bộ puly lốc điều h&ograve;a Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13262987</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/bo-puly-loc-dieu-hoa-daewoo-lacetti-2009-2011-13262987-main.jpg" alt="Bộ puly lốc điều h&ograve;a Daewoo Lacetti 2009-2011"></p>
-<h2>Ưu điểm nổi bật của Bộ puly lốc điều h&ograve;a Daewoo Lacetti 2009-2011</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:12', '2026-08-06 17:21:23', NULL, NULL, 'bộ puly lốc điều hòa daewoo lacetti 2009-2011', NULL, 'bo-puly-loc-dieu-hoa-daewoo-lacetti-2009-2011-13262987-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13262987 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13262987</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Bộ puly lốc điều hòa Daewoo Lacetti 2009-2011</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 6, 0, 0, 0, 0, 'Bộ puly lốc điều hòa Daewoo Lacetti 2009-2011 chính hãng', 'Mua Bộ puly lốc điều hòa Daewoo Lacetti 2009-2011 mã OEM 13262987 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6615, 1, '13263325-V1', '13263325', '', 46, 'Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012', 'cam-bien-ngat-lanh-chevrolet-cruze-2009-2012-2', '<h2>Tổng quan về Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13263325</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:15', '2026-08-06 17:20:10', NULL, NULL, 'cảm biến ngắt lạnh chevrolet cruze 2009-2012', NULL, 'cam-bien-ngat-lanh-chevrolet-cruze-2009-2012-13263325-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263325 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263325</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012 chính hãng', 'Mua Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012 mã OEM 13263325 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6616, 1, '13263325-V2', '13263325', '', 46, 'Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011', 'cam-bien-ngat-lanh-daewoo-lacetti-2009-2011-2', '<h2>Tổng quan về Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</h2>
-<p>Sản phẩm <strong>Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13263325</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cam-bien-ngat-lanh-daewoo-lacetti-2009-2011-13263325-main.jpg" alt="Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011"></p>
-<h2>Ưu điểm nổi bật của Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:19', '2026-08-06 17:19:47', NULL, NULL, 'cảm biến ngắt lạnh daewoo lacetti 2009-2011', NULL, 'cam-bien-ngat-lanh-daewoo-lacetti-2009-2011-13263325-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263325 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263325</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 6, 0, 0, 0, 0, 'Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011 chính hãng', 'Mua Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011 mã OEM 13263325 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6617, 1, '13263325-V3', '13263325', '', 46, 'Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016', 'cam-bien-ngat-lanh-chevrolet-cruze-2015-2016-2', '<h2>Tổng quan về Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</h2>
-<p>Sản phẩm <strong>Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</strong> (M&atilde; OEM: <strong>13263325</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;"><img style="max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0;" src="../../../public/uploads/products/cam-bien-ngat-lanh-chevrolet-cruze-2015-2016-13263325-main.jpg" alt="Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016"></p>
-<h2>Ưu điểm nổi bật của Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:22', '2026-08-06 17:19:25', NULL, NULL, 'cảm biến ngắt lạnh chevrolet cruze 2015-2016', NULL, 'cam-bien-ngat-lanh-chevrolet-cruze-2015-2016-13263325-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263325 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263325</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016 chính hãng', 'Mua Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016 mã OEM 13263325 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6618, 1, '13263325-01-V1', '13263325-01', '', 46, 'Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012', 'cam-bien-ngat-lanh-chevrolet-cruze-2009-2012', '<h2>Tổng quan về Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13263325-01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:28', '2026-08-06 17:19:06', NULL, NULL, 'cảm biến ngắt lạnh chevrolet cruze 2009-2012', NULL, 'cam-bien-ngat-lanh-chevrolet-cruze-2009-2012-13263325-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263325-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263325-01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012 chính hãng', 'Mua Cảm biến ngắt lạnh Chevrolet Cruze 2009-2012 mã OEM 13263325-01 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6619, 1, '13263325-01-V2', '13263325-01', '', 46, 'Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011', 'cam-bien-ngat-lanh-daewoo-lacetti-2009-2011', '<h2>Tổng quan về Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</h2>
-<p>Sản phẩm <strong>Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13263325-01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:32', '2026-08-06 17:18:20', NULL, NULL, 'cảm biến ngắt lạnh daewoo lacetti 2009-2011', NULL, 'cam-bien-ngat-lanh-daewoo-lacetti-2009-2011-13263325-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263325-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263325-01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 6, 0, 0, 0, 0, 'Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011 chính hãng', 'Mua Cảm biến ngắt lạnh Daewoo Lacetti 2009-2011 mã OEM 13263325-01 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6620, 1, '13263325-01-V3', '13263325-01', '', 46, 'Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016', 'cam-bien-ngat-lanh-chevrolet-cruze-2015-2016', '<h2>Tổng quan về Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</h2>
-<p>Sản phẩm <strong>Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</strong> (M&atilde; OEM: <strong>13263325-01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:36', '2026-08-06 17:17:43', NULL, NULL, 'cảm biến ngắt lạnh chevrolet cruze 2015-2016', NULL, 'cam-bien-ngat-lanh-chevrolet-cruze-2015-2016-13263325-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263325-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263325-01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016 chính hãng', 'Mua Cảm biến ngắt lạnh Chevrolet Cruze 2015-2016 mã OEM 13263325-01 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6621, 1, '13263326-V1', '13263326', '', 46, 'Giàn lạnh Chevrolet Cruze 2009-2012', 'gian-lanh-chevrolet-cruze-2009-2012-4', '<h2>Tổng quan về Gi&agrave;n lạnh Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>Gi&agrave;n lạnh Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13263326</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n lạnh Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:41', '2026-08-06 17:15:19', NULL, NULL, 'giàn lạnh chevrolet cruze 2009-2012', NULL, 'gian-lanh-chevrolet-cruze-2009-2012-13263326-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263326 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263326</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Giàn lạnh Chevrolet Cruze 2009-2012 chính hãng', 'Mua Giàn lạnh Chevrolet Cruze 2009-2012 mã OEM 13263326 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6622, 1, '13263326-V2', '13263326', '', 46, 'Giàn lạnh Daewoo Lacetti 2009-2011', 'gian-lanh-daewoo-lacetti-2009-2011-4', '<h2>Tổng quan về Gi&agrave;n lạnh Daewoo Lacetti 2009-2011</h2>
-<p>Sản phẩm <strong>Gi&agrave;n lạnh Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13263326</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n lạnh Daewoo Lacetti 2009-2011</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:45', '2026-08-06 17:14:54', NULL, NULL, 'giàn lạnh daewoo lacetti 2009-2011', NULL, 'gian-lanh-daewoo-lacetti-2009-2011-13263326-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263326 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263326</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Daewoo Lacetti 2009-2011</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 6, 0, 0, 0, 0, 'Giàn lạnh Daewoo Lacetti 2009-2011 chính hãng', 'Mua Giàn lạnh Daewoo Lacetti 2009-2011 mã OEM 13263326 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6623, 1, '13263326-V3', '13263326', '', 46, 'Giàn lạnh Chevrolet Cruze 2015-2016', 'gian-lanh-chevrolet-cruze-2015-2016-4', '<h2>Tổng quan về Gi&agrave;n lạnh Chevrolet Cruze 2015-2016</h2>
-<p>Sản phẩm <strong>Gi&agrave;n lạnh Chevrolet Cruze 2015-2016</strong> (M&atilde; OEM: <strong>13263326</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n lạnh Chevrolet Cruze 2015-2016</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:50', '2026-08-06 17:14:29', NULL, NULL, 'giàn lạnh chevrolet cruze 2015-2016', NULL, 'gian-lanh-chevrolet-cruze-2015-2016-13263326-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263326 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263326</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Chevrolet Cruze 2015-2016</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Giàn lạnh Chevrolet Cruze 2015-2016 chính hãng', 'Mua Giàn lạnh Chevrolet Cruze 2015-2016 mã OEM 13263326 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6624, 1, '13263326-01-V1', '13263326-01', '', 46, 'Giàn lạnh Chevrolet Cruze 2009-2012', 'gian-lanh-chevrolet-cruze-2009-2012-3', '<h2>Tổng quan về Gi&agrave;n lạnh Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>Gi&agrave;n lạnh Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13263326-01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n lạnh Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:11:57', '2026-08-06 17:14:03', NULL, NULL, 'giàn lạnh chevrolet cruze 2009-2012', NULL, 'gian-lanh-chevrolet-cruze-2009-2012-13263326-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263326-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263326-01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Giàn lạnh Chevrolet Cruze 2009-2012 chính hãng', 'Mua Giàn lạnh Chevrolet Cruze 2009-2012 mã OEM 13263326-01 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6625, 1, '13263326-01-V2', '13263326-01', '', 46, 'Giàn lạnh Daewoo Lacetti 2009-2011', 'gian-lanh-daewoo-lacetti-2009-2011-3', '<h2>Tổng quan về Gi&agrave;n lạnh Daewoo Lacetti 2009-2011</h2>
-<p>Sản phẩm <strong>Gi&agrave;n lạnh Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13263326-01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n lạnh Daewoo Lacetti 2009-2011</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:00', '2026-08-06 17:13:41', NULL, NULL, 'giàn lạnh daewoo lacetti 2009-2011', NULL, 'gian-lanh-daewoo-lacetti-2009-2011-13263326-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263326-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263326-01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Daewoo Lacetti 2009-2011</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 6, 0, 0, 0, 0, 'Giàn lạnh Daewoo Lacetti 2009-2011 chính hãng', 'Mua Giàn lạnh Daewoo Lacetti 2009-2011 mã OEM 13263326-01 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6626, 1, '13263326-01-V3', '13263326-01', '', 46, 'Giàn lạnh Chevrolet Cruze 2015-2016', 'gian-lanh-chevrolet-cruze-2015-2016-3', '<h2>Tổng quan về Gi&agrave;n lạnh Chevrolet Cruze 2015-2016</h2>
-<p>Sản phẩm <strong>Gi&agrave;n lạnh Chevrolet Cruze 2015-2016</strong> (M&atilde; OEM: <strong>13263326-01</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n lạnh Chevrolet Cruze 2015-2016</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:04', '2026-08-06 17:13:08', NULL, NULL, 'giàn lạnh chevrolet cruze 2015-2016', NULL, 'gian-lanh-chevrolet-cruze-2015-2016-13263326-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263326-01 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263326-01</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Chevrolet Cruze 2015-2016</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Giàn lạnh Chevrolet Cruze 2015-2016 chính hãng', 'Mua Giàn lạnh Chevrolet Cruze 2015-2016 mã OEM 13263326-01 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6627, 1, '13263329-V1', '13263329', '', 21, 'Giàn sưởi trong xe Chevrolet Cruze 2009-2012', 'gian-suoi-trong-xe-chevrolet-cruze-2009-2012', '<h2>Tổng quan về Gi&agrave;n sưởi trong xe Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>Gi&agrave;n sưởi trong xe Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13263329</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n sưởi trong xe Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:07', '2026-08-06 17:12:45', NULL, NULL, 'giàn sưởi trong xe chevrolet cruze 2009-2012', NULL, 'gian-suoi-trong-xe-chevrolet-cruze-2009-2012-13263329-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263329 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263329</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn sưởi trong xe Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Giàn sưởi trong xe Chevrolet Cruze 2009-2012 chính hãng', 'Mua Giàn sưởi trong xe Chevrolet Cruze 2009-2012 mã OEM 13263329 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6628, 1, '13263329-V2', '13263329', '', 21, 'Giàn sưởi trong xe Daewoo Lacetti 2009-2011', 'gian-suoi-trong-xe-daewoo-lacetti-2009-2011', '<h2>Tổng quan về Gi&agrave;n sưởi trong xe Daewoo Lacetti 2009-2011</h2>
-<p>Sản phẩm <strong>Gi&agrave;n sưởi trong xe Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13263329</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n sưởi trong xe Daewoo Lacetti 2009-2011</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:11', '2026-08-06 17:12:21', NULL, NULL, 'giàn sưởi trong xe daewoo lacetti 2009-2011', NULL, 'gian-suoi-trong-xe-daewoo-lacetti-2009-2011-13263329-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263329 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263329</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn sưởi trong xe Daewoo Lacetti 2009-2011</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 6, 0, 0, 0, 0, 'Giàn sưởi trong xe Daewoo Lacetti 2009-2011 chính hãng', 'Mua Giàn sưởi trong xe Daewoo Lacetti 2009-2011 mã OEM 13263329 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6629, 1, '13263329-V3', '13263329', '', 21, 'Giàn sưởi trong xe Chevrolet Cruze 2015-2016', 'gian-suoi-trong-xe-chevrolet-cruze-2015-2016', '<h2>Tổng quan về Gi&agrave;n sưởi trong xe Chevrolet Cruze 2015-2016</h2>
-<p>Sản phẩm <strong>Gi&agrave;n sưởi trong xe Chevrolet Cruze 2015-2016</strong> (M&atilde; OEM: <strong>13263329</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của Gi&agrave;n sưởi trong xe Chevrolet Cruze 2015-2016</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:15', '2026-08-06 17:11:57', NULL, NULL, 'giàn sưởi trong xe chevrolet cruze 2015-2016', NULL, 'gian-suoi-trong-xe-chevrolet-cruze-2015-2016-13263329-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13263329 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13263329</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn sưởi trong xe Chevrolet Cruze 2015-2016</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Giàn sưởi trong xe Chevrolet Cruze 2015-2016 chính hãng', 'Mua Giàn sưởi trong xe Chevrolet Cruze 2015-2016 mã OEM 13263329 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
-INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6630, 1, '13267648-V1', '13267648', 'DENSO', 43, 'Dàn nóng Chevrolet Cruze 2009-2012', 'dan-nong-chevrolet-cruze-2009-2012-5', '<h2>Tổng quan về D&agrave;n n&oacute;ng Chevrolet Cruze 2009-2012</h2>
-<p>Sản phẩm <strong>D&agrave;n n&oacute;ng Chevrolet Cruze 2009-2012</strong> (M&atilde; OEM: <strong>13267648</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
-<p style="text-align: center;">&nbsp;</p>
-<h2>Ưu điểm nổi bật của D&agrave;n n&oacute;ng Chevrolet Cruze 2009-2012</h2>
-<ul>
-<li><strong>Chất lượng ch&iacute;nh h&atilde;ng:</strong> Sản xuất tr&ecirc;n d&acirc;y chuyền c&ocirc;ng nghệ hiện đại, đ&aacute;p ứng chuẩn x&aacute;c th&ocirc;ng số kỹ thuật nguy&ecirc;n bản.</li>
-<li><strong>Độ bền vượt trội:</strong> Khả năng chịu nhiệt, chịu &aacute;p suất cao v&agrave; chống ăn m&ograve;n tối đa trong qu&aacute; tr&igrave;nh vận h&agrave;nh.</li>
-<li><strong>Lắp đặt chuẩn zin:</strong> Thiết kế chuẩn k&iacute;ch thước ban đầu, thay thế v&agrave; lắp đặt nhanh ch&oacute;ng, tiết kiệm thời gian.</li>
-</ul>
-<div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 20px 0; border: 1px solid #e2e8f0;">
-<p style="color: #1e3a8a; font-weight: bold; margin: 0 0 10px 0; font-size: 15px;">Cooling Systems- Chuỗi Dịch vụ &amp; Phụ t&ugrave;ng Điều H&ograve;a &Ocirc; T&ocirc; Chuy&ecirc;n Nghiệp.</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
-<p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
-<p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:19', '2026-08-06 17:09:11', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
-  <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
-  <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648 cho các dòng xe tương ứng.</li>
-  <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
-</ul>', '<table class="table-striped">
-  <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
-  <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>13267648</td></tr>
-  <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Cruze 2009-2012</td></tr>
-  <tr><td><strong>Xuất xứ</strong></td><td>Chính hãng</td></tr>
-  <tr><td><strong>Tình trạng</strong></td><td>Mới 100%</td></tr>
-</table>', 5, 0, 0, 0, 0, 'Dàn nóng Chevrolet Cruze 2009-2012 chính hãng', 'Mua Dàn nóng Chevrolet Cruze 2009-2012 mã OEM 13267648 chính hãng tại Cooling Systems. Bảo hành 12 tháng, giao hàng toàn quốc. Hotline: 0705 0705 526.', '', '', 0, 0, NULL, 1, 1, 0);
 INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "category_id", "name", "slug", "description", "short_specs", "price", "original_price", "stock", "reserved_stock", "weight_g", "width_cm", "height_cm", "depth_cm", "status", "reject_reason", "is_admin_created", "is_featured", "is_hot", "is_new", "sold_count", "view_count", "rating_avg", "rating_count", "warranty_months", "approved_by", "approved_at", "published_at", "created_at", "updated_at", "meta_title", "meta_description", "focus_keyword", "canonical_url", "og_image", "is_indexed", "price_before_tax", "tax_amount", "vat_rate", "oem_code2", "min_stock", "max_stock", "features", "specifications", "car_brand_id", "sale_price", "is_on_sale", "show_on_home", "show_on_promo", "seo_title", "seo_description", "seo_keyword", "video_url", "cost_price", "total_import_value", "location_code", "is_call_price", "is_active", "wholesale_price") VALUES (6631, 1, '13267648-V2', '13267648', 'DENSO', 43, 'Dàn nóng Daewoo Lacetti 2009-2011', 'dan-nong-daewoo-lacetti-2009-2011-7', '<h2>Tổng quan về D&agrave;n n&oacute;ng Daewoo Lacetti 2009-2011</h2>
 <p>Sản phẩm <strong>D&agrave;n n&oacute;ng Daewoo Lacetti 2009-2011</strong> (M&atilde; OEM: <strong>13267648</strong>) l&agrave; phụ t&ugrave;ng thuộc hệ thống l&agrave;m m&aacute;t v&agrave; điện lạnh &ocirc; t&ocirc; cao cấp. Đạt ti&ecirc;u chuẩn chất lượng khắt khe từ nh&agrave; sản xuất, sản phẩm mang lại khả năng vận h&agrave;nh bền bỉ, mượt m&agrave; v&agrave; tối ưu hiệu suất cho xe của bạn.</p>
 <p style="text-align: center;">&nbsp;</p>
@@ -538,7 +13,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:23', '2026-08-06 17:08:47', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:23', '2026-08-06 17:08:47', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -588,7 +63,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:34', '2026-08-06 17:07:57', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:34', '2026-08-06 17:07:57', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -613,7 +88,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:38', '2026-08-06 17:07:29', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:38', '2026-08-06 17:07:29', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -638,7 +113,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:40', '2026-08-06 17:07:05', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13267648-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:40', '2026-08-06 17:07:05', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13267648-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -663,7 +138,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:44', '2026-08-06 17:06:42', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-hanon-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:44', '2026-08-06 17:06:42', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13267648-hanon-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-HANON cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -688,7 +163,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:48', '2026-08-06 17:06:15', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-hanon-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:12:48', '2026-08-06 17:06:15', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13267648-hanon-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13267648-HANON cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -863,7 +338,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:13', '2026-08-06 17:01:42', NULL, NULL, 'giàn lạnh chevrolet cruze 2009-2012', NULL, 'gian-lanh-chevrolet-cruze-2009-2012-13339086-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:13', '2026-08-06 17:01:42', NULL, NULL, 'giàn lạnh chevrolet cruze 2009-2012', NULL, 'gian-lanh-chevrolet-cruze-2009-2012-13339086-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13339086 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -913,7 +388,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:15', '2026-08-06 17:00:33', NULL, NULL, 'giàn lạnh chevrolet cruze 2015-2016', NULL, 'gian-lanh-chevrolet-cruze-2015-2016-13339086-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:15', '2026-08-06 17:00:33', NULL, NULL, 'giàn lạnh chevrolet cruze 2015-2016', NULL, 'gian-lanh-chevrolet-cruze-2015-2016-13339086-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13339086 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -938,7 +413,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:16', '2026-08-06 16:59:40', NULL, NULL, 'giàn lạnh chevrolet cruze 2009-2012', NULL, 'gian-lanh-chevrolet-cruze-2009-2012-13363450-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:16', '2026-08-06 16:59:40', NULL, NULL, 'giàn lạnh chevrolet cruze 2009-2012', NULL, 'gian-lanh-chevrolet-cruze-2009-2012-13363450-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13363450 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -963,7 +438,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:20', '2026-08-06 16:59:10', NULL, NULL, 'giàn lạnh daewoo lacetti 2009-2011', NULL, 'gian-lanh-daewoo-lacetti-2009-2011-13363450-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:20', '2026-08-06 16:59:10', NULL, NULL, 'giàn lạnh daewoo lacetti 2009-2011', NULL, 'gian-lanh-daewoo-lacetti-2009-2011-13363450-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13363450 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -988,7 +463,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:23', '2026-08-06 16:58:38', NULL, NULL, 'giàn lạnh chevrolet cruze 2015-2016', NULL, 'gian-lanh-chevrolet-cruze-2015-2016-13363450-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:23', '2026-08-06 16:58:38', NULL, NULL, 'giàn lạnh chevrolet cruze 2015-2016', NULL, 'gian-lanh-chevrolet-cruze-2015-2016-13363450-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13363450 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1013,7 +488,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:27', '2026-08-06 16:57:31', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13377762-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:27', '2026-08-06 16:57:31', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-chevrolet-cruze-2009-2012-13377762-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13377762 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1038,7 +513,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:30', '2026-08-06 16:57:08', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13377762-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:30', '2026-08-06 16:57:08', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13377762-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13377762 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1063,7 +538,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:34', '2026-08-06 16:56:48', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13377762-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:34', '2026-08-06 16:56:48', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13377762-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13377762 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1088,7 +563,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:39', '2026-08-06 16:56:25', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13377763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:39', '2026-08-06 16:56:25', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-daewoo-lacetti-2009-2011-13377763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13377763 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1113,7 +588,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:42', '2026-08-06 16:55:53', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13377763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:42', '2026-08-06 16:55:53', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13377763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13377763 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1163,7 +638,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:51', '2026-08-06 16:54:44', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13377763-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:51', '2026-08-06 16:54:44', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-chevrolet-orlando-2011-2014-13377763-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 13377763-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1188,7 +663,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:56', '2026-08-06 16:53:44', NULL, NULL, 'quạt gió điều hòa trong xe byd sealion 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:56', '2026-08-06 16:53:44', NULL, NULL, 'quạt gió điều hòa trong xe byd sealion 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1345307800 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1213,7 +688,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:57', '2026-08-06 16:53:17', NULL, NULL, 'quạt gió điều hòa trong xe byd dolphin 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:57', '2026-08-06 16:53:17', NULL, NULL, 'quạt gió điều hòa trong xe byd dolphin 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1345307800 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1238,7 +713,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:58', '2026-08-06 16:52:43', NULL, NULL, 'quạt gió điều hòa trong xe byd han 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:13:58', '2026-08-06 16:52:43', NULL, NULL, 'quạt gió điều hòa trong xe byd han 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1345307800 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1263,7 +738,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:00', '2026-08-06 16:52:18', NULL, NULL, 'giàn lạnh byd sealion 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:00', '2026-08-06 16:52:18', NULL, NULL, 'giàn lạnh byd sealion 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1350643500 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1288,7 +763,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:02', '2026-08-06 16:51:36', NULL, NULL, 'giàn lạnh byd han 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:02', '2026-08-06 16:51:36', NULL, NULL, 'giàn lạnh byd han 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1350643500 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1313,7 +788,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:04', '2026-08-06 16:49:54', NULL, NULL, 'giàn lạnh byd sealion 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:04', '2026-08-06 16:49:54', NULL, NULL, 'giàn lạnh byd sealion 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1357444600 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1363,7 +838,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:07', '2026-08-06 16:48:43', NULL, NULL, 'quạt gió điều hòa trong xe byd m6 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:07', '2026-08-06 16:48:43', NULL, NULL, 'quạt gió điều hòa trong xe byd m6 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1431300000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1388,7 +863,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:09', '2026-08-06 16:37:03', NULL, NULL, 'quạt gió điều hòa trong xe byd sealion 8 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:09', '2026-08-06 16:37:03', NULL, NULL, 'quạt gió điều hòa trong xe byd sealion 8 2024-2025', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1431300000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1413,7 +888,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:11', '2026-08-06 16:36:14', NULL, NULL, 'quạt gió điều hòa trong xe byd seal 5 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:11', '2026-08-06 16:36:14', NULL, NULL, 'quạt gió điều hòa trong xe byd seal 5 2025-2026', NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1431300000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1438,7 +913,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:13', '2026-08-06 16:34:48', NULL, NULL, 'lốc điều hòa mercedes-benz glc250 2015-2019', NULL, 'loc-dieu-hoa-mercedes-benz-glc250-2015-2019-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:13', '2026-08-06 16:34:48', NULL, NULL, 'lốc điều hòa mercedes-benz glc250 2015-2019', NULL, 'loc-dieu-hoa-mercedes-benz-glc250-2015-2019-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1785N cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1463,7 +938,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:17', '2026-08-06 16:34:09', NULL, NULL, 'lốc điều hòa mercedes-benz e200 facelift 2015', NULL, 'loc-dieu-hoa-mercedes-benz-e200-facelift-2015-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:17', '2026-08-06 16:34:09', NULL, NULL, 'lốc điều hòa mercedes-benz e200 facelift 2015', NULL, 'loc-dieu-hoa-mercedes-benz-e200-facelift-2015-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1785N cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1488,7 +963,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:20', '2026-08-06 16:33:21', NULL, NULL, 'lốc điều hòa mercedes-benz e300 2016-2020', NULL, 'loc-dieu-hoa-mercedes-benz-e300-2016-2020-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:20', '2026-08-06 16:33:21', NULL, NULL, 'lốc điều hòa mercedes-benz e300 2016-2020', NULL, 'loc-dieu-hoa-mercedes-benz-e300-2016-2020-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1785N cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1513,7 +988,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:24', '2026-08-06 16:31:32', NULL, NULL, 'lốc điều hòa mercedes-benz glc200 2015-2019', NULL, 'loc-dieu-hoa-mercedes-benz-glc200-2015-2019-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:24', '2026-08-06 16:31:32', NULL, NULL, 'lốc điều hòa mercedes-benz glc200 2015-2019', NULL, 'loc-dieu-hoa-mercedes-benz-glc200-2015-2019-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1785N cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1555,7 +1030,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:27', '2026-08-06 16:30:45', NULL, NULL, 'lốc điều hòa mercedes-benz glc 2023-2025', NULL, 'loc-dieu-hoa-mercedes-benz-glc-2023-2025-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:27', '2026-08-06 16:30:45', NULL, NULL, 'lốc điều hòa mercedes-benz glc 2023-2025', NULL, 'loc-dieu-hoa-mercedes-benz-glc-2023-2025-1785n-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1785N cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1630,7 +1105,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:39', '2026-08-06 16:20:37', NULL, NULL, 'lốc điều hòa ford ranger 2015', NULL, 'loc-dieu-hoa-ford-ranger-2015-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:39', '2026-08-06 16:20:37', NULL, NULL, 'lốc điều hòa ford ranger 2015', NULL, 'loc-dieu-hoa-ford-ranger-2015-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1655,7 +1130,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:42', '2026-08-06 16:20:02', NULL, NULL, 'lốc điều hòa ford ranger 2013-2015', NULL, 'loc-dieu-hoa-ford-ranger-2013-2015-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:42', '2026-08-06 16:20:02', NULL, NULL, 'lốc điều hòa ford ranger 2013-2015', NULL, 'loc-dieu-hoa-ford-ranger-2013-2015-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1705,7 +1180,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:48', '2026-08-06 16:18:30', NULL, NULL, 'lốc điều hòa mazda bt-50 2016-2018', NULL, 'loc-dieu-hoa-mazda-bt-50-2016-2018-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:48', '2026-08-06 16:18:30', NULL, NULL, 'lốc điều hòa mazda bt-50 2016-2018', NULL, 'loc-dieu-hoa-mazda-bt-50-2016-2018-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1730,7 +1205,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:51', '2026-08-06 16:18:09', NULL, NULL, 'lốc điều hòa ford ranger 2016-2018', NULL, 'loc-dieu-hoa-ford-ranger-2016-2018-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:51', '2026-08-06 16:18:09', NULL, NULL, 'lốc điều hòa ford ranger 2016-2018', NULL, 'loc-dieu-hoa-ford-ranger-2016-2018-19d629bc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1755,7 +1230,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:57', '2026-08-06 16:17:52', NULL, NULL, 'lốc điều hòa ford ranger 2013-2015', NULL, 'loc-dieu-hoa-ford-ranger-2013-2015-19d629bc-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:14:57', '2026-08-06 16:17:52', NULL, NULL, 'lốc điều hòa ford ranger 2013-2015', NULL, 'loc-dieu-hoa-ford-ranger-2013-2015-19d629bc-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1780,7 +1255,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:01', '2026-08-06 16:17:43', NULL, NULL, 'lốc điều hòa mazda bt-50 2012-2015', NULL, 'loc-dieu-hoa-mazda-bt-50-2012-2015-19d629bc-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:01', '2026-08-06 16:17:43', NULL, NULL, 'lốc điều hòa mazda bt-50 2012-2015', NULL, 'loc-dieu-hoa-mazda-bt-50-2012-2015-19d629bc-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1805,7 +1280,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:04', '2026-08-06 16:17:30', NULL, NULL, 'lốc điều hòa ford ranger 2015', NULL, 'loc-dieu-hoa-ford-ranger-2015-19d629bc-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:04', '2026-08-06 16:17:30', NULL, NULL, 'lốc điều hòa ford ranger 2015', NULL, 'loc-dieu-hoa-ford-ranger-2015-19d629bc-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 19D629BC-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1830,7 +1305,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:07', '2026-08-06 16:11:19', NULL, NULL, 'van tiết lưu điều hòa ford ranger 2015', NULL, 'van-tiet-luu-dieu-hoa-ford-ranger-2015-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:07', '2026-08-06 16:11:19', NULL, NULL, 'van tiết lưu điều hòa ford ranger 2015', NULL, 'van-tiet-luu-dieu-hoa-ford-ranger-2015-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1D0061J14B cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1855,7 +1330,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:10', '2026-08-06 16:10:40', NULL, NULL, 'van tiết lưu điều hòa ford everest 2016', NULL, 'van-tiet-luu-dieu-hoa-ford-everest-2016-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:10', '2026-08-06 16:10:40', NULL, NULL, 'van tiết lưu điều hòa ford everest 2016', NULL, 'van-tiet-luu-dieu-hoa-ford-everest-2016-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1D0061J14B cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1880,7 +1355,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:12', '2026-08-06 16:10:07', NULL, NULL, 'van tiết lưu điều hòa ford ranger 2013-2015', NULL, 'van-tiet-luu-dieu-hoa-ford-ranger-2013-2015-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:12', '2026-08-06 16:10:07', NULL, NULL, 'van tiết lưu điều hòa ford ranger 2013-2015', NULL, 'van-tiet-luu-dieu-hoa-ford-ranger-2013-2015-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1D0061J14B cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1905,7 +1380,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:15', '2026-08-06 16:09:47', NULL, NULL, 'van tiết lưu điều hòa mazda bt-50 2012-2015', NULL, 'van-tiet-luu-dieu-hoa-mazda-bt-50-2012-2015-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:15', '2026-08-06 16:09:47', NULL, NULL, 'van tiết lưu điều hòa mazda bt-50 2012-2015', NULL, 'van-tiet-luu-dieu-hoa-mazda-bt-50-2012-2015-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1D0061J14B cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1930,7 +1405,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:18', '2026-08-05 16:20:04', NULL, NULL, 'van tiết lưu điều hòa mazda bt-50 2016-2018', NULL, 'van-tiet-luu-dieu-hoa-mazda-bt-50-2016-2018-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:18', '2026-08-05 16:20:04', NULL, NULL, 'van tiết lưu điều hòa mazda bt-50 2016-2018', NULL, 'van-tiet-luu-dieu-hoa-mazda-bt-50-2016-2018-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1D0061J14B cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1955,7 +1430,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:21', '2026-08-05 16:19:52', NULL, NULL, 'van tiết lưu điều hòa ford ranger 2016-2018', NULL, 'van-tiet-luu-dieu-hoa-ford-ranger-2016-2018-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:21', '2026-08-05 16:19:52', NULL, NULL, 'van tiết lưu điều hòa ford ranger 2016-2018', NULL, 'van-tiet-luu-dieu-hoa-ford-ranger-2016-2018-1d0061j14b-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1D0061J14B cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -1980,7 +1455,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:25', '2026-08-05 16:19:35', NULL, NULL, 'lốc điều hòa volkswagen eos 2008', NULL, 'loc-dieu-hoa-volkswagen-eos-2008-1k0820859s-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:25', '2026-08-05 16:19:35', NULL, NULL, 'lốc điều hòa volkswagen eos 2008', NULL, 'loc-dieu-hoa-volkswagen-eos-2008-1k0820859s-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1K0820859S cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -2005,7 +1480,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:27', '2026-08-05 16:19:17', NULL, NULL, 'lốc điều hòa volkswagen tiguan 2008-2011', NULL, 'loc-dieu-hoa-volkswagen-tiguan-2008-2011-1k0820859s-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:27', '2026-08-05 16:19:17', NULL, NULL, 'lốc điều hòa volkswagen tiguan 2008-2011', NULL, 'loc-dieu-hoa-volkswagen-tiguan-2008-2011-1k0820859s-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1K0820859S cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -2030,7 +1505,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:29', '2026-08-05 16:18:58', NULL, NULL, 'lốc điều hòa volkswagen tiguan 2012-2016', NULL, 'loc-dieu-hoa-volkswagen-tiguan-2012-2016-1k0820859s-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:29', '2026-08-05 16:18:58', NULL, NULL, 'lốc điều hòa volkswagen tiguan 2012-2016', NULL, 'loc-dieu-hoa-volkswagen-tiguan-2012-2016-1k0820859s-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 1K0820859S cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -2155,7 +1630,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:45', '2026-08-05 16:12:51', NULL, NULL, 'quạt gió điều hòa trong xe mercedes-benz e200 2010-2015', NULL, 'quat-gio-dieu-hoa-trong-xe-mercedes-benz-e200-2010-2015-2048200208-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:45', '2026-08-05 16:12:51', NULL, NULL, 'quạt gió điều hòa trong xe mercedes-benz e200 2010-2015', NULL, 'quat-gio-dieu-hoa-trong-xe-mercedes-benz-e200-2010-2015-2048200208-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2048200208-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -2180,7 +1655,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:47', '2026-08-05 16:11:08', NULL, NULL, 'quạt gió điều hòa trong xe mercedes-benz glk280 2009-2011', NULL, 'quat-gio-dieu-hoa-trong-xe-mercedes-benz-glk280-2009-2011-2048200208-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:15:47', '2026-08-05 16:11:08', NULL, NULL, 'quạt gió điều hòa trong xe mercedes-benz glk280 2009-2011', NULL, 'quat-gio-dieu-hoa-trong-xe-mercedes-benz-glk280-2009-2011-2048200208-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2048200208-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -2230,7 +1705,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:16:43', '2026-08-06 17:43:42', NULL, NULL, 'van đuôi lốc điều hòa hyundai santafe 2013-2015', NULL, 'van-duoi-loc-dieu-hoa-hyundai-santafe-2013-2015-976741j000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:16:43', '2026-08-06 17:43:42', NULL, NULL, 'van đuôi lốc điều hòa hyundai santafe 2013-2015', NULL, 'van-duoi-loc-dieu-hoa-hyundai-santafe-2013-2015-976741j000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Chất liệu:</strong> Hợp kim cao cấp v&agrave; cao su tổng hợp chịu nhiệt, chống m&agrave;i m&ograve;n tốt.</li>
 <li><strong>Tương th&iacute;ch:</strong> Tương th&iacute;ch chuẩn 100% theo m&atilde; OEM&nbsp; &nbsp;cho c&aacute;c d&ograve;ng xe tương ứng.</li>
 <li><strong>Ch&iacute;nh s&aacute;ch:</strong> Đ&atilde; kiểm định chất lượng nghi&ecirc;m ngặt, bảo h&agrave;nh 12 th&aacute;ng tr&ecirc;n to&agrave;n quốc.</li>
@@ -2366,7 +1841,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:16:46', '2026-08-06 17:37:34', NULL, NULL, 'van đuôi lốc điều hòa kia cerato 2016-2018', NULL, 'van-duoi-loc-dieu-hoa-kia-cerato-2016-2018-976741j000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 12:16:46', '2026-08-06 17:37:34', NULL, NULL, 'van đuôi lốc điều hòa kia cerato 2016-2018', NULL, 'van-duoi-loc-dieu-hoa-kia-cerato-2016-2018-976741j000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 976741J000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -2408,7 +1883,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 15:00:41', NULL, NULL, 'quạt gió điều hòa trong xe mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27120 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 15:00:41', NULL, NULL, 'quạt gió điều hòa trong xe mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27120 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27120B030P</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Mitsubishi Xforce 2023-2025</td></tr>
@@ -2429,7 +1904,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa trong xe mitsubishi destinator 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27120 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa trong xe mitsubishi destinator 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27120 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27120B030P</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Mitsubishi Destinator 2025-2026</td></tr>
@@ -2450,7 +1925,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404504 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404504 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>31404504</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa Volvo XC60 2017-2019</td></tr>
@@ -2471,7 +1946,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404504 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404504 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>31404504</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa Volvo XC90 2017-2018</td></tr>
@@ -2492,7 +1967,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 10, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa volvo xc90 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404504 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 11, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:44', NULL, NULL, 'quạt gió điều hòa volvo xc90 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404504 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>31404504</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa Volvo XC90 2020-2022</td></tr>
@@ -2513,7 +1988,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark 2016', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark 2016', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>22972792</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Chevrolet Spark 2016</td></tr>
@@ -2534,7 +2009,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark 2018', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark 2018', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>22972792</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Chevrolet Spark 2018</td></tr>
@@ -2555,7 +2030,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa daewoo matiz groove 2010-2012', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa daewoo matiz groove 2010-2012', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>22972792</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Daewoo Matiz Groove 2010-2012</td></tr>
@@ -2576,7 +2051,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark 2011-2013', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark 2011-2013', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>22972792</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Chevrolet Spark 2011-2013</td></tr>
@@ -2597,7 +2072,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark m300 2013-2014', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'van tiết lưu điều hòa chevrolet spark m300 2013-2014', NULL, 'van-tiet-luu-ieu-hoa-gm-spark-matiz-22972792-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 22972792 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>22972792</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Chevrolet Spark M300 2013-2014</td></tr>
@@ -2618,7 +2093,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:47:04', NULL, NULL, 'lốc điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010449 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:47:04', NULL, NULL, 'lốc điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010449 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36010449</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC60 2017-2019</td></tr>
@@ -2639,7 +2114,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 00:43:41', NULL, NULL, 'lốc điều hòa volvo xc40 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010449 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 00:43:41', NULL, NULL, 'lốc điều hòa volvo xc40 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010449 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36010449</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC40 2019-2021</td></tr>
@@ -2660,7 +2135,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'lốc điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010125 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'lốc điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010125 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36010125</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC60 2017-2019</td></tr>
@@ -2681,7 +2156,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'lốc điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010125 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'lốc điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010125 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36010125</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC90 2017-2018</td></tr>
@@ -2702,7 +2177,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'lốc điều hòa volvo xc90 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010125 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:42', NULL, NULL, 'lốc điều hòa volvo xc90 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36010125 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36010125</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC90 2020-2022</td></tr>
@@ -2723,7 +2198,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan tida 2004-2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan tida 2004-2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27281ED000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Tida 2004-2010</td></tr>
@@ -2744,7 +2219,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan livina 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan livina 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27281ED000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Livina 2007</td></tr>
@@ -2765,7 +2240,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan tida 2008', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan tida 2008', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27281ED000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Tida 2008</td></tr>
@@ -2786,7 +2261,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan tida sedan 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'giàn lạnh nissan tida sedan 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27281 ED000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27281ED000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Tida Sedan 2007</td></tr>
@@ -2828,7 +2303,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'dàn sưởi mitsubishi destinator 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27140 B010 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'dàn sưởi mitsubishi destinator 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27140 B010 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27140B010P</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn sưởi Mitsubishi Destinator 2025-2026</td></tr>
@@ -2849,7 +2324,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'van tiết lưu điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 32260834 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'van tiết lưu điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 32260834 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>32260834</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Volvo XC90 2017-2018</td></tr>
@@ -2912,7 +2387,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404339 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa volvo xc90 2017-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404339 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>31404339</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Volvo XC90 2017-2018</td></tr>
@@ -2933,7 +2408,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404339 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 31404339 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>31404339</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Volvo XC60 2017-2019</td></tr>
@@ -2975,7 +2450,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'giàn lạnh nissan teana 2009-2012', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A-GN cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'giàn lạnh nissan teana 2009-2012', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A-GN cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN30A-GN</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Teana 2009-2012</td></tr>
@@ -2996,7 +2471,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'giàn lạnh nissan murano sl 2007', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A-GN cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'giàn lạnh nissan murano sl 2007', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A-GN cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN30A-GN</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Murano SL 2007</td></tr>
@@ -3017,7 +2492,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'giàn lạnh nissan x-trail 2010', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A-GN cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'giàn lạnh nissan x-trail 2010', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A-GN cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN30A-GN</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan X-Trail 2010</td></tr>
@@ -3038,7 +2513,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'van đuôi lốc điều hòa honda odyssey 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38801 P9 KE01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'van đuôi lốc điều hòa honda odyssey 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38801 P9 KE01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>38801P9KE01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van đuôi lốc điều hòa Honda Odyssey 2016-2018</td></tr>
@@ -3122,7 +2597,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'van đuôi lốc điều hòa honda br-v 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38801 P9 KE01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'van đuôi lốc điều hòa honda br-v 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38801 P9 KE01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>38801P9KE01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van đuôi lốc điều hòa Honda BR-V 2022-2024</td></tr>
@@ -3143,7 +2618,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:37', NULL, NULL, 'giàn lạnh nissan teana 2009-2012', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:37', NULL, NULL, 'giàn lạnh nissan teana 2009-2012', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN30A</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Teana 2009-2012</td></tr>
@@ -3164,7 +2639,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:37', NULL, NULL, 'giàn lạnh nissan murano sl 2007', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 10, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:37', NULL, NULL, 'giàn lạnh nissan murano sl 2007', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN30A</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan Murano SL 2007</td></tr>
@@ -3185,7 +2660,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:37', NULL, NULL, 'giàn lạnh nissan x-trail 2010', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 11, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:37', NULL, NULL, 'giàn lạnh nissan x-trail 2010', NULL, 'gian-lanh-nissan-x-trail-murano-teana-27280jn30a-gn-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN30 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN30A</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan X-Trail 2010</td></tr>
@@ -3269,7 +2744,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:24', NULL, NULL, 'lốc điều hòa hyundai elantra 2006-2010', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:24', NULL, NULL, 'lốc điều hòa hyundai elantra 2006-2010', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>351273471</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Hyundai Elantra 2006-2010</td></tr>
@@ -3290,7 +2765,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:24', NULL, NULL, 'lốc điều hòa hyundai avante 2011-2012', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:24', NULL, NULL, 'lốc điều hòa hyundai avante 2011-2012', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>351273471</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Hyundai Avante 2011-2012</td></tr>
@@ -3311,7 +2786,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:23', NULL, NULL, 'lốc điều hòa hyundai i30 2008-2011', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:23', NULL, NULL, 'lốc điều hòa hyundai i30 2008-2011', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>351273471</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Hyundai i30 2008-2011</td></tr>
@@ -3332,7 +2807,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:22', NULL, NULL, 'lốc điều hòa hyundai i30 cw 2008-2011', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:22', NULL, NULL, 'lốc điều hòa hyundai i30 cw 2008-2011', NULL, 'loc-ieu-hoa-hcc-elantra-avante-i30-351273471-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 351273471 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>351273471</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Hyundai i30 CW 2008-2011</td></tr>
@@ -3353,7 +2828,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'lốc điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36011415 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'lốc điều hòa volvo xc60 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36011415 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36011415</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC60 2017-2019</td></tr>
@@ -3374,7 +2849,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'lốc điều hòa volvo xc40 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36011415 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'lốc điều hòa volvo xc40 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 36011415 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>36011415</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Volvo XC40 2019-2021</td></tr>
@@ -3395,7 +2870,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'quạt dàn nóng mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27235 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'quạt dàn nóng mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27235 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27235B030P</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt dàn nóng Mitsubishi Xforce 2023-2025</td></tr>
@@ -3416,7 +2891,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'quạt dàn nóng mitsubishi destinator 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27235 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'quạt dàn nóng mitsubishi destinator 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27235 B030 P cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27235B030P</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt dàn nóng Mitsubishi Destinator 2025-2026</td></tr>
@@ -3437,7 +2912,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng luxgen m7 2011', NULL, 'dan-nong-luxgen-u7-m7-29326mv101c2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 29326 MV101 C2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng luxgen m7 2011', NULL, 'dan-nong-luxgen-u7-m7-29326mv101c2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 29326 MV101 C2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>29326MV101C2</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Luxgen M7 2011</td></tr>
@@ -3458,7 +2933,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng luxgen u7 2011-2013', NULL, 'dan-nong-luxgen-u7-m7-29326mv101c2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 29326 MV101 C2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng luxgen u7 2011-2013', NULL, 'dan-nong-luxgen-u7-m7-29326mv101c2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 29326 MV101 C2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>29326MV101C2</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Luxgen U7 2011-2013</td></tr>
@@ -3479,7 +2954,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng toyota fortuner 2016-2019', NULL, 'dan-nong-paco-innova-fortuner-2p5755-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2 P5755 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng toyota fortuner 2016-2019', NULL, 'dan-nong-paco-innova-fortuner-2p5755-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2 P5755 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2P5755</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Toyota Fortuner 2016-2019</td></tr>
@@ -3500,7 +2975,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng toyota innova 2017-2020', NULL, 'dan-nong-paco-innova-fortuner-2p5755-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2 P5755 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng toyota innova 2017-2020', NULL, 'dan-nong-paco-innova-fortuner-2p5755-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2 P5755 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2P5755</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Toyota innova 2017-2020</td></tr>
@@ -3521,7 +2996,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng toyota fortuner trd 2019-2022', NULL, 'dan-nong-paco-innova-fortuner-2p5755-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2 P5755 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'dàn nóng toyota fortuner trd 2019-2022', NULL, 'dan-nong-paco-innova-fortuner-2p5755-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2 P5755 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2P5755</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Toyota Fortuner TRD 2019-2022</td></tr>
@@ -3584,7 +3059,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:34', NULL, NULL, 'giàn lạnh nissan x-trail 2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN20 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:34', NULL, NULL, 'giàn lạnh nissan x-trail 2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 27280 JN20 A cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>27280JN20A</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Nissan X-Trail 2010</td></tr>
@@ -3626,7 +3101,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:34', NULL, NULL, 'giá bắt lốc điều hòa hyundai tucson 2010-2012', NULL, 'gia-bat-loc-ieu-hoa-kia-sorento-carens-santafe-tucson-2525325001-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2525325001 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:34', NULL, NULL, 'giá bắt lốc điều hòa hyundai tucson 2010-2012', NULL, 'gia-bat-loc-ieu-hoa-kia-sorento-carens-santafe-tucson-2525325001-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2525325001 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2525325001</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giá bắt lốc điều hòa Hyundai Tucson 2010-2012</td></tr>
@@ -3668,7 +3143,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:20', NULL, NULL, 'giá bắt lốc điều hòa hyundai santafe 2019-2021', NULL, 'gia-bat-loc-ieu-hoa-kia-sorento-carens-santafe-tucson-2525325001-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2525325001 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:25:20', NULL, NULL, 'giá bắt lốc điều hòa hyundai santafe 2019-2021', NULL, 'gia-bat-loc-ieu-hoa-kia-sorento-carens-santafe-tucson-2525325001-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2525325001 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2525325001</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giá bắt lốc điều hòa Hyundai Santafe 2019-2021</td></tr>
@@ -3836,7 +3311,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'cao su chân két nước nissan x-trail 2016-2018', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'cao su chân két nước nissan x-trail 2016-2018', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Cao su chân két nước Nissan X-Trail 2016-2018</td></tr>
@@ -3857,7 +3332,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'vách ngăn nhớt lốc máy hyundai santafe 2019-2021', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'vách ngăn nhớt lốc máy hyundai santafe 2019-2021', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Vách ngăn nhớt lốc máy Hyundai Santafe 2019-2021</td></tr>
@@ -3878,7 +3353,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'vách ngăn nhớt lốc máy kia sorento 2021-2023', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'vách ngăn nhớt lốc máy kia sorento 2021-2023', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Vách ngăn nhớt lốc máy Kia Sorento 2021-2023</td></tr>
@@ -3899,7 +3374,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-08 16:17:36', NULL, NULL, 'vách ngăn nhớt lốc máy kia carnival 2021-2024', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-08 16:17:36', NULL, NULL, 'vách ngăn nhớt lốc máy kia carnival 2021-2024', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Vách ngăn nhớt lốc máy Kia Carnival 2021-2024</td></tr>
@@ -3920,7 +3395,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:22:05', NULL, NULL, 'vách ngăn nhớt lốc máy kia carnival 2024-2025', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:22:05', NULL, NULL, 'vách ngăn nhớt lốc máy kia carnival 2024-2025', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Vách ngăn nhớt lốc máy Kia Carnival 2024-2025</td></tr>
@@ -3941,7 +3416,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'dàn nóng suzuki apv 2006-2011', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:32', NULL, NULL, 'dàn nóng suzuki apv 2006-2011', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Suzuki APV 2006-2011</td></tr>
@@ -3962,7 +3437,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:31', NULL, NULL, 'dàn nóng suzuki carry pro 2008-2016', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:31', NULL, NULL, 'dàn nóng suzuki carry pro 2008-2016', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Suzuki Carry Pro 2008-2016</td></tr>
@@ -3983,7 +3458,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:31', NULL, NULL, 'ống nước ra két nước mitsubishi attrage 2020-2023', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:31', NULL, NULL, 'ống nước ra két nước mitsubishi attrage 2020-2023', NULL, 'ket-nuoc-mercedes-benz-s-class-a2215000003-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 2150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>2150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Ống nước ra két nước Mitsubishi Attrage 2020-2023</td></tr>
@@ -4046,7 +3521,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:30', NULL, NULL, 'van tiết lưu điều hòa volvo xc90 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 32260835 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:30', NULL, NULL, 'van tiết lưu điều hòa volvo xc90 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 32260835 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>32260835</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Volvo XC90 2020-2022</td></tr>
@@ -4109,7 +3584,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'dây điện lốc điều hòa volvo xc40 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 30682634 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'dây điện lốc điều hòa volvo xc40 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 30682634 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>30682634</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dây điện lốc điều hòa Volvo XC40 2019-2021</td></tr>
@@ -4130,7 +3605,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'rơ le đóng mở lốc suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38860 B77 M00 N000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'rơ le đóng mở lốc suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38860 B77 M00 N000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>38860B77M00N000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Rơ le đóng mở lốc Suzuki Ertiga 2018-2021</td></tr>
@@ -4151,7 +3626,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'rơ le đóng mở lốc suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38860 B77 M00 N000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'rơ le đóng mở lốc suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38860 B77 M00 N000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>38860B77M00N000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Rơ le đóng mở lốc Suzuki XL7 2020-2025</td></tr>
@@ -4172,7 +3647,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'rơ le đóng mở lốc suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38860 B77 M00 N000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:29', NULL, NULL, 'rơ le đóng mở lốc suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38860 B77 M00 N000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>38860B77M00N000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Rơ le đóng mở lốc Suzuki Ertiga 2023-2024</td></tr>
@@ -4214,7 +3689,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:28', NULL, NULL, 'van đuôi lốc điều hòa honda brio 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38801 PHM004 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:28', NULL, NULL, 'van đuôi lốc điều hòa honda brio 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 38801 PHM004 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>38801PHM004</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van đuôi lốc điều hòa Honda Brio 2018-2021</td></tr>
@@ -4235,7 +3710,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:23', NULL, NULL, 'dàn nóng ford everest 2010-2012', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:23', NULL, NULL, 'dàn nóng ford everest 2010-2012', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Everest 2010-2012</td></tr>
@@ -4256,7 +3731,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:22', NULL, NULL, 'dàn nóng ford everest 2005-2007', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:22', NULL, NULL, 'dàn nóng ford everest 2005-2007', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Everest 2005-2007</td></tr>
@@ -4277,7 +3752,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:22', NULL, NULL, 'dàn nóng ford ranger 2005-2007', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:22', NULL, NULL, 'dàn nóng ford ranger 2005-2007', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Ranger 2005-2007</td></tr>
@@ -4298,7 +3773,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:20', NULL, NULL, 'dàn nóng ford ranger 2007-2009', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:20', NULL, NULL, 'dàn nóng ford ranger 2007-2009', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Ranger 2007-2009</td></tr>
@@ -4319,7 +3794,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:19', NULL, NULL, 'dàn nóng ford ranger 2009-2012', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:19', NULL, NULL, 'dàn nóng ford ranger 2009-2012', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Ranger 2009-2012</td></tr>
@@ -4361,7 +3836,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:17', NULL, NULL, 'dàn nóng ford everest 2008-2010', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:17', NULL, NULL, 'dàn nóng ford everest 2008-2010', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Everest 2008-2010</td></tr>
@@ -4382,7 +3857,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:16', NULL, NULL, 'dàn nóng ford everest 2013-2015', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:16', NULL, NULL, 'dàn nóng ford everest 2013-2015', NULL, 'dan-nong-ford-ranger-bt-50-everest-3m3519710cb-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 M3519710 CB cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3M3519710CB</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Everest 2013-2015</td></tr>
@@ -4403,7 +3878,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:15', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen tiguan 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:15', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen tiguan 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3C0820581</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp van áp suất ga điều hòa Volkswagen Tiguan 2017-2019</td></tr>
@@ -4424,7 +3899,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:14', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen teramont 2021-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:14', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen teramont 2021-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3C0820581</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp van áp suất ga điều hòa Volkswagen Teramont 2021-2023</td></tr>
@@ -4445,7 +3920,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:14', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen t-cross 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:14', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen t-cross 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3C0820581</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp van áp suất ga điều hòa Volkswagen T-Cross 2022-2024</td></tr>
@@ -4466,7 +3941,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:12', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen viloran 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:38:12', NULL, NULL, 'nắp van áp suất ga điều hòa volkswagen viloran 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 3 C0820581 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>3C0820581</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp van áp suất ga điều hòa Volkswagen Viloran 2023-2025</td></tr>
@@ -4529,7 +4004,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:57', NULL, NULL, 'phin lọc gas ford everest 2010-2012', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:57', NULL, NULL, 'phin lọc gas ford everest 2010-2012', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4459101150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Phin lọc gas Ford Everest 2010-2012</td></tr>
@@ -4550,7 +4025,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:07', NULL, NULL, 'phin lọc gas ford ranger 2009-2012', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:07', NULL, NULL, 'phin lọc gas ford ranger 2009-2012', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4459101150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Phin lọc gas Ford Ranger 2009-2012</td></tr>
@@ -4571,7 +4046,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:13', NULL, NULL, 'phin lọc gas toyota corolla altis 2008-2010', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:13', NULL, NULL, 'phin lọc gas toyota corolla altis 2008-2010', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4459101150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Phin lọc gas Toyota Corolla Altis 2008-2010</td></tr>
@@ -4613,7 +4088,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:24', NULL, NULL, 'phin lọc gas toyota corolla altis 2009-2010', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:24', NULL, NULL, 'phin lọc gas toyota corolla altis 2009-2010', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4459101150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Phin lọc gas Toyota Corolla Altis 2009-2010</td></tr>
@@ -4634,7 +4109,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:33', NULL, NULL, 'phin lọc gas toyota corolla altis 2014', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:33', NULL, NULL, 'phin lọc gas toyota corolla altis 2014', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4459101150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Phin lọc gas Toyota Corolla Altis 2014</td></tr>
@@ -4676,7 +4151,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:51', NULL, NULL, 'phin lọc gas daihatsu terios 2007', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:51', NULL, NULL, 'phin lọc gas daihatsu terios 2007', NULL, 'phin-loc-gas-denso-camry-corolla-ranger-everest-terios-4459101150-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4459101150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4459101150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Phin lọc gas Daihatsu TERIOS 2007</td></tr>
@@ -4697,7 +4172,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:56', NULL, NULL, 'giàn lạnh toyota fortuner 2011-2014', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:56', NULL, NULL, 'giàn lạnh toyota fortuner 2011-2014', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4466009860</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Fortuner 2011-2014</td></tr>
@@ -4718,7 +4193,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:48:34', NULL, NULL, 'giàn lạnh toyota fortuner 2009-2012', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:48:34', NULL, NULL, 'giàn lạnh toyota fortuner 2009-2012', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4466009860</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Fortuner 2009-2012</td></tr>
@@ -4739,7 +4214,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:04', NULL, NULL, 'giàn lạnh toyota innova 2004-2006', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:04', NULL, NULL, 'giàn lạnh toyota innova 2004-2006', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4466009860</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Innova 2004-2006</td></tr>
@@ -4760,7 +4235,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:12', NULL, NULL, 'giàn lạnh toyota innova 2006-2008', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:12', NULL, NULL, 'giàn lạnh toyota innova 2006-2008', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4466009860</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Innova 2006-2008</td></tr>
@@ -4781,7 +4256,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:17', NULL, NULL, 'giàn lạnh toyota innova 2008-2011', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:17', NULL, NULL, 'giàn lạnh toyota innova 2008-2011', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4466009860</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Innova 2008-2011</td></tr>
@@ -4802,7 +4277,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:23', NULL, NULL, 'giàn lạnh toyota innova 2012-2013', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:23', NULL, NULL, 'giàn lạnh toyota innova 2012-2013', NULL, 'gian-lanh-denso-innova-corolla-fortuner-4466009860-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 4466009860 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>4466009860</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Innova 2012-2013</td></tr>
@@ -4823,7 +4298,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:08:57', '2026-08-06 14:42:15', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:08:57', '2026-08-06 14:42:15', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC JOLY đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>C&aacute;c d&ograve;ng xe &ocirc; t&ocirc; th&ocirc;ng dụng</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -4874,7 +4349,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 11, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:08:59', '2026-08-06 14:41:35', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 12, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:08:59', '2026-08-06 14:41:35', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC 24V 8PK HANON đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -4925,7 +4400,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:00', '2026-08-06 14:40:58', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:00', '2026-08-06 14:40:58', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC PRADO 7PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -4976,7 +4451,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:01', '2026-08-05 21:35:40', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:01', '2026-08-05 21:35:40', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Bộ đầu lốc Suzuki Swift Bộ đầu lốc Swift đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Suzuki Swift B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5027,7 +4502,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:01', '2026-08-05 21:36:08', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:01', '2026-08-05 21:36:08', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC KIA FORTE đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Kia Forte</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5129,7 +4604,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:04', '2026-08-05 21:34:10', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:04', '2026-08-05 21:34:10', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Bộ đầu lốc Triton Bộ đầu lốc Zinger 2008 4PK (1) đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Triton B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5180,7 +4655,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:05', '2026-08-05 21:31:42', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:05', '2026-08-05 21:31:42', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC SANTAFE GOLD 6PK HANON đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Santafe Gold 6Pk Hanon</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5281,7 +4756,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:07', '2026-08-06 14:40:31', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:07', '2026-08-06 14:40:31', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC MAZDA 3 BỘ ĐẦU LỐC MAZDA 6 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Mazda 3 B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5332,7 +4807,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:08', '2026-08-06 14:39:23', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:08', '2026-08-06 14:39:23', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC LIVINA BỘ ĐẦU TIDA đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Livina B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5546,7 +5021,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:11', '2026-08-06 14:36:00', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:11', '2026-08-06 14:36:00', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC VIOS 2007 149 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Vios 2007 149</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5764,7 +5239,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:14', '2026-08-06 14:32:03', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:14', '2026-08-06 14:32:03', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC CHENGLONG H7 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Chenglong H7</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -5869,7 +5344,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:15', '2026-08-06 14:31:29', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:15', '2026-08-06 14:31:29', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC RANGER 2013 BỘ ĐẦU LỐC BT50 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Ranger 2013 B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6032,7 +5507,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:18', '2026-08-06 14:27:29', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:18', '2026-08-06 14:27:29', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC MATIZ BÃI đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Matiz B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6237,7 +5712,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:21', '2026-08-05 16:56:59', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:21', '2026-08-05 16:56:59', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC HOVO 24V đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Hovo 24V</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6288,7 +5763,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:21', '2026-08-06 14:23:22', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:21', '2026-08-06 14:23:22', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC VIOS 2017 6PK DENSO đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Vios 2017 6Pk Denso</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6340,7 +5815,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:22', '2026-08-05 16:55:57', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:22', '2026-08-05 16:55:57', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC HYUNDAI 2.5T 2018-2020 12V 7PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Hyundai 2.5T 2018-2020 12V 7Pk</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6495,7 +5970,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:24', '2026-08-05 16:53:34', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:24', '2026-08-05 16:53:34', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC INNOVA BỘ ĐẦU FORTUNER MÁY XĂNG đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Innova B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6598,7 +6073,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:26', '2026-08-05 16:48:16', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:26', '2026-08-05 16:48:16', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC ALTIS 2011 KHÔNG BÔN đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Altis 2011 Kh</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6701,7 +6176,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:27', '2026-08-05 16:12:53', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:27', '2026-08-05 16:12:53', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC 505 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6753,7 +6228,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:28', '2026-08-05 16:11:16', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:28', '2026-08-05 16:11:16', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC COUNTY A17 HÀNG XỊN CHÍNH HÃNG đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6909,7 +6384,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:30', '2026-08-05 16:09:22', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:30', '2026-08-05 16:09:22', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC ESCAPE 2.3 BỘ ĐẦU STAREX 7PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Escape 2.3 B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -6962,7 +6437,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:31', '2026-08-05 16:04:28', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:31', '2026-08-05 16:04:28', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC STAREX 6PK HANON đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Starex 6Pk Hanon</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7014,7 +6489,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:32', '2026-08-05 16:00:03', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:32', '2026-08-05 16:00:03', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC BONGO 3 đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Bongo 3</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7066,7 +6541,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:32', '2026-08-05 16:00:43', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:32', '2026-08-05 16:00:43', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC VIOS 2016 6PK đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Vios 2016 6Pk</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7118,7 +6593,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:33', '2026-08-05 15:58:46', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:33', '2026-08-05 15:58:46', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC INNOVA G DENSO BỘ ĐẦU INNOVA G đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Innova G Denso B</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7170,7 +6645,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:34', '2026-08-05 15:58:06', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:34', '2026-08-05 15:58:06', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC NISSAN TEANA 2.0 đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Nissan Teana 2.0</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7221,7 +6696,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:35', '2026-08-05 15:54:14', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:35', '2026-08-05 15:54:14', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC TRANSIT 2005 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Transit 2005</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7273,7 +6748,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:36', '2026-08-05 15:52:17', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:36', '2026-08-05 15:52:17', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC PORTER 4PK XỊN đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Porter 4Pk X</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7376,7 +6851,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:37', '2026-08-05 15:50:58', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:37', '2026-08-05 15:50:58', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC HCC BẢN A 12V HANON đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>C&aacute;c d&ograve;ng xe &ocirc; t&ocirc; th&ocirc;ng dụng</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7427,7 +6902,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:38', '2026-08-05 15:49:53', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:38', '2026-08-05 15:49:53', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Bộ đầu lốc FK40 Bộ đầu xe khách FK40 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7479,7 +6954,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:41', '2026-08-05 15:48:59', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:41', '2026-08-05 15:48:59', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC CAMRY 2.4 2003 5PK đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>C&aacute;c d&ograve;ng xe &ocirc; t&ocirc; th&ocirc;ng dụng</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -7531,7 +7006,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:45', '2026-08-05 15:47:37', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:45', '2026-08-05 15:47:37', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC HYUNDAI PORTER 7PK BỘ ĐẦU LỐC PORTER đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Hyundai Porter 7Pk B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7635,7 +7110,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:46', '2026-08-05 15:46:50', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:46', '2026-08-05 15:46:50', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC SUZUKI ERTIGA BỘ ĐẦU CIAZ đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Suzuki Ertiga B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7686,7 +7161,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:47', '2026-08-05 15:46:04', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:47', '2026-08-05 15:46:04', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC HUYNDAI BẢN A 24V HANON đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7840,7 +7315,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:49', '2026-08-05 15:41:37', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:49', '2026-08-05 15:41:37', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC LAND CRUISER BẢN A đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -7996,7 +7471,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:52', '2026-08-05 15:31:47', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:52', '2026-08-05 15:31:47', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC VIOS 2012 4PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Vios 2012 4Pk</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -8047,7 +7522,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:53', '2026-08-05 15:30:35', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:53', '2026-08-05 15:30:35', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC EVEREST RANGER 2010 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Ranger 2010</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -8099,7 +7574,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:55', '2026-08-05 15:30:04', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:55', '2026-08-05 15:30:04', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC INNOVA 2017 đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Innova 2017</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -8151,7 +7626,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:56', '2026-08-05 15:29:02', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:09:56', '2026-08-05 15:29:02', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC ESCAPE 2.3 BỘ ĐẦU STAREX 7PK HANON đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Escape 2.3 B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -8460,7 +7935,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:03', '2026-08-05 15:22:32', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:03', '2026-08-05 15:22:32', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC PORTER 4PK 12V BỘ ĐẦU STAREX HANON đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Porter 4Pk 12V B</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -8668,7 +8143,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:06', '2026-08-05 15:20:04', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:06', '2026-08-05 15:20:04', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC MORNING BỘ ĐẦU GETZ 4PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Morning B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -8825,7 +8300,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:09', '2026-08-05 15:16:39', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:09', '2026-08-05 15:16:39', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC FORD ESCAPE 3.0 2.0 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Ford Escape 3.0 2.0</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -8876,7 +8351,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:10', '2026-08-05 15:25:21', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:10', '2026-08-05 15:25:21', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC SOLATI XỊN HANON đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Solati X</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -8928,7 +8403,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:10', '2026-08-05 15:15:47', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:10', '2026-08-05 15:15:47', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC NISSAN XTRAIL 2.6 BỘ ĐẦU XTRAIL 2016 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Nissan Xtrail 2.6 B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -9083,7 +8558,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:13', '2026-08-05 15:25:25', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:13', '2026-08-05 15:25:25', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC SANTAFE 2016-2018 đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Santafe 2016-2018</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -9238,7 +8713,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:16', '2026-08-05 15:07:57', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:16', '2026-08-05 15:07:57', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC TRANSIT 2012 đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Transit 2012</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -9289,7 +8764,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:17', '2026-08-05 15:04:09', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:17', '2026-08-05 15:04:09', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC KIA A 1.4T đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Kia A 1.4T</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -9341,7 +8816,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:18', '2026-08-05 15:03:02', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:18', '2026-08-05 15:03:02', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC GETZ BỘ ĐẦU MORNING BỘ ĐẦU I10 5PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Getz B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -9394,7 +8869,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:19', '2026-08-05 15:02:03', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:19', '2026-08-05 15:02:03', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC MÁY XÚC DAEWOO BẢN A 12V đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Daewoo B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -9497,7 +8972,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:21', '2026-08-05 14:57:17', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:21', '2026-08-05 14:57:17', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC 15T 8PK HANON BỘ ĐẦU HCC 8PK đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -9549,7 +9024,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:22', '2026-08-05 14:56:23', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:22', '2026-08-05 14:56:23', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC MATIZ 4 BỘ ĐẦU LỐC MATIZ IV đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Matiz 4 B</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -9652,7 +9127,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:24', '2026-08-05 14:52:51', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 675000, 750000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:24', '2026-08-05 14:52:51', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm BỘ ĐẦU LỐC CIVIC 2.0 BỘ ĐẦU CRV 2.4 đáp ứng nghiêm ngặt các tiêu chuẩn kỹ thuật của nhà sản xuất phụ tùng ô tô chính hãng.</li>
   <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nhôm chịu lực, lõi đồng truyền nhiệt tốt và hợp chất cao su tổng hợp chống lão hóa.</li>
   <li><strong>Độ tương thích hoàn hảo:</strong> Tương thích chính xác với hệ thống điều hòa xe <strong>Các dòng xe ô tô thông dụng</strong>, không cần gia công hay chỉnh sửa khi thay thế.</li>
@@ -9756,7 +9231,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 315000, 350000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 10, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:28', '2026-08-05 14:50:33', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 315000, 350000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 11, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:28', '2026-08-05 14:50:33', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Phin lọc ga Denso ch&iacute;nh h&atilde;ng đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>C&aacute;c d&ograve;ng xe &ocirc; t&ocirc; th&ocirc;ng dụng</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -9808,7 +9283,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 315000, 350000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:29', '2026-08-05 14:48:44', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 315000, 350000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:29', '2026-08-05 14:48:44', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Phin lọc ga Mercedes S d&agrave;i ch&iacute;nh h&atilde;ng đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Mercedes S D</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -9860,7 +9335,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Hotline &amp; Zalo tư vấn: <strong style="color: #1a3258;">0705 070 526</strong></p>
 <p style="margin: 0 0 8px; font-size: 13.5px; color: #475569;">&bull; Email hỗ trợ: <strong style="color: #1a3258;">hotrokhachhang@autopartsvietnam.com</strong></p>
 <p style="margin: 0; font-size: 13.5px; color: #475569;">&bull; Website ch&iacute;nh thức: <a style="color: #1a3258; font-weight: bold;" href="../../../" target="_blank" rel="noopener">https://coolingsystems.vn</a></p>
-</div>', NULL, 810000, 900000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:31', '2026-08-05 14:47:30', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 810000, 900000, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 6, NULL, NULL, NULL, '2026-08-02 19:10:31', '2026-08-05 14:47:30', NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Đạt chuẩn chất lượng OEM:</strong> Sản phẩm Gi&agrave;n sưởi Daewoo Matiz 4 đ&aacute;p ứng nghi&ecirc;m ngặt c&aacute;c ti&ecirc;u chuẩn kỹ thuật của nh&agrave; sản xuất phụ t&ugrave;ng &ocirc; t&ocirc; ch&iacute;nh h&atilde;ng.</li>
 <li><strong>Vật liệu cao cấp:</strong> Chế tạo từ hợp kim nh&ocirc;m chịu lực, l&otilde;i đồng truyền nhiệt tốt v&agrave; hợp chất cao su tổng hợp chống l&atilde;o h&oacute;a.</li>
 <li><strong>Độ tương th&iacute;ch ho&agrave;n hảo:</strong> Tương th&iacute;ch ch&iacute;nh x&aacute;c với hệ thống điều h&ograve;a xe <strong>Daewoo Matiz 4 Gi</strong>, kh&ocirc;ng cần gia c&ocirc;ng hay chỉnh sửa khi thay thế.</li>
@@ -10014,7 +9489,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:29', NULL, NULL, 'dàn nóng ford everest 2005-2007', NULL, 'dan-nong-tongshi-ranger-bt-50-everest-75076-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75076 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:29', NULL, NULL, 'dàn nóng ford everest 2005-2007', NULL, 'dan-nong-tongshi-ranger-bt-50-everest-75076-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75076 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75076</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Everest 2005-2007</td></tr>
@@ -10035,7 +9510,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:36', NULL, NULL, 'dàn nóng ford ranger 2005-2007', NULL, 'dan-nong-tongshi-ranger-bt-50-everest-75076-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75076 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:51:36', NULL, NULL, 'dàn nóng ford ranger 2005-2007', NULL, 'dan-nong-tongshi-ranger-bt-50-everest-75076-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75076 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75076</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Ford Ranger 2005-2007</td></tr>
@@ -10098,7 +9573,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:52:00', NULL, NULL, 'dàn nóng mazda bt-50 2008-2011', NULL, 'dan-nong-tongshi-ranger-bt-50-everest-75076-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75076 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 10, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:52:00', NULL, NULL, 'dàn nóng mazda bt-50 2008-2011', NULL, 'dan-nong-tongshi-ranger-bt-50-everest-75076-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75076 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75076</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Mazda BT-50 2008-2011</td></tr>
@@ -10161,7 +9636,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:10', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi mirage 2014-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:10', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi mirage 2014-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7802A247</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt giàn lạnh trong xe Mitsubishi Mirage 2014-2016</td></tr>
@@ -10182,7 +9657,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:15', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi attrage 2014-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 10, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:15', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi attrage 2014-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7802A247</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt giàn lạnh trong xe Mitsubishi Attrage 2014-2018</td></tr>
@@ -10203,7 +9678,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:19', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi mirage 2017-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:19', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi mirage 2017-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7802A247</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt giàn lạnh trong xe Mitsubishi Mirage 2017-2021</td></tr>
@@ -10224,7 +9699,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:25', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi attrage 2020-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:25', NULL, NULL, 'quạt giàn lạnh trong xe mitsubishi attrage 2020-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7802 A247 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7802A247</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt giàn lạnh trong xe Mitsubishi Attrage 2020-2023</td></tr>
@@ -10245,7 +9720,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:29', NULL, NULL, 'dàn nóng toyota vios 2014-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:29', NULL, NULL, 'dàn nóng toyota vios 2014-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75077</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Toyota Vios 2014-2016</td></tr>
@@ -10266,7 +9741,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:35', NULL, NULL, 'dàn nóng toyota yaris 2014', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:10:35', NULL, NULL, 'dàn nóng toyota yaris 2014', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75077</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Toyota Yaris 2014</td></tr>
@@ -10287,7 +9762,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:05', NULL, NULL, 'nẹp thành cánh cửa sau toyota land cruiser prado 2024-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:05', NULL, NULL, 'nẹp thành cánh cửa sau toyota land cruiser prado 2024-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75077</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nẹp thành cánh cửa sau Toyota Land Cruiser Prado 2024-2026</td></tr>
@@ -10308,7 +9783,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:11', NULL, NULL, 'nẹp thành cánh cửa sau toyota yaris cross 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:11', NULL, NULL, 'nẹp thành cánh cửa sau toyota yaris cross 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75077 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75077</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nẹp thành cánh cửa sau Toyota Yaris Cross 2023-2025</td></tr>
@@ -10329,7 +9804,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:16', NULL, NULL, 'giàn lạnh toyota camry 2007-2008', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:16', NULL, NULL, 'giàn lạnh toyota camry 2007-2008', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75304ZFQX-2</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Camry 2007-2008</td></tr>
@@ -10350,7 +9825,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:21', NULL, NULL, 'giàn lạnh toyota venza 2008-2012', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:21', NULL, NULL, 'giàn lạnh toyota venza 2008-2012', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75304ZFQX-2</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Venza 2008-2012</td></tr>
@@ -10392,7 +9867,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:31', NULL, NULL, 'giàn lạnh toyota camry 2006-2011', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:31', NULL, NULL, 'giàn lạnh toyota camry 2006-2011', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75304ZFQX-2</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Camry 2006-2011</td></tr>
@@ -10413,7 +9888,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:35', NULL, NULL, 'giàn lạnh toyota camry hv 2006-2008', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:35', NULL, NULL, 'giàn lạnh toyota camry hv 2006-2008', NULL, 'gian-lanh-tongshi-camry-venza-75304zfqx-2-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 75304 ZFQX-2 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>75304ZFQX-2</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Camry HV 2006-2008</td></tr>
@@ -10434,7 +9909,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:39', NULL, NULL, 'giàn lạnh bmw x5 2011', NULL, 'gian-lanh-berh-x5-x6-64119197043-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 64119197043-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:39', NULL, NULL, 'giàn lạnh bmw x5 2011', NULL, 'gian-lanh-berh-x5-x6-64119197043-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 64119197043-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>64119197043-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Bmw X5 2011</td></tr>
@@ -10497,7 +9972,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:53', NULL, NULL, 'dàn nóng mitsubishi attrage 2014-2018', NULL, 'dan-nong-mitsubishi-mirage-attrage-7812a229-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:11:53', NULL, NULL, 'dàn nóng mitsubishi attrage 2014-2018', NULL, 'dan-nong-mitsubishi-mirage-attrage-7812a229-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7812A229</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Mitsubishi Attrage 2014-2018</td></tr>
@@ -10644,7 +10119,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:36:08', NULL, NULL, 'giàn lạnh mitsubishi pajero sport 2017-2019', NULL, 'gian-lanh-mitsubishi-triton-pajero-sport-7810a286-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7810 A286 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:36:08', NULL, NULL, 'giàn lạnh mitsubishi pajero sport 2017-2019', NULL, 'gian-lanh-mitsubishi-triton-pajero-sport-7810a286-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7810 A286 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7810A286</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Mitsubishi Pajero Sport 2017-2019</td></tr>
@@ -10665,7 +10140,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:36:14', NULL, NULL, 'giàn lạnh mitsubishi triton 2019-2021', NULL, 'gian-lanh-mitsubishi-triton-pajero-sport-7810a286-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7810 A286 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:36:14', NULL, NULL, 'giàn lạnh mitsubishi triton 2019-2021', NULL, 'gian-lanh-mitsubishi-triton-pajero-sport-7810a286-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7810 A286 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7810A286</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Mitsubishi Triton 2019-2021</td></tr>
@@ -10812,7 +10287,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:39:17', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'loc-ieu-hoa-mitsubishi-outlander-outlander-sport-vitara-7813a197-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:39:17', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'loc-ieu-hoa-mitsubishi-outlander-outlander-sport-vitara-7813a197-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A197</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Suzuki Vitara 2016-2018</td></tr>
@@ -11022,7 +10497,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:42:55', NULL, NULL, 'quạt gió điều hòa trong xe suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:42:55', NULL, NULL, 'quạt gió điều hòa trong xe suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415061J50</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki APV 2006-2011</td></tr>
@@ -11043,7 +10518,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:43:00', NULL, NULL, 'quạt gió điều hòa trong xe suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:43:00', NULL, NULL, 'quạt gió điều hòa trong xe suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415061J50</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki Carry Pro 2008-2016</td></tr>
@@ -11064,7 +10539,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:43:06', NULL, NULL, 'quạt gió điều hòa trong xe toyota rush 2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:43:06', NULL, NULL, 'quạt gió điều hòa trong xe toyota rush 2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415061J50</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Rush 2018</td></tr>
@@ -11085,7 +10560,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:43:18', NULL, NULL, 'quạt gió điều hòa trong xe suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:43:18', NULL, NULL, 'quạt gió điều hòa trong xe suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415061 J50 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415061J50</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki APV 2013-2016</td></tr>
@@ -11190,7 +10665,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:12', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2018-2021', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r20000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R20000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:12', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2018-2021', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r20000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R20000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415073R20000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki Ertiga 2018-2021</td></tr>
@@ -11211,7 +10686,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:21', NULL, NULL, 'quạt gió điều hòa trong xe suzuki xl7 2020-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r20000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R20000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:21', NULL, NULL, 'quạt gió điều hòa trong xe suzuki xl7 2020-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r20000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R20000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415073R20000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki XL7 2020-2025</td></tr>
@@ -11232,7 +10707,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:28', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2023-2024', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r20000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R20000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:28', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2023-2024', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r20000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R20000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415073R20000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki Ertiga 2023-2024</td></tr>
@@ -11253,7 +10728,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:35', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2018-2021', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r21000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R21000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:35', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2018-2021', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r21000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R21000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415073R21000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki Ertiga 2018-2021</td></tr>
@@ -11274,7 +10749,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:40', NULL, NULL, 'quạt gió điều hòa trong xe suzuki xl7 2020-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r21000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R21000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:40', NULL, NULL, 'quạt gió điều hòa trong xe suzuki xl7 2020-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r21000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R21000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415073R21000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki XL7 2020-2025</td></tr>
@@ -11295,7 +10770,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:44', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2023-2024', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r21000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R21000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:44', NULL, NULL, 'quạt gió điều hòa trong xe suzuki ertiga 2023-2024', NULL, 'quat-gio-ieu-hoa-trong-xe-suzuki-ertiga-xl7-7415073r21000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7415073 R21000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7415073R21000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Suzuki Ertiga 2023-2024</td></tr>
@@ -11337,7 +10812,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:57', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A261 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:45:57', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A261 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A261</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Suzuki Vitara 2016-2018</td></tr>
@@ -11358,7 +10833,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:46:04', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A261 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:46:04', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A261 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A261</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Mitsubishi Outlander 2017-2019</td></tr>
@@ -11421,7 +10896,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:49:37', NULL, NULL, 'giàn sưởi suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7412073 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:49:37', NULL, NULL, 'giàn sưởi suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7412073 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7412073R30000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn sưởi Suzuki Ertiga 2023-2024</td></tr>
@@ -11442,7 +10917,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:49:46', NULL, NULL, 'giàn sưởi suzuki fronx 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7412073 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:49:46', NULL, NULL, 'giàn sưởi suzuki fronx 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7412073 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7412073R30000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn sưởi Suzuki Fronx 2025-2026</td></tr>
@@ -11463,7 +10938,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:49:51', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:49:51', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7411373R30000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp quạt gió số 1 Suzuki Ertiga 2018-2021</td></tr>
@@ -11484,7 +10959,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:01', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:01', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7411373R30000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp quạt gió số 1 Suzuki XL7 2020-2025</td></tr>
@@ -11505,7 +10980,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:09', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:09', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7411373R30000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp quạt gió số 1 Suzuki Ertiga 2023-2024</td></tr>
@@ -11526,7 +11001,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:36', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki fronx 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:36', NULL, NULL, 'nắp hộp quạt gió số 1 suzuki fronx 2025-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7411373 R30000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7411373R30000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp quạt gió số 1 Suzuki Fronx 2025-2026</td></tr>
@@ -11547,7 +11022,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:44', NULL, NULL, 'nắp hộp lọc gió số 3 suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421173 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:44', NULL, NULL, 'nắp hộp lọc gió số 3 suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421173 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7421173R00000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp lọc gió số 3 Suzuki Ertiga 2018-2021</td></tr>
@@ -11568,7 +11043,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:49', NULL, NULL, 'nắp hộp lọc gió số 3 suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421173 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:49', NULL, NULL, 'nắp hộp lọc gió số 3 suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421173 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7421173R00000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp lọc gió số 3 Suzuki XL7 2020-2025</td></tr>
@@ -11589,7 +11064,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:54', NULL, NULL, 'nắp hộp lọc gió số 3 suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421173 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:50:54', NULL, NULL, 'nắp hộp lọc gió số 3 suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421173 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7421173R00000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp lọc gió số 3 Suzuki Ertiga 2023-2024</td></tr>
@@ -11610,7 +11085,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:01', NULL, NULL, 'nắp hộp lọc gió số 2 suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421373 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:01', NULL, NULL, 'nắp hộp lọc gió số 2 suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421373 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7421373R00000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp lọc gió số 2 Suzuki Ertiga 2018-2021</td></tr>
@@ -11631,7 +11106,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:22', NULL, NULL, 'nắp hộp lọc gió số 2 suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421373 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:22', NULL, NULL, 'nắp hộp lọc gió số 2 suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421373 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7421373R00000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp lọc gió số 2 Suzuki XL7 2020-2025</td></tr>
@@ -11652,7 +11127,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:27', NULL, NULL, 'nắp hộp lọc gió số 2 suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421373 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:27', NULL, NULL, 'nắp hộp lọc gió số 2 suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7421373 R00000 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7421373R00000</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Nắp hộp lọc gió số 2 Suzuki Ertiga 2023-2024</td></tr>
@@ -11673,7 +11148,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:41', NULL, NULL, 'puly lốc điều hòa mitsubishi xpander 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 B178 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:41', NULL, NULL, 'puly lốc điều hòa mitsubishi xpander 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 B178 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813B178</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Puly lốc điều hòa Mitsubishi Xpander 2022-2024</td></tr>
@@ -11694,7 +11169,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:50', NULL, NULL, 'puly lốc điều hòa mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 B178 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:50', NULL, NULL, 'puly lốc điều hòa mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 B178 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813B178</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Puly lốc điều hòa Mitsubishi Xforce 2023-2025</td></tr>
@@ -11715,7 +11190,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:56', NULL, NULL, 'quạt gió điều hòa trong xe honda city 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79140 T02 T01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:51:56', NULL, NULL, 'quạt gió điều hòa trong xe honda city 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79140 T02 T01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>79140T02T01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Honda City 2020-2022</td></tr>
@@ -11736,7 +11211,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:52:02', NULL, NULL, 'quạt gió điều hòa trong xe honda civic 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79140 T02 T01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:52:02', NULL, NULL, 'quạt gió điều hòa trong xe honda civic 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79140 T02 T01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>79140T02T01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Honda Civic 2022-2023</td></tr>
@@ -11778,7 +11253,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:52:14', NULL, NULL, 'quạt gió điều hòa trong xe honda civic 2024-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79140 T02 T01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:52:14', NULL, NULL, 'quạt gió điều hòa trong xe honda civic 2024-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79140 T02 T01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>79140T02T01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Honda Civic 2024-2025</td></tr>
@@ -11820,7 +11295,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:53:37', NULL, NULL, 'lốc điều hòa mitsubishi attrage 2014-2018', NULL, 'loc-ieu-hoa-mitsubishi-mirage-attrage-7813a385-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A385 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:53:37', NULL, NULL, 'lốc điều hòa mitsubishi attrage 2014-2018', NULL, 'loc-ieu-hoa-mitsubishi-mirage-attrage-7813a385-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A385 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A385</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Mitsubishi Attrage 2014-2018</td></tr>
@@ -11841,7 +11316,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:53:46', NULL, NULL, 'lốc điều hòa mitsubishi mirage 2017-2021', NULL, 'loc-ieu-hoa-mitsubishi-mirage-attrage-7813a385-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A385 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:53:46', NULL, NULL, 'lốc điều hòa mitsubishi mirage 2017-2021', NULL, 'loc-ieu-hoa-mitsubishi-mirage-attrage-7813a385-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A385 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A385</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Mitsubishi Mirage 2017-2021</td></tr>
@@ -12013,7 +11488,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:25:18', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:25:18', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813A871 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -12122,7 +11597,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:06:08', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'loc-ieu-hoa-mitsubishi-outlander-outlander-sport-vitara-7813a737-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A737 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:06:08', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'loc-ieu-hoa-mitsubishi-outlander-outlander-sport-vitara-7813a737-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A737 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A737</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Suzuki Vitara 2016-2018</td></tr>
@@ -12143,7 +11618,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:06:22', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'loc-ieu-hoa-mitsubishi-outlander-outlander-sport-vitara-7813a737-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A737 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:06:22', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'loc-ieu-hoa-mitsubishi-outlander-outlander-sport-vitara-7813a737-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A737 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A737</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Mitsubishi Outlander 2017-2019</td></tr>
@@ -12164,7 +11639,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:08:37', NULL, NULL, 'puly điều hòa mitsubishi xpander 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A945 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:08:37', NULL, NULL, 'puly điều hòa mitsubishi xpander 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A945 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A945</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Puly điều hòa Mitsubishi Xpander 2022-2024</td></tr>
@@ -12185,7 +11660,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:09:13', NULL, NULL, 'puly điều hòa mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A945 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:09:13', NULL, NULL, 'puly điều hòa mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A945 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A945</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Puly điều hòa Mitsubishi Xforce 2023-2025</td></tr>
@@ -12206,7 +11681,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:09:57', NULL, NULL, 'lốc điều hòa mitsubishi outlander sport 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:09:57', NULL, NULL, 'lốc điều hòa mitsubishi outlander sport 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A197-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Mitsubishi Outlander Sport 2013-2015</td></tr>
@@ -12227,7 +11702,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:10:52', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:10:52', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A197-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Suzuki Vitara 2016-2018</td></tr>
@@ -12248,7 +11723,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:11:11', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:11:11', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7813 A197-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7813A197-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Mitsubishi Outlander 2017-2019</td></tr>
@@ -12416,7 +11891,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:15:33', NULL, NULL, 'dàn nóng mitsubishi mirage 2014-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:15:33', NULL, NULL, 'dàn nóng mitsubishi mirage 2014-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7812A229-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Mitsubishi Mirage 2014-2016</td></tr>
@@ -12437,7 +11912,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:16:10', NULL, NULL, 'dàn nóng mitsubishi attrage 2014-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:16:10', NULL, NULL, 'dàn nóng mitsubishi attrage 2014-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7812A229-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Mitsubishi Attrage 2014-2018</td></tr>
@@ -12458,7 +11933,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:16:21', NULL, NULL, 'dàn nóng mitsubishi mirage 2017-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:16:21', NULL, NULL, 'dàn nóng mitsubishi mirage 2017-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 7812 A229-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>7812A229-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Mitsubishi Mirage 2017-2021</td></tr>
@@ -12563,7 +12038,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:18:09', NULL, NULL, 'quạt gió điều hòa trong xe honda city 2015-2017', NULL, 'quat-gio-ieu-hoa-trong-xe-honda-city-hr-v-79310t9ax01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79310 T9 AX01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:18:09', NULL, NULL, 'quạt gió điều hòa trong xe honda city 2015-2017', NULL, 'quat-gio-ieu-hoa-trong-xe-honda-city-hr-v-79310t9ax01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79310 T9 AX01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>79310T9AX01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Honda City 2015-2017</td></tr>
@@ -12584,7 +12059,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:18:18', NULL, NULL, 'quạt gió điều hòa trong xe honda city 2017-2020', NULL, 'quat-gio-ieu-hoa-trong-xe-honda-city-hr-v-79310t9ax01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79310 T9 AX01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:18:18', NULL, NULL, 'quạt gió điều hòa trong xe honda city 2017-2020', NULL, 'quat-gio-ieu-hoa-trong-xe-honda-city-hr-v-79310t9ax01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79310 T9 AX01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>79310T9AX01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Honda City 2017-2020</td></tr>
@@ -12605,7 +12080,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:18:24', NULL, NULL, 'quạt gió điều hòa trong xe honda hr-v 2019-2021', NULL, 'quat-gio-ieu-hoa-trong-xe-honda-city-hr-v-79310t9ax01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79310 T9 AX01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:18:24', NULL, NULL, 'quạt gió điều hòa trong xe honda hr-v 2019-2021', NULL, 'quat-gio-ieu-hoa-trong-xe-honda-city-hr-v-79310t9ax01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 79310 T9 AX01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>79310T9AX01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Honda HR-V 2019-2021</td></tr>
@@ -12626,7 +12101,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:19:14', NULL, NULL, 'giàn lạnh chevrolet colorado 2013-2016', NULL, 'gian-lanh-valeo-colorado-d-max-814751-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814751 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:19:14', NULL, NULL, 'giàn lạnh chevrolet colorado 2013-2016', NULL, 'gian-lanh-valeo-colorado-d-max-814751-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814751 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>814751</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Chevrolet Colorado 2013-2016</td></tr>
@@ -12647,7 +12122,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:20:07', NULL, NULL, 'giàn lạnh isuzu d-max 2014-2017', NULL, 'gian-lanh-valeo-colorado-d-max-814751-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814751 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:20:07', NULL, NULL, 'giàn lạnh isuzu d-max 2014-2017', NULL, 'gian-lanh-valeo-colorado-d-max-814751-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814751 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>814751</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Isuzu D-Max 2014-2017</td></tr>
@@ -12668,7 +12143,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:20:14', NULL, NULL, 'giàn lạnh chevrolet colorado 2017', NULL, 'gian-lanh-valeo-colorado-d-max-814751-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814751 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:20:14', NULL, NULL, 'giàn lạnh chevrolet colorado 2017', NULL, 'gian-lanh-valeo-colorado-d-max-814751-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814751 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>814751</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Chevrolet Colorado 2017</td></tr>
@@ -12815,7 +12290,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:23:19', NULL, NULL, 'dàn nóng honda civic 2006-2010', NULL, 'dan-nong-honda-city-civic-80110snna41-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 80110 SNNA41 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:23:19', NULL, NULL, 'dàn nóng honda civic 2006-2010', NULL, 'dan-nong-honda-city-civic-80110snna41-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 80110 SNNA41 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>80110SNNA41</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Honda Civic 2006-2010</td></tr>
@@ -12836,7 +12311,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:23:28', NULL, NULL, 'dàn nóng honda civic 2010-2012', NULL, 'dan-nong-honda-city-civic-80110snna41-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 80110 SNNA41 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:23:28', NULL, NULL, 'dàn nóng honda civic 2010-2012', NULL, 'dan-nong-honda-city-civic-80110snna41-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 80110 SNNA41 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>80110SNNA41</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Honda Civic 2010-2012</td></tr>
@@ -12857,7 +12332,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:24:04', NULL, NULL, 'dàn nóng honda city 2009-2011', NULL, 'dan-nong-honda-city-civic-80110snna41-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 80110 SNNA41 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:24:04', NULL, NULL, 'dàn nóng honda city 2009-2011', NULL, 'dan-nong-honda-city-civic-80110snna41-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 80110 SNNA41 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>80110SNNA41</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Honda City 2009-2011</td></tr>
@@ -13004,7 +12479,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:30:56', NULL, NULL, 'đèn hậu toyota vios 2006-2007', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:30:56', NULL, NULL, 'đèn hậu toyota vios 2006-2007', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
 <li><strong>Chất liệu:</strong> Hợp kim cao cấp v&agrave; cao su tổng hợp chịu nhiệt, chống m&agrave;i m&ograve;n tốt.</li>
 <li><strong>Tương th&iacute;ch:</strong> Tương th&iacute;ch chuẩn 100% theo m&atilde; OEM 814985 cho c&aacute;c d&ograve;ng xe tương ứng.</li>
 <li><strong>Ch&iacute;nh s&aacute;ch:</strong> Đ&atilde; kiểm định chất lượng nghi&ecirc;m ngặt, bảo h&agrave;nh 12 th&aacute;ng tr&ecirc;n to&agrave;n quốc.</li>
@@ -13046,7 +12521,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:31:09', NULL, NULL, 'lốc điều hòa nissan teana 2013', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814985 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:31:09', NULL, NULL, 'lốc điều hòa nissan teana 2013', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814985 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>814985</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Nissan Teana 2013</td></tr>
@@ -13067,7 +12542,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:31:16', NULL, NULL, 'lốc điều hòa nissan x-trail 2006-2008', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814985 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:31:16', NULL, NULL, 'lốc điều hòa nissan x-trail 2006-2008', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814985 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>814985</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Nissan X-Trail 2006-2008</td></tr>
@@ -13088,7 +12563,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:39:54', NULL, NULL, 'lốc điều hòa nissan x-trail 2016-2018', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814985 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:39:54', NULL, NULL, 'lốc điều hòa nissan x-trail 2016-2018', NULL, 'loc-ieu-hoa-valeo-x-trail-teana-814985-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 814985 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>814985</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Nissan X-Trail 2016-2018</td></tr>
@@ -13109,7 +12584,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:34:40', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2007-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:34:40', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2007-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710306110</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2007-2008</td></tr>
@@ -13130,7 +12605,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:38:34', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2012-2015', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:38:34', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2012-2015', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710306110</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2012-2015</td></tr>
@@ -13151,7 +12626,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:38:41', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2006-2011', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:38:41', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2006-2011', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710306110</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2006-2011</td></tr>
@@ -13172,7 +12647,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:38:57', NULL, NULL, 'quạt gió điều hòa trong xe toyota rav4 2006-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:38:57', NULL, NULL, 'quạt gió điều hòa trong xe toyota rav4 2006-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710306110</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota RAV4 2006-2008</td></tr>
@@ -13193,7 +12668,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:40:08', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2016', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:40:08', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2016', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710306110-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710306110 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710306110</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2016</td></tr>
@@ -13214,7 +12689,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:41:09', NULL, NULL, 'hộp giàn lạnh sau toyota avanza 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 87030 BZ220 B0 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:41:09', NULL, NULL, 'hộp giàn lạnh sau toyota avanza 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 87030 BZ220 B0 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>87030BZ220B0</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp giàn lạnh sau Toyota Avanza 2022-2023</td></tr>
@@ -13235,7 +12710,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:41:18', NULL, NULL, 'hộp giàn lạnh sau toyota veloz 2022-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 87030 BZ220 B0 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:41:18', NULL, NULL, 'hộp giàn lạnh sau toyota veloz 2022-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 87030 BZ220 B0 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>87030BZ220B0</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp giàn lạnh sau Toyota Veloz 2022-2025</td></tr>
@@ -13256,7 +12731,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:42:19', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2008-2013', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D161 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:42:19', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2008-2013', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D161 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030D161</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Vios 2008-2013</td></tr>
@@ -13277,7 +12752,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:42:28', NULL, NULL, 'quạt gió điều hòa trong xe toyota yaris 2008-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D161 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:42:28', NULL, NULL, 'quạt gió điều hòa trong xe toyota yaris 2008-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D161 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030D161</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Yaris 2008-2011</td></tr>
@@ -13298,7 +12773,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:22', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2011-2014', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:22', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2011-2014', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K092</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Fortuner 2011-2014</td></tr>
@@ -13319,7 +12794,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:30', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:30', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K092</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Fortuner 2009-2012</td></tr>
@@ -13340,7 +12815,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:38', NULL, NULL, 'quạt gió điều hòa trong xe toyota innova 2008-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:38', NULL, NULL, 'quạt gió điều hòa trong xe toyota innova 2008-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K092</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Innova 2008-2011</td></tr>
@@ -13361,7 +12836,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:45', NULL, NULL, 'quạt gió điều hòa trong xe toyota innova 2012-2013', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:45', NULL, NULL, 'quạt gió điều hòa trong xe toyota innova 2012-2013', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K092</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Innova 2012-2013</td></tr>
@@ -13382,7 +12857,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:51', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2012-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:51', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2012-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K092</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Fortuner 2012-2015</td></tr>
@@ -13403,7 +12878,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:59', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:43:59', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K092 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K092</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Fortuner 2013-2015</td></tr>
@@ -13424,7 +12899,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:44:43', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2014-2016', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:44:43', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2014-2016', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030D290</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Vios 2014-2016</td></tr>
@@ -13445,7 +12920,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:44:56', NULL, NULL, 'quạt gió điều hòa trong xe toyota yaris 2014', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:44:56', NULL, NULL, 'quạt gió điều hòa trong xe toyota yaris 2014', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030D290</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Yaris 2014</td></tr>
@@ -13466,7 +12941,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:45:05', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2019-2020', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:45:05', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2019-2020', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030D290</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Vios 2019-2020</td></tr>
@@ -13487,7 +12962,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:45:11', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2023-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:45:11', NULL, NULL, 'quạt gió điều hòa trong xe toyota vios 2023-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-vios-yaris-871030d290-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 D290 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030D290</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Vios 2023-2025</td></tr>
@@ -13508,7 +12983,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:45', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K191 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:45', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K191 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K191</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Fortuner 2016-2019</td></tr>
@@ -13529,7 +13004,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:59', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner trd 2019-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K191 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:59', NULL, NULL, 'quạt gió điều hòa trong xe toyota fortuner trd 2019-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K191 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K191</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Fortuner TRD 2019-2022</td></tr>
@@ -13550,7 +13025,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:50:18', NULL, NULL, 'quạt gió điều hòa trong xe toyota innova 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K191 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:50:18', NULL, NULL, 'quạt gió điều hòa trong xe toyota innova 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 871030 K191 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>871030K191</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Innova 2023-2025</td></tr>
@@ -13571,7 +13046,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:51:25', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2007-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:51:25', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2007-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710342101</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2007-2008</td></tr>
@@ -13592,7 +13067,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:51:44', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2012-2015', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:51:44', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2012-2015', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710342101</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2012-2015</td></tr>
@@ -13613,7 +13088,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:52:19', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2006-2011', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:52:19', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2006-2011', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710342101</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2006-2011</td></tr>
@@ -13634,7 +13109,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:52:38', NULL, NULL, 'quạt gió điều hòa trong xe toyota rav4 2006-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:52:38', NULL, NULL, 'quạt gió điều hòa trong xe toyota rav4 2006-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710342101</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota RAV4 2006-2008</td></tr>
@@ -13655,7 +13130,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:57', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2016', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:57', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2016', NULL, 'quat-gio-ieu-hoa-trong-xe-lexus-camry-rav4-8710342101-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710342101 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710342101</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2016</td></tr>
@@ -13676,7 +13151,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:34', NULL, NULL, 'quạt gió điều hòa trong xe toyota land cruiser 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710326210 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:34', NULL, NULL, 'quạt gió điều hòa trong xe toyota land cruiser 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710326210 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710326210</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Land Cruiser 2020-2022</td></tr>
@@ -13697,7 +13172,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:46', NULL, NULL, 'quạt gió điều hòa trong xe toyota land cruiser 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710326210 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:46', NULL, NULL, 'quạt gió điều hòa trong xe toyota land cruiser 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710326210 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710326210</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Land Cruiser 2022-2024</td></tr>
@@ -13718,7 +13193,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:54:37', NULL, NULL, 'quạt gió điều hòa trong xe toyota land cruiser prado 2024-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710326210 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:54:37', NULL, NULL, 'quạt gió điều hòa trong xe toyota land cruiser prado 2024-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710326210 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710326210</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Land Cruiser Prado 2024-2026</td></tr>
@@ -13739,7 +13214,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:56:33', NULL, NULL, 'quạt gió điều hòa trong xe toyota hillux 2004-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-toyota-hillux-gs-8710312070-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710312070 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:56:33', NULL, NULL, 'quạt gió điều hòa trong xe toyota hillux 2004-2008', NULL, 'quat-gio-ieu-hoa-trong-xe-toyota-hillux-gs-8710312070-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710312070 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710312070</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Hillux 2004-2008</td></tr>
@@ -13760,7 +13235,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:56:53', NULL, NULL, 'quạt gió điều hòa trong xe lexus gs300 2006-2007', NULL, 'quat-gio-ieu-hoa-trong-xe-toyota-hillux-gs-8710312070-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710312070 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:56:53', NULL, NULL, 'quạt gió điều hòa trong xe lexus gs300 2006-2007', NULL, 'quat-gio-ieu-hoa-trong-xe-toyota-hillux-gs-8710312070-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710312070 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710312070</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Lexus GS300 2006-2007</td></tr>
@@ -13781,7 +13256,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:59:23', NULL, NULL, 'quạt gió điều hòa trong xe toyota hillux 2004-2008', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710360172 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:59:23', NULL, NULL, 'quạt gió điều hòa trong xe toyota hillux 2004-2008', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710360172 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710360172</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Hillux 2004-2008</td></tr>
@@ -13802,7 +13277,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:59:37', NULL, NULL, 'quạt gió điều hòa trong xe lexus gs300 2006-2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710360172 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:59:37', NULL, NULL, 'quạt gió điều hòa trong xe lexus gs300 2006-2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710360172 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710360172</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Lexus GS300 2006-2007</td></tr>
@@ -13823,7 +13298,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 10:01:01', NULL, NULL, 'quạt gió điều hòa trong xe lexus rx350 2015-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710358080 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 10:01:01', NULL, NULL, 'quạt gió điều hòa trong xe lexus rx350 2015-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710358080 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710358080</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Lexus RX350 2015-2019</td></tr>
@@ -13844,7 +13319,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 10:01:13', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710358080 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 10:01:13', NULL, NULL, 'quạt gió điều hòa trong xe toyota camry 2019-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8710358080 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8710358080</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Camry 2019-2021</td></tr>
@@ -13865,7 +13340,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:30:10', NULL, NULL, 'hộp dàn lạnh trong xe toyota fortuner 2011-2014', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500 K020 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:30:10', NULL, NULL, 'hộp dàn lạnh trong xe toyota fortuner 2011-2014', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500 K020 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>870500K020</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp dàn lạnh trong xe Toyota Fortuner 2011-2014</td></tr>
@@ -13886,7 +13361,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:30:40', NULL, NULL, 'hộp dàn lạnh trong xe toyota fortuner 2009-2012', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500 K020 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:30:40', NULL, NULL, 'hộp dàn lạnh trong xe toyota fortuner 2009-2012', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500 K020 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>870500K020</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp dàn lạnh trong xe Toyota Fortuner 2009-2012</td></tr>
@@ -13907,7 +13382,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:31:39', NULL, NULL, 'hộp dàn lạnh trong xe toyota innova 2008-2011', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500 K020 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:31:39', NULL, NULL, 'hộp dàn lạnh trong xe toyota innova 2008-2011', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500 K020 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>870500K020</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Hộp dàn lạnh trong xe Toyota Innova 2008-2011</td></tr>
@@ -13928,7 +13403,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:36:36', NULL, NULL, 'hộp dàn lạnh trong xe toyota innova 2012-2013', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:36:36', NULL, NULL, 'hộp dàn lạnh trong xe toyota innova 2012-2013', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500K020 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -13953,7 +13428,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:38:12', NULL, NULL, 'hộp dàn lạnh trong xe toyota innova 2014', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:38:12', NULL, NULL, 'hộp dàn lạnh trong xe toyota innova 2014', NULL, 'hop-dan-lanh-trong-xe-lexus-innova-fortuner-870500k020-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 870500K020 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -22322,7 +21797,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa toyota vios 2019-2020', NULL, 'van-tiet-luu-ieu-hoa-toyota-vios-corolla-885150k100-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K100 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:43', NULL, NULL, 'van tiết lưu điều hòa toyota vios 2019-2020', NULL, 'van-tiet-luu-ieu-hoa-toyota-vios-corolla-885150k100-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K100 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K100</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Vios 2019-2020</td></tr>
@@ -22343,7 +21818,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'van tiết lưu điều hòa toyota corolla altis 2008-2010', NULL, 'van-tiet-luu-ieu-hoa-toyota-vios-corolla-885150k100-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K100 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'van tiết lưu điều hòa toyota corolla altis 2008-2010', NULL, 'van-tiet-luu-ieu-hoa-toyota-vios-corolla-885150k100-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K100 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K100</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Corolla Altis 2008-2010</td></tr>
@@ -22364,7 +21839,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'van tiết lưu điều hòa toyota corolla altis 2009-2010', NULL, 'van-tiet-luu-ieu-hoa-toyota-vios-corolla-885150k100-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K100 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:41', NULL, NULL, 'van tiết lưu điều hòa toyota corolla altis 2009-2010', NULL, 'van-tiet-luu-ieu-hoa-toyota-vios-corolla-885150k100-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K100 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K100</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Corolla Altis 2009-2010</td></tr>
@@ -22385,7 +21860,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'van tiết lưu điều hòa toyota innova 2020-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'van tiết lưu điều hòa toyota innova 2020-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K640</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Innova 2020-2021</td></tr>
@@ -22406,7 +21881,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'van tiết lưu điều hòa toyota fortuner 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:40', NULL, NULL, 'van tiết lưu điều hòa toyota fortuner 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K640</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Fortuner 2016-2019</td></tr>
@@ -22427,7 +21902,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa toyota innova 2017-2020', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa toyota innova 2017-2020', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K640</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota innova 2017-2020</td></tr>
@@ -22448,7 +21923,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa toyota fortuner trd 2019-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:39', NULL, NULL, 'van tiết lưu điều hòa toyota fortuner trd 2019-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K640</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Fortuner TRD 2019-2022</td></tr>
@@ -22469,7 +21944,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'van tiết lưu điều hòa toyota innova 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:38', NULL, NULL, 'van tiết lưu điều hòa toyota innova 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885150 K640 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885150K640</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Innova 2023-2025</td></tr>
@@ -22490,7 +21965,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560350 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:36', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser 2020-2022', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560350 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8851560350</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Land Cruiser 2020-2022</td></tr>
@@ -22511,7 +21986,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560350 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:35', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser 2022-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560350 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8851560350</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Land Cruiser 2022-2024</td></tr>
@@ -22532,7 +22007,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:01:43', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser prado 2024-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560350 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:01:43', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser prado 2024-2026', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560350 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8851560350</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Land Cruiser Prado 2024-2026</td></tr>
@@ -22658,7 +22133,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:12:37', NULL, NULL, 'van tiết lưu điều hòa toyota raize 2021-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88515 BZ200 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:12:37', NULL, NULL, 'van tiết lưu điều hòa toyota raize 2021-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88515 BZ200 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88515BZ200</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Raize 2021-2024</td></tr>
@@ -22700,7 +22175,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:23:52', NULL, NULL, 'giàn lạnh toyota camry 2007-2008', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850106112-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:23:52', NULL, NULL, 'giàn lạnh toyota camry 2007-2008', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850106112-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8850106112-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Camry 2007-2008</td></tr>
@@ -22763,7 +22238,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:27:52', NULL, NULL, 'giàn lạnh toyota camry 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850106112-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:27:52', NULL, NULL, 'giàn lạnh toyota camry 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8850106112-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8850106112-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Camry 2006-2011</td></tr>
@@ -22805,7 +22280,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:30:48', NULL, NULL, 'quạt gió điều hòa trong xe toyota avanza 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ130 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:30:48', NULL, NULL, 'quạt gió điều hòa trong xe toyota avanza 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ130 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88550BZ130</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Avanza 2022-2023</td></tr>
@@ -22868,7 +22343,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:33:38', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser 1998-2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560190 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:33:38', NULL, NULL, 'van tiết lưu điều hòa toyota land cruiser 1998-2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8851560190 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8851560190</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Van tiết lưu điều hòa Toyota Land Cruiser 1998-2007</td></tr>
@@ -23057,7 +22532,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:46:09', NULL, NULL, 'quạt gió điều hòa trong xe toyota raize 2021-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:46:09', NULL, NULL, 'quạt gió điều hòa trong xe toyota raize 2021-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88550BZ150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Raize 2021-2024</td></tr>
@@ -23078,7 +22553,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:46:40', NULL, NULL, 'quạt gió điều hòa trong xe toyota avanza 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:46:40', NULL, NULL, 'quạt gió điều hòa trong xe toyota avanza 2022-2023', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ150 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88550BZ150</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Avanza 2022-2023</td></tr>
@@ -23162,7 +22637,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:42:28', NULL, NULL, 'quạt gió điều hòa trong xe toyota veloz 2022-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-toyota-avanza-raize-veloz-88550bz160-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ160 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:42:28', NULL, NULL, 'quạt gió điều hòa trong xe toyota veloz 2022-2025', NULL, 'quat-gio-ieu-hoa-trong-xe-toyota-avanza-raize-veloz-88550bz160-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 88550 BZ160 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>88550BZ160</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Quạt gió điều hòa trong xe Toyota Veloz 2022-2025</td></tr>
@@ -23246,7 +22721,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:50:42', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:50:42', NULL, NULL, 'dàn nóng chevrolet cruze 2009-2012', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8879006</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Cruze 2009-2012</td></tr>
@@ -23267,7 +22742,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:52:02', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:52:02', NULL, NULL, 'dàn nóng daewoo lacetti 2009-2011', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8879006</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Daewoo Lacetti 2009-2011</td></tr>
@@ -23288,7 +22763,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:52:45', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:52:45', NULL, NULL, 'dàn nóng chevrolet orlando 2011-2014', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8879006</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Orlando 2011-2014</td></tr>
@@ -23309,7 +22784,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:53:22', NULL, NULL, 'cảm biến nhiệt độ ngoài trời toyota sienna 2014-2016', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:53:22', NULL, NULL, 'cảm biến nhiệt độ ngoài trời toyota sienna 2014-2016', NULL, 'dan-nong-tongshi-lacetti-cruze-orlando-8879006-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879006 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8879006</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến nhiệt độ ngoài trời Toyota Sienna 2014-2016</td></tr>
@@ -23351,7 +22826,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:56:25', NULL, NULL, 'giàn lạnh toyota fortuner 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885010 K090-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 22:56:25', NULL, NULL, 'giàn lạnh toyota fortuner 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 885010 K090-01 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>885010K090-01</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Giàn lạnh Toyota Fortuner 2009-2012</td></tr>
@@ -23435,7 +22910,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:02:15', NULL, NULL, 'cảm biến nhiệt độ giàn lạnh lexus rx350/rx450h 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8862533190 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:02:15', NULL, NULL, 'cảm biến nhiệt độ giàn lạnh lexus rx350/rx450h 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8862533190 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8862533190</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Cảm biến nhiệt độ giàn lạnh Lexus RX350/RX450H 2013-2015</td></tr>
@@ -23456,7 +22931,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:03:29', NULL, NULL, 'dàn nóng hyundai accent 2011-2016', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:03:29', NULL, NULL, 'dàn nóng hyundai accent 2011-2016', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8870000-SD</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Hyundai Accent 2011-2016</td></tr>
@@ -23477,7 +22952,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:03:58', NULL, NULL, 'dàn nóng kia rio 2012-2014', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:03:58', NULL, NULL, 'dàn nóng kia rio 2012-2014', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8870000-SD</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Kia Rio 2012-2014</td></tr>
@@ -23498,7 +22973,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:04:58', NULL, NULL, 'dàn nóng hyundai i10 grand 2014-2016', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:04:58', NULL, NULL, 'dàn nóng hyundai i10 grand 2014-2016', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8870000-SD</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Hyundai i10 Grand 2014-2016</td></tr>
@@ -23519,7 +22994,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:05:32', NULL, NULL, 'dàn nóng hyundai accent 2013-2014', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:05:32', NULL, NULL, 'dàn nóng hyundai accent 2013-2014', NULL, 'dan-nong-tongshi-i10-accent-rio-8870000-sd-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8870000-SD cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8870000-SD</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Hyundai Accent 2013-2014</td></tr>
@@ -23666,7 +23141,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:12:58', NULL, NULL, 'dàn nóng lexus gx470 2002-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8875013 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:12:58', NULL, NULL, 'dàn nóng lexus gx470 2002-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8875013 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8875013</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Lexus GX470 2002-2009</td></tr>
@@ -23750,7 +23225,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:24:22', NULL, NULL, 'dàn nóng chevrolet aveo 2009-2012', NULL, 'dan-nong-tongshi-aveo-gentra-8879012-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879012 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:24:22', NULL, NULL, 'dàn nóng chevrolet aveo 2009-2012', NULL, 'dan-nong-tongshi-aveo-gentra-8879012-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8879012 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8879012</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Dàn nóng Chevrolet Aveo 2009-2012</td></tr>
@@ -23771,7 +23246,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6 px 0; color: #334155; font-size: 14 px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14 px;">Website ch&iacute;nh thức: <a style="color: #2563 eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:25:11', NULL, NULL, 'lốc điều hòa isuzu d-max 2014-2017', NULL, 'loc-ieu-hoa-isuzu-d-max-mu-x-8982511920-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8982511920 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 23:25:11', NULL, NULL, 'lốc điều hòa isuzu d-max 2014-2017', NULL, 'loc-ieu-hoa-isuzu-d-max-mu-x-8982511920-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul> <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li> <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8982511920 cho các dòng xe tương ứng.</li> <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li> </ul>', '<table class="table-striped">
   <tr><th>Thông số kỹ thuật</th><th>Chi tiết</th></tr>
   <tr><td><strong>Mã phụ tùng (OEM)</strong></td><td>8982511920</td></tr>
   <tr><td><strong>Tên sản phẩm</strong></td><td>Lốc điều hòa Isuzu D-Max 2014-2017</td></tr>
@@ -23792,7 +23267,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 00:44:42', NULL, NULL, 'giàn lạnh chevrolet colorado 2013-2016', NULL, 'gian-lanh-isuzu-colorado-d-max-8981393761-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 00:44:42', NULL, NULL, 'giàn lạnh chevrolet colorado 2013-2016', NULL, 'gian-lanh-isuzu-colorado-d-max-8981393761-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 8981393761 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24042,7 +23517,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:36:33', NULL, NULL, 'van tiết lưu điều hòa nissan teana 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:36:33', NULL, NULL, 'van tiết lưu điều hòa nissan teana 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 922004M400 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24067,7 +23542,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:37:32', NULL, NULL, 'van tiết lưu điều hòa nissan murano sl 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:37:32', NULL, NULL, 'van tiết lưu điều hòa nissan murano sl 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 922004Y800 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24142,7 +23617,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:40:58', NULL, NULL, 'van tiết lưu điều hòa mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:40:58', NULL, NULL, 'van tiết lưu điều hòa mitsubishi xforce 2023-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 92200B000P cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24167,7 +23642,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:42:28', NULL, NULL, 'lốc điều hòa nissan rogue 2017', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:42:28', NULL, NULL, 'lốc điều hòa nissan rogue 2017', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 926004CE0A cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24192,7 +23667,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:44:48', NULL, NULL, 'lốc điều hòa daewoo matiz groove 2010-2012', NULL, 'loc-ieu-hoa-gm-spark-matiz-94558244-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:44:48', NULL, NULL, 'lốc điều hòa daewoo matiz groove 2010-2012', NULL, 'loc-ieu-hoa-gm-spark-matiz-94558244-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 94558244 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24267,7 +23742,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:47:08', NULL, NULL, 'lốc điều hòa nissan livina 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:47:08', NULL, NULL, 'lốc điều hòa nissan livina 2007', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 92600CJ63E cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24317,7 +23792,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:49:17', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:49:17', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9511061J10000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24342,7 +23817,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:49:39', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:49:39', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9511061J10000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24367,7 +23842,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:52:12', NULL, NULL, 'giá đỡ lốc điều hòa suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:52:12', NULL, NULL, 'giá đỡ lốc điều hòa suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9511061J10000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24392,7 +23867,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:53:22', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:53:22', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9511061J20000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24417,7 +23892,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:54:21', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:54:21', NULL, NULL, 'giá đỡ lốc điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9511061J20000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24542,7 +24017,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:59:46', NULL, NULL, 'giàn lạnh ford ranger 2009-2012', NULL, 'gian-lanh-formula-ranger-everest-9058006700-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 01:59:46', NULL, NULL, 'giàn lạnh ford ranger 2009-2012', NULL, 'gian-lanh-formula-ranger-everest-9058006700-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9058006700-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24667,7 +24142,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:19:36', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'loc-ieu-hoa-suzuki-outlander-outlander-sport-vitara-9520061m02-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:19:36', NULL, NULL, 'lốc điều hòa suzuki vitara 2016-2018', NULL, 'loc-ieu-hoa-suzuki-outlander-outlander-sport-vitara-9520061m02-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520061M02 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24692,7 +24167,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:21:36', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'loc-ieu-hoa-suzuki-outlander-outlander-sport-vitara-9520061m02-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:21:36', NULL, NULL, 'lốc điều hòa mitsubishi outlander 2017-2019', NULL, 'loc-ieu-hoa-suzuki-outlander-outlander-sport-vitara-9520061m02-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520061M02 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24717,7 +24192,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:22:37', NULL, NULL, 'lốc điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:22:37', NULL, NULL, 'lốc điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520067D60 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24742,7 +24217,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:23:58', NULL, NULL, 'lốc điều hòa suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:23:58', NULL, NULL, 'lốc điều hòa suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520067D60 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24767,7 +24242,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:25:00', NULL, NULL, 'lốc điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:25:00', NULL, NULL, 'lốc điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520067D60 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24792,7 +24267,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:25:52', NULL, NULL, 'lốc điều hòa suzuki ertiga 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:25:52', NULL, NULL, 'lốc điều hòa suzuki ertiga 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520077MA1000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24817,7 +24292,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:27:04', NULL, NULL, 'lốc điều hòa suzuki new ertiga 2016-2017', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:27:04', NULL, NULL, 'lốc điều hòa suzuki new ertiga 2016-2017', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520077MA1000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24842,7 +24317,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:27:33', NULL, NULL, 'lốc điều hòa suzuki ciaz 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:27:33', NULL, NULL, 'lốc điều hòa suzuki ciaz 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520077MA1000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24867,7 +24342,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:29:29', NULL, NULL, 'lốc điều hòa suzuki ciaz 2020-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:29:29', NULL, NULL, 'lốc điều hòa suzuki ciaz 2020-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520077MA1000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24892,7 +24367,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:31:56', NULL, NULL, 'lốc điều hòa suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:31:56', NULL, NULL, 'lốc điều hòa suzuki ertiga 2018-2021', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520073R30000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24917,7 +24392,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:33:58', NULL, NULL, 'lốc điều hòa suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:33:58', NULL, NULL, 'lốc điều hòa suzuki xl7 2020-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520073R30000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -24942,7 +24417,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:34:53', NULL, NULL, 'lốc điều hòa suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:34:53', NULL, NULL, 'lốc điều hòa suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520073R30000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25042,7 +24517,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:42:37', NULL, NULL, 'lốc điều hòa suzuki xl7 2020-2025', NULL, 'loc-ieu-hoa-suzuki-ertiga-xl7-9520073r10000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:42:37', NULL, NULL, 'lốc điều hòa suzuki xl7 2020-2025', NULL, 'loc-ieu-hoa-suzuki-ertiga-xl7-9520073r10000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9520073R10000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25245,7 +24720,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:52:12', NULL, NULL, 'dàn nóng chevrolet trailblazer 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:52:12', NULL, NULL, 'dàn nóng chevrolet trailblazer 2016-2019', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 94770907-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25320,7 +24795,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:59:24', NULL, NULL, 'dàn nóng suzuki xl7 2020-2025', NULL, 'dan-nong-suzuki-ertiga-xl7-9531073r00-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 08:59:24', NULL, NULL, 'dàn nóng suzuki xl7 2020-2025', NULL, 'dan-nong-suzuki-ertiga-xl7-9531073r00-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9531073R00 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25395,7 +24870,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:04:52', NULL, NULL, 'mặt từ điều hòa suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:04:52', NULL, NULL, 'mặt từ điều hòa suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9529860MA0000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25545,7 +25020,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:13:02', NULL, NULL, 'dàn nóng suzuki xl7 2020-2025', NULL, 'dan-nong-suzuki-ertiga-xl7-95310m72r00-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:13:02', NULL, NULL, 'dàn nóng suzuki xl7 2020-2025', NULL, 'dan-nong-suzuki-ertiga-xl7-95310m72r00-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95310M72R00 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25695,7 +25170,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:23:31', NULL, NULL, 'dàn nóng chevrolet aveo 2013-2017', NULL, 'dan-nong-hcc-aveo-gentra-95227758-hcc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:23:31', NULL, NULL, 'dàn nóng chevrolet aveo 2013-2017', NULL, 'dan-nong-hcc-aveo-gentra-95227758-hcc-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95227758-HCC cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25745,7 +25220,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:34:19', NULL, NULL, 'phin lọc gas suzuki ciaz 2020-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:34:19', NULL, NULL, 'phin lọc gas suzuki ciaz 2020-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9533979P00000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25795,7 +25270,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:35:10', NULL, NULL, 'phin lọc gas suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:35:10', NULL, NULL, 'phin lọc gas suzuki ertiga 2023-2024', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9533979P00000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25845,7 +25320,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:37:21', NULL, NULL, 'giàn lạnh suzuki ertiga 2018-2021', NULL, 'gian-lanh-suzuki-ertiga-xl7-9541173r10000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-06 09:37:21', NULL, NULL, 'giàn lạnh suzuki ertiga 2018-2021', NULL, 'gian-lanh-suzuki-ertiga-xl7-9541173r10000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9541173R10000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25920,7 +25395,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:32:39', NULL, NULL, 'dàn nóng daewoo matiz groove 2010-2012', NULL, 'dan-nong-gm-spark-matiz-95480135-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:32:39', NULL, NULL, 'dàn nóng daewoo matiz groove 2010-2012', NULL, 'dan-nong-gm-spark-matiz-95480135-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95480135 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25945,7 +25420,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:32:08', NULL, NULL, 'dàn nóng chevrolet spark 2011-2013', NULL, 'dan-nong-gm-spark-matiz-95480135-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:32:08', NULL, NULL, 'dàn nóng chevrolet spark 2011-2013', NULL, 'dan-nong-gm-spark-matiz-95480135-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95480135 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25970,7 +25445,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:38:04', NULL, NULL, 'dàn nóng chevrolet spark m300 2013-2014', NULL, 'dan-nong-gm-spark-matiz-95480135-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:38:04', NULL, NULL, 'dàn nóng chevrolet spark m300 2013-2014', NULL, 'dan-nong-gm-spark-matiz-95480135-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95480135 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -25995,7 +25470,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:38:46', NULL, NULL, 'giàn lạnh suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:38:46', NULL, NULL, 'giàn lạnh suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9541061J90 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26020,7 +25495,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:40:39', NULL, NULL, 'giàn lạnh suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:40:39', NULL, NULL, 'giàn lạnh suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9541061J90 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26045,7 +25520,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:42:01', NULL, NULL, 'van tiết lưu điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:42:01', NULL, NULL, 'van tiết lưu điều hòa suzuki apv 2006-2011', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9543161J00 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26070,7 +25545,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:42:23', NULL, NULL, 'van tiết lưu điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:42:23', NULL, NULL, 'van tiết lưu điều hòa suzuki apv 2013-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9543161J00 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26095,7 +25570,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:42:56', NULL, NULL, 'van tiết lưu điều hòa suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:42:56', NULL, NULL, 'van tiết lưu điều hòa suzuki carry pro 2008-2016', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9543161J00 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26120,7 +25595,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:43:42', NULL, NULL, 'van tiết lưu điều hòa suzuki ertiga 2023-2024', NULL, 'van-tiet-luu-ieu-hoa-suzuki-ertiga-xl7-fronx-9543174p00000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:43:42', NULL, NULL, 'van tiết lưu điều hòa suzuki ertiga 2023-2024', NULL, 'van-tiet-luu-ieu-hoa-suzuki-ertiga-xl7-fronx-9543174p00000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9543174P00000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26145,7 +25620,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:44:02', NULL, NULL, 'van tiết lưu điều hòa suzuki fronx 2025-2026', NULL, 'van-tiet-luu-ieu-hoa-suzuki-ertiga-xl7-fronx-9543174p00000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:44:02', NULL, NULL, 'van tiết lưu điều hòa suzuki fronx 2025-2026', NULL, 'van-tiet-luu-ieu-hoa-suzuki-ertiga-xl7-fronx-9543174p00000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9543174P00000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26195,7 +25670,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:44:25', NULL, NULL, 'van tiết lưu điều hòa suzuki xl7 2020-2025', NULL, 'van-tiet-luu-ieu-hoa-suzuki-ertiga-xl7-fronx-9543174p00000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:44:25', NULL, NULL, 'van tiết lưu điều hòa suzuki xl7 2020-2025', NULL, 'van-tiet-luu-ieu-hoa-suzuki-ertiga-xl7-fronx-9543174p00000-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9543174P00000 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26220,7 +25695,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:44:52', NULL, NULL, 'lốc điều hòa daewoo lacetti 2003-2005', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-95908333-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:44:52', NULL, NULL, 'lốc điều hòa daewoo lacetti 2003-2005', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-95908333-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95908333 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26270,7 +25745,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:46:38', NULL, NULL, 'lốc điều hòa chevrolet lacetti 2009-2012', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-95908333-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:46:38', NULL, NULL, 'lốc điều hòa chevrolet lacetti 2009-2012', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-95908333-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95908333 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26295,7 +25770,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:47:25', NULL, NULL, 'dàn nóng chevrolet spark 2018', NULL, 'dan-nong-gm-spark-matiz-95963188-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:47:25', NULL, NULL, 'dàn nóng chevrolet spark 2018', NULL, 'dan-nong-gm-spark-matiz-95963188-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95963188 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26345,7 +25820,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:49:14', NULL, NULL, 'dàn nóng chevrolet spark 2011-2013', NULL, 'dan-nong-gm-spark-matiz-95963188-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:49:14', NULL, NULL, 'dàn nóng chevrolet spark 2011-2013', NULL, 'dan-nong-gm-spark-matiz-95963188-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95963188 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26370,7 +25845,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:49:41', NULL, NULL, 'dàn nóng chevrolet spark m300 2013-2014', NULL, 'dan-nong-gm-spark-matiz-95963188-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:49:41', NULL, NULL, 'dàn nóng chevrolet spark m300 2013-2014', NULL, 'dan-nong-gm-spark-matiz-95963188-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95963188 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26445,7 +25920,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:52:37', NULL, NULL, 'lốc điều hòa chevrolet aveo 2009-2012', NULL, 'loc-ieu-hoa-daewoo-aveo-gentra-96234605-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:52:37', NULL, NULL, 'lốc điều hòa chevrolet aveo 2009-2012', NULL, 'loc-ieu-hoa-daewoo-aveo-gentra-96234605-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96234605 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26595,7 +26070,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:57:24', NULL, NULL, 'lốc điều hòa daewoo gentra 2005-2009', NULL, 'loc-ieu-hoa-v5-aveo-gentra-96234605-v5-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 13:57:24', NULL, NULL, 'lốc điều hòa daewoo gentra 2005-2009', NULL, 'loc-ieu-hoa-v5-aveo-gentra-96234605-v5-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96234605-V5 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26720,7 +26195,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:04:24', NULL, NULL, 'dàn nóng chery qq 2010', NULL, 'dan-nong-gm-matiz-qq-96314763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:04:24', NULL, NULL, 'dàn nóng chery qq 2010', NULL, 'dan-nong-gm-matiz-qq-96314763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96314763 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26745,7 +26220,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:04:40', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'dan-nong-gm-matiz-qq-96314763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:04:40', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'dan-nong-gm-matiz-qq-96314763-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96314763 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26845,7 +26320,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:06:11', NULL, NULL, 'giàn lạnh chevrolet spark m300 2013-2014', NULL, 'gian-lanh-na-spark-matiz-95423623-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:06:11', NULL, NULL, 'giàn lạnh chevrolet spark m300 2013-2014', NULL, 'gian-lanh-na-spark-matiz-95423623-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95423623-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26920,7 +26395,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:07:35', NULL, NULL, 'lốc điều hòa daewoo leganza 2000', NULL, 'loc-ieu-hoa-gm-leganza-vivant-96450073-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:07:35', NULL, NULL, 'lốc điều hòa daewoo leganza 2000', NULL, 'loc-ieu-hoa-gm-leganza-vivant-96450073-main.png', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96450073 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26945,7 +26420,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:09:38', NULL, NULL, 'dàn nóng chevrolet spark 2006-2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:09:38', NULL, NULL, 'dàn nóng chevrolet spark 2006-2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96314858 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -26995,7 +26470,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:10:07', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:10:07', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96314858 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27070,7 +26545,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:12:17', NULL, NULL, 'quạt gió điều hòa trong xe daewoo gentra 2005-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 14:12:17', NULL, NULL, 'quạt gió điều hòa trong xe daewoo gentra 2005-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95978694 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27095,7 +26570,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:11:03', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet aveo 2013-2017', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:11:03', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet aveo 2013-2017', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95978694 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27120,7 +26595,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:11:56', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet aveo 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:11:56', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet aveo 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95978694 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27145,7 +26620,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:12:31', NULL, NULL, 'lốc điều hòa daewoo lacetti 2003-2005', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96442920-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:12:31', NULL, NULL, 'lốc điều hòa daewoo lacetti 2003-2005', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96442920-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96442920 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27195,7 +26670,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:13:42', NULL, NULL, 'lốc điều hòa chevrolet lacetti 2009-2012', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96442920-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:13:42', NULL, NULL, 'lốc điều hòa chevrolet lacetti 2009-2012', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96442920-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96442920 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27220,7 +26695,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:14:35', NULL, NULL, 'lốc điều hòa chevrolet vivant 2007', NULL, 'loc-ieu-hoa-gm-leganza-vivant-96450078-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:14:35', NULL, NULL, 'lốc điều hòa chevrolet vivant 2007', NULL, 'loc-ieu-hoa-gm-leganza-vivant-96450078-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96450078 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27245,7 +26720,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:15:09', NULL, NULL, 'lốc điều hòa daewoo leganza 2000', NULL, 'loc-ieu-hoa-gm-leganza-vivant-96450078-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:15:09', NULL, NULL, 'lốc điều hòa daewoo leganza 2000', NULL, 'loc-ieu-hoa-gm-leganza-vivant-96450078-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96450078 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27345,7 +26820,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:17:04', NULL, NULL, 'giàn lạnh daewoo matiz groove 2010-2012', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:17:04', NULL, NULL, 'giàn lạnh daewoo matiz groove 2010-2012', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95947242 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27370,7 +26845,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:17:22', NULL, NULL, 'giàn lạnh chevrolet spark m300 2013-2014', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:17:22', NULL, NULL, 'giàn lạnh chevrolet spark m300 2013-2014', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95947242 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27395,7 +26870,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:18:14', NULL, NULL, 'giàn lạnh chevrolet spark 2018', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:18:14', NULL, NULL, 'giàn lạnh chevrolet spark 2018', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95947242 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27420,7 +26895,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:18:42', NULL, NULL, 'lốc điều hòa daewoo matiz groove 2010-2012', NULL, 'loc-ieu-hoa-gm-spark-matiz-95967303-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:18:42', NULL, NULL, 'lốc điều hòa daewoo matiz groove 2010-2012', NULL, 'loc-ieu-hoa-gm-spark-matiz-95967303-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95967303 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27445,7 +26920,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:19:51', NULL, NULL, 'lốc điều hòa chevrolet spark 2011-2013', NULL, 'loc-ieu-hoa-gm-spark-matiz-95967303-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:19:51', NULL, NULL, 'lốc điều hòa chevrolet spark 2011-2013', NULL, 'loc-ieu-hoa-gm-spark-matiz-95967303-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95967303 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27470,7 +26945,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:20:07', NULL, NULL, 'lốc điều hòa chevrolet spark m300 2013-2014', NULL, 'loc-ieu-hoa-gm-spark-matiz-95967303-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:20:07', NULL, NULL, 'lốc điều hòa chevrolet spark m300 2013-2014', NULL, 'loc-ieu-hoa-gm-spark-matiz-95967303-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95967303 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27695,7 +27170,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:24:37', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet aveo 2009-2012', NULL, 'quat-gio-ieu-hoa-trong-xe-gm-aveo-gentra-96539655-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:24:37', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet aveo 2009-2012', NULL, 'quat-gio-ieu-hoa-trong-xe-gm-aveo-gentra-96539655-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96539655 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27720,7 +27195,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:25:07', NULL, NULL, 'lốc điều hòa daewoo gentra 2005-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:25:07', NULL, NULL, 'lốc điều hòa daewoo gentra 2005-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96539388 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27745,7 +27220,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:25:40', NULL, NULL, 'lốc điều hòa chevrolet aveo 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:25:40', NULL, NULL, 'lốc điều hòa chevrolet aveo 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96539388 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27820,7 +27295,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:31:16', NULL, NULL, 'lốc điều hòa daewoo lacetti 2003-2005', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96484932-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:31:16', NULL, NULL, 'lốc điều hòa daewoo lacetti 2003-2005', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96484932-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96484932 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27845,7 +27320,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:31:59', NULL, NULL, 'lốc điều hòa daewoo lacetti 2006-2009', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96484932-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:31:59', NULL, NULL, 'lốc điều hòa daewoo lacetti 2006-2009', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96484932-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96484932 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27870,7 +27345,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:32:17', NULL, NULL, 'lốc điều hòa chevrolet lacetti 2009-2012', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96484932-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:32:17', NULL, NULL, 'lốc điều hòa chevrolet lacetti 2009-2012', NULL, 'loc-ieu-hoa-gm-lacetti-lacetti-96484932-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96484932 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27895,7 +27370,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:32:47', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:32:47', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96314763-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27920,7 +27395,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:33:15', NULL, NULL, 'dàn nóng chery qq 2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:33:15', NULL, NULL, 'dàn nóng chery qq 2010', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96314763-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27945,7 +27420,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:33:48', NULL, NULL, 'giàn lạnh chevrolet spark 2006-2010', NULL, 'gian-lanh-gm-spark-matiz-96591591-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:33:48', NULL, NULL, 'giàn lạnh chevrolet spark 2006-2010', NULL, 'gian-lanh-gm-spark-matiz-96591591-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96591591 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27970,7 +27445,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:34:24', NULL, NULL, 'giàn lạnh daewoo matiz 3 2007-2010', NULL, 'gian-lanh-gm-spark-matiz-96591591-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:34:24', NULL, NULL, 'giàn lạnh daewoo matiz 3 2007-2010', NULL, 'gian-lanh-gm-spark-matiz-96591591-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96591591 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -27995,7 +27470,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:35:10', NULL, NULL, 'giàn lạnh trong daewoo lacetti 2003-2005', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:35:10', NULL, NULL, 'giàn lạnh trong daewoo lacetti 2003-2005', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96554439 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28020,7 +27495,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:35:32', NULL, NULL, 'giàn lạnh trong daewoo lacetti 2006-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:35:32', NULL, NULL, 'giàn lạnh trong daewoo lacetti 2006-2009', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96554439 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28045,7 +27520,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:36:09', NULL, NULL, 'giàn lạnh trong chevrolet lacetti 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:36:09', NULL, NULL, 'giàn lạnh trong chevrolet lacetti 2009-2012', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96554439 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28095,7 +27570,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:37:30', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet spark 2011-2013', NULL, 'quat-gio-ieu-hoa-trong-xe-gm-spark-matiz-96675858-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:37:30', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet spark 2011-2013', NULL, 'quat-gio-ieu-hoa-trong-xe-gm-spark-matiz-96675858-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96675858 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28145,7 +27620,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:38:35', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet spark 2018', NULL, 'quat-gio-ieu-hoa-trong-xe-gm-spark-matiz-96675858-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:38:35', NULL, NULL, 'quạt gió điều hòa trong xe chevrolet spark 2018', NULL, 'quat-gio-ieu-hoa-trong-xe-gm-spark-matiz-96675858-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96675858 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28195,7 +27670,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:39:56', NULL, NULL, 'lốc điều hòa daewoo matiz 3 2007-2010', NULL, 'loc-ieu-hoa-daewoo-spark-matiz-96568208-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:39:56', NULL, NULL, 'lốc điều hòa daewoo matiz 3 2007-2010', NULL, 'loc-ieu-hoa-daewoo-spark-matiz-96568208-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96568208 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28220,7 +27695,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:40:08', NULL, NULL, 'lốc điều hòa daewoo matiz 2 1999-2005', NULL, 'loc-ieu-hoa-daewoo-spark-matiz-96568208-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:40:08', NULL, NULL, 'lốc điều hòa daewoo matiz 2 1999-2005', NULL, 'loc-ieu-hoa-daewoo-spark-matiz-96568208-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96568208 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28245,7 +27720,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:41:09', NULL, NULL, 'giàn lạnh daewoo matiz groove 2010-2012', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:41:09', NULL, NULL, 'giàn lạnh daewoo matiz groove 2010-2012', NULL, 'gian-lanh-gm-spark-matiz-95947242-01-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 95947242-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28345,7 +27820,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:43:25', NULL, NULL, 'dàn nóng daewoo lacetti 2006-2009', NULL, 'dan-nong-gm-lacetti-lacetti-96804274-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:43:25', NULL, NULL, 'dàn nóng daewoo lacetti 2006-2009', NULL, 'dan-nong-gm-lacetti-lacetti-96804274-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96804274 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28370,7 +27845,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:43:45', NULL, NULL, 'dàn nóng chevrolet lacetti 2009-2012', NULL, 'dan-nong-gm-lacetti-lacetti-96804274-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:43:45', NULL, NULL, 'dàn nóng chevrolet lacetti 2009-2012', NULL, 'dan-nong-gm-lacetti-lacetti-96804274-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96804274 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28420,7 +27895,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:44:28', NULL, NULL, 'quạt giàn lạnh chevrolet spark 2006-2010', NULL, 'quat-gian-lanh-gm-spark-matiz-96591594-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:44:28', NULL, NULL, 'quạt giàn lạnh chevrolet spark 2006-2010', NULL, 'quat-gian-lanh-gm-spark-matiz-96591594-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96591594 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28470,7 +27945,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:45:09', NULL, NULL, 'dàn nóng chevrolet spark 2006-2010', NULL, 'dan-nong-gm-spark-matiz-96663729-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-09 03:45:09', NULL, NULL, 'dàn nóng chevrolet spark 2006-2010', NULL, 'dan-nong-gm-spark-matiz-96663729-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 96663729 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28620,7 +28095,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:48:57', NULL, NULL, 'giàn lạnh chevrolet spark 2006-2010', NULL, 'gian-lanh-formula-spark-matiz-9700016900-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:48:57', NULL, NULL, 'giàn lạnh chevrolet spark 2006-2010', NULL, 'gian-lanh-formula-spark-matiz-9700016900-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9700016900 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28645,7 +28120,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:19', NULL, NULL, 'giàn lạnh daewoo matiz 3 2007-2010', NULL, 'gian-lanh-formula-spark-matiz-9700016900-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:19', NULL, NULL, 'giàn lạnh daewoo matiz 3 2007-2010', NULL, 'gian-lanh-formula-spark-matiz-9700016900-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9700016900 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28670,7 +28145,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:55', NULL, NULL, 'lốc điều hòa peugeot 207 2014', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:49:55', NULL, NULL, 'lốc điều hòa peugeot 207 2014', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9678656080 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28695,7 +28170,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:50:07', NULL, NULL, 'lốc điều hòa peugeot 408 2015', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:50:07', NULL, NULL, 'lốc điều hòa peugeot 408 2015', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9678656080 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28720,7 +28195,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:50:46', NULL, NULL, 'lốc điều hòa peugeot 3008 2016', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:50:46', NULL, NULL, 'lốc điều hòa peugeot 3008 2016', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9678656080 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28745,7 +28220,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:12', NULL, NULL, 'lốc điều hòa peugeot 208 2015-2016', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:12', NULL, NULL, 'lốc điều hòa peugeot 208 2015-2016', NULL, 'p_6a1f0b341e05c.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9678656080 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28770,7 +28245,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:51:35', NULL, NULL, 'quạt gió điều hòa trong xe kia rio 2012-2014', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:51:35', NULL, NULL, 'quạt gió điều hòa trong xe kia rio 2012-2014', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 971111W100 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28795,7 +28270,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:50', NULL, NULL, 'quạt gió điều hòa trong xe hyundai i20 active 2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 2, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:53:50', NULL, NULL, 'quạt gió điều hòa trong xe hyundai i20 active 2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 971111W100 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28845,7 +28320,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:55:31', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz spinter 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-9700006700-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:55:31', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz spinter 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-9700006700-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9700006700 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -28870,7 +28345,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:56:43', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz sprinter 313 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-9700006700-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 09:56:43', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz sprinter 313 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-9700006700-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9700006700 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -29045,7 +28520,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:27:42', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz spinter 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-97000067-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:27:42', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz spinter 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-97000067-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97000067 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -29070,7 +28545,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 1, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:28:21', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz sprinter 313 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-97000067-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:28:21', NULL, NULL, 'giàn lạnh trong xe trước mercedes-benz sprinter 313 2005', NULL, 'gian-lanh-trong-xe-truoc-formula-mb-sprinter-97000067-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 97000067 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -29095,7 +28570,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 3, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:37:46', NULL, NULL, 'lốc điều hòa peugeot 5008 2017', NULL, 'loc-ieu-hoa-peugeot-5008-3008-9684141780-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-10 13:37:46', NULL, NULL, 'lốc điều hòa peugeot 5008 2017', NULL, 'loc-ieu-hoa-peugeot-5008-3008-9684141780-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM 9684141780 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -56979,7 +56454,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:27', NULL, NULL, 'puly lốc điều hòa suzuki ertiga 2018-2021', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:45:27', NULL, NULL, 'puly lốc điều hòa suzuki ertiga 2018-2021', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM XI2474002862 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57004,7 +56479,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:56', NULL, NULL, 'puly lốc điều hòa suzuki xl7 2020-2025', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:46:56', NULL, NULL, 'puly lốc điều hòa suzuki xl7 2020-2025', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM XI2474002862 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57029,7 +56504,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:47:27', NULL, NULL, 'puly lốc điều hòa suzuki ertiga 2023-2024', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:47:27', NULL, NULL, 'puly lốc điều hòa suzuki ertiga 2023-2024', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM XI2474002862 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57054,7 +56529,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:48:03', NULL, NULL, 'puly lốc điều hòa suzuki fronx 2025-2026', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:48:03', NULL, NULL, 'puly lốc điều hòa suzuki fronx 2025-2026', NULL, 'puly-loc-ieu-hoa-denso-ertiga-xl7-fronx-xi2474002862-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM XI2474002862 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57329,7 +56804,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:56:46', NULL, NULL, 'lốc điều hòa toyota veloz 2022-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 10, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:56:46', NULL, NULL, 'lốc điều hòa toyota veloz 2022-2025', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM XI4471401730 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57479,7 +56954,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:59:50', NULL, NULL, 'lốc điều hòa peugeot 5008 2017', NULL, 'loc-ieu-hoa-peugeot-5008-3008-yl00835980-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 15:59:50', NULL, NULL, 'lốc điều hòa peugeot 5008 2017', NULL, 'loc-ieu-hoa-peugeot-5008-3008-yl00835980-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM YL00835980 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57529,7 +57004,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:02:27', NULL, NULL, 'puly lốc điều hòa isuzu d-max 2014-2017', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:02:27', NULL, NULL, 'puly lốc điều hòa isuzu d-max 2014-2017', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM ZZH230013 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57554,7 +57029,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:02:43', NULL, NULL, 'puly lốc điều hòa isuzu mu-x 2016', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:02:43', NULL, NULL, 'puly lốc điều hòa isuzu mu-x 2016', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM ZZH230013 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57579,7 +57054,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 15:54:08', NULL, NULL, 'puly lốc điều hòa isuzu mu-x 2018', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 15:54:08', NULL, NULL, 'puly lốc điều hòa isuzu mu-x 2018', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM ZZH230013 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57604,7 +57079,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 15:53:05', NULL, NULL, 'puly lốc điều hòa isuzu d-max 2018', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 10, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-07 15:53:05', NULL, NULL, 'puly lốc điều hòa isuzu d-max 2018', NULL, 'puly-loc-ieu-hoa-isuzu-d-max-mu-x-zzh230013-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM ZZH230013 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57629,7 +57104,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:03:35', NULL, NULL, 'lốc điều hòa ford ranger 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:03:35', NULL, NULL, 'lốc điều hòa ford ranger 2013-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM UC9M61450A-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57654,7 +57129,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:04:08', NULL, NULL, 'lốc điều hòa mazda bt-50 2012-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:04:08', NULL, NULL, 'lốc điều hòa mazda bt-50 2012-2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM UC9M61450A-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57679,7 +57154,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:04:27', NULL, NULL, 'lốc điều hòa ford ranger 2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:04:27', NULL, NULL, 'lốc điều hòa ford ranger 2015', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM UC9M61450A-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57704,7 +57179,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:04:49', NULL, NULL, 'lốc điều hòa mazda bt-50 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:04:49', NULL, NULL, 'lốc điều hòa mazda bt-50 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM UC9M61450A-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57729,7 +57204,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:05:10', NULL, NULL, 'lốc điều hòa ford ranger 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 8, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:05:10', NULL, NULL, 'lốc điều hòa ford ranger 2016-2018', NULL, 'cooling-logo-placeholder.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM UC9M61450A-01 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57754,7 +57229,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 7, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:06:47', NULL, NULL, 'dàn nóng chevrolet spark 2006-2010', NULL, 'dan-nong-koyo-spark-matiz-rh-200-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 9, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:06:47', NULL, NULL, 'dàn nóng chevrolet spark 2006-2010', NULL, 'dan-nong-koyo-spark-matiz-rh-200-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM RH-200 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57779,7 +57254,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 5, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:07:20', NULL, NULL, 'dàn nóng daewoo matiz 3 2007-2010', NULL, 'dan-nong-koyo-spark-matiz-rh-200-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:07:20', NULL, NULL, 'dàn nóng daewoo matiz 3 2007-2010', NULL, 'dan-nong-koyo-spark-matiz-rh-200-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM RH-200 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>
@@ -57804,7 +57279,7 @@ INSERT INTO products ("id", "partner_id", "sku", "oem_code", "part_brand", "cate
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Hotline &amp; Zalo tư vấn: 0705 0705 526</p>
 <p style="margin: 0 0 6px 0; color: #334155; font-size: 14px;">Email hỗ trợ: hotrokhachhang@autopartsvietnam.com</p>
 <p style="margin: 0; color: #334155; font-size: 14px;">Website ch&iacute;nh thức: <a style="color: #2563eb; text-decoration: underline;" href="../../../">https://coolingsystems.vn</a></p>
-</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 4, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:07:48', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'dan-nong-koyo-spark-matiz-rh-200-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
+</div>', NULL, 0, NULL, 999, 0, NULL, NULL, NULL, NULL, 'published', NULL, 0, 0, 0, 0, 0, 6, 0.0, 0, 12, NULL, NULL, NULL, '2026-08-05 13:35:37', '2026-08-05 16:07:48', NULL, NULL, 'dàn nóng daewoo matiz 2 1999-2005', NULL, 'dan-nong-koyo-spark-matiz-rh-200-main.jpg', 1, 0, 0, 10, '', 5, 1000, '<ul>
   <li><strong>Chất liệu:</strong> Hợp kim cao cấp và cao su tổng hợp chịu nhiệt, chống mài mòn tốt.</li>
   <li><strong>Tương thích:</strong> Tương thích chuẩn 100% theo mã OEM RH-200 cho các dòng xe tương ứng.</li>
   <li><strong>Chính sách:</strong> Đã kiểm định chất lượng nghiêm ngặt, bảo hành 12 tháng trên toàn quốc.</li>

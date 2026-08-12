@@ -385,8 +385,18 @@ function swTab(t){
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                 Gợi ý từ khóa
               </button>
+          <div class="form-group">
+            <label>Từ khóa phụ <span style="font-weight:400;color:#888;font-size:11px">(Secondary Keywords — tên xe, đời xe, dấu hiệu hỏng hóc, cách kiểm tra...)</span></label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="text" name="seo_secondary_keywords" id="seoSecondaryKeywords" style="flex:1"
+                     value="<?= e($product['seo_secondary_keywords']??'') ?>" placeholder="VD: lốc lạnh vios 2015, lốc lạnh denso, lốc lạnh ô tô kêu to, kiểm tra lốc lạnh"
+                     oninput="runSeoAnalysis()">
+              <button type="button" id="btnSuggestSecKw" onclick="suggestSecondaryKeywords()" class="btn btn-outline-navy btn-sm" style="white-space:nowrap;height:38px;display:inline-flex;align-items:center;gap:4px;flex-shrink:0">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                Gợi ý từ khóa phụ
+              </button>
             </div>
-            <div id="kwSuggestions" style="display:none;margin-top:8px;padding:10px 12px;background:#f0f4ff;border-radius:8px;border:1px solid #c7d2fe"></div>
+            <div id="secKwSuggestions" style="display:none;margin-top:8px;padding:10px 12px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;font-size:12px"></div>
           </div>
 
           <!-- Google SERP Preview -->
@@ -1464,6 +1474,67 @@ function pickKeyword(el) {
     s.style.background = '#fff'; s.style.color = '#4338ca'; s.style.borderColor = '#c7d2fe';
   });
   el.style.background = '#4338ca'; el.style.color = '#fff'; el.style.borderColor = '#4338ca';
+}
+
+function suggestSecondaryKeywords() {
+  var box = document.getElementById('secKwSuggestions');
+  var name = (document.querySelector('input[name="name"]')?.value || '').trim();
+  var brand = (document.querySelector('input[name="part_brand"]')?.value || '').trim();
+  var oem = (document.querySelector('input[name="oem_code"]')?.value || '').trim();
+  var catText = (document.querySelector('select[name="category_id"] option:checked')?.textContent || '').trim();
+
+  if (!name) {
+    box.style.display = 'block';
+    box.innerHTML = '<div style="color:#b91c1c">⚠️ Vui lòng nhập Tên sản phẩm trước để hệ thống gợi ý từ khóa phụ.</div>';
+    return;
+  }
+
+  var candidates = [];
+  var cleanName = name.replace(/\|.*/, '').trim();
+
+  // 1. Tên sản phẩm + dòng xe
+  candidates.push(cleanName.toLowerCase());
+  if (brand) candidates.push((cleanName + ' ' + brand).toLowerCase());
+  if (oem) candidates.push(('mã phụ tùng ' + oem).toLowerCase());
+
+  // 2. Từ khóa chuẩn đoán & tìm thông tin sửa chữa
+  if (catText.match(/lốc|máy nén/i)) {
+    candidates.push('lốc lạnh ô tô kêu to', 'nguyên nhân điều hòa không mát', 'cách kiểm tra lốc lạnh', 'lốc lạnh đóng ngắt liên tục');
+  } else if (catText.match(/dàn lạnh|giàn lạnh/i)) {
+    candidates.push('dàn lạnh ô tô bị rò rỉ gas', 'điều hòa ô tô có mùi hôi', 'thay dàn lạnh ô tô chính hãng');
+  } else if (catText.match(/dàn nóng|giàn nóng/i)) {
+    candidates.push('dàn nóng ô tô bị bẩn', 'vệ sinh dàn nóng điều hòa ô tô', 'dàn nóng ô tô xì gas');
+  } else if (catText.match(/quạt/i)) {
+    candidates.push('quạt dàn nóng ô tô không quay', 'quạt dàn lạnh ô tô kêu to', 'thay mô tơ quạt điều hòa');
+  } else {
+    candidates.push('dấu hiệu hỏng điều hòa ô tô', 'cách kiểm tra phụ tùng ô tô chính hãng');
+  }
+
+  var html = '<div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:6px">💡 Từ khóa phụ gợi ý (click để thêm):</div><div style="display:flex;flex-wrap:wrap;gap:6px">';
+  candidates.forEach(function(kw) {
+    html += '<span onclick="pickSecondaryKeyword(this)" style="cursor:pointer;padding:4px 10px;background:#fff;border:1px solid #86efac;border-radius:16px;font-size:11px;color:#15803d;font-weight:600">' + kw + '</span>';
+  });
+  html += '</div>';
+
+  box.style.display = 'block';
+  box.innerHTML = html;
+}
+
+function pickSecondaryKeyword(el) {
+  var kw = el.textContent.trim();
+  var input = document.getElementById('seoSecondaryKeywords');
+  var cur = input.value.trim();
+  if (cur) {
+    var parts = cur.split(',').map(function(s){return s.trim();});
+    if (parts.indexOf(kw) === -1) {
+      input.value = cur + ', ' + kw;
+    }
+  } else {
+    input.value = kw;
+  }
+  input.dispatchEvent(new Event('input'));
+  runSeoAnalysis();
+  el.style.background = '#15803d'; el.style.color = '#fff';
 }
 
 // ── SEO CONTENT ANALYSIS (Weighted Scoring) ──
