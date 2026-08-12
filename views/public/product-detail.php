@@ -425,14 +425,14 @@ if (!empty($faqItems)) {
             <div>
               <div class="fs-12 text-muted mb-1">Nhà cung cấp</div>
               <div class="fw-700 text-navy" style="font-size:14px">Cooling Parts &amp; Service</div>
-              <div class="fs-12 text-muted mt-1">✓ Đối tác xác minh • Bảo hành chính hãng</div>
+              <div class="fs-12 text-muted mt-1">✓ Đối tác xác minh • Bảo hành uy tín</div>
             </div>
           </div>
           <?php /* Nut chat da chuyen thanh icon noi (foot.php .floating-social) */ ?>
         </div>
 
         <div class="pd-trust">
-           Hàng chính hãng OEM &nbsp;·&nbsp;  Bảo hành <?= (int)($product['warranty_months']??0) ?> tháng<br>
+           Hàng OEM chuẩn &nbsp;·&nbsp;  Bảo hành <?= (int)($product['warranty_months']??0) ?> tháng<br>
            Đổi trả 7 ngày &nbsp;·&nbsp;  Hỗ trợ kỹ thuật 24/7<br>
            Giao hàng toàn quốc — Miễn phí từ 2 triệu
         </div>
