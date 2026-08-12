@@ -1499,10 +1499,16 @@ select.frm-input {
   line-height: 1.5 !important;
   padding-left: 0 !important;
 }
-.pd-content-html p, .pd-content-html ul, .pd-content-html ol,
-.pd-content-html li, .pd-content-html span, .pd-content-html div {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.pd-content-html p, .pd-content-html span {
+  padding-left: 0;
+  padding-right: 0;
+}
+.pd-content-html ul, .pd-content-html ol {
+  padding-left: 28px !important;
+  margin-bottom: 1em;
+}
+.pd-content-html li {
+  margin-bottom: 0.4em;
 }
 .pd-content-html table {
   margin-left: 0 !important;
