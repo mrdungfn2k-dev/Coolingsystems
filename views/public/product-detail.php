@@ -459,7 +459,7 @@ if (!empty($faqItems)) {
     <?php if(!empty($product['specifications'])): ?>
     <div style="margin-top:24px;border-top:1px solid var(--line);padding-top:22px;padding-left:16px;padding-right:16px">
       <h2 class="serif text-navy mb-2" style="font-size:18px">Thông số kỹ thuật</h2>
-      <div style="line-height:1.9;background:var(--bg-soft);padding:14px;border-radius:4px;font-size:14px" class="pd-content-html"><?= $product['specifications'] ?></div>
+      <div style="line-height:1.9;color:var(--ink-2);font-size:14px" class="pd-content-html"><?= $product['specifications'] ?></div>
     </div>
     <?php endif; ?>
 
