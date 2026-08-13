@@ -1193,18 +1193,38 @@ if (!empty($images[0]['file_path'])) {
 ?>
 (function() {
   try {
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     var pData = {
-      id: <?= (int)$product['id'] ?>,
-      name: <?= json_encode($product['name']) ?>,
-      price: <?= (float)$product['price'] ?>,
-      is_call_price: <?= !empty($product['is_call_price']) ? 1 : 0 ?>,
+      id: <?= (int)($product['id'] ?? 0) ?>,
+      name: <?= json_encode($product['name'] ?? '') ?>,
+      price: <?= (float)($product['price'] ?? 0) ?>,
+      is_call_price: <?= (!empty($product['is_call_price']) || empty($product['price']) || (float)$product['price'] <= 0) ? 1 : 0 ?>,
       image: <?= json_encode($pImgUrl) ?>,
       slug: <?= json_encode($product['slug'] ?? '') ?>
     };
-    var list = JSON.parse(localStorage.getItem('cs_recently_viewed') || '[]');
-    list = list.filter(function(item) { return item && item.id; });
-    
-    // Auto-repair missing/placeholder images for stored products
+
+    if (!pData.id || !pData.name || !pData.name.trim()) return;
+
+    var rawList = localStorage.getItem('cs_recently_viewed');
+    var list = [];
+    try { list = JSON.parse(rawList || '[]'); } catch(e) { list = []; }
+    if (!Array.isArray(list)) list = [];
+
+    // Strict filter: item MUST have valid id AND valid non-empty name
+    list = list.filter(function(item) {
+      return item && item.id && typeof item.name === 'string' && item.name.trim() !== '' && item.name !== 'undefined';
+    });
+
+    // Auto-repair existing stored item matching current product
     var exIdx = list.findIndex(function(item) { return item.id === pData.id; });
     if (exIdx !== -1) {
       if (pData.image && (!list[exIdx].image || list[exIdx].image.includes('favicon'))) {
@@ -1216,20 +1236,35 @@ if (!empty($images[0]['file_path'])) {
     if (list.length > 10) list = list.slice(0, 10);
     localStorage.setItem('cs_recently_viewed', JSON.stringify(list));
 
-    var otherItems = list.filter(function(item) { return item && item.id !== pData.id; });
+    var otherItems = list.filter(function(item) { 
+      return item && item.id !== pData.id && typeof item.name === 'string' && item.name.trim() !== '' && item.name !== 'undefined'; 
+    });
+
     var sec = document.getElementById('recentlyViewedSection');
     var grid = document.getElementById('recentlyViewedGrid');
     if (sec && grid && otherItems.length > 0) {
       grid.innerHTML = otherItems.map(function(it) {
-        var pStr = it.is_call_price ? '<span style="color:#1e293b;font-weight:700;">Liên hệ ngay: </span><a href="tel:0705070526" onclick="event.stopPropagation()" style="color:#2563eb;text-decoration:underline;font-weight:800;">0705.0705.26</a>' : (new Intl.NumberFormat('vi-VN').format(it.price) + ' ₫');
+        var safeName = escapeHtml(it.name);
         var url = '/products/' + (it.slug || it.id);
-        var imgSrc = it.image || '/uploads/products/cooling-logo-placeholder.jpg';
+        var imgSrc = it.image || '';
+        if (imgSrc && !imgSrc.startsWith('/') && !imgSrc.startsWith('http')) {
+          imgSrc = '/' + imgSrc;
+        }
+        if (!imgSrc || imgSrc.includes('favicon')) {
+          imgSrc = '/uploads/products/cooling-logo-placeholder.jpg';
+        }
+
+        var isCall = it.is_call_price || !it.price || parseFloat(it.price) <= 0;
+        var pStr = isCall 
+          ? '<div style="font-size:11px;font-weight:700;color:#475569;line-height:1.3">Liên hệ ngay:<br><span style="color:#002f6c;font-weight:800;font-size:13px">0705 070 526</span></div>'
+          : '<span style="font-size:14px;font-weight:800;color:var(--navy, #002f6c);">' + (new Intl.NumberFormat('vi-VN').format(it.price) + ' ₫') + '</span>';
+
         return '<a href="' + url + '" class="rv-card" style="text-decoration:none; color:inherit; background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 6px 16px rgba(0,0,0,0.08)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'none\'">' +
           '<div style="background:#fff; aspect-ratio:4/3; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center; margin-bottom:8px;">' +
-          '<img src="' + imgSrc + '" style="width:100%; height:100%; object-fit:contain; padding:4px;" onerror="this.src=\'/uploads/products/cooling-logo-placeholder.jpg\'">' +
+          '<img src="' + escapeHtml(imgSrc) + '" alt="' + safeName + '" style="width:100%; height:100%; object-fit:contain; padding:4px;" onerror="this.onerror=null;this.src=\'/uploads/products/cooling-logo-placeholder.jpg\'">' +
           '</div>' +
-          '<div style="font-size:12.5px; font-weight:600; color:#0b1d3a; line-clamp:2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:35px; line-height:1.4; margin-bottom:6px;">' + it.name + '</div>' +
-          '<div style="font-size:' + (it.is_call_price ? '12.5px' : '14.5px') + '; font-weight:800; color:var(--navy, #1a3258);">' + pStr + '</div>' +
+          '<div style="font-size:12.5px; font-weight:600; color:#0b1d3a; line-clamp:2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; height:35px; line-height:1.4; margin-bottom:6px;" title="' + safeName + '">' + safeName + '</div>' +
+          '<div>' + pStr + '</div>' +
           '</a>';
       }).join('');
       sec.style.display = 'block';
