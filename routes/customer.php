@@ -998,6 +998,13 @@ post('/customer/checkout', function() {
     $payMethod = in_array($rawMethod, ['cod','bank_transfer','credit']) ? $rawMethod : 'cod';
     $dbPayMethod = $payMethod;
 
+    // Policy 04: Validate COD Maximum Limit (10,000,000 VND)
+    if ($payMethod === 'cod' && defined('COD_MAX') && COD_MAX > 0 && $grand > COD_MAX) {
+        flash('error', 'Đơn hàng có giá trị trên ' . vnd(COD_MAX) . ' không áp dụng thanh toán COD. Vui lòng chọn phương thức Chuyển khoản ngân hàng.');
+        redirect('/customer/checkout');
+        return;
+    }
+
     // Validate B2B Credit Limit payment
     if ($payMethod === 'credit' && $isPartner) {
         $creditLimit = (float)($user['credit_limit'] ?? 100000000);
