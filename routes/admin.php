@@ -225,12 +225,13 @@ get('/admin/partners', function() {
 
 get('/admin/products', function() {    requireStaffPermission('rbac:catalog.products.view|products', '/admin/login');
     $perPage=20; $page=max(1,intval($_GET['page']??1));
-    $q=trim($_GET['q']??''); $tab=$_GET['tab']??'all'; $catId=intval($_GET['cat']??0);
+    $q=trim($_GET['q']??''); $oem=trim($_GET['oem']??''); $tab=$_GET['tab']??'all'; $catId=intval($_GET['cat']??0);
     $brandId=intval($_GET['brand_id']??$_GET['brand']??0); $partBrand=trim($_GET['part_brand']??$_GET['pbrand']??'');
     $where='WHERE 1=1'; $params=[];
     if($tab==='draft'){$where.=" AND p.status='draft'";}
     elseif($tab==='published'){$where.=" AND p.status='published'";}
     if($q){$where.=" AND (p.name LIKE ? OR p.sku LIKE ? OR p.oem_code LIKE ? OR p.oem_code2 LIKE ?)"; $l="%$q%"; $params=array_merge($params,[$l,$l,$l,$l]);}
+    if($oem){$where.=" AND (p.oem_code LIKE ? OR p.oem_code2 LIKE ? OR p.sku LIKE ?)"; $lo="%$oem%"; $params=array_merge($params,[$lo,$lo,$lo]);}
     if($catId){$where.=" AND p.category_id=?"; $params[]=$catId;}
     if($brandId){
         $brandRow = dbGet("SELECT name FROM brands WHERE id=?", [$brandId]);
@@ -3105,11 +3106,11 @@ post('/admin/products/new', function() {
     $brandNamesStr = '';
     if (!empty($selectedBrandIds)) {
         $inClause = implode(',', $selectedBrandIds);
-        $bRows = dbAll("SELECT name FROM car_brands WHERE id IN ($inClause)");
+        $bRows = dbAll("SELECT name FROM brands WHERE id IN ($inClause)");
         $bNames = array_column($bRows, 'name');
         $brandNamesStr = implode(' ', $bNames);
     } elseif (!empty($d['car_brand_id'])) {
-        $bRow = dbGet("SELECT name FROM car_brands WHERE id=?", [intval($d['car_brand_id'])]);
+        $bRow = dbGet("SELECT name FROM brands WHERE id=?", [intval($d['car_brand_id'])]);
         if ($bRow) $brandNamesStr = $bRow['name'];
     }
     if ($oem !== '' && $brandNamesStr !== '') {
@@ -3351,11 +3352,11 @@ post('/admin/products/:id/edit', function($p) {
     $brandNamesStr = '';
     if (!empty($selectedBrandIds)) {
         $inClause = implode(',', $selectedBrandIds);
-        $bRows = dbAll("SELECT name FROM car_brands WHERE id IN ($inClause)");
+        $bRows = dbAll("SELECT name FROM brands WHERE id IN ($inClause)");
         $bNames = array_column($bRows, 'name');
         $brandNamesStr = implode(' ', $bNames);
     } elseif (!empty($d['car_brand_id'])) {
-        $bRow = dbGet("SELECT name FROM car_brands WHERE id=?", [intval($d['car_brand_id'])]);
+        $bRow = dbGet("SELECT name FROM brands WHERE id=?", [intval($d['car_brand_id'])]);
         if ($bRow) $brandNamesStr = $bRow['name'];
     }
     if ($editOem !== '' && $brandNamesStr !== '') {
@@ -3411,12 +3412,16 @@ post('/admin/products/:id/edit', function($p) {
         $catId = null;
     }
     $carBrandId = intval($d['car_brand_id']??0) ?: null;
-    if ($carBrandId && !dbGet("SELECT id FROM car_brands WHERE id=?", [$carBrandId])) {
+    if ($carBrandId && !dbGet("SELECT id FROM brands WHERE id=?", [$carBrandId])) {
         $carBrandId = null;
     }
 
-    // === LƯU LỊCH SỬ TRƯỚC KHI CẬP NHẬT ===
-    saveProductHistory($currentProduct, 'update', (int)($user['id'] ?? 0));
+    // Auto-replace old OEM code in description if OEM code changed
+    $oldOemCode = trim((string)($currentProduct['oem_code'] ?? ''));
+    $editDesc = (string)($d['description'] ?? '');
+    if ($oldOemCode !== '' && $editOem !== '' && $oldOemCode !== $editOem) {
+        $editDesc = replaceOemInContentText($editDesc, $oldOemCode, $editOem);
+    }
 
     dbRun("UPDATE products SET name=?,sku=?,oem_code=?,oem_code2=?,part_brand=?,car_brand_id=?,category_id=?,price=?,price_before_tax=?,tax_amount=?,vat_rate=?,original_price=?,stock=?,min_stock=?,max_stock=?,warranty_months=?,description=?,status=?,is_featured=?,is_call_price=?,show_on_home=?,show_on_promo=?,is_new=?,is_indexed=?,weight_g=?,width_cm=?,height_cm=?,depth_cm=?,video_url=?,cost_price=?,total_import_value=?,updated_at=datetime('now','localtime') WHERE id=?", [
         trim($d['name']??''),
@@ -3435,7 +3440,7 @@ post('/admin/products/:id/edit', function($p) {
         intval($d['min_stock']??0),
         $maxStock,
         intval($d['warranty_months']??12),
-        $d['description']??'',
+        $editDesc,
         $status,
         isset($d['is_featured'])?1:0,
         $isContactPrice ? 1 : 0,
@@ -3589,6 +3594,10 @@ post('/admin/products/:id/edit', function($p) {
     // Save features and specifications
     $features = trim($_POST['features'] ?? '');
     $specs = trim($_POST['specifications'] ?? '');
+    if ($oldOemCode !== '' && $editOem !== '' && $oldOemCode !== $editOem) {
+        $features = replaceOemInContentText($features, $oldOemCode, $editOem);
+        $specs = replaceOemInContentText($specs, $oldOemCode, $editOem);
+    }
     if ($features || $specs) {
         dbRun("UPDATE products SET features=?, specifications=? WHERE id=?", [$features, $specs, $p['id']]);
     }

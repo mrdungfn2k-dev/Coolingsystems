@@ -83,14 +83,29 @@ $formAction = isset($product)
             </div>
             <div class="form-group">
               <label>Mã OEM chính</label>
-              <input type="text" name="oem_code" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code']??'') ?>" placeholder="VD: 447710-8370">
-              <small style="color:#64748b;font-size:11px">Có thể nhập nhiều mã, cách nhau dấu phẩy</small>
+              <div style="display:flex;gap:6px">
+                <input type="text" name="oem_code" id="oemCodeMainInput" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code']??'') ?>" placeholder="VD: 447710-8370" style="flex:1">
+                <button type="button" onclick="searchByOem('oemCodeMainInput')" class="btn btn-navy" style="height:42px;padding:0 14px;font-size:13px;font-weight:700;white-space:nowrap;border-radius:6px;display:inline-flex;align-items:center;gap:4px" title="Tìm sản phẩm theo mã OEM này">
+                  🔍 Tìm kiếm
+                </button>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;flex-wrap:wrap;gap:4px">
+                <small style="color:#64748b;font-size:11px">Có thể nhập nhiều mã, cách nhau dấu phẩy</small>
+                <button type="button" id="btnSyncOem" onclick="syncOemToEditors()" style="background:#fef3c7;border:1px solid #f59e0b;color:#b45309;font-size:11px;font-weight:700;cursor:pointer;padding:3px 10px;border-radius:4px;display:inline-flex;align-items:center;gap:4px;transition:all 0.2s" title="Tự động thay thế Mã OEM mới vào Mô tả, Đặc điểm & Thông số kỹ thuật">
+                  ⚡ Đồng bộ mã OEM vào Bài viết
+                </button>
+              </div>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Mã OEM phụ / Cross-ref <span style="color:#94a3b8;font-weight:400;font-size:12px">(tùy chọn)</span></label>
-              <input type="text" name="oem_code2" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code2']??'') ?>" placeholder="VD: 8846048040 (OE Reference, mã đối chiếu)">
+              <div style="display:flex;gap:6px">
+                <input type="text" name="oem_code2" id="oemCodeSubInput" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code2']??'') ?>" placeholder="VD: 8846048040 (OE Reference, mã đối chiếu)" style="flex:1">
+                <button type="button" onclick="searchByOem('oemCodeSubInput')" class="btn btn-navy" style="height:42px;padding:0 14px;font-size:13px;font-weight:700;white-space:nowrap;border-radius:6px;display:inline-flex;align-items:center;gap:4px" title="Tìm sản phẩm theo mã OEM phụ này">
+                  🔍 Tìm kiếm
+                </button>
+              </div>
               <small style="color:#64748b;font-size:11px">Mã OEM thứ hai hoặc mã đối chiếu từ nhà sản xuất khác</small>
             </div>
           </div>
@@ -2391,6 +2406,18 @@ function formatSingleOEMJS(rawCode, brandName) {
     return clean;
 }
 
+function searchByOem(inputId) {
+    var inp = document.getElementById(inputId);
+    var val = inp ? inp.value.trim() : '';
+    if (!val) {
+        alert('Vui lòng nhập mã OEM để tìm kiếm.');
+        return;
+    }
+    // Lay ma dau tien neu nhap nhieu ma ngan cach bang phay hoac xiet
+    var firstCode = val.split(',')[0].split('/')[0].trim();
+    window.open('/admin/products?oem=' + encodeURIComponent(firstCode), '_blank');
+}
+
 function autoFormatOEMInput() {
     var oemInput = document.querySelector('input[name="oem_code"]');
     if (!oemInput) return;
@@ -2414,6 +2441,85 @@ function autoFormatOEMInput() {
     });
 
     oemInput.value = formattedList.join(', ');
+}
+
+var initialOEMCode = <?= json_encode($product['oem_code'] ?? '') ?>;
+
+function syncOemToEditors(manualOldOem) {
+    var newOemInput = document.getElementById('oemCodeMainInput');
+    var newOem = newOemInput ? newOemInput.value.trim() : '';
+    if (!newOem) {
+        alert('Vui lòng nhập Mã OEM mới trước khi thực hiện đồng bộ.');
+        return;
+    }
+
+    var oldOem = (manualOldOem !== undefined && manualOldOem !== null) ? manualOldOem : initialOEMCode;
+
+    if (!oldOem || oldOem.trim() === '') {
+        var inputOld = prompt('Mã OEM ban đầu trong CSDL đang trống. Vui lòng nhập Mã OEM cũ cần tìm và thay thế trong bài viết:', '');
+        if (!inputOld || !inputOld.trim()) return;
+        oldOem = inputOld.trim();
+    }
+
+    if (oldOem === newOem) {
+        alert('Mã OEM mới (' + newOem + ') trùng với Mã OEM cũ. Chưa có sự thay đổi để đồng bộ.');
+        return;
+    }
+
+    var editorIds = ['tinymceDesc', 'tinymceFeat', 'tinymceSpec'];
+    var totalReplacements = 0;
+
+    editorIds.forEach(function(id) {
+        var content = '';
+        var ed = typeof tinymce !== 'undefined' ? tinymce.get(id) : null;
+        if (ed) {
+            content = ed.getContent();
+        } else {
+            var el = document.getElementById(id);
+            if (el) content = el.value;
+        }
+
+        if (!content) return;
+
+        var oldList = oldOem.split(/[,/]/).map(function(s){ return s.trim(); }).filter(Boolean);
+        var newList = newOem.split(/[,/]/).map(function(s){ return s.trim(); }).filter(Boolean);
+
+        var updatedContent = content;
+
+        // 1. Full exact match replacement
+        if (updatedContent.includes(oldOem)) {
+            var count1 = updatedContent.split(oldOem).length - 1;
+            totalReplacements += count1;
+            updatedContent = updatedContent.split(oldOem).join(newOem);
+        }
+
+        // 2. Individual sub-codes
+        oldList.forEach(function(singleOld, idx) {
+            if (!singleOld || singleOld.length < 3) return;
+            var singleNew = newList[idx] || newOem;
+            if (updatedContent.includes(singleOld)) {
+                var esc = singleOld.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var regex = new RegExp(esc, 'g');
+                var matches = updatedContent.match(regex);
+                if (matches) totalReplacements += matches.length;
+                updatedContent = updatedContent.replace(regex, singleNew);
+            }
+        });
+
+        if (ed) {
+            ed.setContent(updatedContent);
+        } else {
+            var el = document.getElementById(id);
+            if (el) el.value = updatedContent;
+        }
+    });
+
+    initialOEMCode = newOem;
+    if (totalReplacements > 0) {
+        alert('✅ Đã đồng bộ thành công! Đã thay thế ' + totalReplacements + ' vị trí mã OEM trong Mô tả, Đặc điểm & Thông số.');
+    } else {
+        alert('ℹ️ Không tìm thấy mã OEM cũ (' + oldOem + ') xuất hiện trong bài viết để thay thế.');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {

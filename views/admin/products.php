@@ -173,7 +173,16 @@ $partBrands = dbAll("SELECT name AS part_brand FROM product_brands ORDER BY sort
 <form method="get" action="/admin/products" class="af-filter" style="background:#fff;padding:16px 20px;border-radius:12px;border:1px solid #eaeaea;box-shadow:0 2px 8px rgba(0,0,0,0.02);margin-bottom:20px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end">
   <div style="flex:1;min-width:200px">
     <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px">TÌM KIẾM</label>
-    <input type="text" name="q" class="frm-input" value="<?= e($_GET['q']??'') ?>" placeholder="Tên SP, SKU, OEM..." style="width:100%;height:38px;border-radius:6px">
+    <input type="text" name="q" class="frm-input" value="<?= e($_GET['q']??'') ?>" placeholder="Tên SP, SKU..." style="width:100%;height:38px;border-radius:6px">
+  </div>
+  <div style="min-width:190px">
+    <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px">MÃ OEM</label>
+    <div style="display:flex;gap:4px">
+      <input type="text" name="oem" class="frm-input" value="<?= e($_GET['oem']??'') ?>" placeholder="Nhập mã OEM..." style="flex:1;height:42px;border-radius:6px">
+      <button type="submit" class="btn btn-navy" style="height:42px;border-radius:6px;padding:0 12px;font-size:13px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">
+        🔍 Tìm OEM
+      </button>
+    </div>
   </div>
   <div style="min-width:160px">
     <label style="font-size:12px;font-weight:700;color:#555;display:block;margin-bottom:6px">DANH MỤC</label>

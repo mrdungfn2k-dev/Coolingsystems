@@ -868,3 +868,44 @@ function formatOemCodeByBrand(string $rawInput, string $brandName): string {
     }
     return implode(', ', $res);
 }
+
+function replaceOemInContentText(string $content, string $oldOem, string $newOem): string {
+    $content = (string)$content;
+    $oldOem = trim($oldOem);
+    $newOem = trim($newOem);
+    if ($content === '' || $oldOem === '' || $newOem === '' || $oldOem === $newOem) {
+        return $content;
+    }
+
+    $targets = [$oldOem];
+    $parts = array_filter(array_map('trim', explode(',', $oldOem)));
+    foreach ($parts as $p) {
+        if ($p !== '') {
+            $targets[] = $p;
+            $subParts = array_filter(array_map('trim', explode('/', $p)));
+            foreach ($subParts as $sp) {
+                if ($sp !== '') {
+                    $targets[] = $sp;
+                    $clean = preg_replace('/[^A-Za-z0-9]/', '', $sp);
+                    if (strlen($clean) >= 5) {
+                        $targets[] = $clean;
+                    }
+                }
+            }
+        }
+    }
+
+    usort($targets, function($a, $b) {
+        return strlen($b) - strlen($a);
+    });
+    $targets = array_values(array_unique($targets));
+
+    foreach ($targets as $t) {
+        if ($t !== '' && strpos($content, $t) !== false) {
+            $content = str_replace($t, $newOem, $content);
+        }
+    }
+
+    return $content;
+}
+
