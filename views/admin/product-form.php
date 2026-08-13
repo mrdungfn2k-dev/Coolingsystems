@@ -2269,4 +2269,166 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 </script>
+<script>
+function formatSingleOEMJS(rawCode, brandName) {
+    if (!rawCode) return "";
+    rawCode = rawCode.trim();
+    if (rawCode.indexOf(' / ') !== -1) {
+        rawCode = rawCode.split(' / ')[0];
+    }
+    var clean = rawCode.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+    if (!clean) return rawCode;
+
+    var bUpper = (brandName || '').toUpperCase().trim();
+    var len = clean.length;
+
+    // 1. Toyota / Lexus
+    if (bUpper.indexOf('TOYOTA') !== -1 || bUpper.indexOf('LEXUS') !== -1) {
+        if (len === 10) {
+            var f = clean.substring(0, 5) + '-' + clean.substring(5);
+            return (f !== clean) ? (f + ' / ' + clean) : clean;
+        }
+    }
+    // 2. Hyundai / Kia
+    else if (bUpper.indexOf('HYUNDAI') !== -1 || bUpper.indexOf('KIA') !== -1) {
+        if (len === 10) {
+            var f = clean.substring(0, 5) + '-' + clean.substring(5);
+            return (f !== clean) ? (f + ' / ' + clean) : clean;
+        }
+    }
+    // 3. Honda
+    else if (bUpper.indexOf('HONDA') !== -1) {
+        if (len === 11) {
+            var f = clean.substring(0, 5) + '-' + clean.substring(5, 8) + '-' + clean.substring(8);
+            return f + ' / ' + clean;
+        }
+    }
+    // 4. Mazda
+    else if (bUpper.indexOf('MAZDA') !== -1) {
+        if (len === 10 || len === 9) {
+            var f = clean.substring(0, 4) + '-' + clean.substring(4, 6) + '-' + clean.substring(6);
+            return f + ' / ' + clean;
+        }
+    }
+    // 5. Ford
+    else if (bUpper.indexOf('FORD') !== -1) {
+        if (len === 10) {
+            var f = clean.substring(0, 4) + '-' + clean.substring(4, 8) + '-' + clean.substring(8);
+            return f + ' / ' + clean;
+        } else if (len === 11) {
+            var f = clean.substring(0, 4) + '-' + clean.substring(4, 9) + '-' + clean.substring(9);
+            return f + ' / ' + clean;
+        }
+    }
+    // 6. Nissan
+    else if (bUpper.indexOf('NISSAN') !== -1) {
+        if (len === 10) {
+            var f = clean.substring(0, 5) + '-' + clean.substring(5);
+            return f + ' / ' + clean;
+        }
+    }
+    // 7. Suzuki
+    else if (bUpper.indexOf('SUZUKI') !== -1) {
+        if (len === 13) {
+            var f = clean.substring(0, 5) + '-' + clean.substring(5, 10) + '-' + clean.substring(10);
+            return f + ' / ' + clean;
+        } else if (len === 10) {
+            var f = clean.substring(0, 5) + '-' + clean.substring(5);
+            return f + ' / ' + clean;
+        }
+    }
+    // 8. Isuzu
+    else if (bUpper.indexOf('ISUZU') !== -1) {
+        if (len === 10) {
+            var f = clean.charAt(0) + '-' + clean.substring(1, 6) + '-' + clean.substring(6, 9) + '-' + clean.charAt(9);
+            return f + ' / ' + clean;
+        }
+    }
+    // 9. Porsche
+    else if (bUpper.indexOf('PORSCHE') !== -1) {
+        if (len === 11) {
+            var f = clean.substring(0, 3) + '.' + clean.substring(3, 6) + '.' + clean.substring(6, 9) + '.' + clean.substring(9);
+            return f + ' / ' + clean;
+        }
+    }
+    // 10. Mercedes-Benz
+    else if (bUpper.indexOf('MERCEDES') !== -1 || bUpper.indexOf('BENZ') !== -1 || bUpper.indexOf('MERC') !== -1) {
+        if (clean.indexOf('A') === 0 && len === 11) {
+            var f = 'A ' + clean.substring(1, 4) + ' ' + clean.substring(4, 7) + ' ' + clean.substring(7, 9) + ' ' + clean.substring(9);
+            return f + ' / ' + clean;
+        } else if (len === 10) {
+            var f = 'A ' + clean.substring(0, 3) + ' ' + clean.substring(3, 6) + ' ' + clean.substring(6, 8) + ' ' + clean.substring(8);
+            return f + ' / A' + clean;
+        }
+    }
+    // 11. BMW
+    else if (bUpper.indexOf('BMW') !== -1) {
+        if (len === 11) {
+            var f = clean.substring(0, 2) + ' ' + clean.substring(2, 4) + ' ' + clean.charAt(4) + ' ' + clean.substring(5, 8) + ' ' + clean.substring(8);
+            return f + ' / ' + clean;
+        }
+    }
+    // 12. Audi / Volkswagen
+    else if (bUpper.indexOf('AUDI') !== -1 || bUpper.indexOf('VOLKSWAGEN') !== -1 || bUpper.indexOf('VW') !== -1 || bUpper.indexOf('VAG') !== -1) {
+        if (len === 10 || len === 11) {
+            var f = clean.substring(0, 3) + ' ' + clean.substring(3, 6) + ' ' + clean.substring(6, 9) + ' ' + clean.substring(9);
+            return f + ' / ' + clean;
+        } else if (len === 9) {
+            var f = clean.substring(0, 3) + ' ' + clean.substring(3, 6) + ' ' + clean.substring(6, 9);
+            return f + ' / ' + clean;
+        }
+    }
+    // 13. Land Rover
+    else if (bUpper.indexOf('LAND ROVER') !== -1 || bUpper.indexOf('LANDROVER') !== -1 || bUpper.indexOf('RANGE ROVER') !== -1) {
+        if (clean.indexOf('LR') !== 0 && len === 6) {
+            clean = 'LR' + clean;
+        }
+        if (clean.indexOf('LR') === 0) {
+            return clean + ' / ' + clean;
+        }
+    }
+
+    return clean;
+}
+
+function autoFormatOEMInput() {
+    var oemInput = document.querySelector('input[name="oem_code"]');
+    if (!oemInput) return;
+    var rawVal = oemInput.value.trim();
+    if (!rawVal) return;
+
+    var carBrandSelect = document.getElementById('carBrandSelect');
+    var brandNames = [];
+    if (carBrandSelect) {
+        Array.from(carBrandSelect.selectedOptions).forEach(function(opt) {
+            if (opt.value !== '0' && opt.value !== 'HIDDEN') {
+                brandNames.push(opt.text.trim());
+            }
+        });
+    }
+
+    var brandStr = brandNames.join(' ');
+    var items = rawVal.split(',');
+    var formattedList = items.map(function(item) {
+        return formatSingleOEMJS(item, brandStr);
+    });
+
+    oemInput.value = formattedList.join(', ');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var oemInput = document.querySelector('input[name="oem_code"]');
+    if (oemInput) {
+        oemInput.addEventListener('blur', autoFormatOEMInput);
+        oemInput.addEventListener('change', autoFormatOEMInput);
+    }
+    var carBrandSelect = document.getElementById('carBrandSelect');
+    if (carBrandSelect) {
+        carBrandSelect.addEventListener('change', autoFormatOEMInput);
+        if (carBrandSelect.tomselect) {
+            carBrandSelect.tomselect.on('change', autoFormatOEMInput);
+        }
+    }
+});
+</script>
 

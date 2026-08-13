@@ -733,3 +733,138 @@ function saveProductHistory(array $product, string $action = 'update', ?int $cha
         error_log('[saveProductHistory] ' . $e->getMessage());
     }
 }
+
+function formatSingleOemCodeByBrand(string $rawCode, string $brandName): string {
+    $rawCode = trim($rawCode);
+    if ($rawCode === '') return '';
+
+    if (strpos($rawCode, ' / ') !== false) {
+        $parts = explode(' / ', $rawCode);
+        $rawCode = $parts[0];
+    }
+
+    $clean = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', $rawCode));
+    if ($clean === '') return $rawCode;
+
+    $brandUpper = mb_strtoupper(trim($brandName), 'UTF-8');
+    $len = strlen($clean);
+
+    // 1. Toyota / Lexus
+    if (strpos($brandUpper, 'TOYOTA') !== false || strpos($brandUpper, 'LEXUS') !== false) {
+        if ($len === 10) {
+            $formatted = substr($clean, 0, 5) . '-' . substr($clean, 5);
+            return $formatted !== $clean ? "{$formatted} / {$clean}" : $clean;
+        }
+    }
+    // 2. Hyundai / Kia
+    elseif (strpos($brandUpper, 'HYUNDAI') !== false || strpos($brandUpper, 'KIA') !== false) {
+        if ($len === 10) {
+            $formatted = substr($clean, 0, 5) . '-' . substr($clean, 5);
+            return $formatted !== $clean ? "{$formatted} / {$clean}" : $clean;
+        }
+    }
+    // 3. Honda
+    elseif (strpos($brandUpper, 'HONDA') !== false) {
+        if ($len === 11) {
+            $formatted = substr($clean, 0, 5) . '-' . substr($clean, 5, 3) . '-' . substr($clean, 8);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 4. Mazda
+    elseif (strpos($brandUpper, 'MAZDA') !== false) {
+        if ($len === 10 || $len === 9) {
+            $formatted = substr($clean, 0, 4) . '-' . substr($clean, 4, 2) . '-' . substr($clean, 6);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 5. Ford
+    elseif (strpos($brandUpper, 'FORD') !== false) {
+        if ($len === 10) {
+            $formatted = substr($clean, 0, 4) . '-' . substr($clean, 4, 4) . '-' . substr($clean, 8);
+            return "{$formatted} / {$clean}";
+        } elseif ($len === 11) {
+            $formatted = substr($clean, 0, 4) . '-' . substr($clean, 4, 5) . '-' . substr($clean, 9);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 6. Nissan
+    elseif (strpos($brandUpper, 'NISSAN') !== false) {
+        if ($len === 10) {
+            $formatted = substr($clean, 0, 5) . '-' . substr($clean, 5);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 7. Suzuki
+    elseif (strpos($brandUpper, 'SUZUKI') !== false) {
+        if ($len === 13) {
+            $formatted = substr($clean, 0, 5) . '-' . substr($clean, 5, 5) . '-' . substr($clean, 10);
+            return "{$formatted} / {$clean}";
+        } elseif ($len === 10) {
+            $formatted = substr($clean, 0, 5) . '-' . substr($clean, 5);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 8. Isuzu
+    elseif (strpos($brandUpper, 'ISUZU') !== false) {
+        if ($len === 10) {
+            $formatted = $clean[0] . '-' . substr($clean, 1, 5) . '-' . substr($clean, 6, 3) . '-' . $clean[9];
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 9. Porsche
+    elseif (strpos($brandUpper, 'PORSCHE') !== false) {
+        if ($len === 11) {
+            $formatted = substr($clean, 0, 3) . '.' . substr($clean, 3, 3) . '.' . substr($clean, 6, 3) . '.' . substr($clean, 9);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 10. Mercedes-Benz
+    elseif (strpos($brandUpper, 'MERCEDES') !== false || strpos($brandUpper, 'BENZ') !== false || strpos($brandUpper, 'MERC') !== false) {
+        if (strpos($clean, 'A') === 0 && $len === 11) {
+            $formatted = 'A ' . substr($clean, 1, 3) . ' ' . substr($clean, 4, 3) . ' ' . substr($clean, 7, 2) . ' ' . substr($clean, 9);
+            return "{$formatted} / {$clean}";
+        } elseif ($len === 10) {
+            $formatted = 'A ' . substr($clean, 0, 3) . ' ' . substr($clean, 3, 3) . ' ' . substr($clean, 6, 2) . ' ' . substr($clean, 8);
+            return "{$formatted} / A{$clean}";
+        }
+    }
+    // 11. BMW
+    elseif (strpos($brandUpper, 'BMW') !== false) {
+        if ($len === 11) {
+            $formatted = substr($clean, 0, 2) . ' ' . substr($clean, 2, 2) . ' ' . $clean[4] . ' ' . substr($clean, 5, 3) . ' ' . substr($clean, 8);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 12. Audi / Volkswagen
+    elseif (strpos($brandUpper, 'AUDI') !== false || strpos($brandUpper, 'VOLKSWAGEN') !== false || strpos($brandUpper, 'VW') !== false || strpos($brandUpper, 'VAG') !== false) {
+        if ($len === 10 || $len === 11) {
+            $formatted = substr($clean, 0, 3) . ' ' . substr($clean, 3, 3) . ' ' . substr($clean, 6, 3) . ' ' . substr($clean, 9);
+            return "{$formatted} / {$clean}";
+        } elseif ($len === 9) {
+            $formatted = substr($clean, 0, 3) . ' ' . substr($clean, 3, 3) . ' ' . substr($clean, 6, 3);
+            return "{$formatted} / {$clean}";
+        }
+    }
+    // 13. Land Rover
+    elseif (strpos($brandUpper, 'LAND ROVER') !== false || strpos($brandUpper, 'LANDROVER') !== false || strpos($brandUpper, 'RANGE ROVER') !== false) {
+        if (strpos($clean, 'LR') !== 0 && $len === 6) {
+            $clean = 'LR' . $clean;
+        }
+        if (strpos($clean, 'LR') === 0) {
+            return "{$clean} / {$clean}";
+        }
+    }
+
+    return $clean;
+}
+
+function formatOemCodeByBrand(string $rawInput, string $brandName): string {
+    $rawInput = trim($rawInput);
+    if ($rawInput === '') return '';
+    $items = array_filter(array_map('trim', explode(',', $rawInput)));
+    $res = [];
+    foreach ($items as $item) {
+        $res[] = formatSingleOemCodeByBrand($item, $brandName);
+    }
+    return implode(', ', $res);
+}

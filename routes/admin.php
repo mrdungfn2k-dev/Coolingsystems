@@ -3099,6 +3099,23 @@ post('/admin/products/new', function() {
     $name = trim($d['name'] ?? '');
     $oem = trim($d['oem_code'] ?? '');
     $oem2 = trim($d['oem_code2'] ?? '');
+
+    // Auto-format OEM code by brand rules
+    $selectedBrandIds = array_filter(array_map('intval', (array)($d['car_brand_ids'] ?? [])));
+    $brandNamesStr = '';
+    if (!empty($selectedBrandIds)) {
+        $inClause = implode(',', $selectedBrandIds);
+        $bRows = dbAll("SELECT name FROM car_brands WHERE id IN ($inClause)");
+        $bNames = array_column($bRows, 'name');
+        $brandNamesStr = implode(' ', $bNames);
+    } elseif (!empty($d['car_brand_id'])) {
+        $bRow = dbGet("SELECT name FROM car_brands WHERE id=?", [intval($d['car_brand_id'])]);
+        if ($bRow) $brandNamesStr = $bRow['name'];
+    }
+    if ($oem !== '' && $brandNamesStr !== '') {
+        $oem = formatOemCodeByBrand($oem, $brandNamesStr);
+    }
+
     $sku = resolveProductSku($d['sku'] ?? '', $oem);
     $price = intval($d['price'] ?? 0);
     $priceBefore = intval($d['price_before_tax'] ?? 0);
@@ -3328,6 +3345,23 @@ post('/admin/products/:id/edit', function($p) {
     $status = in_array($d['status']??'', ['draft','published']) ? $d['status'] : 'draft';
     $editOem = trim($d['oem_code'] ?? '');
     $editOem2 = trim($d['oem_code2'] ?? '');
+
+    // Auto-format OEM code by brand rules
+    $selectedBrandIds = array_filter(array_map('intval', (array)($d['car_brand_ids'] ?? [])));
+    $brandNamesStr = '';
+    if (!empty($selectedBrandIds)) {
+        $inClause = implode(',', $selectedBrandIds);
+        $bRows = dbAll("SELECT name FROM car_brands WHERE id IN ($inClause)");
+        $bNames = array_column($bRows, 'name');
+        $brandNamesStr = implode(' ', $bNames);
+    } elseif (!empty($d['car_brand_id'])) {
+        $bRow = dbGet("SELECT name FROM car_brands WHERE id=?", [intval($d['car_brand_id'])]);
+        if ($bRow) $brandNamesStr = $bRow['name'];
+    }
+    if ($editOem !== '' && $brandNamesStr !== '') {
+        $editOem = formatOemCodeByBrand($editOem, $brandNamesStr);
+    }
+
     $editSku = resolveProductSku($d['sku'] ?? '', $editOem);
     $detailedRbac = (($user['role'] ?? '') === 'staff') && rbacUsesDetailedMode((int)$user['id']);
     if ($detailedRbac) {
