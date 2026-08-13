@@ -1,6 +1,6 @@
-<?php $title = 'Phụ tùng theo hãng xe'; require __DIR__ . '/../partials/head.php'; ?>
+<?php $title = 'Phụ tùng theo xe'; require __DIR__ . '/../partials/head.php'; ?>
 <section class="block"><div class="wrap">
-  <div class="sec-card"><div class="sec-head"><div class="title"><span class="bar"></span><h2>Phụ tùng theo hãng xe</h2></div></div>
+  <div class="sec-card"><div class="sec-head"><div class="title"><span class="bar"></span><h2>Phụ tùng theo xe</h2></div></div>
     <div class="brands-grid"><?php foreach ($brands as $b): ?>
       <a href="/products?brand_id=<?= $b['id'] ?>" class="brand-card <?= !empty($b['image']) ? 'has-image' : '' ?>">
         <?php if (!empty($b['image'])): ?>

@@ -94,7 +94,7 @@
     <a href="/" class="nav-link <?= isActive('/') ?>">Trang chủ</a>
     <a href="/about" class="nav-link <?= isActive('/about') ?>">Giới thiệu</a>
     <a href="/products" class="nav-link <?= isActive('/products') ?>">Sản phẩm</a>
-    <a href="/brands" class="nav-link <?= isActive('/brands') ?>">Phụ tùng theo hãng</a>
+    <a href="/brands" class="nav-link <?= isActive('/brands') ?>">Phụ tùng theo xe</a>
     <a href="/product-brands" class="nav-link <?= isActive('/product-brands') ?>">Thương hiệu</a>
     <a href="/vouchers" class="nav-link <?= isActive('/vouchers') ?>">Khuyến mại</a>
     <a href="/news" class="nav-link <?= isActive('/news') ?>">Tin tức</a>

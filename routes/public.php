@@ -735,7 +735,7 @@ get('/brands', function() {
         WHERE p2.status='published'
         AND (pf2.brand_id=b.id OR pbm2.brand_id=b.id OR p2.car_brand_id=b.id OR p2.name LIKE '%' || b.name || '%')
     ) AS real_count FROM brands b ORDER BY b.sort_order, b.name");
-    view('public/brands', ['title'=>'Phụ tùng theo hãng','brands'=>$brands]);
+    view('public/brands', ['title'=>'Phụ tùng theo xe','brands'=>$brands]);
 });
 
 get('/shops/:slug', function($p) {

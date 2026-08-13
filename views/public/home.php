@@ -724,33 +724,8 @@ foreach ($cats as $cat):
 <?php endforeach; ?>
 
 
-<!-- Phụ tùng theo hãng xe -->
-<section class="block" id="brands-section"><div class="wrap"><div class="sec-card">
-  <div class="sec-head">
-    <div class="title"><span class="bar"></span><h2>Phụ tùng theo hãng xe</h2></div>
-    <a href="/brands" class="btn-link all-link">Xem tất cả</a>
-  </div>
-  
-  <div class="brands-grid">
-    <?php foreach ($brands as $b):
-      $bCount = $b['real_count'] ?? $b['product_count'] ?? 0;
-    ?>
-    <a href="/products?brand_id=<?= $b['id'] ?>" class="brand-card <?= !empty($b['image']) ? 'has-image' : '' ?>">
-      <div class="brand-img-wrap">
-        <?php if (!empty($b['image'])): ?>
-          <img src="/uploads/brands/<?= e($b['image']) ?>" alt="<?= e($b['name']) ?>" width="120" height="60" loading="lazy">
-        <?php else: ?>
-          <span class="brand-initial"><?= strtoupper(mb_substr($b['name'], 0, 3)) ?></span>
-        <?php endif; ?>
-      </div>
-      <div class="brand-info">
-        <div class="name"><?= e($b['name']) ?></div>
-        <div class="count"><?= $bCount ?> sản phẩm</div>
-      </div>
-    </a>
-    <?php endforeach; ?>
-  </div>
-</div></div></section>
+
+
 
 
 
