@@ -7253,3 +7253,39 @@ get('/admin/settings/backups/download', function() {
     flash('error', 'Không tìm thấy bản sao lưu.');
     redirect('/admin/settings/backups');
 });
+
+// Garage Tiers routes
+get('/admin/garage-tiers', function() {
+    $user = requireStaffPermission('rbac:customers', '/admin/login');
+    $tiers = dbAll("SELECT * FROM garage_tiers ORDER BY id ASC");
+    if (empty($tiers)) {
+        dbExecute("INSERT INTO garage_tiers (tier_code, tier_name, discount_percent, min_monthly_spend) VALUES ('BRONZE', 'Gara Thành Viên', 5.0, 0)");
+        dbExecute("INSERT INTO garage_tiers (tier_code, tier_name, discount_percent, min_monthly_spend) VALUES ('SILVER', 'Gara Thân Thiết', 10.0, 10000000)");
+        dbExecute("INSERT INTO garage_tiers (tier_code, tier_name, discount_percent, min_monthly_spend) VALUES ('GOLD', 'Gara Vàng', 15.0, 30000000)");
+        dbExecute("INSERT INTO garage_tiers (tier_code, tier_name, discount_percent, min_monthly_spend) VALUES ('DIAMOND', 'Gara Kim Cương', 20.0, 50000000)");
+        $tiers = dbAll("SELECT * FROM garage_tiers ORDER BY id ASC");
+    }
+    view('admin/garage-tiers', compact('tiers'));
+});
+
+post('/admin/garage-tiers/update', function() {
+    $user = requireStaffPermission('rbac:customers', '/admin/login');
+    csrfCheck();
+    $tierIds = $_POST['tier_id'] ?? [];
+    $tierNames = $_POST['tier_name'] ?? [];
+    $discounts = $_POST['discount_percent'] ?? [];
+    $spends = $_POST['min_monthly_spend'] ?? [];
+
+    foreach ($tierIds as $i => $id) {
+        $id = intval($id);
+        $name = trim($tierNames[$i] ?? '');
+        $disc = floatval($discounts[$i] ?? 0);
+        $spend = floatval($spends[$i] ?? 0);
+        if ($id > 0 && !empty($name)) {
+            dbExecute("UPDATE garage_tiers SET tier_name=?, discount_percent=?, min_monthly_spend=?, updated_at=CURRENT_TIMESTAMP WHERE id=?", [$name, $disc, $spend, $id]);
+        }
+    }
+    setFlash('success', 'Đã lưu cấu hình Hạng Gara thành công!');
+    header('Location: /admin/garage-tiers');
+    exit;
+});
