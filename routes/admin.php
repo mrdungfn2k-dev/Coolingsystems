@@ -2818,7 +2818,11 @@ post('/admin/inventory/:id/update', function($p) {
         if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Tồn tối thiểu không được lớn hơn tồn tối đa.']); exit; }
         flash('error','Tồn tối thiểu không được lớn hơn tồn tối đa.'); redirect($targetUrl); return;
     }
-    if($values['original_price']>0&&$values['original_price']<$values['price']){
+    $isContactPrice = !empty($values['is_call_price']) || !empty($values['is_contact_price']) || !empty($values['is_call']) || !empty($product['is_call_price']);
+    if ($isContactPrice) {
+        $values['price'] = 0;
+    }
+    if(!$isContactPrice && $values['original_price']>0 && $values['original_price']<$values['price']){
         if ($isAjax) { echo json_encode(['ok'=>false, 'message'=>'Giá gốc không được nhỏ hơn giá bán khi được nhập.']); exit; }
         flash('error','Giá gốc không được nhỏ hơn giá bán khi được nhập.'); redirect($targetUrl); return;
     }
@@ -3148,6 +3152,9 @@ post('/admin/products/new', function() {
     if (!$name) $valErrors[] = 'Tên sản phẩm không được để trống';
     if (!$sku)  $valErrors[] = 'Vui lòng nhập mã SKU hoặc mã OEM';
     $isContactPrice = !empty($d['is_call_price']) || !empty($d['is_contact_price']) || !empty($d['is_call']);
+    if ($isContactPrice) {
+        $price = 0;
+    }
     if (!$inventoryManagedSeparately) {
         if (!$isContactPrice && $price <= 0) $valErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
         if ($stockRaw === '') $valErrors[] = 'Tồn kho hiện tại không được để trống';
@@ -3165,7 +3172,7 @@ post('/admin/products/new', function() {
     if ($origRaw !== '') {
         if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
             $valErrors[] = 'Giá gốc phải là số nguyên không âm';
-        } else if (intval($origRaw) > 0 && intval($origRaw) < $price) {
+        } else if (!$isContactPrice && intval($origRaw) > 0 && intval($origRaw) < $price) {
             $valErrors[] = 'Giá gốc không được nhỏ hơn Giá bán sau VAT';
         }
     }
@@ -3375,6 +3382,9 @@ post('/admin/products/:id/edit', function($p) {
     $editErrors = [];
     if (!trim($d['name'] ?? '')) $editErrors[] = 'Tên sản phẩm không được để trống';
     $isContactPrice = !empty($d['is_call_price']) || !empty($d['is_contact_price']) || !empty($d['is_call']);
+    if ($isContactPrice) {
+        $price = 0;
+    }
     if (!$isContactPrice && $price <= 0) $editErrors[] = 'Giá bán sau VAT phải lớn hơn 0';
     if ($stockRaw === '') $editErrors[] = 'Tồn kho hiện tại không được để trống';
     elseif (!ctype_digit($stockRaw) || $stock > 1000) $editErrors[] = 'Tồn kho hiện tại chỉ được từ 0 đến 1000';
@@ -3388,7 +3398,7 @@ post('/admin/products/:id/edit', function($p) {
     if ($origRaw !== '') {
         if (!ctype_digit($origRaw) || intval($origRaw) < 0) {
             $editErrors[] = 'Giá gốc phải là số nguyên không âm';
-        } else if (intval($origRaw) > 0 && intval($origRaw) < $price) {
+        } else if (!$isContactPrice && intval($origRaw) > 0 && intval($origRaw) < $price) {
             $editErrors[] = 'Giá gốc không được nhỏ hơn Giá bán sau VAT';
         }
     }
@@ -7329,3 +7339,54 @@ get('/admin/settings/backups/download', function() {
     flash('error', 'Không tìm thấy bản sao lưu.');
     redirect('/admin/settings/backups');
 });
+
+// Cấu hình Hạng Gara & Chiết khấu buôn
+get('/admin/garage-tiers', function() {
+    $user = requireStaffPermission('rbac:settings|users', '/admin/login');
+    dbRun("CREATE TABLE IF NOT EXISTS garage_tiers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        tier_code TEXT NOT NULL UNIQUE,
+        tier_name TEXT NOT NULL,
+        discount_percent REAL DEFAULT 0,
+        min_monthly_spend REAL DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
+    
+    $tiers = dbAll("SELECT * FROM garage_tiers ORDER BY id ASC");
+    if (empty($tiers)) {
+        dbRun("INSERT INTO garage_tiers (tier_code, tier_name, discount_percent, min_monthly_spend) VALUES 
+            ('BRONZE', 'Đồng (Bronze)', 5, 0),
+            ('SILVER', 'Bạc (Silver)', 8, 10000000),
+            ('GOLD', 'Vàng (Gold)', 12, 30000000),
+            ('DIAMOND', 'Kim Cương (Diamond)', 15, 70000000)");
+        $tiers = dbAll("SELECT * FROM garage_tiers ORDER BY id ASC");
+    }
+
+    view('admin/garage-tiers', [
+        'title' => 'Cấu hình Hạng Gara & Chiết khấu',
+        'tiers' => $tiers
+    ]);
+});
+
+post('/admin/garage-tiers/update', function() {
+    $user = requireStaffPermission('rbac:settings|users', '/admin/login');
+    csrfCheck();
+    $ids = $_POST['tier_id'] ?? [];
+    $names = $_POST['tier_name'] ?? [];
+    $discounts = $_POST['discount_percent'] ?? [];
+    $spends = $_POST['min_monthly_spend'] ?? [];
+
+    foreach ($ids as $i => $id) {
+        $id = (int)$id;
+        $name = trim($names[$i] ?? '');
+        $disc = floatval($discounts[$i] ?? 0);
+        $spend = floatval($spends[$i] ?? 0);
+        if ($id > 0 && $name !== '') {
+            dbRun("UPDATE garage_tiers SET tier_name=?, discount_percent=?, min_monthly_spend=?, updated_at=CURRENT_TIMESTAMP WHERE id=?", [$name, $disc, $spend, $id]);
+        }
+    }
+    flash('success', 'Đã cập nhật cấu hình Hạng Gara thành công!');
+    redirect('/admin/garage-tiers');
+});
+
