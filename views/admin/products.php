@@ -19,37 +19,35 @@
   <h1 style="margin:0">Quản lý sản phẩm</h1>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
     <div style="position:relative;display:inline-block" id="exportDropdown">
-      <button type="button" onclick="toggleExportMenu()" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <button type="button" onclick="toggleExportMenu()" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;border-radius:8px;font-weight:600;padding:6px 14px">
         Xuất CSV ▾
       </button>
-      <div id="exportMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:100;min-width:220px;margin-top:4px;overflow:hidden">
-        <a href="#" onclick="document.getElementById('exportMenu').style.display='none';csColPick({section:'products',url:'/admin/products/export-csv',title:'Tất cả sản phẩm'});return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">📄 Xuất tất cả SP (CSV)</a>
-        <a href="#" onclick="exportSelected();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">☑️ Xuất SP đã chọn (CSV)</a>
+      <div id="exportMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:100;min-width:220px;margin-top:4px;overflow:hidden">
+        <a href="#" onclick="document.getElementById('exportMenu').style.display='none';csColPick({section:'products',url:'/admin/products/export-csv',title:'Tất cả sản phẩm'});return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">Xuất tất cả SP (CSV)</a>
+        <a href="#" onclick="exportSelected();return false" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">Xuất SP đã chọn (CSV)</a>
         <hr style="margin:4px 0;border:0;border-top:1px solid #eee">
-        <a href="#" onclick="triggerImageExport('all');return false;" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh tất cả SP (ZIP)</a>
-        <a href="#" onclick="triggerImageExport('selected');return false;" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">🖼️ Xuất ảnh SP đã chọn (ZIP)</a>
+        <a href="#" onclick="triggerImageExport('all');return false;" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">Xuất ảnh tất cả SP (ZIP)</a>
+        <a href="#" onclick="triggerImageExport('selected');return false;" style="display:block;padding:10px 16px;color:#333;text-decoration:none;font-size:13px" onmouseover="this.style.background='#f5f7fa'" onmouseout="this.style.background='#fff'">Xuất ảnh SP đã chọn (ZIP)</a>
       </div>
     </div>
-    <button type="button" onclick="document.getElementById('csvImportModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;gap:4px">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+    <button type="button" onclick="document.getElementById('csvImportModal').style.display='flex'" class="btn btn-outline-navy btn-sm" style="display:inline-flex;align-items:center;border-radius:8px;font-weight:600;padding:6px 14px">
       Nhập CSV
     </button>
     <form method="post" action="/admin/products/batch-set-call-price" style="display:inline-block;margin:0" onsubmit="return csConfirmForm(this, 'Xác nhận TÍCH CHỌN tất cả sản phẩm thành Liên hệ báo giá?')">
       <?= csrfField() ?>
       <input type="hidden" name="call_price_status" value="1">
-      <button type="submit" class="btn btn-outline-secondary btn-sm" title="Tích chọn Liên hệ báo giá cho tất cả SP">
-        📞 Tích tất cả Báo giá
+      <button type="submit" class="btn btn-outline-secondary btn-sm" style="border-radius:8px;font-weight:600;padding:6px 14px;border:1.5px solid #cbd5e1" title="Tích chọn Liên hệ báo giá cho tất cả SP">
+        Tích tất cả Báo giá
       </button>
     </form>
     <form method="post" action="/admin/products/batch-set-call-price" style="display:inline-block;margin:0" onsubmit="return csConfirmForm(this, 'Xác nhận BỎ TÍCH tất cả sản phẩm để hiển thị lại giá bán bình thường?')">
       <?= csrfField() ?>
       <input type="hidden" name="call_price_status" value="0">
-      <button type="submit" class="btn btn-outline-secondary btn-sm" title="Bỏ tích Liên hệ báo giá để hiện lại giá bán cho tất cả SP">
-        💲 Bỏ tích hiện lại giá
+      <button type="submit" class="btn btn-outline-secondary btn-sm" style="border-radius:8px;font-weight:600;padding:6px 14px;border:1.5px solid #cbd5e1" title="Bỏ tích Liên hệ báo giá để hiện lại giá bán cho tất cả SP">
+        Bỏ tích hiện lại giá
       </button>
     </form>
-    <a href="/admin/products/new" class="btn btn-gold btn-sm">+ Đăng SP mới</a>
+    <a href="/admin/products/new" class="btn btn-gold btn-sm" style="border-radius:8px;font-weight:600;padding:6px 14px">+ Đăng SP mới</a>
   </div>
 </div>
 <!-- Import CSV Modal -->
