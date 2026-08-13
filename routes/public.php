@@ -843,6 +843,9 @@ get('/policies', function() {
 get('/policies/:slug', function($p) {
     $slug = $p['slug'] ?? '';
     $page = dbGet("SELECT * FROM static_pages WHERE slug=?", [$slug]);
+    if (!$page && $slug === 'dieu-khoan-bao-mat') {
+        $page = dbGet("SELECT * FROM static_pages WHERE slug='chinh-sach'");
+    }
     if (!$page) { http_response_code(404); view('errors/404', ['title'=>'404']); return; }
     view('public/static-page', ['title' => $page['title'], 'page' => $page]);
 });

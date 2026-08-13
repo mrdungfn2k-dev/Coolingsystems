@@ -46,17 +46,23 @@
         $slug = $p['slug'];
         $pVis = ($pageVis[$slug] ?? '1') !== '0';
         $urlMap = [
-          'gioi-thieu'           => '/about',
-          'lien-he'              => '/contact',
-          'tuyen-dung'           => '/careers',
-          'cau-chuyen-cooling'   => '/about/story',
-          'he-thong-cua-hang'    => '/stores',
-          'tin-tuc-tong-hop'     => '/news',
-          '4-buoc-cam-ket'       => '/#cam-ket',
-          'dieu-khoan-bao-mat'   => '/policies/dieu-khoan-bao-mat',
-          'huong-dan-mua-hang'   => '/policies/huong-dan-mua-hang',
-          'chinh-sach-doi-tra'   => '/policies/chinh-sach-doi-tra',
-          'chinh-sach-bao-hanh'  => '/policies/chinh-sach-bao-hanh',
+          'gioi-thieu'                     => '/about',
+          'lien-he'                        => '/contact',
+          'tuyen-dung'                     => '/careers',
+          'cau-chuyen-cooling'             => '/about/story',
+          'he-thong-cua-hang'              => '/stores',
+          'tin-tuc-tong-hop'               => '/news',
+          '4-buoc-cam-ket'                 => '/#cam-ket',
+          'dieu-khoan-bao-mat'             => '/policies/dieu-khoan-bao-mat',
+          'chinh-sach'                     => '/policies/dieu-khoan-bao-mat',
+          'huong-dan-mua-hang'             => '/policies/huong-dan-mua-hang',
+          'chinh-sach-doi-tra'             => '/policies/chinh-sach-doi-tra',
+          'chinh-sach-bao-hanh'            => '/policies/chinh-sach-bao-hanh',
+          'quy-trinh-giai-quyet-khieu-nai' => '/policies/quy-trinh-giai-quyet-khieu-nai',
+          'chinh-sach-gia'                 => '/policies/chinh-sach-gia',
+          'chinh-sach-thanh-toan'          => '/policies/chinh-sach-thanh-toan',
+          'dieu-kien-han-che-cung-cap'     => '/policies/dieu-kien-han-che-cung-cap',
+          'hinh-thuc-ho-tro-truc-tuyen'    => '/policies/hinh-thuc-ho-tro-truc-tuyen',
         ];
         $viewUrl = $urlMap[$slug] ?? ('/policies/'.$slug);
       ?>

@@ -46,7 +46,17 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
       ?>
       <div class="foot-col"><h4>Sản phẩm</h4><ul><li><a href="/products">Tất cả phụ tùng</a></li><li><a href="/brands">Theo hãng xe</a></li><li><a href="/promotions">Khuyến mại</a></li></ul></div>
       <div class="foot-col"><h4>Về chúng tôi</h4><ul><?php if(($_pVisFoot['gioi-thieu'] ?? '1') !== '0'): ?><li><a href="/about">Câu chuyện Cooling</a></li><?php endif; ?><?php if(($_pVisFoot['he-thong-cua-hang'] ?? '1') !== '0'): ?><li><a href="/stores">Hệ thống cửa hàng</a></li><?php endif; ?><?php if(($_pVisFoot['tin-tuc-tong-hop'] ?? '1') !== '0'): ?><li><a href="/news">Tin tức</a></li><?php endif; ?><li><a href="/contact">Liên hệ</a></li></ul></div>
-      <div class="foot-col"><h4>Hỗ trợ</h4><ul><li><a href="/policies/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li><li><a href="/policies/chinh-sach-doi-tra">Chính sách đổi trả</a></li><li><a href="/policies/chinh-sach-bao-hanh">Chính sách bảo hành</a></li><li><a href="/policies/dieu-khoan-bao-mat">Điều khoản bảo mật</a></li></ul></div>
+      <div class="foot-col"><h4>Hỗ trợ</h4><ul>
+        <?php if(($_pVisFoot['huong-dan-mua-hang'] ?? '1') !== '0'): ?><li><a href="/policies/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['chinh-sach-doi-tra'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-doi-tra">Chính sách đổi trả</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['chinh-sach-bao-hanh'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-bao-hanh">Chính sách bảo hành</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['dieu-khoan-bao-mat'] ?? '1') !== '0'): ?><li><a href="/policies/dieu-khoan-bao-mat">Điều khoản bảo mật</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['quy-trinh-giai-quyet-khieu-nai'] ?? '1') !== '0'): ?><li><a href="/policies/quy-trinh-giai-quyet-khieu-nai">Giải quyết khiếu nại</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['chinh-sach-gia'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-gia">Chính sách giá</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['chinh-sach-thanh-toan'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-thanh-toan">Chính sách thanh toán</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['dieu-kien-han-che-cung-cap'] ?? '1') !== '0'): ?><li><a href="/policies/dieu-kien-han-che-cung-cap">Điều kiện cung cấp</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['hinh-thuc-ho-tro-truc-tuyen'] ?? '1') !== '0'): ?><li><a href="/policies/hinh-thuc-ho-tro-truc-tuyen">Hỗ trợ trực tuyến</a></li><?php endif; ?>
+      </ul></div>
       <div class="foot-col"><h4>Bài viết mới</h4><ul>
         <?php if(!empty($_footArticles)): foreach($_footArticles as $_fa): ?>
         <li><a href="/news/<?= e($_fa['slug']) ?>"><?= e(mb_substr($_fa['title'],0,40)) ?></a></li>
