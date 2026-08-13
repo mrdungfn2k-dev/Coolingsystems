@@ -35,6 +35,20 @@
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
       Nhập CSV
     </button>
+    <form method="post" action="/admin/products/batch-set-call-price" style="display:inline-block;margin:0" onsubmit="return csConfirmForm(this, 'Xác nhận TÍCH CHỌN tất cả sản phẩm thành Liên hệ báo giá?')">
+      <?= csrfField() ?>
+      <input type="hidden" name="call_price_status" value="1">
+      <button type="submit" class="btn btn-outline-secondary btn-sm" title="Tích chọn Liên hệ báo giá cho tất cả SP">
+        📞 Tích tất cả Báo giá
+      </button>
+    </form>
+    <form method="post" action="/admin/products/batch-set-call-price" style="display:inline-block;margin:0" onsubmit="return csConfirmForm(this, 'Xác nhận BỎ TÍCH tất cả sản phẩm để hiển thị lại giá bán bình thường?')">
+      <?= csrfField() ?>
+      <input type="hidden" name="call_price_status" value="0">
+      <button type="submit" class="btn btn-outline-secondary btn-sm" title="Bỏ tích Liên hệ báo giá để hiện lại giá bán cho tất cả SP">
+        💲 Bỏ tích hiện lại giá
+      </button>
+    </form>
     <a href="/admin/products/new" class="btn btn-gold btn-sm">+ Đăng SP mới</a>
   </div>
 </div>

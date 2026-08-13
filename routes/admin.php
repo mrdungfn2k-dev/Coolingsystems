@@ -3077,6 +3077,18 @@ get('/admin/products/new', function() {
     view('admin/product-form', ['title'=>'Đăng SP mới','role'=>'admin','categories'=>$categories,'brands'=>$brands,'images'=>[]]);
 });
 
+post('/admin/products/batch-set-call-price', function() {
+    $user = requireStaffPermission('rbac:catalog.products.create|products', '/admin/login'); csrfCheck();
+    $status = intval($_POST['call_price_status'] ?? 1);
+    dbRun("UPDATE products SET is_call_price = ?", [$status]);
+    if ($status === 1) {
+        flash('success', 'Đã bật "Liên hệ báo giá" cho tất cả sản phẩm thành công.');
+    } else {
+        flash('success', 'Đã bỏ "Liên hệ báo giá", hiển thị lại giá bán cho tất cả sản phẩm thành công.');
+    }
+    redirect('/admin/products');
+});
+
 post('/admin/products/new', function() {
     $user = requireStaffPermission('rbac:catalog.products.create|products', '/admin/login'); csrfCheck();
     $d = $_POST;
