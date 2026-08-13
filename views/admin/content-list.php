@@ -8,64 +8,69 @@
 
 <div class="panel">
   <table class="tbl">
-    <thead><tr><th>Tên trang</th><th>Slug</th><th>Cập nhật lần cuối</th><th>Xem</th><th>Sửa</th></tr></thead>
+    <thead><tr><th>Tên trang</th><th>Slug</th><th>Cập nhật lần cuối</th><th>Trạng thái hiển thị</th><th>Xem</th><th>Sửa</th></tr></thead>
     <tbody>
-    <!-- Footer row -->
-    <tr>
-      <td><strong>Footer (Chân trang)</strong></td>
-      <td class="fs-12"><code>footer-info</code></td>
-      <td class="fs-12">—</td>
-      <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
-      <td><button onclick="document.getElementById('footerModal').style.display='flex'" class="btn btn-gold btn-sm">Sửa</button></td>
-    </tr>
-    <!-- Banner row (hero) -->
-    <tr>
-      <td><strong>Banner trang chủ</strong></td>
-      <td class="fs-12"><code>hero-banner</code></td>
-      <td class="fs-12">—</td>
-      <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
-      <td><button onclick="document.getElementById('bannerModal').style.display='flex'" class="btn btn-gold btn-sm">Sửa</button></td>
-    </tr>
-    <!-- Banner 2 (carousel trượt trang chủ) -->
-    <tr>
-      <td><strong>Banner 2</strong></td>
-      <td class="fs-12"><code>home-banners</code></td>
-      <td class="fs-12">—</td>
-      <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
-      <td><a href="/admin/banners" class="btn btn-gold btn-sm">Sửa</a></td>
-    </tr>
-    <!-- 4 Bước cam kết -->
-    <tr>
-      <td><strong>4 bước cam kết</strong></td>
-      <td class="fs-12"><code>trust-steps</code></td>
-      <td class="fs-12">—</td>
-      <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
-      <td><a href="/admin/trust-steps" class="btn btn-gold btn-sm">Sửa</a></td>
-    </tr>
+    <?php
+      $pageVis = $pageVis ?? [];
+      $customItems = [
+        ['title' => 'Footer (Chân trang)', 'slug' => 'footer-info', 'type' => 'modal', 'modal' => 'footerModal'],
+        ['title' => 'Banner trang chủ', 'slug' => 'hero-banner', 'type' => 'modal', 'modal' => 'bannerModal'],
+        ['title' => 'Banner 2', 'slug' => 'home-banners', 'type' => 'link', 'url' => '/admin/banners'],
+        ['title' => '4 bước cam kết', 'slug' => 'trust-steps', 'type' => 'link', 'url' => '/admin/trust-steps'],
+      ];
+    ?>
+    <?php foreach ($customItems as $cItem): ?>
+      <?php $cVis = ($pageVis[$cItem['slug']] ?? '1') !== '0'; ?>
+      <tr>
+        <td><strong><?= e($cItem['title']) ?></strong></td>
+        <td class="fs-12"><code><?= e($cItem['slug']) ?></code></td>
+        <td class="fs-12">—</td>
+        <td>
+          <button type="button" class="btn btn-sm <?= $cVis ? 'btn-navy' : 'btn-outline-secondary' ?>" data-slug="<?= e($cItem['slug']) ?>" data-status="<?= $cVis ? 1 : 0 ?>" onclick="togglePageVis('<?= e($cItem['slug']) ?>', this)" style="min-width:95px;font-weight:700">
+            <?= $cVis ? '✓ Hiển thị' : '✕ Đã ẩn' ?>
+          </button>
+        </td>
+        <td><a href="/" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
+        <td>
+          <?php if ($cItem['type'] === 'modal'): ?>
+            <button onclick="document.getElementById('<?= $cItem['modal'] ?>').style.display='flex'" class="btn btn-gold btn-sm">Sửa</button>
+          <?php else: ?>
+            <a href="<?= $cItem['url'] ?>" class="btn btn-gold btn-sm">Sửa</a>
+          <?php endif; ?>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+
     <?php foreach($pages as $p): ?>
+      <?php
+        $slug = $p['slug'];
+        $pVis = ($pageVis[$slug] ?? '1') !== '0';
+        $urlMap = [
+          'gioi-thieu'           => '/about',
+          'lien-he'              => '/contact',
+          'tuyen-dung'           => '/careers',
+          'cau-chuyen-cooling'   => '/about/story',
+          'he-thong-cua-hang'    => '/stores',
+          'tin-tuc-tong-hop'     => '/news',
+          '4-buoc-cam-ket'       => '/#cam-ket',
+          'dieu-khoan-bao-mat'   => '/policies/dieu-khoan-bao-mat',
+          'huong-dan-mua-hang'   => '/policies/huong-dan-mua-hang',
+          'chinh-sach-doi-tra'   => '/policies/chinh-sach-doi-tra',
+          'chinh-sach-bao-hanh'  => '/policies/chinh-sach-bao-hanh',
+        ];
+        $viewUrl = $urlMap[$slug] ?? ('/policies/'.$slug);
+      ?>
       <tr>
         <td><strong><?= e($p['title']) ?></strong></td>
-        <td class="fs-12"><code><?= e($p['slug']) ?></code></td>
+        <td class="fs-12"><code><?= e($slug) ?></code></td>
         <td class="fs-12"><?= $p['updated_at'] ? relTime($p['updated_at']) : '—' ?></td>
-        <?php
-          $slug = $p['slug'];
-          $urlMap = [
-            'gioi-thieu'           => '/about',
-            'lien-he'              => '/contact',
-            'tuyen-dung'           => '/careers',
-            'cau-chuyen-cooling'   => '/about/story',
-            'he-thong-cua-hang'    => '/stores',
-            'tin-tuc-tong-hop'     => '/news',
-            '4-buoc-cam-ket'       => '/#cam-ket',
-            'dieu-khoan-bao-mat'   => '/policies/dieu-khoan-bao-mat',
-            'huong-dan-mua-hang'   => '/policies/huong-dan-mua-hang',
-            'chinh-sach-doi-tra'   => '/policies/chinh-sach-doi-tra',
-            'chinh-sach-bao-hanh'  => '/policies/chinh-sach-bao-hanh',
-          ];
-          $viewUrl = $urlMap[$slug] ?? ('/policies/'.$slug);
-        ?>
+        <td>
+          <button type="button" class="btn btn-sm <?= $pVis ? 'btn-navy' : 'btn-outline-secondary' ?>" data-slug="<?= e($slug) ?>" data-status="<?= $pVis ? 1 : 0 ?>" onclick="togglePageVis('<?= e($slug) ?>', this)" style="min-width:95px;font-weight:700">
+            <?= $pVis ? '✓ Hiển thị' : '✕ Đã ẩn' ?>
+          </button>
+        </td>
         <td><a href="<?= $viewUrl ?>" target="_blank" class="btn btn-outline-navy btn-sm">Xem</a></td>
-        <td><a href="/admin/content/<?= e($p['slug']) ?>" class="btn btn-gold btn-sm">Sửa</a></td>
+        <td><a href="/admin/content/<?= e($slug) ?>" class="btn btn-gold btn-sm">Sửa</a></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
@@ -224,5 +229,38 @@
     </form>
   </div>
 </div>
+
+<script>
+function togglePageVis(slug, btn) {
+  var curStatus = parseInt(btn.getAttribute('data-status') || '1');
+  var newStatus = curStatus === 1 ? 0 : 1;
+  btn.disabled = true;
+  var fd = new FormData();
+  fd.append('slug', slug);
+  fd.append('status', newStatus);
+  if (window._CSRF) fd.append('_csrf', window._CSRF);
+  fetch('/admin/content/toggle-visibility', {
+    method: 'POST',
+    body: fd
+  }).then(function(r){ return r.json(); }).then(function(data){
+    btn.disabled = false;
+    if (data.ok) {
+      btn.setAttribute('data-status', newStatus);
+      if (newStatus === 1) {
+        btn.className = 'btn btn-sm btn-navy';
+        btn.innerHTML = '✓ Hiển thị';
+      } else {
+        btn.className = 'btn btn-sm btn-outline-secondary';
+        btn.innerHTML = '✕ Đã ẩn';
+      }
+    } else {
+      alert('Không thể cập nhật trạng thái.');
+    }
+  }).catch(function(err){
+    btn.disabled = false;
+    alert('Lỗi kết nối.');
+  });
+}
+</script>
 
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

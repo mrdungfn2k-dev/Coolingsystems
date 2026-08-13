@@ -91,16 +91,30 @@
       <a href="/products" style="display:block;padding:12px 18px;text-align:center;color:#c8a951;font-weight:700;font-size:13px;text-decoration:none;background:#fafafa;border-top:2px solid #f0f0f0;border-radius:0 0 8px 8px">Xem tất cả sản phẩm →</a>
     </div>
   </div>
+    <?php
+      $visRows = dbAll("SELECT key, value FROM settings WHERE key LIKE 'page_visible_%'");
+      $pVisNav = [];
+      foreach ($visRows as $vr) {
+          $pVisNav[str_replace('page_visible_', '', $vr['key'])] = $vr['value'];
+      }
+    ?>
     <a href="/" class="nav-link <?= isActive('/') ?>">Trang chủ</a>
-    <a href="/about" class="nav-link <?= isActive('/about') ?>">Giới thiệu</a>
+    <?php if (($pVisNav['gioi-thieu'] ?? '1') !== '0'): ?>
+      <a href="/about" class="nav-link <?= isActive('/about') ?>">Giới thiệu</a>
+    <?php endif; ?>
     <a href="/products" class="nav-link <?= isActive('/products') ?>">Sản phẩm</a>
     <a href="/brands" class="nav-link <?= isActive('/brands') ?>">Phụ tùng theo xe</a>
     <a href="/product-brands" class="nav-link <?= isActive('/product-brands') ?>">Thương hiệu</a>
     <a href="/vouchers" class="nav-link <?= isActive('/vouchers') ?>">Khuyến mại</a>
-    <a href="/news" class="nav-link <?= isActive('/news') ?>">Tin tức</a>
-    <!-- Chính sách moved to footer -->
-    <a href="/stores" class="nav-link <?= isActive('/stores') ?>">Hệ thống cửa hàng</a>
-    <a href="/warranty/lookup" class="nav-link <?= isActive('/warranty/lookup') ?>">Tra bảo hành</a>
+    <?php if (($pVisNav['tin-tuc-tong-hop'] ?? '1') !== '0'): ?>
+      <a href="/news" class="nav-link <?= isActive('/news') ?>">Tin tức</a>
+    <?php endif; ?>
+    <?php if (($pVisNav['he-thong-cua-hang'] ?? '1') !== '0'): ?>
+      <a href="/stores" class="nav-link <?= isActive('/stores') ?>">Hệ thống cửa hàng</a>
+    <?php endif; ?>
+    <?php if (($pVisNav['chinh-sach-bao-hanh'] ?? '1') !== '0'): ?>
+      <a href="/warranty/lookup" class="nav-link <?= isActive('/warranty/lookup') ?>">Tra bảo hành</a>
+    <?php endif; ?>
 
   </div>
 </nav>

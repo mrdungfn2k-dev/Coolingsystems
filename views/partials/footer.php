@@ -37,8 +37,15 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
         <?php endif; ?>
         <p class="desc" style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px"><?= e($_footerDesc) ?></p>
       </div>
+      <?php
+        $_visRows = dbAll("SELECT key, value FROM settings WHERE key LIKE 'page_visible_%'");
+        $_pVisFoot = [];
+        foreach ($_visRows as $_vr) {
+            $_pVisFoot[str_replace('page_visible_', '', $_vr['key'])] = $_vr['value'];
+        }
+      ?>
       <div class="foot-col"><h4>Sản phẩm</h4><ul><li><a href="/products">Tất cả phụ tùng</a></li><li><a href="/brands">Theo hãng xe</a></li><li><a href="/promotions">Khuyến mại</a></li></ul></div>
-      <div class="foot-col"><h4>Về chúng tôi</h4><ul><li><a href="/about">Câu chuyện Cooling</a></li><li><a href="/stores">Hệ thống cửa hàng</a></li><li><a href="/news">Tin tức</a></li><li><a href="/contact">Liên hệ</a></li></ul></div>
+      <div class="foot-col"><h4>Về chúng tôi</h4><ul><?php if(($_pVisFoot['gioi-thieu'] ?? '1') !== '0'): ?><li><a href="/about">Câu chuyện Cooling</a></li><?php endif; ?><?php if(($_pVisFoot['he-thong-cua-hang'] ?? '1') !== '0'): ?><li><a href="/stores">Hệ thống cửa hàng</a></li><?php endif; ?><?php if(($_pVisFoot['tin-tuc-tong-hop'] ?? '1') !== '0'): ?><li><a href="/news">Tin tức</a></li><?php endif; ?><li><a href="/contact">Liên hệ</a></li></ul></div>
       <div class="foot-col"><h4>Hỗ trợ</h4><ul><li><a href="/policies/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li><li><a href="/policies/chinh-sach-doi-tra">Chính sách đổi trả</a></li><li><a href="/policies/chinh-sach-bao-hanh">Chính sách bảo hành</a></li><li><a href="/policies/dieu-khoan-bao-mat">Điều khoản bảo mật</a></li></ul></div>
       <div class="foot-col"><h4>Bài viết mới</h4><ul>
         <?php if(!empty($_footArticles)): foreach($_footArticles as $_fa): ?>

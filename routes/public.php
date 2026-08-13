@@ -587,6 +587,22 @@ get('/products', function() {
         $params[] = '%' . $year . '%';
     }
 
+    // OEM code filter (Max 20 chars)
+    if (!empty($_GET['oem'])) {
+        $oemRaw = trim($_GET['oem']);
+        if (mb_strlen($oemRaw) > 20) $oemRaw = mb_substr($oemRaw, 0, 20);
+        if (!empty($oemRaw)) {
+            $escapedOem = str_replace("'", "''", $oemRaw);
+            $normalizedOem = strtoupper((string)preg_replace('/[^a-z0-9]+/i', '', $oemRaw));
+            $oemSql = "(p.oem_code LIKE '%" . $escapedOem . "%' OR p.sku LIKE '%" . $escapedOem . "%'";
+            if ($normalizedOem !== '') {
+                $normalizedSql = "REPLACE(REPLACE(REPLACE(REPLACE(UPPER(COALESCE(%s,'')),'-',''),' ',''),'.',''),'/','')";
+                $oemSql .= " OR " . sprintf($normalizedSql, 'p.oem_code') . " LIKE '%" . $normalizedOem . "%'";
+            }
+            $where[] = $oemSql . ')';
+        }
+    }
+
     if (!empty($_GET['promo'])) {
         // Show only products with active promotions
         $where[] = "p.is_on_sale=1 AND p.sale_price > 0";
@@ -620,6 +636,14 @@ get('/products', function() {
     $products = dbAll("SELECT DISTINCT p.*, 'Cooling' AS shop_name, (SELECT file_path FROM product_images WHERE product_id=p.id ORDER BY is_main DESC LIMIT 1) AS main_image FROM products p $joins WHERE $wStr ORDER BY $sort LIMIT $limit OFFSET $offset", $params);
     $categories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY sort_order");
     $brands = dbAll("SELECT * FROM brands ORDER BY sort_order, name");
+    $brandIdSelect = intval($_GET['brand_id'] ?? 0);
+    if ($brandIdSelect > 0) {
+        $carModels = dbAll("SELECT * FROM car_models WHERE brand_id=? ORDER BY name", [$brandIdSelect]);
+    } else {
+        $carModels = dbAll("SELECT * FROM car_models ORDER BY name");
+    }
+    $years = range(date('Y'), 2000);
+    $allModels = dbAll("SELECT id, brand_id, name FROM car_models ORDER BY name");
     $activeVehicle = null;
     if (!empty($_GET['brand_id'])) {
         $activeVehicle = dbGet("SELECT b.name AS brand_name FROM brands b WHERE b.id=?", [intval($_GET['brand_id'])]);
@@ -629,7 +653,7 @@ get('/products', function() {
     if ($page > 1 && count($_GET) === 1 && array_key_exists('page', $_GET)) {
         $seo['canonical'] = 'https://coolingsystems.vn/products?page=' . $page;
     }
-    view('public/products', compact('products','total','page','totalPages','limit','categories','brands','activeVehicle','productBrands','seo'));
+    view('public/products', compact('products','total','page','totalPages','limit','categories','brands','carModels','allModels','years','activeVehicle','productBrands','seo'));
 });
 
 // Slug-based SEO-friendly URL: /products/dan-lanh-toyota-camry-2018-xyz

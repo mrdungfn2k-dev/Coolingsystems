@@ -3696,7 +3696,28 @@ get('/admin/content', function() {
     $pages = dbAll('SELECT * FROM static_pages ORDER BY title');
     $bannerSettings = []; $bkeys = ['hero_badge','hero_heading','hero_subtext','hero_btn1_text','hero_btn1_url','hero_btn2_text','hero_btn2_url','hero_bg_image','hero_show_text','hero_banner_link','home_banners_list']; foreach($bkeys as $bk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$bk]); $bannerSettings[$bk]=$r['value']??'';}
     $footerSettings = []; $fkeys = ['footer_logo_text','footer_desc','footer_copyright']; foreach($fkeys as $fk){$r=dbGet("SELECT value FROM settings WHERE key=?",[$fk]); $footerSettings[$fk]=$r['value']??'';}
-    view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages], ['bannerSettings'=>$bannerSettings, 'footerSettings'=>$footerSettings]));
+    $vRows = dbAll("SELECT key, value FROM settings WHERE key LIKE 'page_visible_%'");
+    $pageVis = [];
+    foreach ($vRows as $vr) {
+        $pageVis[str_replace('page_visible_', '', $vr['key'])] = $vr['value'];
+    }
+    view('admin/content-list', array_merge( ['title'=>'Quản lý nội dung','role'=>'admin','pages'=>$pages,'pageVis'=>$pageVis], ['bannerSettings'=>$bannerSettings, 'footerSettings'=>$footerSettings]));
+});
+
+post('/admin/content/toggle-visibility', function() {
+    $user = requireStaffPermission('content', '/auth/login');
+    $slug = trim($_POST['slug'] ?? '');
+    $status = intval($_POST['status'] ?? 1);
+    if ($slug !== '') {
+        $key = 'page_visible_' . $slug;
+        dbRun("INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$key, (string)$status]);
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true, 'slug' => $slug, 'status' => $status]);
+        exit;
+    }
+    header('Content-Type: application/json');
+    echo json_encode(['ok' => false]);
+    exit;
 });
 
 get('/admin/garage-tiers', function() {

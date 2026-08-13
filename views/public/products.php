@@ -19,34 +19,26 @@ if (!function_exists('cdd')) {
   <style>
     .prod-layout-wrapper { display:grid; grid-template-columns:240px 1fr; gap:20px; }
     .pf-head { display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line); padding:14px 0; margin-bottom:18px; flex-wrap:wrap; min-height:46px; }
-    .filter-card { background:linear-gradient(180deg,#fbfcfe 0%,#fff 100%); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:20px; box-shadow:0 1px 4px rgba(15,35,66,.05); }
+    .filter-card { background:linear-gradient(180deg,#fbfcfe 0%,#fff 100%); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:20px; box-shadow:0 1px 4px rgba(15,35,66,.05); }
     .filter-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px 16px; }
-    .filter-field { display:flex; flex-direction:column; gap:7px; min-width:0; }
+    .filter-field { display:flex; flex-direction:column; gap:6px; min-width:0; }
     .filter-field > label { font-size:11px; font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.05em; }
-    .filter-select { width:100%; height:44px; padding:0 40px 0 14px; border:1.5px solid var(--line); border-radius:10px; font-size:13.5px; font-weight:500; color:var(--navy-dark); background-color:#fff; background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231a3258' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 13px center; background-size:15px; -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; transition:border-color .15s,box-shadow .15s,background-color .15s; text-overflow:ellipsis; }
-    .filter-select:hover { border-color:#b9c4d6; background-color:#fcfdff; }
-    .filter-select:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
+    .filter-select, .filter-input { width:100%; height:44px; padding:0 14px; border:1.5px solid var(--line); border-radius:10px; font-size:13.5px; font-weight:500; color:var(--navy-dark); background-color:#fff; transition:border-color .15s,box-shadow .15s; box-sizing:border-box; }
+    .filter-select { padding-right:36px; background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%231a3258' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; background-size:14px; -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer; text-overflow:ellipsis; }
+    .filter-select:hover, .filter-input:hover { border-color:#b9c4d6; }
+    .filter-select:focus, .filter-input:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
+    .filter-submit-btn { width:100%; height:44px; border-radius:10px; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; border:none; background:var(--navy); color:#fff; cursor:pointer; transition:background .15s,transform .1s; }
+    .filter-submit-btn:hover { background:#122543; }
+    .filter-submit-btn:active { transform:scale(0.98); }
     @media(max-width:900px) {
       .prod-layout-wrapper { grid-template-columns:1fr; }
       .cat-sidebar-wrapper { display:none; }
-      .filter-grid { grid-template-columns:1fr 1fr; }
+      .filter-grid { grid-template-columns:repeat(2,1fr); }
     }
     @media(max-width:560px) {
       .filter-grid { grid-template-columns:1fr; gap:12px; }
       .filter-card { padding:14px; border-radius:12px; }
     }
-    .cdd { position:relative; }
-    .cdd-trigger { width:100%; height:44px; padding:0 12px 0 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--navy-dark); font-size:13.5px; font-weight:500; cursor:pointer; transition:border-color .15s,box-shadow .15s; font-family:inherit; }
-    .cdd-trigger:hover { border-color:#b9c4d6; }
-    .cdd.open .cdd-trigger { border-color:var(--navy); box-shadow:0 0 0 3px rgba(26,50,88,.12); }
-    .cdd-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:left; }
-    .cdd-arrow { flex-shrink:0; color:#1a3258; transition:transform .2s; }
-    .cdd.open .cdd-arrow { transform:rotate(180deg); }
-    .cdd-panel { display:none; position:fixed; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 14px 38px rgba(15,35,66,.2); max-height:320px; overflow-y:auto; -webkit-overflow-scrolling:touch; z-index:9999; padding:6px; }
-    .cdd.open .cdd-panel { display:block; }
-    .cdd-opt { padding:11px 12px; border-radius:7px; font-size:13.5px; color:var(--navy-dark); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background .12s; }
-    .cdd-opt:hover { background:#f1f5fb; }
-    .cdd-opt.sel { background:var(--navy); color:#fff; font-weight:600; }
   </style>
   <div class="prod-layout-wrapper">
     <aside class="cat-sidebar-wrapper">
@@ -58,27 +50,86 @@ if (!function_exists('cdd')) {
       <div class="pf-head">
         <div class="title"><span class="bar"></span><h2 style="margin:0">Tìm thấy <?= numFmt($total) ?> sản phẩm</h2></div>
       </div>
-      <div class="filter-card">
+      <form method="GET" action="/products" id="filterForm" class="filter-card">
         <div class="filter-grid">
-          <?php
-          $qa=$_GET; unset($qa['cat'],$qa['page']); $allUrl='/products'.(!empty($qa)?'?'.http_build_query($qa):'');
-          $optsCat=[['url'=>$allUrl,'label'=>'Tất cả danh mục','sel'=>empty($_GET['cat'])]];
-          foreach ($categories as $c){ $qc=$_GET; $qc['cat']=$c['slug']; unset($qc['page']); $optsCat[]=['url'=>'?'.http_build_query($qc),'label'=>$c['name'],'sel'=>(($_GET['cat']??'')===$c['slug'])]; }
-          cdd('Danh mục',$optsCat);
-          $qb=$_GET; unset($qb['brand_id'],$qb['page']); $allB='/products'.(!empty($qb)?'?'.http_build_query($qb):'');
-          $optsBrand=[['url'=>$allB,'label'=>'Tất cả hãng xe','sel'=>empty($_GET['brand_id'])]];
-          foreach (($brands??[]) as $b){ $qbb=$_GET; $qbb['brand_id']=$b['id']; unset($qbb['page']); $optsBrand[]=['url'=>'?'.http_build_query($qbb),'label'=>$b['name'],'sel'=>((string)($_GET['brand_id']??'')===(string)$b['id'])]; }
-          cdd('Hãng xe',$optsBrand);
-          $qp=$_GET; unset($qp['pb'],$qp['page']); $allP='/products'.(!empty($qp)?'?'.http_build_query($qp):'');
-          $optsPb=[['url'=>$allP,'label'=>'Tất cả thương hiệu','sel'=>empty($_GET['pb'])]];
-          foreach (($productBrands??[]) as $pbr){ $qpp=$_GET; $qpp['pb']=$pbr['name']; unset($qpp['page']); $optsPb[]=['url'=>'?'.http_build_query($qpp),'label'=>$pbr['name'],'sel'=>(($_GET['pb']??'')===$pbr['name'])]; }
-          cdd('Thương hiệu',$optsPb);
-          $optsSort=[];
-          foreach (['newest'=>'Mới nhất','bestseller'=>'Bán chạy','price_asc'=>'Giá thấp','price_desc'=>'Giá cao','rating'=>'Đánh giá'] as $k=>$vv){ $q=$_GET; $q['sort']=$k; unset($q['page']); $optsSort[]=['url'=>'?'.http_build_query($q),'label'=>$vv,'sel'=>(($_GET['sort']??'newest')===$k)]; }
-          cdd('Sắp xếp',$optsSort);
-          ?>
+          <!-- 1. Hãng xe -->
+          <div class="filter-field">
+            <label>Hãng xe</label>
+            <select name="brand_id" id="filterBrandSelect" class="filter-select" onchange="onBrandChange(this.value)">
+              <option value="">Tất cả hãng xe</option>
+              <?php foreach (($brands??[]) as $b): ?>
+                <option value="<?= $b['id'] ?>" <?= ((string)($_GET['brand_id']??'') === (string)$b['id']) ? 'selected' : '' ?>><?= e($b['name']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- 2. Loại xe / Dòng xe -->
+          <div class="filter-field">
+            <label>Loại xe / Dòng xe</label>
+            <select name="model_id" id="filterModelSelect" class="filter-select">
+              <option value="">Tất cả dòng xe</option>
+              <?php foreach (($carModels??[]) as $m): ?>
+                <option value="<?= $m['id'] ?>" <?= ((string)($_GET['model_id']??'') === (string)$m['id']) ? 'selected' : '' ?>><?= e($m['name']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- 3. Đời xe -->
+          <div class="filter-field">
+            <label>Đời xe</label>
+            <select name="year" class="filter-select">
+              <option value="">Tất cả đời xe</option>
+              <?php foreach (($years??[]) as $y): ?>
+                <option value="<?= $y ?>" <?= ((string)($_GET['year']??'') === (string)$y) ? 'selected' : '' ?>><?= $y ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- 4. Mã OEM (tối đa 20 ký tự) -->
+          <div class="filter-field">
+            <label>Mã OEM</label>
+            <input type="text" name="oem" maxlength="20" placeholder="Nhập mã OEM" value="<?= e($_GET['oem'] ?? '') ?>" class="filter-input">
+          </div>
+
+          <!-- 5. Danh mục -->
+          <div class="filter-field">
+            <label>Danh mục</label>
+            <select name="cat" class="filter-select">
+              <option value="">Tất cả danh mục</option>
+              <?php foreach ($categories as $c): ?>
+                <option value="<?= e($c['slug']) ?>" <?= (($_GET['cat']??'') === $c['slug']) ? 'selected' : '' ?>><?= e($c['name']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- 6. Thương hiệu -->
+          <div class="filter-field">
+            <label>Thương hiệu</label>
+            <select name="pb" class="filter-select">
+              <option value="">Tất cả thương hiệu</option>
+              <?php foreach (($productBrands??[]) as $pbr): ?>
+                <option value="<?= e($pbr['name']) ?>" <?= (($_GET['pb']??'') === $pbr['name']) ? 'selected' : '' ?>><?= e($pbr['name']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- 7. Sắp xếp -->
+          <div class="filter-field">
+            <label>Sắp xếp</label>
+            <select name="sort" class="filter-select">
+              <?php foreach (['newest'=>'Mới nhất','bestseller'=>'Bán chạy','price_asc'=>'Giá thấp đến cao','price_desc'=>'Giá cao đến thấp','rating'=>'Đánh giá cao'] as $k=>$vv): ?>
+                <option value="<?= $k ?>" <?= (($_GET['sort']??'newest') === $k) ? 'selected' : '' ?>><?= $vv ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <!-- 8. Nút Tìm kiếm -->
+          <div class="filter-field" style="justify-content:flex-end">
+            <label style="visibility:hidden">Tìm kiếm</label>
+            <button type="submit" class="btn btn-navy filter-submit-btn">Tìm kiếm</button>
+          </div>
         </div>
-      </div>
+      </form>
       <?php if (empty($products)): ?>
         <div class="empty-state"><div class="em-icon">∅</div><h3>Chưa có phụ tùng cho lựa chọn này</h3><a href="/products" class="btn btn-outline-navy">Xem tất cả SP</a></div>
       <?php else: ?>
@@ -155,5 +206,28 @@ window.addEventListener('scroll', function(e){ if(e.target && e.target.closest &
 window.addEventListener('resize', cddCloseAll);
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') cddCloseAll(); });
 
+const allCarModels = <?= json_encode($allModels ?? []) ?>;
+const curModelId = "<?= e($_GET['model_id'] ?? '') ?>";
+
+function onBrandChange(brandId) {
+  const modelSelect = document.getElementById('filterModelSelect');
+  if (!modelSelect) return;
+  modelSelect.innerHTML = '<option value="">Tất cả dòng xe</option>';
+  const filtered = brandId ? allCarModels.filter(m => String(m.brand_id) === String(brandId)) : allCarModels;
+  filtered.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m.id;
+    opt.textContent = m.name;
+    if (String(m.id) === String(curModelId)) opt.selected = true;
+    modelSelect.appendChild(opt);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const brandSelect = document.getElementById('filterBrandSelect');
+  if (brandSelect && brandSelect.value) {
+    onBrandChange(brandSelect.value);
+  }
+});
 </script>
 <?php require __DIR__ . '/../partials/foot.php'; ?>
