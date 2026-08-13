@@ -162,7 +162,9 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
 
     <!-- Section 3: Dịch vụ & Tra cứu -->
     <span class="nav-section-label">Dịch vụ & Tra cứu</span>
-    <a href="/stores">Hệ thống cửa hàng</a>
+    <?php if (($_pVisFoot['he-thong-cua-hang'] ?? '1') !== '0'): ?>
+      <a href="/stores">Hệ thống cửa hàng</a>
+    <?php endif; ?>
     <a href="/policies">Chính sách & Quy định</a>
 
     <!-- Section 4: Tài khoản của tôi -->

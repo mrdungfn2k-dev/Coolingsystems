@@ -1,6 +1,14 @@
 <?php require __DIR__.'/../partials/dashboard-head.php'; ?>
-<div class="dash-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-  <h1>Quản lý Hệ thống cửa hàng</h1>
+<div class="dash-head" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <h1 style="margin:0">Quản lý Hệ thống cửa hàng</h1>
+    <div style="display:flex;align-items:center;gap:8px;background:#f8fafc;padding:6px 14px;border-radius:20px;border:1.5px solid #cbd5e1;box-shadow:0 1px 3px rgba(0,0,0,0.05)">
+      <span style="font-size:13px;font-weight:600;color:#334155">Hiển thị trên Menu:</span>
+      <button type="button" id="btnToggleNavVis" class="btn btn-sm <?= ($navVisible ?? true) ? 'btn-navy' : 'btn-outline-secondary' ?>" data-status="<?= ($navVisible ?? true) ? 1 : 0 ?>" onclick="toggleStoreNavVis(this)" style="min-width:100px;font-weight:700;border-radius:14px;transition:all 0.2s">
+        <?= ($navVisible ?? true) ? '✓ Hiển thị' : '✕ Đã ẩn' ?>
+      </button>
+    </div>
+  </div>
   <button class="btn btn-navy" onclick="document.getElementById('addModal').style.display='flex'">+ Thêm cửa hàng</button>
 </div>
 
@@ -217,5 +225,49 @@ function geocodeAddress(mode) {
 }
 document.getElementById('addModal').addEventListener('click',function(e){if(e.target===this)this.style.display='none'});
 document.getElementById('editModal').addEventListener('click',function(e){if(e.target===this)this.style.display='none'});
+
+function toggleStoreNavVis(btn) {
+  var curStatus = parseInt(btn.getAttribute('data-status') || '1');
+  var newStatus = curStatus === 1 ? 0 : 1;
+  btn.disabled = true;
+  var origText = btn.innerHTML;
+  btn.textContent = 'Đang lưu...';
+
+  var formData = new FormData();
+  formData.append('slug', 'he-thong-cua-hang');
+  formData.append('status', newStatus);
+
+  fetch('/admin/content/toggle-visibility', {
+    method: 'POST',
+    body: formData
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(res) {
+    btn.disabled = false;
+    if (res && res.ok) {
+      btn.setAttribute('data-status', newStatus);
+      if (newStatus === 1) {
+        btn.className = 'btn btn-sm btn-navy';
+        btn.innerHTML = '✓ Hiển thị';
+      } else {
+        btn.className = 'btn btn-sm btn-outline-secondary';
+        btn.innerHTML = '✕ Đã ẩn';
+      }
+      if (typeof csToast === 'function') {
+        csToast(newStatus === 1 ? 'Đã hiện "Hệ thống cửa hàng" trên thanh menu' : 'Đã ẩn "Hệ thống cửa hàng" khỏi thanh menu', 'success');
+      } else {
+        alert(newStatus === 1 ? 'Đã hiện "Hệ thống cửa hàng" trên thanh menu' : 'Đã ẩn "Hệ thống cửa hàng" khỏi thanh menu');
+      }
+    } else {
+      alert('Không thể cập nhật trạng thái hiển thị.');
+      btn.innerHTML = origText;
+    }
+  })
+  .catch(function(err) {
+    btn.disabled = false;
+    alert('Lỗi kết nối máy chủ.');
+    btn.innerHTML = origText;
+  });
+}
 </script>
 <?php require __DIR__.'/../partials/dashboard-foot.php'; ?>

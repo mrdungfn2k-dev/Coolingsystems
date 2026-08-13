@@ -4895,7 +4895,9 @@ get('/admin/stores', function() {
     requireStaffPermission('rbac:organization.branches.view|stores', '/auth/login');
     $stores = dbAll("SELECT * FROM stores ORDER BY sort_order, name");
     $branchTypes = dbAll("SELECT code, name, is_active FROM store_branch_types ORDER BY sort_order, id");
-    view('admin/stores', ['title'=>'Hệ thống cửa hàng','role'=>'admin','stores'=>$stores,'branchTypes'=>$branchTypes]);
+    $navVisRow = dbGet("SELECT value FROM settings WHERE key='page_visible_he-thong-cua-hang'");
+    $navVisible = ($navVisRow['value'] ?? '1') !== '0';
+    view('admin/stores', ['title'=>'Hệ thống cửa hàng','role'=>'admin','stores'=>$stores,'branchTypes'=>$branchTypes,'navVisible'=>$navVisible]);
 });
 
 get('/admin/branch-types', function() {

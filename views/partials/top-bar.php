@@ -65,8 +65,13 @@ foreach ($hotlineItems as $item) {
       <a href="/agency/login" style="color:var(--gold-warm); font-weight:700;">Kênh Đại Lý</a>
       <span class="sep">|</span>
       <a href="/policies">Chính sách</a>
-      <span class="sep">|</span>
-      <a href="/stores">Cửa hàng</a>
+      <?php
+        $_tbVisStores = dbGet("SELECT value FROM settings WHERE key='page_visible_he-thong-cua-hang'");
+        if (($_tbVisStores['value'] ?? '1') !== '0'):
+      ?>
+        <span class="sep">|</span>
+        <a href="/stores">Cửa hàng</a>
+      <?php endif; ?>
       <span class="sep">|</span>
       <div id="google_translate_element" style="display:none"></div>
       <button id="langSwitchBtn" onclick="switchLang()">EN/VI</button>
