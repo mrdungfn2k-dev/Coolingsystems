@@ -387,7 +387,7 @@ get('/', function() {
         AND (pf2.brand_id=b.id OR pbm2.brand_id=b.id OR p2.car_brand_id=b.id OR p2.name LIKE '%' || b.name || '%')
     ) AS real_count FROM brands b ORDER BY b.sort_order, b.name");
     $categories = dbAll("SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.status='published') AS cnt FROM categories c WHERE (c.is_active=1 OR c.is_active IS NULL) ORDER BY sort_order, id");
-    $sidebarCategories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY is_featured DESC, sort_order, id");
+    $sidebarCategories = dbAll("SELECT * FROM categories WHERE parent_id IS NULL AND (is_active=1 OR is_active IS NULL) ORDER BY sort_order ASC, id ASC");
     $productBrands = dbAll("SELECT * FROM product_brands ORDER BY sort_order, name");
     $trustSteps = dbAll("SELECT * FROM trust_steps WHERE is_active=1 ORDER BY sort_order");
     view('public/home', compact('featured','saleProducts','saleTotal','bestSellers','brands','categories','sidebarCategories','productBrands','trustSteps'));
