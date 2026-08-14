@@ -7,7 +7,11 @@ $isVerifiedGara = function_exists('isVerifiedGarage') ? isVerifiedGarage() : (!e
 $retailPrice = (float)($product['price'] ?? 0);
 $displayPrice = function_exists('getProductEffectivePrice') ? getProductEffectivePrice($product) : $retailPrice;
 
-if ($isVerifiedGara) {
+$isCallPrice = !empty($product['is_call_price']) || !empty($product['is_contact_price']) || !empty($product['is_call']) || empty($product['price']) || (float)$product['price'] <= 0;
+
+if ($isCallPrice) {
+    $displayOriginalPrice = null;
+} elseif ($isVerifiedGara) {
     $displayOriginalPrice = ($retailPrice > $displayPrice) ? $retailPrice : null;
 } else {
     $displayOriginalPrice = $product['original_price'] ?? null;
@@ -298,12 +302,12 @@ if (!empty($faqItems)) {
 
         <!-- Price -->
         <div style="margin:0 0 10px">
-          <?php if(!empty($product['is_call_price'])): ?>
+          <?php if($isCallPrice): ?>
             <span class="pd-price-big" style="font-size:22px;color:#1e293b">Liên hệ ngay: <a href="tel:0705070526" style="color:#2563eb;text-decoration:underline;font-weight:800">0705.0705.26</a></span>
           <?php else: ?>
             <span class="pd-price-big"><?= vnd($displayPrice) ?></span>
             <span class="fs-12 text-muted" style="margin-left:6px;font-weight:500">(Đã bao gồm <?= (int)($product['vat_rate']??0) ?>% VAT)</span>
-            <?php if(!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+            <?php if(!$isCallPrice && $displayPrice > 0 && !empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
               <span class="pd-price-was"><?= vnd($displayOriginalPrice) ?></span>
               <span class="pd-discount-badge">-<?= round(($displayOriginalPrice-$displayPrice)/$displayOriginalPrice*100) ?>%</span>
             <?php endif; ?>

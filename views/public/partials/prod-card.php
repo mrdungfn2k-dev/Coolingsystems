@@ -3,7 +3,11 @@ $isVerifiedGara = function_exists('isVerifiedGarage') ? isVerifiedGarage() : (!e
 $retailPrice = (float)($p['price'] ?? 0);
 $displayPrice = function_exists('getProductEffectivePrice') ? getProductEffectivePrice($p) : $retailPrice;
 
-if ($isVerifiedGara) {
+$isCallPrice = !empty($p['is_call_price']) || !empty($p['is_contact_price']) || !empty($p['is_call']) || empty($p['price']) || (float)$p['price'] <= 0;
+
+if ($isCallPrice) {
+    $displayOriginalPrice = null;
+} elseif ($isVerifiedGara) {
     $displayOriginalPrice = ($retailPrice > $displayPrice) ? $retailPrice : null;
 } else {
     $displayOriginalPrice = $p['original_price'] ?? null;
@@ -33,7 +37,7 @@ if ($rawOem !== '') {
     <?php else: ?>
       <img src="/uploads/products/cooling-logo-placeholder.jpg" alt="<?= e($p['name']) ?>" width="280" height="210" loading="lazy" decoding="async" style="position:relative;z-index:1;width:100%;height:100%;object-fit:contain!important;padding:12px;background:#fff">
     <?php endif; ?>
-    <?php if (!empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
+    <?php if (!$isCallPrice && $displayPrice > 0 && !empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice): ?>
       <span style="position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700">-<?= round(100-$displayPrice/$displayOriginalPrice*100) ?>%</span>
     <?php endif; ?>
     <?php 
@@ -45,7 +49,7 @@ if ($rawOem !== '') {
       }
     ?>
     <?php if ($is_new_badge): ?>
-      <span style="position:absolute;top:<?= !empty($displayOriginalPrice)&&$displayOriginalPrice>$displayPrice ? 30 : 8 ?>px;left:8px;background:var(--gold-warm);color:var(--navy-dark);padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">MỚI</span>
+      <span style="position:absolute;top:<?= (!$isCallPrice && !empty($displayOriginalPrice) && $displayOriginalPrice > $displayPrice) ? 30 : 8 ?>px;left:8px;background:var(--gold-warm);color:var(--navy-dark);padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">MỚI</span>
     <?php endif; ?>
   </a>
 
@@ -60,7 +64,7 @@ if ($rawOem !== '') {
   <!-- Giá + nút giỏ hàng cùng hàng -->
   <div class="prod-price-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;gap:4px">
     <div>
-      <?php if (!empty($p['is_call_price'])): ?>
+      <?php if ($isCallPrice): ?>
         <span style="font-size:12.5px;font-weight:700;color:#1e293b;white-space:nowrap">Liên hệ ngay: <a href="tel:0705070526" onclick="event.stopPropagation()" style="color:#2563eb;text-decoration:underline;font-weight:800">0705.0705.26</a></span>
       <?php else: ?>
         <span style="font-size:15px;font-weight:800;color:var(--navy);white-space:nowrap"><?= vnd($displayPrice) ?></span>
