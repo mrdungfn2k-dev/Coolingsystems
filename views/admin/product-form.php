@@ -86,13 +86,13 @@ $formAction = isset($product)
               <div style="display:flex;gap:6px">
                 <input type="text" name="oem_code" id="oemCodeMainInput" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code']??'') ?>" placeholder="VD: 447710-8370" style="flex:1">
                 <button type="button" onclick="searchByOem('oemCodeMainInput')" class="btn btn-navy" style="height:42px;padding:0 14px;font-size:13px;font-weight:700;white-space:nowrap;border-radius:6px;display:inline-flex;align-items:center;gap:4px" title="Tìm sản phẩm theo mã OEM này">
-                  🔍 Tìm kiếm
+                  Tìm kiếm
                 </button>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;flex-wrap:wrap;gap:4px">
                 <small style="color:#64748b;font-size:11px">Có thể nhập nhiều mã, cách nhau dấu phẩy</small>
                 <button type="button" id="btnSyncOem" onclick="syncOemToEditors()" style="background:#fef3c7;border:1px solid #f59e0b;color:#b45309;font-size:11px;font-weight:700;cursor:pointer;padding:3px 10px;border-radius:4px;display:inline-flex;align-items:center;gap:4px;transition:all 0.2s" title="Tự động thay thế Mã OEM mới vào Mô tả, Đặc điểm & Thông số kỹ thuật">
-                  ⚡ Đồng bộ mã OEM vào Bài viết
+                  Đồng bộ mã OEM vào Bài viết
                 </button>
               </div>
             </div>
@@ -103,7 +103,7 @@ $formAction = isset($product)
               <div style="display:flex;gap:6px">
                 <input type="text" name="oem_code2" id="oemCodeSubInput" <?= $canEditProductCodes ? '' : 'readonly' ?> value="<?= e($product['oem_code2']??'') ?>" placeholder="VD: 8846048040 (OE Reference, mã đối chiếu)" style="flex:1">
                 <button type="button" onclick="searchByOem('oemCodeSubInput')" class="btn btn-navy" style="height:42px;padding:0 14px;font-size:13px;font-weight:700;white-space:nowrap;border-radius:6px;display:inline-flex;align-items:center;gap:4px" title="Tìm sản phẩm theo mã OEM phụ này">
-                  🔍 Tìm kiếm
+                  Tìm kiếm
                 </button>
               </div>
               <small style="color:#64748b;font-size:11px">Mã OEM thứ hai hoặc mã đối chiếu từ nhà sản xuất khác</small>
