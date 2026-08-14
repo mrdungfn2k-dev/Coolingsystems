@@ -180,7 +180,7 @@ $partBrands = dbAll("SELECT name AS part_brand FROM product_brands ORDER BY sort
     <div style="display:flex;gap:4px">
       <input type="text" name="oem" class="frm-input" value="<?= e($_GET['oem']??'') ?>" placeholder="Nhập mã OEM..." style="flex:1;height:42px;border-radius:6px">
       <button type="submit" class="btn btn-navy" style="height:42px;border-radius:6px;padding:0 12px;font-size:13px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">
-        🔍 Tìm OEM
+        TÌM OEM
       </button>
     </div>
   </div>

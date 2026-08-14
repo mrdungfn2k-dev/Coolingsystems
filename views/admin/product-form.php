@@ -892,7 +892,7 @@ function initDescEditor() {
   target.dataset.editorLoading = '1';
   tinymce.init({
   selector: '#tinymceDesc',
-  height: 300,
+  height: 600,
   language: 'vi',
   forced_root_block: 'p',
   force_p_newlines: true,
@@ -1021,7 +1021,7 @@ function initFeatEditor() {
   target.dataset.editorLoading = '1';
   tinymce.init({
   selector: '#tinymceFeat',
-  height: 250,
+  height: 500,
   language: 'vi',
   forced_root_block: 'p',
   force_p_newlines: true,
@@ -1149,7 +1149,7 @@ function initSpecEditor() {
   target.dataset.editorLoading = '1';
   tinymce.init({
   selector: '#tinymceSpec',
-  height: 250,
+  height: 500,
   language: 'vi',
   forced_root_block: 'p',
   force_p_newlines: true,
