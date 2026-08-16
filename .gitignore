@@ -3,8 +3,8 @@ node_modules/
 
 # Database
 *.db
-*.sqlite
 database.sqlite
+!database/cooling.sqlite
 *.zip
 
 # Uploads (user-generated content)
