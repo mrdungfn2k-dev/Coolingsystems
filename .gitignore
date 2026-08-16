@@ -10,7 +10,8 @@ database.sqlite
 # Uploads (user-generated content)
 public/uploads/*
 !public/uploads/products/
-uploads/
+!public/uploads/products/**
+/uploads/
 
 # Backup files
 backups/
@@ -38,6 +39,7 @@ __pycache__/
 
 # Python scripts
 *.py
+!organize_and_sync_vps_images.py
 *.ipynb
 
 # Excel & data files
