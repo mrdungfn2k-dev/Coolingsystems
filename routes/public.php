@@ -513,7 +513,7 @@ get('/products', function() {
     else if (!empty($_GET['cat'])) {
         $catSlug = trim($_GET['cat']);
         if ($catSlug === 'mo-to-quat-gio-dieu-hoa') $catSlug = 'motor-quat-dan-lanh';
-        if ($catSlug === 'van-tiet-luu-dieu-hoa') $catSlug = 'van-tiet-luu';
+        if ($catSlug === 'van-tiet-luu') $catSlug = 'van-tiet-luu-dieu-hoa';
         $joins .= " LEFT JOIN categories c ON c.id=p.category_id";
         // Include child categories
         $catRow = dbGet("SELECT id FROM categories WHERE slug=? AND (is_active=1 OR is_active IS NULL)", [$catSlug]);
