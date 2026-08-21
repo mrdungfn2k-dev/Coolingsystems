@@ -44,7 +44,7 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
           $_ownerEmail= dbGet("SELECT value FROM settings WHERE key='footer_company_email'")['value'] ?? 'cskh@cooling.vn';
         ?>
         <div class="footer-owner-info" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(255,255,255,0.18);font-size:12px;color:rgba(255,255,255,0.75);line-height:1.6">
-          <div style="font-weight:800;color:#c8a951;margin-bottom:6px;font-size:12.5px;text-transform:uppercase;letter-spacing:0.4px">⚡ Đơn vị chủ quản</div>
+          <div style="font-weight:800;color:#c8a951;margin-bottom:6px;font-size:12.5px;text-transform:uppercase;letter-spacing:0.4px">Đơn vị chủ quản</div>
           <div style="margin-bottom:3px"><strong style="color:#fff;font-weight:700"><?= e($_ownerComp) ?></strong></div>
           <div style="margin-bottom:3px">MST: <strong style="color:#fff"><?= e($_ownerTax) ?></strong></div>
           <div style="margin-bottom:3px">Địa chỉ: <?= e($_ownerAddr) ?></div>

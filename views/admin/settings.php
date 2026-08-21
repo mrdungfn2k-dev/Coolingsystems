@@ -377,7 +377,7 @@ function removeQr() {
 
     <!-- Footer Owner Information Settings -->
   <div class="settings-card" style="grid-column: 1 / -1; margin-top: 10px;">
-    <h3>🏢 Quản lý thông tin đơn vị chủ quản (Footer)</h3>
+    <h3>Quản lý thông tin đơn vị chủ quản (Footer)</h3>
     <p style="color:#666;font-size:13px;margin-bottom:16px">Các thông tin này sẽ hiển thị trực tiếp dưới Logo & Mô tả ở chân trang (Footer) và trên trang Thông tin chủ quản.</p>
     <form method="post" action="/admin/settings/footer-owner" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
       <?= csrfField() ?>
