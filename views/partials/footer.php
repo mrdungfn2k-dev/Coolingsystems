@@ -50,8 +50,8 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
         <?php if(($_pVisFoot['huong-dan-mua-hang'] ?? '1') !== '0'): ?><li><a href="/policies/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li><?php endif; ?>
         <?php if(($_pVisFoot['chinh-sach-doi-tra'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-doi-tra">Chính sách đổi trả</a></li><?php endif; ?>
         <?php if(($_pVisFoot['chinh-sach-bao-hanh'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-bao-hanh">Chính sách bảo hành</a></li><?php endif; ?>
-        <?php if(($_pVisFoot['dieu-khoan-bao-mat'] ?? '1') !== '0'): ?><li><a href="/policies/dieu-khoan-bao-mat">Điều khoản bảo mật</a></li>
-        <?php if(($_pVisFoot['thong-tin-chu-quan'] ?? '1') !== '0'): ?><li><a href="/policies/thong-tin-chu-quan">Thông tin chủ quản</a></li><?php endif; ?><?php endif; ?>
+        <?php if(($_pVisFoot['dieu-khoan-bao-mat'] ?? '1') !== '0'): ?><li><a href="/policies/dieu-khoan-bao-mat">Điều khoản bảo mật</a></li><?php endif; ?>
+        <?php if(($_pVisFoot['thong-tin-chu-quan'] ?? '1') !== '0'): ?><li><a href="/policies/thong-tin-chu-quan">Thông tin chủ quản</a></li><?php endif; ?>
         <?php if(($_pVisFoot['quy-trinh-giai-quyet-khieu-nai'] ?? '1') !== '0'): ?><li><a href="/policies/quy-trinh-giai-quyet-khieu-nai">Giải quyết khiếu nại</a></li><?php endif; ?>
         <?php if(($_pVisFoot['chinh-sach-gia'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-gia">Chính sách giá</a></li><?php endif; ?>
         <?php if(($_pVisFoot['chinh-sach-thanh-toan'] ?? '1') !== '0'): ?><li><a href="/policies/chinh-sach-thanh-toan">Chính sách thanh toán</a></li><?php endif; ?>
