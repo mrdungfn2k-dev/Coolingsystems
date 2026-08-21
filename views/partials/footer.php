@@ -35,7 +35,22 @@ $_tDesc = dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?
         <?php else: ?>
           <div class="logo" style="font-size:24px;font-weight:900;color:#fff;letter-spacing:1px"><?= e($_footerLogo) ?></div>
         <?php endif; ?>
-        <p class="desc" style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px"><?= e($_footerDesc) ?></p>
+        <p class="desc" style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;line-height:1.5"><?= e($_footerDesc) ?></p>
+        <?php
+          $_ownerComp = dbGet("SELECT value FROM settings WHERE key='footer_company_name'")['value'] ?? (dbGet("SELECT value FROM system_config WHERE key='company_name'")['value'] ?? 'CÔNG TY TNHH ĐẦU TƯ VÀ CÔNG NGHỆ AUTOPARTS VIỆT NAM');
+          $_ownerTax  = dbGet("SELECT value FROM settings WHERE key='footer_company_tax'")['value'] ?? '0110325421';
+          $_ownerAddr = dbGet("SELECT value FROM settings WHERE key='footer_company_address'")['value'] ?? (dbGet("SELECT value FROM system_config WHERE key='contact_address'")['value'] ?? 'Số 11, ngõ 171, phố Sài Đồng, Phường Phúc Lợi, Thành phố Hà Nội, Việt Nam');
+          $_ownerPhone= dbGet("SELECT value FROM settings WHERE key='footer_company_phone'")['value'] ?? '0705.0705.26';
+          $_ownerEmail= dbGet("SELECT value FROM settings WHERE key='footer_company_email'")['value'] ?? 'cskh@cooling.vn';
+        ?>
+        <div class="footer-owner-info" style="margin-top:14px;padding-top:12px;border-top:1px dashed rgba(255,255,255,0.18);font-size:12px;color:rgba(255,255,255,0.75);line-height:1.6">
+          <div style="font-weight:800;color:#c8a951;margin-bottom:6px;font-size:12.5px;text-transform:uppercase;letter-spacing:0.4px">⚡ Đơn vị chủ quản</div>
+          <div style="margin-bottom:3px"><strong style="color:#fff;font-weight:700"><?= e($_ownerComp) ?></strong></div>
+          <div style="margin-bottom:3px">MST: <strong style="color:#fff"><?= e($_ownerTax) ?></strong></div>
+          <div style="margin-bottom:3px">Địa chỉ: <?= e($_ownerAddr) ?></div>
+          <div style="margin-bottom:3px">Hotline & Zalo: <a href="tel:<?= preg_replace('/[^0-9]/','',$_ownerPhone) ?>" style="color:#c8a951;font-weight:700;text-decoration:none"><?= e($_ownerPhone) ?></a></div>
+          <div>Email: <a href="mailto:<?= e($_ownerEmail) ?>" style="color:rgba(255,255,255,0.9);text-decoration:underline"><?= e($_ownerEmail) ?></a></div>
+        </div>
       </div>
       <?php
         $_visRows = dbAll("SELECT key, value FROM settings WHERE key LIKE 'page_visible_%'");

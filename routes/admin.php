@@ -5260,6 +5260,42 @@ get('/admin/contacts/:id/delete', function($p) {
 
 
 // ── Contact Info Settings ──
+post('/admin/settings/footer-owner', function() {
+    requireRole('admin', '/admin/login'); csrfCheck();
+    
+    $name = trim($_POST['footer_company_name'] ?? '');
+    $tax = trim($_POST['footer_company_tax'] ?? '');
+    $addr = trim($_POST['footer_company_address'] ?? '');
+    $phone = trim($_POST['footer_company_phone'] ?? '');
+    $email = trim($_POST['footer_company_email'] ?? '');
+    $desc = trim($_POST['footer_desc'] ?? '');
+
+    $fields = [
+        'footer_company_name' => $name,
+        'footer_company_tax' => $tax,
+        'footer_company_address' => $addr,
+        'footer_company_phone' => $phone,
+        'footer_company_email' => $email,
+        'footer_desc' => $desc,
+        'company_address' => $addr
+    ];
+
+    foreach ($fields as $k => $v) {
+        dbRun("INSERT INTO settings (key, value) VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$k, $v]);
+    }
+    
+    if (!empty($addr)) {
+        dbRun("INSERT INTO system_config (key, value) VALUES ('contact_address',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$addr]);
+        dbRun("INSERT INTO system_config (key, value) VALUES ('company_address',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$addr]);
+    }
+    if (!empty($name)) {
+        dbRun("INSERT INTO system_config (key, value) VALUES ('company_name',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [$name]);
+    }
+
+    flash('success', 'Đã cập nhật thông tin đơn vị chủ quản ở Chân trang!');
+    redirect('/admin/settings');
+});
+
 post('/admin/settings/contact-info', function() {
     requireRole('admin', '/admin/login'); csrfCheck();
     

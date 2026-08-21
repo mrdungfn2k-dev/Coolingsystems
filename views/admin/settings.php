@@ -375,6 +375,42 @@ function removeQr() {
     </form>
   </div>
 
+    <!-- Footer Owner Information Settings -->
+  <div class="settings-card" style="grid-column: 1 / -1; margin-top: 10px;">
+    <h3>🏢 Quản lý thông tin đơn vị chủ quản (Footer)</h3>
+    <p style="color:#666;font-size:13px;margin-bottom:16px">Các thông tin này sẽ hiển thị trực tiếp dưới Logo & Mô tả ở chân trang (Footer) và trên trang Thông tin chủ quản.</p>
+    <form method="post" action="/admin/settings/footer-owner" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+      <?= csrfField() ?>
+      <div class="form-group" style="grid-column: 1 / -1;">
+        <label>Tên đơn vị / Công ty chủ quản</label>
+        <input type="text" name="footer_company_name" value="<?= htmlspecialchars(dbGet("SELECT value FROM settings WHERE key='footer_company_name'")['value'] ?? (dbGet("SELECT value FROM system_config WHERE key='company_name'")['value'] ?? 'CÔNG TY TNHH ĐẦU TƯ VÀ CÔNG NGHỆ AUTOPARTS VIỆT NAM')) ?>" placeholder="CÔNG TY TNHH ĐẦU TƯ VÀ CÔNG NGHỆ AUTOPARTS VIỆT NAM" required>
+      </div>
+      <div class="form-group">
+        <label>Mã số thuế / Giấy phép ĐKKD</label>
+        <input type="text" name="footer_company_tax" value="<?= htmlspecialchars(dbGet("SELECT value FROM settings WHERE key='footer_company_tax'")['value'] ?? '0110325421') ?>" placeholder="0110325421">
+      </div>
+      <div class="form-group">
+        <label>Hotline & Zalo liên hệ</label>
+        <input type="text" name="footer_company_phone" value="<?= htmlspecialchars(dbGet("SELECT value FROM settings WHERE key='footer_company_phone'")['value'] ?? '0705.0705.26') ?>" placeholder="0705.0705.26">
+      </div>
+      <div class="form-group">
+        <label>Email hỗ trợ</label>
+        <input type="email" name="footer_company_email" value="<?= htmlspecialchars(dbGet("SELECT value FROM settings WHERE key='footer_company_email'")['value'] ?? 'cskh@cooling.vn') ?>" placeholder="cskh@cooling.vn">
+      </div>
+      <div class="form-group">
+        <label>Mô tả ngắn ở Chân trang <small>(dưới Logo)</small></label>
+        <input type="text" name="footer_desc" value="<?= htmlspecialchars(dbGet("SELECT value FROM settings WHERE key='footer_desc'")['value'] ?? 'Sàn TMĐT phụ tùng ô tô chính hãng — chuyên sâu hệ thống làm mát. Cung cấp phụ tùng uy tín cho hàng triệu khách hàng trên toàn quốc.') ?>" placeholder="Mô tả ngắn...">
+      </div>
+      <div class="form-group" style="grid-column: 1 / -1;">
+        <label>Địa chỉ trụ sở chủ quản</label>
+        <input type="text" name="footer_company_address" value="<?= htmlspecialchars(dbGet("SELECT value FROM settings WHERE key='footer_company_address'")['value'] ?? (dbGet("SELECT value FROM system_config WHERE key='contact_address'")['value'] ?? 'Số 11, ngõ 171, phố Sài Đồng, Phường Phúc Lợi, Thành phố Hà Nội, Việt Nam')) ?>" placeholder="Số 11, ngõ 171, phố Sài Đồng, Phường Phúc Lợi, Thành phố Hà Nội, Việt Nam" required>
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <button type="submit" class="btn-save">Lưu thông tin đơn vị chủ quản</button>
+      </div>
+    </form>
+  </div>
+
   <!-- Newsletter / Promotion Settings -->
   <div class="settings-card" style="grid-column: 1 / -1;">
     <h3>📧 Cài đặt ưu đãi đăng ký</h3>
