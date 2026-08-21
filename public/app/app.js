@@ -1492,7 +1492,7 @@
       tier: 'ĐẠI LÝ',
       points: 12500,
       taxId: '0101234567-001',
-      address: 'Số 12 Nguyễn Văn Cừ, P. Gia Thụy, Long Biên, Hà Nội'
+      address: 'Số 11, ngõ 171, phố Sài Đồng, Phường Phúc Lợi, Thành phố Hà Nội, Việt Nam'
     },
     activeCategory: 'all',
     searchQuery: '',
@@ -1971,7 +1971,7 @@
       <div style="padding:14px;">
         <div style="background:#fff; border-radius:14px; border:1px solid var(--gray-border); padding:14px; margin-bottom:12px;">
           <div style="font-size:13.5px; font-weight:800; color:var(--navy-dark);">Cooling Long Biên — Kho tổng</div>
-          <div style="font-size:11px; color:var(--gray-text-sub); margin:3px 0 8px;">Số 12 Nguyễn Văn Cừ, Long Biên, Hà Nội</div>
+          <div style="font-size:11px; color:var(--gray-text-sub); margin:3px 0 8px;">Số 11, ngõ 171, phố Sài Đồng, Phường Phúc Lợi, Thành phố Hà Nội, Việt Nam</div>
         </div>
       </div>
     `;

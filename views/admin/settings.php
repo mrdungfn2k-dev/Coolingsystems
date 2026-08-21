@@ -362,7 +362,7 @@ function removeQr() {
       <div style="flex:1;min-width:250px;">
         <div class="form-group">
           <label>Địa chỉ</label>
-          <input type="text" name="contact_address" maxlength="100" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='contact_address'")['value'] ?? '') ?>" placeholder="123 Trường Chinh...">
+          <input type="text" name="contact_address" maxlength="100" value="<?= htmlspecialchars(dbGet("SELECT value FROM system_config WHERE key='contact_address'")['value'] ?? '') ?>" placeholder="Số 11, ngõ 171, phố Sài Đồng, Phường Phúc Lợi, Thành phố Hà Nội, Việt Nam">
         </div>
         <div class="form-group">
           <label>Giờ làm việc</label>
