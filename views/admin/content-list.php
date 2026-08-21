@@ -54,6 +54,7 @@
           'tin-tuc-tong-hop'               => '/news',
           '4-buoc-cam-ket'                 => '/#cam-ket',
           'dieu-khoan-bao-mat'             => '/policies/dieu-khoan-bao-mat',
+          'thong-tin-chu-quan'             => '/policies/thong-tin-chu-quan',
           'chinh-sach'                     => '/policies/dieu-khoan-bao-mat',
           'huong-dan-mua-hang'             => '/policies/huong-dan-mua-hang',
           'chinh-sach-doi-tra'             => '/policies/chinh-sach-doi-tra',
